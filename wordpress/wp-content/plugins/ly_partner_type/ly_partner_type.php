@@ -1,14 +1,14 @@
 <?php
 
 /*
-    Plugin Name: LY Author Type
+    Plugin Name: LY Partner Type
     Plugin URI: http://www.opensistemas.com/
-    Description: Creates the content type 'Author'
+    Description: Creates the content type 'Partner'
     Version: 1.0
     Author: Roberto Moreno
     Author Email: rmoreno@opensistemas.com
     Plugin URI: http://www.opensistemas.com/
-    Text Domain: ly_author_type
+    Text Domain: ly_partner_type
     License: GPLv2 
 */
 
@@ -88,23 +88,16 @@ if (!class_exists('AuthorCustomType')) :
             </p>
             <p>
                 <label for="birthdate"><?php _e('Birthdate', 'ly_author_type')?></label>
-                <input type="date" name="birthdate" id="birthdate" value="<?php if ( isset($birthdate) ) echo $birthdate[0]; ?>" />
+                <input type="text" name="birthdate" id="birthdate" value="<?php if ( isset($birthdate) ) echo $birthdate[0]; ?>" />
             </p>
             <p>
                 <label for="placeBirth"><?php _e('Place birth', 'ly_author_type')?></label>
                 <input type="text" name="placeBirth" id="placeBirth" value="<?php if ( isset($placeBirth) ) echo $placeBirth[0]; ?>" />
             </p>
-            <label for="bio" class="bio"><?php _e('Bio', 'ly_author_type' )?></label>
-            <?php 
-            $settings = array(
-                'media_buttons' => false,
-                'wpautop' => false,
-                'textarea_rows' => 4,
-                'tinymce' => false,
-                'quicktags' => array()
-            );
-            wp_editor($bio[0], 'bio-information', $settings); 
-            ?>
+            <p>
+                <label for="bio"><?php _e('Bio', 'ly_author_type')?></label>
+                <input type="text" name="bio" id="bio" value="<?php if ( isset($bio) ) echo $bio[0]; ?>" />
+            </p>
             <p>
                 <label for="relatedWork"><?php _e('Related Work', 'ly_author_type')?></label>
                 <input type="text" name="relatedWork" id="relatedWork" value="<?php if ( isset($relatedWork) ) echo $relatedWork[0]; ?>" />
@@ -178,7 +171,7 @@ if (!class_exists('AuthorCustomType')) :
         function register_admin_styles(){
             global $typenow;
             if ($typenow == $this->post_type) {
-                wp_enqueue_style('ly-author-type-css', plugin_dir_url( __FILE__ ) . 'css/ly_author_type.css');               
+                wp_enqueue_style('author-type-css', plugin_dir_url( __FILE__ ) . 'css/ly_author_type.css');               
             }
         }
 
