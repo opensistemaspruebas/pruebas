@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+  <div data-component-bbva="search" data-css="true"></div>
+
   <main id="mainContent" class="home" data-role="content">
 		<div class="wrapperFluid">
             
