@@ -17,6 +17,10 @@ get_header(); ?>
 		<div id="primary" class="container">
 			<div id="content" role="main">
 
+			<!-- Buscador y resultados de CloudSearch. -->
+			<div data-component-bbva="search" data-css="true"></div>
+			<!-- ************************************* -->
+
 			<?php if ( have_posts() ) : ?>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
