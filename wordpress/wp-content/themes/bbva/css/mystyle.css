@@ -1,0 +1,119 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-feb-2016, 9:32:41
+    Author     : diegoprieto
+*/
+
+@font-face {
+    font-family: bbvaweb-bookitalic;
+    src: url("../fonts/bbvaweb-bookitalic.eot")format("embedded-opentype"),
+        url("../fonts/bbvaweb-bookitalic.woff") format("woff"),
+        url("../fonts/bbvaweb-bookitalic.ttf") format("opentype"),
+        url("../fonts/bbvaweb-bookitalic.svg") format("svg"); 
+}
+
+
+@font-face {
+    font-family: bbvaweb-light;
+    src: url("../fonts/bbvaweb-light.eot")format("embedded-opentype"),
+        url("../fonts/bbvaweb-light.woff") format("woff"),
+        url("../fonts/bbvaweb-light.ttf") format("opentype"),
+        url("../fonts/bbvaweb-light.svg") format("svg"); 
+}
+
+@font-face {
+    font-family: bbvaweb-lighitalict;
+    src: url("../fonts/bbvaweb-lightitalict.eot")format("embedded-opentype"),
+        url("../fonts/bbvaweb-lightitalict.woff") format("woff"),
+        url("../fonts/bbvaweb-lightitalict.ttf") format("opentype"),
+        url("../fonts/bbvaweb-lightitalict.svg") format("svg"); 
+}
+
+@font-face {
+    font-family: bbvaweb-medium;
+    src: url("../fonts/bbvaweb-medium.eot")format("embedded-opentype"),
+        url("../fonts/bbvaweb-medium.woff") format("woff"),
+        url("../fonts/bbvaweb-medium.ttf") format("opentype"),
+        url("../fonts/bbvaweb-medium.svg") format("svg"); 
+}
+
+@font-face {
+    font-family: bbvaweb-mediumitalic;
+    src: url("../fonts/bbvaweb-mediumitalic.eot")format("embedded-opentype"),
+        url("../fonts/bbvaweb-mediumitalic.woff") format("woff"),
+        url("../fonts/bbvaweb-mediumitalic.ttf") format("opentype"),
+        url("../fonts/bbvaweb-mediumitalic.svg") format("svg"); 
+}
+
+@font-face {
+    font-family: bbvaweb-semibold;
+    src: url("../fonts/bbvaweb-semibold.eot")format("embedded-opentype"),
+        url("../fonts/bbvaweb-semibold.woff") format("woff"),
+        url("../fonts/bbvaweb-semibold.ttf") format("opentype"),
+        url("../fonts/bbvaweb-semibold.svg") format("svg"); 
+}
+
+
+
+*{
+    font-family: bbvaweb-light;
+}
+
+#bbva_title{
+    font-family: bbvaweb-medium;
+}
+
+.menu-row{
+    background: linear-gradient(#0079C1,#00529B);
+    margin-top: 10px;
+}
+
+.menu_web ul{
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.menu_web,.menu_web ul, .menu_web ul li{
+    height: 100%;
+    width: 100%;
+}
+
+.menu_web  ul  li{
+    background: url(../images/separador-menu.png) top right no-repeat rgba(0, 0, 0, 0);
+    line-height: 50px;
+    list-style: none;
+    float: left;
+    width: auto;
+}
+
+.menu_web  ul  li:hover{
+    background: red;
+}
+
+.menu_web  ul  li  a{
+    color: #FFF;
+    font-size: 17px;
+    height: 100%;
+    display: block;
+    padding: 0 10px;
+}
+
+.menu_web ul li a:hover{
+     background: #005098;
+         text-decoration: none;
+}
+
+header.row{
+    margin-right: 0px;
+}
+
+h1{
+    font-size: 50px;
+    color: #213E8B;
+}
