@@ -8,6 +8,10 @@
  */
 
 get_header(); ?>
+	
+		<!-- Para indicar que hay que indexar los posts. -->
+		<meta name="wp_search" content="true">	
+		<!-- ******************************************* -->
 
 		<div id="primary" class="container">
 			<div id="content" role="main">
