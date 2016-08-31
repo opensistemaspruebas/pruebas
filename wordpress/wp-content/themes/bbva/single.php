@@ -31,8 +31,7 @@ get_header(); ?>
 			  	// Paso todo el texto a minúscula.
 			    $post_tags .= strtolower($tag->name); 
 			  }
-			} 
-			echo $post_tags;
+			}
 		?>
 		<meta name="wp_text_array" content="<?php echo $post_tags; ?>">
 		<!-- ******************************************* -->
