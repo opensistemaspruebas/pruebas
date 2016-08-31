@@ -11,10 +11,17 @@ get_header(); ?>
 	
 		<!-- Para indicar que hay que indexar los posts. -->
 		<meta name="wp_search" content="true">
-		<meta name="wp_content" content="<?php echo $post->post_content; ?>">
+		<?php
+			// Elimino puntos, comas y saltos de línea, y paso todo el texto a minúscula. 
+			$post_title = str_replace(array("\r", "\n"), '', strtolower(strtr(strip_tags($post->post_title), array('.' => '', ',' => ''))));
+		 	$post_content = strtolower(str_replace(array("\r", "\n"), '', strtr(strip_tags($post->post_content), array('.' => '', ',' => ''))));
+		 	$search_content = $post_title . ' ' . $post_content; 
+		?>
+		<meta name="wp_content" content="<?php echo $search_content; ?>">
 		<meta name="wp_title" content="<?php echo $post->post_title; ?>">
 		<meta name="wp_topic" content="post">
 		<!-- ******************************************* -->
+
 
 		<div id="primary" class="container">
 			<div id="content" role="main">
