@@ -17,7 +17,24 @@ get_header(); ?>
 		 	$post_content = strtolower(str_replace(array("\r", "\n"), '', strtr(strip_tags($post->post_content), array('.' => '', ',' => ''))));
 		?>
 		<meta name="wp_content" content="<?php echo $post_content; ?>">
-		<meta name="wp_topic" content="<?php _('Publicación'); ?>">
+		<meta name="wp_topic" content="post">
+		<?php 
+			$post_tags = '';
+			$tags = get_the_tags();
+			$i = count($tags);
+			if ($tags) {
+			  foreach ($tags as $tag) {
+			  	// Añado coma para separar las etiquetas.
+			  	if (!empty($post_tags)) {
+			  		$post_tags .= ',';
+			  	}
+			  	// Paso todo el texto a minúscula.
+			    $post_tags .= strtolower($tag->name); 
+			  }
+			} 
+			echo $post_tags;
+		?>
+		<meta name="wp_text_array" content="<?php echo $post_tags; ?>">
 		<!-- ******************************************* -->
 
 
