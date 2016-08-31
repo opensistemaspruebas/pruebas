@@ -34,6 +34,7 @@ get_header(); ?>
 			}
 		?>
 		<meta name="wp_text_array" content="<?php echo $post_tags; ?>">
+		<meta name="wp_topic" content="post">
 		<!-- ******************************************* -->
 
 
