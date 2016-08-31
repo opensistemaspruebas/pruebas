@@ -10,7 +10,10 @@
 get_header(); ?>
 	
 		<!-- Para indicar que hay que indexar los posts. -->
-		<meta name="wp_search" content="true">	
+		<meta name="wp_search" content="true">
+		<meta name="wp_content" content="<?php echo $post->post_content; ?>">
+		<meta name="wp_title" content="<?php echo $post->post_title; ?>">
+		<meta name="wp_topic" content="post">
 		<!-- ******************************************* -->
 
 		<div id="primary" class="container">
