@@ -3,7 +3,12 @@ var iti_widget_image_context = false;
 function iti_widget_image_return(iti_widget_image_id,iti_widget_image_thumb){
     // show our image for reference
     iti_widget_image_context.find('img').remove();
+    iti_widget_image_context.parent().find('i').remove();
     iti_widget_image_context.append('<img src="' + iti_widget_image_thumb + '" alt="Image" />');
+
+    // moliver: añadir botón de eliminar imagen
+    iti_widget_image_context.parent().append("<a class='button iti-image-widget-trigger-remove' href='javascript:void(0);' title='" + object_name.remove_image + "'>" + object_name.remove_image + "</a>");
+    // ****************************************
 
     // save our image id
     iti_widget_image_context.find('input').val(iti_widget_image_id);
@@ -12,12 +17,16 @@ function iti_widget_image_return(iti_widget_image_id,iti_widget_image_thumb){
 function iti_widget_image_update_thickbox(){
     if(iti_widget_image_context){
 
+        // moliver: ocultar botón de guardar los cambios
+        jQuery('#TB_iframeContent').contents().find('p.ml-submit').remove();
+        //**********************************************
+
         // need to add our own button
         if(jQuery('#TB_iframeContent').contents().find('td.savesend').length){
             jQuery('#TB_iframeContent').contents().find('td.savesend').each(function(){
                 if(jQuery(this).find('input.iti-widget-image-choose').length==0){
                     jQuery(this).find('input').hide();
-                    jQuery(this).prepend('<input type="submit" name="itiwidgetimagechoose" class="iti-widget-image-choose button" value="Use this image" />');
+                    jQuery(this).prepend('<input type="submit" name="itiwidgetimagechoose" class="iti-widget-image-choose button" value=' + object_name.some_string + ' />');
                 }
             });
         }
@@ -39,7 +48,7 @@ function iti_widget_image_update_thickbox(){
 
         // update button
         if(jQuery('#TB_iframeContent').contents().find('.media-item .savesend input[type=submit], #insertonlybutton').length){
-            jQuery('#TB_iframeContent').contents().find('.media-item .savesend input[type=submit], #insertonlybutton').val('Use this image');
+            jQuery('#TB_iframeContent').contents().find('.media-item .savesend input[type=submit], #insertonlybutton').val(object_name.some_string);
         }
         if(jQuery('#TB_iframeContent').contents().find('#tab-type_url').length){
             jQuery('#TB_iframeContent').contents().find('#tab-type_url').hide();
@@ -48,6 +57,15 @@ function iti_widget_image_update_thickbox(){
             // we need to ALWAYS get the fullsize since we're retrieving the guid
             // if the user inserts an image somewhere else and chooses another size, everything breaks
             jQuery('#TB_iframeContent').contents().find('tr.image-size input[value="full"]').prop('checked', true);
+            
+
+
+            // moliver: quito el botón de editar imagen y el texto de campos requerido
+            jQuery('#TB_iframeContent').contents().find('p.media-types.media-types-required-info,td.A1B1 .button').parent().remove();
+            //************************************************************************
+            
+
+
             jQuery('#TB_iframeContent').contents().find('tr.post_title,tr.image_alt,tr.post_excerpt,tr.image-size,tr.post_content,tr.url,tr.align,tr.submit>td>a.del-link').hide();
         }
     }
@@ -72,4 +90,13 @@ jQuery(document).ready(function(){
         tb_show(jQuery(this).attr('title'), event.target.href, false);
         iti_widget_image_thickbox_updater = setInterval( iti_widget_image_update_thickbox, 500 );
     });
+    // moliver: eliminar imagen
+    jQuery('.widgets-holder-wrap').on('click', 'a.iti-image-widget-trigger-remove', function(e){
+        e.preventDefault();
+        jQuery(this).parent().find("img").remove();
+        jQuery(this).parent().find("input").val("");
+        jQuery(this).parent().prepend('<p><i>' + object_name.no_image + '</i></p>');
+        jQuery(this).remove();
+    }); 
+    //*************************
 });

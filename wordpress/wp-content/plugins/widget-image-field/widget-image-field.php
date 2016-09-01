@@ -28,7 +28,25 @@ class WidgetImageField {
             wp_enqueue_script( 'jquery-ui-core' );
             wp_enqueue_script( 'thickbox' );
             wp_enqueue_script( 'media-upload' );
-            wp_enqueue_script( 'widgetimagefield', WIDGET_IMAGE_FIELD_URL . '/script.js', array( 'jquery', 'jquery-ui-core', 'thickbox', 'media-upload' ), false, true );
+
+
+            // moliver: traducir carga de imágenes
+            // Register the script
+            wp_register_script('widgetimagefield', WIDGET_IMAGE_FIELD_URL . '/script.js');
+
+            // Localize the script with new data
+            $translation_array = array(
+                'some_string' => __('Select Image'),
+                'no_image' => __( 'No image set' ),
+                'remove_image' => __( 'Remove Image' ),
+                'a_value' => '10'
+            );
+            wp_localize_script('widgetimagefield', 'object_name', $translation_array);
+
+            // Enqueued script with localized data.           
+            wp_enqueue_script('widgetimagefield', array('jquery', 'jquery-ui-core', 'thickbox', 'media-upload'), false, true);
+            //*************************************
+
 
             wp_enqueue_style( 'thickbox' );
             wp_enqueue_style( 'widgetimagefield', WIDGET_IMAGE_FIELD_URL . '/style.css' );
@@ -109,13 +127,23 @@ class WidgetImageField {
 
             if ( $this->image_id ) {
                 $field .= "<img src='" . esc_url( $this->src ) . "' width='" . absint( $this->width ) . "' height='" . absint( $this->height ) . "' />";
+            } else {
+                $field .= "<p><i>" .  __( 'No image set' ) . "</i></p>";
             }
 
             $field .= "</div>";
 
             $field .= "<a class='button iti-image-widget-trigger' href='media-upload.php?TB_iframe=1&amp;width=640&amp;height=1500' title='" . __( 'Choose Image' ) . "'>";
-            $field .= __( 'Choose Image' );
-            $field .= "</a></div>";
+            $field .= __( 'Insert image' );
+            $field .= "</a>";
+
+            if ( $this->image_id ) {
+                $field .= "<a class='button iti-image-widget-trigger-remove' href='javascript:void(0);' title='" . __( 'Remove Image' ) . "'>";
+                $field .= __( 'Remove Image' );
+                $field .= "</a>";
+            }
+
+            $field .= "</div>";
         }
         return $field;
     }
