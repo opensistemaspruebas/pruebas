@@ -68,3 +68,16 @@ class OS_Image_Widget_Loader extends OS_Image_Widget_Plugin {}
 // Initialize and load the plugin.
 $os_image_widget = new OS_Image_Widget_Plugin();
 add_action('plugins_loaded', array($os_image_widget, 'load'));
+
+
+function restrict_mime($mimes) {
+
+	$mimes = array(
+		'png' => 'image/png',
+        'jpg|jpeg|jpe' => 'image/jpeg',
+        'gif' => 'image/gif',
+	);
+	
+	return $mimes;
+}
+//add_filter('upload_mimes','restrict_mime');
