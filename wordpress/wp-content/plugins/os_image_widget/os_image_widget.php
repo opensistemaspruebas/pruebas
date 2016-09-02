@@ -2,7 +2,7 @@
 /**
  * Plugin Name: OS Image Widget
  * Plugin URI: http://www.opensistemas.com/
- * Description: Widget que muesta una imagen con un cuadro de texto y un link.
+ * Description: Widget que muestra una imagen con un cuadro de texto y un link.
  * Version: 1.0
  * Author: Marta Oliver
  * Author URI: http://www.opensistemas.com/
