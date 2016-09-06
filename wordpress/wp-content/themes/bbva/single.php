@@ -16,8 +16,7 @@ get_header(); ?>
 			// Elimino puntos, comas y saltos de línea, y paso todo el texto a minúscula. 
 		 	$post_content = strtolower(str_replace(array("\r", "\n"), '', strtr(strip_tags($post->post_content), array('.' => '', ',' => ''))));
 		?>
-		<meta name="wp_content" content="<?php echo $post_content; ?>">
-		<meta name="wp_topic" content="post">
+		<meta name="wp_content" content="<?php echo $post_content; ?>">		
 		<?php 
 			$post_tags = '';
 			$tags = get_the_tags();
@@ -35,6 +34,7 @@ get_header(); ?>
 		?>
 		<meta name="wp_text_array" content="<?php echo $post_tags; ?>">
 		<meta name="wp_topic" content="post">
+		<meta name="wp_author" content="<?php the_author_meta('display_name', $post->post_author); ?>">
 		<!-- ******************************************* -->
 
 
