@@ -777,10 +777,15 @@ function get_search_meta_for_post($post) {
 
 	$post_content = strtolower(str_replace(array("\r", "\n"), '', strtr(strip_tags($post->post_content), array('.' => '', ',' => ''))));
 
+	$thumbID = get_post_thumbnail_id( $post->ID );
+	$imgDestacada = wp_get_attachment_url($thumbID);
+
 	$meta .= '<meta name="wp_search" content="true">';
+	$meta .= '<meta name="wp_date" content="' . $post->post_date . '">';
 	$meta .= '<meta name="wp_title" content="' . $post->post_title . '">';
+	$meta .= '<meta name="image_src" content="' . $imgDestacada . '">';
 	$meta .= '<meta name="wp_content" content="' . $post_content . '">';
-	$meta .= '<meta name="wp_text_array" content="' . get_all_tags_from_post($post->ID) . '">';
+	$meta .= '<meta name="wp_category" content="' . get_all_tags_from_post($post->ID) . '">';
 	$meta .= '<meta name="wp_topic" content="' . get_post_type($post->ID) . '">';
 
 	return $meta;

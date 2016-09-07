@@ -26,6 +26,14 @@ if (!class_exists('OS_Filter_Widget')) :
 	        	)
 	        );
 	        wp_register_script('os_filter_widget_js', plugins_url('js/os_filter_widget.js' , __FILE__), array('jquery'));
+	        $translation_array = array(
+				'no_results' => __('No results found', 'os_filter_widget'),
+				'more_results' => __('More', 'os_filter_widget'),
+				'sort_by_asc_date' => __('Older', 'os_filter_widget'),
+				'sort_by_desc_date' => __('Recents', 'os_filter_widget'),
+				'sort_by_popular' => __('Popular', 'os_filter_widget'),
+			);
+			wp_localize_script('os_filter_widget_js', 'object_name', $translation_array);
             wp_enqueue_script('os_filter_widget_js');
 	    }
 
@@ -34,33 +42,30 @@ if (!class_exists('OS_Filter_Widget')) :
 
 	    	echo $args['before_widget'];
 
-	    	$categorias = get_terms('category', array('hide_empty' => false));
-	    	$categorias_listado = '';
-	    	foreach ($categorias as $categoria) {
-	    		if (!empty($categorias_listado)) {
-	    			$categorias_listado .= ',';
-	    		}
-	    		$categorias_listado .= $categoria->name;
-	    	}
+	    	$categories = get_terms(
+				array(
+					"taxonomy" => array("post_tag", "category"),
+					"hide_empty" => true,
+					"fields" => "names"
+				)
+			);
 
+			$authors = get_users(
+				array(
+					'fields' => array(
+						'display_name'
+					),
+					'who' => 'authors'
+				)
+			);
 
-	    	$autores = get_users(array('role' => 'author'));
-	    	$autores_listado = '';
-	    	foreach ($autores as $autor) {
-	    		if (!empty($autores_listado)) {
-	    			$autores_listado .= ',';
-	    		}
-	    		$autores_listado .= $autor->display_name;
-	    	}
-
-	    	$paises = get_terms('country', array('hide_empty' => false));
-	    	$paises_listado = '';
-	    	foreach ($paises as $pais) {
-	    		if (!empty($paises_listado)) {
-	    			$paises_listado .= ',';
-	    		}
-	    		$paises_listado .= $pais->name;
-	    	}
+	    	$countries = get_terms(
+				array(
+					"taxonomy" => array("country"),
+					"hide_empty" => true,
+					"fields" => "names"
+				)
+			);
 
 			?>
 			<h1><?php _e('Filters', 'os_filter_widget'); ?></h1>
@@ -68,41 +73,47 @@ if (!class_exists('OS_Filter_Widget')) :
 				
 				<label for="inputText" class="assistive-text"><?php _e('Text', 'os_filter_widget'); ?></label>
 				<input type="text" class="field" name="inputText" id="inputText">
-				
-				<label for="inputCategory" class="assistive-text"><?php _e('Category', 'os_filter_widget'); ?></label>
-				<input type="text" class="field" name="inputCategory" id="inputCategory">
-				
-				<label for="inputAuthor" class="assistive-text"><?php _e('Author', 'os_filter_widget'); ?></label>
-				<input type="text" class="field" name="inputAuthor" id="inputAuthor">
-				
-				<label for="inputGeography" class="assistive-text"><?php _e('Geography', 'os_filter_widget'); ?></label>
-				<input type="text" class="field" name="inputGeography" id="inputGeography">
+
+				<input type="hidden" name="size" id="size" value="7">
+				<input type="hidden" name="start" id="start" value="0">
+				<input type="hidden" name="inputSortBy" id="inputSortBy" value="sortByDescDate">
+
+				<label for="selectCategory" class="assistive-text"><?php _e('Categories', 'os_filter_widget'); ?></label>
+				<?php if (!empty($categories)) : ?>
+				<select id="selectCategory" name="selectCategory" multiple="multiple">
+					<?php foreach ($categories as $category) : ?>
+						<option value="<?php echo $category; ?>"><?php echo $category; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
+
+				<label for="selectAuthor" class="assistive-text"><?php _e('Authors', 'os_filter_widget'); ?></label>
+				<?php if (!empty($authors)) : ?>
+				<select id="selectAuthor" name="selectAuthor" multiple="multiple">
+					<?php foreach ($authors as $author) : ?>
+						<option value="<?php echo $author->display_name; ?>"><?php echo $author->display_name; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
+
+				<label for="selectCountry" class="assistive-text"><?php _e('Countries', 'os_filter_widget'); ?></label>
+				<?php if (!empty($countries)) : ?>
+				<select id="selectCountry" name="selectCountry" multiple="multiple">
+					<?php foreach ($countries as $country) : ?>
+						<option value="<?php echo $country; ?>"><?php echo $country; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
 				
 				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Search', 'os_filter_widget'); ?>">
+
 			</form>
-			<div id="results"></div>
+			
+			<div id="sortLinks"></div>
+			<div id="results"></div>			
+			<div id="moreLink"></div>
+
 			<?php
-
-			/*echo '<h2>' . __("Categories", "os_filter_widget") . '</h2>';
-			echo '<ul>';
-			foreach ($categorias as $categoria) {
-				echo '<li><a href="#" name="' . $categoria->slug . ' id="' . $categoria->slug . '">' . $categoria->name . '</a></li>';
-			}
-			echo '</ul>';
-
-			echo '<h2>' . __("Authors", "os_filter_widget") . '</h2>';
-			echo '<ul>';
-			foreach ($autores as $autor) {
-				echo '<li><a href="#" name="' . $autor->user_login . ' id="' . $autor->user_login . '">' . $autor->display_name . '</a></li>';
-			}
-			echo '</ul>';
-
-			echo '<h2>' . __("Countries", "os_filter_widget") . '</h2>';
-			echo '<ul>';
-			foreach ($paises as $pais) {
-				echo '<li><a href="#" name="' . $pais->slug . ' id="' . $pais->slug . '">' . $pais->name . '</a></li>';
-			}
-			echo '</ul>';*/
 
 			echo $args['after_widget'];
 
