@@ -14,25 +14,23 @@
 
 if (!class_exists('OS_Filter_Widget')) :
 
-	class OS_Filter_Widget extends WP_Widget { 
+	class OS_Filter_Widget extends WP_Widget {
 
-		
+
 	    function __construct() {
 	        parent::__construct(
-	        	'os_filter_widget', 
-	        	__('OS Filter Widget', 'os_filter_widget'), 
+	        	'os_filter_widget',
+	        	__('OS Filter Widget', 'os_filter_widget'),
 	        	array(
 	            	'description' => __('Widget que busca publicaciones y filtra por etiquetas', 'os_filter_widget')
 	        	)
-	        );	        
+	        );
 	        wp_register_script('os_filter_widget_js', plugins_url('js/os_filter_widget.js' , __FILE__), array('jquery'));
             wp_enqueue_script('os_filter_widget_js');
 	    }
-	    
+
 
 	    public function widget($args, $instance) {
-
-	    	/* http://ec2-52-210-40-79.eu-west-1.compute.amazonaws.com/buscador-por-api/ */	 	    	
 
 	    	echo $args['before_widget'];
 
@@ -54,7 +52,7 @@ if (!class_exists('OS_Filter_Widget')) :
 	    		}
 	    		$autores_listado .= $autor->display_name;
 	    	}
-	    	
+
 	    	$paises = get_terms('country', array('hide_empty' => false));
 	    	$paises_listado = '';
 	    	foreach ($paises as $pais) {
@@ -65,60 +63,69 @@ if (!class_exists('OS_Filter_Widget')) :
 	    	}
 
 			?>
-			<form method="get" id="searchform" action="http://literacy.local.com/">
-				<label for="s" class="assistive-text"><?php _e('Filters', 'os_filter_widget'); ?></label>
-				<input type="text" class="field" name="s" id="s" placeholder="<?php _e('Search', 'os_filter_widget'); ?>">
-				<input type="submit" class="submit" name="submit" id="searchsubmit" value="<?php _e('Search', 'os_filter_widget'); ?>">
-				<input type="hidden" name="categorias" id="categorias" value="<?php echo $categorias_listado; ?>">
-				<input type="hidden" name="autores" id="autores" value="<?php echo $autores_listado; ?>">
-				<input type="hidden" name="paises" id="paises" value="<?php echo $paises_listado; ?>">
-
+			<h1><?php _e('Filters', 'os_filter_widget'); ?></h1>
+			<form action="#" method="get" name="form_filter" id="form_filter">
+				
+				<label for="inputText" class="assistive-text"><?php _e('Text', 'os_filter_widget'); ?></label>
+				<input type="text" class="field" name="inputText" id="inputText">
+				
+				<label for="inputCategory" class="assistive-text"><?php _e('Category', 'os_filter_widget'); ?></label>
+				<input type="text" class="field" name="inputCategory" id="inputCategory">
+				
+				<label for="inputAuthor" class="assistive-text"><?php _e('Author', 'os_filter_widget'); ?></label>
+				<input type="text" class="field" name="inputAuthor" id="inputAuthor">
+				
+				<label for="inputGeography" class="assistive-text"><?php _e('Geography', 'os_filter_widget'); ?></label>
+				<input type="text" class="field" name="inputGeography" id="inputGeography">
+				
+				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Search', 'os_filter_widget'); ?>">
 			</form>
+			<div id="results"></div>
 			<?php
 
-			echo '<h2>' . __("Categories", "os_filter_widget") . '</h2>';
-			echo '<ul>';		
-			foreach ($categorias as $categoria) {			
-				echo '<li><a href="#" name="' . $categoria->slug . ' id="' . $categoria->slug . '">' . $categoria->name . '</a></li>';			
+			/*echo '<h2>' . __("Categories", "os_filter_widget") . '</h2>';
+			echo '<ul>';
+			foreach ($categorias as $categoria) {
+				echo '<li><a href="#" name="' . $categoria->slug . ' id="' . $categoria->slug . '">' . $categoria->name . '</a></li>';
 			}
 			echo '</ul>';
 
 			echo '<h2>' . __("Authors", "os_filter_widget") . '</h2>';
 			echo '<ul>';
 			foreach ($autores as $autor) {
-				echo '<li><a href="#" name="' . $autor->user_login . ' id="' . $autor->user_login . '">' . $autor->display_name . '</a></li>';			
+				echo '<li><a href="#" name="' . $autor->user_login . ' id="' . $autor->user_login . '">' . $autor->display_name . '</a></li>';
 			}
 			echo '</ul>';
-			
+
 			echo '<h2>' . __("Countries", "os_filter_widget") . '</h2>';
-			echo '<ul>';		
+			echo '<ul>';
 			foreach ($paises as $pais) {
-				echo '<li><a href="#" name="' . $pais->slug . ' id="' . $pais->slug . '">' . $pais->name . '</a></li>';			
+				echo '<li><a href="#" name="' . $pais->slug . ' id="' . $pais->slug . '">' . $pais->name . '</a></li>';
 			}
-			echo '</ul>';
+			echo '</ul>';*/
 
 			echo $args['after_widget'];
 
 	    }
-	    
-	    
+
+
 	    public function form($instance) {
-	        ?>        
+	        ?>
 	        <p><?php _e('Este widget no tiene parámetros configurables.', 'os_filter_widget'); ?></p>
 	        <?php
 	    }
-	    
+
 
 	    function update($new_instance, $old_instance) {
 	    	return $new_instance;
 	    }
 
 	}
-	 
+
 	function os_filter_widget() {
 	    register_widget('os_filter_widget');
 	}
-	 
+
 	// Initialize Plugin
 	add_action('widgets_init', 'os_filter_widget');
 

@@ -9,34 +9,9 @@
 
 get_header(); ?>
 	
-		<!-- Para indicar que hay que indexar los posts. -->
-		<meta name="wp_search" content="true">
-		<meta name="wp_title" content="<?php echo $post->post_title; ?>">
-		<?php
-			// Elimino puntos, comas y saltos de línea, y paso todo el texto a minúscula. 
-		 	$post_content = strtolower(str_replace(array("\r", "\n"), '', strtr(strip_tags($post->post_content), array('.' => '', ',' => ''))));
-		?>
-		<meta name="wp_content" content="<?php echo $post_content; ?>">		
-		<?php 
-			$post_tags = '';
-			$tags = get_the_tags();
-			$i = count($tags);
-			if ($tags) {
-			  foreach ($tags as $tag) {
-			  	// Añado coma para separar las etiquetas.
-			  	if (!empty($post_tags)) {
-			  		$post_tags .= ',';
-			  	}
-			  	// Paso todo el texto a minúscula.
-			    $post_tags .= strtolower($tag->name); 
-			  }
-			}
-		?>
-		<meta name="wp_text_array" content="<?php echo $post_tags; ?>">
-		<meta name="wp_topic" content="post">
-		<meta name="wp_author" content="<?php the_author_meta('display_name', $post->post_author); ?>">
+		<!-- Metas para el buscador. -->
+		<?php echo get_search_meta_for_post($post); ?>
 		<!-- ******************************************* -->
-
 
 		<div id="primary" class="container">
 			<div id="content" role="main">

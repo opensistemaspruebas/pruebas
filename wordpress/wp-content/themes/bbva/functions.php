@@ -739,3 +739,49 @@ function twentyeleven_get_gallery_images() {
 
 	return $images;
 }
+
+
+// Devuelve todas las etiquetas de un post separadas por comas
+function get_all_tags_from_post($post_id) {
+	
+	$coauthors = get_coauthors($post_id);
+	$authors = array();
+	
+	foreach ($coauthors as $coauthor) {
+		$display_name = $coauthor->data->display_name;
+		array_push($authors, $display_name);
+	}
+	
+	$tags = wp_get_post_terms(
+		$post_id, 
+		array(
+			'post_tag', 
+			'category',
+			'country'
+		), 
+		array(
+			"fields" => "names"
+		)
+	);
+	
+	$all_tags = array_merge($authors, $tags);
+	$all_tags_separadas_por_comas = implode(",", $all_tags);
+	
+	return $all_tags_separadas_por_comas;
+}
+
+
+// Devuelve los metas del buscador para incluirlos en el post
+function get_search_meta_for_post($post) {
+	$meta = '';
+
+	$post_content = strtolower(str_replace(array("\r", "\n"), '', strtr(strip_tags($post->post_content), array('.' => '', ',' => ''))));
+
+	$meta .= '<meta name="wp_search" content="true">';
+	$meta .= '<meta name="wp_title" content="' . $post->post_title . '">';
+	$meta .= '<meta name="wp_content" content="' . $post_content . '">';
+	$meta .= '<meta name="wp_text_array" content="' . get_all_tags_from_post($post->ID) . '">';
+	$meta .= '<meta name="wp_topic" content="' . get_post_type($post->ID) . '">';
+
+	return $meta;
+}
