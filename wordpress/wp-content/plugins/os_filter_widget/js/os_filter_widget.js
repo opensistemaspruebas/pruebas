@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 			text = getCleanedString(text);
 			tags_string = tags_string;
 
-			var aux = (sortBy == "sortByPopular") ? ' AND (category:"destacado")' : '';
+			var aux = (sortBy == "sortByPopular") ? ' AND (category:"interesante")' : '';
 			sortBy = (sortBy == "sortByPopular") ? 'date desc' : sortBy;
 			query += (text) ? '(title:("' + text + '") OR content:("' + text + '"))' : '';
 			query += (text && tags_string) ? ' AND ' : '';
