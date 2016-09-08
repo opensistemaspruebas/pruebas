@@ -9,15 +9,15 @@
  * Text Domain: os_custom_search
  */
 
-function mySearchFilter($query) {
-	$post_type = $_GET['type'];
-	if (!$post_type) {
-		$post_type = 'any';
-	}
-    if ($query->is_search) {
-        $query->set('post_type', $post_type);
-    };
-    return $query;
-};
 
-add_filter('pre_get_posts','mySearchFilter');
+function print_buscador() {
+	echo '<div class="componente_BUSCADORgeneral" id="buscadorGeneralExtensible" style=""> 
+          <form action="/resultados.html" method="get" data-ajax="false">
+            <fieldset>
+                <label xml:lang="es" for="inpbuscar_general" lang="es">Buscar</label>
+                <input style="width: 176px;" data-role="none" id="inpbuscar_general" class="text" xml:lang="es" placeholder="_Escribe aquí tu busqueda" title="Search" name="q" lang="es" type="text">
+                <input data-role="none" id="btnbuscar_general" value="Buscar" xml:lang="es" name="btnbuscar_general" lang="es" type="submit">
+            </fieldset>
+           </form>
+          </div>';
+}

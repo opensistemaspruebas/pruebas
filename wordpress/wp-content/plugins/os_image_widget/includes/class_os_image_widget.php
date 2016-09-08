@@ -107,7 +107,7 @@ class OS_Image_Widget extends WP_Widget {
 			if ( ! empty ( $instance['link'] ) ) {
 				$target = ( empty( $instance['new_window'] ) ) ? '' : ' target="_blank"';
 
-				$instance['link_open']  = '<a href="' . esc_url( $instance['link'] ) . '"' . $target . '>';
+				$instance['link_open']  = '<a class="botonVerde" href="' . esc_url( $instance['link'] ) . '"' . $target . '>';
 				$instance['link_close'] = '</a>';
 
 				// This is to differentiate between the image link and text link.
