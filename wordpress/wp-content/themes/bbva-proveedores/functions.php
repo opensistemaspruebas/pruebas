@@ -76,4 +76,7 @@ if(function_exists('register_sidebar'))
 		'after_title'   => '</h2>',
 	) );
 
+
+
+
 ?>
