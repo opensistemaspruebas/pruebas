@@ -48,7 +48,6 @@
         <link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/bbva/css/mystyle.css" />
         <script src="/wp-content/themes/bbva/js/jquery-1.12.0.min.js"></script>
         <script src="/wp-content/themes/bbva/js/jquery-ui.min.js"></script>
-        <script src="/wp-content/themes/bbva/js/jquery.select2.js"></script>
         <script src="/wp-content/themes/bbva/js/bootstrap.min.js"></script>
 
         

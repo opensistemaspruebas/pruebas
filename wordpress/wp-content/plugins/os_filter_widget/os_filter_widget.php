@@ -25,17 +25,18 @@ if (!class_exists('OS_Filter_Widget')) :
 	            	'description' => __('Widget que busca publicaciones y filtra por etiquetas', 'os_filter_widget')
 	        	)
 	        );
-	        wp_register_script('os_filter_widget_js', plugins_url('js/os_filter_widget.js' , __FILE__), array('jquery'));
+	        wp_register_script('os_filter_widget_js', plugins_url('js/os_filter_widget_min.js' , __FILE__), array('jquery'));
 	        $translation_array = array(
 				'no_results' => __('No results found', 'os_filter_widget'),
 				'more_results' => __('More', 'os_filter_widget'),
 				'sort_by_asc_date' => __('Older', 'os_filter_widget'),
 				'sort_by_desc_date' => __('Recents', 'os_filter_widget'),
 				'sort_by_popular' => __('Popular', 'os_filter_widget'),
+				'ajaxurl' => admin_url('admin-ajax.php')
 			);
 			wp_localize_script('os_filter_widget_js', 'object_name', $translation_array);
             wp_enqueue_script('os_filter_widget_js');
-	    }
+        }
 
 
 	    public function widget($args, $instance) {
@@ -76,7 +77,7 @@ if (!class_exists('OS_Filter_Widget')) :
 
 				<input type="hidden" name="size" id="size" value="7">
 				<input type="hidden" name="start" id="start" value="0">
-				<input type="hidden" name="inputSortBy" id="inputSortBy" value="sortByDescDate">
+				<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
 
 				<label for="selectCategory" class="assistive-text"><?php _e('Categories', 'os_filter_widget'); ?></label>
 				<?php if (!empty($categories)) : ?>
@@ -139,5 +140,6 @@ if (!class_exists('OS_Filter_Widget')) :
 
 	// Initialize Plugin
 	add_action('widgets_init', 'os_filter_widget');
+
 
 endif;
