@@ -1,6 +1,6 @@
 <?php
 /**
- * Sidebar del Grupo Secundario, Columna Principal
+ * Sidebar Columna Principal
  *
  */
 
@@ -9,4 +9,6 @@ if ( ! is_active_sidebar( 'sidebar-0' ) ) {
 }
 ?>
 
-<?php dynamic_sidebar( 'sidebar-0' ); ?>
+<div class="colFluid">
+	<?php dynamic_sidebar( 'sidebar-0' ); ?>
+</div>

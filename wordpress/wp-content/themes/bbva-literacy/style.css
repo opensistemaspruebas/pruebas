@@ -292,38 +292,6 @@ ul.tabs_contentHorizontal li.tab_box .moduloCarrusel_boxTexto .fotoInfo_link {ma
 .promoTipo_link .fotoInfo_titulo, .promoTipo_link .fotoInfo_texto {float:left;width:100%;}
 .promoTipo_botonVerde .fotoInfo_link, .promoTipo_link .fotoInfo_link {float:left;width:100%;}
 
-.wrapperContent ul.tabs_menuHorizontal {position:relative;left:0;z-index:100;margin:0px;padding:0px;}
-ul.tabs_menuHorizontal li {display:block;width:33%;padding:30px 0px;margin-left:-1px;float:left;cursor: pointer;text-align:center;border-right:1px solid #ededf0;border-left:1px solid #ededf0;}
-ul.tabs_menuHorizontal li.tab_boton {background-color:#fff;color:#009ee5 !important;font-size:.9rem;font-family:"BBVA Book", Arial, sans-serif;}
-ul.tabs_menuHorizontal li.tab_boton .textoIconoOcultar {text-indent: 0px;float:none;}
-ul.tabs_menuHorizontal li.tab_boton.active {background-color:#f5f6f7;color:#6f7070 !important;}
-ul.tabs_menuHorizontal li.tab_boton.active:before {content: url('images/carrusel-pico.png');color:#f5f6f7;text-align:center;font-size:20px;margin:-48px 0 0 46%;float:left;}
-
-
-/************ PROMOCIONAL **************/
-.moduloContenido_promocional {margin:20px 0px;}
-.moduloContenido_promocional .moduloImagen_boxTexto p.section_textoDestacado {margin-top:0px;}
-.moduloContenido_promocional .moduloImagen_boxTexto p.section_texto {width:100%;}
-.moduloContenido_promocional .moduloImagen_boxTexto .section_verTodos {float:inherit;}
-.moduloContenido_promocional .moduloImagen_boxTexto .section_verTodos a {text-align: left;}
-
-
-/************ NOTICIAS **************/
-.moduloNoticias_boxImage {width:100%;}
-.moduloNoticias_boxTexto {width:100%;position:relative;padding:10px;background-color:#f5f5f5;}
-.moduloNoticias_boxTexto .noticia_titulo {color:#009ee5;font-size:.95em; font-family:"BBVA Book", Arial, sans-serif;wdith:100%;}
-.moduloNoticias_boxTexto .noticia_etiqueta {position:absolute;top:-21px;left:0px;font-size:.8em;background-color:#87c82e;color:#fff;padding:3px 5px;font-family:"BBVA Medium", Arial, sans-serif;}
-	.moduloNoticias_boxTexto .noticia_etiqueta a {color:#fff;}
-.moduloNoticias_boxTexto .noticia_fecha {color:#a3a3a3; font-size:.8em;font-family:"BBVA Book", Arial, sans-serif;text-align:right;}
-
-.moduloContenido_noticiasUltimas {margin:20px 0px;}
-.moduloContenido_noticiasUltimas .section_titulo {width:75%;float:left;}
-.moduloContenido_noticiasUltimas .section_verTodos {width:20%;float:right;margin:0px;}
-
-.moduloContenido_noticiasDestacadas {background-color:#e5e5e5;}
-.moduloContenido_noticiasDestacadas .moduloNoticias_boxTexto {background-color:#fff;}
-
-.moduloContenido_noticiasListado ul li {margin-bottom:25px;}
 
 
 /*********************************************** 

@@ -10,7 +10,6 @@
             <div class="colCompleta col-md-12">
                 <div class="moduloContenido_introPagina_azul"><div class="wrapperContent">
                 	<div class="col-md-10">
-                        <p class="pagina_migas"><?php the_breadcrumb(); ?></p>
                         <h1 class="pagina_titulo"><?php the_title(); ?></h1>
                         <p class="pagina_texto"><?php the_excerpt(); ?></p>
                     </div>
@@ -36,8 +35,8 @@
 					endwhile;
 				?>
             </div>
-            <div class="colPpal col-md-4">
-                <?php  get_sidebar()?>
+            <div class="colSec col-md-4">
+               
             </div>
         </div>
      </div>

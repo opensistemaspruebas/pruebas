@@ -5,11 +5,12 @@
             
             <div id="bloque_contenidoPrincipal">
                 <div class="colCompleta row">
-                    <?php get_sidebar( 'colCompleta' )?>
+                    <?php get_sidebar('sidebar-0'); ?>
                 </div>
             </div>
          	
          </div>
-  	</main> 
+  	</main>  
+    
     
 <?php get_footer(); ?>
