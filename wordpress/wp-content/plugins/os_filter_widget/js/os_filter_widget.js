@@ -1,11 +1,5 @@
 $(document).ready(function() {
 	
-	/*$('#f').keyup(function() {
-    	//$('#field2hidden').val($(this).val());
-    	console.log($(this).val());
-	
-	});*/
-
 	$("form#form_filter").change(function() {
 		var sortBy = $("#inputSortBy").val("sortByDescDate");
 		var size = $("#size").val("7");
