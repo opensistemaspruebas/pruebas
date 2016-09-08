@@ -32,7 +32,8 @@ if (!class_exists('OS_Filter_Widget')) :
 				'sort_by_asc_date' => __('Older', 'os_filter_widget'),
 				'sort_by_desc_date' => __('Recents', 'os_filter_widget'),
 				'sort_by_popular' => __('Popular', 'os_filter_widget'),
-				'ajaxurl' => admin_url('admin-ajax.php')
+				'ajaxurl' => admin_url('admin-ajax.php'),
+				
 			);
 			wp_localize_script('os_filter_widget_js', 'object_name', $translation_array);
             wp_enqueue_script('os_filter_widget_js');
