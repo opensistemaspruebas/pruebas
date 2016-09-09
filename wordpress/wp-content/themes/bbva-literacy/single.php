@@ -8,7 +8,7 @@ get_header(); ?>
     
         <!-- Metas para el buscador. -->
         <?php echo get_search_meta_for_post($post); ?>
-        <!-- ******************************************* -->
+        <!-- ****************************************** -->
 
     	<main id="mainContent" class="template_single" data-role="content">
             <div class="wrapperFix">
