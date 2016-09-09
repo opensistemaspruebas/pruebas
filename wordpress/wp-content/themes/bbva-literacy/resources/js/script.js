@@ -1,6 +1,6 @@
-<!-- Custom Theme JavaScript -->
+/* Custom Theme JavaScript */
 
-$(document).ready(function(){
+$(document).ready(function() {
 
 	/****************************
 		Menu principal
@@ -55,8 +55,8 @@ $(document).ready(function(){
 	/****************************************
 		Select bonitos con selectbox
 	****************************************/
-	$("#selectPaises_filtrosNoticias").selectbox();
+	/*$("#selectPaises_filtrosNoticias").selectbox();
 	$("#selectPaises_filtrosHerramientas").selectbox();
-	$("#selectPaises_filtrosFaqs").selectbox();
+	$("#selectPaises_filtrosFaqs").selectbox();*/
 	 
 });
