@@ -273,25 +273,20 @@ main .wrapperFluid [class*="moduloContenido_"] {padding:50px 0px;float:left;widt
 .moduloContenido_introPagina.introAzul {}
 
 /************ CARRUSEL PROMOCIONAL debajo del header **************/
-.moduloContenido_carruselPromocionalHeader {padding:0px !important;}
-.moduloContenido_carruselPromocionalHeader .carruselPromocional {width:100%;float:left;border-bottom:1px solid #ededf0;}
+.moduloContenido_imagenEstaticaHeader {padding:0px !important;}
+.moduloContenido_imagenEstaticaHeader .imagenPromocional {width:100%;float:left;border-bottom:1px solid #ededf0;}
 
-ul.tabs_contentHorizontal {height:400px;margin:0px;padding:0px;}
-ul.tabs_contentHorizontal li.tab_box {position:relative;height:400px;}
-ul.tabs_contentHorizontal li.tab_box .wrapperContent {position:relative;margin-top:-335px;margin-bottom:81px;left:0;z-index:100;}
-ul.tabs_contentHorizontal li.tab_box figure.moduloCarrusel_boxImagen {overflow:hidden;height:400px;width:100%;}
-ul.tabs_contentHorizontal li.tab_box figure img{width: 1277px;height: 400px;position: relative;left: 50%;margin-left: -638.5px;}
-ul.tabs_contentHorizontal li.tab_box .moduloCarrusel_boxTexto {width:437px;/*height:266px;*/padding:20px;background-color:#fff;overflow:hidden;}
-ul.tabs_contentHorizontal li.tab_box .moduloCarrusel_boxTexto .fotoInfo_titulo {font-size:3.0em;line-height:1em;color:#006ec1;margin:0px 0 10px 0px;font-family:"BBVA Light";}
-ul.tabs_contentHorizontal li.tab_box .moduloCarrusel_boxTexto .fotoInfo_texto {font-size:.9em;color:#706f6f;font-weight:normal;margin:0px;margin:0px 0 10px 0px;}
-ul.tabs_contentHorizontal li.tab_box .moduloCarrusel_boxTexto .fotoInfo_link {margin:0px 0 0px 0px;font-size:1em;color:#009ee5;}
-
-.promoTipo_fecha .fotoInfo_titulo, .promoTipo_fecha .fotoInfo_texto, .promoTipo_fecha .fotoInfo_link  {float:right;width:47%;text-align:left;}
-.promoTipo_fecha .evento_fecha {margin:0px 0px 0px 0px;}
-.promoTipo_botonVerde .fotoInfo_titulo, .promoTipo_botonVerde .fotoInfo_texto {float:left;width:100%;}
-.promoTipo_link .fotoInfo_titulo, .promoTipo_link .fotoInfo_texto {float:left;width:100%;}
-.promoTipo_botonVerde .fotoInfo_link, .promoTipo_link .fotoInfo_link {float:left;width:100%;}
-
+.componente_imagenPromocional {height:610px;width:100%;margin:0px;padding:0px;float:left;}
+.componente_imagenPromocional .imagenPromocional_boxImagen {z-index:10;position:relative;display: block;float:left;height:610px;width:100%;padding-left: 0px;background-size: cover;background-position: center center;}
+.componente_imagenPromocional .imagenPromocional_boxImagen img {display:none;}
+.componente_imagenPromocional .wrapperContent {position:relative;}
+.componente_imagenPromocional .imagenPromocional_boxTexto {width:437px;/*height:266px;*/padding:20px;background-color:#fff;overflow:hidden;z-index:1000;position:absolute;margin-top:120px;margin-bottom:81px;left:0;}
+.componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_titulo {font-size:2.8em;line-height:1em;color:#000;margin:0px 0 10px 0px;font-family:"BBVA Light";}
+.componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_texto, 
+.componente_imagenPromocional .imagenPromocional_boxTexto p {font-size:.85em;color:#a3a3a3;font-weight:normal;margin:0px;margin:0px 0 10px 0px;}
+.componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_boton {margin:0px 0 0px 0px;font-size:1em;}
+.componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_boton a {color:#fff;background-color:#02a5a5;}
+.componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_link {margin:0px 0 0px 0px;font-size:1em;color:#009ee5;}
 
 
 /*********************************************** 
@@ -343,7 +338,7 @@ ul.tabs_contentHorizontal li.tab_box .moduloCarrusel_boxTexto .fotoInfo_link {ma
 #footer_logoBBVA img{width:15%;}
 #footer_politicaLinks {margin:0px 0px 0 0;float:left;}
 #footer_politicaLinks li{font-size:.7rem;display:inline-block;margin:0px 40px 0px 0px;color:#4799d3;}
-#footer_copy {float:left;margin-top:4px;color:#fff;font-size:.75rem;font-family:"BBVA Book";font-weight:normal;}
+#footer_copy {float:left;margin-top:24px;color:#fff;font-size:.75rem;font-family:"BBVA Book";font-weight:normal;}
 #footer_nombrePortal {font-family: "BBVA Light";font-weight: 100;font-size:1.8rem;color:#fff;display:inline-block;top:0px;right:0px;float:right;position:relative;width:100%;text-align:right;}
 #footer_redesFollow {clear:right;width:100%;float:right;}
 #footer_redesFollow li {float:right;width:20px;}

@@ -12,17 +12,15 @@
  */
 ?>
 
-<section class="moduloContenido_carruselPromocionalHeader">
-    <div class="carruselPromocional">
-        <ul class="tabs_contentHorizontal">
-            <li class="tab_box" id="promo_01">
+<section class="moduloContenido_imagenEstaticaHeader">
+    <div class="componente_imagenPromocional">
             	<?php if (!empty($image_id)) : ?>
-                <figure class="moduloCarrusel_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id); ?>');">
+                <figure class="imagenPromocional_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id); ?>');">
                 	<img src="<?php echo wp_get_attachment_image_url($image_id); ?>">
                 </figure>
                 <?php endif; ?>
                 <div class="wrapperContent">
-                    <div class="moduloCarrusel_boxTexto promoTipo_botonVerde">
+                    <div class="imagenPromocional_boxTexto">
                     	<?php if (!empty($title)) : ?>
                         <p class="fotoInfo_titulo"><?php echo $title; ?></p>
                     	<?php endif; ?>
@@ -30,7 +28,7 @@
                         <?php echo wpautop($text); ?>
                     	<?php endif; ?>
                     	<?php if ( ! empty( $link_text ) ) : ?>
-                        <p class="fotoInfo_link">
+                        <p class="fotoInfo_boton">
                         	<?php
                         		echo $text_link_open;
 								echo $link_text;
@@ -40,7 +38,5 @@
                     	<?php endif; ?>
                     </div>
                 </div>
-            </li>
-        </ul>
     </div>
 </section>

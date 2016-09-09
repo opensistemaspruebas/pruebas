@@ -84,11 +84,10 @@
                               <ul id="recursivos_directLinks" class="directLinks">
                                 <li class="item_01"><a href="" class="icon-linkInterno">FAQ's</a></li>
                               </ul>
-                              <!--<ul id="recursivos_idiomasPortal" class="idiomasPortal">
+                             <ul id="recursivos_idiomasPortal" class="idiomasPortal">
                                 <li class="item_01 activo"><a href="">English</a></li>
                                 <li class="item_02 inactivo"><a href="">Español</a></li>
-                              </ul>-->
-                              <?php do_action('wpml_add_language_selector'); ?>
+                              </ul>
                         </div>
                 	</div>
             	</div>
