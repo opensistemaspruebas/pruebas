@@ -70,7 +70,11 @@ if (!class_exists('OS_Filter_Widget')) :
 			);
 
 			?>
-			<h1><?php _e('Filters', 'os_filter_widget'); ?></h1>
+			<?php 
+				echo $args['before_title']; 
+				_e('Filters', 'os_filter_widget');
+				echo $args['after_title']; 
+			?>
 			<form action="#" method="get" name="form_filter" id="form_filter">
 				
 				<label for="inputText" class="assistive-text"><?php _e('Text', 'os_filter_widget'); ?></label>
