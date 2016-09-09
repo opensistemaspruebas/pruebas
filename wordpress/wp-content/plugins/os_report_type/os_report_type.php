@@ -215,7 +215,7 @@ function reports_fields_function() {
     ));
   }
 }
-add_action('acf/register_fields', 'my_register_fields_function');
+add_action('acf/register_fields', 'reports_fields_function');
 
 
 
