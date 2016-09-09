@@ -50,10 +50,11 @@
             <section id="header_tools">
             	<div class="wrapperContent">
             		<div class="wrapperPosicionado">
-                    	<ul id="recursivos_idiomasPortal" class="idiomasPortal">
+                    	<!--<ul id="recursivos_idiomasPortal" class="idiomasPortal">
                                 <li class="item_01 activo"><a href="">English</a></li>
                                 <li class="item_02 inactivo"><a href="">Español</a></li>
-                         </ul>
+                         </ul>-->
+                         <?php //do_action('wpml_add_language_selector'); ?>
                         
                 	</div>
             	</div>

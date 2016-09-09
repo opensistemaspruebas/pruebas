@@ -12,8 +12,7 @@
 */
 
 
-// Create a function that will attach our new 'country' taxonomy to the 'candidature' post type
-function add_country_taxonomy_to_post(){
+function create_country_taxonomy(){
 
     // Set the name of the taxonomy
     $taxonomy = 'country';
@@ -51,4 +50,4 @@ function add_country_taxonomy_to_post(){
     register_taxonomy($taxonomy, $object_type, $args); 
 
 }
-add_action('init', 'add_country_taxonomy_to_post');
+add_action( 'init', 'create_country_taxonomy', 0 );

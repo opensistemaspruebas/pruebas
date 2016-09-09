@@ -20,8 +20,8 @@ if (function_exists('register_sidebar')) {
 			'id' => 'sidebar-0',
 			'description' => __('Sidebar Principal, columna completa'),
 			'class' => '',
-			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget' => '</aside>',
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget' => '</section>',
 			'before_title' => '<h1 class="widget-title">',
 			'after_title' => '</h1>'
 		)
@@ -39,6 +39,12 @@ function add_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
 
+
+// Quitar del menú las entradas por defecto
+function remove_default_post_type() {
+	remove_menu_page('edit.php');
+}
+add_action('admin_menu','remove_default_post_type');
 
 
 // Devuelve todas las etiquetas de un post separadas por comas
@@ -124,3 +130,23 @@ function normaliza($cadena){
     
     return utf8_encode($cadena);
 }
+
+
+/*function literacy_add_search_meta() {
+    $post_type = get_post_type();
+    if ($post_type == 'product' && is_single()): $product = get_product( get_the_ID() ); $attrs = beeva_get_atts($product);
+        ?>
+        <meta name="wp_search" content="true"/>
+        <meta name="wp_content" content="<?=htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($product->post->post_content)))?>"/>
+        <meta name="wp_title" content="<?=$product->post->post_title?>">
+        <meta name="keywords" content="<?=implode($attrs,',')?>"/>
+        <meta name="date" content="<?=get_the_date('Y-m-d'); ?>"/>
+        <meta name="topic" content="<?=get_post_type() ?>"/>
+        <?php if ( has_post_thumbnail() ) : ?>
+            <meta name="image_src" content="<?=str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com','',get_the_post_thumbnail_url())?>"/>
+        <? endif; ?>
+        <? $cat = get_the_category(); if($cat && count($cat)): ?>
+            <meta name="category" content="<?=$cat[0]->name ?>"/>
+        <? endif; ?>
+    <? endif;
+}*/
