@@ -213,6 +213,39 @@ function reports_fields_function() {
       ),
       'menu_order' => 0,
     ));
+    register_field_group(array (
+        'id' => 'acf_informe-completo',
+        'title' => 'Informe completo',
+        'fields' => array (
+          array (
+            'key' => 'field_57d2aebb3dedf',
+            'label' => 'Informe',
+            'name' => 'informe',
+            'type' => 'file',
+            'instructions' => 'PDF',
+            'save_format' => 'object',
+            'library' => 'all',
+          ),
+        ),
+        'location' => array (
+          array (
+            array (
+              'param' => 'post_type',
+              'operator' => '==',
+              'value' => 'report',
+              'order_no' => 0,
+              'group_no' => 0,
+            ),
+          ),
+        ),
+        'options' => array (
+          'position' => 'acf_after_title',
+          'layout' => 'default',
+          'hide_on_screen' => array (
+          ),
+        ),
+        'menu_order' => 0,
+      ));
   }
 }
 add_action('acf/register_fields', 'reports_fields_function');
