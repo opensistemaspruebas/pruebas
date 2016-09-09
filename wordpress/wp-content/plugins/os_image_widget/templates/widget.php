@@ -15,8 +15,9 @@
 <section class="moduloContenido_imagenEstaticaHeader">
     <div class="componente_imagenPromocional">
             	<?php if (!empty($image_id)) : ?>
-                <figure class="imagenPromocional_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id); ?>');">
-                	<img src="<?php echo wp_get_attachment_image_url($image_id); ?>">
+                <?php $image_size = 'original'; ?>
+                <figure class="imagenPromocional_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>');">
+                	<img src="<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>">
                 </figure>
                 <?php endif; ?>
                 <div class="wrapperContent">

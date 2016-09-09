@@ -1,6 +1,6 @@
 /* Custom Theme JavaScript */
 
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 
 	/****************************
 		Menu principal
