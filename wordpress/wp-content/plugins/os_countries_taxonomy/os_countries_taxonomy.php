@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Plugin Name: OS Países Taxonomy
+	Plugin Name: OS Countries Taxonomy
 	Plugin URI: https://www.opensistemas.com/
 	Description: Crea la taxonomía países..
 	Version: 1.0
@@ -12,7 +12,7 @@
 */
 
 
-function create_country_taxonomy() {
+function create_country_taxonomy(){
 
     // Set the name of the taxonomy
     $taxonomy = 'country';
@@ -21,17 +21,17 @@ function create_country_taxonomy() {
     
     // Populate our array of names for our taxonomy
     $labels = array(
-        'name'               => __('Países', 'os_countries_taxonomy'),
-        'singular_name'      => __('País', 'os_countries_taxonomy'),
-        'search_items'       => __('Buscar países', 'os_countries_taxonomy'),
-        'all_items'          => __('Todos los países', 'os_countries_taxonomy'),
-        'parent_item'        => __('País padre', 'os_countries_taxonomy'),
-        'parent_item_colon'  => __('País padre:', 'os_countries_taxonomy'),
-        'update_item'        => __('Actualizar país', 'os_countries_taxonomy'),
-        'edit_item'          => __('Editar país', 'os_countries_taxonomy'),
-        'add_new_item'       => __('Añadir nuevo país', 'os_countries_taxonomy'), 
-        'new_item_name'      => __('Nuevo nombre de país', 'os_countries_taxonomy'),
-        'menu_name'          => __('Países', 'os_countries_taxonomy'),
+        'name'               => __('Countries', 'os_countries_taxonomy'),
+        'singular_name'      => __('Country', 'os_countries_taxonomy'),
+        'search_items'       => __('Search Countries', 'os_countries_taxonomy'),
+        'all_items'          => __('All Countries', 'os_countries_taxonomy'),
+        'parent_item'        => __('Parent Country', 'os_countries_taxonomy'),
+        'parent_item_colon'  => __('Parent Country:', 'os_countries_taxonomy'),
+        'update_item'        => __('Update Country', 'os_countries_taxonomy'),
+        'edit_item'          => __('Edit Country', 'os_countries_taxonomy'),
+        'add_new_item'       => __('Add New Country', 'os_countries_taxonomy'), 
+        'new_item_name'      => __('New Country Name', 'os_countries_taxonomy'),
+        'menu_name'          => __('Countries', 'os_countries_taxonomy'),
     );
     
     // Define arguments to be used 
@@ -50,4 +50,4 @@ function create_country_taxonomy() {
     register_taxonomy($taxonomy, $object_type, $args); 
 
 }
-add_action('init', 'create_country_taxonomy', 0);
+add_action( 'init', 'create_country_taxonomy', 0 );

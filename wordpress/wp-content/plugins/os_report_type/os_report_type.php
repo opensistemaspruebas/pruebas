@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Plugin Name: OS Publicación Type
+	Plugin Name: OS Report Type
 	Plugin URI: https://www.opensistemas.com/
 	Description: Crea el tipo de contenido 'publicación'.
 	Version: 1.0
@@ -22,24 +22,24 @@ add_action('plugins_loaded', 'load_text_domain', 10);
 function report_post_type() {
   // Set UI labels for Custom Post Type
   $labels = array(
-    'name'                => _x('Publicaciones', 'Post Type General Name', 'os_report_type'),
-    'singular_name'       => _x('Publicación', 'Post Type Singular Name', 'os_report_type'),
-    'menu_name'           => __('Publicaciones', 'os_report_type'),
-    'parent_item_colon'   => __('Publicación padre', 'os_report_type'),
-    'all_items'           => __('Todas las publicaciones', 'os_report_type'),
-    'view_item'           => __('Ver publicación', 'os_report_type'),
-    'add_new_item'        => __('Añadir nueva publicación', 'os_report_type'),
-    'add_new'             => __('Añadir nueva', 'os_report_type'),
-    'edit_item'           => __('Editar publicación', 'os_report_type'),
-    'update_item'         => __('Actualizar publicación', 'os_report_type'),
-    'search_items'        => __('Buscar publicaciones', 'os_report_type'),
-    'not_found'           => __('No se ha encontrado ninguna publicación', 'os_report_type'),
-    'not_found_in_trash'  => __('No se ha encontrado ninguna publicación en la papelera', 'os_report_type'),
+    'name'                => _x('Reports', 'Post Type General Name', 'os_report_type'),
+    'singular_name'       => _x('Report', 'Post Type Singular Name', 'os_report_type'),
+    'menu_name'           => __('Reports', 'os_report_type'),
+    'parent_item_colon'   => __('Parent Report', 'os_report_type'),
+    'all_items'           => __('All Reports', 'os_report_type'),
+    'view_item'           => __('View Report', 'os_report_type'),
+    'add_new_item'        => __('Add New Report', 'os_report_type'),
+    'add_new'             => __('Add New', 'os_report_type'),
+    'edit_item'           => __('Edit Report', 'os_report_type'),
+    'update_item'         => __('Update Report', 'os_report_type'),
+    'search_items'        => __('Search Reports', 'os_report_type'),
+    'not_found'           => __('Not found', 'os_report_type'),
+    'not_found_in_trash'  => __('Not found in trash', 'os_report_type'),
   );
   // Set other options for Custom Post Type
   $args = array(
-    'label'               => __('Publicaciones', 'os_report_type'),
-    'description'         => __('Publicaciones', 'os_report_type'),
+    'label'               => __('Reports', 'os_report_type'),
+    'description'         => __('Reports', 'os_report_type'),
     'labels'              => $labels,
     'supports'            => array('title', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields'),
     'hierarchical'        => false,
@@ -67,11 +67,11 @@ function reports_fields_function() {
   if (function_exists("register_field_group")) {
     register_field_group(array (
       'id' => 'acf_fuente',
-      'title' => __('Fuente', 'os_report_type'),
+      'title' => __('Source', 'os_report_type'),
       'fields' => array (
         array (
           'key' => 'field_57d2a8d7d0fb8',
-          'label' => __('Nombre', 'os_report_type'),
+          'label' => __('Name', 'os_report_type'),
           'name' => 'nombre',
           'type' => 'text',
           'instructions' => 'Banco Mundial',
@@ -97,7 +97,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a6d4148c2',
-          'label' => __('Fecha de publicación', 'os_report_type'),
+          'label' => __('Publication date', 'os_report_type'),
           'name' => 'fecha_de_publicacion',
           'type' => 'date_picker',
           'instructions' => 'DD/MM/YYYY',
@@ -107,7 +107,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a824895c0',
-          'label' => __('Tipo', 'os_report_type'),
+          'label' => __('Type', 'os_report_type'),
           'name' => 'tipo',
           'type' => 'select',
           'choices' => array (
@@ -119,7 +119,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a84d895c1',
-          'label' => __('Público objetivo', 'os_report_type'),
+          'label' => __('Target public', 'os_report_type'),
           'name' => 'publico_objetivo',
           'type' => 'select',
           'choices' => array (
@@ -131,7 +131,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a92cc44e1',
-          'label' => __('Número de páginas', 'os_report_type'),
+          'label' => __('Number of pages', 'os_report_type'),
           'name' => 'numero_de_paginas',
           'type' => 'number',
           'instructions' => '1234',
@@ -145,7 +145,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a94531506',
-          'label' => __('Código JEL', 'os_report_type'),
+          'label' => __('JEL code', 'os_report_type'),
           'name' => 'codigo_jel',
           'type' => 'number',
           'instructions' => '13423534356546',
@@ -159,7 +159,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a96294b76',
-          'label' => __('Edición', 'os_report_type'),
+          'label' => __('Edition', 'os_report_type'),
           'name' => 'edicion',
           'type' => 'text',
           'instructions' => '3º',
@@ -188,7 +188,7 @@ function reports_fields_function() {
           'label' => __('Logo', 'os_report_type'),
           'name' => 'logo',
           'type' => 'image',
-          'instructions' => __('Logo de la fuente', 'os_report_type'),
+          'instructions' => __('Source Logo', 'os_report_type'),
           'save_format' => 'object',
           'preview_size' => 'thumbnail',
           'library' => 'all',
@@ -215,11 +215,11 @@ function reports_fields_function() {
     ));
     register_field_group(array (
         'id' => 'acf_informe-completo',
-        'title' => __('Informe completo', 'os_report_type'),
+        'title' => __('Full report', 'os_report_type'),
         'fields' => array (
           array (
             'key' => 'field_57d2aebb3dedf',
-            'label' => __('Informe', 'os_report_type'),
+            'label' => __('Report', 'os_report_type'),
             'name' => 'informe',
             'type' => 'file',
             'instructions' => 'PDF',

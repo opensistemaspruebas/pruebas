@@ -104,6 +104,55 @@
         ]
     },
     {
+        "name": "otgs/installer",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "ssh://git@git.onthegosystems.com:10022/installer/installer.git",
+            "reference": "a44c885a44923f64dde00e24e257ff0384e5238a"
+        },
+        "require": {
+            "composer/installers": "~1.0",
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.5"
+        },
+        "time": "2016-08-05 08:23:27",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7.x-dev",
+                "dev-develop": "1.7.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "scripts": {
+            "test": [
+                "phpunit"
+            ]
+        },
+        "license": [
+            "GPL-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Mihai Grigori",
+                "email": "mihai@wpml.org",
+                "homepage": "http://www.wp-types.com"
+            }
+        ],
+        "description": "Installs and updates WPML and Toolset dependencies automatically",
+        "homepage": "https://git.onthegosystems.com/installer/installer",
+        "keywords": [
+            "install",
+            "plugins",
+            "update",
+            "utils"
+        ]
+    },
+    {
         "name": "wpml/commons",
         "version": "dev-develop",
         "version_normalized": "dev-develop",
@@ -162,55 +211,6 @@
         "keywords": [
             "auto-loader",
             "twig-extensions"
-        ]
-    },
-    {
-        "name": "otgs/installer",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "ssh://git@git.onthegosystems.com:10022/installer/installer.git",
-            "reference": "fc4f8ad6696493a7416929b9815455960f476101"
-        },
-        "require": {
-            "composer/installers": "~1.0",
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.5"
-        },
-        "time": "2016-08-03 09:59:11",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.7.x-dev",
-                "dev-develop": "1.7.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "scripts": {
-            "test": [
-                "phpunit"
-            ]
-        },
-        "license": [
-            "GPL-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Mihai Grigori",
-                "email": "mihai@wpml.org",
-                "homepage": "http://www.wp-types.com"
-            }
-        ],
-        "description": "Installs and updates WPML and Toolset dependencies automatically",
-        "homepage": "https://git.onthegosystems.com/installer/installer",
-        "keywords": [
-            "install",
-            "plugins",
-            "update",
-            "utils"
         ]
     },
     {

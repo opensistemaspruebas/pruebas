@@ -42,12 +42,20 @@ class WPML_WP_API {
 		return preg_match("/^$regex$/", $value);
 	}
 
+	public function get_transient( $transient ) {
+		return get_transient( $transient );
+	}
+
+	public function set_transient( $transient, $value, $expiration = 0 ) {
+		set_transient( $transient, $value, $expiration );
+	}
+
 	/**
 	 * @param string      $option
 	 * @param mixed       $value
 	 * @param string|bool $autoload
 	 *
-	 * @return bool
+	 * @return bool False if value was not updated and true if value was updated.
 	 */
 	public function update_option( $option, $value, $autoload = null ) {
 		return update_option( $option, $value, $autoload );
@@ -283,6 +291,15 @@ class WPML_WP_API {
 	}
 
 	/**
+	 * @param string|array $post_types
+	 *
+	 * @return bool
+	 */
+	public function is_singular( $post_types = '' ) {
+		return is_singular( $post_types );
+	}
+
+	/**
 	 * @param int|WP_User $user
 	 * @param string      $capability
 	 *
@@ -291,6 +308,29 @@ class WPML_WP_API {
 	public function user_can( $user, $capability ) {
 
 		return user_can( $user, $capability );
+	}
+	
+	/**
+	 * Wrapper for add_filter
+	 */
+	public function add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {
+		
+		return add_filter( $tag, $function_to_add, $priority, $accepted_args );
+	}
+	
+	/**
+	 * Wrapper for remove_filter
+	 */
+	public function remove_filter( $tag, $function_to_remove, $priority = 10 ) {
+		
+		return remove_filter( $tag, $function_to_remove, $priority );
+	}
+
+	/**
+	 * Wrapper for current_filter
+	 */
+	public function current_filter() {
+		return current_filter();
 	}
 
 	public function get_tm_url( $tab = null, $hash = null ) {
@@ -543,6 +583,33 @@ class WPML_WP_API {
 	) {
 
 		return update_post_meta( $post_id, $key, $value, $prev_value );
+	}
+
+	/**
+	 * Wrapper for add_post_meta
+	 *
+	 * @param int    $post_id    Post ID.
+	 * @param string $meta_key   Metadata name.
+	 * @param mixed  $meta_value Metadata value. Must be serializable if non-scalar.
+	 * @param bool   $unique     Optional. Whether the same key should not be added.
+	 *                           Default false.
+	 * @return int|false Meta ID on success, false on failure.
+	 */
+	public function add_post_meta( $post_id, $meta_key, $meta_value, $unique = false ) {
+		return add_post_meta( $post_id, $meta_key, $meta_value, $unique );
+	}
+
+	/**
+	 * Wrapper for delete_post_meta
+	 *
+	 * @param int    $post_id    Post ID.
+	 * @param string $meta_key   Metadata name.
+	 * @param mixed  $meta_value Optional. Metadata value. Must be serializable if
+	 *                           non-scalar. Default empty.
+	 * @return bool True on success, false on failure.
+	 */
+	public function delete_post_meta( $post_id, $meta_key, $meta_value = '' ) {
+		return delete_post_meta( $post_id, $meta_key, $meta_value );
 	}
 
 	/**
@@ -946,10 +1013,6 @@ class WPML_WP_API {
 		return implode( $naked_elements );
 	}
 
-	public function add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {
-		return add_filter( $tag, $function_to_add, $priority, $accepted_args );
-	}
-
 	public function has_filter($tag, $function_to_check = false) {
 		return has_filter( $tag, $function_to_check );
 	}
@@ -1082,6 +1145,84 @@ class WPML_WP_API {
 	public function get_wp_post_types_global() {
 		global $wp_post_types;
 		return $wp_post_types;
+	}
+
+	/**
+	 * @return wp_xmlrpc_server
+	 */
+	public function get_wp_xmlrpc_server() {
+		global $wp_xmlrpc_server;
+
+		return $wp_xmlrpc_server;
+	}
+
+	/**
+	 * Wrapper for $wp_taxonomies global variable
+	 *
+	 */
+	function get_wp_taxonomies( ) {
+		global $wp_taxonomies;
+		
+		return $wp_taxonomies;
+	}
+	
+	/**
+	 * Wrapper for get_category_link function
+	 *
+	 * @param int $category_id
+	 *
+	 * @return string
+	 */
+	function get_category_link( $category_id ) {
+		return get_category_link(  $category_id );
+	}
+	
+	/**
+	 * Wrapper for is_wp_error function
+	 *
+	 * @param mixed $thing
+	 *
+	 * @return bool
+	 */
+	function is_wp_error( $thing ) {
+		return is_wp_error( $thing );
+	}
+
+	/**
+	 * @param int  $limit
+	 * @param bool $provide_object
+	 * @param bool $ignore_args
+	 *
+	 * @return array
+	 */
+	public function get_backtrace($limit = 0, $provide_object = false, $ignore_args = true) {
+		$options = false;
+
+		if ( version_compare( $this->phpversion(), '5.3.6' ) < 0 ) {
+			// Before 5.3.6, the only values recognized are TRUE or FALSE,
+			// which are the same as setting or not setting the DEBUG_BACKTRACE_PROVIDE_OBJECT option respectively.
+			$options = $provide_object;
+		} else {
+			// As of 5.3.6, 'options' parameter is a bitmask for the following options:
+			if ( $provide_object )
+				$options |= DEBUG_BACKTRACE_PROVIDE_OBJECT;
+			if ( $ignore_args )
+				$options |= DEBUG_BACKTRACE_IGNORE_ARGS;
+		}
+		if ( version_compare( $this->phpversion(), '5.4.0' ) >= 0 ) {
+			$debug_backtrace = debug_backtrace( $options, $limit ); //add one item to include the current frame
+		} elseif ( version_compare( $this->phpversion(), '5.2.4' ) >= 0 ) {
+			//@link https://core.trac.wordpress.org/ticket/20953
+			$debug_backtrace = debug_backtrace();
+		} else {
+			$debug_backtrace = debug_backtrace( $options );
+		}
+
+		//Remove the current frame
+		if($debug_backtrace) {
+			array_shift($debug_backtrace);
+		}
+		return $debug_backtrace;
 	}
 
 }
