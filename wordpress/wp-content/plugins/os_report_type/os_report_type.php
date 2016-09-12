@@ -41,7 +41,7 @@ function report_post_type() {
     'label'               => __('Reports', 'os_report_type'),
     'description'         => __('Reports', 'os_report_type'),
     'labels'              => $labels,
-    'supports'            => array('title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+    'supports'            => array('title', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields'),
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
@@ -206,7 +206,7 @@ function reports_fields_function() {
         ),
       ),
       'options' => array (
-        'position' => 'normal',
+        'position' => 'side',
         'layout' => 'default',
         'hide_on_screen' => array (
         ),
