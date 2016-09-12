@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Plugin Name: OS Report Type
+	Plugin Name: OS Publicación Type
 	Plugin URI: https://www.opensistemas.com/
 	Description: Crea el tipo de contenido 'publicación'.
 	Version: 1.0
@@ -22,24 +22,24 @@ add_action('plugins_loaded', 'load_text_domain', 10);
 function report_post_type() {
   // Set UI labels for Custom Post Type
   $labels = array(
-    'name'                => _x('Reports', 'Post Type General Name', 'os_report_type'),
-    'singular_name'       => _x('Report', 'Post Type Singular Name', 'os_report_type'),
-    'menu_name'           => __('Reports', 'os_report_type'),
-    'parent_item_colon'   => __('Parent Report', 'os_report_type'),
-    'all_items'           => __('All Reports', 'os_report_type'),
-    'view_item'           => __('View Report', 'os_report_type'),
-    'add_new_item'        => __('Add New Report', 'os_report_type'),
-    'add_new'             => __('Add New', 'os_report_type'),
-    'edit_item'           => __('Edit Report', 'os_report_type'),
-    'update_item'         => __('Update Report', 'os_report_type'),
-    'search_items'        => __('Search Report', 'os_report_type'),
-    'not_found'           => __('Not Found', 'os_report_type'),
-    'not_found_in_trash'  => __('Not Found in Trash', 'os_report_type'),
+    'name'                => _x('Publicaciones', 'Post Type General Name', 'os_report_type'),
+    'singular_name'       => _x('Publicación', 'Post Type Singular Name', 'os_report_type'),
+    'menu_name'           => __('Publicaciones', 'os_report_type'),
+    'parent_item_colon'   => __('Parent Publicación', 'os_report_type'),
+    'all_items'           => __('Todas las publicaciones', 'os_report_type'),
+    'view_item'           => __('Ver publicación', 'os_report_type'),
+    'add_new_item'        => __('Añadir nueva publicación', 'os_report_type'),
+    'add_new'             => __('Añadir nueva', 'os_report_type'),
+    'edit_item'           => __('Editar publicación', 'os_report_type'),
+    'update_item'         => __('Actualizar publicación', 'os_report_type'),
+    'search_items'        => __('Buscar publicaciones', 'os_report_type'),
+    'not_found'           => __('No se ha encontrado ninguna publicación', 'os_report_type'),
+    'not_found_in_trash'  => __('No se ha encontrado ninguna publicación en la papelera', 'os_report_type'),
   );
   // Set other options for Custom Post Type
   $args = array(
-    'label'               => __('Reports', 'os_report_type'),
-    'description'         => __('Reports', 'os_report_type'),
+    'label'               => __('Publicaciones', 'os_report_type'),
+    'description'         => __('Publicaciones', 'os_report_type'),
     'labels'              => $labels,
     'supports'            => array('title', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields'),
     'hierarchical'        => false,
@@ -71,7 +71,7 @@ function reports_fields_function() {
       'fields' => array (
         array (
           'key' => 'field_57d2a8d7d0fb8',
-          'label' => 'Nombre',
+          'label' => __('Nombre', 'os_report_type'),
           'name' => 'nombre',
           'type' => 'text',
           'instructions' => 'Banco Mundial',
@@ -84,7 +84,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a2d0a5753',
-          'label' => 'URL',
+          'label' => __('URL', 'os_report_type'),
           'name' => 'url',
           'type' => 'text',
           'instructions' => 'http://www.example.com/',
@@ -97,7 +97,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a6d4148c2',
-          'label' => 'Fecha de publicación',
+          'label' => __('Fecha de publicación', 'os_report_type'),
           'name' => 'fecha_de_publicacion',
           'type' => 'date_picker',
           'instructions' => 'DD/MM/YYYY',
@@ -107,7 +107,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a824895c0',
-          'label' => 'Tipo',
+          'label' => __('Tipo', 'os_report_type'),
           'name' => 'tipo',
           'type' => 'select',
           'choices' => array (
@@ -119,7 +119,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a84d895c1',
-          'label' => 'Público objetivo',
+          'label' => __('Público objetivo', 'os_report_type'),
           'name' => 'publico_objetivo',
           'type' => 'select',
           'choices' => array (
@@ -131,7 +131,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a92cc44e1',
-          'label' => 'Número de páginas',
+          'label' => __('Número de páginas', 'os_report_type'),
           'name' => 'numero_de_paginas',
           'type' => 'number',
           'instructions' => '1234',
@@ -145,7 +145,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a94531506',
-          'label' => 'Código JEL',
+          'label' => __('Código JEL', 'os_report_type'),
           'name' => 'codigo_jel',
           'type' => 'number',
           'instructions' => '13423534356546',
@@ -159,7 +159,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a96294b76',
-          'label' => 'Edición',
+          'label' => __('Edición', 'os_report_type'),
           'name' => 'edicion',
           'type' => 'text',
           'instructions' => '3º',
@@ -172,7 +172,7 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a97828bd7',
-          'label' => 'Editorial',
+          'label' => __('Editorial', 'os_report_type'),
           'name' => 'editorial',
           'type' => 'text',
           'instructions' => 'BBVA Colombia',
@@ -185,10 +185,10 @@ function reports_fields_function() {
         ),
         array (
           'key' => 'field_57d2a994ff817',
-          'label' => 'Logo',
+          'label' => __('Logo', 'os_report_type'),
           'name' => 'logo',
           'type' => 'image',
-          'instructions' => 'Logo de la fuente',
+          'instructions' => __('Logo de la fuente', 'os_report_type'),
           'save_format' => 'object',
           'preview_size' => 'thumbnail',
           'library' => 'all',
@@ -215,11 +215,11 @@ function reports_fields_function() {
     ));
     register_field_group(array (
         'id' => 'acf_informe-completo',
-        'title' => 'Informe completo',
+        'title' => __('Informe completo', 'os_report_type'),
         'fields' => array (
           array (
             'key' => 'field_57d2aebb3dedf',
-            'label' => 'Informe',
+            'label' => __('Informe', 'os_report_type'),
             'name' => 'informe',
             'type' => 'file',
             'instructions' => 'PDF',
