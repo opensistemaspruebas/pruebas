@@ -67,7 +67,7 @@ function reports_fields_function() {
   if (function_exists("register_field_group")) {
     register_field_group(array (
       'id' => 'acf_fuente',
-      'title' => 'Fuente',
+      'title' => __('Fuente', 'os_report_type'),
       'fields' => array (
         array (
           'key' => 'field_57d2a8d7d0fb8',

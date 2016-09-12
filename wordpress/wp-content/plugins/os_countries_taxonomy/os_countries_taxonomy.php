@@ -12,7 +12,7 @@
 */
 
 
-function create_country_taxonomy(){
+function create_country_taxonomy() {
 
     // Set the name of the taxonomy
     $taxonomy = 'country';
