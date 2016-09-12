@@ -25,7 +25,7 @@ function report_post_type() {
     'name'                => _x('Publicaciones', 'Post Type General Name', 'os_report_type'),
     'singular_name'       => _x('Publicación', 'Post Type Singular Name', 'os_report_type'),
     'menu_name'           => __('Publicaciones', 'os_report_type'),
-    'parent_item_colon'   => __('Parent Publicación', 'os_report_type'),
+    'parent_item_colon'   => __('Publicación padre', 'os_report_type'),
     'all_items'           => __('Todas las publicaciones', 'os_report_type'),
     'view_item'           => __('Ver publicación', 'os_report_type'),
     'add_new_item'        => __('Añadir nueva publicación', 'os_report_type'),
