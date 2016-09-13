@@ -37,9 +37,9 @@ jQuery(document).ready(function($) {
             return;
         }
         custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: object_name.choose_source_logo,
+            title: object_name.choose_source_pdf,
             button: {
-                text: object_name.choose_source_logo
+                text: object_name.choose_source_pdf
             },
             multiple: false,
             library: { type: 'application/pdf' },

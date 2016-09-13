@@ -63,7 +63,8 @@ function register_admin_scripts() {
       wp_enqueue_media();
       wp_register_script('os_report_type-js', plugins_url('js/os_report_type_min.js' , __FILE__), array('jquery'));           
       $translation_array = array(
-        'choose_logo' => __('Choose logo', 'os_report_type')
+        'choose_source_logo' => __('Choose logo', 'os_report_type'),
+        'choose_source_pdf' => __('Choose document', 'os_report_type')
       );
       wp_localize_script( 'os_report_type-js', 'object_name', $translation_array );
       wp_enqueue_script('os_report_type-js');
