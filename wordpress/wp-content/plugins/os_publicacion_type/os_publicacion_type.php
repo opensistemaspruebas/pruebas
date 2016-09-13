@@ -12,12 +12,14 @@
 */
 
 
-function load_text_domain_report() {
+function load_text_domain_publicacion() {
   load_plugin_textdomain('os_publicacion_type', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
-add_action('plugins_loaded', 'load_text_domain_report', 10);
+add_action('plugins_loaded', 'load_text_domain_publicacion', 10);
 
 
+add_theme_support('post-thumbnails');
+add_post_type_support('publicacion', 'thumbnail');  
 function publicacion_type() {
   $labels = array(
     'name'                => _x('Publicaciones', 'post type general name', 'os_publicacion_type'),
@@ -49,7 +51,7 @@ function publicacion_type() {
       'menu_position'      => null,
       'menu_icon'          => 'dashicons-welcome-write-blog',
       'supports'           => array('title', 'author', 'thumbnail', 'excerpt'),
-      'taxonomies'         => array('category', 'post_tag', 'country')
+      'taxonomies'         => array('category', 'post_tag', 'ambito_geografico')
   );
   register_post_type('publicacion', $args );
 }
@@ -73,18 +75,18 @@ function register_admin_scripts() {
 add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
-function report_meta_boxes() {
-  add_meta_box('report_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_report_pdf', 'report', 'normal', 'low');
-  add_meta_box('report_source', __('Fuente de la publicación', 'os_publicacion_type'), 'meta_box_report_source', 'report', 'normal', 'low');
+function publicacion_meta_boxes() {
+  add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'low');
+  add_meta_box('publicacion_source', __('Fuente de la publicación', 'os_publicacion_type'), 'meta_box_publicacion_source', 'publicacion', 'normal', 'low');
 }
-add_action('add_meta_boxes', 'report_meta_boxes');
+add_action('add_meta_boxes', 'publicacion_meta_boxes');
 
 
-function meta_box_report_pdf() {
+function meta_box_publicacion_pdf() {
   
   global $post;
   
-  wp_nonce_field(basename(__FILE__), 'meta_box_report_pdf-nonce');
+  wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_pdf-nonce');
   
   $pdf = get_post_meta($post->ID, 'pdf', true);
   
@@ -100,11 +102,11 @@ function meta_box_report_pdf() {
 }
 
 
-function meta_box_report_source() {
+function meta_box_publicacion_source() {
   
   global $post;
   
-  wp_nonce_field(basename(__FILE__), 'meta_box_report_source-nonce');
+  wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_source-nonce');
   
   $source_name = get_post_meta($post->ID, 'source_name', true);
   $source_url = get_post_meta($post->ID, 'source_url', true);
@@ -144,10 +146,10 @@ function meta_box_report_source() {
     <input type="text" name="type" value="<?php echo $type; ?>" class="widefat" />
   </p>
   <p>
-    <label for="geographical_area"><?php _e('Área geográfica', 'os_publicacion_type'); ?></label>
+    <label for="geographical_area"><?php _e('Ámbito geográfico', 'os_publicacion_type'); ?></label>
     <select name="geographical_area" class="widefat">
       <?php  
-        $countries = get_terms('country', array('hide_empty' => false));
+        $countries = get_terms('ambito_geografico', array('hide_empty' => false));
         foreach ($countries as $country) {
           $selected = ($country->term_id == $geographical_area) ? 'selected="selected"' : '';
           ?><option <?php echo $selected; ?> value="<?php echo $country->term_id; ?>"><?php echo $country->name; ?></option><?php
