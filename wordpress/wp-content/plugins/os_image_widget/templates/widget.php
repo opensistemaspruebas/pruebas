@@ -12,32 +12,30 @@
  */
 ?>
 
-<section class="moduloContenido_imagenEstaticaHeader">
-    <div class="componente_imagenPromocional">
-            	<?php if (!empty($image_id)) : ?>
-                <?php $image_size = 'original'; ?>
-                <figure class="imagenPromocional_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>');">
-                	<img src="<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>">
-                </figure>
-                <?php endif; ?>
-                <div class="wrapperContent">
-                    <div class="imagenPromocional_boxTexto">
-                    	<?php if (!empty($title)) : ?>
-                        <p class="fotoInfo_titulo"><?php echo $title; ?></p>
-                    	<?php endif; ?>
-                    	<?php if (!empty($text)) : ?>
-                        <?php echo wpautop($text); ?>
-                    	<?php endif; ?>
-                    	<?php if ( ! empty( $link_text ) ) : ?>
-                        <p class="fotoInfo_boton">
-                        	<?php
-                        		echo $text_link_open;
-								echo $link_text;
-								echo $text_link_close;
-                        	?>
-                        </p>
-                    	<?php endif; ?>
-                    </div>
+<div class="componente_imagenPromocional">
+            <?php if (!empty($image_id)) : ?>
+            <?php $image_size = 'original'; ?>
+            <figure class="imagenPromocional_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>');">
+                <img src="<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>">
+            </figure>
+            <?php endif; ?>
+            <div class="wrapperContent">
+                <div class="imagenPromocional_boxTexto">
+                    <?php if (!empty($title)) : ?>
+                    <p class="fotoInfo_titulo"><?php echo $title; ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($text)) : ?>
+                    <?php echo wpautop($text); ?>
+                    <?php endif; ?>
+                    <?php if ( ! empty( $link_text ) ) : ?>
+                    <p class="fotoInfo_boton">
+                        <?php
+                            echo $text_link_open;
+                            echo $link_text;
+                            echo $text_link_close;
+                        ?>
+                    </p>
+                    <?php endif; ?>
                 </div>
-    </div>
-</section>
+            </div>
+</div>

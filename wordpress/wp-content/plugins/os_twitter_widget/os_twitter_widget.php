@@ -48,7 +48,7 @@ if (!class_exists('OS_Twitter_Widget')) :
             
             ?>
                 
-				<a class="twitter-timeline" data-lang="es" data-width="400" data-height="300" data-tweet-limit="3" data-theme="light" data-link-color="#2B7BB9" href="https://twitter.com/<?php echo $cuenta ?>">Tweets by <?php echo $cuenta ?></a> 
+				<a class="twitter-timeline" data-lang="es" data-width="100%" data-height="300" data-tweet-limit="3" data-theme="light" data-link-color="#2B7BB9" href="https://twitter.com/<?php echo $cuenta ?>">Tweets by <?php echo $cuenta ?></a> 
 				<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 			<?php
