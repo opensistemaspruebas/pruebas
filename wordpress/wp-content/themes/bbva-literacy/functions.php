@@ -88,7 +88,15 @@ function get_search_meta_for_post($post) {
 	$meta = '';
 
 	$post_title = getCleanedString($post->post_title);
+	$post_excerpt = wp_strip_all_tags(get_the_excerpt());
 	$post_content = getCleanedString($post->post_content);
+	$post_type = get_post_type($post->ID);
+
+	if ($post_type == "publicacion") {
+		$content = $post_excerpt;
+	} else {
+		$content = $post_content;
+	}
 
 	$thumbID = get_post_thumbnail_id($post->ID );
 	$imgDestacada = wp_get_attachment_url($thumbID);
@@ -97,9 +105,9 @@ function get_search_meta_for_post($post) {
 	$meta .= '<meta name="wp_date" content="' . $post->post_date . '">';
 	$meta .= '<meta name="wp_title" content="' . $post_title . '">';
 	$meta .= '<meta name="image_src" content="' . $imgDestacada . '">';
-	$meta .= '<meta name="wp_content" content="' . $post_content . '">';
+	$meta .= '<meta name="wp_content" content="' . $content . '">';
 	$meta .= '<meta name="wp_category" content="' . get_all_tags_from_post($post->ID) . '">';
-	$meta .= '<meta name="wp_topic" content="' . get_post_type($post->ID) . '">';
+	$meta .= '<meta name="wp_topic" content="' . $post_type . '">';
 
 	return $meta;
 }
