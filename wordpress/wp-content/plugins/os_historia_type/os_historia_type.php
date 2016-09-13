@@ -51,6 +51,6 @@ function historia_type() {
       'supports'           => array('title', 'author', 'thumbnail', 'excerpt'),
       'taxonomies'         => array('category', 'post_tag', 'country')
   );
-  register_post_type('story', $args );
+  register_post_type('historia', $args );
 }
 add_action('init', 'historia_type', 0);

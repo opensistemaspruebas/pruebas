@@ -51,7 +51,7 @@ function publicacion_type() {
       'supports'           => array('title', 'author', 'thumbnail', 'excerpt'),
       'taxonomies'         => array('category', 'post_tag', 'country')
   );
-  register_post_type('report', $args );
+  register_post_type('publicacion', $args );
 }
 add_action('init', 'publicacion_type', 0);
 
