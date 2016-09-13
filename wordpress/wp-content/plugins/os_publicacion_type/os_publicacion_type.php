@@ -18,7 +18,7 @@ function load_text_domain_report() {
 add_action('plugins_loaded', 'load_text_domain_report', 10);
 
 
-function report_post_type() {
+function publicacion_type() {
   $labels = array(
     'name'                => _x('Publicaciones', 'post type general name', 'os_publicacion_type'),
     'singular_name'       => _x('Publicación', 'post type singular name', 'os_publicacion_type'),
@@ -53,7 +53,7 @@ function report_post_type() {
   );
   register_post_type('report', $args );
 }
-add_action('init', 'report_post_type', 0);
+add_action('init', 'publicacion_type', 0);
 
 
 function register_admin_scripts() {
