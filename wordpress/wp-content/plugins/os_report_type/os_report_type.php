@@ -12,10 +12,10 @@
 */
 
 
-function load_text_domain() {
+function load_text_domain_report() {
   load_plugin_textdomain('os_report_type', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
-add_action('plugins_loaded', 'load_text_domain', 10);
+add_action('plugins_loaded', 'load_text_domain_report', 10);
 
 
 function report_post_type() {
@@ -47,6 +47,7 @@ function report_post_type() {
       'has_archive'        => true,
       'hierarchical'       => false,
       'menu_position'      => null,
+      'menu_icon'          => 'dashicons-welcome-write-blog',
       'supports'           => array('title', 'author', 'thumbnail', 'excerpt'),
       'taxonomies'         => array('category', 'post_tag', 'country')
   );
