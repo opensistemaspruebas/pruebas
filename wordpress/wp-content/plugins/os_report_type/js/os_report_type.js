@@ -22,9 +22,9 @@ jQuery(document).ready(function($) {
         });
         custom_uploader.on('select', function() {
             var attachment = custom_uploader.state().get('selection').first().toJSON();
-            var thumb = attachment.sizes.thumbnail.url;
             jQuery('input#source_logo').val(attachment.url);
-            jQuery('img#show_logo').attr("src", thumb);
+            jQuery('img#show_logo').attr("src", attachment.url);
+            jQuery('img#show_logo').show();
         });
         custom_uploader.open();
     });

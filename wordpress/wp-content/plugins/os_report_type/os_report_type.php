@@ -60,7 +60,7 @@ function register_admin_scripts() {
     
     if ($typenow == $post->post_type) {
       wp_enqueue_media();
-      wp_register_script('os_report_type-js', plugins_url('js/os_report_type.js' , __FILE__), array('jquery'));           
+      wp_register_script('os_report_type-js', plugins_url('js/os_report_type_min.js' , __FILE__), array('jquery'));           
       $translation_array = array(
         'choose_logo' => __('Choose logo', 'os_report_type')
       );
@@ -115,7 +115,6 @@ function meta_box_report_source() {
   $jel_code = get_post_meta($post->ID, 'jel_code', true);
   $edition = get_post_meta($post->ID, 'edition', true);
   $editorial = get_post_meta($post->ID, 'editorial', true);
-
   ?>
   
   <p>
@@ -128,20 +127,13 @@ function meta_box_report_source() {
   </p>
   <p>
     <label for="source_logo"><?php _e('Logo', 'os_report_type'); ?></label>
-    <input class="widefat" id="source_logo" name="source_logo" type="text" value="<?php if (isset($logo)) echo $logo; ?>" readonly="readonly"/>
-  </p>
-  <p>  
-    <img id="show_logo" name="show_logo" style="max-height:100px;" src="<?php if (isset($logo)) echo esc_attr($logo); ?>">
-  </p>
-  <p>  
+    <input class="widefat" id="source_logo" name="source_logo" type="text" value="<?php if (!empty($logo)) echo $logo; ?>" readonly="readonly"/>
+    <img id="show_logo" draggable="false" alt="" name="show_logo" width="100%" src="<?php if (!empty($logo)) echo esc_attr($logo); ?>" style="<?php if (empty($logo)) echo "display: none;"; ?>">
     <input id="upload_logo" name="upload_logo" type="button" value="<?php _e('Explore/Upload', 'os_report_type'); ?>" />
   </p>
   <p>
     <label for="publication_date"><?php _e('Publication date', 'os_report_type'); ?></label>
-  </p>
-  <p>
     <input type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
-  
   </p>
   <p>
     <label for="type"><?php _e('Type', 'os_report_type'); ?></label>
@@ -154,7 +146,7 @@ function meta_box_report_source() {
         $countries = get_terms('country', array('hide_empty' => false));
         foreach ($countries as $country) {
           $selected = ($country->term_id == $geographical_area) ? 'selected="selected"' : '';
-          ?><option <?php echo $selected; ?> value="<?php $country->term_id; ?>"><?php echo $country->name; ?></option><?php
+          ?><option <?php echo $selected; ?> value="<?php echo $country->term_id; ?>"><?php echo $country->name; ?></option><?php
         }
       ?>
     </select>
@@ -184,9 +176,6 @@ function meta_box_report_source() {
 
 
 function meta_boxes_save($post_id) {
-
-  error_log($_POST['geographical_area']);
-
   if (isset($_POST['source_name'])) {
     update_post_meta($post_id, 'source_name', strip_tags($_POST['source_name']));
   }
