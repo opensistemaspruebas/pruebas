@@ -64,7 +64,7 @@ function get_all_tags_from_post($post_id) {
 		array(
 			'post_tag', 
 			'category',
-			'country'
+			'ambito_geografico'
 		), 
 		array(
 			"fields" => "names"

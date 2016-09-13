@@ -12,6 +12,29 @@ get_header(); ?>
         <?php echo get_search_meta_for_post($post); ?>
         <!-- ****************************************** -->
 
+
+
+        <?php
+            $title = get_the_title();
+            $abstact = get_the_excerpt();
+            $post_meta = get_post_meta(get_the_id());
+            $coauthors = get_coauthors(get_the_id());
+            $tags = wp_get_post_terms(
+                get_the_id(), 
+                array(
+                    'post_tag', 
+                    'category',
+                    'ambito_geografico'
+                ), 
+                array(
+                    "fields" => "names"
+                )
+            );
+        ?>
+
+
+        <?php //echo '<pre>';print_r($post_meta);echo '<pre>';*/ ?>
+
     	<main id="mainContent" class="template_single" data-role="content">
             <div class="wrapperFix">
                 <div id="bloque_introPagina"> 
@@ -35,8 +58,8 @@ get_header(); ?>
         					endwhile;
                         ?>
                     </div>
-                    <div class="colSec col-md-4">
-                       
+                    <div class="colPpal col-md-8">
+
                     </div>
                 </div>
             </div>
