@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
 			query += (text && tags_string) ? ' AND ' : '';
 			query += (tags_string) ? '(category:(' + tags_string + '))' : '';
 
-			var url_buscador = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + ' AND (topic:"post")' + aux + '&return=title%2Ctopic%2Ccategory%2Cdate%2Cimage_src' + '&sort=' + sortBy + '&size=' + size + '&start=' + start + '&project=irnbsadx';
+			var url_buscador = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + ' AND (topic:"publicacion")' + aux + '&return=title%2Ctopic%2Ccategory%2Cdate%2Cimage_src' + '&sort=' + sortBy + '&size=' + size + '&start=' + start + '&project=irnbsadx';
 
 			$.get(url_buscador, function(d) {
 
