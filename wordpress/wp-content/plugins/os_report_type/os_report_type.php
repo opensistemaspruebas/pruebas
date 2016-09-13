@@ -72,7 +72,7 @@ add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
 function report_meta_boxes() {
-  add_meta_box('report_pdf', __('PDF report', 'os_report_type'), 'meta_box_report_pdf', 'report', 'side', 'high');
+  add_meta_box('report_pdf', __('PDF report', 'os_report_type'), 'meta_box_report_pdf', 'report', 'normal', 'low');
   add_meta_box('report_source', __('Source', 'os_report_type'), 'meta_box_report_source', 'report', 'normal', 'low');
 }
 add_action('add_meta_boxes', 'report_meta_boxes');
@@ -129,14 +129,19 @@ function meta_box_report_source() {
   <p>
     <label for="source_logo"><?php _e('Logo', 'os_report_type'); ?></label>
     <input class="widefat" id="source_logo" name="source_logo" type="text" value="<?php if (isset($logo)) echo $logo; ?>" readonly="readonly"/>
-    <div class="thumbnail">
-      <img id="show_logo" name="show_logo" width="100%" src="<?php echo esc_attr($logo); ?>">
-    </div>
+  </p>
+  <p>  
+    <img id="show_logo" name="show_logo" style="max-height:100px;" src="<?php if (isset($logo)) echo esc_attr($logo); ?>">
+  </p>
+  <p>  
     <input id="upload_logo" name="upload_logo" type="button" value="<?php _e('Explore/Upload', 'os_report_type'); ?>" />
   </p>
   <p>
     <label for="publication_date"><?php _e('Publication date', 'os_report_type'); ?></label>
+  </p>
+  <p>
     <input type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
+  
   </p>
   <p>
     <label for="type"><?php _e('Type', 'os_report_type'); ?></label>
