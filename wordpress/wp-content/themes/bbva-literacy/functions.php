@@ -18,14 +18,16 @@ if (function_exists('register_sidebar')) {
 		array(
 			'name' => 'Main Sidebar',
 			'id' => 'sidebar-0',
-			'description' => __('Sidebar Principal, columna completa'),
+			'description' => __('Sidebar Principal'),
 			'class' => '',
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget' => '</section>',
-			'before_title' => '<h1 class="widget-title">',
-			'after_title' => '</h1>'
+			'before_widget' => '<section class="moduloContenido_%2$s"><div class="wrapperContent">',
+			'after_widget'  => '</div></section>',
+			'before_title'  => '',
+			'after_title'   => '',
 		)
 	);
+	
+
 }
 	
 
