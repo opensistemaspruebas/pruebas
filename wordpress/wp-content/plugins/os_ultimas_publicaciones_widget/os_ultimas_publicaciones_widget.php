@@ -25,14 +25,6 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 	            	'description' => __('Muestra las tres últimas publicaciones del sitio utilizando CloudSearch.', 'os_ultimas_publicaciones_widget')
 	        	)
 	        );
-	        wp_register_script('os_ultimas_publicaciones_widget_js', plugins_url('js/os_ultimas_publicaciones_widget_min.js' , __FILE__), array('jquery'));
-	        $translation_array = array(
-				'leer_mas' => __('Leer más', 'os_ultimas_publicaciones_widget'),
-				'ajaxurl' => admin_url('admin-ajax.php'),
-				
-			);
-			wp_localize_script('os_ultimas_publicaciones_widget_js', 'object_name', $translation_array);
-            wp_enqueue_script('os_ultimas_publicaciones_widget_js');
         }
 
 
@@ -40,7 +32,9 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 	    	echo $args['before_widget'];
 
-	    	$args = array(
+	    	$url = $instance['url'];
+
+	    	$argumentos = array(
 				'numberposts' => 3,
 				'offset' => 0,
 				'category' => 0,
@@ -55,8 +49,8 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 				'suppress_filters' => true
 			);
 
-			$recent_posts = wp_get_recent_posts($args, ARRAY_A);
-			$url = $instance['url'];
+			$recent_posts = wp_get_recent_posts($argumentos, ARRAY_A);
+
 
 			?>
 
@@ -105,14 +99,13 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 	    public function form($instance) {
 
 	    	$defaults = array('url' => '');
+	        $instance = wp_parse_args((array) $instance, $defaults);
 
-	    	$instance = wp_parse_args((array)$instance, $defaults);
 	        $url = $instance['url'];
-
 
 	        ?>
 	        <label for="url" class="assistive-text"><?php _e('Link a página de todas las publicaciones', 'os_ultimas_publicaciones_widget'); ?></label>
-			<input type="text" class="field" name="url" id="url" value="<?php echo $url; ?>">
+			<input type="text" class="field" name="url" id="url" value="<?php if (!empty($url)) echo $url; ?>">
 	        <?php
 	    }
 
