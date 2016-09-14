@@ -3,7 +3,7 @@
 /*
 	Plugin Name: OS Últimas Publicaciones Widget
 	Plugin URI: https://www.opensistemas.com/
-	Description: Crea un widget que muestra las tres últimas publicaciones del sitio utilizando CloudSearch.
+	Description: Crea un widget que muestra las tres últimas publicaciones.
 	Version: 1.0
 	Author: Marta Oliver
 	Author URI: https://www.opensistemas.com/
@@ -22,7 +22,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 	        	'os_ultimas_publicaciones_widget',
 	        	__('OS Últimas Publicaciones', 'os_ultimas_publicaciones_widget'),
 	        	array(
-	            	'description' => __('Muestra las tres últimas publicaciones del sitio utilizando CloudSearch.', 'os_ultimas_publicaciones_widget')
+	            	'description' => __('Muestra las tres últimas publicaciones del sitio.', 'os_ultimas_publicaciones_widget')
 	        	)
 	        );
         }
@@ -32,7 +32,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 	    	echo $args['before_widget'];
 
-	    	$url = $instance['url'];
+	    	$url_publicaciones = $instance['url_publicaciones'];
 
 	    	$argumentos = array(
 				'numberposts' => 3,
@@ -67,7 +67,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 							$post_excerpt = substr($post_excerpt, 0, strrpos($post_excerpt, ' ')) . "...";
 
 							echo '<li id="noticia_' . $i . '" class="col-md-4 col-sm-4 col-xs-12 ">
-								    <figure class="contenidoNoticias_boxImage">' . get_the_post_thumbnail($p['ID'], 'thumbnail') . '</figure>
+								    <figure class="contenidoNoticias_boxImage">' . get_the_post_thumbnail($p['ID'], 'medium') . '</figure>
 								    <div class="contenidoNoticias_boxTexto">
 								        <p class="item_fecha">' . get_the_date('j F Y', $p['ID']) . '</p>
 								        <h3 class="item_titulo">' . $p['post_title'] . '</h3>
@@ -81,7 +81,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 			    </ul>
 			    <p class="section_verTodos">
-			        <a href="<?php echo $url; ?>" class="icon-linkInterno">
+			        <a href="<?php echo $url_publicaciones; ?>" class="icon-linkInterno">
 			            <em><?php _e("Todas las publicaciones", "os_ultimas_publicaciones_widget"); ?></em>
 			        </a>
 			    </p>
@@ -97,24 +97,20 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 
 	    public function form($instance) {
-
-	    	$defaults = array('url' => '');
-	        $instance = wp_parse_args((array) $instance, $defaults);
-
-	        $url = $instance['url'];
-
-	        ?>
-	        <label for="url" class="assistive-text"><?php _e('Link a página de todas las publicaciones', 'os_ultimas_publicaciones_widget'); ?></label>
-			<input type="text" class="field" name="url" id="url" value="<?php if (!empty($url)) echo $url; ?>">
-	        <?php
+	    	$url_publicaciones = ! empty($instance['url_publicaciones']) ? $instance['url_publicaciones'] : 'http://';
+	    	?>
+	    	<p>
+				<label for="<?php echo $this->get_field_id('url_publicaciones'); ?>"><?php _e('URL de página de todas las publicaciones:', 'os_ultimas_publicaciones_widget'); ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id('url_publicaciones'); ?>" name="<?php echo $this->get_field_name('url_publicaciones'); ?>" type="url" value="<?php echo esc_attr($url_publicaciones); ?>">
+			</p>
+			<?php
 	    }
 
 
 	    function update($new_instance, $old_instance) {
-
-	    	$new_instance['url'] = strip_tags($new_instance['url']);
-
-	    	return $new_instance;
+			$instance = array();
+			$instance['url_publicaciones'] = (!empty( $new_instance['url_publicaciones'])) ? strip_tags($new_instance['url_publicaciones']) : '';
+			return $instance;
 	    }
 
 	}

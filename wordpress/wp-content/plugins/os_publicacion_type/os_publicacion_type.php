@@ -65,8 +65,7 @@ function register_admin_scripts() {
       wp_enqueue_media();
       wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type_min.js' , __FILE__), array('jquery'));           
       $translation_array = array(
-        'choose_source_logo' => __('Seleccionar logo', 'os_publicacion_type'),
-        'choose_source_pdf' => __('Seleccionar documento', 'os_publicacion_type')
+        'choose_source_logo' => __('Seleccionar logo', 'os_publicacion_type')
       );
       wp_localize_script( 'os_publicacion_type-js', 'object_name', $translation_array );
       wp_enqueue_script('os_publicacion_type-js');
@@ -77,6 +76,7 @@ add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 function publicacion_meta_boxes() {
   add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'low');
+  add_meta_box('publicacion_video', __('Vídeo', 'os_publicacion_type'), 'meta_box_publicacion_video', 'publicacion', 'normal', 'low');
   add_meta_box('publicacion_source', __('Fuente de la publicación', 'os_publicacion_type'), 'meta_box_publicacion_source', 'publicacion', 'normal', 'low');
 }
 add_action('add_meta_boxes', 'publicacion_meta_boxes');
@@ -92,11 +92,25 @@ function meta_box_publicacion_pdf() {
   
   ?>
   <p>
-    <label for="pdf"><?php _e('Archivo PDF', 'os_publicacion_type'); ?></label>
-    <input class="widefat" id="pdf" name="pdf" type="text" value="<?php if (isset($pdf)) echo $pdf; ?>" readonly="readonly"/>
+    <label for="pdf"><?php _e('URL del archivo PDF', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="pdf" name="pdf" type="url" value="<?php if (isset($pdf)) echo $pdf; ?>"/>
   </p>
+  <?php
+}
+
+
+function meta_box_publicacion_video() {
+  
+  global $post;
+  
+  wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_video-nonce');
+  
+  $video = get_post_meta($post->ID, 'video', true);
+  
+  ?>
   <p>
-    <input id="upload_pdf" name="upload_pdf" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
+    <label for="video"><?php _e('URL del archivo de vídeo', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="video" name="video" type="url" value="<?php if (isset($video)) echo $video; ?>"/>
   </p>
   <?php
 }
@@ -217,6 +231,9 @@ function meta_boxes_save($post_id) {
   }
   if (isset($_POST['pdf'])) {
     update_post_meta($post_id, 'pdf', strip_tags($_POST['pdf']));
+  }
+  if (isset($_POST['video'])) {
+    update_post_meta($post_id, 'video', strip_tags($_POST['video']));
   }
 }
 add_action('save_post', "meta_boxes_save");

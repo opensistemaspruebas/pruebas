@@ -48,7 +48,7 @@ function historia_type() {
       'hierarchical'       => false,
       'menu_position'      => null,
       'menu_icon'           => 'dashicons-book',
-      'supports'           => array('title', 'author', 'thumbnail', 'excerpt'),
+      'supports'           => array('title', 'author', 'editor', 'thumbnail'),
       'taxonomies'         => array('category', 'post_tag', 'country')
   );
   register_post_type('historia', $args );
