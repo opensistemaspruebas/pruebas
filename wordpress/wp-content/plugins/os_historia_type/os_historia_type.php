@@ -49,7 +49,7 @@ function historia_type() {
       'menu_position'      => null,
       'menu_icon'           => 'dashicons-book',
       'supports'           => array('title', 'author', 'editor', 'thumbnail'),
-      'taxonomies'         => array('category', 'post_tag', 'country')
+      'taxonomies'         => array('category', 'post_tag', 'ambito_geografico')
   );
   register_post_type('historia', $args );
 }

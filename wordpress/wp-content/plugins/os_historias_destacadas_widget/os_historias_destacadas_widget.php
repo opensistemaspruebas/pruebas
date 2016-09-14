@@ -25,14 +25,6 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 	            	'description' => __('Muestra las tres historias destacadas.', 'os_historias_destacadas_widget')
 	        	)
 	        );
-	       
-	       	wp_register_script('os_historias_destacadas_widget_js', plugins_url('js/os_historias_destacadas_widget_min.js' , __FILE__), array('jquery'));
-	        $translation_array = array(
-				'only_3' => __('Solo puede seleccionar 3 historias', 'os_historias_destacadas_widget'),
-			);
-			wp_localize_script('os_historias_destacadas_widget_js', 'historias_destacadas', $translation_array);
-            wp_enqueue_script('os_historias_destacadas_widget_js');
-
         }
 
 
