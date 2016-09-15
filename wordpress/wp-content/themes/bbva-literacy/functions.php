@@ -18,14 +18,16 @@ if (function_exists('register_sidebar')) {
 		array(
 			'name' => 'Main Sidebar',
 			'id' => 'sidebar-0',
-			'description' => __('Sidebar Principal, columna completa'),
+			'description' => __('Sidebar Principal'),
 			'class' => '',
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget' => '</section>',
-			'before_title' => '<h1 class="widget-title">',
-			'after_title' => '</h1>'
+			'before_widget' => '<section class="moduloContenido_%2$s"><div class="wrapperContent">',
+			'after_widget'  => '</div></section>',
+			'before_title'  => '',
+			'after_title'   => '',
 		)
 	);
+	
+
 }
 	
 
@@ -50,21 +52,20 @@ add_action('admin_menu','remove_default_post_type');
 // Devuelve todas las etiquetas de un post separadas por comas
 function get_all_tags_from_post($post_id) {
 	
-	$coauthors = get_coauthors($post_id);
+	/*$coauthors = get_coauthors($post_id);*/
 	$authors = array();
 	
-	foreach ($coauthors as $coauthor) {
+	/*foreach ($coauthors as $coauthor) {
 		$display_name = $coauthor->data->display_name;
 		$display_name = getCleanedString($display_name);
 		array_push($authors, $display_name);
-	}
+	}*/
 	
 	$tags = wp_get_post_terms(
 		$post_id, 
 		array(
-			'post_tag', 
 			'category',
-			'country'
+			'ambito_geografico'
 		), 
 		array(
 			"fields" => "names"
@@ -88,7 +89,15 @@ function get_search_meta_for_post($post) {
 	$meta = '';
 
 	$post_title = getCleanedString($post->post_title);
+	$post_excerpt = wp_strip_all_tags(get_the_excerpt());
 	$post_content = getCleanedString($post->post_content);
+	$post_type = get_post_type($post->ID);
+
+	if ($post_type == "publicacion") {
+		$content = $post_excerpt;
+	} else {
+		$content = $post_content;
+	}
 
 	$thumbID = get_post_thumbnail_id($post->ID );
 	$imgDestacada = wp_get_attachment_url($thumbID);
@@ -97,9 +106,9 @@ function get_search_meta_for_post($post) {
 	$meta .= '<meta name="wp_date" content="' . $post->post_date . '">';
 	$meta .= '<meta name="wp_title" content="' . $post_title . '">';
 	$meta .= '<meta name="image_src" content="' . $imgDestacada . '">';
-	$meta .= '<meta name="wp_content" content="' . $post_content . '">';
+	$meta .= '<meta name="wp_content" content="' . $content . '">';
 	$meta .= '<meta name="wp_category" content="' . get_all_tags_from_post($post->ID) . '">';
-	$meta .= '<meta name="wp_topic" content="' . get_post_type($post->ID) . '">';
+	$meta .= '<meta name="wp_topic" content="' . $post_type . '">';
 
 	return $meta;
 }

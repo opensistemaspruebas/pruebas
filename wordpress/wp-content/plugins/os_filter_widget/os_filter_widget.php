@@ -63,7 +63,7 @@ if (!class_exists('OS_Filter_Widget')) :
 
 	    	$countries = get_terms(
 				array(
-					"taxonomy" => array("country"),
+					"taxonomy" => array("ambito_geografico"),
 					"hide_empty" => true,
 					"fields" => "names"
 				)
@@ -72,19 +72,19 @@ if (!class_exists('OS_Filter_Widget')) :
 			?>
 			<?php 
 				echo $args['before_title']; 
-				_e('Filters', 'os_filter_widget');
+				_e('Filtros', 'os_filter_widget');
 				echo $args['after_title']; 
 			?>
 			<form action="#" method="get" name="form_filter" id="form_filter">
 				
-				<label for="inputText" class="assistive-text"><?php _e('Text', 'os_filter_widget'); ?></label>
+				<label for="inputText" class="assistive-text"><?php _e('Texto', 'os_filter_widget'); ?></label>
 				<input type="text" class="field" name="inputText" id="inputText">
 
 				<input type="hidden" name="size" id="size" value="7">
 				<input type="hidden" name="start" id="start" value="0">
 				<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
 
-				<label for="selectCategory" class="assistive-text"><?php _e('Categories', 'os_filter_widget'); ?></label>
+				<label for="selectCategory" class="assistive-text"><?php _e('Categorías', 'os_filter_widget'); ?></label>
 				<?php if (!empty($categories)) : ?>
 				<select id="selectCategory" name="selectCategory" multiple="multiple">
 					<?php foreach ($categories as $category) : ?>
@@ -93,7 +93,7 @@ if (!class_exists('OS_Filter_Widget')) :
 				</select>
 				<?php endif; ?>
 
-				<label for="selectAuthor" class="assistive-text"><?php _e('Authors', 'os_filter_widget'); ?></label>
+				<label for="selectAuthor" class="assistive-text"><?php _e('Autores', 'os_filter_widget'); ?></label>
 				<?php if (!empty($authors)) : ?>
 				<select id="selectAuthor" name="selectAuthor" multiple="multiple">
 					<?php foreach ($authors as $author) : ?>
@@ -102,7 +102,7 @@ if (!class_exists('OS_Filter_Widget')) :
 				</select>
 				<?php endif; ?>
 
-				<label for="selectCountry" class="assistive-text"><?php _e('Countries', 'os_filter_widget'); ?></label>
+				<label for="selectCountry" class="assistive-text"><?php _e('Ámbito geográfico', 'os_filter_widget'); ?></label>
 				<?php if (!empty($countries)) : ?>
 				<select id="selectCountry" name="selectCountry" multiple="multiple">
 					<?php foreach ($countries as $country) : ?>
@@ -111,7 +111,7 @@ if (!class_exists('OS_Filter_Widget')) :
 				</select>
 				<?php endif; ?>
 				
-				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Search', 'os_filter_widget'); ?>">
+				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Buscar', 'os_filter_widget'); ?>">
 
 			</form>
 			

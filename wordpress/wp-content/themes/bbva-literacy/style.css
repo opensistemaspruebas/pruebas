@@ -236,7 +236,7 @@ ul#menu-menu-principal > li.menu-item a:hover strong {color:#00559c;font-weight:
 ul#menu-menu-principal > li.menu-item.abierto {color:#00559c;;text-decoration:none;display:block;}
 
 /*********************************************** 
-		MODULOS
+		MODULOS/COMPONENTES
 ***********************************************/
 [class*="moduloContenido_"]:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
 main .wrapperFluid [class*="moduloContenido_"] {padding:50px 0px;float:left;width:100%;}
@@ -275,13 +275,13 @@ main .wrapperFluid [class*="moduloContenido_"] {padding:50px 0px;float:left;widt
 .moduloContenido_introPagina.introAzul {}
 
 /************ CARRUSEL PROMOCIONAL debajo del header **************/
-.moduloContenido_imagenEstaticaHeader {padding:0px !important;}
-.moduloContenido_imagenEstaticaHeader .imagenPromocional {width:100%;float:left;border-bottom:1px solid #ededf0;}
+.moduloContenido_widget_simpleimage {padding:0px !important;}
+.moduloContenido_widget_simpleimage > .wrapperContent {width:100%;float:left;}
 
 .componente_imagenPromocional {height:610px;width:100%;margin:0px;padding:0px;float:left;}
 .componente_imagenPromocional .imagenPromocional_boxImagen {z-index:10;position:relative;display: block;float:left;height:610px;width:100%;padding-left: 0px;background-size: cover;background-position: center center;}
 .componente_imagenPromocional .imagenPromocional_boxImagen img {display:none;}
-.componente_imagenPromocional .wrapperContent {position:relative;}
+.componente_imagenPromocional > .wrapperContent {position:relative;}
 .componente_imagenPromocional .imagenPromocional_boxTexto {width:437px;/*height:266px;*/padding:20px;background-color:#fff;overflow:hidden;z-index:1000;position:absolute;margin-top:120px;margin-bottom:81px;left:0;}
 .componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_titulo {font-size:2.8em;line-height:1em;color:#000;margin:0px 0 10px 0px;font-family:"BBVA Light";}
 .componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_texto, 
@@ -290,6 +290,9 @@ main .wrapperFluid [class*="moduloContenido_"] {padding:50px 0px;float:left;widt
 .componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_boton a {color:#fff;background-color:#02a5a5;}
 .componente_imagenPromocional .imagenPromocional_boxTexto .fotoInfo_link {margin:0px 0 0px 0px;font-size:1em;color:#009ee5;}
 
+/************ TWITTER **************/
+
+.timeline-TweetList-tweet {width:33%;float:left;}
 
 /*********************************************** 
 			ASIDES
