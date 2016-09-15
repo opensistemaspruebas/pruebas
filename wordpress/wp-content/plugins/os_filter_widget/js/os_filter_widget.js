@@ -1,6 +1,10 @@
 jQuery(document).ready(function() {
+
+	jQuery("input#inputText").change(function() {
+		console.log("cambio");
+	});
 	
-	jQuery("form#form_filter").change(function() {
+	/*jQuery("form#form_filter").change(function() {
 		var sortBy = jQuery("#inputSortBy").val("date desc");
 		var size = jQuery("#size").val("7");
 		var start = jQuery("#start").val("0");
@@ -120,7 +124,7 @@ jQuery(document).ready(function() {
 
 		return true;
 
-	});
+	});*/
 
 });
  

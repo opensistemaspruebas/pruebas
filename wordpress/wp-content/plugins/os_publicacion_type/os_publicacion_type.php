@@ -74,9 +74,19 @@ function register_admin_scripts() {
 add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
+add_filter( 'admin_post_thumbnail_html', 'add_featured_image_instruction');
+function add_featured_image_instruction( $content ) {
+     $content .= '<p><i>The person image should be 92x92 pixels</i></p>';
+   
+   return str_replace(__('Set featured image'), __('Añadir imagen', 'os_publicacion_type'), $content);
+}
+
+
 function publicacion_meta_boxes() {
   add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'low');
   add_meta_box('publicacion_source', __('Fuente de la publicación', 'os_publicacion_type'), 'meta_box_publicacion_source', 'publicacion', 'normal', 'low');
+  remove_meta_box('postimagediv', 'publicacion', 'side');
+  add_meta_box('postimagediv', __('Imagen de la cabecera', 'os_publicacion_type'), 'post_thumbnail_meta_box', 'publicacion', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'publicacion_meta_boxes');
 
@@ -96,6 +106,7 @@ function meta_box_publicacion_pdf() {
   </p>
   <?php
 }
+
 
 
 function meta_box_publicacion_source() {

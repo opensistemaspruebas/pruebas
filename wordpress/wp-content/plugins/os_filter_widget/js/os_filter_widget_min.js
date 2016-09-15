@@ -1,17 +1,91 @@
 jQuery(document).ready(function() {
+
+	// Autocompletado de categorías, autores y ámbitos geográficos
+	jQuery("input#inputText").on('input', function() {
+		myText = getCleanedString(jQuery(this).val());
+		esUnaCategoria = false;
+		jQuery('ul#categorias li').each(function() {
+	        var li_text = getCleanedString(jQuery(this).text());
+	        var n = li_text.includes(myText);
+	        if (n) {
+	        	jQuery(this).show();
+	        	esUnaCategoria = true;
+	        } else {
+	        	jQuery(this).hide();
+	        }
+    	});
+    	if (esUnaCategoria && myText !== '') {
+    		jQuery("div#caja_categorias").show();
+    	} else {
+    		jQuery("div#caja_categorias").hide();
+    	}
+    	esUnAutor = false;
+		jQuery('ul#autores li').each(function() {
+	        var li_text = getCleanedString(jQuery(this).text());
+	        var n = li_text.includes(myText);
+	        if (n) {
+	        	jQuery(this).show();
+	        	esUnAutor = true;
+	        } else {
+	        	jQuery(this).hide();
+	        }
+    	});
+    	if (esUnAutor && myText !== '') {
+    		jQuery("div#caja_autores").show();
+    	} else {
+    		jQuery("div#caja_autores").hide();
+    	}
+    	if (myText !== '') {
+    		jQuery("div#caja_paises").show();
+    	} else {
+    		jQuery("div#caja_paises").hide();
+    	}
+	});
+
+
+	// Marcar etiquetas
+	jQuery("div#caja_categorias li a, div#caja_autores li a, div#caja_categorias li a, div#caja_paises li a").on("click", function(e) {
+		e.preventDefault();
+		if (jQuery(this).parent().hasClass("selected")) {
+			return false;
+		} else {
+			jQuery(this).parent().clone().appendTo("div#caja_seleccion ul");
+			jQuery(this).parent().addClass("selected");
+		}
+	});
+
+
+	// Desmarcar etiquetas
+	jQuery("div#caja_seleccion ul li a").live("click", function(e) {
+		e.preventDefault();
+		var data_name = jQuery(this).parent().attr("data-name");
+		jQuery(this).remove();
+		jQuery("li.selected[data-name=" + data_name + "]").removeClass("selected");
+	});
+
 	
-	jQuery("form#form_filter").change(function() {
+	/*jQuery("form#form_filter").change(function() {
 		var sortBy = jQuery("#inputSortBy").val("date desc");
 		var size = jQuery("#size").val("7");
 		var start = jQuery("#start").val("0");
-	});
+	});*/
+
 
 	// Submit del formulario del filtro
 	jQuery("form#form_filter").submit(function(e) {
 		
 		e.preventDefault();
 		
-		var text = jQuery("input#inputText").val();
+		var text = getCleanedString(jQuery("input#inputText").val());
+
+		categorias = "";
+		autor = "";
+		paises = "";
+
+		jQuery("div#caja_seleccion ul li.categoria").each(function() {
+			categorias += getCleanedString(jQuery(this).text()) + ',';
+		});
+		categorias = categorias.substring(0, categorias.length - 1);
 		
 		var tags = [];
 		var categories = jQuery("#selectCategory").val();
@@ -78,7 +152,7 @@ jQuery(document).ready(function() {
 	});
 
 	// Links de cambiar ordenación
-	jQuery(document).on("click", "a.changeSort", function(e) {
+	/*jQuery(document).on("click", "a.changeSort", function(e) {
 		
 		e.preventDefault();
 		e.stopPropagation();
@@ -120,7 +194,7 @@ jQuery(document).ready(function() {
 
 		return true;
 
-	});
+	});*/
 
 });
  

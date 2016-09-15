@@ -47,7 +47,7 @@ if (!class_exists('OS_Filter_Widget')) :
 	    	$categories = get_terms(
 				array(
 					"taxonomy" => array("post_tag", "category"),
-					"hide_empty" => false,
+					"hide_empty" => true,
 					"fields" => "names"
 				)
 			);
@@ -64,64 +64,65 @@ if (!class_exists('OS_Filter_Widget')) :
 	    	$countries = get_terms(
 				array(
 					"taxonomy" => array("ambito_geografico"),
-					"hide_empty" => false,
+					"hide_empty" => true,
 					"fields" => "names"
 				)
 			);
 
-			echo $args['before_title']; 
-			_e('Filtros', 'os_filter_widget');
-			echo $args['after_title']; 
-			
+			?>
+			<?php 
+				echo $args['before_title']; 
+				_e('Filtros', 'os_filter_widget');
+				echo $args['after_title']; 
 			?>
 			<form action="#" method="get" name="form_filter" id="form_filter">
+				
 				<label for="inputText" class="assistive-text hidden"><?php _e('Texto', 'os_filter_widget'); ?></label>
 				<input type="text" class="field" name="inputText" id="inputText">
-				<div id="caja_seleccion">
-					<ul id="seleccion" name="seleccion"></ul>
-				</div>
-				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Buscar', 'os_filter_widget'); ?>">
+
 				<input type="hidden" name="size" id="size" value="7">
 				<input type="hidden" name="start" id="start" value="0">
 				<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
-				<div id="caja_categorias" id="caja_categorias" style="display: none;">
-					<h2><?php _e('Categorías', 'os_filter_widget'); ?> <span class="num">(<?php echo wp_count_terms("category"); ?>)</span></h2>
-					<?php if (!empty($categories)) : ?>
-					<ul id="categorias" name="categorias">
-						<?php foreach ($categories as $category) : ?>
-							<li class="categoria" data-name="<?php echo $category; ?>" style="display: none;"><a href="#"><?php echo $category; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php endif; ?>
-				</div>
 
-				<div id="caja_autores" id="caja_autores" style="display: none;">
-					<h2><?php _e('Autores', 'os_filter_widget'); ?> <span class="num">(<?php echo count($authors); ?>)</span></h2>
-					<?php if (!empty($authors)) : ?>
-					<ul id="autores" name="autores">
-						<?php foreach ($authors as $author) : ?>
-							<li class="autor" data-name="<?php echo $author->display_name; ?>" style="display: none;"><a href="#"><?php echo $author->display_name; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php endif; ?>
-				</div>
-				<div id="caja_paises" id="caja_paises" style="display: none;">
-					<h2><?php _e('Ámbito geográfico', 'os_filter_widget'); ?> <span class="num">(<?php echo wp_count_terms("ambito_geografico"); ?>)</span></h2>
-					<?php if (!empty($countries)) : ?>
-					<ul id="paises" name="paises">
-						<?php foreach ($countries as $country) : ?>
-							<li class="pais" data-name="<?php echo $country; ?>"><a href="#"><?php echo $country; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php endif; ?>
-				</div>
+				<label for="selectCategory" class="assistive-text"><?php _e('Categorías', 'os_filter_widget'); ?> (<?php echo wp_count_terms("category"); ?>)</label>
+				<?php if (!empty($categories)) : ?>
+				<select id="selectCategory" name="selectCategory" multiple="multiple">
+					<?php foreach ($categories as $category) : ?>
+						<option value="<?php echo $category; ?>"><?php echo $category; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
+
+				<label for="selectAuthor" class="assistive-text"><?php _e('Autores', 'os_filter_widget'); ?> (<?php echo count($authors); ?>)</label>
+				<?php if (!empty($authors)) : ?>
+				<select id="selectAuthor" name="selectAuthor" multiple="multiple">
+					<?php foreach ($authors as $author) : ?>
+						<option value="<?php echo $author->display_name; ?>"><?php echo $author->display_name; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
+
+				<label for="selectCountry" class="assistive-text"><?php _e('Ámbito geográfico', 'os_filter_widget'); ?> (<?php echo wp_count_terms("ambito_geografico"); ?>)</label>
+				<?php if (!empty($countries)) : ?>
+				<select id="selectCountry" name="selectCountry" multiple="multiple">
+					<?php foreach ($countries as $country) : ?>
+						<option value="<?php echo $country; ?>"><?php echo $country; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<?php endif; ?>
+				
+				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Buscar', 'os_filter_widget'); ?>">
+
 			</form>
+			
 			<div id="sortLinks"></div>
 			<div id="results"></div>			
 			<div id="moreLink"></div>
+
 			<?php
 
 			echo $args['after_widget'];
+
 	    }
 
 
