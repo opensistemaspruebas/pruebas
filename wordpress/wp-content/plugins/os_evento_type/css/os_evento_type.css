@@ -1,0 +1,20 @@
+#event-data input, #programme-data input, #speaker-data input {
+	margin-top: 10px;
+    width: 100%;
+}
+
+#event-data .wp-editor-container, #programme-data .wp-editor-container, #speaker-data .wp-editor-container{
+	margin-top: 10px;
+}
+
+#event-data .wp-editor-area, #programme-data .wp-editor-area, #speaker-data .wp-editor-area{
+    font-family: inherit;
+    font-size: 14px;
+    padding: 5px;
+}
+
+#event-data .wp-editor-area:focus, #programme-data .wp-editor-area:focus, #speaker-data .wp-editor-area:focus{
+	border-color: #5b9dd9;
+    -webkit-box-shadow: 0 0 2px rgba(30,140,190,.8);
+    box-shadow: 0 0 2px rgba(30,140,190,.8);
+}
