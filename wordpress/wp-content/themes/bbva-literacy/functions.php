@@ -20,8 +20,8 @@ if (function_exists('register_sidebar')) {
 			'id' => 'sidebar-0',
 			'description' => __('Sidebar Principal'),
 			'class' => '',
-			'before_widget' => '<section class="moduloContenido_%2$s"><div class="wrapperContent">',
-			'after_widget'  => '</div></section>',
+			'before_widget' => '',
+			'after_widget'  => '',
 			'before_title'  => '',
 			'after_title'   => '',
 		)
@@ -34,10 +34,20 @@ if (function_exists('register_sidebar')) {
 // Añadir css y js del tema
 function add_theme_scripts() {
 	wp_enqueue_style('style', get_stylesheet_uri());
-	wp_enqueue_style('style_responsive', get_template_directory_uri() . '/resources/css/style_responsive.css');
-	wp_enqueue_style('boostrap', get_template_directory_uri() . '/resources/css/bootstrap.min.css');
-	wp_enqueue_script('script', get_template_directory_uri() . '/resources/js/script.js', array ('jquery' ), 1.1, true);
-	wp_enqueue_script("jquery");
+	wp_enqueue_style('app', get_template_directory_uri() . '/resources/css/app.css');
+	wp_enqueue_style('vendor', get_template_directory_uri() . '/resources/css/vendor.css');
+	wp_enqueue_script('script-os', get_template_directory_uri() . '/resources/js/script-os.js', array ('jquery' ), 1.1, true);
+	wp_enqueue_script('jquery.min', get_template_directory_uri() . '/resources/js/jquery.min.js');
+    wp_enqueue_script('bootstrap.min', get_template_directory_uri() . '/resources/js/bootstrap.min.js');
+    wp_enqueue_script('jquery.mmenu.min.all', get_template_directory_uri() . '/resources/js/jquery.mmenu.min.all.js');
+    wp_enqueue_script('jquery-ui.min', get_template_directory_uri() . '/resources/js/jquery-ui.min.js');
+    wp_enqueue_script('js.cookie', get_template_directory_uri() . '/resources/js.cookie.js');
+    wp_enqueue_script('bootstrap-select.min', get_template_directory_uri() . '/resources/bootstrap-select.min.js');
+    wp_enqueue_script('modernizr', get_template_directory_uri() . '/resources/js/modernizr.js');
+    wp_enqueue_script('wow.min', get_template_directory_uri() . '/resources/js/wow.min.js');
+    wp_enqueue_script('picturefill.min', get_template_directory_uri() . '/resources/js/picturefill.min.js');
+    wp_enqueue_script('app', get_template_directory_uri() . '/resources/js/app.js');
+	//wp_enqueue_script("jquery");
 }
 add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
 
