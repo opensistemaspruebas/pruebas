@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
         });
         custom_uploader.on('select', function() {
             var attachment = custom_uploader.state().get('selection').first().toJSON();
-            jQuery('input#source_logo').val(attachment.url);
+            jQuery('input#organization_logo').val(attachment.url);
             jQuery('img#show_logo').attr("src", attachment.sizes.thumbnail.url);
             jQuery('img#show_logo').show();
         });

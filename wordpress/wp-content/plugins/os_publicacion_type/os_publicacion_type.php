@@ -65,7 +65,7 @@ function register_admin_scripts() {
       wp_enqueue_media();
       wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type_min.js' , __FILE__), array('jquery'));           
       $translation_array = array(
-        'choose_source_logo' => __('Seleccionar logo', 'os_publicacion_type')
+        'choose_organization_logo' => __('Seleccionar logo', 'os_publicacion_type')
       );
       wp_localize_script( 'os_publicacion_type-js', 'object_name', $translation_array );
       wp_enqueue_script('os_publicacion_type-js');
@@ -163,9 +163,13 @@ function meta_box_publicacion_info($post) {
   $jel_code = get_post_meta($post->ID, 'jel_code', true);
   $edition = get_post_meta($post->ID, 'edition', true);
   $editorial = get_post_meta($post->ID, 'editorial', true);
-  $source_name = get_post_meta($post->ID, 'source_name', true);
-  $source_url = get_post_meta($post->ID, 'source_url', true);
-  $source_logo = get_post_meta($post->ID, 'source_logo', true);
+  $organization_name = get_post_meta($post->ID, 'organization_name', true);
+  $organization_url = get_post_meta($post->ID, 'organization_url', true);
+  
+  $organization_logo = get_post_meta($post->ID, 'organization_logo', true);
+
+  $organization_logo_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($organization_logo));
+
   ?>
 
   <p>
@@ -197,17 +201,17 @@ function meta_box_publicacion_info($post) {
     <input type="text" name="editorial" value="<?php echo $editorial; ?>" class="widefat" />
   </p>
   <p>
-    <label for="source_name"><?php _e('Nombre de la fuente', 'os_publicacion_type'); ?></label>
-    <input type="text" name="source_name" value="<?php echo $source_name; ?>" class="widefat" />
+    <label for="organization_name"><?php _e('Nombre de la organización que lo publica', 'os_publicacion_type'); ?></label>
+    <input type="text" name="organization_name" value="<?php echo $organization_name; ?>" class="widefat" />
   </p>
   <p>
-    <label for="source_url"><?php _e('URL de la fuente donde está alojado el informe', 'os_publicacion_type'); ?></label>
-    <input type="url" name="source_url" value="<?php echo $source_url; ?>" class="widefat" />
+    <label for="organization_url"><?php _e('URL de la organización que lo publica', 'os_publicacion_type'); ?></label>
+    <input type="url" name="organization_url" value="<?php echo $organization_url; ?>" class="widefat" />
   </p>
   <p>
-    <label for="source_logo"><?php _e('Logo de la fuente', 'os_publicacion_type'); ?></label>
-    <input class="widefat" id="source_logo" name="source_logo" type="text" value="<?php if (!empty($source_logo)) echo $source_logo; ?>" readonly="readonly"/>
-    <img id="show_logo" draggable="false" alt="" name="show_logo" src="<?php if (!empty($source_logo)) echo esc_attr($source_logo); ?>" style="<?php if (empty($source_logo)) echo "display: none;"; ?>">
+    <label for="organization_logo"><?php _e('Logo de la organización', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="organization_logo" name="organization_logo" type="text" value="<?php if (!empty($organization_logo)) echo $organization_logo; ?>" readonly="readonly"/>
+    <img id="show_logo" draggable="false" alt="" name="show_logo" src="<?php if (!empty($organization_logo_thumbnail)) echo esc_attr($organization_logo_thumbnail); ?>" style="<?php if (empty($organization_logo_thumbnail)) echo "display: none;"; ?>">
   </p>
   <p>
     <input id="upload_logo" name="upload_logo" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
@@ -248,14 +252,17 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['editorial'])) {
     update_post_meta($post_id, 'editorial', strip_tags($_POST['editorial']));
   }
-  if (isset($_POST['source_name'])) {
-   update_post_meta($post_id, 'source_name', strip_tags($_POST['source_name']));
+  if (isset($_POST['organization_name'])) {
+   update_post_meta($post_id, 'organization_name', strip_tags($_POST['organization_name']));
   }
   if (isset($_POST['source_url'])) {
     update_post_meta($post_id, 'source_url', strip_tags($_POST['source_url']));
   }
-  if (isset($_POST['source_logo'])) {
-   update_post_meta($post_id, 'source_logo', strip_tags($_POST['source_logo']));
+  if (isset($_POST['organization_url'])) {
+    update_post_meta($post_id, 'organization_url', strip_tags($_POST['organization_url']));
+  }
+  if (isset($_POST['organization_logo'])) {
+   update_post_meta($post_id, 'organization_logo', strip_tags($_POST['organization_logo']));
   }
 
 
