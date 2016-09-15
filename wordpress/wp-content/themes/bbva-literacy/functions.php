@@ -52,19 +52,18 @@ add_action('admin_menu','remove_default_post_type');
 // Devuelve todas las etiquetas de un post separadas por comas
 function get_all_tags_from_post($post_id) {
 	
-	$coauthors = get_coauthors($post_id);
+	/*$coauthors = get_coauthors($post_id);*/
 	$authors = array();
 	
-	foreach ($coauthors as $coauthor) {
+	/*foreach ($coauthors as $coauthor) {
 		$display_name = $coauthor->data->display_name;
 		$display_name = getCleanedString($display_name);
 		array_push($authors, $display_name);
-	}
+	}*/
 	
 	$tags = wp_get_post_terms(
 		$post_id, 
 		array(
-			'post_tag', 
 			'category',
 			'ambito_geografico'
 		), 
