@@ -38,7 +38,7 @@ function publicacion_type() {
   );
   $args = array(
       'labels'             => $labels,
-      'description'        => __( 'Descripción.', 'os_publicacion_type'),
+      'description'        => __('Descripción.', 'os_publicacion_type'),
       'public'             => true,
       'publicly_queryable' => true,
       'show_ui'            => true,
@@ -50,7 +50,7 @@ function publicacion_type() {
       'hierarchical'       => false,
       'menu_position'      => null,
       'menu_icon'          => 'dashicons-welcome-write-blog',
-      'supports'           => array('title', 'thumbnail', 'excerpt'),
+      'supports'           => array('title'),
       'taxonomies'         => array('category', 'ambito_geografico')
   );
   register_post_type('publicacion', $args );
@@ -74,26 +74,54 @@ function register_admin_scripts() {
 add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
-add_filter( 'admin_post_thumbnail_html', 'add_featured_image_instruction');
+add_filter('admin_post_thumbnail_html', 'add_featured_image_instruction');
 function add_featured_image_instruction( $content ) {
-     $content .= '<p><i>The person image should be 92x92 pixels</i></p>';
-   
-   return str_replace(__('Set featured image'), __('Añadir imagen', 'os_publicacion_type'), $content);
+  $content = str_replace(__('Set featured image'), __('Añadir imagen', 'os_publicacion_type'), $content);
+  $content = str_replace(__('Remove featured image'), __('Eliminar imagen', 'os_publicacion_type'), $content); 
+  return $content;
 }
 
 
 function publicacion_meta_boxes() {
-  add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'low');
-  add_meta_box('publicacion_source', __('Fuente de la publicación', 'os_publicacion_type'), 'meta_box_publicacion_source', 'publicacion', 'normal', 'low');
-  remove_meta_box('postimagediv', 'publicacion', 'side');
   add_meta_box('postimagediv', __('Imagen de la cabecera', 'os_publicacion_type'), 'post_thumbnail_meta_box', 'publicacion', 'normal', 'high');
+  add_meta_box('publicacion_abstract_destacado',  __('Texto destacado del abstract', 'os_publicacion_type'), 'meta_box_abstract_destacado', 'publicacion', 'normal', 'high');
+  add_meta_box('publicacion_abstract_contenido',  __('Texto normal del abstract', 'os_publicacion_type'), 'meta_box_abstract_contenido', 'publicacion', 'normal', 'high');
+  add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'high');
+  add_meta_box('publicacion_source_link', __('Link a la fuente', 'os_publicacion_type'), 'meta_box_source_link', 'publicacion', 'normal', 'high');
+  add_meta_box('publicacion_info', __('Información adicional', 'os_publicacion_type'), 'meta_box_publicacion_info', 'publicacion', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'publicacion_meta_boxes');
 
 
-function meta_box_publicacion_pdf() {
-  
-  global $post;
+function meta_box_abstract_destacado($post) {
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_abstract_destacado-nonce');
+
+  $abstract_destacado = get_post_meta($post->ID, 'abstract_destacado', true);
+
+  ?>
+  <p>
+      <textarea rows="4" class="widefat" name="abstract_destacado" id="abstract_destacado"><?php echo $abstract_destacado; ?></textarea>
+  </p>
+  <?php   
+}
+
+
+function meta_box_abstract_contenido($post) {
+
+    wp_nonce_field(basename(__FILE__), 'meta_box_abstract_contenido-nonce');
+
+    $abstract_contenido = get_post_meta($post->ID, 'abstract_contenido', true);
+
+    ?>
+    <p>
+        <textarea rows="4" class="widefat" name="abstract_contenido" id="abstract_contenido"><?php echo $abstract_contenido; ?></textarea>
+    </p>
+    <?php   
+}
+
+
+function meta_box_publicacion_pdf($post) {
   
   wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_pdf-nonce');
   
@@ -101,68 +129,52 @@ function meta_box_publicacion_pdf() {
   
   ?>
   <p>
-    <label for="pdf"><?php _e('URL del archivo PDF', 'os_publicacion_type'); ?></label>
-    <input class="widefat" id="pdf" name="pdf" type="url" value="<?php if (isset($pdf)) echo $pdf; ?>"/>
+    <label for="pdf"><?php _e('URL externa del archivo PDF', 'os_publicacion_type'); ?></label>
+    <input type="url" class="widefat" id="pdf" name="pdf" value="<?php if (isset($pdf)) echo $pdf; ?>"/>
+  </p>
+  <?php
+}
+
+
+function meta_box_source_link($post) {
+  
+  wp_nonce_field(basename(__FILE__), 'meta_box_source_link-nonce');
+  
+  $source_url = get_post_meta($post->ID, 'source_url', true);
+  
+  ?>
+  <p>
+    <label for="source_url"><?php _e('URL de la fuente del informe', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="source_url" name="source_url" type="url" value="<?php if (isset($source_url)) echo $source_url; ?>"/>
   </p>
   <?php
 }
 
 
 
-function meta_box_publicacion_source() {
+function meta_box_publicacion_info($post) {
   
-  global $post;
+  wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_info-nonce');
   
-  wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_source-nonce');
-  
-  $source_name = get_post_meta($post->ID, 'source_name', true);
-  $source_url = get_post_meta($post->ID, 'source_url', true);
-  $logo = get_post_meta($post->ID, 'source_logo', true);
   $publication_date = get_post_meta($post->ID, 'publication_date', true);
-  $type = get_post_meta($post->ID, 'type', true);
-  $geographical_area = get_post_meta($post->ID, 'geographical_area', true);
+  $type = get_post_meta($post->ID, 'type', true);  
   $target_audiences = get_post_meta($post->ID, 'target_audiences', true);
-  $number_of_pages = get_post_meta($post->ID, 'number_of_pages', true);
+  $number_of_pages = get_post_meta($post->ID, 'number_of_pages', true); 
   $jel_code = get_post_meta($post->ID, 'jel_code', true);
   $edition = get_post_meta($post->ID, 'edition', true);
   $editorial = get_post_meta($post->ID, 'editorial', true);
+  $source_name = get_post_meta($post->ID, 'source_name', true);
+  $source_url = get_post_meta($post->ID, 'source_url', true);
+  $source_logo = get_post_meta($post->ID, 'source_logo', true);
   ?>
-  
-  <p>
-    <label for="source_name"><?php _e('Nombre de la fuente', 'os_publicacion_type'); ?></label>
-    <input type="text" name="source_name" value="<?php echo $source_name; ?>" class="widefat" />
-  </p>
-  <p>
-    <label for="source_url"><?php _e('URL de la fuente', 'os_publicacion_type'); ?></label>
-    <input type="link" name="source_url" value="<?php echo $source_url; ?>" class="widefat" />
-  </p>
-  <p>
-    <label for="source_logo"><?php _e('Logo de la fuente', 'os_publicacion_type'); ?></label>
-    <input class="widefat" id="source_logo" name="source_logo" type="text" value="<?php if (!empty($logo)) echo $logo; ?>" readonly="readonly"/>
-    <img id="show_logo" draggable="false" alt="" name="show_logo" width="100%" src="<?php if (!empty($logo)) echo esc_attr($logo); ?>" style="<?php if (empty($logo)) echo "display: none;"; ?>">
-  </p>
-  <p>
-    <input id="upload_logo" name="upload_logo" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
-  </p>
+
   <p>
     <label for="publication_date"><?php _e('Fecha de publicación', 'os_publicacion_type'); ?></label>
     <input type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
   </p>
   <p>
-    <label for="type"><?php _e('Tipo de publicación', 'os_publicacion_type'); ?></label>
+    <label for="type"><?php _e('Tipo', 'os_publicacion_type'); ?></label>
     <input type="text" name="type" value="<?php echo $type; ?>" class="widefat" />
-  </p>
-  <p>
-    <label for="geographical_area"><?php _e('Ámbito geográfico', 'os_publicacion_type'); ?></label>
-    <select name="geographical_area" class="widefat">
-      <?php  
-        $countries = get_terms('ambito_geografico', array('hide_empty' => false));
-        foreach ($countries as $country) {
-          $selected = ($country->term_id == $geographical_area) ? 'selected="selected"' : '';
-          ?><option <?php echo $selected; ?> value="<?php echo $country->term_id; ?>"><?php echo $country->name; ?></option><?php
-        }
-      ?>
-    </select>
   </p>
   <p>
     <label for="target_audiences"><?php _e('Público objetivo', 'os_publicacion_type'); ?></label>
@@ -184,34 +196,48 @@ function meta_box_publicacion_source() {
     <label for="editorial"><?php _e('Editorial', 'os_publicacion_type'); ?></label>
     <input type="text" name="editorial" value="<?php echo $editorial; ?>" class="widefat" />
   </p>
+  <p>
+    <label for="source_name"><?php _e('Nombre de la fuente', 'os_publicacion_type'); ?></label>
+    <input type="text" name="source_name" value="<?php echo $source_name; ?>" class="widefat" />
+  </p>
+  <p>
+    <label for="source_url"><?php _e('URL de la fuente donde está alojado el informe', 'os_publicacion_type'); ?></label>
+    <input type="url" name="source_url" value="<?php echo $source_url; ?>" class="widefat" />
+  </p>
+  <p>
+    <label for="source_logo"><?php _e('Logo de la fuente', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="source_logo" name="source_logo" type="text" value="<?php if (!empty($source_logo)) echo $source_logo; ?>" readonly="readonly"/>
+    <img id="show_logo" draggable="false" alt="" name="show_logo" src="<?php if (!empty($source_logo)) echo esc_attr($source_logo); ?>" style="<?php if (empty($source_logo)) echo "display: none;"; ?>">
+  </p>
+  <p>
+    <input id="upload_logo" name="upload_logo" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
+  </p>
   <?php
 }
 
 
 function meta_boxes_save($post_id) {
-  if (isset($_POST['source_name'])) {
-    update_post_meta($post_id, 'source_name', strip_tags($_POST['source_name']));
+  if (isset($_POST['abstract_destacado'])) {
+    update_post_meta($post_id, 'abstract_destacado', strip_tags($_POST['abstract_destacado']));
   }
-  if (isset($_POST['source_url'])) {
-   update_post_meta($post_id, 'source_url', strip_tags($_POST['source_url']));
+  if (isset($_POST['abstract_contenido'])) {
+    update_post_meta($post_id, 'abstract_contenido', strip_tags($_POST['abstract_contenido']));
   }
-  if (isset($_POST['source_logo'])) {
-   update_post_meta($post_id, 'source_logo', strip_tags($_POST['source_logo']));
+  if (isset($_POST['pdf'])) {
+    update_post_meta($post_id, 'pdf', strip_tags($_POST['pdf']));
   }
+
   if (isset($_POST['publication_date'])) {
     update_post_meta($post_id, 'publication_date', strip_tags($_POST['publication_date']));
   }
   if (isset($_POST['type'])) {
-    update_post_meta($post_id, 'type', strip_tags($_POST['type']));
-  }
-  if (isset($_POST['geographical_area'])) {
-   update_post_meta($post_id, 'geographical_area', strip_tags($_POST['geographical_area']));
+   update_post_meta($post_id, 'type', strip_tags($_POST['type']));
   }
   if (isset($_POST['target_audiences'])) {
-    update_post_meta($post_id, 'target_audiences', strip_tags($_POST['target_audiences']));
+   update_post_meta($post_id, 'target_audiences', strip_tags($_POST['target_audiences']));
   }
   if (isset($_POST['number_of_pages'])) {
-   update_post_meta($post_id, 'number_of_pages', strip_tags($_POST['number_of_pages']));
+    update_post_meta($post_id, 'number_of_pages', strip_tags($_POST['number_of_pages']));
   }
   if (isset($_POST['jel_code'])) {
     update_post_meta($post_id, 'jel_code', strip_tags($_POST['jel_code']));
@@ -222,8 +248,16 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['editorial'])) {
     update_post_meta($post_id, 'editorial', strip_tags($_POST['editorial']));
   }
-  if (isset($_POST['pdf'])) {
-    update_post_meta($post_id, 'pdf', strip_tags($_POST['pdf']));
+  if (isset($_POST['source_name'])) {
+   update_post_meta($post_id, 'source_name', strip_tags($_POST['source_name']));
   }
+  if (isset($_POST['source_url'])) {
+    update_post_meta($post_id, 'source_url', strip_tags($_POST['source_url']));
+  }
+  if (isset($_POST['source_logo'])) {
+   update_post_meta($post_id, 'source_logo', strip_tags($_POST['source_logo']));
+  }
+
+
 }
 add_action('save_post', "meta_boxes_save");

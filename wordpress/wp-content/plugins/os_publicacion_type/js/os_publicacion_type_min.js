@@ -1,1 +1,31 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('1(h).j(2($){1("a#o").l(2(e){e.q();5 0;k(0){0.8();m}0=4.6.n.p=4.6({f:7.9,g:{i:7.9},z:H,C:{B:\'D\'},});0.r(\'G\',2(){5 3=0.F().E(\'A\').u().t();1(\'a#s\').v(3.b);1(\'d#c\').w("y",3.b);1(\'d#c\').x()});0.8()})});',44,44,'custom_uploader|jQuery|function|attachment|wp|var|media|object_name|open|choose_source_logo|input|url|show_logo|img||title|button|document|text|ready|if|click|return|frames|upload_logo|file_frame|preventDefault|on|source_logo|toJSON|first|val|attr|show|src|multiple|selection|type|library|image|get|state|select|false'.split('|'),0,{}))
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+jQuery(document).ready(function($) {
+    jQuery("input#upload_logo").click(function(e) {
+        e.preventDefault();
+        var custom_uploader;
+        if (custom_uploader) {
+            custom_uploader.open();
+            return;
+        }
+        custom_uploader = wp.media.frames.file_frame = wp.media({
+            title: object_name.choose_source_logo,
+            button: {
+                text: object_name.choose_source_logo
+            },
+            multiple: false,
+            library: { type: 'image' },
+        });
+        custom_uploader.on('select', function() {
+            var attachment = custom_uploader.state().get('selection').first().toJSON();
+            jQuery('input#source_logo').val(attachment.url);
+            jQuery('img#show_logo').attr("src", attachment.sizes.thumbnail.url);
+            jQuery('img#show_logo').show();
+        });
+        custom_uploader.open();
+    });
+});
