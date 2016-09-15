@@ -141,6 +141,19 @@ function normaliza($cadena){
 }
 
 
+function get_attachment_id_by_url($url) {
+	$parsed_url  = explode( parse_url( WP_CONTENT_URL, PHP_URL_PATH ), $url );
+	$this_host = str_ireplace( 'www.', '', parse_url( home_url(), PHP_URL_HOST ) );
+	$file_host = str_ireplace( 'www.', '', parse_url( $url, PHP_URL_HOST ) );
+	if ( ! isset( $parsed_url[1] ) || empty( $parsed_url[1] ) || ( $this_host != $file_host ) ) {
+		return;
+	}
+	global $wpdb;
+	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->prefix}posts WHERE guid RLIKE %s;", $parsed_url[1] ));
+	return $attachment[0];
+}
+
+
 /*function literacy_add_search_meta() {
     $post_type = get_post_type();
     if ($post_type == 'product' && is_single()): $product = get_product( get_the_ID() ); $attrs = beeva_get_atts($product);
