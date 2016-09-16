@@ -29,17 +29,6 @@ if (function_exists('register_sidebar')) {
 	
 
 }
-	
-
-// Añadir css y js del tema
-function add_theme_scripts() {
-	wp_enqueue_style('style', get_stylesheet_uri());
-	wp_enqueue_style('style_responsive', get_template_directory_uri() . '/resources/css/style_responsive.css');
-	wp_enqueue_style('boostrap', get_template_directory_uri() . '/resources/css/bootstrap.min.css');
-	wp_enqueue_script('script', get_template_directory_uri() . '/resources/js/script.js', array ('jquery' ), 1.1, true);
-	wp_enqueue_script("jquery");
-}
-add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );
 
 
 // Quitar del menú las entradas por defecto
