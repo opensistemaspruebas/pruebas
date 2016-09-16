@@ -12,30 +12,16 @@
  */
 ?>
 
-<div class="componente_imagenPromocional">
-            <?php if (!empty($image_id)) : ?>
-            <?php $image_size = 'original'; ?>
-            <figure class="imagenPromocional_boxImagen" style="background-image: url('<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>');">
-                <img src="<?php echo wp_get_attachment_image_url($image_id, $image_size); ?>">
-            </figure>
-            <?php endif; ?>
-            <div class="wrapperContent">
-                <div class="imagenPromocional_boxTexto">
-                    <?php if (!empty($title)) : ?>
-                    <p class="fotoInfo_titulo"><?php echo $title; ?></p>
-                    <?php endif; ?>
-                    <?php if (!empty($text)) : ?>
-                    <?php echo wpautop($text); ?>
-                    <?php endif; ?>
-                    <?php if ( ! empty( $link_text ) ) : ?>
-                    <p class="fotoInfo_boton">
-                        <?php
-                            echo $text_link_open;
-                            echo $link_text;
-                            echo $text_link_close;
-                        ?>
-                    </p>
-                    <?php endif; ?>
-                </div>
-            </div>
-</div>
+<!-- banner simple -->
+<article class="block-image block-image_know-us wow fadeInUp">
+    <img src="<?php echo wp_get_attachment_image_url($image_id, 'original'); ?>" alt="image title" />
+    <div class="film-grey"></div>
+    <div class="block-content-center">
+        <div class="container text-default">
+            <h2 class="title"><?php echo $title; ?></h2>
+            <p><?php echo wpautop($text); ?></p>
+            <button type="button" class="btn-rounded-orange-border" onclick="window.location.href='<?php echo $link; ?>'"><?php echo $link_text; ?></button>
+        </div>
+    </div>
+</article>
+<!-- EO banner simple -->
