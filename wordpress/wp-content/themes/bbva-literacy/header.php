@@ -59,6 +59,7 @@
             </div>
             <!-- EO header -->
         </header>
+        
         <div class="nav-content open">
             <!-- navbar menu -->
             <div class="container">
@@ -78,62 +79,20 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="nav navbar-nav" id="topmenu">
-                        <li class="panel">
-                            <a class=" collapsed active_menu mr-sm" href="index.html">
-                                <span class="hidden-xs">Home</span>
-                                <span class="visible-xs pl-lg">Home</span>
-                            </a>
-                            <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#home">
-                                <span ¡>Home</span>
-                            </a>
-                        </li>
-                        <li class="panel">
-                            <a class=" collapsed  mr-sm" href="publish.html">
-                                <span class="hidden-xs">Publicaciones</span>
-                                <span class="visible-xs pl-lg">Publicaciones</span>
-                            </a>
-                            <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#publish">
-                                <span ¡>Publicaciones</span>
-                            </a>
-                        </li>
-                        <li class="panel">
-                            <a class=" collapsed  mr-sm" href="world.html">
-                                <span class="hidden-xs">En el mundo</span>
-                                <span class="visible-xs pl-lg">En el mundo</span>
-                            </a>
-                            <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#world">
-                                <span ¡>En el mundo</span>
-                            </a>
-                        </li>
-                        <li class="panel">
-                            <a class=" collapsed  mr-sm" href="impact.html">
-                                <span class="hidden-xs">Impacto</span>
-                                <span class="visible-xs pl-lg">Impacto</span>
-                            </a>
-                            <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#impact">
-                                <span ¡>Impacto</span>
-                            </a>
-                        </li>
-                        <li class="panel">
-                            <a class=" collapsed  mr-sm" href="support.html">
-                                <span class="hidden-xs">Eventos</span>
-                                <span class="visible-xs pl-lg">Eventos</span>
-                            </a>
-                            <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#support">
-                                <span ¡>Eventos</span>
-                            </a>
-                        </li>
-                        <li class="panel">
-                            <a class=" collapsed  mr-sm" href="aboutus.html">
-                                <span class="hidden-xs">Sobre Nosotros</span>
-                                <span class="visible-xs pl-lg">Sobre Nosotros</span>
-                            </a>
-                            <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#aboutus">
-                                <span ¡>Sobre Nosotros</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <?php
+                        $args = array(
+                            'menu' => $menu_header, 
+                            'theme_location' => '',
+                            'container' => '', 
+                            'container_class' => '', 
+                            'container_id' => '', 
+                            'menu_class' => 'nav navbar-nav', 
+                            'menu_id' => 'topmenu',
+                            'depth' => 1,
+                            'walker' => new Custom_Walker_Nav_Menu
+                        );
+                        wp_nav_menu($args);
+                    ?>
                     <div class="hidden-xs logo-search ml-sm pt-xs font-xl">
                         <span class="bbva-icon-search"></span>
                     </div>
@@ -145,6 +104,6 @@
                     </div>
                 </nav>
             </div>
-            <!-- EO navbar menu -->
         </div>
+        
         <div class="contents">
