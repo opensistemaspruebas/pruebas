@@ -32,6 +32,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 	    
 	    	echo $args['before_widget'];
 
+	    	$texto = $instance['texto'];
 	    	$historia_destacada_1 = $instance['historia_destacada_1'];
 	    	$historia_destacada_2 = $instance['historia_destacada_2'];
 	    	$historia_destacada_3 = $instance['historia_destacada_3'];
@@ -60,44 +61,332 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 
 
 			?>
+			<!-- banner simple -->
+            <section class="outstanding-histories pt-xl pb-lg">
+                <div class="container">
+                    <header>
+                        <div class="row title-container">
+                            <div class="col-md-12 text-center">
+                                <h1><?php _e("Historias destacadas", "os_historias_destacadas_widget"); ?></h1>
+                            </div>
+                        </div>
+                        <div class="row description-container">
+                            <div class="col-xs-10 col-sm-6 col-md-6 col-lg-6 text-center">
+                                <p class="description"><?php echo $texto; ?></p>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="card-container container-fluid mt-md mb-md">
+                        <div class="row">
+			            <?php if (!empty($historias)) : ?>
+			            <?php
 
-			<div class="wrapperContent">
-			    <h2 class="section_titulo"><?php _e("Historias destacadas", "os_historias_destacadas_widget"); ?></h2>
-			    <?php if (!empty($historias)) : ?>
-			    <ul class="lista_noticias">
-			    	<?php
-			    		$i = 1;
-			    		foreach ($historias as $p) {
+				           	// Primera historia
+				           	if (!empty($historias[0])) {
+				           		$p = $historias[0];
+				           		$post_content = strip_tags($p->post_content);
+				    			if (!empty($post_content)) {
+					    			$post_content = substr($post_content, 0, 80);
+									$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
+								}
 
-			    			$post_content = strip_tags($p->post_content);
-			    			if (!empty($post_content)) {
-				    			$post_content = substr($post_content, 0, 80);
-								$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
-							}
+								?>
+								<div class="main-card-container col-xs-12 col-sm-6 col-md-6 col-lg-6 noppading">
+								    <section class="container-fluid main-card">
+								        <header class="row header-container">
+								            <div class="image-container nopadding col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								                <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
+								            </div>
+								            <div class="floating-text color-white col-xs-9 col-sm-9 col-md-9 col-lg-9">
+								                <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+								                <h1 class="title font-xxxl"><?php $p->post_title; ?></h1>
+								            </div>
+								        </header>
+								        <div class="row data-container">
+								            <p><?php echo $post_content; ?></p>
+								            <a href="<?php echo get_permalink($p->ID); ?>" class="readmore"><?php _e("Leer más", "os_historias_destacadas_widget"); ?></a>
+								            <footer class="row">
+								            	<?php if (get_post_meta($p->ID, 'publicacion_pdf')): ?>
+								                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+								                    <div class="card-icon">
+								                        <span class="icon bbva-icon-quote"></span>
+								                        <div class="triangle triangle-up-left"></div>
+								                        <div class="triangle triangle-down-right"></div>
+								                    </div>
+								                </div>
+								                <?php endif; ?>
+								                <?php if (!empty($post_content)): ?>
+								                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+								                    <div class="card-icon">
+								                        <span class="icon bbva-icon-comments"></span>
+								                        <div class="triangle triangle-up-left"></div>
+								                        <div class="triangle triangle-down-right"></div>
+								                    </div>
+								                </div>
+								                <?php endif; ?>
+								            </footer>
+								        </div>
+								    </section>
+								</div>
+								<?php
+				           	}
 
-							echo '<li id="noticia_' . $i . '" class="col-md-4 col-sm-4 col-xs-12 ">
-								    <figure class="contenidoNoticias_boxImage">' . get_the_post_thumbnail($p->ID, 'medium') . '</figure>
-								    <div class="contenidoNoticias_boxTexto">
-								        <p class="item_fecha">' . get_the_date('j F Y', $p->ID) . '</p>
-								        <h3 class="item_titulo">' . $p->post_title . '</h3>
-								        <p class="item_contenido">' . $post_content . '</p>
-								        <a target="_blank" href="' . get_permalink($p->ID) . '">' . __("Leer más", "os_historias_destacadas_widget") . '</a>
+				           	// Segunda historia
+				           	if (!empty($historias[1])) {
+				           		$p = $historias[1];
+				           		$post_content = strip_tags($p->post_content);
+				    			if (!empty($post_content)) {
+					    			$post_content = substr($post_content, 0, 80);
+									$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
+								}
+				           		?>
+				           		<div class="hidden-xs secondary-card-container col-sm-6 col-md-6 col-lg-6">
+								    <div class="_container">
+								        <section class="container-fluid secondary-card">
+								            <div class="row main-container">
+								                <div class="image-container nopadding col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								                    <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
+								                </div>
+								                <div class="data-container pt-sm pb-sm col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+								                            <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+								                            <h1><?php echo $p->post_title; ?></h1>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+								                            <p class="description font-xs"><?php echo $post_content; ?></p>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 colorBlue-620">
+								                            <a href="<?php echo get_permalink($p->ID); ?>" class="readmore"><?php _e("Leer más", "os_historias_destacadas_widget"); ?></a>
+								                        </div>
+								                    </div>
+								                    <footer class="row">
+										            	<?php if (get_post_meta($p->ID, 'publicacion_pdf')): ?>
+										                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+										                    <div class="card-icon">
+										                        <span class="icon bbva-icon-quote"></span>
+										                        <div class="triangle triangle-up-left"></div>
+										                        <div class="triangle triangle-down-right"></div>
+										                    </div>
+										                </div>
+										                <?php endif; ?>
+										                <?php if (!empty($post_content)): ?>
+										                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+										                    <div class="card-icon">
+										                        <span class="icon bbva-icon-comments"></span>
+										                        <div class="triangle triangle-up-left"></div>
+										                        <div class="triangle triangle-down-right"></div>
+										                    </div>
+										                </div>
+										                <?php endif; ?>
+								                    </footer>
+								                </div>
+								            </div>
+								        </section>
 								    </div>
-								 </li>';
-			    			$i++;
-			    		}
-			    	?>
+								    <?php 
+								    	// Tercera historia
+								    	if (!empty($historias[2])) {
+									    	$p = $historias[2];
+							           		$post_content = strip_tags($p->post_content);
+							    			if (!empty($post_content)) {
+								    			$post_content = substr($post_content, 0, 80);
+												$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
+											}
+									    	?>
+										    <div class="_container">
+										        <section class="container-fluid secondary-card">
+										            <div class="row main-container">
+										                <div class="image-container nopadding col-xs-6 col-sm-6 col-md-6 col-lg-6">
+										                    <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
+										                </div>
+										                <div class="data-container pt-sm pb-sm col-xs-6 col-sm-6 col-md-6 col-lg-6">
+										                    <div class="row">
+										                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+										                            <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+										                        </div>
+										                    </div>
+										                    <div class="row">
+										                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+										                            <h1><?php echo $p->post_title; ?></h1>
+										                        </div>
+										                    </div>
+										                    <div class="row">
+										                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+										                            <p class="description font-xs"><?php echo $post_content; ?></p>
+										                        </div>
+										                    </div>
+										                    <div class="row">
+										                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 colorBlue-620">
+										                            <a href="<?php echo get_permalink($p->ID); ?>" class="readmore"><?php _e("Leer más", "os_historias_destacadas_widget"); ?></a>
+										                        </div>
+										                    </div>
+										                    <footer class="row">
+												            	<?php if (get_post_meta($p->ID, 'publicacion_pdf')): ?>
+												                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+												                    <div class="card-icon">
+												                        <span class="icon bbva-icon-quote"></span>
+												                        <div class="triangle triangle-up-left"></div>
+												                        <div class="triangle triangle-down-right"></div>
+												                    </div>
+												                </div>
+												                <?php endif; ?>
+												                <?php if (!empty($post_content)): ?>
+												                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+												                    <div class="card-icon">
+												                        <span class="icon bbva-icon-comments"></span>
+												                        <div class="triangle triangle-up-left"></div>
+												                        <div class="triangle triangle-down-right"></div>
+												                    </div>
+												                </div>
+												                <?php endif; ?>
+										                    </footer>
+										                </div>
+										            </div>
+										        </section>
+										    </div>
+									    	<?php
+									    }
+								    ?>
+				           		</div>
+				           		<?php
+				           	} else if (!empty($historias[2])) {
+				           		$p = $historias[2];
+				           		$post_content = strip_tags($p->post_content);
+				    			if (!empty($post_content)) {
+					    			$post_content = substr($post_content, 0, 80);
+									$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
+								}
+								?>
+								<div class="hidden-xs secondary-card-container col-sm-6 col-md-6 col-lg-6">
+								    <div class="_container">
+								        <section class="container-fluid secondary-card">
+								            <div class="row main-container">
+								                <div class="image-container nopadding col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								                    <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
+								                </div>
+								                <div class="data-container pt-sm pb-sm col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+								                            <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+								                            <h1><?php echo $p->post_title; ?></h1>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
+								                            <p class="description font-xs"><?php echo $post_content; ?></p>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 colorBlue-620">
+								                            <a href="<?php echo get_permalink($p->ID); ?>" class="readmore"><?php _e("Leer más", "os_historias_destacadas_widget"); ?></a>
+								                        </div>
+								                    </div>
+								                    <footer class="row">
+										            	<?php if (get_post_meta($p->ID, 'publicacion_pdf')): ?>
+										                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+										                    <div class="card-icon">
+										                        <span class="icon bbva-icon-quote"></span>
+										                        <div class="triangle triangle-up-left"></div>
+										                        <div class="triangle triangle-down-right"></div>
+										                    </div>
+										                </div>
+										                <?php endif; ?>
+										                <?php if (!empty($post_content)): ?>
+										                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+										                    <div class="card-icon">
+										                        <span class="icon bbva-icon-comments"></span>
+										                        <div class="triangle triangle-up-left"></div>
+										                        <div class="triangle triangle-down-right"></div>
+										                    </div>
+										                </div>
+										                <?php endif; ?>
+								                    </footer>
+								                </div>
+								            </div>
+								        </section>
+								    </div>
+				           		</div>
+								<?php
+								if (!empty($historias[0])) {
+									$p = $historias[0];
+									$post_content = strip_tags($p->post_content);
+									if (!empty($post_content)) {
+										$post_content = substr($post_content, 0, 80);
+										$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
+									}
+									?>
+									<div class="visible-xs main-card-container col-xs-12 noppading">
+									    <section class="container-fluid main-card">
+									        <header class="row header-container">
+									            <div class="image-container nopadding col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									                <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
+									            </div>
+									            <div class="floating-text color-white col-xs-9 col-sm-9 col-md-9 col-lg-9">
+									                <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+									                <h1 class="title font-xxxl"><?php echo $p->post_title; ?></h1>
+									            </div>
+									        </header>
+									        <div class="row data-container">
+									            <p><?php echo $post_content; ?></p>
+									            <a href="<?php echo get_permalink($p->ID); ?>" class="readmore"><?php _e("Leer más", "os_historias_destacadas_widget"); ?></a>
+									            <footer class="row">
+									            	<?php if (get_post_meta($p->ID, 'publicacion_pdf')): ?>
+									                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+									                    <div class="card-icon">
+									                        <span class="icon bbva-icon-quote"></span>
+									                        <div class="triangle triangle-up-left"></div>
+									                        <div class="triangle triangle-down-right"></div>
+									                    </div>
+									                </div>
+									                <?php endif; ?>
+									                <?php if (!empty($post_content)): ?>
+									                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+									                    <div class="card-icon">
+									                        <span class="icon bbva-icon-comments"></span>
+									                        <div class="triangle triangle-up-left"></div>
+									                        <div class="triangle triangle-down-right"></div>
+									                    </div>
+									                </div>
+									                <?php endif; ?>
+									            </footer>
+									        </div>
+									    </section>
+									</div>
+									<?php
+								}
+				           	}
 
-			    </ul>
-			    <p class="section_verTodos">
-			        <a href="<?php echo $url_historias; ?>" class="icon-linkInterno">
-			            <em><?php _e("Todas las historias", "os_historias_destacadas_widget"); ?></em>
-			        </a>
-			    </p>
-			    <?php else : ?>
-			    <p><?php _e("No hay historias disponibles.", "os_historias_destacadas_widget"); ?></p>
-			    <?php endif; ?>
-			</div>
+			    		?>
+			            <?php else: ?>
+			            <p><?php _e("No hay historias disponibles.", "os_historias_destacadas_widget"); ?></p>
+			            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <footer class="pt-md">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a href="<?php echo $url_historias; ?>" class="font-xs"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las historias", "os_historias_destacadas_widget"); ?></a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </section>
+            <!-- EO banner simple -->
+
 	    	<?php
 
 			echo $args['after_widget'];
@@ -107,6 +396,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 
 	    public function form($instance) {
 	    	
+	    	$texto = ! empty($instance['texto']) ? $instance['texto'] : '';
 	    	$url_historias = ! empty($instance['url_historias']) ? $instance['url_historias'] : 'http://';
 	    	$historia_destacada_1 = ! empty($instance['historia_destacada_1']) ? $instance['historia_destacada_1'] : '';
 	    	$historia_destacada_2 = ! empty($instance['historia_destacada_2']) ? $instance['historia_destacada_2'] : '';
@@ -131,6 +421,9 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 			$historias = get_posts($args);
 
 	    	?>
+	    	<p><label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_historias_destacadas_widget'); ?></label>
+				<textarea class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
+			</p>
 	    	<p>
 				<label for="<?php echo $this->get_field_id('url_historias'); ?>"><?php _e('URL de página de todas las historias:', 'os_historias_destacadas_widget'); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id('url_historias'); ?>" name="<?php echo $this->get_field_name('url_historias'); ?>" type="url" value="<?php echo esc_attr($url_historias); ?>">
@@ -184,6 +477,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 
 	    function update($new_instance, $old_instance) {
 	    	$instance = array();
+	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : '';
 	    	$instance['historia_destacada_1'] = (!empty( $new_instance['historia_destacada_1'])) ? strip_tags($new_instance['historia_destacada_1']) : '';
 	    	$instance['historia_destacada_2'] = (!empty( $new_instance['historia_destacada_2'])) ? strip_tags($new_instance['historia_destacada_2']) : '';
 	    	$instance['historia_destacada_3'] = (!empty( $new_instance['historia_destacada_3'])) ? strip_tags($new_instance['historia_destacada_3']) : '';
