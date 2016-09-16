@@ -98,8 +98,8 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 								                <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
 								            </div>
 								            <div class="floating-text color-white col-xs-9 col-sm-9 col-md-9 col-lg-9">
-								                <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
-								                <h1 class="title font-xxxl"><?php $p->post_title; ?></h1>
+								                <span class="date"><?php echo get_the_date('j F Y', $p->ID); ?></span>
+								                <h1 class="title font-xxxl"><?php echo $p->post_title; ?></h1>
 								            </div>
 								        </header>
 								        <div class="row data-container">
@@ -150,7 +150,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 								                <div class="data-container pt-sm pb-sm col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								                    <div class="row">
 								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
-								                            <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+								                            <span class="date"><?php echo get_the_date('j F Y', $p->ID); ?></span>
 								                        </div>
 								                    </div>
 								                    <div class="row">
@@ -211,7 +211,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 										                <div class="data-container pt-sm pb-sm col-xs-6 col-sm-6 col-md-6 col-lg-6">
 										                    <div class="row">
 										                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
-										                            <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+										                            <span class="date"><?php echo get_the_date('j F Y', $p->ID); ?></span>
 										                        </div>
 										                    </div>
 										                    <div class="row">
@@ -276,7 +276,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 								                <div class="data-container pt-sm pb-sm col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								                    <div class="row">
 								                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 color-grey-1">
-								                            <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+								                            <span class="date"><?php echo get_the_date('j F Y', $p->ID); ?></span>
 								                        </div>
 								                    </div>
 								                    <div class="row">
@@ -335,7 +335,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 									                <img class="img-responsive" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($p->ID), 'thumbnail')[0]; ?>" alt="" />
 									            </div>
 									            <div class="floating-text color-white col-xs-9 col-sm-9 col-md-9 col-lg-9">
-									                <span class="date"><?php get_the_date('j F Y', $p->ID); ?></span>
+									                <span class="date"><?php echo get_the_date('j F Y', $p->ID); ?></span>
 									                <h1 class="title font-xxxl"><?php echo $p->post_title; ?></h1>
 									            </div>
 									        </header>
