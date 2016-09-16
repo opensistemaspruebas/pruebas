@@ -9329,7 +9329,7 @@ html a:focus, body a:focus {
 @font-face {
   font-family: 'bbva';
   src: url("../fonts/icon-bbva/bbva.eot?xsbixv");
-  src: url("../fonts/icon-bbva//bbva.eot?xsbixv#iefix") format("embedded-opentype"), url("../fonts/icon-bbva//bbva.ttf?xsbixv") format("truetype"), url("../fonts/icon-bbva//bbva.woff?xsbixv") format("woff"), url("../fonts/icon-bbva//bbva.svg?xsbixv#bbva") format("svg");
+  src: url("../fonts/icon-bbva/bbva.eot?xsbixv#iefix") format("embedded-opentype"), url("../fonts/icon-bbva/bbva.ttf?xsbixv") format("truetype"), url("../fonts/icon-bbva/bbva.woff?xsbixv") format("woff"), url("../fonts/icon-bbva/bbva.svg?xsbixv#bbva") format("svg");
   font-weight: normal;
   font-style: normal;
 }
