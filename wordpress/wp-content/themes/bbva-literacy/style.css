@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 
 /*
@@ -40,3 +41,5 @@ ul#menu-menu-principal > li.menu-item a strong {display:table-cell;vertical-alig
 ul#menu-menu-principal > li.menu-item a:hover strong {color:#00559c;font-weight:900;opacity: 1;filter: alpha(opacity=100);-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";}
 ul#menu-menu-principal > li.menu-item.abierto {color:#00559c;;text-decoration:none;display:block;}
 
+=======
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751

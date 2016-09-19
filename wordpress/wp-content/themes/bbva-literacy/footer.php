@@ -1,4 +1,9 @@
+<<<<<<< HEAD
  	<div class="prefooter-bbva">
+=======
+        </div>
+        <div class="prefooter-bbva">
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
             <!-- prefooter -->
             <div class="container">
                 <div class="row">
@@ -10,9 +15,13 @@
                                         <a role="button">Sobre Educacion Financiera</a>
                                     </p>
                                     <p class="visible-xs title">
+<<<<<<< HEAD
                                         <a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
                                           Sobre Educacion Financiera<span class="icon-plus icon-collapsable font-xxxl"></span>
                                         </a>
+=======
+                                        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample">Sobre Educacion Financiera<span class="icon-plus icon-collapsable font-xxxl"></span></a>
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
                                     </p>
                                     <div class="collapse" id="collapseOne">
                                         <ul class="hidden-xs footer-menu">
@@ -38,6 +47,7 @@
                                         <a role="button">En el mundo</a>
                                     </p>
                                     <p class="visible-xs title">
+<<<<<<< HEAD
                                         <a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
                                           En el mundo<span class="icon-plus icon-collapsable font-xxxl"></span>
                                         </a>
@@ -61,6 +71,29 @@
                                               <li><a href="#">Perú</a></li>
                                           </ul>
                                       </div>
+=======
+                                        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">En el mundo<span class="icon-plus icon-collapsable font-xxxl"></span></a>
+                                    </p>
+                                    <div class="collapse" id="collapseTwo">
+                                        <div class="row mgl-0 footer-menu-collapsed">
+                                            <ul class="col-xs-6 col-sm-6 footer-menu footer-menu-world double-column">
+                                                <li><a href="#">España</a></li>
+                                                <li><a href="#">USA</a></li>
+                                                <li><a href="#">Turquia</a></li>
+                                                <li><a href="#">Portugal</a></li>
+                                                <li><a href="#">Chile</a></li>
+                                                <li><a href="#">Colombia</a></li>
+                                            </ul>
+                                            <ul class="col-xs-6 col-sm-6 footer-menu footer-menu-world">
+                                                <li><a href="#">Venezuela</a></li>
+                                                <li><a href="#">Uruguay</a></li>
+                                                <li><a href="#">Paraguay</a></li>
+                                                <li><a href="#">Argentina</a></li>
+                                                <li><a href="#">México</a></li>
+                                                <li><a href="#">Perú</a></li>
+                                            </ul>
+                                        </div>
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
                                     </div>
                                 </div>
                             </div>
@@ -70,8 +103,13 @@
                                 </p>
                                 <p class="visible-xs title">
                                     <a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample">
+<<<<<<< HEAD
                                       Enlaces de interes<span class="icon-plus icon-collapsable font-xxxl"></span>
                                     </a>
+=======
+                          Enlaces de interes<span class="icon-plus icon-collapsable font-xxxl"></span>
+                        </a>
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
                                 </p>
                                 <div class="collapse" id="collapseThree">
                                     <ul class="hidden-xs footer-menu">
@@ -118,6 +156,7 @@
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
                         <ul class="footer-menu footer-social">
+<<<<<<< HEAD
                             <li><a href="#">
                                 <span class="hover-style font-xl">
                                     <span class="bbva-icon-facebook_link"></span>
@@ -133,6 +172,29 @@
                                     <span class="bbva-icon-youtube"></span>
                                 </span>
                             </a></li>
+=======
+                            <li>
+                                <a href="#">
+                                    <span class="hover-style font-xl">
+                        <span class="bbva-icon-facebook_link"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="hover-style font-xl">
+                        <span class="bbva-icon-twitter_link"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="hover-style font-xl">
+                        <span class="bbva-icon-youtube"></span>
+                                    </span>
+                                </a>
+                            </li>
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
                         </ul>
                     </div>
                 </div>
@@ -142,6 +204,7 @@
                     </div>
                     <div class=" visible-xs col-xs-12">
                         <ul class="footer-menu footer-social">
+<<<<<<< HEAD
                             <li><a href="#">
                                 <span class="hover-style font-xxxl">
                                     <span class="bbva-icon-facebook_link"></span>
@@ -157,14 +220,53 @@
                                     <span class="bbva-icon-youtube"></span>
                                 </span>
                             </a></li>
+=======
+                            <li>
+                                <a href="#">
+                                    <span class="hover-style font-xxxl">
+                        <span class="bbva-icon-facebook_link"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="hover-style font-xxxl">
+                        <span class="bbva-icon-twitter_link"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="hover-style font-xxxl">
+                        <span class="bbva-icon-youtube"></span>
+                                    </span>
+                                </a>
+                            </li>
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- EO footer -->
+<<<<<<< HEAD
 
 </div><!--end webpage-->
 
 <?php wp_footer(); ?>
+=======
+        </footer>
+    </div>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/jquery.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/bootstrap.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/jquery.mmenu.min.all.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/jquery-ui.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/js.cookie.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/bootstrap-select.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/modernizr.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/wow.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/picturefill.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/app.js"></script>
+>>>>>>> c80a9661fe37c9867c69c723644f1868a00e2751
 </body>
+
 </html>

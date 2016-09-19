@@ -297,7 +297,7 @@ class OS_Image_Widget extends WP_Widget {
 							<?php
 							break;*/
 
-						case 'link' :
+						/*case 'link' :
 							?>
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'link' ) ); ?>">
 								<label for="<?php echo esc_attr( $this->get_field_id( 'link' ) ); ?>"><?php _e('Link'); ?>:</label>
@@ -313,8 +313,19 @@ class OS_Image_Widget extends WP_Widget {
 								</label>
 							</p>
 							<?php
-							break;
+							break;*/
 
+						case 'link' :
+							?>
+							<p class="<?php echo esc_attr( $this->siw_field_class( 'link' ) ); ?>">
+								<label for="<?php echo esc_attr( $this->get_field_id( 'link' ) ); ?>"><?php _e('Link'); ?>:</label>
+								<span class="os_image_widget-input-group">
+									<input type="text" name="<?php echo esc_attr( $this->get_field_name( 'link' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'link' ) ); ?>" value="<?php echo esc_url( $instance['link'] ); ?>" class="os_image_widget-input-group-field">
+									<button class="os_image_widget-find-posts-button os_image_widget-input-group-button dashicons dashicons-search"></button>
+								</span>
+							</p>
+							<?php
+							break;
 						case 'link_classes' :
 							?>
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'link_classes' ) ); ?>">
