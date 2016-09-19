@@ -182,6 +182,7 @@
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/modernizr.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/wow.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/picturefill.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/circle-progress.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/app.js"></script>
 </body>
 

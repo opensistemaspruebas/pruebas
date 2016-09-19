@@ -147,3 +147,86 @@ if (!class_exists('OS_Filter_Widget')) :
 
 
 endif;
+
+
+class JSONPost {
+
+    private static function saveInfo($name,$info,$post=false){
+        $debug = false;
+        $path = '/var/www/bbvaLiteracy/wp-content/_json/';
+        if($post){
+            $path .= '_publicaciones/';
+        }
+        if (!is_dir($path)) {
+            mkdir($path,0777,true);
+        }
+        $path .= $name.'.json';
+        if($debug){
+            echo "Guardamos ".$name."\r\n";
+        }
+        if(!file_put_contents($path,json_encode($info))) {
+            echo 'Error generando JSON del artículo';
+            exit();
+        }
+    }
+
+    private function get_words($sentence, $count = 55) {
+        preg_match("/(?:\w+(?:\W+|$)){0,$count}/", $sentence, $matches);
+        return $matches[0];
+    }
+
+    public static function savePost($post_id){
+
+    	error_log("+++ paso por aqui +++");
+
+        $os_query = new WP_Query('p='.$post_id);
+        $res = array();
+        while ($os_query->have_posts()) : $os_query->the_post();
+            $content_partial = 'content';
+            if(isset($_POST['layout_type'])){
+                if($_POST['layout_type'] == 'v2'){
+                    $content_partial = 'v2-content';
+                }
+                if($_POST['layout_type'] == 'v3'){
+                    $content_partial = 'v3-content';
+                }
+                if($_POST['layout_type'] == 'v3-simple'){
+                    $content_partial = 'v3-content';
+                    global $forse_hide_element_read_more;
+                    global $forse_hide_element_date;
+                    $forse_hide_element_read_more = true;
+                    $forse_hide_element_date = true;
+                }
+                if(in_array($_POST['template_type'], array('page-masonry-condensed-facebook', 'page-masonry-simple-facebook'))){
+                    global $facebook_likes;
+                    $facebook_likes = true;
+                }
+                if($_POST['template_type'] == 'page-masonry-condensed-fixed-height'){
+                    global $forse_fixed_height;
+                    $forse_fixed_height = true;
+                }
+                if($_POST['template_type'] == 'page-masonry-condensed-with-author'){
+                    global $show_author_face;
+                    $show_author_face = true;
+                }
+            }
+            $res['body'] = os_load_template_part( $content_partial, get_post_format() );
+            $res['cats'] = wp_get_post_categories($post_id);
+            JSONPost::saveInfo($post_id,$res,true);
+        endwhile;
+    }
+
+    public static function regen(){
+        $args = array(
+            'post_type' =>  'publicacion',
+            'numberposts' => -1,
+            'fields' => 'ids'
+        );
+        $postslist = get_posts( $args );
+        foreach($postslist as $id){
+            JSONPost::savePost($id,false,false);
+        }
+    }
+}
+
+add_action('save_post', array(JSONPost, 'savePost'));

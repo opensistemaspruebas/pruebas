@@ -86,6 +86,41 @@ var navPhone = function($) {
     });
 };
 
+var progresscircle = function($) {
+    'use strict';
+
+    var selectorPercicle = '.procircle';
+    var config = {
+        startAngle: -Math.PI / 2,
+        emptyFill: '#f3f1f3',
+        thickness: 10,
+        lineCap: 'butt' // "butt" or "round"
+    };
+    var configBlue = {};
+    var configYellow = {};
+    var configTeel = {};
+
+    $.extend(configBlue, config, {
+        fill: {
+            color: '#5bbeff'
+        }
+    });
+    $.extend(configYellow, config, {
+        fill: {
+            color: '#f8cd51'
+        }
+    });
+    $.extend(configTeel, config, {
+        fill: {
+            color: '#14afb0'
+        }
+    });
+
+    $('.blue ' + selectorPercicle).circleProgress(configBlue);
+    $('.yellow ' + selectorPercicle).circleProgress(configYellow);
+    $('.teel ' + selectorPercicle).circleProgress(configTeel);
+};
+
 var selectLanguage = function($) {
     'use strict';
     $('.selectpicker')
@@ -124,6 +159,7 @@ jQuery(document).ready(function($) {
         footerMenu($);
         animationWow($);
         cookies($);
+        progresscircle($);
     });
 
 var lgScreenMin = 1200;
