@@ -20,8 +20,8 @@ if (function_exists('register_sidebar')) {
 			'id' => 'sidebar-0',
 			'description' => __('Sidebar Principal'),
 			'class' => '',
-			'before_widget' => '<section class="moduloContenido_%2$s"><div class="wrapperContent">',
-			'after_widget'  => '</div></section>',
+			'before_widget' => '',
+			'after_widget'  => '',
 			'before_title'  => '',
 			'after_title'   => '',
 		)
