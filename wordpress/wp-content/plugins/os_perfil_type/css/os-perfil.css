@@ -1,0 +1,27 @@
+input[type=text].error {border-color: #ca0b0b;}
+input[type=text].error:focus {
+	border-color: #ca0b0b;
+    -webkit-box-shadow: 0 0 2px rgba(202, 11, 11, 0.82);
+    box-shadow: 0 0 2px rgba(202, 11, 11, 0.82);
+}
+
+label.error {margin-left: 5px;color: #ca0b0b;}
+
+#tipo-perfil label.error {float: right;}
+
+label{ display: inline-block; min-width: 110px;}
+
+.imagen {border: 1px solid #ccc;}
+
+.imagen .centered {width: 80%; display: block; margin: 10px auto;}
+
+.imagen input[type=text] {margin: 10px; width: 80%; display: inline-block;}
+
+.imagen img {display: block; margin: 0 auto;}
+
+.imagen label {
+    display: block;
+    padding: 10px;
+}
+
+.imagen label.normal {display: inline-block;}
