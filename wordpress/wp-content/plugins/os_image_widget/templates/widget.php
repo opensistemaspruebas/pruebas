@@ -12,16 +12,20 @@
  */
 ?>
 
-<!-- banner simple -->
-<article class="block-image block-image_know-us wow fadeInUp">
-    <img src="<?php echo wp_get_attachment_image_url($image_id, 'original'); ?>" alt="image title" />
-    <div class="film-grey"></div>
-    <div class="block-content-center">
-        <div class="container text-default">
-            <h2 class="title"><?php echo $title; ?></h2>
+ <!-- outsanding-image -->
+<section class="block-image block-outstanding-image wow fadeInUp">
+    <div class="image-section">
+    	<img class="img-responsive" src="<?php echo wp_get_attachment_image_url($image_id, 'original'); ?>" alt="image title" />
+        <div class="visible-xs triangle-down-right"></div>
+    </div>
+    <div class="container">
+        <div class="block-content-center background-container">
+            <h2><?php echo $title; ?></h2>
             <p><?php echo wpautop($text); ?></p>
-            <button type="button" class="btn-rounded-orange-border" onclick="window.location.href='<?php echo $link; ?>'"><?php echo $link_text; ?></button>
+			<div class="container-button">
+				<a href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php echo $link_text; ?></a>
+			</div>
         </div>
     </div>
-</article>
-<!-- EO banner simple -->
+</section>
+<!-- EO outsanding-image -->
