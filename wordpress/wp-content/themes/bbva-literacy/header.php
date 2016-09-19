@@ -7,12 +7,11 @@
         <![endif]-->
     <meta name="HandheldFriendly" content="true" />
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/resources/css/vendor.css" />
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/resources/css/app.css" />
-    <title> 
-    <?php echo bloginfo( 'name' ); wp_title('|', true, "left"); ?>
-    </title>
+    <title><?php echo bloginfo('name'); wp_title('|', true, "left"); ?></title>
 </head>
 
 <body>
