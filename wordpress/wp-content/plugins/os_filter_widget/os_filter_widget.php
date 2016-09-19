@@ -177,12 +177,17 @@ class JSONPost {
 
     public static function savePost($post_id){
 
-    	error_log("+++ paso por aqui +++");
+    	//error_log("+++ paso por aqui +++");
+    	//error_log($post_id);
 
-        $os_query = new WP_Query('p='.$post_id);
+        $os_query = new WP_Query('p=' . $post_id . '&post_type=publicacion');
+
         $res = array();
         while ($os_query->have_posts()) : $os_query->the_post();
-            $content_partial = 'content';
+
+        	error_log("bucle");
+
+            /*$content_partial = 'content';
             if(isset($_POST['layout_type'])){
                 if($_POST['layout_type'] == 'v2'){
                     $content_partial = 'v2-content';
@@ -210,8 +215,8 @@ class JSONPost {
                     $show_author_face = true;
                 }
             }
-            $res['body'] = os_load_template_part( $content_partial, get_post_format() );
-            $res['cats'] = wp_get_post_categories($post_id);
+            $res['body'] = os_load_template_part( $content_partial, get_post_format() );*/
+            $res['cats'] = wp_get_post_terms($post_id, array('category', 'ambito_geografico'));
             JSONPost::saveInfo($post_id,$res,true);
         endwhile;
     }
