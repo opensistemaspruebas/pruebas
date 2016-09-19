@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/resources/css/vendor.css" />
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/resources/css/app.css" />
     <title><?php echo bloginfo('name'); wp_title('|', true, "left"); ?></title>
+    <?php wp_head(); ?>
 </head>
 
 <body>

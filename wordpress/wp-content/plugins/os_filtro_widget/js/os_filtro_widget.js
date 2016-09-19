@@ -56,19 +56,12 @@ jQuery(document).ready(function() {
 
 
 	// Desmarcar etiquetas
-	jQuery("div#caja_seleccion ul li a").live("click", function(e) {
+	jQuery("div#caja_seleccion").on("click", "ul li a", function(e) {
 		e.preventDefault();
 		var data_name = jQuery(this).parent().attr("data-name");
-		jQuery(this).remove();
-		jQuery("li.selected[data-name=" + data_name + "]").removeClass("selected");
+		jQuery(this).parent().remove();
+		jQuery("li.selected[data-name='" + data_name + "']").removeClass("selected");
 	});
-
-	
-	/*jQuery("form#form_filter").change(function() {
-		var sortBy = jQuery("#inputSortBy").val("date desc");
-		var size = jQuery("#size").val("7");
-		var start = jQuery("#start").val("0");
-	});*/
 
 
 	// Submit del formulario del filtro
@@ -150,51 +143,6 @@ jQuery(document).ready(function() {
 		return true;
 	
 	});
-
-	// Links de cambiar ordenación
-	/*jQuery(document).on("click", "a.changeSort", function(e) {
-		
-		e.preventDefault();
-		e.stopPropagation();
-
-		var sortBy = jQuery(this).attr("id");
-
-		var sort = 'date%20desc';
-
-		switch(sortBy) {
-		    case 'sortByAscDate':
-		        sort = 'date asc';
-		        break;
-		    case 'sortByDescDate':
-		        sort = 'date desc';
-		        break;
-		     case 'sortByPopular':
-		     	sort = 'sortByPopular';
-		     	break;
-		}
-
-		jQuery("#inputSortBy").val(sort);
-
-		jQuery("form#form_filter").submit();		
-
-		return true;
-
-	});
-
-	// Link para mostrar más publicaciones
-	jQuery(document).on("click", "a#more", function(e) {
-		
-		e.preventDefault();
-		e.stopPropagation();
-
-		var size = jQuery("#size").val();
-
-		jQuery("#size").val(size * 2);
-		jQuery("form#form_filter").submit();
-
-		return true;
-
-	});*/
 
 });
  

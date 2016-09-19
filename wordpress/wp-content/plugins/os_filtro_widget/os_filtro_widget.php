@@ -1,0 +1,305 @@
+<?php
+
+/*
+	Plugin Name: OS Filtro Widget
+	Plugin URI: https://www.opensistemas.com/
+	Description: Crea un widget que busca publicaciones y filtra por etiquetas.
+	Version: 1.0
+	Author: Marta Oliver
+	Author URI: https://www.opensistemas.com/
+	License: GPLv2 or later
+	Text Domain: os_filtro_widget
+*/
+
+
+if (!class_exists('OS_Filtro_Widget')) :
+
+	class OS_Filtro_Widget extends WP_Widget {
+
+
+		function __construct() {
+	        $options = array(
+	            'classname' => "os_filtro_widget",
+	            'description' => __('Widget que busca publicaciones y filtra por etiquetas', 'os_filtro_widget')
+	        );
+	        $this->WP_Widget('os_filtro_widget', __('OS Filtro Widget', 'os_filtro_widget'), $options);
+	        add_action('plugins_loaded', array(&$this, 'load_text_domain'), 10);
+	        add_action('wp_enqueue_scripts', array(&$this, 'add_script_filter_widget'));
+	    }
+
+
+	    // Selecciona el dominio para la traducción
+        public function load_text_domain() {
+            $plugin_dir = basename(dirname(__FILE__));
+            load_plugin_textdomain('os_filtro_widget', false, $plugin_dir . "/languages");
+        }
+
+
+	    public function widget($args, $instance) {
+
+	    	echo $args['before_widget'];
+
+	    	$categories = get_terms(
+				array(
+					"taxonomy" => array("post_tag", "category"),
+					"hide_empty" => false,
+					"fields" => "names"
+				)
+			);
+
+			$authors = get_users(
+				array(
+					'fields' => array(
+						'display_name'
+					),
+					'who' => 'authors'
+				)
+			);
+
+
+	    	$countries = get_terms(
+				array(
+					"taxonomy" => array("ambito_geografico"),
+					"hide_empty" => false,
+					"fields" => "names"
+				)
+			);
+
+			echo $args['before_title']; 
+			_e('Filtros', 'os_filtro_widget');
+			echo $args['after_title']; 
+			
+			?>
+			<form action="#" method="get" name="form_filter" id="form_filter">
+				<label for="inputText" class="assistive-text hidden"><?php _e('Texto', 'os_filtro_widget'); ?></label>
+				<input type="text" class="field" name="inputText" id="inputText">
+				<div id="caja_seleccion">
+					<ul id="seleccion" name="seleccion"></ul>
+				</div>
+				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Buscar', 'os_filtro_widget'); ?>">
+				<input type="hidden" name="size" id="size" value="7">
+				<input type="hidden" name="start" id="start" value="0">
+				<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
+				<div id="caja_categorias" id="caja_categorias" style="display: none;">
+					<h2><?php _e('Categorías', 'os_filtro_widget'); ?> <span class="num">(<?php echo wp_count_terms("category"); ?>)</span></h2>
+					<?php if (!empty($categories)) : ?>
+					<ul id="categorias" name="categorias">
+						<?php foreach ($categories as $category) : ?>
+							<li class="categoria" data-name="<?php echo $category; ?>" style="display: none;"><a href="#"><?php echo $category; ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+				</div>
+
+				<div id="caja_autores" id="caja_autores" style="display: none;">
+					<h2><?php _e('Autores', 'os_filtro_widget'); ?> <span class="num">(<?php echo count($authors); ?>)</span></h2>
+					<?php if (!empty($authors)) : ?>
+					<ul id="autores" name="autores">
+						<?php foreach ($authors as $author) : ?>
+							<li class="autor" data-name="<?php echo $author->display_name; ?>" style="display: none;"><a href="#"><?php echo $author->display_name; ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+				</div>
+				<div id="caja_paises" id="caja_paises" style="display: none;">
+					<h2><?php _e('Ámbito geográfico', 'os_filtro_widget'); ?> <span class="num">(<?php echo wp_count_terms("ambito_geografico"); ?>)</span></h2>
+					<?php if (!empty($countries)) : ?>
+					<ul id="paises" name="paises">
+						<?php foreach ($countries as $country) : ?>
+							<li class="pais" data-name="<?php echo $country; ?>"><a href="#"><?php echo $country; ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+				</div>
+			</form>
+			<div id="sortLinks"></div>
+			<div id="results"></div>			
+			<div id="moreLink"></div>
+			<?php
+
+			echo $args['after_widget'];
+	    }
+
+
+	    public function form($instance) {
+	        ?>
+	        <p><?php _e('Este widget no tiene parámetros configurables.', 'os_filtro_widget'); ?></p>
+	        <?php
+	    }
+
+
+	    function update($new_instance, $old_instance) {
+	    	return $new_instance;
+	    }
+
+
+		function add_script_filter_widget() {
+            if (is_active_widget(false, false, $this->id_base, true)) {
+		        wp_register_script('os_filtro_widget_js', plugins_url('js/os_filtro_widget.js' , __FILE__), array('jquery'));
+	            wp_enqueue_script('os_filtro_widget_js');
+            }
+        } 
+
+
+	}
+
+	add_action('widgets_init', create_function('', 'return register_widget("os_filtro_widget");'));
+
+
+endif;
+
+
+class JSONPost {
+
+    private static function saveInfo($name, $info, $post = false) {
+        $debug = false;
+        $path = '/var/www/bbvaLiteracy/wp-content/_json/';
+
+        if ($post) {
+        	error_log(get_post_type($name));
+            $path .= '_' . get_post_type($name) . '/';
+        }
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+        $path .= $name . '.json';
+        if ($debug) {
+            echo "Guardamos " . $name . "\r\n";
+        }
+        if (!file_put_contents($path,json_encode($info))) {
+            echo 'Error generando JSON del artículo';
+            exit();
+        }
+    }
+
+    private function get_words($sentence, $count = 55) {
+        preg_match("/(?:\w+(?:\W+|$)){0,$count}/", $sentence, $matches);
+        return $matches[0];
+    }
+
+    public static function savePost($post_id){
+
+		$args = array(
+		    'post_type' => array('publicacion', 'historia', 'taller'),
+		    'p' => $post_id
+		);
+
+        $os_query = new WP_Query($args);
+
+        $res = array();
+        while ($os_query->have_posts()) : $os_query->the_post();
+            $res['cats'] = wp_get_post_terms($post_id, array('category', 'ambito_geografico'), array("fields" => "ids"));
+            JSONPost::saveInfo($post_id, $res, true);
+        endwhile;
+    }
+
+    public static function regen(){
+        $args = array(
+            'post_type' =>  'publicacion',
+            'numberposts' => -1,
+            'fields' => 'ids'
+        );
+        $postslist = get_posts( $args );
+        foreach($postslist as $id){
+            JSONPost::savePost($id,false,false);
+        }
+    }
+}
+
+add_action('save_post', array(JSONPost, 'savePost'));
+
+add_action('wp_footer', function() {
+    
+    if (is_single()) { 
+    	return; // sólo en listados
+    }
+    
+    $cat = get_query_var('cat');
+    
+    if ($cat) {
+        $cat = get_category( $cat );
+        $args = array(
+            'category' => $cat->term_id,
+            'post_type' =>  array('publicacion', 'historia', 'taller'),
+            'numberposts' => -1,
+            'fields' => 'ids'
+        );
+    } else {
+        $args = array(
+            'post_type' =>  array('publicacion', 'historia', 'taller'),
+            'numberposts' => -1,
+            'fields' => 'ids'
+        );
+    }
+    $postslist = get_posts($args);
+    $catlist = array();
+    foreach(get_categories() as $cat){
+        $catlist['cat_' . $cat->term_id] = 
+        	array(
+            	'url' => get_category_link($cat->term_id),
+            	'name' => $cat->name
+        	);
+    }
+    ?>
+    <script>
+        var beevaInfinito = {
+            index : <?=json_encode($postslist)?>,
+            categories : <?=json_encode($catlist)?>,
+            promises : [],
+            getCat : function(id){
+              return beevaInfinito.categories['cat_'+id];
+            },
+            postPerPage : <?=get_option('posts_per_page')?>,
+            path : '/wp-content/_json/_posts/',
+            load : function(cb){
+                beevaInfinito.promises = [];
+                var i = beevaInfinito.now + 1;
+                var max = beevaInfinito.now+beevaInfinito.postPerPage;
+                for(i;i<max;i++){
+                    if(beevaInfinito.index[i]){
+                        var p = {
+                            id : beevaInfinito.index[i],
+                            load : false
+                        };
+                        beevaInfinito.promises.push(p);
+                        beevaInfinito.getPost(p,cb);
+                    }else{
+                        beevaInfinito.more = false;
+                        break;
+                    }
+                }
+                beevaInfinito.now = max-1;
+                beevaInfinito.more = ((++i) <= beevaInfinito.index.length-1);
+            },
+            getPost : function(item,cb){
+                jQuery.get(beevaInfinito.path+item.id+'.json').then(function(data){
+                    if(typeof data !== 'object'){
+                        try{
+                            data = JSON.parse(data);
+                        }catch(e){}
+                    }
+                    item.post = data;
+                    item.load = true;
+                    beevaInfinito.cb(cb);
+                },function(e){
+                    console.log(e);
+                    item.load = true;
+                    beevaInfinito.cb(cb);
+                });
+            },
+            cb : function(cb){
+                var res = [];
+                for(var i=0;i<beevaInfinito.promises.length;i++){
+                    var item = beevaInfinito.promises[i];
+                    if(!item.load) return;
+                    res.push(item.post);
+                }
+                if(cb) cb(res);
+            }
+        };
+        beevaInfinito.now = beevaInfinito.postPerPage - 1;
+        beevaInfinito.more = ((beevaInfinito.index.length-1) > beevaInfinito.now);
+    </script>
+    <?php
+});
+?>
