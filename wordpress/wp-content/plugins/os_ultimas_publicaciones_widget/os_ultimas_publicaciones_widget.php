@@ -30,68 +30,147 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 	    public function widget($args, $instance) {
 
-	    	echo $args['before_widget'];
-
-	    	$url_publicaciones = $instance['url_publicaciones'];
-
-	    	$argumentos = array(
-				'numberposts' => 3,
-				'offset' => 0,
-				'category' => 0,
-				'orderby' => 'post_date',
-				'order' => 'DESC',
-				'include' => '',
-				'exclude' => '',
-				'meta_key' => '',
-				'meta_value' =>'',
-				'post_type' => 'publicacion',
-				'post_status' => 'publish',
-				'suppress_filters' => true
-			);
-
-			$recent_posts = wp_get_recent_posts($argumentos, ARRAY_A);
-
-
-			?>
-
-			<div class="wrapperContent">
-			    <h2 class="section_titulo"><?php _e("Últimas publicaciones", "os_ultimas_publicaciones_widget"); ?></h2>
-			    <?php if (!empty($recent_posts)) : ?>
-			    <ul class="lista_noticias">
-			    	<?php
-			    		$i = 1;
-			    		foreach ($recent_posts as $p) {
-
-			    			$post_excerpt = strip_tags($p['post_excerpt']);
-			    			$post_excerpt = substr($post_excerpt, 0, 80);
-							$post_excerpt = substr($post_excerpt, 0, strrpos($post_excerpt, ' ')) . "...";
-
-							echo '<li id="noticia_' . $i . '" class="col-md-4 col-sm-4 col-xs-12 ">
-								    <figure class="contenidoNoticias_boxImage">' . get_the_post_thumbnail($p['ID'], 'medium') . '</figure>
-								    <div class="contenidoNoticias_boxTexto">
-								        <p class="item_fecha">' . get_the_date('j F Y', $p['ID']) . '</p>
-								        <h3 class="item_titulo">' . $p['post_title'] . '</h3>
-								        <p class="item_contenido">' . $post_excerpt . '</p>
-								        <a target="_blank" href="' . get_permalink($p['ID']) . '">' . __("Leer más", "os_ultimas_publicaciones_widget") . '</a>
-								    </div>
-								 </li>';
-			    			$i++;
-			    		}
-			    	?>
-
-			    </ul>
-			    <p class="section_verTodos">
-			        <a href="<?php echo $url_publicaciones; ?>" class="icon-linkInterno">
-			            <em><?php _e("Todas las publicaciones", "os_ultimas_publicaciones_widget"); ?></em>
-			        </a>
-			    </p>
-			    <?php else : ?>
-			    <p><?php _e("No hay publicaciones disponibles.", "os_ultimas_publicaciones_widget"); ?></p>
-			    <?php endif; ?>
-			</div>
+	    	?>
+			<section class="latests-posts pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			    <div class="container">
+			        <header class="title-description">
+			            <h1>Últimas publicaciones</h1>
+			            <div class="description-container">
+			                <p>Cosulta las últimas publicaciones escritas por expertos de cara a mejorar tu economía y planificación de futuro.</p>
+			            </div>
+			        </header>
+			        <section class="card-container nopadding container-fluid mt-md mb-md">
+			            <div class="row">
+			                <div class="main-card-container col-xs-12 col-sm-4 noppading">
+			                    <!-- main-card -->
+			                    <section class="container-fluid main-card">
+			                        <header class="row header-container">
+			                            <div class="image-container nopadding col-xs-12">
+			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/informe1.png" alt="">
+			                            </div>
+			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                                <p class="date">27 Agosto 2016</p>
+			                                <h1>Beyond Ties and Cofee Mugs...</h1>
+			                            </div>
+			                        </header>
+			                        <div class="row data-container">
+			                            <p class="nopadding col-xs-9 date">27 Agosto 2016</p>
+			                            <h1 class="title nopadding col-xs-9">Beyond Ties and Cofee Mugs...</h1>
+			                            <p>Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p>
+			                            <a href="#" class="hidden-xs readmore">Leer más</a>
+			                            <footer class="row">
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-comments"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                            </footer>
+			                        </div>
+			                    </section>
+			                    <!-- EO main-card -->
+			                </div>
+			                <div class="main-card-container col-xs-12 col-sm-4 noppading">
+			                    <!-- main-card -->
+			                    <section class="container-fluid main-card">
+			                        <header class="row header-container">
+			                            <div class="image-container nopadding col-xs-12">
+			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/informe2.png" alt="">
+			                            </div>
+			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                                <p class="date">24 Agosto 2016</p>
+			                                <h1>Lorem ipsum dolor sit amet...</h1>
+			                            </div>
+			                        </header>
+			                        <div class="row data-container">
+			                            <p class="nopadding col-xs-9 date">24 Agosto 2016</p>
+			                            <h1 class="title nopadding col-xs-9">Lorem ipsum dolor sit amet...</h1>
+			                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+			                            <a href="#" class="hidden-xs readmore">Leer más</a>
+			                            <footer class="row">
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                            </footer>
+			                        </div>
+			                    </section>
+			                    <!-- EO main-card -->
+			                </div>
+			                <div class="main-card-container col-xs-12 col-sm-4 noppading">
+			                    <!-- main-card -->
+			                    <section class="container-fluid main-card">
+			                        <header class="row header-container">
+			                            <div class="image-container nopadding col-xs-12">
+			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/informe3.png" alt="">
+			                            </div>
+			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                                <p class="date">23 Agosto 2016</p>
+			                                <h1>Lorem ipsum dolor</h1>
+			                            </div>
+			                        </header>
+			                        <div class="row data-container">
+			                            <p class="nopadding col-xs-9 date">23 Agosto 2016</p>
+			                            <h1 class="title nopadding col-xs-9">Lorem ipsum dolor</h1>
+			                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+			                            <a href="#" class="hidden-xs readmore">Leer más</a>
+			                            <footer class="row">
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                            </footer>
+			                        </div>
+			                    </section>
+			                    <!-- EO main-card -->
+			                </div>
+			            </div>
+			        </section>
+			        <footer class="pt-md">
+			            <div class="row">
+			                <div class="col-md-12 text-center">
+			                    <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las publicaciones</a>
+			                </div>
+			            </div>
+			        </footer>
+			    </div>
+			</section>
 	    	<?php
-
-			echo $args['after_widget'];
 
 	    }
 
