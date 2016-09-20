@@ -11,11 +11,9 @@
 }
 
 .slider-tab1, .slider-tab2, .slider-tab3{
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 5px;
-    padding: 5px;
-    margin: 10px 15px 20px 5px;
-    float:left; 
+    margin-bottom: 15px;
+    float: left;
+    width: 100%;
 }
 
 .items_menu{
