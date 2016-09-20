@@ -113,7 +113,9 @@ jQuery(document).ready(function() {
 			query += (text && tags_string) ? ' AND ' : '';
 			query += (tags_string) ? '(category:(' + tags_string + '))' : '';
 
-			var url_buscador = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + ' AND (topic:"publicacion")' + aux + '&return=title%2Ctopic%2Ccategory%2Cdate%2Cimage_src' + '&sort=' + sortBy + '&size=' + size + '&start=' + start + '&project=irnbsadx';
+			//var url_buscador = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + ' AND (topic:"publicacion")' + aux + '&return=title%2Ctopic%2Ccategory%2Cdate%2Cimage_src' + '&sort=' + sortBy + '&size=' + size + '&start=' + start + '&project=irnbsadx';
+			//var url_buscador = 'https://tnsy1em5jb.execute-api.eu-west-1.amazonaws.com/pro/search?&q=*prueba*&return=title%2Cresourcename%2Cdescription%2Cdomain%2Cimage_src%2Ctopic%2Ccategory%2Cdate&parser=lucene&size=50&start=0&fq=%28and+project%3A%27inlfs5i9%27%29';
+			var url_buscador = 'http://d6fve07q425ph.cloudfront.net/bbva-components/search?&q.parser=lucene&q=prueba&project=irnbsadx';
 
 			$.get(url_buscador, function(d) {
 
