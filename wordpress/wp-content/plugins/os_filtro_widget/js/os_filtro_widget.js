@@ -51,6 +51,63 @@ jQuery(document).ready(function() {
 		} else {
 			jQuery(this).parent().clone().appendTo("div#caja_seleccion ul");
 			jQuery(this).parent().addClass("selected");
+			
+			query = '';
+			wp_double_array = '';
+			wp_text_array = '';
+
+			jQuery("ul#seleccion li").each(function() {
+				if (jQuery(this).hasClass("autor")) {
+					wp_text_array += '+"' + jQuery(this).attr("term-id") + '"';
+				} else {
+					wp_double_array += '+"' + jQuery(this).attr("term-id") + '"';
+				}
+			});
+
+			if (wp_text_array) {
+				query += 'wp_text_array:(' + wp_text_array + ')';
+				if (wp_double_array) {
+					query += 'AND wp_double_array:(' + wp_double_array + ')';
+				}
+			} else if (wp_double_array) {
+				query += 'wp_double_array:(' + wp_double_array + ')';
+			} else {
+				return false;
+			}
+
+
+			var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + '&return=wp_double_array%2Cwp_text_array&project=is8lyryw';
+			
+			terms = [];
+			authors = [];
+			
+			jQuery.get(url_buscador, function(d) {
+				
+				if (d.code === 200 && d.data.hits.found > 0) {
+			        
+			        jQuery.each(d.data.hits.hit, function(i, result) {
+			        	
+			        	var terms_aux = result.fields.wp_double_array;
+			        	var authors_aux = result.fields.wp_text_array;
+			        	
+			        	for (var i = 0; i < terms_aux.length; i++) {
+			        		terms.push(terms_aux[i]);
+			        	}
+			        	
+			        	for (var j = 0; j < authors_aux.length; j++) {
+			        		authors.push(authors_aux[j]);
+			        	}
+			        
+			        });
+				
+				} else {
+					// No hay ninguna categoría relacionada
+				}
+			}, 'json');
+
+			console.log(terms);
+			console.log(authors);
+
 		}
 	});
 
@@ -87,6 +144,7 @@ jQuery(document).ready(function() {
 		var sortBy = jQuery("#inputSortBy").val();
 		var size = jQuery("#size").val();
 		var start = jQuery("#start").val();
+		var topic = jQuery("#topic").val();
 
 		tags = (categories) ? tags.concat(categories) : tags;
 		tags = (authors) ? tags.concat(authors) : tags;
