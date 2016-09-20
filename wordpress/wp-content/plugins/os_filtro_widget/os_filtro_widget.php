@@ -76,6 +76,7 @@ if (!class_exists('OS_Filtro_Widget')) :
 					<ul id="seleccion" name="seleccion"></ul>
 				</div>
 				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Buscar', 'os_filtro_widget'); ?>">
+				<input type="hidden" name="topic" id="topic" value="publicacion">
 				<input type="hidden" name="size" id="size" value="7">
 				<input type="hidden" name="start" id="start" value="0">
 				<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
@@ -135,6 +136,14 @@ if (!class_exists('OS_Filtro_Widget')) :
 		function add_script_filter_widget() {
             if (is_active_widget(false, false, $this->id_base, true)) {
 		        wp_register_script('os_filtro_widget_js', plugins_url('js/os_filtro_widget.js' , __FILE__), array('jquery'));
+		        $translation_array = array(
+		        	'more_results' => __('Más resultados', 'os_filtro_widget'),
+		        	'no_results' => __('Sin resultados', 'os_filtro_widget'),
+		        	'sort_by_asc_date' => __('Más antiguos', 'os_filtro_widget'),
+		        	'sort_by_desc_date' => __('Más recientes', 'os_filtro_widget'),
+		        	'sort_by_popular' => __('Más leídos', 'os_filtro_widget'),
+		      	);
+		        wp_localize_script('os_filtro_widget_js', 'object_name', $translation_array );
 	            wp_enqueue_script('os_filtro_widget_js');
             }
         } 

@@ -114,14 +114,13 @@ jQuery(document).ready(function() {
 			query += (tags_string) ? '(category:(' + tags_string + '))' : '';
 
 			//var url_buscador = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + ' AND (topic:"publicacion")' + aux + '&return=title%2Ctopic%2Ccategory%2Cdate%2Cimage_src' + '&sort=' + sortBy + '&size=' + size + '&start=' + start + '&project=irnbsadx';
-			//var url_buscador = 'https://tnsy1em5jb.execute-api.eu-west-1.amazonaws.com/pro/search?&q=*prueba*&return=title%2Cresourcename%2Cdescription%2Cdomain%2Cimage_src%2Ctopic%2Ccategory%2Cdate&parser=lucene&size=50&start=0&fq=%28and+project%3A%27inlfs5i9%27%29';
-			var url_buscador = 'http://d6fve07q425ph.cloudfront.net/bbva-components/search?&q.parser=lucene&q=prueba&project=irnbsadx';
+			var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + text + '*&project=is8lyryw';
 
-			$.get(url_buscador, function(d) {
+			jQuery.get(url_buscador, function(d) {
 
 				if (d.code === 200 && d.data.hits.found > 0) {
 					var results = '<ul>';
-			        $.each(d.data.hits.hit, function(i, result) {
+			        jQuery.each(d.data.hits.hit, function(i, result) {
 			        	var image = (result.fields.image_src !== undefined) ? result.fields.image_src : '';
 			            results += '<li><a href="/' + result.fields.resourcename + '"target="_blank">' + result.fields.title + ' ' + result.fields.date + ' ' + result.fields.category + ' ' + image + '</a></li>';
 			        });
