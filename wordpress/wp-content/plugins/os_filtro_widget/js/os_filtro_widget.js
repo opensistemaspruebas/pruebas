@@ -78,10 +78,10 @@ jQuery(document).ready(function() {
 
 			var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + '&return=wp_double_array%2Cwp_text_array&project=is8lyryw';
 			
-			terms = [];
-			authors = [];
+			var terms = [];
+			var authors = [];
 			
-			jQuery.get(url_buscador, function(d) {
+			jQuery.get(url_buscador, function(d, terms, authors) {
 				
 				if (d.code === 200 && d.data.hits.found > 0) {
 			        
