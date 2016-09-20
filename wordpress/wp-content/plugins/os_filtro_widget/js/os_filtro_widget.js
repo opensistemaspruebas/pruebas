@@ -58,9 +58,9 @@ jQuery(document).ready(function() {
 	// Desmarcar etiquetas
 	jQuery("div#caja_seleccion").on("click", "ul li a", function(e) {
 		e.preventDefault();
-		var data_name = jQuery(this).parent().attr("data-name");
+		var data_name = jQuery(this).parent().attr("term-id");
 		jQuery(this).parent().remove();
-		jQuery("li.selected[data-name='" + data_name + "']").removeClass("selected");
+		jQuery("li.selected[term-id='" + data_name + "']").removeClass("selected");
 	});
 
 
