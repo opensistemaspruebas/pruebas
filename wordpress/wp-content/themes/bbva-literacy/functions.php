@@ -54,7 +54,7 @@ function add_search_meta() {
     if (in_array($post_type, $types) && is_single()) : $p = get_post(get_the_ID()); $attrs = get_atts($p);
     	$post_content = '';
     	if ($post_type == 'publicacion') {
-    		$post_content = get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
+    		$post_content = $p->post_content . ' ' . get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
     		$post_content = getCleanedString($post_content);
     	} else {
     		$post_content = getCleanedString($p->post_content);
