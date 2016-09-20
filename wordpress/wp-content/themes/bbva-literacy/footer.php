@@ -7,21 +7,23 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-4 footer-menu-item">
                                 <div>
-                                    <p class="hidden-xs title">
-                                        <a role="button">Sobre Educacion Financiera</a>
+                                    <p class="hidden-xs title mb-md">
+                                        <a role="button">Sobre Educación Financiera</a>
                                     </p>
                                     <p class="visible-xs title">
-                                        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample">Sobre Educacion Financiera<span class="icon-plus icon-collapsable font-xxxl"></span></a>
+                                        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
+                                      Sobre Educación Financiera<span class="icon-plus icon-collapsable"></span>
+                                    </a>
                                     </p>
                                     <div class="collapse" id="collapseOne">
-                                        <ul class="hidden-xs footer-menu">
-                                            <li><a href="#">Publicaciones</a></li>
-                                            <li><a href="#">En el mundo</a></li>
-                                            <li><a href="#">Impacto</a></li>
-                                            <li><a href="#">Eventos</a></li>
-                                            <li><a href="#">Sobre Nosotros</a></li>
+                                        <ul class="hidden-xs prefooter-menu">
+                                            <li class="mb-md"><a href="#">Publicaciones</a></li>
+                                            <li class="mb-md"><a href="#">En el mundo</a></li>
+                                            <li class="mb-md"><a href="#">Impacto</a></li>
+                                            <li class="mb-md"><a href="#">Eventos</a></li>
+                                            <li class="mb-md"><a href="#">Sobre Nosotros</a></li>
                                         </ul>
-                                        <div class="visible-xs row footer-menu-collapsed">
+                                        <div class="visible-xs row prefooter-menu-collapsed">
                                             <a href="#" class="col-xs-6">Publicaciones</a>
                                             <a href="#" class="col-xs-6">En el mundo</a>
                                             <a href="#" class="col-xs-6">Impacto</a>
@@ -33,49 +35,51 @@
                             </div>
                             <div class="col-xs-12 col-sm-4 footer-menu-item">
                                 <div>
-                                    <p class="hidden-xs title">
+                                    <p class="hidden-xs title mb-md">
                                         <a role="button">En el mundo</a>
                                     </p>
                                     <p class="visible-xs title">
-                                        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">En el mundo<span class="icon-plus icon-collapsable font-xxxl"></span></a>
+                                        <a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
+                                      En el mundo<span class="icon-plus icon-collapsable"></span>
+                                    </a>
                                     </p>
                                     <div class="collapse" id="collapseTwo">
-                                        <div class="row mgl-0 footer-menu-collapsed">
-                                            <ul class="col-xs-6 col-sm-6 footer-menu footer-menu-world double-column">
-                                                <li><a href="#">España</a></li>
-                                                <li><a href="#">USA</a></li>
-                                                <li><a href="#">Turquia</a></li>
-                                                <li><a href="#">Portugal</a></li>
-                                                <li><a href="#">Chile</a></li>
-                                                <li><a href="#">Colombia</a></li>
+                                        <div class="row mgl-0 prefooter-menu-collapsed">
+                                            <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
+                                                <li class="mb-md"><a href="#">España</a></li>
+                                                <li class="mb-md"><a href="#">USA</a></li>
+                                                <li class="mb-md"><a href="#">Turquía</a></li>
+                                                <li class="mb-md"><a href="#">Portugal</a></li>
+                                                <li class="mb-md"><a href="#">Chile</a></li>
+                                                <li class="mb-md"><a href="#">Colombia</a></li>
                                             </ul>
-                                            <ul class="col-xs-6 col-sm-6 footer-menu footer-menu-world">
-                                                <li><a href="#">Venezuela</a></li>
-                                                <li><a href="#">Uruguay</a></li>
-                                                <li><a href="#">Paraguay</a></li>
-                                                <li><a href="#">Argentina</a></li>
-                                                <li><a href="#">México</a></li>
-                                                <li><a href="#">Perú</a></li>
+                                            <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
+                                                <li class="mb-md"><a href="#">Venezuela</a></li>
+                                                <li class="mb-md"><a href="#">Uruguay</a></li>
+                                                <li class="mb-md"><a href="#">Paraguay</a></li>
+                                                <li class="mb-md"><a href="#">Argentina</a></li>
+                                                <li class="mb-md"><a href="#">México</a></li>
+                                                <li class="mb-md"><a href="#">Perú</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-4 footer-menu-item">
-                                <p class="hidden-xs title">
-                                    <a role="button">Enlaces de interes</a>
+                                <p class="hidden-xs title mb-md">
+                                    <a role="button">Enlaces de interés</a>
                                 </p>
                                 <p class="visible-xs title">
                                     <a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample">
-                          Enlaces de interes<span class="icon-plus icon-collapsable font-xxxl"></span>
-                        </a>
+                                  Enlaces de interés<span class="icon-plus icon-collapsable"></span>
+                                </a>
                                 </p>
                                 <div class="collapse" id="collapseThree">
-                                    <ul class="hidden-xs footer-menu">
-                                        <li><a href="#">Web corporativa BBVA.com</a></li>
-                                        <li><a href="#">Empleo BBVA</a></li>
+                                    <ul class="hidden-xs prefooter-menu">
+                                        <li class="mb-md"><a href="#">Web corporativa BBVA.com</a></li>
+                                        <li class="mb-md"><a href="#">Empleo BBVA</a></li>
                                     </ul>
-                                    <div class="visible-xs row footer-menu-collapsed">
+                                    <div class="visible-xs row prefooter-menu-collapsed">
                                         <a href="#" class="col-xs-8">Web corporativa BBVA.com</a>
                                         <a href="#" class="col-xs-4">Empleo BBVA</a>
                                     </div>
