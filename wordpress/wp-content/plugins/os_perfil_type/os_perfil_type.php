@@ -42,10 +42,6 @@ if (!class_exists('PerfilCustomType')) :
             add_action('save_post', array(&$this, "meta_boxes_save"));
             add_action('admin_print_styles', array(&$this,'register_admin_styles'));
             add_action('admin_enqueue_scripts', array(&$this, 'register_admin_scripts'));
-            //add_filter('manage_edit-perfil_columns', array(&$this,'edit_testimonies_columns'));
-            //add_action('manage_perfil_posts_custom_column', array(&$this,'manage_testimonies_columns'), 10, 2);
-            //add_filter('manage_edit-perfil_sortable_columns', array(&$this, 'testimonies_sortable_columns'));
-            //add_action('load-edit.php', array(&$this,'edit_testimonies_load'));
             add_action('plugins_loaded', array(&$this, 'load_text_domain'), 10);
         }
 
@@ -77,10 +73,10 @@ if (!class_exists('PerfilCustomType')) :
                 'show_ui' => true,
                 'hierarchical' => false,
                 'has_archive' => true,
-                'rewrite' => array('slug' => 'Perfil'),
+                'rewrite' => array('slug' => 'perfil'),
                 //'menu_position' => 4,
                 'menu_icon' =>  'dashicons-id',
-                'supports' => array("title", "revisions")
+                'supports' => array("title", "editor"),
                 )
             );
         }
@@ -91,8 +87,8 @@ if (!class_exists('PerfilCustomType')) :
         function meta_boxes_add() {
             add_meta_box("t-author", __("Información básica", "os_perfil_type"), array(&$this, "author_meta_box_callback"), $this->post_type,"advanced","default");
             add_meta_box("tipo-perfil", __("Tipo de perfil", "os_perfil_type"), array(&$this, "tipo_meta_box_callback"), $this->post_type,"side","high");
-            add_meta_box("detalles",__("Detalles de Consejero/Coordinador", "os_perfil_type"),array(&$this, "detalles_meta_box_callback"),$this->post_type,"advanced","default");
-            add_meta_box("detalles-asesor",__("Detalles de Asesor", "os_perfil_type"),array(&$this, "detalles_asesor_meta_box_callback"),$this->post_type,"advanced","default");
+            add_meta_box("detalles-miembro",__("Detalles", "os_perfil_type"),array(&$this, "detalles_miembro_meta_box_callback"),$this->post_type,"advanced","default");
+            add_meta_box("detalles",__("Detalles de Asesor/Coordinador", "os_perfil_type"),array(&$this, "detalles_meta_box_callback"),$this->post_type,"advanced","default");
 
             //add_meta_box("featured-testimony", __("Featured testimony", "os_perfil_type"), array(&$this, "featured_meta_box_callback"), $this->post_type,"side");
             //add_meta_box("video-testimony",__("Link to the video", "os_perfil_type"),array(&$this,"vt_meta_box_callback"),$this->post_type,"side","low");
@@ -100,17 +96,17 @@ if (!class_exists('PerfilCustomType')) :
 
         function author_meta_box_callback($post) {
         	wp_nonce_field( basename( __FILE__ ), 'autor-nonce' );
-            $nombre = get_post_meta( $post->ID, 'meta-autor-nombre' );
-            $estudios = get_post_meta( $post->ID, 'meta-autor-estudios' );
+            $nombre = get_post_meta( $post->ID, 'meta-autor-nombre' , true);
+            $cargo = get_post_meta( $post->ID, 'meta-autor-cargo' , true);
             ?>
          
             <p>
                 <label for="meta-autor-nombre" class="autor-row-title"><?php _e( 'Nombre', 'os_perfil_type' )?></label>
-                <input type="text" name="meta-autor-nombre" class="required" id="meta-autor-nombre" value="<?php if ( $nombre !== '') echo $nombre[0]; ?>" />
+                <input type="text" name="meta-autor-nombre" class="required" id="meta-autor-nombre" value="<?php if ( $nombre !== '') echo $nombre; ?>" />
             </p>
             <p>
-                <label for="meta-autor-estudios" class="autor-row-title"><?php _e( 'Estudios', 'os_perfil_type' )?></label>
-                <input type="text" name="meta-autor-estudios" class="required" id="meta-autor-estudios" value="<?php if ( $estudios !== '' ) echo $estudios[0]; ?>" />
+                <label for="meta-autor-cargo" class="autor-row-title"><?php _e( 'Cargo', 'os_perfil_type' )?></label>
+                <input type="text" name="meta-autor-cargo" class="required" id="meta-autor-cargo" value="<?php if ( $cargo !== '' ) echo $cargo; ?>" />
             </p>
          
             <?php
@@ -118,102 +114,131 @@ if (!class_exists('PerfilCustomType')) :
 
         function tipo_meta_box_callback($post) {
             wp_nonce_field( basename( __FILE__ ), 'tipo-nonce' );
-            $cargo = get_post_meta( $post->ID, 'tipo-perfil' )[0];
+            $es_autor = get_post_meta( $post->ID, 'es-autor' , true);
+            $perfil = get_post_meta( $post->ID, 'tipo-perfil' , true);
+            $grupo = get_post_meta( $post->ID, 'grupo-perfil' , true);
 
             $posiblesCargos = array(
-                'autor' =>  __("Autor", "os_perfil_type"),
-                'consejero' =>  __("Consejero", "os_perfil_type"),
+                'asesor' =>  __("Asesor", "os_perfil_type"),
                 'coordinador' =>  __("Coordinador de grupo", "os_perfil_type"),
-                'asesor' =>  __("Asesor de grupo", "os_perfil_type"));
+                'miembro' =>  __("Miembro de grupo", "os_perfil_type"),
+                'speaker' => __("Speaker", "os_perfil_type"),
+                'no-perfil' => __("Sin perfil adicional", "os_perfil_type"));
 
+            /*$posiblesGrupos = array(
+                'singrupo' => __("Sin grupo", "os_perfil_type"),
+                'consejo-asesor' => __("Consejo asesor", "os_perfil_type"),
+                'trabajo' => __("Comité de trabajo", "os_perfil_type"),
+                'investigacion' => __("Grupo de investigación", "os_perfil_type"),
+                'formacion' => __("Grupo de formación", "os_perfil_type"));*/
+
+            //Dropdown of pages
+            $dropdown_args = array(
+                'post_type'        => 'grupo-trabajo',
+                'name'             => 'grupo-perfil',
+                'sort_column'      => 'menu_order, post_title',
+                'selected'         =>  empty( $grupo ) ? 0 : $grupo,
+                'show_option_none' => 'Sin grupo',
+                'option_none_value' => 'singrupo',
+                'echo'             => 0,
+            );
+            $pages_list = wp_dropdown_pages( $dropdown_args );
+
+            // Imprimo checkbox autor
+            $inputs .= '<p><input type="checkbox" name="es-autor" value="1" id="es-autor" ' . checked($es_autor,1,0) . ' />'.
+                '<label for="es-autor"> ¿Es Autor? ' .
+                '</label></p>';
+
+            // Imprimo radio button
             foreach($posiblesCargos as $key => $label) {
-                foreach ($cargo as $k => $val) {
-                    if($val == $key) {
+                if($perfil != '') {
+                    if($key == $perfil) {
                         $checked = 'checked=checked';
-                        break;
+                    } else {
+                        $checked = '';
                     }
-                    $checked = '';
+                } else {
+                    if($key == 'no-perfil') {
+                        $checked = 'checked=checked';
+                    }
                 }
                 
-                $inputs .= '<input type="checkbox" name="tipo-perfil[]" value="' . esc_attr($key) . '" id="tipo-perfil[' . esc_attr($key) . ']" ' . $checked . ' />'.
+                $inputs .= '<input type="radio" name="tipo-perfil" value="' . esc_attr($key) . '" id="tipo-perfil[' . esc_attr($key) . ']" ' . $checked . ' />'.
                 '<label for="tipo-perfil[' . esc_attr($key) . ']"> ' . esc_html($label) . ' ' .
                 '</label><br>';
             }
+
+
+            /*$inputs .= '<p><label for="grupo-perfil">Grupo de trabajo</label>' .
+                        '<select name="grupo-perfil" id="grupo-perfil">';
+
+            foreach ($posiblesGrupos as $key => $value) {
+                $inputs .= '<option value="' . esc_attr($key) . '" ' . selected( $grupo, $key , false) . '>' . esc_html($value) . '</option>';
+            }
+
+            $inputs .= '</select></p>';*/
+            $inputs .= '<p><label for="grupo-perfil">Grupo de trabajo:</label>' . $pages_list . '</p>';
 
             echo $inputs;
 
         }
 
         function detalles_meta_box_callback($post) {
-            wp_nonce_field( basename( __FILE__ ), 'detalles-nonce' );
-            $fotoPerfil = get_post_meta( $post->ID, 'foto-perfil' );
-            $fotoPerfil_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($fotoPerfil));
+            wp_nonce_field( basename( __FILE__ ), 'detalles-nonce' , true);
 
-            $cargo = get_post_meta( $post->ID, 'titulo-cargo' );
-
-            $lugarTrabajo = get_post_meta( $post->ID, 'lugar-trabajo' );
-
-            $logoTrabajo = get_post_meta( $post->ID, 'logo-trabajo' );
+            $logoTrabajo = get_post_meta( $post->ID, 'logo-trabajo' , true);
             $logoTrabajo_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($logoTrabajo));
 
-            $enlaceLinkedin = get_post_meta( $post->ID, 'enlace-linkedin' );
+            $enlaceLinkedin = get_post_meta( $post->ID, 'enlace-linkedin' , true);
 
-            $email = get_post_meta( $post->ID, 'email' );
+            $email = get_post_meta( $post->ID, 'email' , true);
 
-            $web = get_post_meta( $post->ID, 'web' );
+            $web = get_post_meta( $post->ID, 'web' , true);
 
-            $fotoGrande = get_post_meta( $post->ID, 'foto-grande' );
+            $fotoGrande = get_post_meta( $post->ID, 'foto-grande' , true);
             $fotoGrande_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($fotoGrande));
 
-            $fraseFotoGrande = get_post_meta( $post->ID, 'frase-foto-grande' );
+            $fraseFotoGrande = get_post_meta( $post->ID, 'frase-foto-grande' , true);
 
-            $areaExpertise1 = get_post_meta( $post->ID, 'area-expertise-1' );
-            $areaExpertise2 = get_post_meta( $post->ID, 'area-expertise-2' );
-            $areaExpertise3 = get_post_meta( $post->ID, 'area-expertise-3' );
+            $areaExpertise1 = get_post_meta( $post->ID, 'area-expertise-1' , true);
+            $areaExpertise2 = get_post_meta( $post->ID, 'area-expertise-2' , true);
+            $areaExpertise3 = get_post_meta( $post->ID, 'area-expertise-3' , true);
+
+            $otrosTrabajos = get_post_meta( $post->ID, 'otros-trabajos' , true);
+            
+            if(empty($otrosTrabajos)) {
+                $otrosTrabajos = array(
+                            array(
+                                'titulo' => '',
+                                'texto' => '',
+                                'enlace' => '')
+                        );
+            }
 
             ?>
          
             <div class="imagen">
-                <label for="foto-perfil"><?php _e('Foto de perfil', 'os_perfil_type'); ?></label>
-                <img id="show_foto" draggable="false" alt="" name="show_foto" src="<?php if (!empty($fotoPerfil_thumbnail)) echo esc_attr($fotoPerfil_thumbnail); ?>" style="<?php if (empty($fotoPerfil_thumbnail)) echo "display: none;"; ?>">
-                <div class="centered">
-                    <input class="widefat" id="foto-perfil" name="foto-perfil" type="text" value="<?php if (!empty($fotoPerfil)) echo $fotoPerfil; ?>" readonly="readonly"/>
-                    <input id="upload_foto" name="upload_foto" type="button" value="<?php _e('Explorar/Subir', 'os_perfil_type'); ?>" />
-                </div>
-            </div>
-
-            <p>
-                <label for="titulo-cargo" class="autor-row-title"><?php _e('Título/Cargo', 'os_perfil_type' )?></label>
-                <input type="text" name="titulo-cargo" id="titulo-cargo" value="<?php if ( $cargo !== '' ) echo $cargo[0]; ?>" />
-            </p>
-
-            <p>
-                <label for="lugar-trabajo" class="autor-row-title"><?php _e( 'Lugar de trabajo', 'os_perfil_type' )?></label>
-                <input type="text" name="lugar-trabajo" id="lugar-trabajo" value="<?php if ( $lugarTrabajo !== '' ) echo $lugarTrabajo[0]; ?>" />
-            </p>
-
-            <div class="imagen">
                 <label for="logo-trabajo"><?php _e('Logo de trabajo', 'os_perfil_type'); ?></label>
-                <img id="show_loto" draggable="false" alt="" name="show_loto" src="<?php if (!empty($logoTrabajo_thumbnail)) echo esc_attr($logoTrabajo_thumbnail); ?>" style="<?php if (empty($logoTrabajo_thumbnail)) echo "display: none;"; ?>">
+                <img id="show_logo_emp" draggable="false" alt="" name="show_logo_emp" src="<?php if (!empty($logoTrabajo_thumbnail)) echo esc_attr($logoTrabajo_thumbnail); ?>" style="<?php if (empty($logoTrabajo_thumbnail)) echo "display: none;"; ?>">
                 <div class="centered">
                     <input class="widefat" id="logo-trabajo" name="logo-trabajo" type="text" value="<?php if (!empty($logoTrabajo)) echo $logoTrabajo; ?>" readonly="readonly"/>
-                    <input id="upload_loto" name="upload_loto" type="button" value="<?php _e('Explorar/Subir', 'os_perfil_type'); ?>" />
+                    <input id="upload_logo_emp" name="upload_logo_emp" type="button" value="<?php _e('Explorar/Subir', 'os_perfil_type'); ?>" />
                 </div>
             </div>
 
             <p>
                 <label for="enlace-linkedin" class="autor-row-title"><?php _e('Enlace Linkedin', 'os_perfil_type' )?></label>
-                <input type="text" name="enlace-linkedin" id="enlace-linkedin" value="<?php if ( $enlaceLinkedin !== '' ) echo $enlaceLinkedin[0]; ?>" />
+                <input type="text" name="enlace-linkedin" id="enlace-linkedin" value="<?php if ( $enlaceLinkedin !== '' ) echo $enlaceLinkedin; ?>" />
             </p>
 
             <p>
                 <label for="email" class="autor-row-title"><?php _e('Email', 'os_perfil_type' )?></label>
-                <input type="text" name="email" id="email" value="<?php if ( $email !== '' ) echo $email[0]; ?>" />
+                <input type="text" name="email" id="email" value="<?php if ( $email !== '' ) echo $email; ?>" />
             </p>
 
             <p>
                 <label for="web" class="autor-row-title"><?php _e('Web', 'os_perfil_type' )?></label>
-                <input type="text" name="web" id="web" value="<?php if ( $web !== '' ) echo $web[0]; ?>" />
+                <input type="text" name="web" id="web" value="<?php if ( $web !== '' ) echo $web; ?>" />
             </p>
 
             <div class="imagen">
@@ -224,105 +249,84 @@ if (!class_exists('PerfilCustomType')) :
                     <input id="upload_foto_grande" name="upload_foto_grande" type="button" value="<?php _e('Explorar/Subir', 'os_perfil_type'); ?>" />
                 </div>
                 <label for="frase-foto-grande" class="normal autor-row-title"><?php _e('Frase', 'os_perfil_type' )?></label>
-                <input type="text" name="frase-foto" id="frase-foto-grande" value="<?php if ( $fraseFotoGrande !== '' ) echo $fraseFotoGrande[0]; ?>" />
+                <input type="text" name="frase-foto-grande" id="frase-foto-grande" value="<?php if ( $fraseFotoGrande !== '' ) echo $fraseFotoGrande; ?>" />
             </div>
 
             <p>
                 <label for="area-expertise-1" class="autor-row-title"><?php _e('Área expertise 1', 'os_perfil_type' )?></label>
-                <input type="text" name="web" id="area-expertise-1" value="<?php if ( $areaExpertise1 !== '' ) echo $areaExpertise1[0]; ?>" />
+                <input type="text" name="area-expertise-1" id="area-expertise-1" value="<?php if ( $areaExpertise1 !== '' ) echo $areaExpertise1; ?>" />
             </p>
             <p>
                 <label for="area-expertise-2" class="autor-row-title"><?php _e('Área expertise 2', 'os_perfil_type' )?></label>
-                <input type="text" name="web" id="area-expertise-2" value="<?php if ( $areaExpertise2 !== '' ) echo $areaExpertise3[0]; ?>" />
+                <input type="text" name="area-expertise-2" id="area-expertise-2" value="<?php if ( $areaExpertise2 !== '' ) echo $areaExpertise2; ?>" />
             </p>
             <p>
                 <label for="area-expertise-3" class="autor-row-title"><?php _e('Área expertise 3', 'os_perfil_type' )?></label>
-                <input type="text" name="web" id="area-expertise-3" value="<?php if ( $areaExpertise3 !== '' ) echo $areaExpertise2[0]; ?>" />
+                <input type="text" name="area-expertise-3" id="area-expertise-3" value="<?php if ( $areaExpertise3 !== '' ) echo $areaExpertise3; ?>" />
             </p>
+
+            <div class="lista">
+                <div class="titulo bold"><?php _e('Otros trabajos', 'os_perfil_type' )?></div>
+                
+                <?php foreach ($otrosTrabajos as $key => $otroTrab) : ?>
+                    <div class="otros-trabajos">
+                        
+                        <div>
+                            <label for="otros-trabajos[<?php echo $key ?>][titulo]" class="autor-row-title"><?php _e('Título', 'os_perfil_type' )?></label>
+                            <input type="text" name="otros-trabajos[<?php echo $key ?>][titulo]" id="otros-trabajos[<?php echo $key ?>][titulo]" value="<?php if ( $otroTrab['titulo'] !== '' ) echo $otroTrab['titulo']; ?>" />
+                        </div>
+
+                        <div>
+                            <label class="top" for="otros-trabajos[<?php echo $key ?>][texto]" class="autor-row-title"><?php _e('Texto', 'os_perfil_type' )?></label>
+                            <textarea id="otros-trabajos[<?php echo $key; ?>][texto]" name="otros-trabajos[<?php echo $key; ?>][texto]"> <?php if ( $otroTrab['texto'] !== '' ) echo $otroTrab['texto']; ?></textarea>
+                        </div>
+
+                        <div>
+                            <label for="otros-trabajos[<?php echo $key ?>][enlace]" class="autor-row-title"><?php _e('Enlace', 'os_perfil_type' )?></label>
+                            <input type="text" name="otros-trabajos[<?php echo $key ?>][enlace]" id="otros-trabajos[<?php echo $key ?>][enlace]" value="<?php if ( $otroTrab['enlace'] !== '' ) echo $otroTrab['enlace']; ?>" />
+                        </div>
+
+                        <div class="alignright">
+                                <a id="delete-otros-trabajos" href="javascript:void(0);">Borrar</a>
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+
+                <p> <a id="add-otros-trabajos" href="javascript:void(0);">Añadir trabajo</a> </p>
+            </div>
          
             <?php
 
         }
 
-        function detalles_asesor_meta_box_callback($post) {
-            wp_nonce_field( basename( __FILE__ ), 'detalles-asesor-nonce' );
-            $fotoPerfil = get_post_meta( $post->ID, 'asesor-foto-perfil' );
+        function detalles_miembro_meta_box_callback($post) {
+            wp_nonce_field( basename( __FILE__ ), 'detalles-miembro-nonce' , true);
+            $fotoPerfil = get_post_meta( $post->ID, 'miembro-foto-perfil' , true);
             $fotoPerfil_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($fotoPerfil));
-            $lugarTrabajo = get_post_meta( $post->ID, 'asesor-lugar-trabajo' );
+            $lugarTrabajo = get_post_meta( $post->ID, 'miembro-lugar-trabajo' , true);
 
             ?>
          
 
             <div class="imagen">
-                <label for="asesor-foto-perfil"><?php _e('Foto de perfil', 'os_perfil_type'); ?></label>
-                <img id="show_foto_asesor" draggable="false" alt="" name="show_foto" src="<?php if (!empty($fotoPerfil_thumbnail)) echo esc_attr($fotoPerfil_thumbnail); ?>" style="<?php if (empty($fotoPerfil_thumbnail)) echo "display: none;"; ?>">
+                <label for="miembro-foto-perfil"><?php _e('Foto de perfil', 'os_perfil_type'); ?></label>
+                <img id="show_foto_miembro" draggable="false" alt="" name="show_foto" src="<?php if (!empty($fotoPerfil_thumbnail)) echo esc_attr($fotoPerfil_thumbnail); ?>" style="<?php if (empty($fotoPerfil_thumbnail)) echo "display: none;"; ?>">
                 <div class="centered">
-                    <input class="widefat" id="asesor-foto-perfil" name="asesor-foto-perfil" type="text" value="<?php if (!empty($fotoPerfil)) echo $fotoPerfil; ?>" readonly="readonly"/>
-                    <input id="upload_foto_asesor" name="upload_foto" type="button" value="<?php _e('Explorar/Subir', 'os_perfil_type'); ?>" />
+                    <input class="widefat" id="miembro-foto-perfil" name="miembro-foto-perfil" type="text" value="<?php if (!empty($fotoPerfil)) echo $fotoPerfil; ?>" readonly="readonly"/>
+                    <input id="upload_foto_miembro" name="upload_foto" type="button" value="<?php _e('Explorar/Subir', 'os_perfil_type'); ?>" />
                 </div>
             </div>
 
             <p>
-                <label for="asesor-lugar-trabajo" class="autor-row-title"><?php _e( 'Lugar de trabajo', 'os_perfil_type' )?></label>
-                <input type="text" name="asesor-lugar-trabajo" id="asesor-lugar-trabajo" value="<?php if ( $lugarTrabajo !== '' ) echo $lugarTrabajo[0]; ?>" />
+                <label for="miembro-lugar-trabajo" class="autor-row-title"><?php _e( 'Lugar de trabajo', 'os_perfil_type' )?></label>
+                <input type="text" name="miembro-lugar-trabajo" id="miembro-lugar-trabajo" value="<?php if ( $lugarTrabajo !== '' ) echo $lugarTrabajo; ?>" />
             </p>
          
             <?php
 
         }        
-        
-         function vt_meta_box_callback($post) {
-            wp_nonce_field( basename( __FILE__ ), 'vt-nonce' );
-            $link = get_post_meta( $post->ID, 'meta-video-testimony' );
-            $mask = get_post_meta( $post->ID, 'meta-video-mask' );
-            ?>
-         
-            <span><?php _e( 'Link to the video testimony' , 'os_perfil_type' )?></span>
-            <p>
-                <label for="meta-video-testimony" class="autor-row-title"><?php _e( 'Link', 'os_perfil_type' )?></label>
-                <input type="text" name="meta-video-testimony" id="meta-video-testimonye" value="<?php if ( $link !== '') echo $link[0]; ?>" />
-            </p>
-            <p>
-                <label for="meta-video-mask" class="image-row-title"><?php _e( 'Mask', 'os_perfil_type' )?></label>
-                <input class="widefat" id="meta-video-mask" name="meta-video-mask" type="text" value="<?php if ( isset($mask) ) echo $mask[0]; ?>" />
-            </p>
-            <p>
-                <input id="upload_mask" name="upload_mask" type="button" value="Explore/Upload" />
-            </p>
-         
-            <?php
-        }
-
-        function featured_meta_box_callback($post) {
-            wp_nonce_field( basename( __FILE__ ), 'featured-nonce' );
-            $featured_stored_meta = get_post_meta( $post->ID, 'featured-testimony' );
-
-            $checked = $this->check_featured_testimonies($post->ID,$featured_stored_meta[0]);
-            // No se puede marcar un evento como Featured si ya hay otro 
-            $disabled = $checked[1];
-            ?>
-            
-            <p>
-                <span class="featured-row-title"><?php _e( 'If checked, this testimony will be showed at first. There can only be one event labeled as \'Featured\'', 'os_perfil_type' )?></span>
-                <div class="featured-row-content">
-                    <label for="meta-radio-yes">
-                        <input type="radio" name="featured-testimony" <?php echo $disabled ?> id="meta-radio-yes" value="yes" <?php if ( isset ( $featured_stored_meta[0] ) ) checked( $featured_stored_meta[0], 'yes' ); ?>>
-                        <?php _e( 'Yes', 'os_perfil_type' )?>
-                    </label>
-                    <label for="meta-radio-no">
-                        <input type="radio" name="featured-testimony" <?php echo $disabled ?> id="meta-radio-no" value="no" <?php if ( isset ( $featured_stored_meta[0] ) ) { checked( $featured_stored_meta[0], 'no' ); } else {checked(1,1);}; ?>>
-                        <?php _e( 'No', 'os_perfil_type' )?>
-                    </label>
-                </div>
-                <?php if($disabled === "disabled") {
-                        $title = get_the_title($checked[0]);
-                        print("<div class=\"notice-message\">" . __("Testimony with title \"","os_perfil_type") . $title . __("\" has been labeled as Featured. Please, first uncheck it if you want to mark this testimony as Featured",'os_perfil_type') . "</div>");
-                    }
-                    ?>
-            </p>
-         
-            <?php
-        }
+    
 
         function meta_boxes_save($post_id) {
         	if( $this->user_can_save( $post_id, 'autor-nonce' ) ) {
@@ -330,43 +334,108 @@ if (!class_exists('PerfilCustomType')) :
                 if( isset( $_POST[ 'meta-autor-nombre' ] ) ) {
                     update_post_meta( $post_id, 'meta-autor-nombre', $_POST[ 'meta-autor-nombre' ] );
                 }
-                if( isset( $_POST[ 'meta-autor-estudios' ] ) ) {
-                    update_post_meta( $post_id, 'meta-autor-estudios', $_POST[ 'meta-autor-estudios' ] );
-                }
-            }
-            
-            if( $this->user_can_save( $post_id, 'detalles-asesor-nonce' ) ) {
-            	if( isset( $_POST[ 'asesor-foto-perfil' ] ) ) {
-                    update_post_meta( $post_id, 'asesor-foto-perfil', $_POST[ 'asesor-foto-perfil' ] );
-                }
-                if( isset( $_POST[ 'asesor-lugar-trabajo' ] ) ) {
-                    update_post_meta( $post_id, 'asesor-lugar-trabajo', $_POST[ 'asesor-lugar-trabajo' ] );
+                if( isset( $_POST[ 'meta-autor-cargo' ] ) ) {
+                    update_post_meta( $post_id, 'meta-autor-cargo', $_POST[ 'meta-autor-cargo' ] );
                 }
             }
 
             if( $this->user_can_save( $post_id, 'tipo-nonce' ) ) {
+                if( isset( $_POST[ 'es-autor' ] ) ) {
+                    update_post_meta( $post_id, 'es-autor', $_POST[ 'es-autor' ] );
+                } else {
+                    delete_post_meta( $post_id, 'es-autor', $_POST[ 'es-autor' ] );
+                }
+
                 if( isset( $_POST[ 'tipo-perfil' ] ) ) {
                     update_post_meta( $post_id, 'tipo-perfil', $_POST[ 'tipo-perfil' ] );
                 } else {
                     delete_post_meta( $post_id, 'tipo-perfil', $_POST[ 'tipo-perfil' ] );
                 }
-            }
 
-            if( $this->user_can_save( $post_id, 'vt-nonce' ) ) {
-            	if( isset( $_POST[ 'meta-video-testimony' ] ) ) {
-                    update_post_meta( $post_id, 'meta-video-testimony', $_POST[ 'meta-video-testimony' ] );
-                }
-                if( isset( $_POST[ 'meta-video-mask' ] ) ) {
-                    update_post_meta( $post_id, 'meta-video-mask', $_POST[ 'meta-video-mask' ] );
+                if( isset( $_POST[ 'grupo-perfil' ] ) ) {
+                    update_post_meta( $post_id, 'grupo-perfil', $_POST[ 'grupo-perfil' ] );
+                } else {
+                    delete_post_meta( $post_id, 'grupo-perfil', $_POST[ 'grupo-perfil' ] );
                 }
             }
 
-            if( $this->user_can_save( $post_id, 'featured-nonce' ) ) {
-                // Checks for input and saves if needed
-                if( isset( $_POST[ 'featured-testimony' ] ) ) {
-                    update_post_meta( $post_id, 'featured-testimony', $_POST[ 'featured-testimony' ] );
+            if( $this->user_can_save( $post_id, 'detalles-miembro-nonce' ) ) {
+                if( isset( $_POST[ 'tipo-perfil' ] )) {
+                    if( isset( $_POST[ 'miembro-foto-perfil' ] ) ) {
+                        update_post_meta( $post_id, 'miembro-foto-perfil', $_POST[ 'miembro-foto-perfil' ] );
+                    }
+                    if( isset( $_POST[ 'miembro-lugar-trabajo' ] ) ) {
+                        update_post_meta( $post_id, 'miembro-lugar-trabajo', $_POST[ 'miembro-lugar-trabajo' ] );
+                    }
+                } else {
+                    delete_post_meta( $post_id, 'miembro-foto-perfil', $_POST[ 'miembro-foto-perfil' ] );
+                    delete_post_meta( $post_id, 'miembro-lugar-trabajo', $_POST[ 'miembro-lugar-trabajo' ] );
                 }
             }
+
+            // Asesor, coordinador y speaker pueden tener ficha propia
+            if( $this->user_can_save( $post_id, 'detalles-nonce' ) ) {
+                if( isset( $_POST[ 'tipo-perfil' ] ) && ($_POST[ 'tipo-perfil' ] == 'asesor' || $_POST[ 'tipo-perfil' ] == 'coordinador')) {
+                    if( isset( $_POST[ 'foto-perfil' ] ) ) {
+                        update_post_meta( $post_id, 'foto-perfil', $_POST[ 'foto-perfil' ] );
+                    }
+                    if( isset( $_POST[ 'lugar-trabajo' ] ) ) {
+                        update_post_meta( $post_id, 'lugar-trabajo', $_POST[ 'lugar-trabajo' ] );
+                    }
+                    if( isset( $_POST[ 'logo-trabajo' ] ) ) {
+                        update_post_meta( $post_id, 'logo-trabajo', $_POST[ 'logo-trabajo' ] );
+                    }
+                    if( isset( $_POST[ 'enlace-linkedin' ] ) ) {
+                        update_post_meta( $post_id, 'enlace-linkedin', $_POST[ 'enlace-linkedin' ] );
+                    }
+                    if( isset( $_POST[ 'email' ] ) ) {
+                        update_post_meta( $post_id, 'email', $_POST[ 'email' ] );
+                    }
+                    if( isset( $_POST[ 'web' ] ) ) {
+                        update_post_meta( $post_id, 'web', $_POST[ 'web' ] );
+                    }
+                    if( isset( $_POST[ 'foto-grande' ] ) ) {
+                        update_post_meta( $post_id, 'foto-grande', $_POST[ 'foto-grande' ] );
+                    }
+                    if( isset( $_POST[ 'frase-foto-grande' ] ) ) {
+                        update_post_meta( $post_id, 'frase-foto-grande', $_POST[ 'frase-foto-grande' ] );
+                    }
+                    if( isset( $_POST[ 'area-expertise-1' ] ) ) {
+                        update_post_meta( $post_id, 'area-expertise-1', $_POST[ 'area-expertise-1' ] );
+                    }
+                    if( isset( $_POST[ 'area-expertise-2' ] ) ) {
+                        update_post_meta( $post_id, 'area-expertise-2', $_POST[ 'area-expertise-2' ] );
+                    }
+                    if( isset( $_POST[ 'area-expertise-3' ] ) ) {
+                        update_post_meta( $post_id, 'area-expertise-3', $_POST[ 'area-expertise-3' ] );
+                    }
+                    if( isset( $_POST[ 'otros-trabajos' ] ) ) {
+                        $otrosTrabajos = $_POST['otros-trabajos'];
+                        $nuevosTrabajos = array();
+                        foreach ($otrosTrabajos as $trabajo) {
+                            if (!(empty($trabajo['titulo']) && empty($trabajo['texto']) && empty($trabajo['enlace']))) {
+                                array_push($nuevosTrabajos, $trabajo);
+                            }
+                        }
+                        update_post_meta($post_id, 'otros-trabajos', $nuevosTrabajos);
+                    }
+
+                } else {
+                    delete_post_meta( $post_id, 'foto-perfil', $_POST[ 'foto-perfil' ] );
+                    delete_post_meta( $post_id, 'lugar-trabajo', $_POST[ 'lugar-trabajo' ] );
+                    delete_post_meta( $post_id, 'logo-trabajo', $_POST[ 'logo-trabajo' ] );
+                    delete_post_meta( $post_id, 'enlace-linkedin', $_POST[ 'enlace-linkedin' ] );
+                    delete_post_meta( $post_id, 'email', $_POST[ 'email' ] );
+                    delete_post_meta( $post_id, 'web', $_POST[ 'web' ] );
+                    delete_post_meta( $post_id, 'foto-grande', $_POST[ 'foto-grande' ] );
+                    delete_post_meta( $post_id, 'frase-foto-grande', $_POST[ 'frase-foto-grande' ] );
+                    delete_post_meta( $post_id, 'area-expertise-1', $_POST[ 'area-expertise-1' ] );
+                    delete_post_meta( $post_id, 'area-expertise-2', $_POST[ 'area-expertise-2' ] );
+                    delete_post_meta( $post_id, 'area-expertise-3', $_POST[ 'area-expertise-3' ] );
+                    delete_post_meta( $post_id, 'otros-trabajos', $_POST[ 'otros-trabajos' ] );
+                }
+            }
+
         }
 
         function register_admin_styles(){
@@ -386,118 +455,6 @@ if (!class_exists('PerfilCustomType')) :
             }
         }
 
-        ////////////// MANEJO DE COLUMNAS DE LA ADMINISTRACIÓN ///////////////////
-
-        function edit_testimonies_columns($columns) {
-            $new_columns = array(
-                'test-author' => __('Person information', 'os_perfil_type'),
-                'featured' => __('Featured', 'os_perfil_type'),
-            );
-            return array_merge($columns, $new_columns);
-        }
-
-        function manage_testimonies_columns( $column, $post_id ) {
-            global $post;
-
-            switch( $column ) {
-
-                /* If displaying the 'featured' column. */
-                case 'featured' :
-
-                    /* Get the post meta. */
-                    $featured = get_post_meta( $post_id, 'featured-testimony', true );
-
-                    if ( empty( $featured ) )
-                        echo __('No');
-                    else
-                        printf(__('%s', 'os_perfil_type'), ucfirst($featured));
-                    break;
-
-                case 'test-author' :
-
-                    /* Get the post meta. */
-                    $author_name = get_post_meta( $post_id, 'meta-autor-nombre', true );
-                    $author_estudios = get_post_meta( $post_id, 'meta-autor-estudios', true );
-
-                    if ( empty( $author_name ) )
-                        echo __('-');
-                    else
-                        printf(__('%s - %s', 'os_perfil_type'), $author_name, $author_estudios);
-                    break;
-
-                /* Just break out of the switch statement for everything else. */
-                default :
-                    break;
-            }
-        }
-
-        function testimonies_sortable_columns($columns) {
-            $columns['featured'] = 'featured';
-            $columns['test-author'] = 'test-author';
-
-            return $columns;
-        }
-
-        function edit_testimonies_load() {
-            add_filter('request', array(&$this, 'sort_testimonies'));
-        }
-
-        function sort_testimonies($vars) {
-            /* Check if we're viewing the 'movie' post type. */
-            if ( isset( $vars['post_type'] ) && $this->post_type == $vars['post_type'] ) {
-
-                /* Check if 'orderby' is set to 'featured'. */
-                if ( isset( $vars['orderby'] ) && 'featured' == $vars['orderby'] ) {
-
-                    /* Añadimos los post que no tengan el meta_key para que también salgan al ordenarlos */
-                    $meta_query =  array(
-                        'relation' => 'OR',
-                        array(
-                            'key' => 'featured-testimony',
-                            'compare' => 'NOT EXISTS',
-                            'value' => '',
-                        )
-                    );
-
-                    /* Merge the query vars with our custom variables. */
-                    $vars = array_merge(
-                        $vars,
-                        array(
-                            'meta_query' => $meta_query,
-                            'meta_key' => 'featured-testimony',
-                            'orderby' => 'meta_value'
-                        )
-                    );
-                }
-
-                /* Check if 'orderby' is set to 'featured'. */
-                if ( isset( $vars['orderby'] ) && 'test-author' == $vars['orderby'] ) {
-
-                    /* Añadimos los post que no tengan el meta_key para que también salgan al ordenarlos */
-                    $meta_query =  array(
-                        'relation' => 'OR',
-                        array(
-                            'key' => 'meta-autor-nombre',
-                            'compare' => 'NOT EXISTS',
-                            'value' => '',
-                        )
-                    );
-
-                    /* Merge the query vars with our custom variables. */
-                    $vars = array_merge(
-                        $vars,
-                        array(
-                            'meta_query' => $meta_query,
-                            'meta_key' => 'meta-autor-nombre',
-                            'orderby' => 'meta_value'
-                        )
-                    );
-                }
-            }
-
-            return $vars;
-
-        }
 
         //////////////// FUNCIONES PRIVADAS ////////////////////
 
@@ -518,47 +475,11 @@ if (!class_exists('PerfilCustomType')) :
            return true;
         }   
 
-        /*
-        * Comprueba si ya hay un testimonio marcado como Featured y además, en caso afirmativo, devuelve su post id.
-        */
-        private function check_featured_testimonies($post_id,$featured) {
-            global $wpdb;
-            $featured = array();
-            $blog_id = get_current_blog_id();
-            $table = $wpdb->prefix . "postmeta";
-            /*if($blog_id !== 1) {
-                $table = "wp_" . $blog_id . "_postmeta";
-            }*/
-
-            $results = $wpdb->get_results("SELECT post_id FROM $table WHERE meta_key='featured-testimony' AND meta_value='yes'");
-            if(!empty($results)) {
-                $result = $results[0];
-                $featured[0] = $result->post_id;
-                if($result->post_id == $post_id) {
-                    $featured[1] = "";
-                    return $featured;
-                }
-                $results = $wpdb->get_results("SELECT post_id FROM $table WHERE meta_key='_wp_trash_meta_status' AND post_id=$featured[0]");
-	            // Si no está en la Papelera, no te deja modificar el campo Featured
-	            if(empty($results)) {
-	            	$featured[1] = "disabled";
-	            } else {
-	            	$featured[1] = "";
-	            }
-	            return $featured;
-            } else {
-                $featured[1] = "";
-                return $featured;
-            }
-            
-            $featured[1] = "disabled";
-            return $featured;
-        }
 
 
     }
 
-    $osTestimony = new PerfilCustomType();
+    $osPerfil = new PerfilCustomType();
 
 endif;
 
