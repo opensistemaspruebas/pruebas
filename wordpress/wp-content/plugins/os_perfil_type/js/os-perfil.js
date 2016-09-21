@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
             "meta-autor-nombre": {
                 required: true
             },
-            "meta-autor-estudios": {
+            "meta-autor-cargo": {
                 required: true
             },
             "tipo-perfil[]": {
@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
             "meta-autor-nombre": {
                 required: "Campo obligatorio"
             },
-            "meta-autor-estudios": {
+            "meta-autor-cargo": {
                 required: "Campo obligatorio"
             },
             "tipo-perfil[]": {
