@@ -1,14 +1,9 @@
-jQuery(document).ready(function(jQuery) {
-	
+jQuery(document).ready(function() {
 	jQuery('select#color').simplecolorpicker({theme: 'glyphicons'});
-
 	jQuery('select#visualizacion').on("change", function() {
 		toggleFields();
 	});
-
 });
-
-
 function toggleFields() {
     if (jQuery("#visualizacion").val() == "circulo" || jQuery("#visualizacion").val() == "barra") {
         jQuery("#form1").show();

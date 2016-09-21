@@ -90,7 +90,7 @@ function meta_box_tipo($post) {
   $completado = get_post_meta($post->ID, 'completado', true);
   $titulo = get_post_meta($post->ID, 'titulo', true);
   $subtitulo = get_post_meta($post->ID, 'subtitulo', true);
-  $icono = get_post_meta($post->ID, 'icono', true);
+  $animacion = get_post_meta($post->ID, 'animacion', true);
 
   ?>
   <p>
@@ -98,7 +98,7 @@ function meta_box_tipo($post) {
     <select class="widefat" name="visualizacion" id="visualizacion">
       <option value="circulo" <?php if ($visualizacion == "circulo") echo 'selected="selected"'; ?>><?php _e('Círculo', 'os_impacto_type'); ?></option>
       <option value="barra" <?php if ($visualizacion == "barra") echo 'selected="selected"'; ?>><?php _e('Barra', 'os_impacto_type'); ?></option>
-      <option value="icono" <?php if ($visualizacion == "icono") echo 'selected="selected"'; ?>><?php _e('Icono', 'os_impacto_type'); ?></option>
+      <option value="animacion" <?php if ($visualizacion == "animacion") echo 'selected="selected"'; ?>><?php _e('Icono', 'os_impacto_type'); ?></option>
     </select>
   </p>
   <div id="form1" name="form1" <?php if ($visualizacion == "circulo" || $visualizacion == "barra") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
@@ -118,16 +118,16 @@ function meta_box_tipo($post) {
     </p>
     <p>
       <label for="objetivo"><?php _e('Valor objetivo', 'os_publicacion_type'); ?></label>
-      <input type="number" class="widefat" id="objetivo" name="objetivo" value="<?php if (isset($objetivo)) echo $objetivo; ?>"/>
+      <input type="number" min="0" max="999999999999999" class="widefat" id="objetivo" name="objetivo" value="<?php if (isset($objetivo)) echo $objetivo; ?>"/>
       <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_publicacion_type'); ?>: 1400000</i>
     </p>
     <p>
       <label for="completado"><?php _e('Valor completado', 'os_publicacion_type'); ?></label>
-      <input type="number" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>"/>
+      <input type="number" min="0" max="999999999999999" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>"/>
       <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_publicacion_type'); ?>: 2500000</i>
     </p>
   </div>
-  <div id="form2" name="form2" <?php if ($visualizacion == "icono") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
+  <div id="form2" name="form2" <?php if ($visualizacion == "animacion") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
     <p>
       <label for="titulo"><?php _e('Título', 'os_publicacion_type'); ?></label>
       <input type="text" class="widefat" id="titulo" name="titulo" value="<?php if (isset($titulo)) echo $titulo; ?>"/>
@@ -137,8 +137,8 @@ function meta_box_tipo($post) {
       <input type="text" class="widefat" id="subtitulo" name="subtitulo" value="<?php if (isset($subtitulo)) echo $subtitulo; ?>"/>
     </p>
     <p>
-      <label for="icono"><?php _e('Icono', 'os_publicacion_type'); ?></label>
-      <input type="text" class="widefat" id="icono" name="icono" value="<?php if (isset($icono)) echo $icono; ?>"/>
+      <label for="animacion"><?php _e('Animación', 'os_publicacion_type'); ?></label>
+      <input type="text" class="widefat" id="animacion" name="animacion" value="<?php if (isset($animacion)) echo $animacion; ?>"/>
     </p>
   </div>
   <?php
@@ -147,8 +147,36 @@ function meta_box_tipo($post) {
 
 function meta_boxes_impacto_save($post_id) {
 
+  if (isset($_POST['visualizacion'])) {
+    update_post_meta($post_id, 'visualizacion', strip_tags($_POST['visualizacion']));
+  }
+
   if (isset($_POST['color'])) {
     update_post_meta($post_id, 'color', strip_tags($_POST['color']));
+  }
+
+  if (isset($_POST['etiqueta'])) {
+    update_post_meta($post_id, 'etiqueta', strip_tags($_POST['etiqueta']));
+  }
+
+  if (isset($_POST['objetivo'])) {
+    update_post_meta($post_id, 'objetivo', strip_tags($_POST['objetivo']));
+  }
+
+  if (isset($_POST['completado'])) {
+    update_post_meta($post_id, 'completado', strip_tags($_POST['completado']));
+  }
+
+  if (isset($_POST['titulo'])) {
+    update_post_meta($post_id, 'titulo', strip_tags($_POST['titulo']));
+  }
+
+  if (isset($_POST['subtitulo'])) {
+    update_post_meta($post_id, 'subtitulo', strip_tags($_POST['subtitulo']));
+  }
+
+  if (isset($_POST['animacion'])) {
+    update_post_meta($post_id, 'animacion', strip_tags($_POST['animacion']));
   }
 
 }
