@@ -46,9 +46,9 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			                    <section class="container-fluid main-card">
 			                        <header class="row header-container">
 			                            <div class="image-container nopadding col-xs-12">
-			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/informe1.png" alt="">
+			                                <img class="img-responsive" src="images/home/informe1.png" alt="">
 			                            </div>
-			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                            <div class="hidden-xs floating-text col-xs-9">
 			                                <p class="date">27 Agosto 2016</p>
 			                                <h1>Beyond Ties and Cofee Mugs...</h1>
 			                            </div>
@@ -90,9 +90,9 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			                    <section class="container-fluid main-card">
 			                        <header class="row header-container">
 			                            <div class="image-container nopadding col-xs-12">
-			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/informe2.png" alt="">
+			                                <img class="img-responsive" src="images/home/informe2.png" alt="">
 			                            </div>
-			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                            <div class="hidden-xs floating-text col-xs-9">
 			                                <p class="date">24 Agosto 2016</p>
 			                                <h1>Lorem ipsum dolor sit amet...</h1>
 			                            </div>
@@ -127,9 +127,9 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			                    <section class="container-fluid main-card">
 			                        <header class="row header-container">
 			                            <div class="image-container nopadding col-xs-12">
-			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/informe3.png" alt="">
+			                                <img class="img-responsive" src="images/home/informe3.png" alt="">
 			                            </div>
-			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                            <div class="hidden-xs floating-text col-xs-9">
 			                                <p class="date">23 Agosto 2016</p>
 			                                <h1>Lorem ipsum dolor</h1>
 			                            </div>
@@ -161,7 +161,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			                </div>
 			            </div>
 			        </section>
-			        <footer class="pt-md">
+			        <footer>
 			            <div class="row">
 			                <div class="col-md-12 text-center">
 			                    <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las publicaciones</a>
