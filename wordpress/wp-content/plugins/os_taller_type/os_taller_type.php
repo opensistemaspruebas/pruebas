@@ -72,7 +72,7 @@ if (!class_exists('TallerCustomType')) :
 
         function taller_data_meta_box_callback($post) {
 
-            wp_nonce_field( basename(__FILE__), 'taller-nonce');         
+            wp_nonce_field( basename(__FILE__), 'taller-nonce');  
             
             $descp = get_post_meta($post->ID, 'descp', true);
             $link_taller = get_post_meta( $post->ID, 'link_taller', true);
