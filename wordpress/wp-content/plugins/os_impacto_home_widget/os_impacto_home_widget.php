@@ -32,9 +32,9 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 	    	
 	    	global $wpdb;
 
-	    	echo '<pre>';
+	    	/*echo '<pre>';
 	    	print_r($instance);
-	    	echo '</pre>';
+	    	echo '</pre>';*/
 
 	    	$title = $instance['title'];
 	    	$texto = $instance['texto'];
@@ -66,7 +66,7 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 									$post_id = get_the_id();
 									$visualizacion = (get_post_meta($post_id, 'visualizacion', true)) ? get_post_meta($post_id, 'visualizacion', true) : "circulo";
 									$color = get_post_meta($post_id, 'color', true);
-									$etiqueta = get_post_meta($post_id, 'etiqueta', true);
+									$etiqueta = mb_strtoupper(get_post_meta($post_id, 'etiqueta', true), 'UTF-8');
 									$objetivo = get_post_meta($post_id, 'objetivo', true);
 									$completado = get_post_meta($post_id, 'completado', true);
 									$titulo = get_post_meta($post_id, 'titulo', true);
@@ -224,9 +224,24 @@ function pintaCirculo($etiqueta, $color, $objetivo, $completado) {
 
 	$porcentaje = $completado / $objetivo;
 
+	switch ($color) {
+		case '#14afb0':
+			$colorClass = 'teel';
+			break;
+		case '#5bbeff':
+			$colorClass = 'blue';
+			break;
+		case '#f8cd51':
+			$colorClass = 'yellow';
+			break;		
+		default:
+			$colorClass = 'blue';
+			break;
+	}($color);
+
 	?>
 	<div class="col-xs-12 col-sm-4 text-center">
-		<div class="circle-container blue hidden-xs hidden-sm">
+		<div class="circle-container <?php echo $colorClass; ?> hidden-xs hidden-sm">
 		    <div class="circle-progress">
 		        <div class="circle-text">
 		            <p class="circle-value"><?php echo thousandsCurrencyFormatCustom($completado); ?></p>
@@ -236,7 +251,7 @@ function pintaCirculo($etiqueta, $color, $objetivo, $completado) {
 		    </div>
 		    <p class="circle-footer"><?php _e("Objetivo", "os_impacto_type"); ?> <?php echo thousandsCurrencyFormat($objetivo); ?></p>
 		</div>
-		<div class="circle-container blue hidden-md hidden-lg">
+		<div class="circle-container <?php echo $colorClass; ?> hidden-md hidden-lg">
 		    <div class="circle-progress">
 		        <div class="circle-text">
 		            <p class="circle-value"><?php echo thousandsCurrencyFormatCustom($completado); ?></p>
