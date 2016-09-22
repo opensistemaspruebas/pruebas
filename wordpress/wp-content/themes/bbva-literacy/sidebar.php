@@ -9,6 +9,6 @@ if ( ! is_active_sidebar( 'sidebar-0' ) ) {
 }
 ?>
 
-<div class="colFluid">
-	<?php dynamic_sidebar( 'sidebar-0' ); ?>
-</div>
+
+<?php dynamic_sidebar( 'sidebar-0' ); ?>
+

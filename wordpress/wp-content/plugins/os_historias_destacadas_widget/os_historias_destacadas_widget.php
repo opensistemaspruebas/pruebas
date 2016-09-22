@@ -30,83 +30,254 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 
 	    public function widget($args, $instance) {
 	    
-	    	echo $args['before_widget'];
-
-	    	$historia_destacada_1 = $instance['historia_destacada_1'];
-	    	$historia_destacada_2 = $instance['historia_destacada_2'];
-	    	$historia_destacada_3 = $instance['historia_destacada_3'];
-	    	$url_historias = $instance['url_historias'];
-
-	    	$post__in = array();
-	    	if ($historia_destacada_1) {
-	    		array_push($post__in, $historia_destacada_1);
-	    	}
-	    	if ($historia_destacada_2) {
-	    		array_push($post__in, $historia_destacada_2);
-	    	}
-	    	if ($historia_destacada_3) {
-	    		array_push($post__in, $historia_destacada_3);
-	    	}
-
-	    	if (!(empty($post__in))) {
-	    		$historias = get_posts(
-	    			array(
-					    'include'   => $post__in,
-					    'post_type' => 'historia',
-					    'orderby'   => 'post__in',
-					)
-				);
-	    	}
-
-
-			?>
-
-			<div class="wrapperContent">
-			    <h2 class="section_titulo"><?php _e("Historias destacadas", "os_historias_destacadas_widget"); ?></h2>
-			    <?php if (!empty($historias)) : ?>
-			    <ul class="lista_noticias">
-			    	<?php
-			    		$i = 1;
-			    		foreach ($historias as $p) {
-
-			    			$post_content = strip_tags($p->post_content);
-			    			if (!empty($post_content)) {
-				    			$post_content = substr($post_content, 0, 80);
-								$post_content = substr($post_content, 0, strrpos($post_content, ' ')) . "...";
-							}
-
-							echo '<li id="noticia_' . $i . '" class="col-md-4 col-sm-4 col-xs-12 ">
-								    <figure class="contenidoNoticias_boxImage">' . get_the_post_thumbnail($p->ID, 'medium') . '</figure>
-								    <div class="contenidoNoticias_boxTexto">
-								        <p class="item_fecha">' . get_the_date('j F Y', $p->ID) . '</p>
-								        <h3 class="item_titulo">' . $p->post_title . '</h3>
-								        <p class="item_contenido">' . $post_content . '</p>
-								        <a target="_blank" href="' . get_permalink($p->ID) . '">' . __("Leer más", "os_historias_destacadas_widget") . '</a>
-								    </div>
-								 </li>';
-			    			$i++;
-			    		}
-			    	?>
-
-			    </ul>
-			    <p class="section_verTodos">
-			        <a href="<?php echo $url_historias; ?>" class="icon-linkInterno">
-			            <em><?php _e("Todas las historias", "os_historias_destacadas_widget"); ?></em>
-			        </a>
-			    </p>
-			    <?php else : ?>
-			    <p><?php _e("No hay historias disponibles.", "os_historias_destacadas_widget"); ?></p>
-			    <?php endif; ?>
-			</div>
+	    	?>
+			<section class="outstanding-histories pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			    <div class="container">
+			        <header class="title-description">
+			            <h1>Historias destacadas</h1>
+			            <div class="description-container">
+			                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus augue felis, porttitor quis nibh eget, ante…</p>
+			            </div>
+			        </header>
+			        <div class="card-container container-fluid mt-md mb-md">
+			            <div class="row">
+			                <div class="main-card-container col-xs-12 col-sm-6 noppading">
+			                    <!-- main-card -->
+			                    <section class="container-fluid main-card">
+			                        <header class="row header-container">
+			                            <div class="image-container nopadding col-xs-12">
+			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/historia1.png" alt="">
+			                            </div>
+			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                                <p class="date">27 Agosto 2016</p>
+			                                <h1>Beyond Ties and Cofee Mugs...</h1>
+			                            </div>
+			                        </header>
+			                        <div class="row data-container">
+			                            <p class="nopadding col-xs-9 date">27 Agosto 2016</p>
+			                            <h1 class="title nopadding col-xs-9">Beyond Ties and Cofee Mugs...</h1>
+			                            <p>Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p>
+			                            <a href="#" class="hidden-xs readmore">Leer más</a>
+			                            <footer class="row">
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-comments"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                            </footer>
+			                        </div>
+			                    </section>
+			                    <!-- EO main-card -->
+			                </div>
+			                <div class="hidden-xs secondary-card-container col-sm-6 ">
+			                    <div class="_container">
+			                        <!-- secondary-card -->
+			                        <section class="container-fluid secondary-card">
+			                            <div class="row main-container">
+			                                <div class="image-container nopadding col-xs-6">
+			                                    <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/historia2.png" alt="">
+			                                </div>
+			                                <div class="data-container pt-sm pb-sm col-xs-6">
+			                                    <div class="row">
+			                                        <div class="col-xs-12 color-grey-1">
+			                                            <span class="date">24 Agosto 2016</span>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-xs-12 color-grey-1">
+			                                            <h1>Lorem ipsum dolor sit amet...</h1>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-xs-12 color-grey-1">
+			                                            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-xs-12 colorBlue-620">
+			                                            <a href="#" class="readmore">Leer más</a>
+			                                        </div>
+			                                    </div>
+			                                    <footer class="row">
+			                                        <div class="col-xs-2">
+			                                            <div class="card-icon">
+			                                                <span class="icon bbva-icon-quote"></span>
+			                                                <div class="triangle triangle-up-left"></div>
+			                                                <div class="triangle triangle-down-right"></div>
+			                                            </div>
+			                                        </div>
+			                                        <div class="col-xs-2">
+			                                            <div class="card-icon">
+			                                                <span class="icon bbva-icon-audio"></span>
+			                                                <div class="triangle triangle-up-left"></div>
+			                                                <div class="triangle triangle-down-right"></div>
+			                                            </div>
+			                                        </div>
+			                                    </footer>
+			                                </div>
+			                            </div>
+			                        </section>
+			                        <!-- EO secondary-card -->
+			                    </div>
+			                    <div class="_container">
+			                        <!-- secondary-card -->
+			                        <section class="container-fluid secondary-card">
+			                            <div class="row main-container">
+			                                <div class="image-container nopadding col-xs-6">
+			                                    <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/historia3.png" alt="">
+			                                </div>
+			                                <div class="data-container pt-sm pb-sm col-xs-6">
+			                                    <div class="row">
+			                                        <div class="col-xs-12 color-grey-1">
+			                                            <span class="date">23 Agosto 2016</span>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-xs-12 color-grey-1">
+			                                            <h1>Lorem ipsum dolor</h1>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-xs-12 color-grey-1">
+			                                            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-xs-12 colorBlue-620">
+			                                            <a href="#" class="readmore">Leer más</a>
+			                                        </div>
+			                                    </div>
+			                                    <footer class="row">
+			                                        <div class="col-xs-2">
+			                                            <div class="card-icon">
+			                                                <span class="icon bbva-icon-quote"></span>
+			                                                <div class="triangle triangle-up-left"></div>
+			                                                <div class="triangle triangle-down-right"></div>
+			                                            </div>
+			                                        </div>
+			                                        <div class="col-xs-2">
+			                                            <div class="card-icon">
+			                                                <span class="icon bbva-icon-audio"></span>
+			                                                <div class="triangle triangle-up-left"></div>
+			                                                <div class="triangle triangle-down-right"></div>
+			                                            </div>
+			                                        </div>
+			                                    </footer>
+			                                </div>
+			                            </div>
+			                        </section>
+			                        <!-- EO secondary-card -->
+			                    </div>
+			                </div>
+			                <div class="visible-xs main-card-container col-xs-12 noppading">
+			                    <!-- main-card -->
+			                    <section class="container-fluid main-card">
+			                        <header class="row header-container">
+			                            <div class="image-container nopadding col-xs-12">
+			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/historia2.png" alt="">
+			                            </div>
+			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                                <p class="date">24 Agosto 2016</p>
+			                                <h1>Lorem ipsum dolor sit amet...</h1>
+			                            </div>
+			                        </header>
+			                        <div class="row data-container">
+			                            <p class="nopadding col-xs-9 date">24 Agosto 2016</p>
+			                            <h1 class="title nopadding col-xs-9">Lorem ipsum dolor sit amet...</h1>
+			                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+			                            <a href="#" class="hidden-xs readmore">Leer más</a>
+			                            <footer class="row">
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                            </footer>
+			                        </div>
+			                    </section>
+			                    <!-- EO main-card -->
+			                </div>
+			                <div class="visible-xs main-card-container col-xs-12 noppading">
+			                    <!-- main-card -->
+			                    <section class="container-fluid main-card">
+			                        <header class="row header-container">
+			                            <div class="image-container nopadding col-xs-12">
+			                                <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/resources/images/home/historia3.png" alt="">
+			                            </div>
+			                            <div class="hidden-xs floating-text color-white col-xs-9">
+			                                <p class="date">23 Agosto 2016</p>
+			                                <h1>Lorem ipsum dolor</h1>
+			                            </div>
+			                        </header>
+			                        <div class="row data-container">
+			                            <p class="nopadding col-xs-9 date">23 Agosto 2016</p>
+			                            <h1 class="title nopadding col-xs-9">Lorem ipsum dolor</h1>
+			                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+			                            <a href="#" class="hidden-xs readmore">Leer más</a>
+			                            <footer class="row">
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+			                            </footer>
+			                        </div>
+			                    </section>
+			                    <!-- EO main-card -->
+			                </div>
+			            </div>
+			        </div>
+			        <footer class="pt-md">
+			            <div class="row">
+			                <div class="col-md-12 text-center">
+			                    <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las Historias</a>
+			                </div>
+			            </div>
+			        </footer>
+			    </div>
+			</section>
 	    	<?php
-
-			echo $args['after_widget'];
 
 	    }
 
 
 	    public function form($instance) {
 	    	
+	    	$texto = ! empty($instance['texto']) ? $instance['texto'] : '';
 	    	$url_historias = ! empty($instance['url_historias']) ? $instance['url_historias'] : 'http://';
 	    	$historia_destacada_1 = ! empty($instance['historia_destacada_1']) ? $instance['historia_destacada_1'] : '';
 	    	$historia_destacada_2 = ! empty($instance['historia_destacada_2']) ? $instance['historia_destacada_2'] : '';
@@ -131,6 +302,9 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 			$historias = get_posts($args);
 
 	    	?>
+	    	<p><label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_historias_destacadas_widget'); ?></label>
+				<textarea class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
+			</p>
 	    	<p>
 				<label for="<?php echo $this->get_field_id('url_historias'); ?>"><?php _e('URL de página de todas las historias:', 'os_historias_destacadas_widget'); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id('url_historias'); ?>" name="<?php echo $this->get_field_name('url_historias'); ?>" type="url" value="<?php echo esc_attr($url_historias); ?>">
@@ -184,6 +358,7 @@ if (!class_exists('OS_Historias_Destacadas_Widget')) :
 
 	    function update($new_instance, $old_instance) {
 	    	$instance = array();
+	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : '';
 	    	$instance['historia_destacada_1'] = (!empty( $new_instance['historia_destacada_1'])) ? strip_tags($new_instance['historia_destacada_1']) : '';
 	    	$instance['historia_destacada_2'] = (!empty( $new_instance['historia_destacada_2'])) ? strip_tags($new_instance['historia_destacada_2']) : '';
 	    	$instance['historia_destacada_3'] = (!empty( $new_instance['historia_destacada_3'])) ? strip_tags($new_instance['historia_destacada_3']) : '';

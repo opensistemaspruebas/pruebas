@@ -16,6 +16,21 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 	class OS_Ultimas_Publicaciones_Widget extends WP_Widget {
 
+		private $meses = array(
+			'01' => 'Enero',
+			'02' => 'Febrero',
+			'03' => 'Marzo',
+			'04' => 'Abril',
+			'05' => 'Mayo',
+			'06' => 'Junio',
+			'07' => 'Julio',
+			'08' => 'Agosto',
+			'09' => 'Septiembre',
+			'10' => 'Octubre',
+			'11' => 'Noviembre',
+			'12' => 'Diciembre',
+			);
+
 
 	    function __construct() {
 	        parent::__construct(
@@ -30,68 +45,107 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 	    public function widget($args, $instance) {
 
-	    	echo $args['before_widget'];
-
-	    	$url_publicaciones = $instance['url_publicaciones'];
-
-	    	$argumentos = array(
-				'numberposts' => 3,
-				'offset' => 0,
-				'category' => 0,
-				'orderby' => 'post_date',
-				'order' => 'DESC',
-				'include' => '',
-				'exclude' => '',
-				'meta_key' => '',
-				'meta_value' =>'',
-				'post_type' => 'publicacion',
-				'post_status' => 'publish',
-				'suppress_filters' => true
+    		$args_publicaciones = array(
+				'posts_per_page'   => 3,
+				'offset'           => 0,
+				'orderby'          => 'date',
+				'order'            => 'DESC',
+				'post_type'        => 'publicacion',
+				'post_status'      => 'publish',
+				'suppress_filters' => true 
 			);
+			$publicaciones = get_posts( $args_publicaciones );
 
-			$recent_posts = wp_get_recent_posts($argumentos, ARRAY_A);
+    	?>
+			<section class="latests-posts pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			    <div class="container">
+			        <header class="title-description">
+			            <h1><?php _e('Últimas publicaciones', 'os_ultimas_publicaciones_widget') ?></h1>
+			            <div class="description-container">
+			                <p><?php _e('Cosulta las últimas publicaciones escritas por expertos de cara a mejorar tu economía y planificación de futuro.', 'os_ultimas_publicaciones_widget') ?></p>
+			            </div>
+			        </header>
+			        <section class="card-container nopadding container-fluid mt-md mb-md">
+			            <div class="row">
 
+			            	<?php foreach ($publicaciones as $key => $publicacion) : ?>
+			            		<?php
 
-			?>
+			            			$abstract_destacado = get_post_meta($publicacion->ID, 'abstract_destacado', true);
+			            			$abstract = get_post_meta($publicacion->ID, 'abstract_contenido', true);
+			            			$pdf = get_post_meta($publicacion->ID, 'pdf', true);
+			            			$fecha = $this->formatearFecha($publicacion->post_date);
+			            			$enlace_publicacion = get_post_permalink($publicacion->ID);
+			            			$imagen_id = get_post_thumbnail_id( $publicacion->ID );
+			            			$imagen = wp_get_attachment_image_src( $imagen_id, "full" )[0];
+			            			$imagen_alt = get_post_meta( $imagen_id, '_wp_attachment_image_alt', true);
 
-			<div class="wrapperContent">
-			    <h2 class="section_titulo"><?php _e("Últimas publicaciones", "os_ultimas_publicaciones_widget"); ?></h2>
-			    <?php if (!empty($recent_posts)) : ?>
-			    <ul class="lista_noticias">
-			    	<?php
-			    		$i = 1;
-			    		foreach ($recent_posts as $p) {
+			            		?>
+			            		<div class="main-card-container col-xs-12 col-sm-4 noppading">
+				                    <!-- main-card -->
+				                    <section class="container-fluid main-card">
+				                        <header class="row header-container">
+				                            <div class="image-container nopadding col-xs-12">
+				                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+				                            </div>
+				                            <div class="hidden-xs floating-text col-xs-9">
+				                                <p class="date"><?php echo $fecha; ?></p>
+				                                <h1><?php echo $publicacion->post_title; ?></h1>
+				                            </div>
+				                        </header>
+				                        <div class="row data-container">
+				                            <p class="nopadding col-xs-9 date"><?php echo $fecha; ?></p>
+				                            <h1 class="title nopadding col-xs-9"><?php echo $publicacion->post_title; ?></h1>
+				                            <p><?php echo $abstract_destacado; ?></p>
+				                            <a href="<?php echo $enlace_publicacion; ?>" class="hidden-xs readmore"><?php _e('Leer más','os_ultimas_publicaciones_widget'); ?></a>
+				                            <footer class="row">
+				                            	<?php if ($abstract) : ?>
+					                                <div class="col-xs-2 col-lg-1">
+					                                    <div class="card-icon">
+					                                        <span class="icon bbva-icon-quote"></span>
+					                                        <div class="triangle triangle-up-left"></div>
+					                                        <div class="triangle triangle-down-right"></div>
+					                                    </div>
+					                                </div>
+				                                <?php endif; ?>
+				                                <?php if (false) : ?>
+					                                <div class="col-xs-2 col-lg-1">
+					                                    <div class="card-icon">
+					                                        <span class="icon bbva-icon-audio"></span>
+					                                        <div class="triangle triangle-up-left"></div>
+					                                        <div class="triangle triangle-down-right"></div>
+					                                    </div>
+					                                </div>
+												<?php endif; ?>
+				                                <?php if ($pdf) : ?>
+					                                <div class="col-xs-2 col-lg-1">
+					                                    <div class="card-icon">
+					                                        <span class="icon bbva-icon-comments"></span>
+					                                        <div class="triangle triangle-up-left"></div>
+					                                        <div class="triangle triangle-down-right"></div>
+					                                    </div>
+					                                </div>
+				                                <?php endif; ?>
+				                            </footer>
+				                        </div>
+				                    </section>
+				                    <!-- EO main-card -->
+				                </div>
 
-			    			$post_excerpt = strip_tags($p['post_excerpt']);
-			    			$post_excerpt = substr($post_excerpt, 0, 80);
-							$post_excerpt = substr($post_excerpt, 0, strrpos($post_excerpt, ' ')) . "...";
+			            	<?php endforeach; ?>
 
-							echo '<li id="noticia_' . $i . '" class="col-md-4 col-sm-4 col-xs-12 ">
-								    <figure class="contenidoNoticias_boxImage">' . get_the_post_thumbnail($p['ID'], 'medium') . '</figure>
-								    <div class="contenidoNoticias_boxTexto">
-								        <p class="item_fecha">' . get_the_date('j F Y', $p['ID']) . '</p>
-								        <h3 class="item_titulo">' . $p['post_title'] . '</h3>
-								        <p class="item_contenido">' . $post_excerpt . '</p>
-								        <a target="_blank" href="' . get_permalink($p['ID']) . '">' . __("Leer más", "os_ultimas_publicaciones_widget") . '</a>
-								    </div>
-								 </li>';
-			    			$i++;
-			    		}
-			    	?>
-
-			    </ul>
-			    <p class="section_verTodos">
-			        <a href="<?php echo $url_publicaciones; ?>" class="icon-linkInterno">
-			            <em><?php _e("Todas las publicaciones", "os_ultimas_publicaciones_widget"); ?></em>
-			        </a>
-			    </p>
-			    <?php else : ?>
-			    <p><?php _e("No hay publicaciones disponibles.", "os_ultimas_publicaciones_widget"); ?></p>
-			    <?php endif; ?>
-			</div>
+			            </div>
+			        </section>
+			        <footer>
+			            <div class="row">
+			                <div class="col-md-12 text-center">
+			                    <a href="<?php echo $instance['url_publicaciones']; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_ultimas_publicaciones_widget') ?></a>
+			                </div>
+			            </div>
+			        </footer>
+			    </div>
+			</section>
 	    	<?php
-
-			echo $args['after_widget'];
 
 	    }
 
@@ -111,6 +165,19 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			$instance = array();
 			$instance['url_publicaciones'] = (!empty( $new_instance['url_publicaciones'])) ? strip_tags($new_instance['url_publicaciones']) : '';
 			return $instance;
+	    }
+
+	    private function formatearFecha($fecha) {
+	    	$fechaFormateada = '';
+	    	$fecha = explode(" ",$fecha);
+	    	$fecha = explode("-",$fecha[0]);
+	    	$anno = $fecha[0];
+	    	$mes = $fecha[1];
+	    	$dia = $fecha[2];
+
+	    	$fechaFormateada = $dia . ' ' . $this->meses[$mes] . ' ' . $anno;
+
+	    	return $fechaFormateada;
 	    }
 
 	}
