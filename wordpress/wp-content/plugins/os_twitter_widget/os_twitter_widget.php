@@ -41,48 +41,28 @@ if (!class_exists('OS_Twitter_Widget')) :
 
 
 	    public function widget($args, $instance) {
-
-	    	echo $args['before_widget'];
-
-
-	    	//Url donde esta nuestro JSON
-$req = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/twitter/?project=irnbsadx&baseUri=https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=BBVALiteracy&count=3';
-
-//https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=BBVALiteracy&count=3
-
-
-//Iniciamos cURL junto con la URL
-$cVimeo = curl_init($req);
-
-//Agregamos opciones necesarias para leer
-curl_setopt($cVimeo,CURLOPT_RETURNTRANSFER, TRUE);
-
-// Capturamos la URL
-$gVimeo = curl_exec($cVimeo);
-
-echo $gVimeo;
-
-//Descodificamos para leer
-/*$getVimeo = json_decode($gVimeo,true);
-
-echo $getVimeo;
-*/
-//Asociamos los campos del JSON a variables
-/*$titulo = $getVimeo['title'];
-$descripcion = $getVimeo['description'];
-$thumbnail = $getVimeo['thumbnail_url'];*/
-
-
-
-	
-			?>
-			
-			 <p><?php _e('Todo correcto.', 'os_twitter_widget'); ?></p>
-			
-			<?php
-
-			echo $args['after_widget'];
-
+	    	?>
+	    	<section class="latests-tweets pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			    <div class="container">
+			        <header>
+			            <p class="icon bbva-icon-twitter"></p>
+			            <h1 class="pt-xs pb-sm"><?php _e("Últimos tweets", "os_twitter_widget"); ?></h1>
+			            <p><?php _e("Estos son los últimos twits sobre educación financiera en el mundo", "os_twitter_widget"); ?></p>
+			        </header>
+			        <section class="container-fluid mt-md mb-md">
+			            <div class="row tweets-container">
+			            </div>
+			        </section>
+			        <footer class="pt-md">
+			            <div class="row">
+			                <div class="col-md-12 text-center">
+			                    <a href="#" class="readmore">Canal oficial de Twitter <span class="bbva-icon-link_external"></span></a>
+			                </div>
+			            </div>
+			        </footer>
+			    </div>
+			</section>
+	    	<?php
 	    }
 
 
