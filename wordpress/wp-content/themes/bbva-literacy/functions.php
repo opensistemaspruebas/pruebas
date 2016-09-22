@@ -187,3 +187,13 @@ function thousandsCurrencyFormatCustom($num) {
 	$x_display .= ' <span class="meter">' . $x_parts[$x_count_parts - 1] . '</span>';
 	return $x_display;
 }
+
+
+function os_imprimir($array,$parar) {
+	echo '<pre>';
+	print_r($array);
+	echo '</pre>';
+	if($parar) {
+		exit();
+	}
+}

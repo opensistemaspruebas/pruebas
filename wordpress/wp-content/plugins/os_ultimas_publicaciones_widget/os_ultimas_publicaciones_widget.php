@@ -76,7 +76,9 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			            			$pdf = get_post_meta($publicacion->ID, 'pdf', true);
 			            			$fecha = $this->formatearFecha($publicacion->post_date);
 			            			$enlace_publicacion = get_post_permalink($publicacion->ID);
-			            			$imagen = wp_get_attachment_image_src( get_post_thumbnail_id( $publicacion->ID ), "full" )[0];
+			            			$imagen_id = get_post_thumbnail_id( $publicacion->ID );
+			            			$imagen = wp_get_attachment_image_src( $imagen_id, "full" )[0];
+			            			$imagen_alt = $image_alt = get_post_meta( $imagen_id, '_wp_attachment_image_alt', true);
 
 			            		?>
 			            		<div class="main-card-container col-xs-12 col-sm-4 noppading">
@@ -84,7 +86,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 				                    <section class="container-fluid main-card">
 				                        <header class="row header-container">
 				                            <div class="image-container nopadding col-xs-12">
-				                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
+				                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
 				                            </div>
 				                            <div class="hidden-xs floating-text col-xs-9">
 				                                <p class="date"><?php echo $fecha; ?></p>
