@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
 	        });
 		
 		} else {
-			// No hay ninguna categoría relacionada
+			jQuery('.row.tweets-container').append('<p>No hay tweets disponibles</p>');
 		}
 	}, 'json');
 
