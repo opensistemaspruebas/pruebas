@@ -78,7 +78,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			            			$enlace_publicacion = get_post_permalink($publicacion->ID);
 			            			$imagen_id = get_post_thumbnail_id( $publicacion->ID );
 			            			$imagen = wp_get_attachment_image_src( $imagen_id, "full" )[0];
-			            			$imagen_alt = $image_alt = get_post_meta( $imagen_id, '_wp_attachment_image_alt', true);
+			            			$imagen_alt = get_post_meta( $imagen_id, '_wp_attachment_image_alt', true);
 
 			            		?>
 			            		<div class="main-card-container col-xs-12 col-sm-4 noppading">
