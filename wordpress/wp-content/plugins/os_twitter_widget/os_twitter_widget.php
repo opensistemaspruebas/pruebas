@@ -56,7 +56,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 			        <footer class="pt-md">
 			            <div class="row">
 			                <div class="col-md-12 text-center">
-			                    <a href="#" class="readmore">Canal oficial de Twitter <span class="bbva-icon-link_external"></span></a>
+			                    <a href="#" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
 			                </div>
 			            </div>
 			        </footer>
