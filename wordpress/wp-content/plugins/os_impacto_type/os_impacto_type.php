@@ -37,17 +37,18 @@ function impacto_type() {
   $args = array(
       'labels'             => $labels,
       'description'        => __( 'Descripción.', 'os_impacto_type'),
-      'public'             => true,
+      'public'             => false,
       'publicly_queryable' => true,
       'show_ui'            => true,
       'show_in_menu'       => true,
+      'show_in_nav_menus'  => false, 
       'query_var'          => true,
-      'rewrite'            => array('slug' => 'impacto'),
+      'rewrite'            => false,
       'capability_type'    => 'post',
-      'has_archive'        => true,
+      'has_archive'        => false,
       'hierarchical'       => false,
       'menu_position'      => null,
-      'menu_icon'           => 'dashicons-chart-pie',
+      'menu_icon'          => 'dashicons-chart-pie',
       'supports'           => array('title'),
       'taxonomies'         => array()
   );
