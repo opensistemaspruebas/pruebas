@@ -50,7 +50,7 @@ function publicacion_type() {
       'hierarchical'       => false,
       'menu_position'      => null,
       'menu_icon'          => 'dashicons-welcome-write-blog',
-      'supports'           => array('title'),
+      'supports'           => array('title', 'author'),
       'taxonomies'         => array('category', 'ambito_geografico')
   );
   register_post_type('publicacion', $args );
