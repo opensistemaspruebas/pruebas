@@ -60,9 +60,9 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 			<section class="latests-posts pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
 			    <div class="container">
 			        <header class="title-description">
-			            <h1><?php _e('Últimas publicaciones', 'os_ultimas_publicaciones_widget') ?></h1>
+			            <h1><?php echo $instance['titulo']; ?></h1>
 			            <div class="description-container">
-			                <p><?php _e('Cosulta las últimas publicaciones escritas por expertos de cara a mejorar tu economía y planificación de futuro.', 'os_ultimas_publicaciones_widget') ?></p>
+			                <p><?php echo $instance['texto']; ?></p>
 			            </div>
 			        </header>
 			        <section class="card-container nopadding container-fluid mt-md mb-md">
@@ -108,7 +108,7 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 					                                    </div>
 					                                </div>
 				                                <?php endif; ?>
-				                                <?php if (false) : ?>
+				                                <?php if (false) : // Cuando aparece este icono? ?>
 					                                <div class="col-xs-2 col-lg-1">
 					                                    <div class="card-icon">
 					                                        <span class="icon bbva-icon-audio"></span>
@@ -151,8 +151,19 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 
 	    public function form($instance) {
+	    	$titulo = ! empty($instance['titulo']) ? $instance['titulo'] : '';
+	    	$texto = ! empty($instance['texto']) ? $instance['texto'] : '';
 	    	$url_publicaciones = ! empty($instance['url_publicaciones']) ? $instance['url_publicaciones'] : 'http://';
 	    	?>
+	    	<p>
+				<label for="<?php echo $this->get_field_id('titulo'); ?>"><?php _e('Título:', 'os_ultimas_publicaciones_widget'); ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" type="text" value="<?php echo esc_attr($titulo); ?>">
+			</p>
+
+			<p>
+				<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_ultimas_publicaciones_widget'); ?></label>
+				<textarea rows="5" class="widefat" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>" type="text"><?php echo esc_attr($texto); ?></textarea>
+			</p>
 	    	<p>
 				<label for="<?php echo $this->get_field_id('url_publicaciones'); ?>"><?php _e('URL de página de todas las publicaciones:', 'os_ultimas_publicaciones_widget'); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id('url_publicaciones'); ?>" name="<?php echo $this->get_field_name('url_publicaciones'); ?>" type="url" value="<?php echo esc_attr($url_publicaciones); ?>">
@@ -162,8 +173,12 @@ if (!class_exists('OS_Ultimas_Publicaciones_Widget')) :
 
 
 	    function update($new_instance, $old_instance) {
-			$instance = array();
+			$instance = $old_instance;
+
+			$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : '';
+			$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : '';
 			$instance['url_publicaciones'] = (!empty( $new_instance['url_publicaciones'])) ? strip_tags($new_instance['url_publicaciones']) : '';
+
 			return $instance;
 	    }
 
