@@ -27,12 +27,18 @@ if (!class_exists('OS_Twitter_Widget')) :
 	        );
 	        wp_register_script('os_twitter_widget_js', plugins_url('js/os_twitter_widget.js' , __FILE__), array('jquery'));
 	        $translation_array = array(
-				'no_results' => __('No results found', 'os_twitter_widget'),
-				'more_results' => __('More', 'os_twitter_widget'),
-				'sort_by_asc_date' => __('Older', 'os_twitter_widget'),
-				'sort_by_desc_date' => __('Recents', 'os_twitter_widget'),
-				'sort_by_popular' => __('Popular', 'os_twitter_widget'),
-				'ajaxurl' => admin_url('admin-ajax.php'),
+				'enero' => __('Enero', 'os_twitter_widget'),
+				'febrero' => __('Febrero', 'os_twitter_widget'),
+				'marzo' => __('Marzo', 'os_twitter_widget'),
+				'abril' => __('Abril', 'os_twitter_widget'),
+				'mayo' => __('Mayo', 'os_twitter_widget'),
+				'junio' => __('Junio', 'os_twitter_widget'),
+				'julio' => __('Julio', 'os_twitter_widget'),
+				'agosto' => __('Agosto', 'os_twitter_widget'),
+				'septiembre' => __('Septiembre', 'os_twitter_widget'),
+				'octubre' => __('Octubre', 'os_twitter_widget'),
+				'noviembre' => __('Noviembre', 'os_twitter_widget'),
+				'diciembre' => __('Diciembre', 'os_twitter_widget'),
 				
 			);
 			wp_localize_script('os_twitter_widget_js', 'object_name', $translation_array);
@@ -42,7 +48,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 
 	    public function widget($args, $instance) {
 
-	    	print_r($instance);
+	    	//print_r($instance);
 
 	    	$titulo = $instance['titulo'];
 	    	$texto = $instance['texto'];

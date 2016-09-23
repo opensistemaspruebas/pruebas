@@ -1,7 +1,6 @@
 jQuery(document).ready(function() {
 
-	console.log("twitter");
-
+	//console.log("twitter");
 
 	var url_twitter = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/twitter/?project=irnbsadx&baseUri=statuses/user_timeline&count=3&user_id=775250916622602241';
 
@@ -14,7 +13,8 @@ jQuery(document).ready(function() {
 			jQuery('.row.tweets-container').html('');
 	        
 	        jQuery.each(d.data, function(i, result) {
-	        	console.log(result);
+	        	
+	        	//console.log(result);
 
 	        	var nombre = result.user.name;
 	        	var usuario = '@' + result.user.screen_name;
@@ -23,7 +23,21 @@ jQuery(document).ready(function() {
 	        	var fecha = new Date(result.created_at);
 	        	var texto = result.text;
 
-	        	var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+	        	var meses = [
+	        		object_name.enero, 
+	        		object_name.febrero,
+	        		object_name.marzo,
+	        		object_name.abril,
+	        		object_name.mayo,
+	        		object_name.junio,
+	        		object_name.julio,
+	        		object_name.agosto,
+	        		object_name.septiembre,
+	        		object_name.octubre,
+	        		object_name.noviembre,
+	        		object_name.diciembre,
+	        	];
+
 
 	        	fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()];
 	        	fecha = fecha.toString();
