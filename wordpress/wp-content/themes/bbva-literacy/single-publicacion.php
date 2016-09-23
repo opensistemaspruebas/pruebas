@@ -55,21 +55,27 @@ get_header(); ?>
                 </header>
                 <div class="row visible-xs">
                     <div class="icon-section col-xs-6">
-                        <div class="card-icon ml-xs">
-                            <span class="icon bbva-icon-quote"></span>
-                            <div class="triangle triangle-up-left"></div>
-                            <div class="triangle triangle-down-right"></div>
-                        </div>
-                        <div class="card-icon ml-xs">
-                            <span class="icon bbva-icon-audio"></span>
-                            <div class="triangle triangle-up-left"></div>
-                            <div class="triangle triangle-down-right"></div>
-                        </div>
-                        <div class="card-icon ml-xs">
-                            <span class="icon bbva-icon-comments"></span>
-                            <div class="triangle triangle-up-left"></div>
-                            <div class="triangle triangle-down-right"></div>
-                        </div>
+                        <?php if (!empty($abstract_destacado) || !empty($abstract_contenido)) : ?>
+                            <div class="card-icon ml-xs">
+                                <span class="icon bbva-icon-quote"></span>
+                                <div class="triangle triangle-up-left"></div>
+                                <div class="triangle triangle-down-right"></div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (false) : ?>
+                            <div class="card-icon ml-xs">
+                                <span class="icon bbva-icon-audio"></span>
+                                <div class="triangle triangle-up-left"></div>
+                                <div class="triangle triangle-down-right"></div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($pdf) : ?>
+                            <div class="card-icon ml-xs">
+                                <span class="icon bbva-icon-comments"></span>
+                                <div class="triangle triangle-up-left"></div>
+                                <div class="triangle triangle-down-right"></div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="share-rrss-section col-xs-offset-4 col-xs-2 rrss-xs">
                         <span class="icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content='<span class="bbva-icon-twitter_link twitter-icon mr-xs"></span>
@@ -81,21 +87,27 @@ get_header(); ?>
                 </div>
                 <div class="row mb-xs hidden-xs">
                     <div class="icon-section col-sm-offset-2 col-sm-2">
-                        <div class="card-icon ml-xs">
-                            <span class="icon bbva-icon-quote"></span>
-                            <div class="triangle triangle-up-left"></div>
-                            <div class="triangle triangle-down-right"></div>
-                        </div>
-                        <div class="card-icon ml-xs">
-                            <span class="icon bbva-icon-audio"></span>
-                            <div class="triangle triangle-up-left"></div>
-                            <div class="triangle triangle-down-right"></div>
-                        </div>
-                        <div class="card-icon ml-xs">
-                            <span class="icon bbva-icon-comments"></span>
-                            <div class="triangle triangle-up-left"></div>
-                            <div class="triangle triangle-down-right"></div>
-                        </div>
+                        <?php if (!empty($abstract_destacado) || !empty($abstract_contenido)) : ?>
+                            <div class="card-icon ml-xs">
+                                <span class="icon bbva-icon-quote"></span>
+                                <div class="triangle triangle-up-left"></div>
+                                <div class="triangle triangle-down-right"></div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (false) : ?>
+                            <div class="card-icon ml-xs">
+                                <span class="icon bbva-icon-audio"></span>
+                                <div class="triangle triangle-up-left"></div>
+                                <div class="triangle triangle-down-right"></div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($pdf) : ?>
+                            <div class="card-icon ml-xs">
+                                <span class="icon bbva-icon-comments"></span>
+                                <div class="triangle triangle-up-left"></div>
+                                <div class="triangle triangle-down-right"></div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="share-rrss-section col-sm-4 col-sm-offset-3">
                         <p class="mr-xs"><?php _e('Compartir en', 'os_publicacion_type'); ?></p>
@@ -173,7 +185,7 @@ get_header(); ?>
                             </div>
                             <div class="col-xs-11">
                                 <h2><?php echo mb_strtoupper($author->data->display_name, 'UTF-8'); ?></h2>
-                                <p>Licenciada en Economía</p>
+                                <p><?php echo get_the_author_meta('cargo', $author->data->ID); ?></p>
                             </div>
                         </div>
                     </div>
@@ -209,6 +221,7 @@ get_header(); ?>
                 <div class="container content-wrap">
                     <h1 class="mt-lg mb-md"><?php _e('Información adicional', 'os_publicacion_type'); ?></h1>
                     <div class="row additional-info mb-md">
+                        <?php if (!empty($publication_date)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -221,6 +234,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($jel_code)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -233,6 +248,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($type)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -245,6 +262,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($edition)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -257,6 +276,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($ambito_geografico)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -269,6 +290,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($editorial)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -281,6 +304,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($target_audiences)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -293,6 +318,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($organization_name)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -305,6 +332,8 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (!empty($number_of_pages)) : ?>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -317,6 +346,7 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </section>
