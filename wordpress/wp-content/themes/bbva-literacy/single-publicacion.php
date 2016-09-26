@@ -41,6 +41,8 @@ get_header(); ?>
 
     $authors = get_coauthors();
 
+    $relates_posts = get_posts();
+
 ?>
     
 <div class="contents">
@@ -199,7 +201,7 @@ get_header(); ?>
             <div class="container content-wrap">
                 <h1 class="mt-lg mb-md"><?php _e('Fuente', 'os_publicacion_type'); ?></h1>
                 <div class="source">
-                    <a href="<?php echo $source_url; ?>"><?php echo $source_url; ?></a>
+                    <a target="_blank" href="<?php echo $source_url; ?>"><?php echo $source_url; ?></a>
                 </div>
             </div>
         </section>
@@ -352,6 +354,7 @@ get_header(); ?>
             </section>
         <?php endif; ?>
     </article>
+
     <!-- latests-posts -->
     <section class="latests-posts pt-xl pb-lg wow fadeInUp">
         <div class="container">

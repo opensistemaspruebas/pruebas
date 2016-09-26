@@ -54,7 +54,13 @@ function add_search_meta() {
     if (in_array($post_type, $types) && is_single()) : $p = get_post(get_the_ID()); $attrs = get_atts($p);
     	$post_content = '';
     	if ($post_type == 'publicacion') {
-    		$post_content = get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
+    		$abstract_destacado = get_post_meta($p->ID, 'abstract_destacado', true);
+    		$abstract_contenido = get_post_meta($p->ID, 'abstract_contenido', true);
+    		if (empty($abstract_destacado) && empty($abstract_contenido)) {
+    			$post_content = $p->post_content;
+    		} else {
+    			$post_content = get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
+    		}
     	} else {
     		$post_content = $p->post_content;
     	}

@@ -11214,7 +11214,7 @@ $screen-lg-min: 1200px;
 }
 
 /* line 37, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-.text-300, .main-card .data-container p, .main-card .data-container a.readmore, .block-outstanding-image p, .title-description .description-container p, .slider .slider-caption p, .latests-tweets header p:last-child, .latests-tweets footer a.readmore, .tweet .data-container .tweet-content, .tweet .data-container .statistics .likes > span:first-child, .tweet .data-container .statistics .share > span:first-child, .data-grid section .grid-wrapper .data-block .description, .data-grid section .grid-wrapper .data-block .link, .data-grid footer .wrap, .consultant-main-data-wrapper > h4, .consultant-main-data-wrapper > p, .consultant-secondary-data-wrapper .expertise-wrapper p span, .summit .block-content-center p, .summit .block-content-center .link, .grid-footer a.readmore, #publishing-view .container > header .mobile-filter, #publishing-view #consultant-cv > header .back-wrapper > header .mobile-filter, #consultant-cv > header #publishing-view .back-wrapper > header .mobile-filter, #publishing-view .nav-content .submenu-content > header .mobile-filter, .nav-content #publishing-view .submenu-content > header .mobile-filter, #publishing-view .container > header .sort-items-container a, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a, #publishing-view .nav-content .submenu-content > header .sort-items-container a, .nav-content #publishing-view .submenu-content > header .sort-items-container a, #publishing-view .container > header .filter, #publishing-view #consultant-cv > header .back-wrapper > header .filter, #consultant-cv > header #publishing-view .back-wrapper > header .filter, #publishing-view .nav-content .submenu-content > header .filter, .nav-content #publishing-view .submenu-content > header .filter, .publication .header-section .icon-section .card-icon .icon, .publication section p, .publication section.content-section .pdf-rectangle p, .publication section.authors-section h2, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p {
+.text-300, .main-card .data-container p, .main-card .data-container a.readmore, .block-outstanding-image p, .title-description .description-container p, .slider .slider-caption p, .latests-tweets header p:last-child, .latests-tweets footer a.readmore, .tweet .data-container .tweet-content, .tweet .data-container .statistics .likes > span:first-child, .tweet .data-container .statistics .share > span:first-child, .data-grid section .grid-wrapper .data-block .description, .data-grid section .grid-wrapper .data-block .link, .data-grid footer .wrap, .consultant-main-data-wrapper > h4, .consultant-main-data-wrapper > p, .consultant-secondary-data-wrapper .expertise-wrapper p span, .summit .block-content-center p, .summit .block-content-center .link, .grid-footer a.readmore, #publishing-view .main-wrapper > header .mobile-filter, #publishing-view .main-wrapper > header .sort-items-container a, #publishing-view .main-wrapper > header .filter, .publication .header-section .icon-section .card-icon .icon, .publication section p, .publication section.content-section .pdf-rectangle p, .publication section.authors-section h2, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p {
   font-size: 15px;
 }
 
@@ -11239,7 +11239,7 @@ $screen-lg-min: 1200px;
 }
 
 /* line 42, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-.text-500, #consultant-cv > header .back-wrapper a .icon, #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a span, .header .header-logo .launcher-menu-mobil {
+.text-500, #consultant-cv > header .back-wrapper a .icon, #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a span, .header .header-logo .launcher-menu-mobil, #publishing-view .main-wrapper > header h2 {
   font-size: 22px;
 }
 
@@ -11289,7 +11289,7 @@ $screen-lg-min: 1200px;
 }
 
 /* line 52, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-.text-720, .consultant-main-data-wrapper > h1, #publishing-view .container > header h1, #publishing-view #consultant-cv > header .back-wrapper > header h1, #consultant-cv > header #publishing-view .back-wrapper > header h1, #publishing-view .nav-content .submenu-content > header h1, .nav-content #publishing-view .submenu-content > header h1, .publication .header-section header h1 {
+.text-720, .consultant-main-data-wrapper > h1, #publishing-view .main-wrapper > header h1, .publication .header-section header h1 {
   font-size: 42px;
 }
 
@@ -11343,7 +11343,7 @@ $screen-lg-min: 1200px;
     font-size: 13px;
   }
   /* line 66, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-  .text-300, .main-card .data-container p, .main-card .data-container a.readmore, .block-outstanding-image p, .title-description .description-container p, .slider .slider-caption p, .latests-tweets header p:last-child, .latests-tweets footer a.readmore, .tweet .data-container .tweet-content, .tweet .data-container .statistics .likes > span:first-child, .tweet .data-container .statistics .share > span:first-child, .data-grid section .grid-wrapper .data-block .description, .data-grid section .grid-wrapper .data-block .link, .data-grid footer .wrap, .consultant-main-data-wrapper > h4, .consultant-main-data-wrapper > p, .consultant-secondary-data-wrapper .expertise-wrapper p span, .summit .block-content-center p, .summit .block-content-center .link, .grid-footer a.readmore, #publishing-view .container > header .mobile-filter, #publishing-view #consultant-cv > header .back-wrapper > header .mobile-filter, #consultant-cv > header #publishing-view .back-wrapper > header .mobile-filter, #publishing-view .nav-content .submenu-content > header .mobile-filter, .nav-content #publishing-view .submenu-content > header .mobile-filter, #publishing-view .container > header .sort-items-container a, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a, #publishing-view .nav-content .submenu-content > header .sort-items-container a, .nav-content #publishing-view .submenu-content > header .sort-items-container a, #publishing-view .container > header .filter, #publishing-view #consultant-cv > header .back-wrapper > header .filter, #consultant-cv > header #publishing-view .back-wrapper > header .filter, #publishing-view .nav-content .submenu-content > header .filter, .nav-content #publishing-view .submenu-content > header .filter, .publication .header-section .icon-section .card-icon .icon, .publication section p, .publication section.content-section .pdf-rectangle p, .publication section.authors-section h2, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p {
+  .text-300, .main-card .data-container p, .main-card .data-container a.readmore, .block-outstanding-image p, .title-description .description-container p, .slider .slider-caption p, .latests-tweets header p:last-child, .latests-tweets footer a.readmore, .tweet .data-container .tweet-content, .tweet .data-container .statistics .likes > span:first-child, .tweet .data-container .statistics .share > span:first-child, .data-grid section .grid-wrapper .data-block .description, .data-grid section .grid-wrapper .data-block .link, .data-grid footer .wrap, .consultant-main-data-wrapper > h4, .consultant-main-data-wrapper > p, .consultant-secondary-data-wrapper .expertise-wrapper p span, .summit .block-content-center p, .summit .block-content-center .link, .grid-footer a.readmore, #publishing-view .main-wrapper > header .mobile-filter, #publishing-view .main-wrapper > header .sort-items-container a, #publishing-view .main-wrapper > header .filter, .publication .header-section .icon-section .card-icon .icon, .publication section p, .publication section.content-section .pdf-rectangle p, .publication section.authors-section h2, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p {
     font-size: 13px;
   }
   /* line 67, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
@@ -11367,7 +11367,7 @@ $screen-lg-min: 1200px;
     font-size: 18px;
   }
   /* line 72, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-  .text-500, #consultant-cv > header .back-wrapper a .icon, #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a span, .header .header-logo .launcher-menu-mobil {
+  .text-500, #consultant-cv > header .back-wrapper a .icon, #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a span, .header .header-logo .launcher-menu-mobil, #publishing-view .main-wrapper > header h2 {
     font-size: 22px;
   }
   /* line 73, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
@@ -11407,7 +11407,7 @@ $screen-lg-min: 1200px;
     font-size: 24px;
   }
   /* line 82, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-  .text-720, .consultant-main-data-wrapper > h1, #publishing-view .container > header h1, #publishing-view #consultant-cv > header .back-wrapper > header h1, #consultant-cv > header #publishing-view .back-wrapper > header h1, #publishing-view .nav-content .submenu-content > header h1, .nav-content #publishing-view .submenu-content > header h1, .publication .header-section header h1 {
+  .text-720, .consultant-main-data-wrapper > h1, #publishing-view .main-wrapper > header h1, .publication .header-section header h1 {
     font-size: 25px;
   }
   /* line 83, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
@@ -12346,7 +12346,7 @@ form label {
 .main-card {
   font-family: "BentonSans";
   height: 99%;
-  box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 1px -1px;
 }
 
 /* line 6, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
@@ -12384,12 +12384,17 @@ form label {
   color: white;
 }
 
-/* line 26, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 22, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+.main-card header .floating-text .date {
+  font-weight: 500;
+}
+
+/* line 27, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card header .floating-text h1 {
   font-weight: bold;
 }
 
-/* line 33, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 34, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card .data-container {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12405,14 +12410,14 @@ form label {
   padding: 0 30px;
 }
 
-/* line 41, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 42, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card .data-container .date {
   margin: 0;
-  color: #bdbdbd;
+  color: #9b9b9b;
   font-weight: 500;
 }
 
-/* line 48, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 49, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card .data-container h1 {
   font-weight: 500;
   margin: 0;
@@ -12422,7 +12427,7 @@ form label {
   color: #121212;
 }
 
-/* line 56, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 57, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card .data-container p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -12434,34 +12439,34 @@ form label {
   color: #666666;
 }
 
-/* line 63, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 64, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card .data-container a.readmore {
   font-weight: 500;
   color: #2a86ca;
 }
 
-/* line 67, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 68, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 .main-card .data-container a.readmore:hover {
   text-decoration: none;
 }
 
 @media (max-width: 767px) {
-  /* line 33, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+  /* line 34, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
   .main-card .data-container {
     height: 50%;
   }
-  /* line 71, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+  /* line 72, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
   .main-card .data-container p {
     color: #121212;
   }
 }
 
-/* line 77, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 78, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 footer > div:not(:first-child) {
   padding-left: 25px;
 }
 
-/* line 80, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 81, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 footer .card-icon {
   position: relative;
   height: 30px;
@@ -12478,21 +12483,21 @@ footer .card-icon {
   text-align: center;
 }
 
-/* line 89, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 90, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 footer .card-icon .triangle {
   height: 100%;
   width: 0;
   position: absolute;
 }
 
-/* line 94, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 95, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 footer .card-icon .icon {
   z-index: 5;
   color: #666666;
   opacity: 0.6;
 }
 
-/* line 99, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 100, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 footer .card-icon .triangle-up-left {
   border-left: 0px solid transparent;
   border-right: 30px solid transparent;
@@ -12500,7 +12505,7 @@ footer .card-icon .triangle-up-left {
   left: 0;
 }
 
-/* line 106, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
+/* line 107, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_main-card.scss */
 footer .card-icon .triangle-down-right {
   border-left: 30px solid transparent;
   border-right: 0px solid transparent;
@@ -13282,6 +13287,7 @@ footer .card-icon .triangle-down-right {
 /* line 52, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes span, .tweet .data-container .statistics .share span {
   font-size: 13px;
+  font-weight: 600;
 }
 
 /* line 54, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
@@ -13289,12 +13295,17 @@ footer .card-icon .triangle-down-right {
   padding-left: 20px;
 }
 
+/* line 57, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+.tweet .data-container .statistics .date {
+  font-weight: 600;
+}
+
 @media (max-width: 767px) {
-  /* line 58, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  /* line 59, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
   .tweet .data-container .statistics .share, .tweet .data-container .statistics .date {
     padding-left: 10px;
   }
-  /* line 61, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  /* line 62, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
   .tweet .data-container .statistics .likes, .tweet .data-container .statistics .date {
     font-size: 13px;
   }
@@ -13339,9 +13350,10 @@ footer .card-icon .triangle-down-right {
 #consultant-cv > header .back-wrapper a .text {
   position: absolute;
   margin-top: 6px;
+  font-weight: 500;
 }
 
-/* line 38, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv > header img {
   width: 100%;
   max-height: 450px;
@@ -13349,13 +13361,13 @@ footer .card-icon .triangle-down-right {
 }
 
 @media (max-width: 768px) {
-  /* line 38, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+  /* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
   #consultant-cv > header img {
     margin-top: 0;
   }
 }
 
-/* line 48, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 49, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv > header .title-wrapper {
   position: absolute;
   top: 0;
@@ -13375,7 +13387,7 @@ footer .card-icon .triangle-down-right {
           align-items: center;
 }
 
-/* line 58, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 59, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv > header .title-wrapper h1 {
   font-family: "TiemposHeadline";
   font-weight: 500;
@@ -13390,32 +13402,32 @@ footer .card-icon .triangle-down-right {
   text-overflow: -o-ellipsis-lastline;
 }
 
-/* line 72, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 73, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv section .info-wrapper {
   position: relative;
 }
 
-/* line 76, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 77, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper {
   margin: 105px 0 95px 0;
 }
 
-/* line 80, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 81, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a:not(:first-child) {
   margin-left: 15px;
 }
 
-/* line 83, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+/* line 84, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
 #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a:hover, #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper a:link {
   text-decoration: none;
 }
 
 @media (max-width: 768px) {
-  /* line 75, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+  /* line 76, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
   #consultant-cv section .info-wrapper .secondary-data {
     position: initial;
   }
-  /* line 95, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
+  /* line 96, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-cv.scss */
   #consultant-cv section .info-wrapper .secondary-data .contacts-wrapper {
     position: absolute;
     top: 14px;
@@ -13752,7 +13764,7 @@ footer .card-icon .triangle-down-right {
 }
 
 /* line 7, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_grid-footer.scss */
-.grid-footer a.readmore:hover {
+.grid-footer a.readmore:hover, .grid-footer a.readmore:link {
   text-decoration: none;
 }
 
@@ -15735,86 +15747,91 @@ footer .card-icon .triangle-down-right {
 }
 
 /* line 5, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header, #publishing-view #consultant-cv > header .back-wrapper > header, #consultant-cv > header #publishing-view .back-wrapper > header, #publishing-view .nav-content .submenu-content > header, .nav-content #publishing-view .submenu-content > header {
-  padding: 40px 0 25px 0;
+#publishing-view .main-wrapper > header {
+  padding: 40px 15px 25px 15px;
 }
 
 @media (max-width: 768px) {
   /* line 5, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-  #publishing-view .container > header, #publishing-view #consultant-cv > header .back-wrapper > header, #consultant-cv > header #publishing-view .back-wrapper > header, #publishing-view .nav-content .submenu-content > header, .nav-content #publishing-view .submenu-content > header {
-    padding: 20px 0 0 0;
+  #publishing-view .main-wrapper > header {
+    padding: 20px 15px 0 15px;
   }
 }
 
 /* line 12, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .mobile-filter, #publishing-view #consultant-cv > header .back-wrapper > header .mobile-filter, #consultant-cv > header #publishing-view .back-wrapper > header .mobile-filter, #publishing-view .nav-content .submenu-content > header .mobile-filter, .nav-content #publishing-view .submenu-content > header .mobile-filter {
+#publishing-view .main-wrapper > header .mobile-filter {
   font-weight: 500;
   padding: 17px 0;
   text-align: center;
-  border-top: solid 2px #cccccc;
-  border-bottom: solid 2px #cccccc;
+  border-top: solid 1px #D3D3D3;
+  border-bottom: solid 1px #D3D3D3;
 }
 
 /* line 21, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header h1, #publishing-view #consultant-cv > header .back-wrapper > header h1, #consultant-cv > header #publishing-view .back-wrapper > header h1, #publishing-view .nav-content .submenu-content > header h1, .nav-content #publishing-view .submenu-content > header h1 {
+#publishing-view .main-wrapper > header h1 {
   font-weight: 700;
-  margin-bottom: 42px;
 }
 
 @media (max-width: 768px) {
   /* line 21, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-  #publishing-view .container > header h1, #publishing-view #consultant-cv > header .back-wrapper > header h1, #consultant-cv > header #publishing-view .back-wrapper > header h1, #publishing-view .nav-content .submenu-content > header h1, .nav-content #publishing-view .submenu-content > header h1 {
-    margin-bottom: 30px;
+  #publishing-view .main-wrapper > header h1 {
     text-align: center;
   }
 }
 
-/* line 32, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .sort-items-container, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container, #publishing-view .nav-content .submenu-content > header .sort-items-container, .nav-content #publishing-view .submenu-content > header .sort-items-container {
+/* line 30, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header h2 {
+  width: 65%;
+  font-weight: normal;
+  margin-bottom: 50px;
+}
+
+/* line 37, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .sort-items-container {
   display: inline-block;
 }
 
-/* line 35, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .sort-items-container a, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a, #publishing-view .nav-content .submenu-content > header .sort-items-container a, .nav-content #publishing-view .submenu-content > header .sort-items-container a {
+/* line 40, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .sort-items-container a {
   font-weight: 500;
   color: #666666;
 }
 
-/* line 40, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .sort-items-container a:not(:first-child), #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a:not(:first-child), #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a:not(:first-child), #publishing-view .nav-content .submenu-content > header .sort-items-container a:not(:first-child), .nav-content #publishing-view .submenu-content > header .sort-items-container a:not(:first-child) {
+/* line 45, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .sort-items-container a:not(:first-child) {
   margin-left: 35px;
 }
 
-/* line 44, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .sort-items-container a:hover, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a:hover, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a:hover, #publishing-view .nav-content .submenu-content > header .sort-items-container a:hover, .nav-content #publishing-view .submenu-content > header .sort-items-container a:hover {
+/* line 49, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .sort-items-container a:hover {
   text-decoration: none;
   color: #da3851;
 }
 
 @media (max-width: 768px) {
-  /* line 32, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-  #publishing-view .container > header .sort-items-container, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container, #publishing-view .nav-content .submenu-content > header .sort-items-container, .nav-content #publishing-view .submenu-content > header .sort-items-container {
+  /* line 37, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+  #publishing-view .main-wrapper > header .sort-items-container {
     width: 100%;
     margin-top: 15px;
   }
-  /* line 54, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-  #publishing-view .container > header .sort-items-container a, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a, #publishing-view .nav-content .submenu-content > header .sort-items-container a, .nav-content #publishing-view .submenu-content > header .sort-items-container a {
+  /* line 59, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+  #publishing-view .main-wrapper > header .sort-items-container a {
     display: inline-block;
     width: 32%;
   }
-  /* line 58, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-  #publishing-view .container > header .sort-items-container a .text, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a .text, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a .text, #publishing-view .nav-content .submenu-content > header .sort-items-container a .text, .nav-content #publishing-view .submenu-content > header .sort-items-container a .text {
+  /* line 63, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+  #publishing-view .main-wrapper > header .sort-items-container a .text {
     display: inline-block;
     width: 45px;
   }
-  /* line 63, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-  #publishing-view .container > header .sort-items-container a:not(:first-child), #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container a:not(:first-child), #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container a:not(:first-child), #publishing-view .nav-content .submenu-content > header .sort-items-container a:not(:first-child), .nav-content #publishing-view .submenu-content > header .sort-items-container a:not(:first-child) {
+  /* line 68, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+  #publishing-view .main-wrapper > header .sort-items-container a:not(:first-child) {
     margin: 0;
   }
 }
 
-/* line 69, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .sort-items-container .arrowUp, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container .arrowUp, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container .arrowUp, #publishing-view .nav-content .submenu-content > header .sort-items-container .arrowUp, .nav-content #publishing-view .submenu-content > header .sort-items-container .arrowUp {
+/* line 74, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .sort-items-container .arrowUp {
   font-size: 25px;
   display: inline-block;
   -webkit-transform: rotate(-270deg);
@@ -15822,8 +15839,8 @@ footer .card-icon .triangle-down-right {
           transform: rotate(-270deg);
 }
 
-/* line 75, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .sort-items-container .arrowDown, #publishing-view #consultant-cv > header .back-wrapper > header .sort-items-container .arrowDown, #consultant-cv > header #publishing-view .back-wrapper > header .sort-items-container .arrowDown, #publishing-view .nav-content .submenu-content > header .sort-items-container .arrowDown, .nav-content #publishing-view .submenu-content > header .sort-items-container .arrowDown {
+/* line 80, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .sort-items-container .arrowDown {
   font-size: 25px;
   display: inline-block;
   -webkit-transform: rotate(-90deg);
@@ -15831,16 +15848,16 @@ footer .card-icon .triangle-down-right {
           transform: rotate(-90deg);
 }
 
-/* line 82, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .filter, #publishing-view #consultant-cv > header .back-wrapper > header .filter, #consultant-cv > header #publishing-view .back-wrapper > header .filter, #publishing-view .nav-content .submenu-content > header .filter, .nav-content #publishing-view .submenu-content > header .filter {
+/* line 87, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .filter {
   font-weight: 500;
   float: right;
   margin-top: 10px;
   color: #2a86ca;
 }
 
-/* line 89, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
-#publishing-view .container > header .filter:hover, #publishing-view #consultant-cv > header .back-wrapper > header .filter:hover, #consultant-cv > header #publishing-view .back-wrapper > header .filter:hover, #publishing-view .nav-content .submenu-content > header .filter:hover, .nav-content #publishing-view .submenu-content > header .filter:hover {
+/* line 94, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_publishing.scss */
+#publishing-view .main-wrapper > header .filter:hover {
   text-decoration: none;
 }
 

@@ -1,5 +1,14 @@
 jQuery(document).ready(function() {
 
+
+	jQuery("input#inputText").focusin(function() {
+		jQuery(this).val("");
+		jQuery("div#caja_categorias").hide();
+		jQuery("div#caja_paises").hide();
+		jQuery("div#caja_autores").hide();
+	});
+
+
 	// Autocompletado de categorías, autores y ámbitos geográficos
 	jQuery("input#inputText").on('input', function() {
 		myText = getCleanedString(jQuery(this).val());
@@ -51,63 +60,6 @@ jQuery(document).ready(function() {
 		} else {
 			jQuery(this).parent().clone().appendTo("div#caja_seleccion ul");
 			jQuery(this).parent().addClass("selected");
-			
-			query = '';
-			wp_double_array = '';
-			wp_text_array = '';
-
-			jQuery("ul#seleccion li").each(function() {
-				if (jQuery(this).hasClass("autor")) {
-					wp_text_array += '+"' + jQuery(this).attr("term-id") + '"';
-				} else {
-					wp_double_array += '+"' + jQuery(this).attr("term-id") + '"';
-				}
-			});
-
-			if (wp_text_array) {
-				query += 'wp_text_array:(' + wp_text_array + ')';
-				if (wp_double_array) {
-					query += 'AND wp_double_array:(' + wp_double_array + ')';
-				}
-			} else if (wp_double_array) {
-				query += 'wp_double_array:(' + wp_double_array + ')';
-			} else {
-				return false;
-			}
-
-
-			var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + '&return=wp_double_array%2Cwp_text_array&project=is8lyryw';
-			
-			var terms = [];
-			var authors = [];
-			
-			jQuery.get(url_buscador, function(d, terms, authors) {
-				
-				if (d.code === 200 && d.data.hits.found > 0) {
-			        
-			        jQuery.each(d.data.hits.hit, function(i, result) {
-			        	
-			        	var terms_aux = result.fields.wp_double_array;
-			        	var authors_aux = result.fields.wp_text_array;
-			        	
-			        	for (var i = 0; i < terms_aux.length; i++) {
-			        		terms.push(terms_aux[i]);
-			        	}
-			        	
-			        	for (var j = 0; j < authors_aux.length; j++) {
-			        		authors.push(authors_aux[j]);
-			        	}
-			        
-			        });
-				
-				} else {
-					// No hay ninguna categoría relacionada
-				}
-			}, 'json');
-
-			console.log(terms);
-			console.log(authors);
-
 		}
 	});
 
@@ -128,76 +80,67 @@ jQuery(document).ready(function() {
 		
 		var text = getCleanedString(jQuery("input#inputText").val());
 
-		categorias = "";
-		autor = "";
-		paises = "";
+		categorias = [];
+		autores = [];
+		paises = [];
 
-		jQuery("div#caja_seleccion ul li.categoria").each(function() {
-			categorias += getCleanedString(jQuery(this).text()) + ',';
+		jQuery("div#caja_seleccion ul li").each(function() {
+            if(jQuery(this).hasClass("autor"))
+				autores.push(getCleanedString(jQuery(this).text()));
+			else if(jQuery(this).hasClass("categoria"))
+				categorias.push(getCleanedString(jQuery(this).attr("term-id")));
+			else if(jQuery(this).hasClass("pais"))
+				paises.push(getCleanedString(jQuery(this).attr("term-id")));
 		});
-		categorias = categorias.substring(0, categorias.length - 1);
-		
-		var tags = [];
-		var categories = jQuery("#selectCategory").val();
-		var authors = jQuery("#selectAuthor").val();
-		var countries = jQuery("#selectCountry").val();
-		var sortBy = jQuery("#inputSortBy").val();
-		var size = jQuery("#size").val();
-		var start = jQuery("#start").val();
-		var topic = jQuery("#topic").val();
 
-		tags = (categories) ? tags.concat(categories) : tags;
-		tags = (authors) ? tags.concat(authors) : tags;
-		tags = (countries) ? tags.concat(countries) : tags;
+		query_paises="";
+		query_autores="";
+		query_categorias="";
 
-		if (text || tags.length > 0) {
+		filter = false;
+		if(paises.length > 0){
+			filter = true;
+			query_paises = "(or wp_double_array:" + paises.join(" wp_double_array:") + ")";
+		}
+		if(autores.length > 0){
+			filter = true;
+			query_autores = "(or wp_text_array:'" + autores.join("' wp_text_array:'") + "')";
+		}
+		if(categorias.length > 0){
+			filter = true;
+			query_categorias = "(or wp_double_array:" + categorias.join(" wp_double_array:") + ")";	
+		}
+			
+		if(text == "" && filter == false)
+			return false;
 
-			var query = '';
+		var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + text + '*&project=is8lyryw';
+		if(filter)
+			url_buscador += '&fq=(and '+query_categorias+ ' ' + query_autores + ' ' + query_paises + ')';
 
-			if (tags.length > 0) {
-				for (var i = 0; i < tags.length; i++) { 
-					tags[i] = getCleanedString(tags[i]);
-				}
+		jQuery.get(url_buscador, function(d) {
+
+			if (d.code === 200 && d.data.hits.found > 0) {
+				var results = '<ul>';
+		        jQuery.each(d.data.hits.hit, function(i, result) {
+		        	var image = (result.fields.image_src !== undefined) ? result.fields.image_src : '';
+		            results += '<li><a href="/' + result.fields.resourcename + '"target="_blank">' + result.fields.title + ' ' + result.fields.date + ' ' + result.fields.category + ' ' + image + '</a></li>';
+		        });
+		        jQuery('#results').html(results + '</ul>');
+		        if (d.data.hits.found <= size) {
+					jQuery('div#moreLink').empty();
+		        } else {
+		        	jQuery('div#moreLink').html('<a href="javascript:void(0);" name="more" id="more">+ ' + object_name.more_results + '</a>');
+		        }
+		        jQuery('div#sortLinks').html('<a href="javascript:void(0);" class="changeSort" name="sortByAscDate" id="sortByAscDate">' +  object_name.sort_by_asc_date + '</a> <a href="javascript:void(0);" class="changeSort" name="sortByDescDate" id="sortByDescDate">' +  object_name.sort_by_desc_date + '</a> <a href="javascript:void(0);" class="changeSort" name="sortByPopular" id="sortByPopular">' +  object_name.sort_by_popular + '</a>');
+			} else {
+				jQuery('div#sortLinks').empty();
+				jQuery('div#moreLink').empty();
+				jQuery('#results').html(object_name.no_results);
 			}
 
-			var tags_string = (tags.length > 0) ? '"' + tags.join('"+"') + '"' : '';
+		}, 'json');
 
-			text = getCleanedString(text);
-			tags_string = tags_string;
-
-			var aux = (sortBy == "sortByPopular") ? ' AND (category:"interesante")' : '';
-			sortBy = (sortBy == "sortByPopular") ? 'date desc' : sortBy;
-			query += (text) ? '(title:("' + text + '") OR content:("' + text + '"))' : '';
-			query += (text && tags_string) ? ' AND ' : '';
-			query += (tags_string) ? '(category:(' + tags_string + '))' : '';
-
-			//var url_buscador = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/search?&q.parser=lucene&q=' + query + ' AND (topic:"publicacion")' + aux + '&return=title%2Ctopic%2Ccategory%2Cdate%2Cimage_src' + '&sort=' + sortBy + '&size=' + size + '&start=' + start + '&project=irnbsadx';
-			var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + text + '*&project=is8lyryw';
-
-			jQuery.get(url_buscador, function(d) {
-
-				if (d.code === 200 && d.data.hits.found > 0) {
-					var results = '<ul>';
-			        jQuery.each(d.data.hits.hit, function(i, result) {
-			        	var image = (result.fields.image_src !== undefined) ? result.fields.image_src : '';
-			            results += '<li><a href="/' + result.fields.resourcename + '"target="_blank">' + result.fields.title + ' ' + result.fields.date + ' ' + result.fields.category + ' ' + image + '</a></li>';
-			        });
-			        jQuery('#results').html(results + '</ul>');
-			        if (d.data.hits.found <= size) {
-						jQuery('div#moreLink').empty();
-			        } else {
-			        	jQuery('div#moreLink').html('<a href="javascript:void(0);" name="more" id="more">+ ' + object_name.more_results + '</a>');
-			        }
-			        jQuery('div#sortLinks').html('<a href="javascript:void(0);" class="changeSort" name="sortByAscDate" id="sortByAscDate">' +  object_name.sort_by_asc_date + '</a> <a href="javascript:void(0);" class="changeSort" name="sortByDescDate" id="sortByDescDate">' +  object_name.sort_by_desc_date + '</a> <a href="javascript:void(0);" class="changeSort" name="sortByPopular" id="sortByPopular">' +  object_name.sort_by_popular + '</a>');
-				} else {
-					jQuery('div#sortLinks').empty();
-					jQuery('div#moreLink').empty();
-					jQuery('#results').html(object_name.no_results);
-				}
-
-			}, 'json');
-
-		}
 
 		return true;
 	
