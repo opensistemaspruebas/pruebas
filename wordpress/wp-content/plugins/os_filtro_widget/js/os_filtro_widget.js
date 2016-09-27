@@ -12,6 +12,9 @@ jQuery(document).ready(function() {
 	// Autocompletado de categorías, autores y ámbitos geográficos
 	jQuery("input#inputText").on('input', function() {
 		myText = getCleanedString(jQuery(this).val());
+		if (myText.length < 3) {
+			return false;
+		}
 		esUnaCategoria = false;
 		jQuery('ul#categorias li').each(function() {
 	        var li_text = getCleanedString(jQuery(this).text());
