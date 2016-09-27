@@ -456,7 +456,7 @@ function imprime_plantilla_3($titulo, $texto, $posts, $numero_posts_totales, $nu
 			                            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
 			                            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
 			                            <p><?php echo $post_title; ?></p>
-			                            <a href="<?php echo $guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget"); ?></a>
+			                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget"); ?></a>
 			                            <footer class="row">
 			                                <div class="col-xs-2 col-lg-1">
 			                                    <div class="card-icon">
