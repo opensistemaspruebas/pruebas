@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+/*jQuery(document).ready(function() {
 	jQuery("a.readmore").on("click", function(e) {
 		e.preventDefault();
 		console.log("padipoaisd");
@@ -6,4 +6,4 @@ jQuery(document).ready(function() {
 		var n = last.replace("card_", "");
 		console.log(n);
 	});
-});
+});*/
