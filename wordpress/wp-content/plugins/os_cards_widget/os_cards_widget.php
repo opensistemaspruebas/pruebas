@@ -25,28 +25,64 @@ if (!class_exists('OS_Cards_Widget')) :
 	            	'description' => __('Muestra tarjetas para distintos tipos de posts.', 'os_cards_widget')
 	        	)
 	        );
+	        add_action('wp_enqueue_scripts', array(&$this, 'add_script_filter_widget'));
         }
 
+
+		function add_script_filter_widget() {
+            if (is_active_widget(false, false, $this->id_base, true)) {
+		        wp_register_script('os_cards_widget_js', plugins_url('js/os_cards_widget.js' , __FILE__), array('jquery'));
+	            wp_enqueue_script('os_cards_widget_js');
+            }
+        } 
+
+
+
+        // Widget del front-end
 	    public function widget($args, $instance) {
 
-	    	print_r($instance);
+	    	$titulo = (!empty($instance['titulo'])) ? $instance['titulo'] : '';
+	    	$texto = (!empty($instance['texto'])) ? $instance['texto'] : '';
+	    	$numero_posts_totales = (!empty($instance['numero_posts_totales'])) ? $instance['numero_posts_totales'] : 3;
+	    	$numero_posts_mostrar = (!empty($instance['numero_posts_mostrar'])) ? $instance['numero_posts_mostrar'] : 3;
+	    	$plantilla = (!empty($instance['plantilla'])) ? $instance['plantilla'] : 'plantilla_1';
+	    	$tipo_post = (!empty($instance['tipo_post'])) ? $instance['tipo_post'] : 'publicacion';
+	    	$enlace_detalle = (!empty($instance['enlace_detalle'])) ? $instance['enlace_detalle'] : '';
+
+	    	$author = isset($instance['filtrar_por_autor']) ? $curauth->ID : 0;
 
 	    	$args = array(
-			   'public'   => true,
-			   '_builtin' => false
+				'posts_per_page'   => $numero_posts_totales,
+				'offset'           => 0,
+				'category'         => '',
+				'orderby'          => 'post_date',
+				'order'            => 'DESC',
+				'meta_key'         => '',
+				'meta_value'       => '',
+				'post_type'        => $tipo_post,
+				'post_status'      => 'publish',
+				'suppress_filters' => true,
+				'author'           =>  0,
 			);
 
-			$output = 'names'; // names or objects, note names is the default
-			$operator = 'and'; // 'and' or 'or'
+	    	$posts = get_posts($args);
 
-	    	foreach (get_post_types( $args, $output, $operator ) as $post_type ) {
-			   print_r($post_type);
-			}
+	    	switch ($plantilla) {
+	    		case 'plantilla_1' :
+	    			imprime_plantilla_1($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle);
+	    			break;
+	    		case 'plantilla_2' :
+	    			imprime_plantilla_2($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle);
+	    			break;
+	    		case 'plantilla_3' :
+	    			imprime_plantilla_3($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle);
+	    			break;
+	    	}
+
 
 	    }
 
-
-	    // Formulario del front-end
+	    // Formulario del back-end
 	    public function form($instance) {
 	    	
 	    	$titulo = (!empty($instance['titulo'])) ? $instance['titulo'] : '';
@@ -122,12 +158,338 @@ if (!class_exists('OS_Cards_Widget')) :
 
 	}
 
+
+	// Registrar el widget
 	function os_cards_widget() {
 	    register_widget('os_cards_widget');
 	}
 
-	// Initialize Plugin
+	
+	// Inicializar el widget
 	add_action('widgets_init', 'os_cards_widget');
 
 
 endif;
+
+
+// 3 posts en cada linea
+function imprime_plantilla_1($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle) {
+
+	?>
+	<section class="latests-posts pt-xl wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	    <div class="container">
+	        <header class="title-description">
+	            <h1><?php echo $titulo; ?></h1>
+	            <div class="description-container">
+	                <p><?php echo $texto; ?></p>
+	            </div>
+	        </header>
+	        <?php if (!empty($posts)) : ?>
+	        <section class="card-container nopadding container-fluid mt-md mb-md">
+	            <div class="row">
+	                    
+	                    <?php $i = 0 ;?>
+                    	<?php foreach ($posts as $post) : ?>
+
+                    		<?php
+
+                    			$post_title = $post->post_title;
+                    			$post_date = get_the_date('j F Y', $post->ID);
+                    			$post_guid = $post->guid;
+                    			$post_abstract = substr(get_post_meta($post->ID, 'abstract_destacado', true), 0, 140) . '...';
+                    			$pdf = get_post_meta($post->ID, 'pdf', true);
+		            			$imagen_id = get_post_thumbnail_id($post->ID);
+		            			$imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
+		            			$imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
+
+           						$style = '';
+           						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
+           							$style = 'style="display: none;'; ; 
+           					?>
+           					<div class="main-card-container col-xs-12 col-sm-4 noppading">
+		                    <section class="container-fluid main-card" <?php echo $style; ?>>
+		                        <header class="row header-container">
+		                            <div class="image-container nopadding col-xs-12">
+		                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+		                            </div>
+		                            <div class="hidden-xs floating-text col-xs-9">
+		                                <p class="date"><?php echo $post_date; ?></p>
+		                                <h1><?php echo $post_title; ?></h1>
+		                            </div>
+		                        </header>
+		                        <div class="row data-container">
+		                            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
+		                            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
+		                            <p><?php echo $post_abstract; ?></p>
+		                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget"); ?></a>
+		                            <footer class="row">
+		                            	<?php if ($post_abstract) : ?>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-quote"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+		                                <?php endif; ?>
+		                                <?php if (false) :?>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-audio"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+										<?php endif; ?>
+		                                <?php if ($pdf) : ?>
+			                                <div class="col-xs-2 col-lg-1">
+			                                    <div class="card-icon">
+			                                        <span class="icon bbva-icon-comments"></span>
+			                                        <div class="triangle triangle-up-left"></div>
+			                                        <div class="triangle triangle-down-right"></div>
+			                                    </div>
+			                                </div>
+		                                <?php endif; ?>
+		                            </footer>
+		                        </div>
+		                    </section>
+		                    </div>
+		                <?php $i++; ?>
+		                <?php endforeach; ?>
+	            
+	            </div>
+	        </section>
+	        <footer class="grid-footer">
+	            <div class="row">
+	                <div class="col-md-12 text-center">
+	                    <a href="<?php echo $enlace_detalle; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las publicaciones", "os_cards_widget"); ?></a>
+	                </div>
+	            </div>
+	        </footer>
+	    	<?php endif; ?>
+	    </div>
+	</section>
+	<?php
+}
+
+
+// 2 posts en una linea, 3 en otra
+function imprime_plantilla_2($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle) {
+	
+	if (empty($enlace_detalle)) {
+		?>
+		<input type="hidden" name="numero_posts_totales" value="<?php echo $numero_posts_totales; ?>">
+		<input type="hidden" name="numero_posts_mostrar" value="<?php echo $numero_posts_mostrar; ?>">
+		<?php
+	}
+
+	?>
+	<article id="publishing-view">
+	    <div class="main-wrapper">
+	        <header class="container">
+	            <h1><?php echo $titulo; ?></h1>
+	            <h2><?php echo $texto; ?></h2>
+	            <div class="visible-xs mobile-filter">
+	                <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget'); ?></a>
+	            </div>
+	            <div class="sort-items-container">
+	                <a href="#">
+	                    <span class="icon bbva-icon-arrow arrowUp"></span>
+	                    <span class="text"><?php _e('Más recientes', 'os_cards_widget'); ?></span>
+	                </a>
+	                <a href="#">
+	                    <span class="icon bbva-icon-arrow arrowDown"></span>
+	                    <span class="text"><?php _e('Más antiguos', 'os_cards_widget'); ?></span>
+	                </a>
+	                <a href="#">
+	                    <span class="icon bbva-icon-view "></span>
+	                    <span class="text"><?php _e('Más leídos', 'os_cards_widget'); ?></span>
+	                </a>
+	            </div>
+	            <a class="filter hidden-xs" href="#"> <span class="bbva-icon-filter"></span> <span><?php _e('Filtrar', 'os_cards_widget'); ?></span> </a>
+	        </header>
+	        <?php if (!empty($posts)) : ?>
+	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>
+	        <section>
+	            <article class="cards-grid">
+	                <section class="container">
+	                    <div class="row">
+	                    	<?php $i = 0 ;?>
+	                    	<?php foreach ($posts as $post) : ?>
+
+	                    		<?php 
+
+	                    			$post_title = $post->post_title;
+	                    			$post_date = get_the_date('j F Y', $post->ID);
+	                    			$post_guid = $post->guid;
+	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
+	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
+			            			$imagen_id = get_post_thumbnail_id($post->ID);
+			            			$imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
+			            			$imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
+
+	                    		?>
+
+	           					<?php $grid = $order[($i % 5)]; ?>
+	           					<?php 
+	           						$style = '';
+	           						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
+	           							$style = 'style="display: none;'; ; 
+	           					?>
+	           					<?php if ($grid == "double") : ?>
+	           					<div name="card_<?php echo $i; ?>" class="col-xs-12 col-sm-6 double-card card-container" <?php echo $style; ?>>
+	           					<?php elseif ($grid == "triple") : ?>
+	           					<div name="card_<?php echo $i; ?>" class="col-xs-12 col-sm-4 triple-card card-container" <?php echo $style; ?>>
+	           					<?php endif; ?>
+								    <section class="container-fluid main-card">
+								        <header class="row header-container">
+								            <div class="image-container nopadding col-xs-12">
+								                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+								            </div>
+								            <div class="hidden-xs floating-text col-xs-9">
+								                <p class="date"><?php echo $post_date; ?></p>
+								                <h1><?php echo $post_title; ?></h1>
+								            </div>
+								        </header>
+								        <div class="row data-container">
+								            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
+								            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
+								            <p><?php echo $post_abstract; ?></p>
+								            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e('Leer más', 'os_cards_widget'); ?></a>
+								            <footer class="row">
+					                        <?php if (!empty($abstract_destacado)) : ?>
+					                            <div class="col-xs-2 col-lg-1">
+					                                <span class="icon bbva-icon-quote"></span>
+					                                <div class="triangle triangle-up-left"></div>
+					                                <div class="triangle triangle-down-right"></div>
+					                            </div>
+					                        <?php endif; ?>
+					                        <?php if (false) : ?>
+					                            <div class="col-xs-2 col-lg-1">
+					                                <span class="icon bbva-icon-audio"></span>
+					                                <div class="triangle triangle-up-left"></div>
+					                                <div class="triangle triangle-down-right"></div>
+					                            </div>
+					                        <?php endif; ?>
+					                        <?php if ($pdf) : ?>
+					                            <div class="col-xs-2 col-lg-1">
+					                                <span class="icon bbva-icon-comments"></span>
+					                                <div class="triangle triangle-up-left"></div>
+					                                <div class="triangle triangle-down-right"></div>
+					                            </div>
+					                        <?php endif; ?>
+								            
+								            </footer>
+								        </div>
+								    </section>
+	           					</div>
+	                    		<?php $i++; ?>
+	                    	<?php endforeach; ?>
+	                    </div>
+	                    <footer class="grid-footer">
+	                        <div class="row">
+	                            <div class="col-md-12 text-center">
+	                                <a href="<?php echo $enlace_detalle; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más publicaciones', 'os_cards_widget'); ?></a>
+	                            </div>
+	                        </div>
+	                    </footer>
+	                </section>
+	            </article>
+	        </section>
+	    	<?php endif; ?>
+	    </div>
+	</article>
+	<?php
+}
+
+
+// 1 post a la izquierda, 2 posts a la derecha
+function imprime_plantilla_3($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle) {
+	?>
+	<section class="outstanding-histories pt-xl wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	    <div class="container">
+	        <header class="title-description">
+	            <h1><?php echo $title; ?></h1>
+	            <div class="description-container">
+	                <p><?php $texto; ?></p>
+	            </div>
+	        </header>
+	        <?php if (!empty($posts)) : ?>
+	        <?php $order = array('main', 'secondary', 'secondary'); ?>
+	        <div name="card_<?php echo $i; ?>" class="card-container container-fluid mt-md mb-md">
+	            <div class="row">
+	            	<?php $i = 0 ;?>
+	            	<?php foreach ($posts as $post) : ?>
+	                <?php 
+
+						$post_title = $post->post_title;
+						$post_date = get_the_date('j F Y', $post->ID);
+						$post_guid = $post->guid;
+						$post_content = $post->post_content;
+						$imagen_id = get_post_thumbnail_id($post->ID);
+						$imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
+						$imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
+
+						$grid = $order[($i % 3)]; 
+
+						$style = '';
+						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
+							$style = 'style="display: none;'; ; 
+
+					?>	
+
+					<?php if ($grid == "main") : ?>
+					<div name="card_<?php echo $i; ?>" class="_main-card col-xs-12 col-sm-6 noppading _main-card" <?php echo $style; ?>>
+					<?php elseif ($grid == "secondary") : ?>
+					<div name="card_<?php echo $i; ?>" class="_main-card col-xs-12 col-sm-6 noppading _secondary-card" <?php echo $style; ?>>
+					<?php endif; ?>
+					    <section class="container-fluid main-card">
+					        <header class="row header-container">
+					            <div class="image-container nopadding col-xs-12">
+					                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+					            </div>
+					            <div class="hidden-xs floating-text col-xs-9">
+					                <p class="date"><?php echo $post_date; ?></p>
+					                <h1><?php echo $post_title; ?></h1>
+					            </div>
+					        </header>
+					        <div class="row data-container">
+					            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
+					            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
+					            <p><?php echo $post_content; ?>.</p>
+					            <a href="<?php echo $enlace_detalle; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget"); ?></a>
+					            <footer class="row">
+					                <div class="col-xs-2 col-lg-1">
+					                    <div class="card-icon">
+					                        <span class="icon bbva-icon-quote"></span>
+					                        <div class="triangle triangle-up-left"></div>
+					                        <div class="triangle triangle-down-right"></div>
+					                    </div>
+					                </div>
+					                <div class="col-xs-2 col-lg-1">
+					                    <div class="card-icon">
+					                        <span class="icon bbva-icon-audio"></span>
+					                        <div class="triangle triangle-up-left"></div>
+					                        <div class="triangle triangle-down-right"></div>
+					                    </div>
+					                </div>
+					            </footer>
+					        </div>
+					    </section>
+					</div>
+	                <?php $i++; ?>
+	            	<?php endforeach; ?>
+	            </div>
+	        </div>
+	        <footer class="grid-footer">
+	            <div class="row">
+	                <div class="col-md-12 text-center">
+	                    <a href="<?php echo $enlace_detalle; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las historias", "os_cards_widget"); ?></a>
+	                </div>
+	            </div>
+	        </footer>
+	    	<?php endif; ?>
+	    </div>
+	</section>
+	<?php
+}
