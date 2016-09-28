@@ -326,14 +326,14 @@ class OS_Image_Widget extends WP_Widget {
 							</p>
 							<?php
 							break;
-						case 'link_classes' :
+						/*case 'link_classes' :
 							?>
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'link_classes' ) ); ?>">
 								<label for="<?php echo esc_attr( $this->get_field_id( 'link_classes' ) ); ?>"><?php _e( 'Link Classes'); ?>:</label>
 								<input type="text" name="<?php echo esc_attr( $this->get_field_name( 'link_classes' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'link_classes' ) ); ?>" value="<?php echo esc_attr( $instance['link_classes'] ); ?>" class="widefat">
 							</p>
 							<?php
-							break;
+							break;*/
 
 						case 'link_text' :
 							?>
