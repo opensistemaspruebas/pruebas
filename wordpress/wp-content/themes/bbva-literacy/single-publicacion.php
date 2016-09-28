@@ -30,20 +30,52 @@ get_header(); ?>
     $organization_url = get_post_meta(get_the_ID(), 'organization_url', true);
     $organization_logo = get_post_meta(get_the_ID(), 'organization_logo', true);
 
-    $tags = wp_get_post_terms(get_the_ID(), 'category', array("fields" => "names"));
+    $tags = wp_get_post_terms(get_the_ID(), 'category', array("fields" => "all"));
 
-    $ambito_geografico = wp_get_post_terms(get_the_ID(), 'ambito_geografico', array("fields" => "names"));
-    if (!empty($ambito_geografico)) {
-        $ambito_geografico = $ambito_geografico[0];
+    $ambitos_geograficos = wp_get_post_terms(get_the_ID(), 'ambito_geografico', array("fields" => "all"));
+    if (!empty($ambitos_geograficos)) {
+        $ambito_geografico = $ambitos_geograficos[0]->name;
     } else {
         $ambito_geografico = '';
     }
 
     $authors = get_coauthors();
 
-    $relates_posts = get_posts();
+
+    $tags_ids = array();
+    foreach($tags as $individual_tag) $tags_ids[] = $individual_tag->term_id;
+
+    $ambitos_geograficos_ids = array();
+    foreach($ambitos_geograficos as $individual_ambito_geografico) $ambitos_geograficos_ids[] = $individual_ambito_geografico->term_id;
+
+    $tax_query_tags = array(
+        'taxonomy' => 'category',
+        'field'    => 'term_id',
+        'terms'    => $tags_ids,
+    );
+
+    $tax_query_ambitos_geograficos = array(
+        'taxonomy' => 'category',
+        'field'    => 'term_id',
+        'terms'    => $ambitos_geograficos_ids,
+    );
+
+
+    $args = array(
+        'post_type' => 'publicacion',
+        'post__not_in' => array(get_the_ID()),
+        'posts_per_page' => 6,
+        'tax_query' => array(
+            'relation' => 'OR',
+            $tax_query_tags,
+            $tax_query_ambitos_geograficos
+        ),
+    );
+    $query = new WP_Query($args);
+    
 
 ?>
+
     
 <div class="contents">
     <article class="publication">
@@ -212,7 +244,7 @@ get_header(); ?>
                 <h1 class="mt-lg mb-md"><?php _e('Tags', 'os_publicacion_type'); ?></h1>
                 <div class="tags">
                     <?php foreach ($tags as $tag) : ?>
-                        <span class="tag pt-xs pl-sm pr-sm pb-xs mr-xs mb-xs"><?php echo $tag; ?></span>
+                        <span class="tag pt-xs pl-sm pr-sm pb-xs mr-xs mb-xs"><?php echo $tag->name; ?></span>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -356,144 +388,98 @@ get_header(); ?>
     </article>
 
     <!-- latests-posts -->
-    <section class="latests-posts pt-xl pb-lg wow fadeInUp">
-        <div class="container">
-            <header class="title-description">
-                <h1><?php _e('Publicaciones relacionadas', 'os_publicacion_type'); ?></h1>
-                <div class="description-container">
-                    <p></p>
-                </div>
-            </header>
-            <div class="card-container nopadding container-fluid mt-md mb-md">
-                <div class="row">
-                    <div class="main-card-container col-xs-12 col-sm-4 noppading">
-                        <!-- main-card -->
-                        <section class="container-fluid main-card">
-                            <header class="row header-container">
-                                <div class="image-container nopadding col-xs-12">
-                                    <img class="img-responsive" src="images/home/informe1.png" alt="" />
-                                </div>
-                                <div class="hidden-xs floating-text col-xs-9">
-                                    <p class="date">27 Agosto 2016</p>
-                                    <h1>Beyond Ties and Cofee Mugs...</h1>
-                                </div>
-                            </header>
-                            <div class="row data-container">
-                                <p class="nopadding col-xs-9 date">27 Agosto 2016</p>
-                                <h1 class="title nopadding col-xs-9">Beyond Ties and Cofee Mugs...</h1>
-                                <p>Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p>
-                                <a href="#" class="hidden-xs readmore">Leer más</a>
-                                <footer class="row">
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-quote"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-audio"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-comments"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    </div>
-                                </footer>
-                            </div>
-                        </section>
-                        <!-- EO main-card -->
+    <?php 
+
+    if ($query->have_posts()) {
+        ?>
+        <section class="latests-posts pt-xl pb-lg wow fadeInUp">
+            <div class="container">
+                <header class="title-description">
+                    <h1><?php _e('Publicaciones relacionadas', 'os_publicacion_type'); ?></h1>
+                    <div class="description-container">
+                        <p></p>
                     </div>
-                    <div class="main-card-container col-xs-12 col-sm-4 noppading">
-                        <!-- main-card -->
-                        <section class="container-fluid main-card">
-                            <header class="row header-container">
-                                <div class="image-container nopadding col-xs-12">
-                                    <img class="img-responsive" src="images/home/informe2.png" alt="" />
-                                </div>
-                                <div class="hidden-xs floating-text col-xs-9">
-                                    <p class="date">24 Agosto 2016</p>
-                                    <h1>Lorem ipsum dolor sit amet...</h1>
-                                </div>
-                            </header>
-                            <div class="row data-container">
-                                <p class="nopadding col-xs-9 date">24 Agosto 2016</p>
-                                <h1 class="title nopadding col-xs-9">Lorem ipsum dolor sit amet...</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                                <a href="#" class="hidden-xs readmore">Leer más</a>
-                                <footer class="row">
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-quote"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
+                </header>
+                <div class="card-container nopadding container-fluid mt-md mb-md">
+                    <div class="row">
+                        <?php
+                        while ($query->have_posts()) {
+                            $query->the_post();
+                            $date = get_the_date('j F Y');
+                            $abstract_destacado = substr(get_post_meta($post->ID, 'abstract_destacado', true), 0, 140) . '...';
+                            $abstract_contenido = get_post_meta(get_the_ID(), 'abstract_contenido', true);
+                            $imagen_id = get_post_thumbnail_id($post->ID);
+                            $imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
+                            $imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
+                            $pdf = get_post_meta(get_the_ID(), 'pdf', true);
+                            ?>
+                            <div class="main-card-container col-xs-12 col-sm-4 noppading">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container nopadding col-xs-12">
+                                            <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
                                         </div>
-                                    </div>
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-audio"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
+                                        <div class="hidden-xs floating-text col-xs-9">
+                                            <p class="date"><?php echo $date; ?></p>
+                                            <h1><?php the_title(); ?></h1>
                                         </div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <p class="nopadding col-xs-9 date"><?php echo $date; ?></p>
+                                        <h1 class="title nopadding col-xs-9"><?php the_title(); ?></h1>
+                                        <p><?php echo $abstract_destacado; ?></p>
+                                        <a href="<?php the_permalink(); ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_publicacion_type"); ?></a>
+                                        <footer class="row">
+                                            <?php if ($abstract_destacado) : ?>
+                                                <div class="col-xs-2 col-lg-1">
+                                                    <div class="card-icon">
+                                                        <span class="icon bbva-icon-quote"></span>
+                                                        <div class="triangle triangle-up-left"></div>
+                                                        <div class="triangle triangle-down-right"></div>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if (false) :?>
+                                                <div class="col-xs-2 col-lg-1">
+                                                    <div class="card-icon">
+                                                        <span class="icon bbva-icon-audio"></span>
+                                                        <div class="triangle triangle-up-left"></div>
+                                                        <div class="triangle triangle-down-right"></div>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($pdf) : ?>
+                                                <div class="col-xs-2 col-lg-1">
+                                                    <div class="card-icon">
+                                                        <span class="icon bbva-icon-comments"></span>
+                                                        <div class="triangle triangle-up-left"></div>
+                                                        <div class="triangle triangle-down-right"></div>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </footer>
                                     </div>
-                                </footer>
+                                </section>
+                                <!-- EO main-card -->
                             </div>
-                        </section>
-                        <!-- EO main-card -->
-                    </div>
-                    <div class="main-card-container col-xs-12 col-sm-4 noppading">
-                        <!-- main-card -->
-                        <section class="container-fluid main-card">
-                            <header class="row header-container">
-                                <div class="image-container nopadding col-xs-12">
-                                    <img class="img-responsive" src="images/home/informe3.png" alt="" />
-                                </div>
-                                <div class="hidden-xs floating-text col-xs-9">
-                                    <p class="date">23 Agosto 2016</p>
-                                    <h1>Lorem ipsum dolor</h1>
-                                </div>
-                            </header>
-                            <div class="row data-container">
-                                <p class="nopadding col-xs-9 date">23 Agosto 2016</p>
-                                <h1 class="title nopadding col-xs-9">Lorem ipsum dolor</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                <a href="#" class="hidden-xs readmore">Leer más</a>
-                                <footer class="row">
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-quote"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2 col-lg-1">
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-audio"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    </div>
-                                </footer>
-                            </div>
-                        </section>
-                        <!-- EO main-card -->
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
+                <footer>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
+                        </div>
+                    </div>
+                </footer>
             </div>
-            <footer>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </section>
+        </section>
+        <?php
+    }
+
+    ?>
 
 <?php get_footer(); ?>
