@@ -27,12 +27,18 @@ if (!class_exists('OS_Twitter_Widget')) :
 	        );
 	        wp_register_script('os_twitter_widget_js', plugins_url('js/os_twitter_widget.js' , __FILE__), array('jquery'));
 	        $translation_array = array(
-				'no_results' => __('No results found', 'os_twitter_widget'),
-				'more_results' => __('More', 'os_twitter_widget'),
-				'sort_by_asc_date' => __('Older', 'os_twitter_widget'),
-				'sort_by_desc_date' => __('Recents', 'os_twitter_widget'),
-				'sort_by_popular' => __('Popular', 'os_twitter_widget'),
-				'ajaxurl' => admin_url('admin-ajax.php'),
+				'enero' => __('Enero', 'os_twitter_widget'),
+				'febrero' => __('Febrero', 'os_twitter_widget'),
+				'marzo' => __('Marzo', 'os_twitter_widget'),
+				'abril' => __('Abril', 'os_twitter_widget'),
+				'mayo' => __('Mayo', 'os_twitter_widget'),
+				'junio' => __('Junio', 'os_twitter_widget'),
+				'julio' => __('Julio', 'os_twitter_widget'),
+				'agosto' => __('Agosto', 'os_twitter_widget'),
+				'septiembre' => __('Septiembre', 'os_twitter_widget'),
+				'octubre' => __('Octubre', 'os_twitter_widget'),
+				'noviembre' => __('Noviembre', 'os_twitter_widget'),
+				'diciembre' => __('Diciembre', 'os_twitter_widget'),
 				
 			);
 			wp_localize_script('os_twitter_widget_js', 'object_name', $translation_array);
@@ -42,58 +48,69 @@ if (!class_exists('OS_Twitter_Widget')) :
 
 	    public function widget($args, $instance) {
 
-	    	echo $args['before_widget'];
+	    	//print_r($instance);
 
+	    	$titulo = $instance['titulo'];
+	    	$texto = $instance['texto'];
+	    	$url_canal = $instance['url_canal'];
 
-	    	//Url donde esta nuestro JSON
-$req = 'http://dquteo8n8b00y.cloudfront.net/bbva-components/twitter/?project=irnbsadx&baseUri=https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=BBVALiteracy&count=3';
-
-//https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=BBVALiteracy&count=3
-
-
-//Iniciamos cURL junto con la URL
-$cVimeo = curl_init($req);
-
-//Agregamos opciones necesarias para leer
-curl_setopt($cVimeo,CURLOPT_RETURNTRANSFER, TRUE);
-
-// Capturamos la URL
-$gVimeo = curl_exec($cVimeo);
-
-echo $gVimeo;
-
-//Descodificamos para leer
-/*$getVimeo = json_decode($gVimeo,true);
-
-echo $getVimeo;
-*/
-//Asociamos los campos del JSON a variables
-/*$titulo = $getVimeo['title'];
-$descripcion = $getVimeo['description'];
-$thumbnail = $getVimeo['thumbnail_url'];*/
-
-
-
-	
-			?>
-			
-			 <p><?php _e('Todo correcto.', 'os_twitter_widget'); ?></p>
-			
-			<?php
-
-			echo $args['after_widget'];
-
+	    	?>
+	    	<section class="latests-tweets pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			    <div class="container">
+			        <header>
+			            <p class="icon bbva-icon-twitter"></p>
+			            <h1 class="pt-xs pb-sm"><?php echo $titulo; ?></h1>
+			            <p><?php echo $texto; ?></p>
+			        </header>
+			        <section class="container-fluid mt-md mb-md">
+			            <div class="row tweets-container">
+			            </div>
+			        </section>
+			        <footer class="pt-md">
+			            <div class="row">
+			                <div class="col-md-12 text-center">
+			                    <a target="_blank" href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
+			                </div>
+			            </div>
+			        </footer>
+			    </div>
+			</section>
+	    	<?php
 	    }
 
 
   		public function form($instance) {
+
+
+  			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : _('Últimos tweets', 'os_twitter_widget');
+  			$texto = !empty($instance['texto']) ? $instance['texto'] : _('Estos son los últimos twits sobre educación financiera en el mundo', 'os_twitter_widget');
+  			$url_canal = !empty($instance['url_canal']) ? $instance['url_canal'] : 'http://';
+
+
 	        ?>
-	        <p><?php _e('Este widget no tiene parámetros configurables.', 'os_twitter_widget'); ?></p>
+	        <p>
+				<label for="<?php echo $this->get_field_id('titulo'); ?>"><?php _e('Título:', 'os_twitter_widget'); ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" type="text" value="<?php echo esc_attr($titulo); ?>">
+			</p>
+	       	<p>
+	       		<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_twitter_widget'); ?></label>
+				<textarea class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
+			</p>
+	    	<p>
+				<label for="<?php echo $this->get_field_id('url_canal'); ?>"><?php _e('URL del canal de Twitter:', 'os_twitter_widget'); ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id('url_canal'); ?>" name="<?php echo $this->get_field_name('url_canal'); ?>" type="url" value="<?php echo esc_attr($url_canal); ?>">
+			</p>
 	        <?php
 	    }
 
 
 	    function update($new_instance, $old_instance) {
+
+	    	$instance = array();
+	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : _('Últimos tweets', 'os_twitter_widget');
+	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : __("Estos son los últimos twits sobre educación financiera en el mundo", "os_twitter_widget");
+	    	$instance['url_twitter'] = (!empty( $new_instance['url_twitter'])) ? strip_tags($new_instance['url_twitter']) : '';
+
 	    	return $new_instance;
 	    }
 

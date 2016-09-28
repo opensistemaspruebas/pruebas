@@ -86,6 +86,25 @@ var navPhone = function($) {
     });
 };
 
+var popover = function ($) {
+
+  var $element = $('[data-toggle="popover"]');
+  var $cardIcon = $('.card-icon');
+
+  //Initializes popovers
+  $element.popover();
+
+  //This event fires immediately when the show instance method is called
+  $element.on('show.bs.popover', function () {
+    $cardIcon.css('display', 'none');
+  });
+
+  //This event is fired immediately when the hide instance method has been called
+  $element.on('hidden.bs.popover', function () {
+    $cardIcon.css('display', 'flex');
+  });
+};
+
 var progresscircle = function($) {
     'use strict';
 
@@ -151,7 +170,7 @@ var animationWow = function($) {
 };
 
 jQuery.noConflict();
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
         'use strict';
         selectLanguage($);
         fixedMenu($);
@@ -160,7 +179,8 @@ jQuery(document).ready(function($) {
         animationWow($);
         cookies($);
         progresscircle($);
-    });
+        popover($);
+      });
 
 var lgScreenMin = 1200;
 

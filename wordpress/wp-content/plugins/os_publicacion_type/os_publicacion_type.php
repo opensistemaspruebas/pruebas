@@ -50,7 +50,7 @@ function publicacion_type() {
       'hierarchical'       => false,
       'menu_position'      => null,
       'menu_icon'          => 'dashicons-welcome-write-blog',
-      'supports'           => array('title'),
+      'supports'           => array('title', 'author'),
       'taxonomies'         => array('category', 'ambito_geografico')
   );
   register_post_type('publicacion', $args );
@@ -75,6 +75,7 @@ add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
 add_filter('admin_post_thumbnail_html', 'add_featured_image_instruction');
+
 function add_featured_image_instruction( $content ) {
   $content = str_replace(__('Set featured image'), __('Añadir imagen', 'os_publicacion_type'), $content);
   $content = str_replace(__('Remove featured image'), __('Eliminar imagen', 'os_publicacion_type'), $content); 
@@ -84,6 +85,7 @@ function add_featured_image_instruction( $content ) {
 
 function publicacion_meta_boxes() {
   add_meta_box('postimagediv', __('Imagen de la cabecera', 'os_publicacion_type'), 'post_thumbnail_meta_box', 'publicacion', 'normal', 'high');
+  add_meta_box("publicacion_imagen_card" ,__("Imagen Card", "os_publicacion_type"), "meta_box_imagen_card", 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_abstract_destacado',  __('Texto destacado del abstract', 'os_publicacion_type'), 'meta_box_abstract_destacado', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_abstract_contenido',  __('Texto normal del abstract', 'os_publicacion_type'), 'meta_box_abstract_contenido', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'high');
@@ -91,6 +93,28 @@ function publicacion_meta_boxes() {
   add_meta_box('publicacion_info', __('Información adicional', 'os_publicacion_type'), 'meta_box_publicacion_info', 'publicacion', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'publicacion_meta_boxes');
+
+        
+function meta_box_imagen_card($post) {         
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_imagen_card-nonce');
+
+  $imagenCard = get_post_meta($post->ID, 'imagenCard', true);
+  $imagen_card_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCard));
+?>
+
+  <p>
+    <label for="imagenCard"><?php _e('Imagen Card', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" readonly="readonly"/>
+    <img id="show_imagenCard" draggable="false" alt="" name="show_imagenCard" src="<?php if (!empty($imagen_card_thumbnail)) echo esc_attr($imagen_card_thumbnail); ?>" style="<?php if (empty($imagen_card_thumbnail)) echo "display: none;"; ?>">
+  </p>
+  <p>
+    <input id="upload_imagenCard" name="upload_imagenCard" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
+  </p>
+            
+<?php
+       
+}
 
 
 function meta_box_abstract_destacado($post) {
@@ -230,7 +254,6 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['pdf'])) {
     update_post_meta($post_id, 'pdf', strip_tags($_POST['pdf']));
   }
-
   if (isset($_POST['publication_date'])) {
     update_post_meta($post_id, 'publication_date', strip_tags($_POST['publication_date']));
   }
@@ -264,7 +287,9 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['organization_logo'])) {
    update_post_meta($post_id, 'organization_logo', strip_tags($_POST['organization_logo']));
   }
-
+ if (isset($_POST['imagenCard'])) {
+   update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
+  }
 
 }
 add_action('save_post', "meta_boxes_save");

@@ -54,7 +54,13 @@ function add_search_meta() {
     if (in_array($post_type, $types) && is_single()) : $p = get_post(get_the_ID()); $attrs = get_atts($p);
     	$post_content = '';
     	if ($post_type == 'publicacion') {
-    		$post_content = get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
+    		$abstract_destacado = get_post_meta($p->ID, 'abstract_destacado', true);
+    		$abstract_contenido = get_post_meta($p->ID, 'abstract_contenido', true);
+    		if (empty($abstract_destacado) && empty($abstract_contenido)) {
+    			$post_content = $p->post_content;
+    		} else {
+    			$post_content = get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
+    		}
     	} else {
     		$post_content = $p->post_content;
     	}
@@ -197,3 +203,28 @@ function os_imprimir($array,$parar) {
 		exit();
 	}
 }
+
+
+function my_show_extra_profile_fields($user) { ?>
+	<h3><?php _e("Información adicional"); ?></h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="cargo"><?php _e('Cargo'); ?></label></th>
+			<td>
+				<input type="text" name="cargo" id="cargo" value="<?php echo esc_attr(get_the_author_meta('cargo', $user->ID)); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Introduzca el cargo del autor'); ?></span>
+			</td>
+		</tr>
+	</table>
+<?php }
+add_action('show_user_profile', 'my_show_extra_profile_fields');
+add_action('edit_user_profile', 'my_show_extra_profile_fields');
+
+
+function my_save_extra_profile_fields( $user_id ) {
+	if (!current_user_can('edit_user', $user_id))
+		return false;
+	update_usermeta( $user_id, 'cargo', $_POST['cargo'] );
+}
+add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
+add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );

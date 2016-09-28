@@ -89,9 +89,6 @@ if (!class_exists('PerfilCustomType')) :
             add_meta_box("tipo-perfil", __("Tipo de perfil", "os_perfil_type"), array(&$this, "tipo_meta_box_callback"), $this->post_type,"side","high");
             add_meta_box("detalles-miembro",__("Detalles", "os_perfil_type"),array(&$this, "detalles_miembro_meta_box_callback"),$this->post_type,"advanced","default");
             add_meta_box("detalles",__("Detalles de Asesor/Coordinador", "os_perfil_type"),array(&$this, "detalles_meta_box_callback"),$this->post_type,"advanced","default");
-
-            //add_meta_box("featured-testimony", __("Featured testimony", "os_perfil_type"), array(&$this, "featured_meta_box_callback"), $this->post_type,"side");
-            //add_meta_box("video-testimony",__("Link to the video", "os_perfil_type"),array(&$this,"vt_meta_box_callback"),$this->post_type,"side","low");
         }
 
         function author_meta_box_callback($post) {
