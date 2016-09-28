@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cargo\n"
+"POT-Creation-Date: 2015-10-21 11:22+0100\n"
+"PO-Revision-Date: 2015-10-21 11:23+0100\n"
+"Last-Translator: Carlos Mendoza <cmendoza@opensistemas.com>\n"
+"Language-Team: Opensistemas <cmendoza@opensistemas.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../os-profile-fields.php:87
+msgid "BBVA User"
+msgstr ""
+
+#: ../os-profile-fields.php:96
+msgid "Author disabled"
+msgstr "Deshabilitar autor"
+
+#: ../os-profile-fields.php:102
+msgid "Hide links to this Author"
+msgstr "Ocultar enlaces a este autor"
+
+#: ../os-profile-fields.php:108
+msgid "Geo Location"
+msgstr "Ubicaci&oacute;n Geogr&aacute;fica"
+
+#: ../os-profile-fields.php:129 ../os-profile-fields.php:313
+msgid "Position"
+msgstr "Cargo"
+
+#: ../os-profile-fields.php:148
+msgid "Link user to unit"
+msgstr "Enlace de usuario a unidad"
+
+#: ../os-profile-fields.php:166
+msgid "User replaces the unit in editing publications"
+msgstr ""
+"Usuario que reemplaza a la unidad en la edici&oacute;n de publicaciones"
+
+#: ../os-profile-fields.php:170
+msgid "Biographical Info"
+msgstr ""
+
+#: ../os-profile-fields.php:178 ../os-profile-fields.php:185
+msgid ""
+"Share a little biographical information to fill out your profile. This may "
+"be shown publicly."
+msgstr ""
+
+#: ../os-profile-fields.php:223
+msgid "WPML language settings"
+msgstr ""
+
+#: ../os-profile-fields.php:227
+msgid "Select your language:"
+msgstr ""
+
+#: ../os-profile-fields.php:230
+#, php-format
+msgid "Default admin language (currently %s)"
+msgstr ""
+
+#: ../os-profile-fields.php:235
+msgid ""
+"this will be your admin language and will also be used for translating "
+"comments."
+msgstr ""
+
+#: ../os-profile-fields.php:237
+msgid "Set admin language as editing language."
+msgstr ""
+
+#: ../os-profile-fields.php:243
+msgid "Hidden languages:"
+msgstr ""
+
+#: ../os-profile-fields.php:249
+#, php-format
+msgid "%s is currently hidden to visitors."
+msgstr ""
+
+#: ../os-profile-fields.php:256
+#, php-format
+msgid "%s are currently hidden to visitors."
+msgstr ""
+
+#: ../os-profile-fields.php:260
+msgid ""
+"All languages are currently displayed. Choose what to do when site languages "
+"are hidden."
+msgstr ""
+
+#: ../os-profile-fields.php:266
+msgid "Display hidden languages"
+msgstr ""
+
+#: ../os-profile-fields.php:312
+msgid "Positions"
+msgstr "Cargos"
+
+#: ../os-profile-fields.php:314
+msgid "Search Position"
+msgstr "Buscar Cargo"
+
+#: ../os-profile-fields.php:315
+msgid "All Positions"
+msgstr "Todos los Cargos"
+
+#: ../os-profile-fields.php:316
+msgid "Edit Position"
+msgstr "Editar Cargo"
+
+#: ../os-profile-fields.php:317
+msgid "Update Position"
+msgstr "Actualizar Cargo"
+
+#: ../os-profile-fields.php:318
+msgid "Add New Position"
+msgstr "Agregar Nuevo Cargo"
+
+#: ../os-profile-fields.php:319
+msgid "New Position Name"
+msgstr "Nombre de Nuevo Cargo"
+
+#: ../os-profile-fields.php:320
+msgid "Job Positions"
+msgstr "Cargos"
