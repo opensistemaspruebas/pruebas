@@ -58,7 +58,9 @@ if (!class_exists('TallerCustomType')) :
                 'has_archive' => true,
                 'rewrite' => array('slug' => 'taller'),
                 'menu_icon' =>  'dashicons-hammer',
-                'supports' => array('title', 'thumbnail')
+                'supports' => array('title'),
+                'taxonomies' => array('ambito_geografico')
+                
             ));
         }
 
@@ -87,14 +89,6 @@ if (!class_exists('TallerCustomType')) :
                 <label for="link_taller"><?php _e('Enlace al taller', 'os_taller_type')?></label>
                 <input class="widefat" type="url" name="link_taller" id="link_taller" value="<?php if ( isset($link_taller) ) echo $link_taller; ?>" />
             </p>
-            <p>
-                <label for="pais"><?php _e('País', 'os_taller_type')?></label>
-                <input class="widefat" type="text" name="pais" id="pais" value="<?php if ( isset($pais) ) echo $pais; ?>" />
-            </p>
-            <p>
-                <label for="link_pais"><?php _e('Enlace web del país', 'os_taller_type')?></label>
-                <input class="widefat" type="url" name="link_pais" id="link_pais" value="<?php if ( isset($link_pais) ) echo $link_pais; ?>" />
-            </p>
             <?php
         }
 
@@ -106,12 +100,6 @@ if (!class_exists('TallerCustomType')) :
             }
             if (isset($_POST['link_taller'])) {
                 update_post_meta( $post_id, 'link_taller', strip_tags($_POST['link_taller']));
-            }
-            if (isset($_POST['pais'])) {
-                update_post_meta( $post_id, 'pais', strip_tags($_POST['pais']));
-            }
-            if (isset($_POST['link_pais'])) {
-                update_post_meta( $post_id, 'link_pais', strip_tags($_POST['link_pais']));
             }
         }
 
