@@ -149,9 +149,9 @@ if (!class_exists('slider_widget')) :
                             <div class="slider-caption">
                                 <div class="container">
                                     <div class="caption-container">
-                                        <h1>Dónde estamos</h1>
-                                        <p>Toda la información sobre educación financiera y talleres en los diferentes paises del mundo.</p>
-                                        <a href="#" class="btn btn-bbva-blue">Empezar</a>
+                                        <h1><?php echo $instance['title1']; ?></h1>
+                                        <p><?php echo $instance['descr1']; ?></p>
+                                        <a href="<?php echo $instance['ulink1']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink1']; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -167,9 +167,9 @@ if (!class_exists('slider_widget')) :
                             <div class="slider-caption">
                                 <div class="container">
                                     <div class="caption-container">
-                                        <h1>Lorem ipsum</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim, eros faucibus euismod gravida, ipsum nibh dictum urna, imperdiet maximus nisi tortor nec leo.</p>
-                                        <a href="#" class="btn btn-bbva-aqua">Lorem ipsum</a>
+                                        <h1><?php echo $instance['title2']; ?></h1>
+                                        <p><?php echo $instance['descr2']; ?></p>
+                                        <a href="<?php echo $instance['ulink2']; ?>" class="btn btn-bbva-aqua"><?php echo $instance['tlink2']; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -185,9 +185,9 @@ if (!class_exists('slider_widget')) :
                             <div class="slider-caption">
                                 <div class="container">
                                     <div class="caption-container">
-                                        <h1>Lorem ipsum</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim, eros faucibus euismod gravida, ipsum nibh dictum urna, imperdiet maximus nisi tortor nec leo.</p>
-                                        <a href="#" class="btn btn-bbva-dark-blue">Lorem ipsum</a>
+                                        <h1><?php echo $instance['title3']; ?></h1>
+                                        <p><?php echo $instance['descr3']; ?></p>
+                                        <a href="<?php echo $instance['ulink3']; ?>" class="btn btn-bbva-dark-blue"><?php echo $instance['tlink3']; ?></a>
                                     </div>
                                 </div>
                             </div>
