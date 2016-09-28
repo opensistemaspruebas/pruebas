@@ -47,3 +47,9 @@
   display: table;
   clear: both;
 }
+<<<<<<< HEAD
+=======
+.panel-grid-cell .so-panel {
+    margin-bottom: 0px!important;
+}
+>>>>>>> 443ebf7bc9828c610ad05a04ef8b3b3dbeb6185a

@@ -1,3 +1,4 @@
 wordpress/wp-config.php
 wordpress/wp-content/uploads/*
 wp-content/_json/*
+wp-content/sql/*

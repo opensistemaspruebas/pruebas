@@ -228,3 +228,22 @@ function my_save_extra_profile_fields( $user_id ) {
 }
 add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
 add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
+
+
+function languages_list_header(){
+    $languages = icl_get_languages('skip_missing=0&orderby=code');
+    ?>
+	<div class="top hidden-xs">
+        <div class="container">
+            <div class="languages-menu">
+                <label for="language-header" class="hidden"><?php _e('Idioma'); ?></label>
+                <select id="language-header" class="selectpicker">
+                	<?php foreach ($languages as $l) : ?>
+                		<option value="<?php echo $l['url']; ?>" <?php if ($l['active']) echo 'selected="selected"'; ?>><?php echo $l['native_name']; ?></option>
+                	<?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    <?php
+}

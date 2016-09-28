@@ -20,7 +20,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 	    function __construct() {
 	        parent::__construct(
 	        	'os_twitter_widget',
-	        	__('Twitter', 'os_twitter_widget'),
+	        	__('OS Twitter Widget', 'os_twitter_widget'),
 	        	array(
 	            	'description' => __('Widget que muestra tweets asociados a una cuenta', 'os_twitter_widget')
 	        	)

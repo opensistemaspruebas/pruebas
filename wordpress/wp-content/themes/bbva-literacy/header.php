@@ -19,17 +19,7 @@
     <div class="webpage">
         <header class="header">
             <!-- header -->
-            <div class="top hidden-xs">
-                <div class="container">
-                    <div class="languages-menu">
-                        <label for="language-header" class="hidden">Idioma</label>
-                        <select id="language-header" class="selectpicker">
-                            <option>Español</option>
-                            <option>English</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <?php languages_list_header(); ?>
             <div class="container">
                 <div class="row vertical-align header-logo">
                     <div class="visible-xs col-xs-12 header-phone">
