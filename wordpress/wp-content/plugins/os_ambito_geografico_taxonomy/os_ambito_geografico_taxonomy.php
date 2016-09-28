@@ -51,3 +51,93 @@ function create_ambito_geografico_taxonomy(){
 
 }
 add_action( 'init', 'create_ambito_geografico_taxonomy', 0 );
+
+
+//Funcion para añadir campos
+function ambito_geografico_add_new_meta_fields(){
+    ?>
+    <div class="form-field">
+        <label for="term_meta[descripcion]">Descripción del enlace</label>
+        <input type="text" name="term_meta[descripcion]" id="term_meta[descripcion]" value="">
+        <p class="description">Nombre descriptivo de la URL</p>
+    </div>
+    <div class="form-field">
+        <label for="term_meta[link]">Link de la web</label>
+        <input type="url" name="term_meta[link]" id="term_meta[link]" value="">
+        <p class="description">URL de la página del país</p>
+    </div>
+
+    <!--Elimina el campo descripcion que viene por defecto-->
+    <style>.term-description-wrap{display:none !important;}</style>
+    
+    <?php
+
+}
+add_action('ambito_geografico_add_form_fields', 'ambito_geografico_add_new_meta_fields', 0, 2);
+
+
+
+//Funcion para modificar campos
+function ambito_geografico_edit_meta_fields($term){
+    $t_id = $term->term_id;
+ 
+    $term_meta = get_option("ambito_geografico_$t_id");
+    ?>
+        <tr class="form-field">
+            <th scope="row" valign="top">
+                <label for="term_meta[descripcion]">Descripción del enlace</label>
+            </th>
+            <td>
+                <input type="text" name="term_meta[descripcion]" id="term_meta[descripcion]" value="<?php echo esc_attr( $term_meta['descripcion'] ) ? esc_attr( $term_meta['descripcion'] ) : ''; ?>">
+                <p class="description">Nombre descriptivo de la URL</p>
+            </td>
+        </tr>
+        <tr class="form-field">
+            <th scope="row" valign="top">
+                <label for="term_meta[link]">Link de la web</label>
+            </th>
+            <td>
+                <input type="url" name="term_meta[link]" id="term_meta[link]" value="<?php echo esc_attr( $term_meta['link'] ) ? esc_attr( $term_meta['link'] ) : ''; ?>">
+                <p class="description">URL de la página del país</p>
+            </td>
+        </tr>
+    <?php
+}
+add_action( 'ambito_geografico_edit_form_fields', 'ambito_geografico_edit_meta_fields', 0, 2 );
+
+
+
+//Funcion para guardar los datos
+function ambito_geografico_save_custom_meta( $term_id ) {
+    if ( isset( $_POST['term_meta'] ) ) {
+        $t_id = $term_id;
+        $term_meta = get_option( "ambito_geografico_$t_id" );
+        $cat_keys = array_keys( $_POST['term_meta'] );
+        foreach ( $cat_keys as $key ) {
+            if ( isset ( $_POST['term_meta'][$key] ) ) {
+                $term_meta[$key] = $_POST['term_meta'][$key];
+            }
+        }
+        update_option( "ambito_geografico_$t_id", $term_meta );
+    }
+}  
+add_action( 'edited_ambito_geografico', 'ambito_geografico_save_custom_meta', 0, 2 );  
+add_action( 'create_ambito_geografico', 'ambito_geografico_save_custom_meta', 0, 2 );
+
+
+
+//Eliminar el campo descripcion que viene por defecto
+add_action( "ambito_geografico_edit_form", function( $tag, $taxonomy ){ 
+
+    ?><style>.term-description-wrap{display:none !important;}</style><?php
+}, 0, 2 );
+
+
+add_filter('manage_edit-ambito_geografico_columns', function ( $columns ) {
+
+    if( isset( $columns['description'] ) )
+        unset( $columns['description'] );   
+
+    return $columns;
+} );
+
