@@ -198,10 +198,8 @@ function imprime_plantilla_1($titulo, $texto, $posts, $numero_posts_totales, $nu
                     			$post_guid = $post->guid;
                     			$post_abstract = substr(get_post_meta($post->ID, 'abstract_destacado', true), 0, 140) . '...';
                     			$pdf = get_post_meta($post->ID, 'pdf', true);
-		            			$imagen_id = get_post_thumbnail_id($post->ID);
-		            			$imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
-		            			$imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
-
+                    			$imagen = get_post_meta($post->ID, 'imagenCard', true);
+                    			
            						$style = '';
            						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
            							$style = 'style="display: none;'; ; 
@@ -210,7 +208,7 @@ function imprime_plantilla_1($titulo, $texto, $posts, $numero_posts_totales, $nu
 		                    <section class="container-fluid main-card" <?php echo $style; ?>>
 		                        <header class="row header-container">
 		                            <div class="image-container nopadding col-xs-12">
-		                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+		                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
 		                            </div>
 		                            <div class="hidden-xs floating-text col-xs-9">
 		                                <p class="date"><?php echo $post_date; ?></p>
@@ -324,10 +322,7 @@ function imprime_plantilla_2($titulo, $texto, $posts, $numero_posts_totales, $nu
 	                    			$post_guid = $post->guid;
 	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
 	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
-			            			$imagen_id = get_post_thumbnail_id($post->ID);
-			            			$imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
-			            			$imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
-
+			            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
 	                    		?>
 
 	           					<?php $grid = $order[($i % 5)]; ?>
@@ -344,7 +339,7 @@ function imprime_plantilla_2($titulo, $texto, $posts, $numero_posts_totales, $nu
 								    <section class="container-fluid main-card">
 								        <header class="row header-container">
 								            <div class="image-container nopadding col-xs-12">
-								                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+								                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
 								            </div>
 								            <div class="hidden-xs floating-text col-xs-9">
 								                <p class="date"><?php echo $post_date; ?></p>
@@ -427,9 +422,7 @@ function imprime_plantilla_3($titulo, $texto, $posts, $numero_posts_totales, $nu
                 			$post_date = get_the_date('j F Y', $post->ID);
                 			$post_guid = $post->guid;
                 			$post_content = substr($post->post_content, 0, 140) . '...';
-	            			$imagen_id = get_post_thumbnail_id($post->ID);
-	            			$imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
-	            			$imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
+	            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
 
        						$style = '';
        						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
@@ -445,7 +438,7 @@ function imprime_plantilla_3($titulo, $texto, $posts, $numero_posts_totales, $nu
 			                    <section class="container-fluid main-card">
 			                        <header class="row header-container">
 			                            <div class="image-container nopadding col-xs-12">
-			                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+			                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
 			                            </div>
 			                            <div class="hidden-xs floating-text col-xs-9">
 			                                <p class="date"><?php echo $post_date; ?></p>
