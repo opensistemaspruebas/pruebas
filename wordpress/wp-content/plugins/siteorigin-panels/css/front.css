@@ -47,6 +47,6 @@
   display: table;
   clear: both;
 }
-#pl-2 .panel-grid-cell .so-panel {
+.panel-grid-cell .so-panel {
     margin-bottom: 0px!important;
 }
