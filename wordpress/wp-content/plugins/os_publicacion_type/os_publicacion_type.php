@@ -189,9 +189,7 @@ function meta_box_publicacion_info($post) {
   $editorial = get_post_meta($post->ID, 'editorial', true);
   $organization_name = get_post_meta($post->ID, 'organization_name', true);
   $organization_url = get_post_meta($post->ID, 'organization_url', true);
-  
   $organization_logo = get_post_meta($post->ID, 'organization_logo', true);
-
   $organization_logo_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($organization_logo));
 
   ?>

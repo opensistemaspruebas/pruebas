@@ -19,7 +19,7 @@
     <div class="webpage">
         <header class="header">
             <!-- header -->
-            <?php languages_list_header(); ?>
+            <?php //languages_list_header(); ?>
             <div class="container">
                 <div class="row vertical-align header-logo">
                     <div class="visible-xs col-xs-12 header-phone">

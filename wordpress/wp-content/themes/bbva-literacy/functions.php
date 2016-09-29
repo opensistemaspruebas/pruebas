@@ -230,7 +230,7 @@ add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
 add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
 
 
-function languages_list_header(){
+/*function languages_list_header(){
     $languages = icl_get_languages('skip_missing=0&orderby=code');
     ?>
 	<div class="top hidden-xs">
@@ -246,4 +246,4 @@ function languages_list_header(){
         </div>
     </div>
     <?php
-}
+}*/
