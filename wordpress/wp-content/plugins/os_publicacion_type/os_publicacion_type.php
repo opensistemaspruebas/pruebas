@@ -85,6 +85,7 @@ function add_featured_image_instruction( $content ) {
 
 function publicacion_meta_boxes() {
   add_meta_box('postimagediv', __('Imagen de la cabecera', 'os_publicacion_type'), 'post_thumbnail_meta_box', 'publicacion', 'normal', 'high');
+  add_meta_box("publicacion_destacada" ,__("Publicación destacada", "os_publicacion_type"), "meta_box_destacada", 'publicacion', 'side', 'high');
   add_meta_box("publicacion_imagen_card" ,__("Imagen Card", "os_publicacion_type"), "meta_box_imagen_card", 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_abstract_destacado',  __('Texto destacado del abstract', 'os_publicacion_type'), 'meta_box_abstract_destacado', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_abstract_contenido',  __('Texto normal del abstract', 'os_publicacion_type'), 'meta_box_abstract_contenido', 'publicacion', 'normal', 'high');
@@ -93,6 +94,25 @@ function publicacion_meta_boxes() {
   add_meta_box('publicacion_info', __('Información adicional', 'os_publicacion_type'), 'meta_box_publicacion_info', 'publicacion', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'publicacion_meta_boxes');
+
+
+function meta_box_destacada($post) {
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_destacada-nonce');
+
+  $destacada = get_post_meta($post->ID, 'destacada', true);
+
+  ?>
+
+  <p>
+    <input class="widefat" id="destacada" name="destacada" type="checkbox" <?php checked($destacada, 'on'); ?> />
+    <label for="destacada"><?php _e('Marcar la publicación como destacada', 'os_publicacion_type'); ?></label>
+  </p>
+            
+<?php
+       
+}
+
 
         
 function meta_box_imagen_card($post) {         
@@ -285,9 +305,16 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['organization_logo'])) {
    update_post_meta($post_id, 'organization_logo', strip_tags($_POST['organization_logo']));
   }
- if (isset($_POST['imagenCard'])) {
+  if (isset($_POST['imagenCard'])) {
    update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
   }
+  if (isset($_POST['destacada'])) {
+    update_post_meta($post_id, 'destacada', strip_tags($_POST['destacada']));
+  } else {
+    update_post_meta($post_id, 'destacada', "off");
+  }
+
+
 
 }
 add_action('save_post', "meta_boxes_save");

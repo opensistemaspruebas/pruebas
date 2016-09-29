@@ -187,8 +187,11 @@
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/wow.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/picturefill.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/circle-progress.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/moment.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/moment-precise-range.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/app.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/script-os.js"></script>
+
     <?php wp_footer(); ?>
 </body>
 
