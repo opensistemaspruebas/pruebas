@@ -14,7 +14,7 @@ License: GPL2
 
 if (!class_exists('PartnerCustomType')) :
   
-   class PartnerCustomType extends MiembrosPartnersCustomType{   
+   class PartnerCustomType extends OrganizacionesPartnersCustomType{   
        
 var $post_type = "partners";
         
