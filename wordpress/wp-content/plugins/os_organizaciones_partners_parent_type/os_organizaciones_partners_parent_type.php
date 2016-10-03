@@ -89,7 +89,7 @@ var $post_type = "organizacionesPartners";
             </p>
             <p>
                 <label for="descripcion"><?php _e('Descripción', 'os_organizaciones_partners_parent_type')?></label>
-                <textarea name="descripcion" class="widefat" id="descripcion"><?php if ( isset($descripcion) ) echo $descripcion[0]; ?></textarea>
+                <textarea name="descripcion" rows="4" class="widefat" id="descripcion"><?php if ( isset($descripcion) ) echo $descripcion[0]; ?></textarea>
             </p>
             <p>
                 <label for="link"><?php _e('Link', 'os_organizaciones_partners_parent_type')?></label>
