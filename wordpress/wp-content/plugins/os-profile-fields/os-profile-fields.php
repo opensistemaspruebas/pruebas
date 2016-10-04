@@ -4,7 +4,7 @@
     Plugin Name: OS Profile Fields
     Description: Filtros y acciones para personalizar los campos de perfil de usuario
     Version: 1.0
-    Author: Carlos Mendoza
+    Author: Marta Oliver
     Author URI: http://www.opensistemas.com/
  */
 

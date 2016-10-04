@@ -14,6 +14,7 @@ get_header(); ?>
     $title = get_the_title();
     $date = get_the_date('l, j \d\e F \d\e Y');
     $abstract_destacado = get_post_meta(get_the_ID(), 'abstract_destacado', true);
+    $imagenCabecera = get_post_meta(get_the_ID(), 'imagenCabecera', true);
     $abstract_contenido = get_post_meta(get_the_ID(), 'abstract_contenido', true);
     $pdf = get_post_meta(get_the_ID(), 'pdf', true);
     $publication_date = get_post_meta(get_the_ID(), 'publication_date', true);
@@ -164,9 +165,9 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <?php if (get_the_post_thumbnail()): ?>
+        <?php if (!empty($imagenCabecera)): ?>
             <div class="image-section">
-                <img src="<?php the_post_thumbnail_url('original'); ?>" alt="image title" />
+                <img src="<?php echo $imagenCabecera; ?>" alt="image title" />
             </div>
         <?php endif; ?>
         <?php if (!empty($date) || !empty($abstract_destacado) || !empty($abstract_contenido) || !empty($source_url)) : ?>

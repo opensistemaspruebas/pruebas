@@ -5,6 +5,31 @@
  */
 
 jQuery(document).ready(function($) {
+
+    jQuery("input#upload_imagenCabecera").click(function(e) {
+        e.preventDefault();
+        var custom_uploader;
+        if (custom_uploader) {
+            custom_uploader.open();
+            return;
+        }
+        custom_uploader = wp.media.frames.file_frame = wp.media({
+            title: object_name.choose_source_logo,
+            button: {
+                text: object_name.choose_source_logo
+            },
+            multiple: false,
+            library: { type: 'image' },
+        });
+        custom_uploader.on('select', function() {
+            var attachment = custom_uploader.state().get('selection').first().toJSON();
+            jQuery('input#imagenCabecera').val(attachment.url);
+            jQuery('img#show_imagenCabecera').attr("src", attachment.sizes.thumbnail.url);
+            jQuery('img#show_imagenCabecera').show();
+        });
+        custom_uploader.open();
+    });
+
     jQuery("input#upload_logo").click(function(e) {
         e.preventDefault();
         var custom_uploader;
@@ -22,8 +47,8 @@ jQuery(document).ready(function($) {
         });
         custom_uploader.on('select', function() {
             var attachment = custom_uploader.state().get('selection').first().toJSON();
-            jQuery('input#source_logo').val(attachment.url);
-            jQuery('img#show_logo').attr("src", attachment.url);
+            jQuery('input#organization_logo').val(attachment.url);
+            jQuery('img#show_logo').attr("src", attachment.sizes.thumbnail.url);
             jQuery('img#show_logo').show();
         });
         custom_uploader.open();
