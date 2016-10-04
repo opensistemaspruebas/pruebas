@@ -58,13 +58,47 @@ if (!class_exists('OSProfileFields')) :
                 update_user_meta($user_id, 'descripcion', $_POST['descripcion']);
             }
 
-            if (isset($_POST['lugar_de_trabajo'])) {
-                update_user_meta($user_id, 'lugar_de_trabajo', $_POST['lugar_de_trabajo']);
+            if (isset($_POST['lugar_trabajo'])) {
+                update_user_meta($user_id, 'lugar_trabajo', $_POST['lugar_trabajo']);
             }
 
-            if (isset($_POST['logo_de_trabajo'])) {
-                update_user_meta($user_id, 'logo_de_trabajo', $_POST['lugar_de_trabajo']);
+            if (isset($_POST['logo_trabajo'])) {
+                update_user_meta($user_id, 'logo_trabajo', $_POST['logo_trabajo']);
             }
+
+            if (isset($_POST['area_expertise_1'])) {
+                update_user_meta($user_id, 'area_expertise_1', $_POST['area_expertise_1']);
+            }
+
+            if (isset($_POST['area_expertise_2'])) {
+                update_user_meta($user_id, 'area_expertise_2', $_POST['area_expertise_2']);
+            }
+
+            if (isset($_POST['area_expertise_3'])) {
+                update_user_meta($user_id, 'area_expertise_3', $_POST['area_expertise_3']);
+            }
+
+            if (isset($_POST['linkedin'])) {
+                update_user_meta($user_id, 'linkedin', $_POST['linkedin']);
+            }
+
+            if (isset($_POST['correo_electronico'])) {
+                update_user_meta($user_id, 'correo_electronico', $_POST['correo_electronico']);
+            }
+
+            if (isset($_POST['url_web'])) {
+                update_user_meta($user_id, 'url_web', $_POST['url_web']);
+            }
+
+            if (isset($_POST['imagen_cabecera'])) {
+                update_user_meta($user_id, 'imagen_cabecera', $_POST['imagen_cabecera']);
+            }
+
+            if (isset($_POST['frase_cabecera'])) {
+                update_user_meta($user_id, 'frase_cabecera', $_POST['frase_cabecera']);
+            }
+
+            // Faltan trabajos relacionados!!!!!!
          
         }
 
@@ -87,7 +121,7 @@ if (!class_exists('OSProfileFields')) :
 
                 if ($user !== 'add-new-user') {
                     $user_id = $user->data->ID;
-
+        
                 }
 
             ?>
@@ -149,10 +183,10 @@ if (!class_exists('OSProfileFields')) :
                 <table class="form-table">
                     <tr>
                         <th>
-                            <label for="lugar_de_trabajo"><?php _e('Lugar de trabajo', 'os_profile_fields'); ?></label>
+                            <label for="lugar_trabajo"><?php _e('Lugar de trabajo', 'os_profile_fields'); ?></label>
                         </th>
                          <td>
-                            <input type="text" name="lugar_de_trabajo" id="lugar_de_trabajo" value="<?php echo esc_attr($lugar_de_trabajo); ?>" class="regular-text" /><br />
+                            <input type="text" name="lugar_trabajo" id="lugar_trabajo" value="<?php echo esc_attr($lugar_trabajo); ?>" class="regular-text" /><br />
                             <span class="description"><?php _e('Nombre del lugar de trabajo', 'os_profile_fields'); ?></span>
                         </td>
                     </tr>

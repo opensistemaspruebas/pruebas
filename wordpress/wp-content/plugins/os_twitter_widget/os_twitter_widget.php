@@ -41,7 +41,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 				'diciembre' => __('Diciembre', 'os_twitter_widget'),
 				
 			);
-			wp_localize_script('os_twitter_widget_js', 'object_name', $translation_array);
+			wp_localize_script('os_twitter_widget_js', 'object_name_twitter', $translation_array);
             wp_enqueue_script('os_twitter_widget_js');
         }
 
