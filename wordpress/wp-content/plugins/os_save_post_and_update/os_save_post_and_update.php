@@ -37,10 +37,10 @@ function save_json_to_file($json, $post_type, $identificador, $json_type){
 			file_put_contents($path . "/" . $identificador . ".json", json_encode($json));
 			break;
 		case "indice":
-			file_put_contents($path . "/" . $identificador . "." . $post_type, json_encode($json));
+			file_put_contents($path . "/" . $identificador . ".json", json_encode($json));
 			break;
 		case "destacados":
-			file_put_contents($path . "/" . "DESTACADOS" . "." . $post_type, json_encode($json));
+			file_put_contents($path . "/" . "DESTACADOS" . ".json", json_encode($json));
 			break;
 		default:
 			break;
