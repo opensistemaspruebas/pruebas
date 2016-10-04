@@ -58,8 +58,6 @@ if (!class_exists('OS_Logos_Widget')) :
 			    	'orderby' => 'rand'
 				)
 			);
-		
-			$i = 0;
 
 			if ($query->have_posts() ) {
 			
@@ -74,7 +72,6 @@ if (!class_exists('OS_Logos_Widget')) :
 		    
 		<?php
 			
-					$i++;
 	    		endwhile;
 				wp_reset_postdata();
 			}
@@ -88,8 +85,6 @@ if (!class_exists('OS_Logos_Widget')) :
 	</div>
 
 		<?php 
-		
-			$i = 0;
 
 			if ($query->have_posts() ) {
 			
@@ -102,7 +97,7 @@ if (!class_exists('OS_Logos_Widget')) :
 					$logoMP = get_post_meta($post_id, 'logoMP', true);
     	?>
 
-	<section class="modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
+	<section class="lightbox modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
     	<div class="modal-dialog" role="document">
         	<div class="modal-content">
             	<div class="container">
@@ -130,7 +125,6 @@ if (!class_exists('OS_Logos_Widget')) :
 	</section>
 
 		<?php
-		    		$i++;
 	    		endwhile;
 				wp_reset_postdata();
 			} 
