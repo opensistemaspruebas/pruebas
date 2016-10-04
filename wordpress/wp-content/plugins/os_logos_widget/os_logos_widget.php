@@ -53,7 +53,9 @@ if (!class_exists('OS_Logos_Widget')) :
 
 			$query = new WP_Query(
 				array(
-			    	'post_type' => 'organizaciones', 
+			    	'post_type' => 'organizaciones',
+			    	'posts_per_page'   => 5, 
+			    	'orderby' => 'rand'
 				)
 			);
 		
@@ -68,7 +70,7 @@ if (!class_exists('OS_Logos_Widget')) :
       
     	?>
       
-		    <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-<?php echo $i; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+		    <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
 		    
 		<?php
 			
@@ -86,12 +88,6 @@ if (!class_exists('OS_Logos_Widget')) :
 	</div>
 
 		<?php 
-
-			$query = new WP_Query(
-				array(
-				    'post_type' => 'organizaciones'
-				)
-			);
 		
 			$i = 0;
 
@@ -106,7 +102,7 @@ if (!class_exists('OS_Logos_Widget')) :
 					$logoMP = get_post_meta($post_id, 'logoMP', true);
     	?>
 
-	<section class="modal fade" id="modal-<?php echo $i; ?>" tabindex="-1" role="dialog">
+	<section class="modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
     	<div class="modal-dialog" role="document">
         	<div class="modal-content">
             	<div class="container">
