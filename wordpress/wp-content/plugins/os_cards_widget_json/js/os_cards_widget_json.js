@@ -1,98 +1,174 @@
-/*jQuery(document).ready(function() {
-	jQuery("a.readmore").on("click", function(e) {
-		e.preventDefault();
-		console.log("padipoaisd");
-		var last = jQuery(".card-container:visible").last().attr("name");
-		var n = last.replace("card_", "");
-		console.log(n);
-	});
-});
-
-$(document).ready(
-	$("#mas").click(
-		alert("Hello! I am an alert box!!")
-		);
-);*/
-jQuery(document).on("click","#mas",function(){
-	var tipo = jQuery(this).attr("tipo");
-	var orden = jQuery(this).attr("orden");
+// Ver mas publicaciones
+jQuery(document).on("click", "#readmore", function(event) {
+	event.preventDefault();
+	var tipo = jQuery("#tipo").val();
+	var orden = jQuery("#orden").val();
 	var path = "/wp-content/jsons/" + tipo + "/";
-	jQuery.getJSON(  path + orden + "." + tipo + ".json", getIndice);
-
+	jQuery.getJSON(path + orden + ".json", getIndice);
 });
 
-function getIndice(indice){
-	var npv = parseInt(jQuery("#mas").attr("npv"));
-	var npt = parseInt(jQuery("#mas").attr("npt"));
-	var npc = parseInt(jQuery("#mas").attr("npc"));
 
+// Cambiar el orden
+jQuery(document).on("click", '.sort-items-container a', function(event) {
+	event.preventDefault();
+	var tipo = jQuery("#tipo").val();
+	var orden = jQuery(this).attr("class");
+	jQuery("#orden").val(orden);
+	var path = "/wp-content/jsons/" + tipo + "/";
+	jQuery('.cards-grid .container div.row').first().html('');
+	jQuery('#card-container').html('');
+	jQuery('.outstanding-histories .card-container .row').first().html('');
+	jQuery("#npc").val('1');
+	jQuery.getJSON(path + orden + ".json", getIndice);
+});
+
+
+// Obtener indice
+function getIndice(indice){
+	var npv = parseInt(jQuery("#npv").val());
+	var npt = parseInt(jQuery("#npt").val());
+	var npc = parseInt(jQuery("#npc").val());
 	for (var i = npc - 1; i < npc + npv - 1; i++) {
-		console.log(indice[i]);
+		//console.log(indice[i]);
+		if (indice[i] == undefined) {
+			// Si el indice no existe, se oculta el boton de mostrar mas y se sale del bucle
+			jQuery('a#readmore').parent().parent().parent().hide();
+			break;
+		}
 		crearPost(indice[i]);
 	}
-
-	jQuery("#mas").attr("npc", npc + npv);
+	npc += npv;
+	jQuery("#npc").val(npc);
 }
 
+
+// Crear post
 function crearPost(indice){
-	var tipo = jQuery("#mas").attr("tipo");
-	var orden = jQuery("#mas").attr("orden");
+	var tipo = jQuery("#tipo").val();
+	var orden = jQuery("#orden").val();
 	var path = "/wp-content/jsons/" + tipo + "/";
-	jQuery.getJSON(  path + indice + ".json", montarPost);
+	jQuery.getJSON(path + indice + ".json", montarPost);
 }
 
+
+// Montar post
 function montarPost(post){
 	console.log(post);
-	jQuery("#card-container").append(getPost(post));
+	var plantilla = jQuery("#plantilla").val();
+	switch(plantilla) {
+		
+		case 'plantilla_1':
+			jQuery('#card-container').append(getPost(post));
+			break;
+
+		case 'plantilla_2':
+			jQuery('.cards-grid .container div.row').first().append(getPost(post));
+			break;
+
+		case 'plantilla_3':
+			jQuery('.outstanding-histories .card-container .row').first().append(getPost(post));
+			break;
+
+	}
 }
 
+
+// HTML del post
 function getPost(post){
-	return '<div class="main-card-container col-xs-12 col-sm-4 noppading"> \
-		                    <section class="container-fluid main-card"> \
-		                        <header class="row header-container"> \
-		                            <div class="image-container nopadding col-xs-12"> \
-		                                <img class="img-responsive" src=" + post["urlImagen"] + " alt=""> \
-		                            </div> \
-		                            <div class="hidden-xs floating-text col-xs-9"> \
-		                                <p class="date">" + post["fecha"] + "</p> \
-		                                <h1>" + post["titulo"] + "</h1> \
-		                            </div> \
-		                        </header> \
-		                        <div class="row data-container"> \
-		                            <p class="nopadding col-xs-9 date"> " + post["fecha"] + " </p> \
-		                            <h1 class="title nopadding col-xs-9">" + post["titulo"] + "</h1> \
-		                            <p><?php echo $post_abstract; ?></p> \
-		                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore">"Leer más"</a> \
-		                            <footer class="row"> \
-		                            	<?php if ($post_abstract) : ?> \
-			                                <div class="col-xs-2 col-lg-1"> \
-			                                    <div class="card-icon"> \
-			                                        <span class="icon bbva-icon-quote"></span> \
-			                                        <div class="triangle triangle-up-left"></div> \
-			                                        <div class="triangle triangle-down-right"></div> \
-			                                    </div> \
-			                                </div> \
-		                                <?php endif; ?> \
-		                                <?php if (false) :?> \
-			                                <div class="col-xs-2 col-lg-1"> \
-			                                    <div class="card-icon"> \
-			                                        <span class="icon bbva-icon-audio"></span> \
-			                                        <div class="triangle triangle-up-left"></div> \
-			                                        <div class="triangle triangle-down-right"></div> \
-			                                    </div> \
-			                                </div> \
-										<?php endif; ?> \
-		                                <?php if ($pdf) : ?> \
-			                                <div class="col-xs-2 col-lg-1"> \
-			                                    <div class="card-icon"> \
-			                                        <span class="icon bbva-icon-comments"></span> \
-			                                        <div class="triangle triangle-up-left"></div> \
-			                                        <div class="triangle triangle-down-right"></div> \
-			                                    </div> \
-			                                </div> \
-		                                <?php endif; ?> \
-		                            </footer> \
-		                        </div> \
-		                    </section> \
-		                    </div>'
+
+	var plantilla = jQuery("#plantilla").val();
+
+	var html = '';
+
+	var titulo = post['titulo'];
+	var descripcion = post['descripcion'];
+	var fecha = new Date(post['fecha'].substring(0, 10));
+	var urlImagen = post['urlImagen'];
+	var urlPublicacion = post['urlPublicacion'];
+	var cita = post['cita'];
+	var video = post['video'];
+	var pdf = post['pdf'];
+
+	var meses = [
+		object_name_cards.enero, 
+		object_name_cards.febrero,
+		object_name_cards.marzo,
+		object_name_cards.abril,
+		object_name_cards.mayo,
+		object_name_cards.junio,
+		object_name_cards.julio,
+		object_name_cards.agosto,
+		object_name_cards.septiembre,
+		object_name_cards.octubre,
+		object_name_cards.noviembre,
+		object_name_cards.diciembre,
+	];
+
+	fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
+	fecha = fecha.toString();
+	fecha = fecha.toUpperCase();
+
+	switch(plantilla) {
+		
+		case 'plantilla_1':
+			html = '<div class="main-card-container col-xs-12 col-sm-4 noppading"><section class="container-fluid main-card"><header class="row header-container"><div class="image-container nopadding col-xs-12"><img class="img-responsive" src="' + urlImagen + '" alt=""></div><div class="hidden-xs floating-text col-xs-9"><p class="date">"' + fecha + '"</p><h1>"' + titulo + '"</h1></div></header><div class="row data-container"><p class="nopadding col-xs-9 date">"' + fecha + '"</p><h1 class="title nopadding col-xs-9">"' + titulo + '"</h1><p><?php echo $post_abstract; ?></p><a href="<?php echo $post_guid; ?>" class="hidden-xs readmore">"' + object_name_cards.leer_mas + '"</a><footer class="row">';             	
+		    if (cita == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-quote"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    }
+		    if (video == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-audio"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    }
+		    if (pdf == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-comments"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+			}
+ 			html += '</footer></div></section></div>';
+			break;
+		
+		case 'plantilla_2':
+			order = ['double', 'double', 'triple', 'triple', 'triple'];
+			i = jQuery('.card-container').size();
+			grid = order[(i % 5)];
+			if (grid == "double") {
+				html = '<div name="card_' + i + '" class="col-xs-12 col-sm-6 double-card card-container">';
+			} else {
+				html = '<div name="card_' + i + '" class="col-xs-12 col-sm-4 triple-card card-container">';
+			}
+			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container nopadding col-xs-12"><img class="img-responsive" src="' + urlImagen + '" alt=""></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><p class="nopadding col-xs-9 date">' + fecha + '</p><h1 class="title nopadding col-xs-9">' + titulo + '</h1><p>' + descripcion + '</p><a href="' + urlPublicacion  + '" class="hidden-xs readmore">' + object_name_cards.leer_mas + '</a><footer class="row">';		        	
+		    if (cita == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-quote"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    }
+		    if (video == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-audio"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    }
+		    if (pdf == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-comments"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+			}
+			html += '</footer></div></section></div>';
+			break;
+		
+		case 'plantilla_3':
+			order = ["main", "secondary", "secondary"];
+			i = jQuery('.outstanding-histories .card-container .row').first().children().size();
+			grid = order[(i % 3)];
+			if (grid == "main") {
+				html = '<div class="_main-card col-xs-12 col-sm-6 noppading _main-card">';
+			} else if (grid == "secondary") {
+				html = '<div class="_main-card col-xs-12 col-sm-6 noppading _secondary-card">';
+			}
+			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container nopadding col-xs-12"><img class="img-responsive" src="' + urlImagen + '" alt=""></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><p class="nopadding col-xs-9 date">' + fecha + '</p><h1 class="title nopadding col-xs-9">' + titulo + '</h1><p>' + descripcion + '</p><a href="' + urlPublicacion  + '" class="hidden-xs readmore">' + object_name_cards.leer_mas + '</a><footer class="row">';		        	
+		    if (cita == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-quote"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    }
+		    if (video == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-audio"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    }
+		    if (pdf == true)  {
+		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-comments"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+			}
+			html += '</footer></div></section></div>';
+			break;
+
+	}
+
+	return html;
 }

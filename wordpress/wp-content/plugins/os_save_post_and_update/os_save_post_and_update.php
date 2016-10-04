@@ -127,17 +127,28 @@ function fetch_destacados($post_type, $order){
 	$posts = get_posts($args);
 	$index_array = array();
 
-	for ($i=0; $i < count($posts); $i++) { 
+	for ($i = 0; $i < count($posts); $i++) { 
 		$index_array[] = $posts[$i]->ID;
 	}
 
 	save_json_to_file($index_array, $post_type, $order, "destacados");
 }
 
-function save_post_and_update($post_id){
-	$post_type = get_post_type($post_id);
-	post_to_json($post_id, $post_type);
-	update_post_index($post_type);
 
+// Generar jsones al guardar un post
+function save_post_and_update($post_id) {
+	// Tipos de post para los que guardamos jsones
+	$valid_types = array("publicacion", "historia");
+
+	$post_type = get_post_type($post_id);
+	
+	// Si no es un tipo valido o no esta en estado publicado, salimos
+	if (!in_array($post_type, $valid_types) || get_post_status($post_id) !== "publish") return;
+
+	// Generar json del post
+	post_to_json($post_id, $post_type);
+	
+	// Actualizar indice
+	update_post_index($post_type);
 }
 add_action('save_post', 'save_post_and_update');
