@@ -31,6 +31,7 @@ jQuery(document).ready(function() {
 	        		var likes = result.retweeted_status.favorite_count;
 	        	}
 
+
 	        	var meses = [
 	        		object_name.enero, 
 	        		object_name.febrero,
