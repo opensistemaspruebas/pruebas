@@ -78,10 +78,12 @@
                                     <ul class="hidden-xs prefooter-menu">
                                         <li class="mb-md"><a href="#">Web corporativa BBVA.com</a></li>
                                         <li class="mb-md"><a href="#">Empleo BBVA</a></li>
+                                        <li class="mb-md"><a target="_blank" href="http://mfbbva.org/">Fundación MicroFinanzas</a></li>
                                     </ul>
                                     <div class="visible-xs row prefooter-menu-collapsed">
                                         <a href="#" class="col-xs-8">Web corporativa BBVA.com</a>
                                         <a href="#" class="col-xs-4">Empleo BBVA</a>
+                                        <a href="http://mfbbva.org/" target="_blank" class="col-xs-4">Fundación MicroFinanzas</a>
                                     </div>
                                 </div>
                             </div>
