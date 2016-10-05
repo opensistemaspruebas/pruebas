@@ -90,7 +90,7 @@ get_header(); ?>
                 </header>
                 <div class="row visible-xs">
                     <div class="icon-section col-xs-6">
-                        <?php if (!empty($abstract_destacado) || !empty($abstract_contenido)) : ?>
+                        <?php if (false) : ?>
                             <div class="card-icon ml-xs">
                                 <span class="icon bbva-icon-quote"></span>
                                 <div class="triangle triangle-up-left"></div>
@@ -122,7 +122,7 @@ get_header(); ?>
                 </div>
                 <div class="row mb-xs hidden-xs">
                     <div class="icon-section col-sm-offset-2 col-sm-2">
-                        <?php if (!empty($abstract_destacado) || !empty($abstract_contenido)) : ?>
+                        <?php if (false) : ?>
                             <div class="card-icon ml-xs">
                                 <span class="icon bbva-icon-quote"></span>
                                 <div class="triangle triangle-up-left"></div>
@@ -409,9 +409,8 @@ get_header(); ?>
                             $date = get_the_date('j F Y');
                             $abstract_destacado = substr(get_post_meta($post->ID, 'abstract_destacado', true), 0, 140) . '...';
                             $abstract_contenido = get_post_meta(get_the_ID(), 'abstract_contenido', true);
-                            $imagen_id = get_post_thumbnail_id($post->ID);
-                            $imagen = wp_get_attachment_image_src($imagen_id, "full")[0];
-                            $imagen_alt = get_post_meta($imagen_id, '_wp_attachment_image_alt', true);
+                            $imagen = get_post_meta($post->ID, 'imagenCard', true);
+                            
                             $pdf = get_post_meta(get_the_ID(), 'pdf', true);
                             ?>
                             <div class="main-card-container col-xs-12 col-sm-4 noppading">
@@ -419,7 +418,7 @@ get_header(); ?>
                                 <section class="container-fluid main-card">
                                     <header class="row header-container">
                                         <div class="image-container nopadding col-xs-12">
-                                            <img class="img-responsive" src="<?php echo $imagen; ?>" alt="<?php echo $imagen_alt; ?>">
+                                            <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
                                         </div>
                                         <div class="hidden-xs floating-text col-xs-9">
                                             <p class="date"><?php echo $date; ?></p>
@@ -432,7 +431,7 @@ get_header(); ?>
                                         <p><?php echo $abstract_destacado; ?></p>
                                         <a href="<?php the_permalink(); ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_publicacion_type"); ?></a>
                                         <footer class="row">
-                                            <?php if ($abstract_destacado) : ?>
+                                            <?php if (false) : ?>
                                                 <div class="col-xs-2 col-lg-1">
                                                     <div class="card-icon">
                                                         <span class="icon bbva-icon-quote"></span>
@@ -472,7 +471,7 @@ get_header(); ?>
                 <footer>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
+                            <a href="<?php _e('/publicaciones/', 'os_publicacion_type'); ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
                         </div>
                     </div>
                 </footer>
