@@ -84,8 +84,6 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 
 	    	$posts = get_posts($args);
 
-	    	//os_imprimir($posts);
-
 	    	switch ($plantilla) {
 	    		case 'plantilla_1' :
 	    			imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
@@ -203,6 +201,10 @@ endif;
 
 // 3 posts en cada linea
 function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
+
+	if (count($posts) < $numero_posts_mostrar) {
+		$numero_posts_mostrar = count($posts);
+	}
 	
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
@@ -225,7 +227,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	        <section class="card-container nopadding container-fluid mt-md mb-md">
 	            <div class="row" id="card-container">
 	                    
-                    	<?php for ($i=0; $i < $numero_posts_mostrar; $i++){ ?>
+                    	<?php for ($i = 0; $i < $numero_posts_mostrar; $i++) { ?>
 
                     		<?php
 
@@ -307,6 +309,11 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 // 2 posts en una linea, 3 en otra
 function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
 	
+	if (count($posts) < $numero_posts_mostrar) {
+		$numero_posts_mostrar = count($posts);
+	}
+
+
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
 		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
@@ -429,6 +436,11 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 
 // 1 post a la izquierda, 2 posts a la derecha
 function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
+	
+	if (count($posts) < $numero_posts_mostrar) {
+		$numero_posts_mostrar = count($posts);
+	}
+
 	
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">

@@ -56,7 +56,7 @@ function post_to_json($post_id, $post_type){
 			$json["titulo"] = get_the_title($post_id);
 			$json["descripcion"] = get_post_meta($post_id, 'abstract_destacado', true);
 			$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
-			$json["urlPublicacion"] = get_permalink($post_id);
+			$json["urlPublicacion"] = get_permalink($post_id, true);
 			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
 			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
@@ -67,7 +67,7 @@ function post_to_json($post_id, $post_type){
 			$json["titulo"] = get_the_title($post_id);
 			$json["descripcion"] = get_post_meta($post_id, "editor", true);
 			$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
-			$json["urlPublicacion"] = get_permalink($post_id);
+			$json["urlPublicacion"] = get_permalink($post_id, true);
 			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
 			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
