@@ -18,27 +18,45 @@ jQuery(document).on("click", '.sort-items-container a', function(event) {
 	jQuery('.cards-grid .container div.row').first().html('');
 	jQuery('#card-container').html('');
 	jQuery('.outstanding-histories .card-container .row').first().html('');
-	jQuery("#npc").val('1');
+	jQuery("#npc").val(0);
 	jQuery.getJSON(path + orden + ".json", getIndice);
 });
 
 
 // Obtener indice
-function getIndice(indice){
+function getIndice(indice) {
 	var npv = parseInt(jQuery("#npv").val());
 	var npt = parseInt(jQuery("#npt").val());
 	var npc = parseInt(jQuery("#npc").val());
-	for (var i = npc - 1; i < npc + npv - 1; i++) {
-		//console.log(indice[i]);
-		if (indice[i] == undefined) {
-			// Si el indice no existe, se oculta el boton de mostrar mas y se sale del bucle
-			jQuery('a#readmore').parent().parent().parent().hide();
-			break;
+	if (npc == 0) {
+		for (var i = npc; i < npc + npt; i++) {
+			//console.log(indice[i]);
+			if (indice[i] == undefined) {
+				// Si el indice no existe, se oculta el boton de mostrar mas y se sale del bucle
+				jQuery('a#readmore').hide();
+				break;
+			}
+			jQuery('a#readmore').show();
+			crearPost(indice[i]);
 		}
-		crearPost(indice[i]);
+		npc += npt;
+	} else {
+		for (var i = npc; i < npc + npv; i++) {
+			//console.log(indice[i]);
+			if (indice[i] == undefined) {
+				// Si el indice no existe, se oculta el boton de mostrar mas y se sale del bucle
+				jQuery('a#readmore').hide();
+				break;
+			}
+			jQuery('a#readmore').show();
+			crearPost(indice[i]);
+		}
+		npc += npv;
 	}
-	npc += npv;
 	jQuery("#npc").val(npc);
+	if (indice.length <= npc) {
+		jQuery('a#readmore').hide();
+	}
 }
 
 

@@ -205,14 +205,17 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	if (count($posts) < $numero_posts_mostrar) {
 		$numero_posts_mostrar = count($posts);
 	}
-	
+
+	$count_posts = wp_count_posts($tipo_post);
+	$published_posts = $count_posts->publish;
+
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
 		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
-		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_mostrar; ?>">
+		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
+		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
-		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_totales; ?>">
-		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_1">
+		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
 	<?php endif; ?>
 
 	<section class="latests-posts pt-xl wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
@@ -295,7 +298,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                     <a href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Ver más', 'os_cards_widget_json'); ?></a>
+	                     <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Ver más', 'os_cards_widget_json'); ?></a>
 	                </div>
 	            </div>
 	        </footer>
@@ -313,13 +316,15 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 		$numero_posts_mostrar = count($posts);
 	}
 
+	$count_posts = wp_count_posts($tipo_post);
+	$published_posts = $count_posts->publish;
 
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
 		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
-		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_mostrar; ?>">
+		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
+		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
-		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_totales; ?>">
 		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
 	<?php endif; ?>
 
@@ -420,7 +425,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    <footer class="grid-footer">
 	                        <div class="row">
 	                            <div class="col-md-12 text-center">
-	                                <a href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
+	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
 	                            </div>
 	                        </div>
 	                    </footer>
@@ -441,14 +446,16 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 		$numero_posts_mostrar = count($posts);
 	}
 
-	
+	$count_posts = wp_count_posts($tipo_post);
+	$published_posts = $count_posts->publish;
+
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
 		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
-		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_mostrar; ?>">
+		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
+		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
-		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_totales; ?>">
-		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_3">
+		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
 	<?php endif; ?>
 	
 	<section class="outstanding-histories pt-xl wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
@@ -539,7 +546,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                    <a href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las Historias", "os_cards_widget_json");?></a>
+	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las Historias", "os_cards_widget_json");?></a>
 	                </div>
 	            </div>
 	        </footer>
