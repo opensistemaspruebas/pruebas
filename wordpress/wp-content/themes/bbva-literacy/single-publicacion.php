@@ -65,7 +65,7 @@ get_header(); ?>
     $args = array(
         'post_type' => 'publicacion',
         'post__not_in' => array(get_the_ID()),
-        'posts_per_page' => 6,
+        'posts_per_page' => 3,
         'tax_query' => array(
             'relation' => 'OR',
             $tax_query_tags,
