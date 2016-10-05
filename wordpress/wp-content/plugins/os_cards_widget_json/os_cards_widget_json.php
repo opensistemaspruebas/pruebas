@@ -124,12 +124,12 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 				<textarea rows="5" class="widefat" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>" type="text"><?php echo esc_attr($texto); ?></textarea>
 			</p>
 	    	<p>
-				<label for="<?php echo $this->get_field_id('numero_posts_totales'); ?>"><?php _e('Número de posts totales', 'os_cards_widget_json'); ?>:</label>
-				<input class="widefat" id="<?php echo $this->get_field_id('numero_posts_totales'); ?>" name="<?php echo $this->get_field_name('numero_posts_totales'); ?>" type="number" value="<?php echo esc_attr($numero_posts_totales); ?>">
+				<label for="<?php echo $this->get_field_id('numero_posts_mostrar'); ?>"><?php _e('Número de posts a mostrar inicialmente', 'os_cards_widget_json'); ?>:</label>
+				<input class="widefat" id="<?php echo $this->get_field_id('numero_posts_mostrar'); ?>" name="<?php echo $this->get_field_name('numero_posts_mostrar'); ?>" type="number" value="<?php echo esc_attr($numero_posts_mostrar); ?>">
 			</p>
 	    	<p>
-				<label for="<?php echo $this->get_field_id('numero_posts_mostrar'); ?>"><?php _e('Número de posts a mostrar', 'os_cards_widget_json'); ?>:</label>
-				<input class="widefat" id="<?php echo $this->get_field_id('numero_posts_mostrar'); ?>" name="<?php echo $this->get_field_name('numero_posts_mostrar'); ?>" type="number" value="<?php echo esc_attr($numero_posts_mostrar); ?>">
+				<label for="<?php echo $this->get_field_id('numero_posts_totales'); ?>"><?php _e('Número de posts a mostrar al pulsar ver más', 'os_cards_widget_json'); ?>:</label>
+				<input class="widefat" id="<?php echo $this->get_field_id('numero_posts_totales'); ?>" name="<?php echo $this->get_field_name('numero_posts_totales'); ?>" type="number" value="<?php echo esc_attr($numero_posts_totales); ?>">
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('tipo_post'); ?>"><?php _e('Tipo de post', 'os_cards_widget_json'); ?>:</label>
