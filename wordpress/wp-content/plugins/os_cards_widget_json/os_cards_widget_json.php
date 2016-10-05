@@ -498,7 +498,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 			                        <div class="row data-container">
 			                            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
 			                            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
-			                            <p><?php echo $post_title; ?></p>
+			                            <p><?php echo $post_content; ?></p>
 			                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget_json"); ?></a>
 			                            <footer class="row">
 			                            	<?php if (false) : ?>
