@@ -187,13 +187,13 @@
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/wow.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/picturefill.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/circle-progress.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/script-os.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_bv7e4BrxwnaEVfLCPMKAyKoQnv15Lo"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/moment.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/moment-precise-range.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/app.js"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/script-os.js"></script>
 
     <?php wp_footer(); ?>
 </body>

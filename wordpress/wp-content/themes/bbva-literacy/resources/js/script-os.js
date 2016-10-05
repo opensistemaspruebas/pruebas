@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
-	$("select#language-header").on("change", function() {
-		console.log("camio");
+	$("select#language-header").change(function() {
+		console.log("cambio");
 		var val = jQuery(this).find(":selected").val();
 		window.location.href = val;
 	});
