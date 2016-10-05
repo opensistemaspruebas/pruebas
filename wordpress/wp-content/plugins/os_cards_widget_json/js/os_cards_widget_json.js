@@ -53,7 +53,7 @@ function crearPost(indice){
 
 // Montar post
 function montarPost(post){
-	console.log(post);
+	//console.log(post);
 	var plantilla = jQuery("#plantilla").val();
 	switch(plantilla) {
 		
