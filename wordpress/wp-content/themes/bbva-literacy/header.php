@@ -27,7 +27,7 @@
                             <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
                         </div>
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <span class="bbva-icon-BBVA"></span>
                             </a>
                             <div class="text-right header-text-xs">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo">
-                        <a href="index.html">
+                        <a href="/">
                             <span class="bbva-icon-BBVA"></span>
                             <span class="hidden">Logo BBVA</span>
                         </a>
@@ -59,7 +59,7 @@
                     <div class="row visible-xs">
                         <div class="col-xs-12 pt-md">
                             <div class="menu-logo">
-                                <a href="index.html">
+                                <a href="/">
                                     <span class="bbva-icon-BBVA"></span>
                                 </a>
                             </div>

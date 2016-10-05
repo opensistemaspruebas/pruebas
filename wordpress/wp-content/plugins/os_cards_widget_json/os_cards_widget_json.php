@@ -257,7 +257,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		                            <p><?php echo $post_abstract; ?></p>
 		                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget_json"); ?></a>
 		                            <footer class="row">
-		                            	<?php if ($post_abstract) : ?>
+		                            	<?php if (false) : ?>
 			                                <div class="col-xs-2 col-lg-1">
 			                                    <div class="card-icon">
 			                                        <span class="icon bbva-icon-quote"></span>
@@ -388,7 +388,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 								            <p><?php echo $post_abstract; ?></p>
 								            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e('Leer más', 'os_cards_widget_json'); ?></a>
 								            <footer class="row">
-					                        <?php if (!empty($abstract_destacado)) : ?>
+					                        <?php if (false) : ?>
 					                            <div class="col-xs-2 col-lg-1">
 					                                <span class="icon bbva-icon-quote"></span>
 					                                <div class="triangle triangle-up-left"></div>
@@ -501,20 +501,33 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 			                            <p><?php echo $post_title; ?></p>
 			                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget_json"); ?></a>
 			                            <footer class="row">
-			                                <div class="col-xs-2 col-lg-1">
-			                                    <div class="card-icon">
-			                                        <span class="icon bbva-icon-quote"></span>
-			                                        <div class="triangle triangle-up-left"></div>
-			                                        <div class="triangle triangle-down-right"></div>
-			                                    </div>
-			                                </div>
-			                                <div class="col-xs-2 col-lg-1">
-			                                    <div class="card-icon">
-			                                        <span class="icon bbva-icon-audio"></span>
-			                                        <div class="triangle triangle-up-left"></div>
-			                                        <div class="triangle triangle-down-right"></div>
-			                                    </div>
-			                                </div>
+			                            	<?php if (false) : ?>
+				                                <div class="col-xs-2 col-lg-1">
+				                                    <div class="card-icon">
+				                                        <span class="icon bbva-icon-quote"></span>
+				                                        <div class="triangle triangle-up-left"></div>
+				                                        <div class="triangle triangle-down-right"></div>
+				                                    </div>
+				                                </div>
+			                                <?php endif; ?>
+			                                <?php if (false) :?>
+				                                <div class="col-xs-2 col-lg-1">
+				                                    <div class="card-icon">
+				                                        <span class="icon bbva-icon-audio"></span>
+				                                        <div class="triangle triangle-up-left"></div>
+				                                        <div class="triangle triangle-down-right"></div>
+				                                    </div>
+				                                </div>
+											<?php endif; ?>
+			                                <?php if ($pdf) : ?>
+				                                <div class="col-xs-2 col-lg-1">
+				                                    <div class="card-icon">
+				                                        <span class="icon bbva-icon-comments"></span>
+				                                        <div class="triangle triangle-up-left"></div>
+				                                        <div class="triangle triangle-down-right"></div>
+				                                    </div>
+				                                </div>
+			                                <?php endif; ?>
 			                            </footer>
 			                        </div>
 			                    </section>

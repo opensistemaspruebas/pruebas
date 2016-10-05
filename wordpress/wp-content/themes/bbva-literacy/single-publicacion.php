@@ -197,7 +197,7 @@ get_header(); ?>
                             </div>
                             <div class="col-xs-12 col-sm-3 col-sm-offset-1">
                                 <div class="container-button mb-md mt-md">
-                                    <a href="<?php echo $pdf; ?>" class="btn btn-bbva-aqua"><?php _e('Leer informe', 'os_publicacion_type'); ?></a>
+                                    <a href="<?php echo $pdf; ?>" class="btn btn-bbva-aqua" target="_blank"><?php _e('Leer informe', 'os_publicacion_type'); ?></a>
                                 </div>
                             </div>
                         </div>
