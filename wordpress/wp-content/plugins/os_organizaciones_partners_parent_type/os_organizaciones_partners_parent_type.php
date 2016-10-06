@@ -15,7 +15,7 @@ if (!class_exists('OrganizacionesPartnersCustomType')) :
   
    class OrganizacionesPartnersCustomType {   
        
-var $post_type = "organizacionesPartners";
+        var $post_type = "organizacionesPartners";
         
         function __construct() {
             add_action('init', array(&$this, 'create_post_type'));
