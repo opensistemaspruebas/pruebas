@@ -12,7 +12,7 @@ jQuery(document).on("click", "#readmore", function(event) {
 jQuery(document).on("click", '.sort-items-container a', function(event) {
 	event.preventDefault();
 	var tipo = jQuery("#tipo").val();
-	var orden = jQuery(this).attr("class");
+	var orden = jQuery(this).attr("data-order");
 	jQuery("#orden").val(orden);
 	var path = "/wp-content/jsons/" + tipo + "/";
 	jQuery('.cards-grid .container div.row').first().html('');
@@ -20,6 +20,8 @@ jQuery(document).on("click", '.sort-items-container a', function(event) {
 	jQuery('.outstanding-histories .card-container .row').first().html('');
 	jQuery("#npc").val(0);
 	jQuery.getJSON(path + orden + ".json", getIndice);
+	jQuery('.sort-items-container a.selected').removeClass("selected");
+	jQuery(this).addClass("selected");
 });
 
 

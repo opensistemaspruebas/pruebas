@@ -337,15 +337,15 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget_json'); ?></a>
 	            </div>
 	            <div class="sort-items-container">
-	                <a class="DESC" href="#">
+	                <a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
 	                    <span class="icon bbva-icon-arrow arrowUp"></span>
 	                    <span class="text"><?php _e('Más recientes', 'os_cards_widget_json'); ?></span>
 	                </a>
-	                <a class="ASC" href="#">
+	                <a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
 	                    <span class="icon bbva-icon-arrow arrowDown"></span>
 	                    <span class="text"><?php _e('Más antiguos', 'os_cards_widget_json'); ?></span>
 	                </a>
-	                <a class="DESTACADOS" href="#">
+	                <a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
 	                    <span class="icon bbva-icon-view "></span>
 	                    <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
 	                </a>
