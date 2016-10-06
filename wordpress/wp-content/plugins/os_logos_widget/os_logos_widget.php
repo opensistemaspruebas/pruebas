@@ -35,6 +35,32 @@ if (!class_exists('OS_Logos_Widget')) :
 
 	    	$titulo = $instance['titulo'];
 	    	$texto = $instance['texto'];
+	    	$tipo_post = (!empty($instance['tipo_post'])) ? $instance['tipo_post'] : 'organizaciones';
+
+	    	switch ($tipo_post) {
+	    		case 'organizaciones':{
+
+					$query = new WP_Query(
+						array(
+					    	'post_type' => 'organizaciones',
+					    	'posts_per_page'   => 5, 
+					    	'orderby' => 'rand'
+						)
+					);
+	    		}
+	    			break;
+	    		case 'partners':{
+
+					$query = new WP_Query(
+						array(
+					    	'post_type' => 'partners',
+					    	'posts_per_page'   => 6, 
+					    	'orderby' => 'rand'
+						)
+					);
+	    		}	
+					break;
+	    	}
 
 	    	?>
 
@@ -50,14 +76,6 @@ if (!class_exists('OS_Logos_Widget')) :
 		<div class="text-center">   
 
 		<?php 
-
-			$query = new WP_Query(
-				array(
-			    	'post_type' => 'organizaciones',
-			    	'posts_per_page'   => 5, 
-			    	'orderby' => 'rand'
-				)
-			);
 
 			if ($query->have_posts() ) {
 			
@@ -142,6 +160,7 @@ if (!class_exists('OS_Logos_Widget')) :
 
   			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : _('Organizaciones del consejo asesor', 'os_logos_widget');
   			$texto = !empty($instance['texto']) ? $instance['texto'] : _('Estas son varias de las organizaciones que apoyan a la educación financiera en los diferentes países en los que estamos presentes', 'os_logos_widget');
+  			$tipo_post = (!empty($instance['tipo_post'])) ? $instance['tipo_post'] : '';
 
 	        ?>
 	        <p>
@@ -152,17 +171,26 @@ if (!class_exists('OS_Logos_Widget')) :
 	       		<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Descripción:', 'os_logos_widget'); ?></label>
 				<textarea class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
 			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('tipo_post'); ?>"><?php _e('Tipo de post', 'os_logos_widget'); ?>:</label>
+				<select class="widefat" id="<?php echo $this->get_field_id('tipo_post'); ?>" name="<?php echo $this->get_field_name('tipo_post'); ?>">
+					<option value="organizaciones" <?php $selected = ($tipo_post == 'organizaciones') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Organizaciones', 'os_logos_widget'); ?></option>
+					<option value="partners" <?php $selected = ($tipo_post == 'partners') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Partners', 'os_logos_widget'); ?></option>
+				</select>
+			</p>
 	        <?php
 	    }
 
 
 	    function update($new_instance, $old_instance) {
 
-	    	$instance = array();
+	    	$instance = $old_instance;
+
 	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : _('Organizaciones del consejo asesor', 'os_logos_widget');
 	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : __("Estas son varias de las organizaciones que apoyan a la educación financiera en los diferentes países en los que estamos presentes", "os_logos_widget");
+	    	$instance['tipo_post'] = (!empty($new_instance['tipo_post'])) ? strip_tags($new_instance['tipo_post']) : '';
 
-	    	return $new_instance;
+	    	return $instance;
 	    }
 
 	}
