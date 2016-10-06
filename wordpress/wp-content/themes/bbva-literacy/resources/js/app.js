@@ -78,73 +78,82 @@ var footerMenu = function($) {
 
 var googlemap = function ($) {
 
-  // Create the map
-  var map = new google.maps.Map(document.getElementById('mapSection'), {
-    center: { lat: -34.397, lng: 150.644 },
-    scrollwheel: false,
-    zoom: 8,
-    draggable: false,
-    disableDefaultUI: true,
-  });
+    var hasMap = $('#mapSection').length;
 
-  // Create a custom icon from our svg.
-  var icon = {
-    path: 'M12.395 11.708c0-1.993 1.614-3.608 3.604-3.608s3.605 1.616 3.605 3.608-1.614 3.608-3.605 3.608c-1.991 0-3.604-1.615-3.604-3.608zM15.729 2.625c-6.065 0-9.3 3.896-9.3 9.467 0 7.414 9.197 17.176 9.197 17.176 0.149 0.142 0.393 0.142 0.543 0.001 0 0 9.402-9.722 9.402-17.094 0-5.529-3.442-9.55-9.424-9.55h-0.418z',
-    fillColor: '#004481',
-    fillOpacity: 1,
-    anchor: new google.maps.Point(0, 0),
-    strokeWeight: 0,
-    scale: 1,
-  };
+    function initialize() {
 
-  var markers = [];
-  var infowindows = [];
-  var marker;
-  var infowindow;
-  var contentString;
+        var mapOptions = {
+            center: new google.maps.LatLng(-34.397, 150.644),
+            scrollwheel: false,
+            zoom: 8,
+            draggable: false,
+            disableDefaultUI: true,
+        };
 
-  // Markers and infowindows from json array
-  $.each(dataEvents, function (index, value) {
-              // Create marker
-              marker = new google.maps.Marker({
+        var icon = {
+            path: 'M12.395 11.708c0-1.993 1.614-3.608 3.604-3.608s3.605 1.616 3.605 3.608-1.614 3.608-3.605 3.608c-1.991 0-3.604-1.615-3.604-3.608zM15.729 2.625c-6.065 0-9.3 3.896-9.3 9.467 0 7.414 9.197 17.176 9.197 17.176 0.149 0.142 0.393 0.142 0.543 0.001 0 0 9.402-9.722 9.402-17.094 0-5.529-3.442-9.55-9.424-9.55h-0.418z',
+            fillColor: '#004481',
+            fillOpacity: 1,
+            anchor: new google.maps.Point(0, 0),
+            strokeWeight: 0,
+            scale: 1,
+        };
+
+        var map = new google.maps.Map(document.getElementById('mapSection'), mapOptions);
+
+        var markers = [];
+        var infowindows = [];
+        var marker;
+        var infowindow;
+        var contentString;
+
+        // Markers and infowindows from json array
+        $.each(dataEvents, function (index, value) {
+            // Create marker
+            marker = new google.maps.Marker({
                 position: { lat: parseFloat(value.latitude), lng: parseFloat(value.longitude) },
                 map: map,
                 draggable: false,
                 icon: icon,
                 zIndex: -20,
                 id: value.id,
-              });
-
-              // Add to the array
-              markers.push(marker);
-
-              // Create infowidow content
-              contentString = '<div id="content">' +
-                  '<h1 id="firstHeading" class="firstHeading">' + value.title + '</h1>' +
-                  '<div id="bodyContent" class="bodyContent mb-xs">' +
-                  value.content +
-                  '</div>' +
-                  '<div id="distanceContent" class="distanceContent">' +
-                  value.distance +
-                  '</div>' +
-                  '</div>';
-
-              // Create infowindow
-              infowindow = new google.maps.InfoWindow({
-                  content: contentString,
-                });
-
-              // Add to the array
-              infowindows.push(infowindow);
             });
 
-  // Add events to markers
-  $.each(markers, function (index, value) {
-    if (document.getElementsByClassName('id-' + markers[index].id).length !== 0) {
-      map.setCenter(markers[index].getPosition());
-      infowindows[index].open(map, markers[index]);
+            // Add to the array
+            markers.push(marker);
+
+            // Create infowidow content
+            contentString = '<div id="content">' +
+                '<h1 id="firstHeading" class="firstHeading">' + value.title + '</h1>' +
+                '<div id="bodyContent" class="bodyContent mb-xs">' +
+                value.content +
+                '</div>' +
+                '<div id="distanceContent" class="distanceContent">' +
+                value.distance +
+                '</div>' +
+                '</div>';
+
+            // Create infowindow
+            infowindow = new google.maps.InfoWindow({
+                content: contentString,
+            });
+
+            // Add to the array
+            infowindows.push(infowindow);
+        });
+
+        // Add events to markers
+        $.each(markers, function (index, value) {
+            if (document.getElementsByClassName('id-' + markers[index].id).length !== 0) {
+                map.setCenter(markers[index].getPosition());
+                infowindows[index].open(map, markers[index]);
+            }
+        });
     }
-  });
+
+    if(hasMap){
+        google.maps.event.addDomListener(window, 'load', initialize);
+    }
 };
 
 var landing = function($) {
@@ -185,8 +194,11 @@ var landing = function($) {
 
 var googleMaps = function($) {
     'use strict';
-    google.charts.load('visualization', '1', {'packages':['geochart']});
-    google.charts.setOnLoadCallback(drawRegionsMap);
+    var hasMap = $('#map_canvas').length;
+    if (hasMap) {
+        google.charts.load('visualization', '1', {'packages':['geochart']});
+        google.charts.setOnLoadCallback(drawRegionsMap);
+    }
 
     var chart, dataTable, init_event = null;
 
@@ -390,6 +402,29 @@ var navPhone = function($) {
     });
 };
 
+var navBar = function ($) {
+
+  var $searchContainer = $('.logo-search');
+  var $searchIcon = $('.search-icon');
+  var $inputSearch = $('.input-search');
+  var $navBarNav = $('.navbar-nav');
+
+  $searchIcon.click(onClickedSearch);
+
+  function onClickedSearch() {
+
+      if ($navBarNav.hasClass('hidden')) {
+          $inputSearch.toggleClass('hidden');
+          $searchContainer.toggleClass('active');
+          setTimeout(function() { $navBarNav.toggleClass('hidden'); }, 800);
+      } else {
+          $navBarNav.toggleClass('hidden');
+          $inputSearch.toggleClass('hidden');
+          $searchContainer.toggleClass('active');
+      }
+  }
+};
+
 var popover = function ($) {
 
   var $element = $('[data-toggle="popover"]');
@@ -432,6 +467,86 @@ var popover = function ($) {
   });
 };
 
+var progressbar = function ($) {
+
+var hasGraphs = $('#impactPage').length;
+
+  function getConfig(max) {
+    return {
+      strokeWidth: 1,
+      easing: 'easeInOut',
+      duration: 1400,
+      color: '#004481',
+      trailColor: '#F4F4F4',
+      trailWidth: 1,
+      text: {
+        style: {
+          color: '#121212',
+          transform: null,
+        },
+        autoStyleContainer: false,
+      },
+      step: (state, bar) => {
+        bar.setText('<div class="progressNumber">' + Math.round(bar.value() * max)
+        + '</div><div class="progressSuffix ml-xs">MM</div>');
+      },
+    };
+  };
+
+  function getCircleConfig(max, color, trailColor, suffix, subColor, subtext) {
+    return {
+      strokeWidth: 4,
+      easing: 'easeInOut',
+      duration: 1400,
+      color: color,
+      trailColor: trailColor,
+      trailWidth: 4,
+      text: {
+        autoStyleContainer: false,
+      },
+      step: (state, circle) => {
+        circle.setText('<div class="circleNumber">' + Math.round(bar.value() * max)
+        + '<label>' + suffix + '</label></div>' +
+        '<div class="circleSubText ' + subColor + '">' + subtext + '</div>');
+      },
+    };
+  };
+
+if (hasGraphs)
+{
+  var bar = new ProgressBar.Line('#lineContainer', getConfig(70));
+  bar.animate(0.8);
+
+  var bar2 = new ProgressBar.Line('#lineContainer2', getConfig(6));
+  bar2.animate(0.75);
+
+  var circle = new ProgressBar.Circle('#circleContainer',
+              getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'));
+  circle.animate(0.5);
+
+  var circle2 = new ProgressBar.Circle('#circleContainer2',
+                getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'));
+  circle2.animate(0.8);
+
+  var circle3 = new ProgressBar.Circle('#circleContainer3',
+                getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'));
+  circle3.animate(0.5);
+
+  var circle4 = new ProgressBar.Circle('#circleContainer4',
+              getCircleConfig(1000, '#FFFFFF', '#FFFFFF', 'K', 'red', 'MUJERES'));
+  circle4.animate(0.8);
+
+  var circle5 = new ProgressBar.Circle('#circleContainer5',
+                getCircleConfig(300, '#FFFFFF', '#FFFFFF', 'K', 'yellow', 'ENTORNOS RURALES'));
+  circle5.animate(0.6);
+
+  var circle6 = new ProgressBar.Circle('#circleContainer6',
+                getCircleConfig(200, '#FFFFFF', '#FFFFFF', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'));
+  circle6.animate(0.5);
+}
+
+};
+
 var progresscircle = function($) {
     'use strict';
 
@@ -445,6 +560,7 @@ var progresscircle = function($) {
     var configBlue = {};
     var configYellow = {};
     var configTeel = {};
+    var configWhite = {};
 
     $.extend(configBlue, config, {
         fill: {
@@ -462,9 +578,199 @@ var progresscircle = function($) {
         }
     });
 
+    var config2 = {
+        startAngle: -Math.PI / 2,
+        emptyFill: '#FFFFFF',
+        thickness: 10,
+        lineCap: 'butt' // "butt" or "round"
+    };
+    $.extend(configWhite, config2, {
+        fill: {
+            color: '#FFFFFF'
+        }
+    });
+
     $('.blue ' + selectorPercicle).circleProgress(configBlue);
     $('.yellow ' + selectorPercicle).circleProgress(configYellow);
     $('.teel ' + selectorPercicle).circleProgress(configTeel);
+    $('.no-circle-red ' + selectorPercicle).circleProgress(configWhite);
+    $('.no-circle-yellow ' + selectorPercicle).circleProgress(configWhite);
+    $('.no-circle-blue ' + selectorPercicle).circleProgress(configWhite);
+};
+
+var publishingFilter = function($) {
+    'use strict';
+
+    var selectedTags = [];
+    var currentMatches = [];
+    var $selectedTag = $('.selected-tag');
+    var $availableTag = $('.available-tag');
+    var $inputSearch = $('.publishing-filter-search-input');
+    var $btnSearch = $('.publishing-filter-search-btn');
+    var $btnCloseFilter = $('.close-publishing-filter');
+    var $btnFilter = $('.show-publishing-filter');
+    var $tagsColumn = $('.tag-container');
+    var $authorsColumn = $('.author-container');
+    var $geoColumn = $('.geo-container');
+    var $tagsCounter = $('.tag-container-counter');
+    var $authorsCounter = $('.author-container-counter');
+    var $geoCounter = $('.geo-container-counter');
+
+    $availableTag.on('click', selectTag);
+    $inputSearch.keypress(onInputKeyPressed);
+    $inputSearch.on('input', searchValueUpdated)
+    $btnSearch.on('click', searchByTags);
+    $btnCloseFilter.on('click', toggleFilter);
+    $btnFilter.on('click', toggleFilter);
+
+    //public methods
+    function removeTagFromColumn(e) {
+        this.remove();
+        restoreTag(this);
+        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
+    }
+
+    function selectTag(e) {
+        this.remove();
+        var $tag = $(this);
+        var tagModel = getTagModel('selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
+        var newTag = createTag(tagModel);
+        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+    }
+
+    function onInputKeyPressed(e) {
+        if(e.keyCode == 13){
+            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+            this.value = "";
+            removeAllMatchedTags();
+        }
+    }
+
+    function searchValueUpdated(e) {
+        var $this = $(this);
+        var value = $this.val();
+        if (value.length > 2) {
+            var matchedResults = _.filter(data.availableTags, function(obj){
+                return obj.text.includes(value);
+            });
+            refreshTagMatches(matchedResults);
+        } else {
+            removeAllMatchedTags();
+        }
+        refreshTagCounters(currentMatches);
+    }
+
+    function searchByTags() {
+		$('.cards-grid').css('opacity', '1');
+        console.log(selectedTags);
+    }
+
+    function toggleFilter() {
+        var $filterWrapper = $('.publishing-filter-wrapper');
+
+        if ($filterWrapper.hasClass('hidden')) {
+            $filterWrapper.removeClass('hidden').addClass('displayed');
+            $('.cards-grid').css('opacity', '0.4');
+        } else {
+            $filterWrapper.removeClass('displayed').addClass('hidden');
+            $('.cards-grid').css('opacity', '1');
+        }
+    }
+
+    //private methods
+    function restoreTag(element) {
+      var $element = $(element);
+      var from = $element.attr('from');
+      if (from) {
+          var tagValue = $element.attr('tag-value');
+          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+          var newTag = createTag(tagModel);
+          addTagToContainer(newTag, from, selectTag);
+      }
+    }
+
+    function addTagToContainer(tag, targetContainer, clickCallback) {
+        var $tag = $(tag);
+        $tag.click(clickCallback).appendTo($('.' + targetContainer));
+        var tagValue = $tag.attr('tag-value');
+        targetContainer === 'selected-tags-container' ? addTagToArray(tagValue) : null;
+    }
+
+    function createTag(tag) {
+        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
+        newTag += tag.icon ? '<span class="' + tag.icon +'"></span>' : '';
+        newTag += '<span>' + tag.text +'</span>' +
+              '</div>';
+        $(newTag).click(removeTagFromColumn);
+        return newTag;
+    }
+
+    function getTagModel(type, from, icon, text, id) {
+        return {
+            type: type + ' wow fadeIn',
+            from: from,
+            icon: icon,
+            text: text,
+            id: id
+        }
+    }
+
+    function removeTagFromArray(_array, tag) {
+        var pos = _array.indexOf(tag);
+        pos > -1 ? _array.splice(pos, 1) : null;
+    }
+
+    function addTagToArray(value) {
+        selectedTags.push(value);
+    }
+
+    function refreshTagMatches(matchedResults) {
+        var l = matchedResults.length;
+        for (var i = 0; i < l; i++) {
+            var tag = matchedResults[i];
+            if (_.where(currentMatches, {'text': tag.text}).length < 1) {
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        }
+        cleanOldMatches(_.difference(currentMatches, matchedResults));
+    }
+
+    function removeAllMatchedTags() {
+        currentMatches = [];
+        $authorsColumn.empty();
+        $tagsColumn.empty();
+        $geoColumn.empty();
+    }
+
+    function cleanOldMatches(oldMatches) {
+        var l = oldMatches.length;
+        for (var i = 0; i < l; i++) {
+            var oldMatch = oldMatches[i];
+            $('#' + oldMatch.id).remove();
+            for (var m = 0; m < currentMatches.length; m++) {
+                if (currentMatches[m].id === oldMatch.id) {
+                    currentMatches.splice(m, 1);
+                }
+            }
+        }
+    }
+
+    function refreshTagCounters(currentMatches) {
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        var l = currentMatches.length;
+        for (var i = 0; i < l; i++) {
+            var $target = $('.' + currentMatches[i].from + '-counter');
+            var currentVal = parseInt($target.text());
+            $target.text(++currentVal);
+        }
+    }
 };
 
 var scroll = function($) {
@@ -688,12 +994,15 @@ jQuery(document).ready(function ($) {
         landing($);
         cookies($);
         progresscircle($);
+        progressbar($);
         popover($);
         googleMaps($);
         scroll($);
         dropdowns($);
         momentjs($);
         googlemap($);
+        publishingFilter($);
+		navBar($);
       });
 
 var lgScreenMin = 1200;
