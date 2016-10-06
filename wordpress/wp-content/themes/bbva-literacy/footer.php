@@ -11,7 +11,6 @@
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
                         <ul class="footer-menu footer-social">
-                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                             <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                             <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
                         </ul>
@@ -23,7 +22,6 @@
                     </div>
                     <div class="visible-xs col-xs-12">
                         <ul class="footer-menu footer-social">
-                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                             <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                             <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
                         </ul>
