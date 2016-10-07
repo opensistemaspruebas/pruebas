@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 	
 	//ocultar_campos();
 	
-	jQuery('select#role').change(function(e) {
+	jQuery('input.permissions').click(function(e) {
 		ocultar_campos();
 	});
 
@@ -99,60 +99,46 @@ jQuery(document).ready(function($) {
 function ocultar_campos() {
 
 	// Ocultar campos de WordPress
-	jQuery(".user-description-wrap").parent().parent().prev().remove();
+	/*jQuery(".user-description-wrap").parent().parent().prev().remove();
 	jQuery(".user-description-wrap").parent().parent().remove();
 	jQuery(".user-rich-editing-wrap").parent().parent().prev().remove();
-	jQuery(".user-rich-editing-wrap").parent().parent().remove();
+	jQuery(".user-rich-editing-wrap").parent().parent().remove();*/
 
 	var roles = ["asesor", "ponente", "miembro", "coordinador", "author"];
 
-	var rol_seleccionado = jQuery('select#role').val();
+	var roles_seleccionados = jQuery('select#role').val();
 
-
-	if (jQuery.inArray(rol_seleccionado, roles) !== -1) {
-		jQuery("input#send_user_notification").attr("checked", false);
-		jQuery(".campo_personalizado").show();
+	jQuery("input.permissions:checked").each(function() {
 		
-		jQuery("input#user_login").parent().parent().hide();
-		jQuery("input#email").parent().parent().hide();
-		jQuery("input#first_name").parent().parent().hide();
-		jQuery("input#last_name").parent().parent().hide();
-		jQuery("input#url").parent().parent().hide();
-		jQuery("button.button.button-secondary.wp-generate-pw.hide-if-no-js").parent().parent().hide();
-		jQuery("input#send_user_notification").parent().parent().parent().hide();
+		var rol_seleccionado = jQuery(this).val();
+	
+		if (jQuery.inArray(rol_seleccionado, roles) !== -1) {
 
-	} else {
-		jQuery(".campo_personalizado").hide();
-		jQuery("input#user_login").parent().parent().parent().parent().show();
-	}
+			jQuery("tr#password").parent().parent().prev().hide();
+			jQuery("tr#password").parent().parent().hide();
 
 
+			jQuery("input#send_user_notification").attr("checked", false);
+			jQuery(".campo_personalizado").show();
+			
+			jQuery("input#user_login").parent().parent().hide();
+			jQuery("input#email").parent().parent().hide();
+			jQuery("input#first_name").parent().parent().hide();
+			jQuery("input#last_name").parent().parent().hide();
+			jQuery("input#url").parent().parent().hide();
+			jQuery("button.button.button-secondary.wp-generate-pw.hide-if-no-js").parent().parent().hide();
+			jQuery("input#send_user_notification").parent().parent().parent().hide();
 
-	/*var roles = ["miembro", "coordinador", "asesor", "author", "ponente"];
-	var roles_selected = [];
-	jQuery('div#informacion_perfiles input[type="checkbox"]:checked').each(function() {
-		roles_selected.push(jQuery(this).val());
-	}); 
-
-	if (roles_selected.length > 0) {
-		for (var i = 0 ; i < roles_selected.length; i++) {
-			var role_selected = roles_selected[i];
-			if (jQuery.inArray(role_selected, roles) !== -1) {
-				jQuery("table.form-table tbody").first().children().each(function() {
-					jQuery(this).hide();
-				});
-				jQuery('input#send_user_notification').attr('checked', false);
-				if (role_selected == "author") {
-					jQuery("#informacion_personal").show();	
-					jQuery("#información_acerca_de").hide();	
-					jQuery("#informacion_trabajo").hide();	
-					jQuery("#informacion_expertise").hide();	
-					jQuery("#informacion_contacto").hide();	
-					jQuery("#informacion_cabecera").hide();	
-				}
-			} else {
-				jQuery("table.form-table tbody").first().children().show();
-			}
+		} else {
+			
+			jQuery("tr#password").parent().parent().prev().show();
+			jQuery("tr#password").parent().parent().show();
+			
+			jQuery(".campo_personalizado").hide();
+			jQuery("input#user_login").parent().parent().parent().parent().show();
 		}
-	}*/
+
+	});
+
+
 }

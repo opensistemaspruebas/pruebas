@@ -23,13 +23,9 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             add_action('init', array(&$this, 'add_custom_user_roles'));
             add_action('init', array(&$this, 'remove_default_user_roles'));
         
-            add_action('user_new_form', array(&$this, 'add_multiple_roles'), 9);
-            add_action('show_user_profile', array(&$this, 'add_multiple_roles'), 9);
-            add_action('edit_user_profile', array(&$this, 'add_multiple_roles'), 9);
-
-            add_action('user_new_form', array(&$this, 'add_custom_fields'), 9);
-            add_action('show_user_profile', array(&$this, 'add_custom_fields'), 9);
-            add_action('edit_user_profile', array(&$this, 'add_custom_fields'), 9);
+            add_action('user_new_form', array(&$this, 'add_custom_fields'), 11);
+            add_action('show_user_profile', array(&$this, 'add_custom_fields'), 11);
+            add_action('edit_user_profile', array(&$this, 'add_custom_fields'), 11);
 
             add_action('user_register', array(&$this, 'save_custom_fields'), 10, 1);
             add_action('personal_options_update', array(&$this, 'save_custom_fields'), 9);
@@ -39,38 +35,6 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
 
             remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
 
-        }
-
-
-        // Crea los roles de asesor, coordinador, miembro y ponente
-        public function add_custom_user_roles() {
-
-            $capabilities = array(
-                'read'              => false,
-                'edit_posts'        => false,
-                'edit_pages'        => false,
-                'edit_others_posts' => false,
-                'create_posts'      => false,
-                'manage_categories' => false,
-                'publish_posts'     => false,
-                'edit_themes'       => false,
-                'install_plugins'   => false,
-                'update_plugin'     => false,
-                'update_core'        => false
-            );
-            
-            if (!get_role('asesor'))
-                add_role('asesor', __('Asesor', 'os_perfiles_de_usuario'), $capabilities );
-
-            if (!get_role('coordinador'))
-                add_role('coordinador', __('Coordinador', 'os_perfiles_de_usuario'), $capabilities );
-            
-            if (!get_role('miembro'))
-                add_role('miembro', __('Miembro', 'os_perfiles_de_usuario'), $capabilities );
-            
-            if (!get_role('ponente'))
-                add_role('ponente', __('Ponente', 'os_perfiles_de_usuario'), $capabilities );
-        
         }
     
 
@@ -84,47 +48,6 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                     remove_role($role);
             }
             
-        }
-
-
-        function add_multiple_roles( $user ) {
-            // Not allowed to edit user - bail
-            if (!current_user_can( 'edit_user', $user->ID ) ) {
-                return;
-            }
-            $roles = get_editable_roles();
-            $user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) ); 
-
-            os_imprimir($user_roles);
-
-
-            ?>
-
-
-
-
-
-            <div class="mrpu-roles-container">
-                <h3><?php _e( 'User Roles', 'multiple-roles-per-user' ); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th><label for="user_credits"><?php _e( 'Roles', 'multiple-roles-per-user' ); ?></label></th>
-                        <td>
-                            <?php foreach ( $roles as $role_id => $role_data ) : ?>
-                                <label for="user_role_<?php echo esc_attr( $role_id ); ?>">
-                                    <input type="checkbox" id="user_role_<?php echo esc_attr( $role_id ); ?>" value="<?php echo esc_attr( $role_id ); ?>" name="mrpu_user_roles[]"<?php echo in_array( $role_id, $user_roles ) ? ' checked="checked"' : ''; ?> />
-                                    <?php echo $role_data['name']; ?>
-                                </label>
-                                <br />
-                            <?php endforeach; ?>
-                            <br />
-                            <span class="description"><?php _e( 'Select one or more roles for this user.', 'multiple-roles-per-user' ); ?></span>
-                            <?php wp_nonce_field( 'mrpu_set_roles', '_mrpu_roles_nonce' ); ?>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <?php 
         }
 
         
@@ -160,6 +83,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             }
 
             ?>
+
             <div class="campo_personalizado" id="informacion_personal" name="informacion_personal">
                 <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
@@ -496,31 +420,6 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 update_user_meta($user_id, 'trabajos', $trabajos_nuevos);
             }
 
-            
-            error_log(print_r($_POST['mrpu_user_roles'], true));
-
-
-            $roles = get_editable_roles();
-            $new_roles = isset( $_POST['mrpu_user_roles']) ? (array) $_POST['mrpu_user_roles'] : array();
-            $new_roles = array_intersect( $new_roles, array_keys( $roles ) );
-            $roles_to_remove = array();
-            $user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
-            if ( ! $new_roles ) {
-                // If there are no roles, delete all of the user's roles
-                $roles_to_remove = $user_roles;
-            } else {
-                $roles_to_remove = array_diff( $user_roles, $new_roles );
-            }
-            foreach ( $roles_to_remove as $_role ) {
-                $user->remove_role( $_role );
-            }
-            if ( $new_roles ) {
-                // Make sure that we don't call $user->add_role() any more than it's necessary
-                $_new_roles = array_diff( $new_roles, array_intersect( array_values( $user->roles ), array_keys( $roles ) ) );
-                foreach ( $_new_roles as $_role ) {
-                    $user->add_role( $_role );
-                }
-            }
          
         }
 
