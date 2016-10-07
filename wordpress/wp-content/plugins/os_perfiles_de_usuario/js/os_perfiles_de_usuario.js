@@ -1,8 +1,12 @@
 jQuery(document).ready(function($) {
-	/*ocultar_campos();
-	jQuery('div#informacion_perfiles input[type="checkbox"]').change(function(e) {
+
+	//jQuery("select#role").parent().parent().parent().parent().before("<h2>Seleccione perfiles</h2>");
+	
+	//ocultar_campos();
+	
+	jQuery('select#role').change(function(e) {
 		ocultar_campos();
-	});*/
+	});
 
 
 	var count = 0;
@@ -92,8 +96,39 @@ jQuery(document).ready(function($) {
 });
 
 
-/*function ocultar_campos() {
-	var roles = ["miembro", "coordinador", "asesor", "author", "ponente"];
+function ocultar_campos() {
+
+	// Ocultar campos de WordPress
+	jQuery(".user-description-wrap").parent().parent().prev().remove();
+	jQuery(".user-description-wrap").parent().parent().remove();
+	jQuery(".user-rich-editing-wrap").parent().parent().prev().remove();
+	jQuery(".user-rich-editing-wrap").parent().parent().remove();
+
+	var roles = ["asesor", "ponente", "miembro", "coordinador", "author"];
+
+	var rol_seleccionado = jQuery('select#role').val();
+
+
+	if (jQuery.inArray(rol_seleccionado, roles) !== -1) {
+		jQuery("input#send_user_notification").attr("checked", false);
+		jQuery(".campo_personalizado").show();
+		
+		jQuery("input#user_login").parent().parent().hide();
+		jQuery("input#email").parent().parent().hide();
+		jQuery("input#first_name").parent().parent().hide();
+		jQuery("input#last_name").parent().parent().hide();
+		jQuery("input#url").parent().parent().hide();
+		jQuery("button.button.button-secondary.wp-generate-pw.hide-if-no-js").parent().parent().hide();
+		jQuery("input#send_user_notification").parent().parent().parent().hide();
+
+	} else {
+		jQuery(".campo_personalizado").hide();
+		jQuery("input#user_login").parent().parent().parent().parent().show();
+	}
+
+
+
+	/*var roles = ["miembro", "coordinador", "asesor", "author", "ponente"];
 	var roles_selected = [];
 	jQuery('div#informacion_perfiles input[type="checkbox"]:checked').each(function() {
 		roles_selected.push(jQuery(this).val());
@@ -119,6 +154,5 @@ jQuery(document).ready(function($) {
 				jQuery("table.form-table tbody").first().children().show();
 			}
 		}
-	}
-}*/
-
+	}*/
+}

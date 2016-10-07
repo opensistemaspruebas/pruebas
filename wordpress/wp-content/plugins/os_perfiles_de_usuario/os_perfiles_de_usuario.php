@@ -23,6 +23,10 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             add_action('init', array(&$this, 'add_custom_user_roles'));
             add_action('init', array(&$this, 'remove_default_user_roles'));
         
+            add_action('user_new_form', array(&$this, 'add_multiple_roles'), 9);
+            add_action('show_user_profile', array(&$this, 'add_multiple_roles'), 9);
+            add_action('edit_user_profile', array(&$this, 'add_multiple_roles'), 9);
+
             add_action('user_new_form', array(&$this, 'add_custom_fields'), 9);
             add_action('show_user_profile', array(&$this, 'add_custom_fields'), 9);
             add_action('edit_user_profile', array(&$this, 'add_custom_fields'), 9);
@@ -32,6 +36,8 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             add_action('edit_user_profile_update', array(&$this, 'save_custom_fields'), 9);
             
             add_action('admin_enqueue_scripts', array($this, 'load_javascript'), 10, 1);
+
+            remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
 
         }
 
@@ -80,6 +86,47 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             
         }
 
+
+        function add_multiple_roles( $user ) {
+            // Not allowed to edit user - bail
+            if (!current_user_can( 'edit_user', $user->ID ) ) {
+                return;
+            }
+            $roles = get_editable_roles();
+            $user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) ); 
+
+            os_imprimir($user_roles);
+
+
+            ?>
+
+
+
+
+
+            <div class="mrpu-roles-container">
+                <h3><?php _e( 'User Roles', 'multiple-roles-per-user' ); ?></h3>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="user_credits"><?php _e( 'Roles', 'multiple-roles-per-user' ); ?></label></th>
+                        <td>
+                            <?php foreach ( $roles as $role_id => $role_data ) : ?>
+                                <label for="user_role_<?php echo esc_attr( $role_id ); ?>">
+                                    <input type="checkbox" id="user_role_<?php echo esc_attr( $role_id ); ?>" value="<?php echo esc_attr( $role_id ); ?>" name="mrpu_user_roles[]"<?php echo in_array( $role_id, $user_roles ) ? ' checked="checked"' : ''; ?> />
+                                    <?php echo $role_data['name']; ?>
+                                </label>
+                                <br />
+                            <?php endforeach; ?>
+                            <br />
+                            <span class="description"><?php _e( 'Select one or more roles for this user.', 'multiple-roles-per-user' ); ?></span>
+                            <?php wp_nonce_field( 'mrpu_set_roles', '_mrpu_roles_nonce' ); ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <?php 
+        }
+
         
         // Añade campos personalizados
         public function add_custom_fields($user) { 
@@ -87,7 +134,9 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             if ($user !== 'add-new-user') {
                 
                 $user_id = $user->data->ID;
-                $nombre = get_user_meta($user_id, 'nombre', true);
+                $user_info = get_userdata($user_id);
+                $nombre = $user_info->first_name;
+                $apellidos = $user_info->last_name;
                 $cargo = get_user_meta($user_id, 'cargo', true);
                 $imagen_perfil = get_user_meta($user_id, 'imagen_perfil', true);
                 $descripcion = get_user_meta($user_id, 'descripcion', true);
@@ -97,8 +146,8 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 $area_expertise_2 = get_user_meta($user_id, 'area_expertise_2', true);
                 $area_expertise_3 = get_user_meta($user_id, 'area_expertise_3', true);
                 $linkedin = get_user_meta($user_id, 'linkedin', true);
-                $correo_electronico = get_user_meta($user_id, 'correo_electronico', true);
-                $url_web = get_user_meta($user_id, 'url_web', true);
+                $correo_electronico = $user_info->user_email;
+                $url_web = $user_info->url_web;
                 $imagen_cabecera = get_user_meta($user_id, 'imagen_cabecera', true);
                 $frase_cabecera = get_user_meta($user_id, 'frase_cabecera', true);
                 $trabajos = get_user_meta($user_id, 'trabajos', true);
@@ -111,7 +160,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             }
 
             ?>
-            <div id="informacion_personal" name="informacion_personal">
+            <div class="campo_personalizado" id="informacion_personal" name="informacion_personal">
                 <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -120,7 +169,16 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                         </th>
                         <td>
                             <input type="text" name="nombre" id="nombre" value="<?php echo esc_attr($nombre); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('Nombre y apellidos de la persona', 'os_perfiles_de_usuario'); ?></span>
+                            <span class="description"><?php _e('Nombre de la persona', 'os_perfiles_de_usuario'); ?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="apellidos"><?php _e('Apellidos', 'os_perfiles_de_usuario'); ?></label>
+                        </th>
+                        <td>
+                            <input type="text" name="apellidos" id="apellidos" value="<?php echo esc_attr($apellidos); ?>" class="regular-text" /><br />
+                            <span class="description"><?php _e('Apellidos de la persona', 'os_perfiles_de_usuario'); ?></span>
                         </td>
                     </tr>
                     <tr>
@@ -135,7 +193,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div id="información_acerca_de" name="informacion_acerca_de">
+            <div class="campo_personalizado" id="información_acerca_de" name="informacion_acerca_de">
                 <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -161,7 +219,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div id="informacion_trabajo" name="informacion_trabajo">
+            <div class="campo_personalizado" id="informacion_trabajo" name="informacion_trabajo">
                 <h3><?php _e('Información sobre el trabajo', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -188,7 +246,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div id="informacion_expertise" name="informacion_expertise">
+            <div class="campo_personalizado" id="informacion_expertise" name="informacion_expertise">
                 <h3><?php _e('Áreas de expertise', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -220,7 +278,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div id="informacion_contacto" name="informacion_contacto">
+            <div class="campo_personalizado" id="informacion_contacto" name="informacion_contacto">
                 <h3><?php _e('Información de contacto', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -255,7 +313,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div id="informacion_cabecera" name="informacion_cabecera">
+            <div class="campo_personalizado" id="informacion_cabecera" name="informacion_cabecera">
                 <h3><?php _e('Información de cabecera', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -282,7 +340,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
+            <div class="campo_personalizado" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
                 <h3><?php _e('Trabajos relacionados', 'os_perfiles_de_usuario'); ?></h3>
                 <?php if (empty($trabajos)) : ?>
                     <div style="border: 3px solid white;padding: 5px;margin-bottom: 10px;">
@@ -316,7 +374,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 <?php else : ?>
                     <?php $i = 0; ?>
                     <?php foreach ($trabajos as $trabajo) : ?>
-                        <div style="border: 3px solid white;padding: 5px;margin-bottom: 10px;">
+                        <div class="campo_personalizado" style="border: 3px solid white;padding: 5px;margin-bottom: 10px;">
                             <table class="form-table">
                                 <tr>
                                     <th>
@@ -363,7 +421,11 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
         public function save_custom_fields($user_id) {
 
             if (isset($_POST['nombre'])) {
-                update_user_meta($user_id, 'nombre', $_POST['nombre']);
+                wp_update_user(array('ID' => $user_id, 'first_name' => esc_attr($_POST['nombre'])));
+            }
+
+            if (isset($_POST['apellidos'])) {
+                wp_update_user(array('ID' => $user_id, 'last_name' => esc_attr($_POST['apellidos'])));
             }
 
             if (isset($_POST['cargo'])) {
@@ -381,8 +443,6 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             if (isset($_POST['lugar_trabajo'])) {
                 update_user_meta($user_id, 'lugar_trabajo', $_POST['lugar_trabajo']);
             }
-
-            error_log($_POST['logo_trabajo']);
 
             if (isset($_POST['logo_trabajo'])) {
                 update_user_meta($user_id, 'logo_trabajo', $_POST['logo_trabajo']);
@@ -405,11 +465,16 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             }
 
             if (isset($_POST['correo_electronico'])) {
-                update_user_meta($user_id, 'correo_electronico', $_POST['correo_electronico']);
+                wp_update_user(array('ID' => $user_id, 'user_login' => esc_attr($_POST['correo_electronico'])));
+                wp_update_user(array('ID' => $user_id, 'email' => esc_attr($_POST['correo_electronico'])));
+            } else if ($_POST['rol'] !== "administrator") {
+                $correo_dummy = 'dummy_' . $user_id . "@dummy.com";
+                wp_update_user(array('ID' => $user_id, 'user_login' => esc_attr($correo_dummy)));
+                wp_update_user(array('ID' => $user_id, 'email' => esc_attr($correo_dummy)));
             }
 
             if (isset($_POST['url_web'])) {
-                update_user_meta($user_id, 'url_web', $_POST['url_web']);
+                wp_update_user(array('ID' => $user_id, 'url_web' => esc_attr($_POST['url_web'])));
             }
 
             if (isset($_POST['imagen_cabecera'])) {
@@ -429,6 +494,32 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                     }
                 }
                 update_user_meta($user_id, 'trabajos', $trabajos_nuevos);
+            }
+
+            
+            error_log(print_r($_POST['mrpu_user_roles'], true));
+
+
+            $roles = get_editable_roles();
+            $new_roles = isset( $_POST['mrpu_user_roles']) ? (array) $_POST['mrpu_user_roles'] : array();
+            $new_roles = array_intersect( $new_roles, array_keys( $roles ) );
+            $roles_to_remove = array();
+            $user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
+            if ( ! $new_roles ) {
+                // If there are no roles, delete all of the user's roles
+                $roles_to_remove = $user_roles;
+            } else {
+                $roles_to_remove = array_diff( $user_roles, $new_roles );
+            }
+            foreach ( $roles_to_remove as $_role ) {
+                $user->remove_role( $_role );
+            }
+            if ( $new_roles ) {
+                // Make sure that we don't call $user->add_role() any more than it's necessary
+                $_new_roles = array_diff( $new_roles, array_intersect( array_values( $user->roles ), array_keys( $roles ) ) );
+                foreach ( $_new_roles as $_role ) {
+                    $user->add_role( $_role );
+                }
             }
          
         }
