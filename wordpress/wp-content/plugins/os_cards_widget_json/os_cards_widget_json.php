@@ -338,15 +338,15 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	            </div>
 	            <div class="sort-items-container">
 	                <a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-arrow arrowUp"></span>
+	                    <span class="icon bbva-icon-arrow arrow arrowUp"></span>
 	                    <span class="text"><?php _e('Más recientes', 'os_cards_widget_json'); ?></span>
 	                </a>
 	                <a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-arrow arrowDown"></span>
+	                    <span class="icon bbva-icon-arrow arrow arrowDown"></span>
 	                    <span class="text"><?php _e('Más antiguos', 'os_cards_widget_json'); ?></span>
 	                </a>
 	                <a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-view "></span>
+	                    <span class="icon bbva-icon-view"></span>
 	                    <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
 	                </a>
 	            </div>
@@ -355,6 +355,38 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	        <?php if (!empty($posts)) : ?>
 	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>
 	        <section>
+			    <div class="content publishing-filter-wrapper container hidden">
+			        <header>
+			            <div class="title">
+			                <span class="text-uppercase text"><?php _e('filtros', 'os_cards_widget_json'); ?></span>
+			                <button type="button" class="close close-publishing-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+			            </div>
+			            <div class="search">
+			                <input class="publishing-filter-search-input" type="text" name="publishing-filter-search-input" value="">
+			                <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Buscar', 'os_cards_widget_json'); ?></button>
+			            </div>
+			            <div class="selected-tags-container"></div>
+			        </header>
+			        <section>
+			            <div class="row available-tags-wrapper">
+			                <div class="col-xs-4">
+			                    <p class="text-uppercase column-name"><?php _e('tags', 'os_cards_widget_json'); ?> (<span class="tag-container-counter">0</span>)</p>
+			                    <div class="tag-container">
+			                    </div>
+			                </div>
+			                <div class="col-xs-4">
+			                    <p class="text-uppercase column-name"><?php _e('Autores', 'os_cards_widget_json'); ?> (<span class="author-container-counter">0</span>)</p>
+			                    <div class="author-container">
+			                    </div>
+			                </div>
+			                <div class="col-xs-4">
+			                    <p class="text-uppercase column-name"><?php _e('ámbito geográfico', 'os_cards_widget_json'); ?> (<span class="geo-container-counter">0</span>)</p>
+			                    <div class="geo-container">
+			                    </div>
+			                </div>
+			            </div>
+			        </section>
+			    </div>
 	            <article class="cards-grid">
 	                <section class="container">
 	                    <div class="row">
@@ -373,14 +405,14 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 
 	           					<?php $grid = $order[($i % 5)]; ?>
 	           					<?php if ($grid == "double") : ?>
-	           					<div name="card_<?php echo $i; ?>" class="col-xs-12 col-sm-6 double-card card-container">
+	           					<div class="col-xs-12 col-sm-6 double-card card-container">
 	           					<?php elseif ($grid == "triple") : ?>
-	           					<div name="card_<?php echo $i; ?>" class="col-xs-12 col-sm-4 triple-card card-container">
+	           					<div class="col-xs-12 col-sm-4 triple-card card-container">
 	           					<?php endif; ?>
 								    <section class="container-fluid main-card">
 								        <header class="row header-container">
-								            <div class="image-container nopadding col-xs-12">
-								                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
+								            <div class="image-container col-xs-12">
+								                <img src="<?php echo $imagen; ?>" alt="">
 								            </div>
 								            <div class="hidden-xs floating-text col-xs-9">
 								                <p class="date"><?php echo $post_date; ?></p>
@@ -390,31 +422,36 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 								        <div class="row data-container">
 								            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
 								            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
-								            <p><?php echo $post_abstract; ?></p>
+								            <?php echo wpautop($post_abstract); ?>
 								            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e('Leer más', 'os_cards_widget_json'); ?></a>
 								            <footer class="row">
-					                        <?php if (false) : ?>
-					                            <div class="col-xs-2 col-lg-1">
-					                                <span class="icon bbva-icon-quote"></span>
-					                                <div class="triangle triangle-up-left"></div>
-					                                <div class="triangle triangle-down-right"></div>
-					                            </div>
-					                        <?php endif; ?>
-					                        <?php if (false) : ?>
-					                            <div class="col-xs-2 col-lg-1">
-					                                <span class="icon bbva-icon-audio"></span>
-					                                <div class="triangle triangle-up-left"></div>
-					                                <div class="triangle triangle-down-right"></div>
-					                            </div>
-					                        <?php endif; ?>
-					                        <?php if ($pdf) : ?>
-					                            <div class="col-xs-2 col-lg-1">
-					                                <span class="icon bbva-icon-comments"></span>
-					                                <div class="triangle triangle-up-left"></div>
-					                                <div class="triangle triangle-down-right"></div>
-					                            </div>
-					                        <?php endif; ?>
-								            
+						                        <?php if (false) : ?>
+						                            <div class="col-xs-2 col-lg-1">
+						                                <div class="card-icon">
+						                                    <span class="icon bbva-icon-quote"></span>
+						                                    <div class="triangle triangle-up-left"></div>
+						                                    <div class="triangle triangle-down-right"></div>
+						                                </div>
+						                            </div>
+						                        <?php endif; ?>
+						                        <?php if (false) : ?>
+						                            <div class="col-xs-2 col-lg-1">
+						                                <div class="card-icon">
+						                                    <span class="icon bbva-icon-audio"></span>
+						                                    <div class="triangle triangle-up-left"></div>
+						                                    <div class="triangle triangle-down-right"></div>
+						                                </div>
+						                            </div>
+						                        <?php endif; ?>
+						                        <?php if ($pdf) : ?>
+						                            <div class="col-xs-2 col-lg-1">
+						                                <div class="card-icon">
+						                                    <span class="icon bbva-icon-comments"></span>
+						                                    <div class="triangle triangle-up-left"></div>
+						                                    <div class="triangle triangle-down-right"></div>
+						                                </div>
+						                            </div>
+						                        <?php endif; ?>
 								            </footer>
 								        </div>
 								    </section>
@@ -425,7 +462,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    <footer class="grid-footer">
 	                        <div class="row">
 	                            <div class="col-md-12 text-center">
-	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
+	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
 	                            </div>
 	                        </div>
 	                    </footer>
