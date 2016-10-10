@@ -62,7 +62,7 @@
                     <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
                         <input class="input-search hidden" type="text" name="name" value="">
                     </div>
-                    <?php languages_list_header_responsive; ?>
+                    <?php languages_list_header_responsive(); ?>
                 </nav>
             </div>
             <!-- EO navbar menu -->
