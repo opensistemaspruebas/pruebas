@@ -149,9 +149,9 @@ function getPost(post){
 			i = jQuery('.card-container').size();
 			grid = order[(i % 5)];
 			if (grid == "double") {
-				html = '<div name="card_' + i + '" class="col-xs-12 col-sm-6 double-card card-container">';
+				html = '<div class="col-xs-12 col-sm-6 double-card card-container">';
 			} else {
-				html = '<div name="card_' + i + '" class="col-xs-12 col-sm-4 triple-card card-container">';
+				html = '<div class="col-xs-12 col-sm-4 triple-card card-container">';
 			}
 			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container nopadding col-xs-12"><img class="img-responsive" src="' + urlImagen + '" alt=""></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><p class="nopadding col-xs-9 date">' + fecha + '</p><h1 class="title nopadding col-xs-9">' + titulo + '</h1><p>' + descripcion + '</p><a href="' + urlPublicacion  + '" class="hidden-xs readmore">' + object_name_cards.leer_mas + '</a><footer class="row">';		        	
 		    if (cita == true)  {
