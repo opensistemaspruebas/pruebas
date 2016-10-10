@@ -68,6 +68,10 @@ if (!class_exists('slider_widget')) :
             $ulink1 = $instance['ulink1'];
             $ulink2 = $instance['ulink2'];
             $ulink2 = $instance['ulink3'];
+
+            $externo1 = $instance['externo1'];
+            $externo2 = $instance['externo2'];
+            $externo3 = $instance['externo3'];
                 
             // Inicio de html para el formulario del widget    
             ?>  
@@ -92,6 +96,12 @@ if (!class_exists('slider_widget')) :
                         <div class="valor-campo-slider paginas" > 
                             <div class="valor-campo-slider" >
                                 <input class="widefat" type="url" name="<?php echo $this->get_field_name('ulink'.$i);?>" value="<?php echo esc_attr(${"ulink" . $i});?>"/>
+                            </div>
+                        </div>
+                        <div class="valor-campo-slider paginas" > 
+                            <div class="valor-campo-slider" >
+                                <input class="widefat" type="checkbox" name="<?php echo $this->get_field_name('externo'.$i);?>" <?php checked(${"externo" . $i}, 'on'); ?>/>
+                                <span><?php _e("Abrir enlace en una nueva ventana"); ?></span>
                             </div>
                         </div>
                     </div>
@@ -124,6 +134,11 @@ if (!class_exists('slider_widget')) :
             $instance['ulink2'] = strip_tags($new_instance['ulink2']);
             $instance['ulink3'] = strip_tags($new_instance['ulink3']);
 
+            $instance['externo1'] = strip_tags($new_instance['externo1']);
+            $instance['externo2'] = strip_tags($new_instance['externo2']);
+            $instance['externo3'] = strip_tags($new_instance['externo3']);
+
+
             return $instance;
         }
 
@@ -151,7 +166,7 @@ if (!class_exists('slider_widget')) :
                                     <div class="caption-container">
                                         <h1><?php echo $instance['title1']; ?></h1>
                                         <p><?php echo $instance['descr1']; ?></p>
-                                        <a href="<?php echo $instance['ulink1']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink1']; ?></a>
+                                        <a <?php if ($instance['externo1'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink1']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink1']; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +184,7 @@ if (!class_exists('slider_widget')) :
                                     <div class="caption-container">
                                         <h1><?php echo $instance['title2']; ?></h1>
                                         <p><?php echo $instance['descr2']; ?></p>
-                                        <a href="<?php echo $instance['ulink2']; ?>" class="btn btn-bbva-aqua"><?php echo $instance['tlink2']; ?></a>
+                                        <a <?php if ($instance['externo2'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink2']; ?>" class="btn btn-bbva-aqua"><?php echo $instance['tlink2']; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +202,7 @@ if (!class_exists('slider_widget')) :
                                     <div class="caption-container">
                                         <h1><?php echo $instance['title3']; ?></h1>
                                         <p><?php echo $instance['descr3']; ?></p>
-                                        <a href="<?php echo $instance['ulink3']; ?>" class="btn btn-bbva-dark-blue"><?php echo $instance['tlink3']; ?></a>
+                                        <a <?php if ($instance['externo3'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink3']; ?>" class="btn btn-bbva-dark-blue"><?php echo $instance['tlink3']; ?></a>
                                     </div>
                                 </div>
                             </div>

@@ -222,3 +222,19 @@ function languages_list_header(){
     </div>
     <?php
 }
+
+
+function languages_list_header_responsive(){
+    $languages = icl_get_languages('skip_missing=0&orderby=code');
+    ?>
+	<div class="visible-xs">
+	    <div class="languages-menu pb-lg pl-lg">
+	    	<?php foreach ($languages as $l) : ?>
+		    	<a role="button" class="languages-mobile-button <?php if ($l['active']) echo 'active'; else echo 'ml-lg'; ?>">
+		    		<span class="language"><?php echo $l['native_name']; ?></span>
+		    	</a>
+	    	<?php endforeach; ?>
+	    </div>
+	</div>
+    <?php
+}
