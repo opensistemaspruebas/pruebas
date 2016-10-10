@@ -27,6 +27,7 @@ get_header(); ?>
     $edition = get_post_meta(get_the_ID(), 'edition', true);
     $editorial = get_post_meta(get_the_ID(), 'editorial', true);
     $organization_name = get_post_meta(get_the_ID(), 'organization_name', true);
+    $name_url = get_post_meta(get_the_ID(), 'name_url', true);
     $source_url = get_post_meta(get_the_ID(), 'source_url', true);
     $organization_url = get_post_meta(get_the_ID(), 'organization_url', true);
     $organization_logo = get_post_meta(get_the_ID(), 'organization_logo', true);
@@ -270,12 +271,12 @@ get_header(); ?>
           </div>
       </section>
       <?php endif; ?>
-      <?php if (!empty($source_url)) : ?>
+      <?php if (!empty($source_url) || !empty($name_url)) : ?>
       <section class="sources-section">
           <div class="container content-wrap">
               <h1 class="mt-lg mb-md"><?php _e('Fuente', 'os_publicacion_type'); ?></h1>
               <div class="source">
-                 <a target="_blank" href="<?php echo $source_url; ?>"><?php echo $source_url; ?></a>
+                 <a target="_blank" href="<?php echo $source_url; ?>"><?php echo $name_url; ?></a>
               </div>
           </div>
       </section>

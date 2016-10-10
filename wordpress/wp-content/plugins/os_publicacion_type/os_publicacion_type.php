@@ -184,11 +184,19 @@ function meta_box_publicacion_pdf($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_pdf-nonce');
   
   $pdf = get_post_meta($post->ID, 'pdf', true);
+  $pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
   
   ?>
   <p>
     <label for="pdf"><?php _e('URL externa del archivo PDF', 'os_publicacion_type'); ?></label>
     <input type="url" class="widefat" id="pdf" name="pdf" value="<?php if (isset($pdf)) echo $pdf; ?>"/>
+  </p>
+  <p>
+    <label for="pdfInterno"><?php _e('Cargador de archivo PDF', 'os_publicacion_type'); ?></label>
+    <input type="url" class="widefat" id="pdfInterno" name="pdfInterno" value="<?php if (isset($pdfInterno)) echo $pdfInterno; ?>" readonly="readonly"/>
+  </p>
+  <p>
+    <input id="upload_pdfInterno" name="upload_pdfInterno" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
   </p>
   <?php
 }
@@ -199,8 +207,13 @@ function meta_box_source_link($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_source_link-nonce');
   
   $source_url = get_post_meta($post->ID, 'source_url', true);
+  $name_url = get_post_meta($post->ID, 'name_url', true);
   
   ?>
+   <p>
+    <label for="name_url"><?php _e('Nombre de la fuente del informe', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="name_url" name="name_url" type="text" value="<?php if (isset($name_url)) echo $name_url; ?>"/>
+  </p>
   <p>
     <label for="source_url"><?php _e('URL de la fuente del informe', 'os_publicacion_type'); ?></label>
     <input class="widefat" id="source_url" name="source_url" type="url" value="<?php if (isset($source_url)) echo $source_url; ?>"/>
@@ -286,6 +299,9 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['pdf'])) {
     update_post_meta($post_id, 'pdf', strip_tags($_POST['pdf']));
   }
+  if (isset($_POST['pdfInterno'])) {
+    update_post_meta($post_id, 'pdfInterno', strip_tags($_POST['pdfInterno']));
+  }
   if (isset($_POST['publication_date'])) {
     update_post_meta($post_id, 'publication_date', strip_tags($_POST['publication_date']));
   }
@@ -309,6 +325,9 @@ function meta_boxes_save($post_id) {
   }
   if (isset($_POST['organization_name'])) {
    update_post_meta($post_id, 'organization_name', strip_tags($_POST['organization_name']));
+  }
+  if (isset($_POST['name_url'])) {
+    update_post_meta($post_id, 'name_url', strip_tags($_POST['name_url']));
   }
   if (isset($_POST['source_url'])) {
     update_post_meta($post_id, 'source_url', strip_tags($_POST['source_url']));
