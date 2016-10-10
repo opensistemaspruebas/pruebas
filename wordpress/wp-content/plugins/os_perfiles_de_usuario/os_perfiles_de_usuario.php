@@ -36,6 +36,31 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
             remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
 
         }
+
+
+        // Crea los roles de asesor, coordinador, miembro y ponente
+        public function add_custom_user_roles() {
+            
+            $args = array(
+                'read'                  => false, // true allows this capability
+                'edit_posts'            => false, // Allows user to edit their own posts
+                'edit_pages'            => false, // Allows user to edit pages
+                'edit_others_posts'     => false, // Allows user to edit others posts not just their own
+                'create_posts'          => false, // Allows user to create new posts
+                'manage_categories'     => false, // Allows user to manage post categories
+                'publish_posts'         => false, // Allows the user to publish, otherwise posts stays in draft mode
+                'edit_themes'           => false, // false denies this capability. User can’t edit your theme
+                'install_plugins'       => false, // User cant add new plugins
+                'update_plugin'         => false, // User can’t update any plugins
+                'update_core'           => false // user cant perform core updates
+            );
+
+            add_role('asesor', __('Asesor', 'os_perfiles_de_usuario'), $args);
+            add_role('coordinador', __('Coordinador', 'os_perfiles_de_usuario'), $args);
+            add_role('miembro', __('Miembro', 'os_perfiles_de_usuario'), $args);
+            add_role('ponente', __('Ponente', 'os_perfiles_de_usuario'), $args);
+        
+        }
     
 
         // Elimina los roles de subscriptor, colaborador y editor
@@ -69,6 +94,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 $area_expertise_2 = get_user_meta($user_id, 'area_expertise_2', true);
                 $area_expertise_3 = get_user_meta($user_id, 'area_expertise_3', true);
                 $linkedin = get_user_meta($user_id, 'linkedin', true);
+                $twitter = get_user_meta($user_id, 'twitter', true);
                 $correo_electronico = $user_info->user_email;
                 $url_web = $user_info->url_web;
                 $imagen_cabecera = get_user_meta($user_id, 'imagen_cabecera', true);
@@ -77,14 +103,14 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
 
             } else {
 
-                $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
+                $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $twitter = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
                 $trabajos = array();
             
             }
 
             ?>
 
-            <div class="campo_personalizado" id="informacion_personal" name="informacion_personal">
+            <div class="campo_personalizado miembro coordinador asesor author ponente" id="informacion_personal" name="informacion_personal">
                 <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -117,7 +143,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div class="campo_personalizado" id="información_acerca_de" name="informacion_acerca_de">
+            <div class="campo_personalizado miembro coordinador asesor" id="información_acerca_de" name="informacion_acerca_de">
                 <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -143,7 +169,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div class="campo_personalizado" id="informacion_trabajo" name="informacion_trabajo">
+            <div class="campo_personalizado miembro coordinador asesor" id="informacion_trabajo" name="informacion_trabajo">
                 <h3><?php _e('Información sobre el trabajo', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -170,7 +196,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div class="campo_personalizado" id="informacion_expertise" name="informacion_expertise">
+            <div class="campo_personalizado miembro coordinador" id="informacion_expertise" name="informacion_expertise">
                 <h3><?php _e('Áreas de expertise', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -202,7 +228,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div class="campo_personalizado" id="informacion_contacto" name="informacion_contacto">
+            <div class="campo_personalizado miembro coordinador" id="informacion_contacto" name="informacion_contacto">
                 <h3><?php _e('Información de contacto', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -217,10 +243,20 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
 
                     <tr>
                         <th>
+                            <label for="twitter"><?php _e('Twitter', 'os_perfiles_de_usuario'); ?></label>
+                        </th>
+                         <td>
+                            <input type="text" name="twitter" id="twitter" value="<?php echo esc_attr($twitter); ?>" class="regular-text" /><br />
+                            <span class="description"><?php _e('URL de perfil de Twitter', 'os_perfiles_de_usuario'); ?></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
                             <label for="correo_electronico"><?php _e('Correo electrónico', 'os_perfiles_de_usuario'); ?></label>
                         </th>
                          <td>
-                            <input type="text" name="correo_electronico" id="linkedin" value="<?php echo esc_attr($correo_electronico); ?>" class="regular-text" /><br />
+                            <input type="text" name="correo_electronico" id="correo_electronico" value="<?php echo esc_attr($correo_electronico); ?>" class="regular-text" /><br />
                             <span class="description"><?php _e('Dirección de correo electrónico', 'os_perfiles_de_usuario'); ?></span>
                         </td>
                     </tr>
@@ -230,14 +266,14 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                             <label for="url_web"><?php _e('Web', 'os_perfiles_de_usuario'); ?></label>
                         </th>
                          <td>
-                            <input type="text" name="url_web" id="linkedin" value="<?php echo esc_attr($url_web); ?>" class="regular-text" /><br />
+                            <input type="text" name="url_web" id="url_web" value="<?php echo esc_attr($url_web); ?>" class="regular-text" /><br />
                             <span class="description"><?php _e('URL de la página web de la persona', 'os_perfiles_de_usuario'); ?></span>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <div class="campo_personalizado" id="informacion_cabecera" name="informacion_cabecera">
+            <div class="campo_personalizado miembro coordinador" id="informacion_cabecera" name="informacion_cabecera">
                 <h3><?php _e('Información de cabecera', 'os_perfiles_de_usuario'); ?></h3>
                 <table class="form-table">
                     <tr>
@@ -264,7 +300,7 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
                 </table>
             </div>
 
-            <div class="campo_personalizado" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
+            <div class="campo_personalizado miembro coordinador" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
                 <h3><?php _e('Trabajos relacionados', 'os_perfiles_de_usuario'); ?></h3>
                 <?php if (empty($trabajos)) : ?>
                     <div style="border: 3px solid white;padding: 5px;margin-bottom: 10px;">
@@ -386,6 +422,10 @@ if (!class_exists('OS_Perfiles_De_Usuario')) :
 
             if (isset($_POST['linkedin'])) {
                 update_user_meta($user_id, 'linkedin', $_POST['linkedin']);
+            }
+
+            if (isset($_POST['twitter'])) {
+                update_user_meta($user_id, 'twitter', $_POST['twitter']);
             }
 
             if (isset($_POST['correo_electronico'])) {
