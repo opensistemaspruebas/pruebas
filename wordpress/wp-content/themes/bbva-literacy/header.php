@@ -2,9 +2,7 @@
 <html lang="es">
 
 <head>
-    <!--[if IE ]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <![endif]-->
+    <!--[if IE ]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
     <meta name="HandheldFriendly" content="true" />
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
@@ -23,52 +21,28 @@
             <div class="container">
                 <div class="row vertical-align header-logo">
                     <div class="visible-xs col-xs-12 header-phone">
-                        <div class="launcher-menu-mobil visible-xs font-xxxl">
-                            <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
-                        </div>
-                        <div class="logo">
-                            <a href="/">
-                                <span class="bbva-icon-BBVA"></span>
-                            </a>
-                            <div class="text-right header-text-xs">
-                                <span>Educacion Financiera</span>
-                            </div>
-                            <div class="logo-search ml-sm">
-                                <span class="bbva-icon-search"></span>
-                            </div>
+                        <div class="launcher-menu-mobil visible-xs"><span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span></div>
+                        <div class="logo"><a href="index.html" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span></a>
+                            <h1>Educación Financiera</h1>
+                            <div class="logo-search ml-sm"><span class="bbva-icon-search"></span></div>
                         </div>
                     </div>
-                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo">
-                        <a href="/">
-                            <span class="bbva-icon-BBVA"></span>
-                            <span class="hidden">Logo BBVA</span>
-                        </a>
-                    </div>
+                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo"><a href="index.html" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span><span class="hidden">Logo BBVA</span></a></div>
                     <div class="hidden-xs col-xs-12 col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-5 col-lg-4 col-lg-offset-4 header-text">
-                        <h1>Educacion Financiera</h1>
-                    </div>
+                        <h1>Educación Financiera</h1></div>
                 </div>
             </div>
             <!-- EO header -->
         </header>
-        
         <div class="nav-content open">
             <!-- navbar menu -->
             <div class="container">
                 <nav class="navbar">
                     <div class="row visible-xs">
                         <div class="col-xs-12 pt-md">
-                            <div class="menu-logo">
-                                <a href="/">
-                                    <span class="bbva-icon-BBVA"></span>
-                                </a>
-                            </div>
-                            <div class="menu-text ml-md">
-                                <span>Educacion Financiera</span>
-                            </div>
-                            <div class="menu-close ml-xxxl">
-                                <a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a>
-                            </div>
+                            <div class="menu-logo"><a href="index.html"><span class="bbva-icon-BBVA"></span></a></div>
+                            <div class="menu-text ml-md"><span>Educación Financiera</span></div>
+                            <div class="menu-close ml-xxxl"><a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a></div>
                         </div>
                     </div>
                     <?php
@@ -85,15 +59,11 @@
                         );
                         wp_nav_menu($args);
                     ?>
-                    <div class="hidden-xs logo-search ml-sm pt-xs font-xl">
-                        <span class="bbva-icon-search"></span>
+                    <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
+                        <input class="input-search hidden" type="text" name="name" value="">
                     </div>
-                    <div class="visible-xs">
-                        <div class="languages-menu pb-lg pl-lg">
-                            <a role="button" class="languages-mobile-button font-lg active"><span class="language">Español</span></a>
-                            <a role="button" class="languages-mobile-button font-lg ml-lg "><span class="language">Inglés</span></a>
-                        </div>
-                    </div>
+                    <?php languages_list_header_responsive; ?>
                 </nav>
             </div>
+            <!-- EO navbar menu -->
         </div>

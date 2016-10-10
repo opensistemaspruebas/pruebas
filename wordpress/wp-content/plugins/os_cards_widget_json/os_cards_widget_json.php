@@ -228,27 +228,28 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	        </header>
 	        <?php if (!empty($posts)) : ?>
 	        <section class="card-container nopadding container-fluid mt-md mb-md">
-	            <div class="row" id="card-container">
-	                    
-                    	<?php for ($i = 0; $i < $numero_posts_mostrar; $i++) { ?>
+	            <div class="row">
+                	<?php for ($i = 0; $i < $numero_posts_mostrar; $i++) : ?>
 
-                    		<?php
+                		<?php
 
-                    			$post_title = $posts[$i]->post_title;
-                    			$post_date = get_the_date('j F Y', $posts[$i]->ID);
-                    			$post_guid = $posts[$i]->guid;
-                    			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
-                    			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
-                    			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
-                    			
-           						$style = '';
-           					?>
-           					<div class="main-card-container col-xs-12 col-sm-4 noppading">
-		                    <section class="container-fluid main-card" <?php echo $style; ?>>
+                			$post_title = $posts[$i]->post_title;
+                			$post_date = get_the_date('j F Y', $posts[$i]->ID);
+                			$post_guid = $posts[$i]->guid;
+                			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
+                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
+       					
+       					?>
+       					<?php $j = $i + 1; ?>
+       					<?php if ($i !== 0 && $i % 2 == 0) : ?>
+       						<div class="<?php echo $j; ?> main-card-container col-xs-12  col-lg-4  hidden-sm hidden-md  noppading">
+       					<?php else : ?>
+       						<div class="<?php echo $j; ?> main-card-container col-xs-12  col-lg-4  col-sm-6 col-md-6  noppading">
+						<?php endif; ?>
+		                    <section class="container-fluid main-card">
 		                        <header class="row header-container">
-		                            <div class="image-container nopadding col-xs-12">
-		                                <img class="img-responsive" src="<?php echo $imagen; ?>" alt="">
-		                            </div>
+		                            <div class="image-container nopadding col-xs-12"><img src="<?php echo $imagen; ?>" alt="" /></div>
 		                            <div class="hidden-xs floating-text col-xs-9">
 		                                <p class="date"><?php echo $post_date; ?></p>
 		                                <h1><?php echo $post_title; ?></h1>
@@ -290,9 +291,8 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		                            </footer>
 		                        </div>
 		                    </section>
-		                    </div>
-		                <?php } ?>
-	            
+	                    </div>
+	                <?php endfor; ?>
 	            </div>
 	        </section>
 	        <footer class="grid-footer">
