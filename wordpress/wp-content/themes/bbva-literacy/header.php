@@ -47,7 +47,7 @@
                     </div>
                     <?php
                         $args = array(
-                            'menu' => $menu_header, 
+                            'menu' => 'menu-principal', 
                             'theme_location' => '',
                             'container' => '', 
                             'container_class' => '', 
