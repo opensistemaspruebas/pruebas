@@ -1,19 +1,29 @@
 jQuery(document).ready(function($) {
-
-	//jQuery("select#role").parent().parent().parent().parent().before("<h2>Seleccione perfiles</h2>");
 	
+	jQuery(".campo_personalizado").hide();
 	ocultar_campos();
 	
-	jQuery('input.permissions').click(function(e) {
+	jQuery("#perfilchecklist input").click(function(e) {
+		jQuery(".campo_personalizado").hide();
 		ocultar_campos();
 	});
+
+
+    $('#publish').click(function(){
+        if (jQuery("#perfilchecklist input:checked").length > 0) {
+            return true;
+        } else {
+            alert('No se ha asignado ningún perfil');
+            return false;
+        }
+    });
 
 
 	var count = 0;
 
 	jQuery("#add-trabajo").click(function(e) {        
 		count++;
-		$('<div style="border: 3px solid white;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos[' + count + '][titulo]" id="trabajos[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos[' + count + '][enlace]" id="trabajos[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(this);
+		$('<div style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos[' + count + '][titulo]" id="trabajos[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos[' + count + '][enlace]" id="trabajos[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(this);
 	});
 
 	jQuery("#delete-trabajo").live("click", function(e) {
@@ -97,19 +107,24 @@ jQuery(document).ready(function($) {
 
 
 function ocultar_campos() {
+	jQuery("#perfilchecklist input:checked").each(function() {
+		perfil = jQuery(this);
+		jQuery(".campo_personalizado").each(function() {
 
-	// Ocultar campos de WordPress
-	/*jQuery(".user-description-wrap").parent().parent().prev().remove();
-	jQuery(".user-description-wrap").parent().parent().remove();
-	jQuery(".user-rich-editing-wrap").parent().parent().prev().remove();
-	jQuery(".user-rich-editing-wrap").parent().parent().remove();*/
-
-	var roles = ['miembro', 'coordinador', 'asesor', 'author', 'ponente'];
-
-	jQuery('.campo_personalizado').each(function() {
-
-		
-		
+			var elem = perfil.attr("value");
+			var clases = jQuery(this).attr("class").split(' ');
+			if (clases.indexOf(elem) !== -1) {
+				jQuery(this).show();
+			}
+		});
 	});
-
 }
+
+
+(function($){
+  $(document).ready(function() {
+     $('.postbox .hndle').unbind('click.postboxes');
+     $('.postbox .handlediv').remove();
+     $('.postbox').removeClass('closed');
+  });
+})(jQuery);
