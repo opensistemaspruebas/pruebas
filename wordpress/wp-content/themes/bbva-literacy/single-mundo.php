@@ -1,12 +1,13 @@
 <?php
-/*
-Template Name: Mundo
-*/
-get_header(); 
 
+/*Template Name: Mundo*/
+get_header(); 
 ?>
 
-   <div class="contents">
+
+
+        
+        <div class="contents">
             
     <section class="back-map">
     <div class="container">
@@ -128,17 +129,17 @@ get_header();
         <!-- council-members-map -->
 
 <section class="council-members nopadding">
-  <div class="container">
-    <h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
-    <div class="text-center">
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
-    </div>
-  </div>
-  
+	<div class="container">
+		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
+		<div class="text-center">
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+		</div>
+	</div>
+	
 <section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -166,7 +167,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -194,7 +195,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -222,7 +223,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -250,7 +251,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -397,17 +398,17 @@ get_header();
         <!-- council-members-map -->
 
 <section class="council-members nopadding">
-  <div class="container">
-    <h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
-    <div class="text-center">
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
-    </div>
-  </div>
-  
+	<div class="container">
+		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
+		<div class="text-center">
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+		</div>
+	</div>
+	
 <section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -435,7 +436,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -463,7 +464,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -491,7 +492,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -519,7 +520,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -666,17 +667,17 @@ get_header();
         <!-- council-members-map -->
 
 <section class="council-members nopadding">
-  <div class="container">
-    <h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
-    <div class="text-center">
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
-    </div>
-  </div>
-  
+	<div class="container">
+		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
+		<div class="text-center">
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+		</div>
+	</div>
+	
 <section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -704,7 +705,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -732,7 +733,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -760,7 +761,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -788,7 +789,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -935,17 +936,17 @@ get_header();
         <!-- council-members-map -->
 
 <section class="council-members nopadding">
-  <div class="container">
-    <h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
-    <div class="text-center">
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
-    </div>
-  </div>
-  
+	<div class="container">
+		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
+		<div class="text-center">
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+		</div>
+	</div>
+	
 <section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -973,7 +974,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1001,7 +1002,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1029,7 +1030,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1057,7 +1058,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1204,17 +1205,17 @@ get_header();
         <!-- council-members-map -->
 
 <section class="council-members nopadding">
-  <div class="container">
-    <h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
-    <div class="text-center">
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
-    </div>
-  </div>
-  
+	<div class="container">
+		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
+		<div class="text-center">
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+		</div>
+	</div>
+	
 <section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1242,7 +1243,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1270,7 +1271,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1298,7 +1299,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1326,7 +1327,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1473,17 +1474,17 @@ get_header();
         <!-- council-members-map -->
 
 <section class="council-members nopadding">
-  <div class="container">
-    <h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
-    <div class="text-center">
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-      <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
-    </div>
-  </div>
-  
+	<div class="container">
+		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
+		<div class="text-center">
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
+			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+		</div>
+	</div>
+	
 <section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1511,7 +1512,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1539,7 +1540,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1567,7 +1568,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1595,7 +1596,7 @@ get_header();
     </div>
 </section>
 
-  
+	
 <section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1645,4 +1646,6 @@ get_header();
     </div>
 </div>
     
+
+
 <?php get_footer(); ?>
