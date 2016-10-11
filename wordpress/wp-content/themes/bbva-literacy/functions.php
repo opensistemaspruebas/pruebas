@@ -205,31 +205,6 @@ function os_imprimir($array,$parar) {
 }
 
 
-function my_show_extra_profile_fields($user) { ?>
-	<h3><?php _e("Información adicional"); ?></h3>
-	<table class="form-table">
-		<tr>
-			<th><label for="cargo"><?php _e('Cargo'); ?></label></th>
-			<td>
-				<input type="text" name="cargo" id="cargo" value="<?php echo esc_attr(get_the_author_meta('cargo', $user->ID)); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e('Introduzca el cargo del autor'); ?></span>
-			</td>
-		</tr>
-	</table>
-<?php }
-add_action('show_user_profile', 'my_show_extra_profile_fields');
-add_action('edit_user_profile', 'my_show_extra_profile_fields');
-
-
-function my_save_extra_profile_fields( $user_id ) {
-	if (!current_user_can('edit_user', $user_id))
-		return false;
-	update_usermeta( $user_id, 'cargo', $_POST['cargo'] );
-}
-add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
-add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
-
-
 function languages_list_header(){
     $languages = icl_get_languages('skip_missing=0&orderby=code');
     ?>
@@ -245,5 +220,21 @@ function languages_list_header(){
             </div>
         </div>
     </div>
+    <?php
+}
+
+
+function languages_list_header_responsive(){
+    $languages = icl_get_languages('skip_missing=0&orderby=code');
+    ?>
+	<div class="visible-xs">
+	    <div class="languages-menu pb-lg pl-lg">
+	    	<?php foreach ($languages as $l) : ?>
+		    	<a role="button" class="languages-mobile-button <?php if ($l['active']) echo 'active'; else echo 'ml-lg'; ?>">
+		    		<span class="language"><?php echo $l['native_name']; ?></span>
+		    	</a>
+	    	<?php endforeach; ?>
+	    </div>
+	</div>
     <?php
 }

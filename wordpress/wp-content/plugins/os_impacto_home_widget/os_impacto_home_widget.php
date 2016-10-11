@@ -58,6 +58,7 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 			            		array(
 			            			'post_type' => 'impacto', 
 			            			'post__in' => array($impacto_1, $impacto_2, $impacto_3),
+			            			'orderby' => 'post__in'
 			            		)
 			            	);
 

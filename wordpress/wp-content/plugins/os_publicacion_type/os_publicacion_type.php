@@ -63,7 +63,7 @@ function register_admin_scripts() {
     
     if ($typenow == $post->post_type) {
       wp_enqueue_media();
-      wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type_min.js' , __FILE__), array('jquery'));           
+      wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type.js' , __FILE__), array('jquery'));           
       $translation_array = array(
         'choose_organization_logo' => __('Seleccionar logo', 'os_publicacion_type')
       );
@@ -74,19 +74,11 @@ function register_admin_scripts() {
 add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
-add_filter('admin_post_thumbnail_html', 'add_featured_image_instruction');
-
-function add_featured_image_instruction( $content ) {
-  $content = str_replace(__('Set featured image'), __('Añadir imagen', 'os_publicacion_type'), $content);
-  $content = str_replace(__('Remove featured image'), __('Eliminar imagen', 'os_publicacion_type'), $content); 
-  return $content;
-}
-
 
 function publicacion_meta_boxes() {
-  add_meta_box('postimagediv', __('Imagen de la cabecera', 'os_publicacion_type'), 'post_thumbnail_meta_box', 'publicacion', 'normal', 'high');
   add_meta_box("publicacion_destacada" ,__("Publicación destacada", "os_publicacion_type"), "meta_box_destacada", 'publicacion', 'side', 'high');
   add_meta_box("publicacion_imagen_card" ,__("Imagen Card", "os_publicacion_type"), "meta_box_imagen_card", 'publicacion', 'normal', 'high');
+  add_meta_box("publicacion_imagen_cabecera" ,__("Imagen de la cabecera", "os_publicacion_type"), "meta_box_imagen_cabecera", 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_abstract_destacado',  __('Texto destacado del abstract', 'os_publicacion_type'), 'meta_box_abstract_destacado', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_abstract_contenido',  __('Texto normal del abstract', 'os_publicacion_type'), 'meta_box_abstract_contenido', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'high');
@@ -107,6 +99,28 @@ function meta_box_destacada($post) {
   <p>
     <input class="widefat" id="destacada" name="destacada" type="checkbox" <?php checked($destacada, 'on'); ?> />
     <label for="destacada"><?php _e('Marcar la publicación como destacada', 'os_publicacion_type'); ?></label>
+  </p>
+            
+<?php
+       
+}
+
+
+function meta_box_imagen_cabecera($post) {         
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_imagen_cabecera-nonce');
+
+  $imagenCabecera = get_post_meta($post->ID, 'imagenCabecera', true);
+  $imagen_cabecera_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCabecera));
+?>
+
+  <p>
+    <label for="imagenCabecera"><?php _e('Imagen de la cabecera', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" readonly="readonly"/>
+    <img id="show_imagenCabecera" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_thumbnail)) echo esc_attr($imagen_cabecera_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_thumbnail)) echo "display: none;"; ?>">
+  </p>
+  <p>
+    <input id="upload_imagenCabecera" name="upload_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
   </p>
             
 <?php
@@ -170,11 +184,19 @@ function meta_box_publicacion_pdf($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_publicacion_pdf-nonce');
   
   $pdf = get_post_meta($post->ID, 'pdf', true);
+  $pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
   
   ?>
   <p>
     <label for="pdf"><?php _e('URL externa del archivo PDF', 'os_publicacion_type'); ?></label>
     <input type="url" class="widefat" id="pdf" name="pdf" value="<?php if (isset($pdf)) echo $pdf; ?>"/>
+  </p>
+  <p>
+    <label for="pdfInterno"><?php _e('Cargador de archivo PDF', 'os_publicacion_type'); ?></label>
+    <input type="url" class="widefat" id="pdfInterno" name="pdfInterno" value="<?php if (isset($pdfInterno)) echo $pdfInterno; ?>" readonly="readonly"/>
+  </p>
+  <p>
+    <input id="upload_pdfInterno" name="upload_pdfInterno" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
   </p>
   <?php
 }
@@ -185,8 +207,13 @@ function meta_box_source_link($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_source_link-nonce');
   
   $source_url = get_post_meta($post->ID, 'source_url', true);
+  $name_url = get_post_meta($post->ID, 'name_url', true);
   
   ?>
+   <p>
+    <label for="name_url"><?php _e('Nombre de la fuente del informe', 'os_publicacion_type'); ?></label>
+    <input class="widefat" id="name_url" name="name_url" type="text" value="<?php if (isset($name_url)) echo $name_url; ?>"/>
+  </p>
   <p>
     <label for="source_url"><?php _e('URL de la fuente del informe', 'os_publicacion_type'); ?></label>
     <input class="widefat" id="source_url" name="source_url" type="url" value="<?php if (isset($source_url)) echo $source_url; ?>"/>
@@ -272,6 +299,9 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['pdf'])) {
     update_post_meta($post_id, 'pdf', strip_tags($_POST['pdf']));
   }
+  if (isset($_POST['pdfInterno'])) {
+    update_post_meta($post_id, 'pdfInterno', strip_tags($_POST['pdfInterno']));
+  }
   if (isset($_POST['publication_date'])) {
     update_post_meta($post_id, 'publication_date', strip_tags($_POST['publication_date']));
   }
@@ -296,6 +326,9 @@ function meta_boxes_save($post_id) {
   if (isset($_POST['organization_name'])) {
    update_post_meta($post_id, 'organization_name', strip_tags($_POST['organization_name']));
   }
+  if (isset($_POST['name_url'])) {
+    update_post_meta($post_id, 'name_url', strip_tags($_POST['name_url']));
+  }
   if (isset($_POST['source_url'])) {
     update_post_meta($post_id, 'source_url', strip_tags($_POST['source_url']));
   }
@@ -307,6 +340,9 @@ function meta_boxes_save($post_id) {
   }
   if (isset($_POST['imagenCard'])) {
    update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
+  }
+  if (isset($_POST['imagenCabecera'])) {
+   update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
   }
   if (isset($_POST['destacada'])) {
     update_post_meta($post_id, 'destacada', strip_tags($_POST['destacada']));

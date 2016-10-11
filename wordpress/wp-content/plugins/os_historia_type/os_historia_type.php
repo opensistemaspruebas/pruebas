@@ -48,9 +48,114 @@ function historia_type() {
       'hierarchical'       => false,
       'menu_position'      => null,
       'menu_icon'           => 'dashicons-book',
-      'supports'           => array('title', 'editor', 'thumbnail'),
+      'supports'           => array('title', 'author', 'editor'),
       'taxonomies'         => array('category', 'ambito_geografico')
   );
   register_post_type('historia', $args );
 }
 add_action('init', 'historia_type', 0);
+
+
+function register_admin_scripts_historia() {
+    global $typenow, $post;
+    
+    if ($typenow == $post->post_type) {
+      wp_enqueue_media();
+      wp_register_script('os_historia_type-js', plugins_url('js/os_historia_type.js' , __FILE__), array('jquery'));           
+      $translation_array = array(
+        'choose_organization_logo' => __('Seleccionar logo', 'os_historia_type')
+      );
+      wp_localize_script( 'os_historia_type-js', 'object_name', $translation_array );
+      wp_enqueue_script('os_historia_type-js');
+    }
+}
+add_action('admin_enqueue_scripts', 'register_admin_scripts_historia');
+
+
+
+function historia_meta_boxes() {
+  add_meta_box("historia_destacada" ,__("Historia destacada", "os_historia_type"), "meta_box_destacada_historia", 'historia', 'side', 'high');
+  add_meta_box("historia_imagen_card" ,__("Imagen Card", "os_historia_type"), "meta_box_imagen_card_historia", 'historia', 'normal', 'high');
+  add_meta_box("historia_imagen_cabecera" ,__("Imagen de la cabecera", "os_historia_type"), "meta_box_imagen_cabecera_historia", 'historia', 'normal', 'high');
+}
+add_action('add_meta_boxes', 'historia_meta_boxes');
+
+
+function meta_box_destacada_historia($post) {
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_destacada_historia-nonce');
+
+  $destacada = get_post_meta($post->ID, 'destacada', true);
+
+  ?>
+
+  <p>
+    <input class="widefat" id="destacada" name="destacada" type="checkbox" <?php checked($destacada, 'on'); ?> />
+    <label for="destacada"><?php _e('Marcar la historia como destacada', 'os_historia_type'); ?></label>
+  </p>
+            
+<?php
+       
+}
+
+
+function meta_box_imagen_cabecera_historia($post) {         
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_imagen_cabecera_historia-nonce');
+
+  $imagenCabecera = get_post_meta($post->ID, 'imagenCabecera', true);
+  $imagen_cabecera_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCabecera));
+?>
+
+  <p>
+    <label for="imagenCabecera"><?php _e('Imagen de la cabecera', 'os_historia_type'); ?></label>
+    <input class="widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" readonly="readonly"/>
+    <img id="show_imagenCabecera" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_thumbnail)) echo esc_attr($imagen_cabecera_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_thumbnail)) echo "display: none;"; ?>">
+  </p>
+  <p>
+    <input id="upload_imagenCabecera" name="upload_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+  </p>
+            
+<?php
+       
+}
+
+
+        
+function meta_box_imagen_card_historia($post) {         
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_imagen_card_historia-nonce');
+
+  $imagenCard = get_post_meta($post->ID, 'imagenCard', true);
+  $imagen_card_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCard));
+?>
+
+  <p>
+    <label for="imagenCard"><?php _e('Imagen Card', 'os_historia_type'); ?></label>
+    <input class="widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" readonly="readonly"/>
+    <img id="show_imagenCard" draggable="false" alt="" name="show_imagenCard" src="<?php if (!empty($imagen_card_thumbnail)) echo esc_attr($imagen_card_thumbnail); ?>" style="<?php if (empty($imagen_card_thumbnail)) echo "display: none;"; ?>">
+  </p>
+  <p>
+    <input id="upload_imagenCard" name="upload_imagenCard" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+  </p>
+            
+<?php
+       
+}
+
+
+
+function meta_boxes_save_historia($post_id) {
+  if (isset($_POST['imagenCard'])) {
+   update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
+  }
+  if (isset($_POST['imagenCabecera'])) {
+   update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
+  }
+  if (isset($_POST['destacada'])) {
+    update_post_meta($post_id, 'destacada', strip_tags($_POST['destacada']));
+  } else {
+    update_post_meta($post_id, 'destacada', "off");
+  }
+}
+add_action('save_post', "meta_boxes_save_historia");
