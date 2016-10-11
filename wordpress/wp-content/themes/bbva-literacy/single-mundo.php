@@ -1,35 +1,19 @@
 <?php
-/*
-Template Name: Archives
-*/
+
+/*Template Name: Mundo*/
 get_header(); 
-
 ?>
 
-<?php
-
-$queried_object = get_queried_object();
-$term_id = $queried_object->term_id;
-$term = get_term_by('id', $term_id, 'ambito_geografico');
 
 
-os_imprimir($term->slug);
-?>
-
-<?php get_header(); ?>
-
-<div class="contents">
-	
-	<?php the_content(); ?>
-	<?php get_sidebar('sidebar-0'); ?>
-
- <div class="contents">
+        
+        <div class="contents">
             
- <section class="back-map">
+    <section class="back-map">
     <div class="container">
         <h1>En el mundo</h1>
         <p>Clicka en el mapa el país al que quieras acceder y consulto todo el catálogo de información financiera específica de ese del país.</p>
-<div class="container_map hidden-xs">
+        <div class="container_map hidden-xs">
             <div id="map_canvas" class="content_map"></div>
             <div class="map_message"></div>
         </div>
@@ -1664,14 +1648,4 @@ os_imprimir($term->slug);
     
 
 
-
-
-
-
-
-
-
-
-</div>
-    
 <?php get_footer(); ?>
