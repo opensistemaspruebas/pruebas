@@ -246,7 +246,7 @@ var googleMaps = function($) {
 
             setTimeout(function () {
                 var selection = chart.getSelection();
-                if (selection.length > 1) {
+                if (selection.length > 0) {
                     var option = selection[0].row;
                     $('#select-country option:eq(' + (++option) + ')').prop('selected', true);
                     $selectCountry.selectpicker('refresh');

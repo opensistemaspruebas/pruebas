@@ -11,17 +11,6 @@
 	Text Domain: os_save_post_and_update
 */
 
-/*
-titulo (texto)
-descripcion (texto)
-urlImagen (url)
-urlPublicacion (url)
-fecha
-video (true/false)
-pdf (true/false)
-cita (true/false)
-*/
-
 function save_json_to_file($json, $post_type, $identificador, $json_type){
 	$path = get_home_path() . "wp-content/jsons/" . $post_type;
 
@@ -79,9 +68,10 @@ function post_to_json($post_id, $post_type){
 			break;
 	}
 
-	//file_put_contents("/home/rmoreno/Proyectos/bbva_literacy/wordpress/wp-content/jsons/publicacion/".$post_id.".json", json_encode($json));
+
 	save_json_to_file($json, $post_type, $post_id, "json");
 }
+
 
 function update_post_index($post_type){
 	fetch($post_type, "ASC");
@@ -90,6 +80,7 @@ function update_post_index($post_type){
 }
 
 function fetch($post_type, $order){
+	
 	$args = array(
 		'posts_per_page'   => 70,
 		'offset'           => 0,
