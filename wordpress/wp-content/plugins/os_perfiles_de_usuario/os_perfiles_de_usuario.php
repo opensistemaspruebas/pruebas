@@ -65,8 +65,8 @@ class OS_Perfiles_de_Usuario {
         $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3', true);
         $linkedin = get_post_meta($post_id, 'linkedin', true);
         $twitter = get_post_meta($post_id, 'twitter', true);
-        $correo_electronico = $user_info->user_email;
-        $url_web = $user_info->url_web;
+        $correo_electronico = get_post_meta($post_id, 'correo_electronico', true);
+        $url_web = get_post_meta($post_id, 'url_web', true);
         $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
         $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
         $trabajos = get_post_meta($post_id, 'trabajos', true);
@@ -84,11 +84,9 @@ class OS_Perfiles_de_Usuario {
         $autor_id = $autor->term_id;
         
         $ponente = get_term_by('slug', 'ponente', 'perfil');
-        $ponenteo_id = $ponente->term_id;
-
+        $ponente_id = $ponente->term_id;
 
         ?>
-
         <div id="informacion_personal" name="informacion_personal">
             <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
@@ -304,7 +302,7 @@ class OS_Perfiles_de_Usuario {
             <?php else : ?>
                 <?php $i = 0; ?>
                 <?php foreach ($trabajos as $trabajo) : ?>
-                    <div class="campo_personalizado" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
+                    <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
                         <table class="form-table">
                             <tr>
                                 <th>
@@ -493,3 +491,23 @@ function create_perfiles_taxonomy() {
 
 }
 add_action('init', 'create_perfiles_taxonomy', 0);
+
+
+function os_perfiles_filter_manage_posts_custom_column($column_name) {
+    
+    print_r("hola");
+
+    if ($column_name == 'coauthors') {
+        global $post;
+        $authors = get_coauthors( $post->ID );
+        
+        $count = 1;
+        foreach( $authors as $author ) :
+            ?>
+            <p>Prueba</p>
+            <?php
+            $count++;
+        endforeach;
+    }
+}
+add_action( 'manage_posts_custom_column', array( $this, 'os_perfiles_filter_manage_posts_custom_column' ) );
