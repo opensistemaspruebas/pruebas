@@ -491,23 +491,3 @@ function create_perfiles_taxonomy() {
 
 }
 add_action('init', 'create_perfiles_taxonomy', 0);
-
-
-function os_perfiles_filter_manage_posts_custom_column($column_name) {
-    
-    print_r("hola");
-
-    if ($column_name == 'coauthors') {
-        global $post;
-        $authors = get_coauthors( $post->ID );
-        
-        $count = 1;
-        foreach( $authors as $author ) :
-            ?>
-            <p>Prueba</p>
-            <?php
-            $count++;
-        endforeach;
-    }
-}
-add_action( 'manage_posts_custom_column', array( $this, 'os_perfiles_filter_manage_posts_custom_column' ) );

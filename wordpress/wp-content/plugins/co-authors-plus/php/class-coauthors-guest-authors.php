@@ -77,17 +77,19 @@ class CoAuthors_Guest_Authors
 
 		// Set up default labels, but allow themes to modify
 		$this->labels = apply_filters( 'coauthors_guest_author_labels', array(
-			'singular' => __( 'Guest Author', 'co-authors-plus' ),
-			'plural' => __( 'Guest Authors', 'co-authors-plus' ),
-			'all_items' => __( 'All Guest Authors', 'co-authors-plus' ),
-			'add_new_item' => __( 'Add New Guest Author', 'co-authors-plus' ),
-			'edit_item' => __( 'Edit Guest Author', 'co-authors-plus' ),
-			'new_item' => __( 'New Guest Author', 'co-authors-plus' ),
-			'view_item' => __( 'View Guest Author', 'co-authors-plus' ),
-			'search_items' => __( 'Search Guest Authors', 'co-authors-plus' ),
-			'not_found' => __( 'No guest authors found', 'co-authors-plus' ),
-			'not_found_in_trash' => __( 'No guest authors found in Trash', 'co-authors-plus' ),
-			'update_item' => __( 'Update Guest Author', 'co-authors-plus' ),
+			// moliver: cambio literales
+			'singular' => __( 'Perfil', 'os_perfiles_usuario' ),
+			'plural' => __( 'Perfiles', 'os_perfiles_usuario' ),
+			'all_items' => __( 'Todos los perfiles', 'os_perfiles_usuario' ),
+			'add_new_item' => __( 'Añadir un nuevo perfil', 'os_perfiles_usuario' ),
+			'edit_item' => __( 'Editar un perfil', 'os_perfiles_usuario' ),
+			'new_item' => __( 'Nuevo perfil', 'os_perfiles_usuario' ),
+			'view_item' => __( 'Ver perfil', 'os_perfiles_usuario' ),
+			'search_items' => __( 'Buscar perfiles', 'os_perfiles_usuario' ),
+			'not_found' => __( 'No se han encontrado perfiles', 'os_perfiles_usuario' ),
+			'not_found_in_trash' => __( 'No se han encontrado perfiles en la papelera', 'os_perfiles_usuario' ),
+			'update_item' => __( 'Actualizar perfil', 'os_perfiles_usuario' ),
+			//**************************
 			'metabox_about' => __( 'About the guest author', 'co-authors-plus' ),
 		) );
 
@@ -97,7 +99,7 @@ class CoAuthors_Guest_Authors
 				'labels' => array(
 						'name' => $this->labels['plural'],
 						'singular_name' => $this->labels['singular'],
-						'add_new' => _x( 'Add New', 'guest author', 'co-authors-plus' ),
+						'add_new' => _x( 'Añadir nuevo', 'os_perfiles_usuario' ),
 						'all_items' => $this->labels['all_items'],
 						'add_new_item' => $this->labels['add_new_item'],
 						'edit_item' => $this->labels['edit_item'],
@@ -357,8 +359,18 @@ class CoAuthors_Guest_Authors
 	 */
 	function action_admin_menu() {
 
-		add_submenu_page( $this->parent_page, $this->labels['plural'], $this->labels['plural'], $this->list_guest_authors_cap, 'view-guest-authors', array( $this, 'view_guest_authors_list' ) );
-
+		// moliver: añado página en el menú en lugar de sub-página
+		//add_submenu_page( $this->parent_page, $this->labels['plural'], $this->labels['plural'], $this->list_guest_authors_cap, 'view-guest-authors', array( $this, 'view_guest_authors_list' ) );
+		add_menu_page(
+			$this->labels['plural'], 
+			$this->labels['plural'], 
+			$this->list_guest_authors_cap, 
+			'view-guest-authors', 
+			array( $this, 'view_guest_authors_list' ),
+			'dashicons-visibility',
+			30
+		);
+		//********************************************************
 	}
 
 	/**
@@ -435,11 +447,11 @@ class CoAuthors_Guest_Authors
 			remove_meta_box( 'submitdiv', $this->post_type, 'side' );
 			remove_meta_box( 'slugdiv', $this->post_type, 'normal' );
 			add_meta_box( 'coauthors-manage-guest-author-save', __( 'Save', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_save' ), $this->post_type, 'side', 'default' );
-			add_meta_box( 'coauthors-manage-guest-author-slug', __( 'Unique Slug', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_slug' ), $this->post_type, 'side', 'default' );
+			//add_meta_box( 'coauthors-manage-guest-author-slug', __( 'Unique Slug', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_slug' ), $this->post_type, 'side', 'default' );
 			// Our metaboxes with co-author details
-			add_meta_box( 'coauthors-manage-guest-author-name', __( 'Name', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_name' ), $this->post_type, 'normal', 'default' );
-			add_meta_box( 'coauthors-manage-guest-author-contact-info', __( 'Contact Info', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_contact_info' ), $this->post_type, 'normal', 'default' );
-			add_meta_box( 'coauthors-manage-guest-author-bio', $this->labels['metabox_about'], array( $this, 'metabox_manage_guest_author_bio' ), $this->post_type, 'normal', 'default' );
+			//add_meta_box( 'coauthors-manage-guest-author-name', __( 'Name', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_name' ), $this->post_type, 'normal', 'default' );
+			//add_meta_box( 'coauthors-manage-guest-author-contact-info', __( 'Contact Info', 'co-authors-plus' ), array( $this, 'metabox_manage_guest_author_contact_info' ), $this->post_type, 'normal', 'default' );
+			//add_meta_box( 'coauthors-manage-guest-author-bio', $this->labels['metabox_about'], array( $this, 'metabox_manage_guest_author_bio' ), $this->post_type, 'normal', 'default' );
 		}
 	}
 
