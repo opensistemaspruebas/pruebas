@@ -30,7 +30,9 @@ get_header(); ?>
     $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
     $trabajos = get_post_meta($post_id, 'trabajos', true);
     
-    $numero_publicaciones = 0;
+    $numero_publicaciones = 20;
+
+    os_imprimir(count_user_posts($post_id));
 
 ?>
 
