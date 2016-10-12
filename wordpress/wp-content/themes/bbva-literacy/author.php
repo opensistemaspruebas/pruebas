@@ -8,31 +8,29 @@ get_header(); ?>
 
 <?php 
 
+    $post_id = 701;
+
     $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $twitter = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
     $trabajos = array();
 
-    $user_id = get_the_author_meta('ID');
-
-    $user_info = get_userdata($user_id);
-    $nombre = $user_info->first_name;
-    $apellidos = $user_info->last_name;
-    $cargo = get_user_meta($user_id, 'cargo', true);
-    $imagen_perfil = get_user_meta($user_id, 'imagen_perfil', true);
-    $descripcion = get_user_meta($user_id, 'descripcion', true);
-    $lugar_trabajo = get_user_meta($user_id, 'lugar_trabajo', true);
-    $logo_trabajo = get_user_meta($user_id, 'logo_trabajo', true);
-    $area_expertise_1 = get_user_meta($user_id, 'area_expertise_1', true);
-    $area_expertise_2 = get_user_meta($user_id, 'area_expertise_2', true);
-    $area_expertise_3 = get_user_meta($user_id, 'area_expertise_3', true);
-    $linkedin = get_user_meta($user_id, 'linkedin', true);
-    $twitter = get_user_meta($user_id, 'twitter', true);
-    $correo_electronico = $user_info->user_email;
-    $url_web = $user_info->url_web;
-    $imagen_cabecera = get_user_meta($user_id, 'imagen_cabecera', true);
-    $frase_cabecera = get_user_meta($user_id, 'frase_cabecera', true);
-    $trabajos = get_user_meta($user_id, 'trabajos', true);
+    $nombre = get_post_meta($post_id, 'cap-display_name', true);
+    $cargo = get_post_meta($post_id, 'cargo', true);
+    $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
+    $descripcion = get_post_meta($post_id, 'descripcion', true);
+    $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo', true);
+    $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
+    $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1', true);
+    $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2', true);
+    $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3', true);
+    $linkedin = get_post_meta($post_id, 'linkedin', true);
+    $twitter = get_post_meta($post_id, 'twitter', true);
+    $correo_electronico = get_post_meta($post_id, 'correo_electronico', true);
+    $url_web = get_post_meta($post_id, 'url_web', true);
+    $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
+    $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
+    $trabajos = get_post_meta($post_id, 'trabajos', true);
     
-    $numero_publicaciones = count_user_posts($user_id, 'publicacion');
+    $numero_publicaciones = 0;
 
 ?>
 
@@ -40,7 +38,7 @@ get_header(); ?>
         <article class="consultant-cv">
             <header>
                 <div class="hidden-xs back-wrapper">
-                    <a href="#"><span class="icon bbva-icon-arrow"></span><span class="text">Volver</span></a>
+                    <a href="/sobre-nosotros/"><span class="icon bbva-icon-arrow"></span><span class="text"><?php _e('Volver'); ?></span></a>
                 </div>
                 <img class="img-responsive" src="<?php echo $imagen_cabecera; ?>" alt="" />
                 <div class="hidden-xs title-wrapper">
@@ -53,7 +51,7 @@ get_header(); ?>
                         <!-- consultant-main-data -->
                         <section class="consultant-main-data-wrapper">
                             <img class="img-responsive consultant-pic" src="<?php echo $imagen_perfil; ?>" alt="" />
-                            <h1><?php echo $nombre . ' ' . $apellidos; ?></h1>
+                            <h1><?php echo $nombre; ?></h1>
                             <h4><?php echo $cargo; ?></h4>
                             <div class="current-work">
                                 <img src="<?php echo $logo_trabajo; ?>" alt="" />
@@ -138,77 +136,66 @@ get_header(); ?>
 
         ?>
         
+        <script>
+            jQuery(document).ready(function($) {
+                numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
+                if (numero_trabajos_ocultos == 0) {
+                    jQuery('a#readmore_trabajos').remove();
+                }
+                numero_trabajos_visibles = jQuery('article#otros_trabajos .content .data-block:visible').length;
+                jQuery('#readmore_trabajos').on('click', function(e) {
+                    e.preventDefault();
+                    numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
+                    i = 1;
+                    jQuery('article#otros_trabajos .content .data-block:hidden').each(function() {
+                        jQuery('article#otros_trabajos .content #trabajo_' + numero_trabajos_visibles).show();
+                        numero_trabajos_visibles++;
+                        if (i == 3) {
+                            return false;
+                        } else {
+                            i++;
+                        }
+                    });
+                    numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
+                    if (numero_trabajos_ocultos == 0) {
+                        jQuery('a#readmore_trabajos').remove();
+                    }
+                });
+            });
+        </script>
         <?php if (!empty($trabajos)) : ?>
-        <article class="container data-grid">
-            <header>
-                <h1>Otros trabajos del autor</h1>
-            </header>
-            <div class="content">
-                <div class="grid-wrapper">
-                    <section class="data-block">
-                        <h2>Car Rental Loss and Damage Insurance</h2>
-                        <p class="description">
-                            When you use your Card to pay for the entire rental and you don't have other coverage, you’re covered in case of damage to your rental car, anywhere in the United States and Canada!
-                        </p>
-                        <p class="link">
-                            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                        </p>
-                    </section>
-                    <section class="data-block">
-                        <h2>Emergency Assistance</h2>
-                        <p class="description">
-                            Whether you are traveling at home or many places abroad, you Card helps you to get ready for your travels and is there for you in case of emergencies.
-                        </p>
-                        <p class="link">
-                            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                        </p>
-                    </section>
-                    <section class="data-block">
-                        <h2>Travel Accident Insurance</h2>
-                        <p class="description">
-                            When you use it to pay for the entire cost of your plane, trip, ship or bus tickets, your Card covers many potential injuries when you are traveling at home or abroad!
-                        </p>
-                        <p class="link">
-                            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                        </p>
-                    </section>
-                    <section class="data-block">
-                        <h2>ID Theft Protection</h2>
-                        <p class="description">
-                            With your Card, you are protected from most fraud and identify theft expenses.
-                        </p>
-                        <p class="link">
-                            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                        </p>
-                    </section>
-                    <section class="data-block">
-                        <h2>Retail Protection (Purchase Protection)</h2>
-                        <p class="description">
-                            When you use your Card and you don't have other coverage, you are covered for 90 days after your eligible purchase in case of theft or damage.
-                        </p>
-                        <p class="link">
-                            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                        </p>
-                    </section>
-                    <section class="data-block">
-                        <h2>Extended Warranty</h2>
-                        <p class="description">
-                            Extend the original U.S. manufacturer’s warranty for up to an additional year on eligible purchases when you make the entire purchase with your Card.
-                        </p>
-                        <p class="link">
-                            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                        </p>
-                    </section>
-                </div>
-            </div>
-            <footer class="grid-footer">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más trabajos'); ?></a>
+            <article id="otros_trabajos" name="otros_trabajos" class="container data-grid">
+                <header>
+                    <h1><?php _e('Otros trabajos del autor'); ?></h1>
+                </header>
+                <div class="content">
+                    <div class="grid-wrapper">
+                        <?php $i = 0; ?>
+                        <?php foreach ($trabajos as $trabajo) : ?>
+                            <?php 
+                                $titulo = $trabajo['titulo'];
+                                $texto = $trabajo['texto'];
+                                $enlace = $trabajo['enlace']
+                            ?>
+                            <section id="trabajo_<?php echo $i; ?>" name="trabajo_<?php echo $i; ?>" class="data-block" <?php if ($i > 2) echo 'style="display:none;"'; ?>>
+                                <h2><?php echo $titulo; ?></h2>
+                                <p class="description"><?php echo $texto; ?></p>
+                                <p class="link">
+                                    <a target="_blank" href="<?php echo $enlace; ?>"><?php _e('Aprender más'); ?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
+                                </p>
+                            </section>
+                            <?php $i++; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-            </footer>
-        </article>
+                <footer class="grid-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <a href="javascript:void(0)" id="readmore_trabajos" name="readmore_trabajos" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más trabajos'); ?></a>
+                        </div>
+                    </div>
+                </footer>
+            </article>
         <?php endif; ?>
 
     </div>
