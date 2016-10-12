@@ -27,12 +27,16 @@ class OS_Perfiles_de_Usuario {
 
     public function load_javascript($hook) {
 
+        global $post_type;
+
         if (!current_user_can('edit_posts'))
             return;
 
         if ($hook == 'post-new.php' || $hook == 'post.php') {
-            wp_enqueue_script('os_perfiles_de_usuario_js', plugins_url('js/os_perfiles_de_usuario.js', __FILE__), array('jquery'));
-            wp_enqueue_style('os_perfiles_de_usuario_css', plugins_url('css/os_perfiles_de_usuario.css', __FILE__));
+            if ('guest-author' == $post_type ) {
+                wp_enqueue_script('os_perfiles_de_usuario_js', plugins_url('js/os_perfiles_de_usuario.js', __FILE__), array('jquery'));
+                wp_enqueue_style('os_perfiles_de_usuario_css', plugins_url('css/os_perfiles_de_usuario.css', __FILE__));
+            }
         }
     
     }

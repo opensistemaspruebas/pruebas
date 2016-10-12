@@ -1135,8 +1135,24 @@ class CoAuthors_Plus {
 				unset( $found_users[ $key ] );
 			} else if ( 'wpuser' === $found_user->type && false === $found_user->has_cap( apply_filters( 'coauthors_edit_author_cap', 'edit_posts' ) ) ) {
 				unset( $found_users[ $key ] );
+			} else if ( 'wpuser' !== $found_user->type) {
+
+				$perfiles = wp_get_post_terms($found_user->ID, 'perfil');
+				$encontrado = false;
+				foreach ($perfiles as $perfil) {
+					if ($perfil->slug == 'autor') {
+						$encontrado = true;
+						break;
+					}
+				}
+				if (!$encontrado)
+					unset( $found_users[$key]);
+
 			}
+
 		}
+
+
 		return (array) $found_users;
 	}
 
