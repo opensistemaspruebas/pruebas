@@ -526,7 +526,7 @@ msgstr "Sin cuenta vinculada"
 
 #: php/class-coauthors-wp-list-table.php:135
 msgid "No matching guest authors were found."
-msgstr "No se encontraron autores"
+msgstr "No se encontraron perfiles"
 
 #: php/class-coauthors-wp-list-table.php:206
 msgid "Delete"

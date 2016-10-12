@@ -8,6 +8,8 @@ get_header(); ?>
 
 <?php 
 
+    print_r("hola");die();
+
     $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $twitter = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
     $trabajos = array();
 

@@ -289,7 +289,7 @@ if ( 'top' == $which ) {
 
 	function display() {
 		global $coauthors_plus;
-		$this->search_box( $coauthors_plus->guest_authors->labels['search_items'], 'guest-authors' );
+		//$this->search_box( $coauthors_plus->guest_authors->labels['search_items'], 'guest-authors' );
 		parent::display();
 	}
 }
