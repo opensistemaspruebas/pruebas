@@ -25,33 +25,25 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	            	'description' => __('Muestra tarjetas para distintos tipos de posts a partir de un json.', 'os_cards_widget_json')
 	        	)
 	        );
-	        add_action('wp_enqueue_scripts', array(&$this, 'add_script_filter_widget'));
+			wp_register_script('os_cards_widget_json_js', plugins_url('js/os_cards_widget_json.js' , __FILE__), array('jquery'));
+			$translation_array = array(
+				'leer_mas' => __('Leer más', 'os_cards_widget_json'),
+				'enero' => __('Enero', 'os_cards_widget_json'),
+				'febrero' => __('Febrero', 'os_cards_widget_json'),
+				'marzo' => __('Marzo', 'os_cards_widget_json'),
+				'abril' => __('Abril', 'os_cards_widget_json'),
+				'mayo' => __('Mayo', 'os_cards_widget_json'),
+				'junio' => __('Junio', 'os_cards_widget_json'),
+				'julio' => __('Julio', 'os_cards_widget_json'),
+				'agosto' => __('Agosto', 'os_cards_widget_json'),
+				'septiembre' => __('Septiembre', 'os_cards_widget_json'),
+				'octubre' => __('Octubre', 'os_cards_widget_json'),
+				'noviembre' => __('Noviembre', 'os_cards_widget_json'),
+				'diciembre' => __('Diciembre', 'os_cards_widget_json'),
+			);
+			wp_localize_script('os_cards_widget_json_js', 'object_name_cards', $translation_array);
+			wp_enqueue_script('os_cards_widget_json_js');
         }
-
-
-		function add_script_filter_widget() {
-            if (is_active_widget(false, false, $this->id_base, true)) {
-		        wp_register_script('os_cards_widget_json_js', plugins_url('js/os_cards_widget_json.js' , __FILE__), array('jquery'));
-		        $translation_array = array(
-					'leer_mas' => __('Leer más', 'os_cards_widget_json'),
-					'enero' => __('Enero', 'os_cards_widget_json'),
-					'febrero' => __('Febrero', 'os_cards_widget_json'),
-					'marzo' => __('Marzo', 'os_cards_widget_json'),
-					'abril' => __('Abril', 'os_cards_widget_json'),
-					'mayo' => __('Mayo', 'os_cards_widget_json'),
-					'junio' => __('Junio', 'os_cards_widget_json'),
-					'julio' => __('Julio', 'os_cards_widget_json'),
-					'agosto' => __('Agosto', 'os_cards_widget_json'),
-					'septiembre' => __('Septiembre', 'os_cards_widget_json'),
-					'octubre' => __('Octubre', 'os_cards_widget_json'),
-					'noviembre' => __('Noviembre', 'os_cards_widget_json'),
-					'diciembre' => __('Diciembre', 'os_cards_widget_json'),
-				);
-	            wp_localize_script('os_cards_widget_json_js', 'object_name_cards', $translation_array);
-	            wp_enqueue_script('os_cards_widget_json_js');
-            }
-        } 
-
 
 
         // Widget del front-end
@@ -79,7 +71,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 				'post_type'        => $tipo_post,
 				'post_status'      => 'publish',
 				'suppress_filters' => true,
-				'author'           =>  0,
+				'author'           => $author,
 			);
 
 	    	$posts = get_posts($args);

@@ -495,3 +495,27 @@ function create_perfiles_taxonomy() {
 
 }
 add_action('init', 'create_perfiles_taxonomy', 0);
+
+
+add_action( 'init', 'add_author_rules' );
+function add_author_rules() { 
+    add_rewrite_rule(
+        "writer/([^/]+)/?",
+        "index.php?author_name=$matches[1]",
+        "top");
+   
+    add_rewrite_rule(
+  "writer/([^/]+)/page/?([0-9]{1,})/?",
+  "index.php?author_name=$matches[1]&paged=$matches[2]",
+  "top");
+   
+    add_rewrite_rule(
+  "writer/([^/]+)/(feed|rdf|rss|rss2|atom)/?",
+  "index.php?author_name=$matches[1]&feed=$matches[2]",
+  "top");
+     
+    add_rewrite_rule(
+  "writer/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?",
+  "index.php?author_name=$matches[1]&feed=$matches[2]",
+  "top");
+}
