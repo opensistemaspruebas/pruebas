@@ -12,474 +12,484 @@
 */
 
 
-if (!class_exists('OS_Perfiles_De_Usuario')) :
+class OS_Perfiles_de_Usuario {
+ 
 
-
-    class OS_Perfiles_De_Usuario {
-        
-
-        function __construct() {
-            
-            add_action('init', array(&$this, 'add_custom_user_roles'));
-            add_action('init', array(&$this, 'remove_default_user_roles'));
-        
-            add_action('user_new_form', array(&$this, 'add_custom_fields'), 11);
-            add_action('show_user_profile', array(&$this, 'add_custom_fields'), 11);
-            add_action('edit_user_profile', array(&$this, 'add_custom_fields'), 11);
-
-            add_action('user_register', array(&$this, 'save_custom_fields'), 10, 1);
-            add_action('personal_options_update', array(&$this, 'save_custom_fields'), 9);
-            add_action('edit_user_profile_update', array(&$this, 'save_custom_fields'), 9);
-            
+    public function __construct() {
+        if (is_admin()) {
+            add_action('load-post.php', array($this, 'init_metabox'));
+            add_action('load-post-new.php', array( $this, 'init_metabox'));
             add_action('admin_enqueue_scripts', array($this, 'load_javascript'), 10, 1);
-
-            remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
-
         }
+ 
+    }
+ 
 
+    public function load_javascript($hook) {
 
-        // Crea los roles de asesor, coordinador, miembro y ponente
-        public function add_custom_user_roles() {
-            
-            $args = array(
-                'read'                  => false, // true allows this capability
-                'edit_posts'            => false, // Allows user to edit their own posts
-                'edit_pages'            => false, // Allows user to edit pages
-                'edit_others_posts'     => false, // Allows user to edit others posts not just their own
-                'create_posts'          => false, // Allows user to create new posts
-                'manage_categories'     => false, // Allows user to manage post categories
-                'publish_posts'         => false, // Allows the user to publish, otherwise posts stays in draft mode
-                'edit_themes'           => false, // false denies this capability. User can’t edit your theme
-                'install_plugins'       => false, // User cant add new plugins
-                'update_plugin'         => false, // User can’t update any plugins
-                'update_core'           => false // user cant perform core updates
-            );
+        if (!current_user_can('edit_posts'))
+            return;
 
-            add_role('asesor', __('Asesor', 'os_perfiles_de_usuario'), $args);
-            add_role('coordinador', __('Coordinador', 'os_perfiles_de_usuario'), $args);
-            add_role('miembro', __('Miembro', 'os_perfiles_de_usuario'), $args);
-            add_role('ponente', __('Ponente', 'os_perfiles_de_usuario'), $args);
-        
+        if ($hook == 'post-new.php' || $hook == 'post.php') {
+            wp_enqueue_script('os_perfiles_de_usuario_js', plugins_url('js/os_perfiles_de_usuario.js', __FILE__), array('jquery'));
+            wp_enqueue_style('os_perfiles_de_usuario_css', plugins_url('css/os_perfiles_de_usuario.css', __FILE__));
         }
     
+    }
 
-        // Elimina los roles de subscriptor, colaborador y editor
-        public function remove_default_user_roles() {
 
-            $roles = array('subscriber', 'contributor', 'editor');
+    public function init_metabox() {
+        add_action( 'add_meta_boxes', array( $this, 'add_metabox'  )        );
+        add_action( 'save_post',      array( $this, 'save_metabox' ), 10, 2 );
+    }
+ 
 
-            foreach ($roles as $role) {
-                if (get_role($role)) 
-                    remove_role($role);
-            }
-            
-        }
+    public function add_metabox() {
+        add_meta_box('my-meta-box', __( 'Campos de perfil', 'os_perfiles_de_usuario' ), array( $this, 'render_metabox' ), 'guest-author', 'advanced', 'default');
+    }
+ 
 
+    public function render_metabox($post) {
+        wp_nonce_field('custom_nonce_action', 'custom_nonce');
+
+        $post_id = $post->ID;
+
+        $nombre = get_post_meta($post_id, 'cap-display_name', true);
+        $cargo = get_post_meta($post_id, 'cargo', true);
+        $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
+        $descripcion = get_post_meta($post_id, 'descripcion', true);
+        $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo', true);
+        $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
+        $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1', true);
+        $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2', true);
+        $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3', true);
+        $linkedin = get_post_meta($post_id, 'linkedin', true);
+        $twitter = get_post_meta($post_id, 'twitter', true);
+        $correo_electronico = $user_info->user_email;
+        $url_web = $user_info->url_web;
+        $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
+        $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
+        $trabajos = get_post_meta($post_id, 'trabajos', true);
+
+        $miembro = get_term_by('slug', 'miembro', 'perfil');
+        $miembro_id = $miembro->term_id;
         
-        // Añade campos personalizados
-        public function add_custom_fields($user) { 
+        $coordinador = get_term_by('slug', 'coordinador', 'perfil');
+        $coordinador_id = $coordinador->term_id;
+        
+        $asesor = get_term_by('slug', 'asesor', 'perfil');
+        $asesor_id = $asesor->term_id;
+        
+        $autor = get_term_by('slug', 'autor', 'perfil');
+        $autor_id = $autor->term_id;
+        
+        $ponente = get_term_by('slug', 'ponente', 'perfil');
+        $ponenteo_id = $ponente->term_id;
 
-            if ($user !== 'add-new-user') {
-                
-                $user_id = $user->data->ID;
-                $user_info = get_userdata($user_id);
-                $nombre = $user_info->first_name;
-                $apellidos = $user_info->last_name;
-                $cargo = get_user_meta($user_id, 'cargo', true);
-                $imagen_perfil = get_user_meta($user_id, 'imagen_perfil', true);
-                $descripcion = get_user_meta($user_id, 'descripcion', true);
-                $lugar_trabajo = get_user_meta($user_id, 'lugar_trabajo', true);
-                $logo_trabajo = get_user_meta($user_id, 'logo_trabajo', true);
-                $area_expertise_1 = get_user_meta($user_id, 'area_expertise_1', true);
-                $area_expertise_2 = get_user_meta($user_id, 'area_expertise_2', true);
-                $area_expertise_3 = get_user_meta($user_id, 'area_expertise_3', true);
-                $linkedin = get_user_meta($user_id, 'linkedin', true);
-                $twitter = get_user_meta($user_id, 'twitter', true);
-                $correo_electronico = $user_info->user_email;
-                $url_web = $user_info->url_web;
-                $imagen_cabecera = get_user_meta($user_id, 'imagen_cabecera', true);
-                $frase_cabecera = get_user_meta($user_id, 'frase_cabecera', true);
-                $trabajos = get_user_meta($user_id, 'trabajos', true);
 
-            } else {
+        ?>
 
-                $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $twitter = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
-                $trabajos = array();
-            
-            }
+        <div id="informacion_personal" name="informacion_personal">
+            <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="nombre"><?php _e('Nombre', 'os_perfiles_de_usuario'); ?> <span class="description">(<?php _e('obligatorio', 'os_perfiles_de_usuario'); ?>)</span></label>
+                    </th>
+                    <td>
+                        <input required="required" type="text" name="cap-display_name" id="cap-display_name" value="<?php echo esc_attr($nombre); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('Nombre y apellidos de la persona', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="cargo"><?php _e('Cargo/Estudios', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="cargo" id="cargo" value="<?php echo esc_attr($cargo); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('Cargo o estudios de la persona', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            ?>
+        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="información_acerca_de" name="informacion_acerca_de">
+            <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="imagen_perfil"><?php _e('Imagen de perfil', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="imagen_perfil" id="imagen_perfil" value="<?php echo esc_url($imagen_perfil); ?>" class="regular-text" readonly="readonly" />
+                        <input type='button' class="additional-user-image button-primary" value="<?php _e('Subir imagen', 'os_perfiles_de_usuario'); ?>" id="uploadimage"/><br />
+                        <span class="description"><?php _e('Subir una imagen de perfil', 'os_perfiles_de_usuario'); ?></span>
+                        <br /><br />
+                        <img id="mostrar_imagen_perfil" name="mostrar_imagen_perfil" src="<?php echo esc_url($imagen_perfil); ?>" style="width:50px;<?php if (empty($imagen_perfil)) echo 'display:none;';?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="descripcion"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <textarea cols="40" rows="5" name="descripcion" id="descripcion"><?php echo $descripcion; ?></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <div class="campo_personalizado miembro coordinador asesor author ponente" id="informacion_personal" name="informacion_personal">
-                <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th>
-                            <label for="nombre"><?php _e('Nombre', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="nombre" id="nombre" value="<?php echo esc_attr($nombre); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('Nombre de la persona', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="apellidos"><?php _e('Apellidos', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="apellidos" id="apellidos" value="<?php echo esc_attr($apellidos); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('Apellidos de la persona', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="cargo"><?php _e('Cargo/Estudios', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="cargo" id="cargo" value="<?php echo esc_attr($cargo); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('Cargo o estudios de la persona', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_trabajo" name="informacion_trabajo">
+            <h3><?php _e('Información sobre el trabajo', 'os_perfiles_de_usuario'); ?></h3>
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="lugar_trabajo"><?php _e('Lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="lugar_trabajo" id="lugar_trabajo" value="<?php echo esc_attr($lugar_trabajo); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('Nombre del lugar de trabajo', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="logo_trabajo"><?php _e('Logo de trabajo', ''); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="logo_trabajo" id="logo_trabajo" value="<?php echo esc_url($logo_trabajo); ?>" class="regular-text" readonly="readonly" />
+                        <input type='button' class="additional-trabajo-image button-primary" value="<?php _e('Subir imagen', 'os_perfiles_de_usuario'); ?>" id="uploadimage"/><br />
+                        <span class="description"><?php _e('Subir logo de trabajo', 'os_perfiles_de_usuario'); ?></span>
+                        <br /><br />
+                        <img id="mostrar_imagen_trabajo" name="mostrar_imagen_trabajo" src="<?php echo esc_url($logo_trabajo); ?>" style="width:150px;<?php if (empty($logo_trabajo)) echo 'display:none;';?>">
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <div class="campo_personalizado miembro coordinador asesor" id="información_acerca_de" name="informacion_acerca_de">
-                <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th>
-                            <label for="imagen_perfil"><?php _e('Imagen de perfil', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="imagen_perfil" id="imagen_perfil" value="<?php echo esc_url($imagen_perfil); ?>" class="regular-text" readonly="readonly" />
-                            <input type='button' class="additional-user-image button-primary" value="<?php _e('Subir imagen', 'os_perfiles_de_usuario'); ?>" id="uploadimage"/><br />
-                            <span class="description"><?php _e('Subir una imagen de perfil', 'os_perfiles_de_usuario'); ?></span>
-                            <br /><br />
-                            <img id="mostrar_imagen_perfil" name="mostrar_imagen_perfil" src="<?php echo esc_url($imagen_perfil); ?>" style="width:150px;<?php if (empty($imagen_perfil)) echo 'display:none;';?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="descripcion"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <textarea cols="40" rows="5" name="descripcion" id="descripcion"><?php echo $descripcion; ?></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_expertise" name="informacion_expertise">
+            <h3><?php _e('Áreas de expertise', 'os_perfiles_de_usuario'); ?></h3>
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="area_expertise_1"><?php _e('Área de expertise 1', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="area_expertise_1" id="area_expertise_1" value="<?php echo esc_attr($area_expertise_1); ?>" class="regular-text" /><br />
+                    </td>
+                </tr>
 
-            <div class="campo_personalizado miembro coordinador asesor" id="informacion_trabajo" name="informacion_trabajo">
-                <h3><?php _e('Información sobre el trabajo', 'os_perfiles_de_usuario'); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th>
-                            <label for="lugar_trabajo"><?php _e('Lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="lugar_trabajo" id="lugar_trabajo" value="<?php echo esc_attr($lugar_trabajo); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('Nombre del lugar de trabajo', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="logo_trabajo"><?php _e('Logo de trabajo', ''); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="logo_trabajo" id="logo_trabajo" value="<?php echo esc_url($logo_trabajo); ?>" class="regular-text" readonly="readonly" />
-                            <input type='button' class="additional-trabajo-image button-primary" value="<?php _e('Subir imagen', 'os_perfiles_de_usuario'); ?>" id="uploadimage"/><br />
-                            <span class="description"><?php _e('Subir logo de trabajo', 'os_perfiles_de_usuario'); ?></span>
-                            <br /><br />
-                            <img id="mostrar_imagen_trabajo" name="mostrar_imagen_trabajo" src="<?php echo esc_url($logo_trabajo); ?>" style="width:150px;<?php if (empty($logo_trabajo)) echo 'display:none;';?>">
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                <tr>
+                    <th>
+                        <label for="area_expertise_2"><?php _e('Área de expertise 2', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="area_expertise_2" id="area_expertise_2" value="<?php echo esc_attr($area_expertise_2); ?>" class="regular-text" /><br />
+                    </td>
+                </tr>
 
-            <div class="campo_personalizado miembro coordinador" id="informacion_expertise" name="informacion_expertise">
-                <h3><?php _e('Áreas de expertise', 'os_perfiles_de_usuario'); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th>
-                            <label for="area_expertise_1"><?php _e('Área de expertise 1', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="area_expertise_1" id="area_expertise_1" value="<?php echo esc_attr($area_expertise_1); ?>" class="regular-text" /><br />
-                        </td>
-                    </tr>
+                <tr>
+                    <th>
+                        <label for="area_expertise_3"><?php _e('Área de expertise 3', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="area_expertise_3" id="area_expertise_3" value="<?php echo esc_attr($area_expertise_3); ?>" class="regular-text" /><br />
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <tr>
-                        <th>
-                            <label for="area_expertise_2"><?php _e('Área de expertise 2', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="area_expertise_2" id="area_expertise_2" value="<?php echo esc_attr($area_expertise_2); ?>" class="regular-text" /><br />
-                        </td>
-                    </tr>
+        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_contacto" name="informacion_contacto">
+            <h3><?php _e('Información de contacto', 'os_perfiles_de_usuario'); ?></h3>
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="linkedin"><?php _e('LinkedIn', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="linkedin" id="linkedin" value="<?php echo esc_attr($linkedin); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('URL de perfil de LinkedIn', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>
-                            <label for="area_expertise_3"><?php _e('Área de expertise 3', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="area_expertise_3" id="area_expertise_3" value="<?php echo esc_attr($area_expertise_3); ?>" class="regular-text" /><br />
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                <tr>
+                    <th>
+                        <label for="twitter"><?php _e('Twitter', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="twitter" id="twitter" value="<?php echo esc_attr($twitter); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('URL de perfil de Twitter', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
 
-            <div class="campo_personalizado miembro coordinador" id="informacion_contacto" name="informacion_contacto">
-                <h3><?php _e('Información de contacto', 'os_perfiles_de_usuario'); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th>
-                            <label for="linkedin"><?php _e('LinkedIn', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="linkedin" id="linkedin" value="<?php echo esc_attr($linkedin); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('URL de perfil de LinkedIn', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>
+                        <label for="correo_electronico"><?php _e('Correo electrónico', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="correo_electronico" id="correo_electronico" value="<?php echo esc_attr($correo_electronico); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('Dirección de correo electrónico', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th>
-                            <label for="twitter"><?php _e('Twitter', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="twitter" id="twitter" value="<?php echo esc_attr($twitter); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('URL de perfil de Twitter', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>
+                        <label for="url_web"><?php _e('Web', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="url_web" id="url_web" value="<?php echo esc_attr($url_web); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('URL de la página web de la persona', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <tr>
-                        <th>
-                            <label for="correo_electronico"><?php _e('Correo electrónico', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="correo_electronico" id="correo_electronico" value="<?php echo esc_attr($correo_electronico); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('Dirección de correo electrónico', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
+        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_cabecera" name="informacion_cabecera">
+            <h3><?php _e('Información de cabecera', 'os_perfiles_de_usuario'); ?></h3>
+            <table class="form-table">
+                <tr>
+                    <th>
+                        <label for="imagen_cabecera"><?php _e('Imagen de cabecera', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="imagen_cabecera" id="imagen_cabecera" value="<?php echo esc_url($imagen_cabecera); ?>" class="regular-text" readonly="readonly" />
+                        <input type='button' class="additional-cabecera-image button-primary" value="<?php _e('Subir imagen', 'os_perfiles_de_usuario'); ?>" id="uploadimagecabecera"/><br />
+                        <span class="description"><?php _e('Subir una imagen para la cabecera de la página de perfil', 'os_perfiles_de_usuario'); ?></span>
+                        <br /><br />
+                        <img id="mostrar_imagen_cabecera" name="mostrar_imagen_cabecera" src="<?php echo esc_url($imagen_cabecera); ?>" style="width:150px;<?php if (empty($imagen_cabecera)) echo 'display:none;';?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="frase_cabecera"><?php _e('Frase para la cabecera', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <textarea cols="40" rows="5" name="frase_cabecera" id="frase_cabecera"><?php echo esc_attr($frase_cabecera); ?></textarea><br />
+                        <span class="description"><?php _e('Frase para la cabecera de la página de perfil', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <tr>
-                        <th>
-                            <label for="url_web"><?php _e('Web', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <input type="text" name="url_web" id="url_web" value="<?php echo esc_attr($url_web); ?>" class="regular-text" /><br />
-                            <span class="description"><?php _e('URL de la página web de la persona', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="campo_personalizado miembro coordinador" id="informacion_cabecera" name="informacion_cabecera">
-                <h3><?php _e('Información de cabecera', 'os_perfiles_de_usuario'); ?></h3>
-                <table class="form-table">
-                    <tr>
-                        <th>
-                            <label for="imagen_cabecera"><?php _e('Imagen de cabecera', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" name="imagen_cabecera" id="imagen_cabecera" value="<?php echo esc_url($imagen_cabecera); ?>" class="regular-text" readonly="readonly" />
-                            <input type='button' class="additional-cabecera-image button-primary" value="<?php _e('Subir imagen', 'os_perfiles_de_usuario'); ?>" id="uploadimagecabecera"/><br />
-                            <span class="description"><?php _e('Subir una imagen para la cabecera de la página de perfil', 'os_perfiles_de_usuario'); ?></span>
-                            <br /><br />
-                            <img id="mostrar_imagen_cabecera" name="mostrar_imagen_cabecera" src="<?php echo esc_url($imagen_cabecera); ?>" style="width:150px;<?php if (empty($imagen_cabecera)) echo 'display:none;';?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="frase_cabecera"><?php _e('Frase para la cabecera', 'os_perfiles_de_usuario'); ?></label>
-                        </th>
-                         <td>
-                            <textarea cols="40" rows="5" name="frase_cabecera" id="frase_cabecera"><?php echo esc_attr($frase_cabecera); ?></textarea><br />
-                            <span class="description"><?php _e('Frase para la cabecera de la página de perfil', 'os_perfiles_de_usuario'); ?></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="campo_personalizado miembro coordinador" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
-                <h3><?php _e('Trabajos relacionados', 'os_perfiles_de_usuario'); ?></h3>
-                <?php if (empty($trabajos)) : ?>
-                    <div style="border: 3px solid white;padding: 5px;margin-bottom: 10px;">
+        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
+            <h3><?php _e('Trabajos relacionados', 'os_perfiles_de_usuario'); ?></h3>
+            <?php if (empty($trabajos)) : ?>
+                <div style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
+                    <table class="form-table">
+                        <tr>
+                            <th>
+                                <label for="trabajos[0][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
+                            </th>
+                             <td>
+                                <input type="text" name="trabajos[0][titulo]" id="trabajos[0][titulo]" value="" class="regular-text" /><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="trabajos[0][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
+                            </th>
+                             <td>
+                                <textarea id="trabajos[0][texto]" name="trabajos[0][texto]" rows="5" cols="40"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="trabajos[0][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
+                            </th>
+                             <td>
+                                <input type="url" name="trabajos[0][enlace]" id="trabajos[0][enlace]" value="" class="regular-text" /><br />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            <?php else : ?>
+                <?php $i = 0; ?>
+                <?php foreach ($trabajos as $trabajo) : ?>
+                    <div class="campo_personalizado" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
                         <table class="form-table">
                             <tr>
                                 <th>
-                                    <label for="trabajos[0][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
+                                    <label for="trabajos[<?php echo $i; ?>][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
                                 </th>
                                  <td>
-                                    <input type="text" name="trabajos[0][titulo]" id="trabajos[0][titulo]" value="" class="regular-text" /><br />
+                                    <input type="text" name="trabajos[<?php echo $i; ?>][titulo]" id="trabajos[<?php echo $i; ?>][titulo]" value="<?php echo $trabajo['titulo']; ?>" class="regular-text" /><br />
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <label for="trabajos[0][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
+                                    <label for="trabajos[<?php echo $i; ?>][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
                                 </th>
                                  <td>
-                                    <textarea id="trabajos[0][texto]" name="trabajos[0][texto]" rows="5" cols="40"></textarea>
+                                    <textarea id="trabajos[<?php echo $i; ?>][texto]" name="trabajos[<?php echo $i; ?>][texto]" rows="5" cols="40"><?php echo $trabajo['texto']; ?></textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <label for="trabajos[0][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
+                                    <label for="trabajos[<?php echo $i; ?>][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
                                 </th>
                                  <td>
-                                    <input type="url" name="trabajos[0][enlace]" id="trabajos[0][enlace]" value="" class="regular-text" /><br />
+                                    <input type="url" name="trabajos[<?php echo $i; ?>][enlace]" id="trabajos[<?php echo $i; ?>][enlace]" value="<?php echo $trabajo['enlace']; ?>" class="regular-text" /><br />
                                 </td>
                             </tr>
                         </table>
+                        <?php if ($i > 0) : ?>
+                            <button id="delete-trabajo" type="button"><?php _e('Eliminar este trabajo', 'os_perfiles_de_usuario'); ?></button>
+                        <?php endif; ?>
                     </div>
-                <?php else : ?>
-                    <?php $i = 0; ?>
-                    <?php foreach ($trabajos as $trabajo) : ?>
-                        <div class="campo_personalizado" style="border: 3px solid white;padding: 5px;margin-bottom: 10px;">
-                            <table class="form-table">
-                                <tr>
-                                    <th>
-                                        <label for="trabajos[<?php echo $i; ?>][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
-                                    </th>
-                                     <td>
-                                        <input type="text" name="trabajos[<?php echo $i; ?>][titulo]" id="trabajos[<?php echo $i; ?>][titulo]" value="<?php echo $trabajo['titulo']; ?>" class="regular-text" /><br />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <label for="trabajos[<?php echo $i; ?>][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
-                                    </th>
-                                     <td>
-                                        <textarea id="trabajos[<?php echo $i; ?>][texto]" name="trabajos[<?php echo $i; ?>][texto]" rows="5" cols="40"><?php echo $trabajo['texto']; ?></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <label for="trabajos[<?php echo $i; ?>][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
-                                    </th>
-                                     <td>
-                                        <input type="url" name="trabajos[<?php echo $i; ?>][enlace]" id="trabajos[<?php echo $i; ?>][enlace]" value="<?php echo $trabajo['enlace']; ?>" class="regular-text" /><br />
-                                    </td>
-                                </tr>
-                            </table>
-                            <?php if ($i > 0) : ?>
-                                <button id="delete-trabajo" type="button"><?php _e('Eliminar este trabajo', 'os_perfiles_de_usuario'); ?></button>
-                            <?php endif; ?>
-                        </div>
-                        <?php $i++; ?>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-                <p>
-                    <button id="add-trabajo" type="button"><?php _e('Añadir trabajo', 'os_perfiles_de_usuario')?></button>
-                </p>
-            </div>
-            <?php
-        
+                    <?php $i++; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <p>
+                <button id="add-trabajo" type="button"><?php _e('Añadir trabajo', 'os_perfiles_de_usuario')?></button>
+            </p>
+        </div>
+        <?php
+    }
+ 
+
+    public function save_metabox($post_id, $post) {
+        $nonce_name   = isset( $_POST['custom_nonce'] ) ? $_POST['custom_nonce'] : '';
+        $nonce_action = 'custom_nonce_action';
+ 
+        if (!isset( $nonce_name ) ) {
+            return;
+        }
+ 
+        if (!wp_verify_nonce( $nonce_name, $nonce_action)) {
+            return;
+        }
+
+        if ( ! current_user_can('edit_post', $post_id)) {
+            return;
+        }
+ 
+        if (wp_is_post_autosave($post_id)) {
+            return;
+        }
+ 
+        if (wp_is_post_revision($post_id)) {
+            return;
+        }
+
+        if (isset($_POST['cap-display_name'])) {
+            update_post_meta($post_id, 'cap-display_name', esc_attr($_POST['cap-display_name']));
         }
 
 
-        // Guarda campos personalizados
-        public function save_custom_fields($user_id) {
+        if (isset($_POST['cargo'])) {
+            update_post_meta($post_id, 'cargo', $_POST['cargo']);
+        }
 
-            if (isset($_POST['nombre'])) {
-                wp_update_user(array('ID' => $user_id, 'first_name' => esc_attr($_POST['nombre'])));
-            }
+        if (isset($_POST['imagen_perfil'])) {
+            update_post_meta($post_id, 'imagen_perfil', $_POST['imagen_perfil']);
+        }
 
-            if (isset($_POST['apellidos'])) {
-                wp_update_user(array('ID' => $user_id, 'last_name' => esc_attr($_POST['apellidos'])));
-            }
+        if (isset($_POST['descripcion'])) {
+            update_post_meta($post_id, 'descripcion', $_POST['descripcion']);
+        }
 
-            if (isset($_POST['cargo'])) {
-                update_user_meta($user_id, 'cargo', $_POST['cargo']);
-            }
+        if (isset($_POST['lugar_trabajo'])) {
+            update_post_meta($post_id, 'lugar_trabajo', $_POST['lugar_trabajo']);
+        }
 
-            if (isset($_POST['imagen_perfil'])) {
-                update_user_meta($user_id, 'imagen_perfil', $_POST['imagen_perfil']);
-            }
+        if (isset($_POST['logo_trabajo'])) {
+            update_post_meta($post_id, 'logo_trabajo', $_POST['logo_trabajo']);
+        }
 
-            if (isset($_POST['descripcion'])) {
-                update_user_meta($user_id, 'descripcion', $_POST['descripcion']);
-            }
+        if (isset($_POST['area_expertise_1'])) {
+            update_post_meta($post_id, 'area_expertise_1', $_POST['area_expertise_1']);
+        }
 
-            if (isset($_POST['lugar_trabajo'])) {
-                update_user_meta($user_id, 'lugar_trabajo', $_POST['lugar_trabajo']);
-            }
+        if (isset($_POST['area_expertise_2'])) {
+            update_post_meta($post_id, 'area_expertise_2', $_POST['area_expertise_2']);
+        }
 
-            if (isset($_POST['logo_trabajo'])) {
-                update_user_meta($user_id, 'logo_trabajo', $_POST['logo_trabajo']);
-            }
+        if (isset($_POST['area_expertise_3'])) {
+            update_post_meta($post_id, 'area_expertise_3', $_POST['area_expertise_3']);
+        }
 
-            if (isset($_POST['area_expertise_1'])) {
-                update_user_meta($user_id, 'area_expertise_1', $_POST['area_expertise_1']);
-            }
+        if (isset($_POST['linkedin'])) {
+            update_post_meta($post_id, 'linkedin', $_POST['linkedin']);
+        }
 
-            if (isset($_POST['area_expertise_2'])) {
-                update_user_meta($user_id, 'area_expertise_2', $_POST['area_expertise_2']);
-            }
+        if (isset($_POST['twitter'])) {
+            update_post_meta($post_id, 'twitter', $_POST['twitter']);
+        }
 
-            if (isset($_POST['area_expertise_3'])) {
-                update_user_meta($user_id, 'area_expertise_3', $_POST['area_expertise_3']);
-            }
+        if (isset($_POST['correo_electronico'])) {
+            update_post_meta($post_id, 'correo_electronico', $_POST['correo_electronico']);
+        }
 
-            if (isset($_POST['linkedin'])) {
-                update_user_meta($user_id, 'linkedin', $_POST['linkedin']);
-            }
+        if (isset($_POST['url_web'])) {
+            update_post_meta($post_id, 'url_web', $_POST['url_web']);
+        }
 
-            if (isset($_POST['twitter'])) {
-                update_user_meta($user_id, 'twitter', $_POST['twitter']);
-            }
+        if (isset($_POST['imagen_cabecera'])) {
+            update_post_meta($post_id, 'imagen_cabecera', $_POST['imagen_cabecera']);
+        }
 
-            if (isset($_POST['correo_electronico'])) {
-                wp_update_user(array('ID' => $user_id, 'user_login' => esc_attr($_POST['correo_electronico'])));
-                wp_update_user(array('ID' => $user_id, 'email' => esc_attr($_POST['correo_electronico'])));
-            } else if ($_POST['rol'] !== "administrator") {
-                $correo_dummy = 'dummy_' . $user_id . "@dummy.com";
-                wp_update_user(array('ID' => $user_id, 'user_login' => esc_attr($correo_dummy)));
-                wp_update_user(array('ID' => $user_id, 'email' => esc_attr($correo_dummy)));
-            }
+        if (isset($_POST['frase_cabecera'])) {
+            update_post_meta($post_id, 'frase_cabecera', $_POST['frase_cabecera']);
+        }
 
-            if (isset($_POST['url_web'])) {
-                wp_update_user(array('ID' => $user_id, 'url_web' => esc_attr($_POST['url_web'])));
-            }
-
-            if (isset($_POST['imagen_cabecera'])) {
-                update_user_meta($user_id, 'imagen_cabecera', $_POST['imagen_cabecera']);
-            }
-
-            if (isset($_POST['frase_cabecera'])) {
-                update_user_meta($user_id, 'frase_cabecera', $_POST['frase_cabecera']);
-            }
-
-            if (isset($_POST['trabajos'])) {
-                $trabajos = $_POST['trabajos'];
-                $trabajos_nuevos = array();
-                foreach ($trabajos as $trabajo) {
-                    if (!(empty($trabajo['titulo']))) {
-                        array_push($trabajos_nuevos, $trabajo);
-                    }
+        if (isset($_POST['trabajos'])) {
+            $trabajos = $_POST['trabajos'];
+            $trabajos_nuevos = array();
+            foreach ($trabajos as $trabajo) {
+                if (!(empty($trabajo['titulo']))) {
+                    array_push($trabajos_nuevos, $trabajo);
                 }
-                update_user_meta($user_id, 'trabajos', $trabajos_nuevos);
             }
-
-         
+            update_post_meta($post_id, 'trabajos', $trabajos_nuevos);
         }
 
-
-        // Carga js
-        public function load_javascript($hook) {
-
-            if (!current_user_can('edit_posts'))
-                return;
-
-            if ($hook == 'user-new.php' || $hook == 'profile.php' || $hook == 'user-edit.php') {
-                wp_enqueue_script('os_perfiles_de_usuario', plugins_url('js/os_perfiles_de_usuario.js', __FILE__), array('jquery'));
-            }
-        
-        }
+    }
+}
+ 
+$os_perfiles_de_usuario = new OS_Perfiles_de_Usuario();
 
 
-    } 
+function create_perfiles_taxonomy() {
 
+    // Set the name of the taxonomy
+    $taxonomy = 'perfil';
+    // Set the post types for the taxonomy
+    $object_type = 'guest-author';
 
-endif;
+    // Populate our array of names for our taxonomy
+    $labels = array(
+        'name'               => __('Perfil', 'os_perfiles_de_usuario'),
+        'singular_name'      => __('Perfil', 'os_perfiles_de_usuario'),
+        'search_items'       => __('Buscar perfiles', 'os_perfiles_de_usuario'),
+        'all_items'          => __('Todos', 'os_perfiles_de_usuario'),
+        'parent_item'        => __('Superior', 'os_perfiles_de_usuario'),
+        'parent_item_colon'  => __('Superior:', 'os_perfiles_de_usuario'),
+        'update_item'        => __('Actualizar perfil', 'os_perfiles_de_usuario'),
+        'edit_item'          => __('Editar perfil', 'os_perfiles_de_usuario'),
+        'add_new_item'       => __('Añadir nuevo perfil', 'os_perfiles_de_usuario'), 
+        'new_item_name'      => __('Nuevo perfil', 'os_perfiles_de_usuario'),
+        'menu_name'          => __('Ámbitos geográficos', 'os_perfiles_de_usuario'),
+    );
 
-$os_perfiles_de_usuario = new OS_Perfiles_De_Usuario();
+    // Define arguments to be used 
+    $args = array(
+        'labels'            => $labels,
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'how_in_nav_menus'  => true,
+        'public'            => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'perfil')
+    );
+
+    // Call the register_taxonomy function
+    register_taxonomy($taxonomy, $object_type, $args); 
+
+    wp_insert_term(__('Miembro', 'os_perfiles_de_usuario'), 'perfil');
+    wp_insert_term(__('Coordinador', 'os_perfiles_de_usuario'), 'perfil');
+    wp_insert_term(__('Asesor', 'os_perfiles_de_usuario'), 'perfil');
+    wp_insert_term(__('Autor', 'os_perfiles_de_usuario'), 'perfil');
+    wp_insert_term(__('Ponente', 'os_perfiles_de_usuario'), 'perfil');
+
+}
+add_action('init', 'create_perfiles_taxonomy', 0);
