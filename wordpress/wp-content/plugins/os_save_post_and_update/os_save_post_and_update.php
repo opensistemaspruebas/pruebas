@@ -126,6 +126,33 @@ function fetch_destacados($post_type, $order){
 }
 
 
+function fetch_autores($post_type, $order, $author){
+	$args = array(
+		'posts_per_page'   => 70,
+		'offset'           => 0,
+		'orderby'          => 'date',
+		'order'            => $order,
+		'post_type'        => $post_type,
+		'post_status'      => 'publish',
+		'author'		   => $author,
+		//'suppress_filters' => true 
+	);
+
+	print_r($author);
+
+	$posts = get_posts($args);
+	$index_array = array();
+
+	os_imprimir($posts);
+
+	/*for ($i = 0; $i < count($posts); $i++) { 
+		$index_array[] = $posts[$i]->ID;
+	}
+
+	save_json_to_file($index_array, $post_type, $order, "destacados");*/
+}
+
+
 // Generar jsones al guardar un post
 function save_post_and_update($post_id) {
 	// Tipos de post para los que guardamos jsones
