@@ -156,6 +156,21 @@ var googlemap = function ($) {
     }
 };
 
+var homeCarouselSwipe = function ($) {
+  $('#home-slider.carousel').swipe({
+    swipeLeft: function () {
+      $(this).carousel('next');
+    },
+
+    swipeRight: function () {
+      $(this).carousel('prev');
+    },
+
+    allowPageScroll: 'vertical',
+    excludedElements: 'button, input, select, textarea, .noSwipe',
+  });
+};
+
 var homeStopCarouselOnMobile = function ($) {
   var mobileRegexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
   if (navigator && navigator.userAgent && mobileRegexp.test(navigator.userAgent)) {
@@ -613,7 +628,10 @@ var navBar = function ($) {
   $searchIcon.click(onClickedSearch);
   $closeNavbarFilter.click(onClickedSearch);
   $inputFilter.on('input', function() {
-      this.value.length > 2 ? $filterWrapper.removeClass('hidden') : null;
+      if(this.value.length > 2) {
+          $filterWrapper.removeClass('hidden');
+          $webContent.css("opacity", "0.4").css('pointer-events', 'none');
+      }
   });
 
   function onClickedSearch() {
@@ -636,7 +654,6 @@ var navBar = function ($) {
 
           //$filterWrapper.removeClass('hidden');
           $searchMenu.fadeToggle(750);
-          $webContent.css("opacity", "0.4").css('pointer-events', 'none');
       }
   }
 };
@@ -1001,6 +1018,209 @@ var publishingFilter = function($) {
     }
 };
 
+var publishingFilterMobile = function($) {
+    'use strict';
+
+    var searchPage = $('.filter-mobile');
+
+    $('.filter-mobile-button, .close-filter-mobile').click(function() {
+        searchPage.toggleClass('closed');
+    });
+
+    var selectedTags = [];
+    var currentMatches = [];
+    var $availableTag = $('#publishing-filter-mobile .available-tag');
+    var $inputSearch = $('#publishing-filter-mobile .publishing-filter-search-input');
+    var $btnSearch = $('#publishing-filter-mobile .publishing-filter-search-btn');
+    var $tagsColumn = $('#publishing-filter-mobile .tag-container');
+    var $authorsColumn = $('#publishing-filter-mobile .author-container');
+    var $geoColumn = $('#publishing-filter-mobile .geo-container');
+    var $tagsCounter = $('#publishing-filter-mobile .tag-container-counter');
+    var $authorsCounter = $('#publishing-filter-mobile .author-container-counter');
+    var $geoCounter = $('#publishing-filter-mobile .geo-container-counter');
+
+    bindEventsWithHandlers();
+
+    function bindEventsWithHandlers() {
+        $availableTag.on('click', selectTag);
+        $inputSearch.keypress(onInputKeyPressed);
+        $inputSearch.on('input', searchValueUpdated);
+        $btnSearch.on('click', searchByTags);
+    }
+
+    function removeTagFromColumn() {
+        this.remove();
+        restoreTag(this);
+        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
+    }
+
+    function selectTag() {
+        this.remove();
+        var $tag = $(this);
+        var from = $tag.attr('from');
+        var tagValue = $tag.attr('tag-value');
+        var id = $tag.attr('id');
+        var tagModel = getTagModel('selected-tag', from, 'bbva-icon-close', tagValue, id);
+        var newTag = createTag(tagModel);
+        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+    }
+
+    function onInputKeyPressed(e) {
+        if (e.keyCode === 13) {
+            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+            this.value = '';
+            removeAllMatchedTags();
+        }
+    }
+
+    function searchValueUpdated() {
+        var $this = $(this);
+        var value = $this.val();
+        if (value.length > 2) {
+            var matchedResults = _.filter(data.availableTags, function (obj) {
+                return obj.text.includes(value);
+            });
+            refreshTagMatches(matchedResults);
+        } else {
+            removeAllMatchedTags();
+        }
+
+        refreshTagCounters(currentMatches);
+    }
+
+    function searchByTags() {
+        $('.cards-grid').css('opacity', '1');
+    }
+
+    //private methods
+    function restoreTag(element) {
+        var $element = $(element);
+        var from = $element.attr('from');
+        if (from) {
+            var tagValue = $element.attr('tag-value');
+            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, from, selectTag);
+        }
+    }
+
+    function addTagToContainer(tag, targetContainer, clickCallback) {
+        var $tag = $(tag);
+        $tag.click(clickCallback).appendTo($('#publishing-filter-mobile ' + '.' + targetContainer));
+        var tagValue = $tag.attr('tag-value');
+        if (targetContainer === 'selected-tags-container') {
+            addTagToArray(tagValue);
+        }
+    }
+
+    function createTag(tag) {
+        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
+        newTag += tag.icon ? '<span class="' + tag.icon + '"></span>' : '';
+        newTag += '<span>' + tag.text + '</span>' + '</div>';
+        $(newTag).click(removeTagFromColumn);
+        return newTag;
+    }
+
+    function getTagModel(type, from, icon, text, id) {
+        return {
+            type: type + ' wow fadeIn',
+            from: from,
+            icon: icon,
+            text: text,
+            id: id,
+        };
+    }
+
+    function removeTagFromArray(_array, tag) {
+        var pos = _array.indexOf(tag);
+        if (pos > -1) {
+            _array.splice(pos, 1);
+        }
+    }
+
+    function addTagToArray(value) {
+        selectedTags.push(value);
+    }
+
+    function refreshTagMatches(matchedResults) {
+        var l = matchedResults.length;
+        for (var i = 0; i < l; i++) {
+            var tag = matchedResults[i];
+            var notPresentInCurrentMatches = _.where(currentMatches, { text: tag.text }).length < 1;
+            var notPresentInSelectedTags = _.indexOf(selectedTags, tag.text) < 0;
+            if (notPresentInCurrentMatches && notPresentInSelectedTags) {
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        }
+
+        cleanOldMatches(_.difference(currentMatches, matchedResults));
+    }
+
+    function removeAllMatchedTags() {
+        currentMatches = [];
+        $authorsColumn.empty();
+        $tagsColumn.empty();
+        $geoColumn.empty();
+    }
+
+    function cleanOldMatches(oldMatches) {
+        var l = oldMatches.length;
+        for (var i = 0; i < l; i++) {
+            var oldMatch = oldMatches[i];
+            $('#publishing-filter-mobile ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
+            for (var m = 0; m < currentMatches.length; m++) {
+                if (currentMatches[m].id === oldMatch.id) {
+                    currentMatches.splice(m, 1);
+                }
+            }
+        }
+    }
+
+    function refreshTagCounters(currentMatches) {
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        var l = currentMatches.length;
+        for (var i = 0; i < l; i++) {
+            var $target = $('#publishing-filter-mobile ' + '.' + currentMatches[i].from + '-counter');
+            var currentVal = parseInt($target.text());
+            $target.text(++currentVal);
+        }
+    }
+
+    function emptyData() {
+        removeAllMatchedTags();
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        $inputSearch.val('');
+        selectedTags = [];
+        $('#publishing-filter-mobile .selected-tags-container').empty();
+    }
+};
+
+var refreshPage = function($) {
+    'use strict';
+
+    var isPhoneSize = null;
+    var isDesktopSize = Modernizr.mq('(min-width: ' + xsScreenMax + 'px)');
+
+    $(window).resize(function() {
+        isPhoneSize = Modernizr.mq('(max-width: ' + xsScreenMax + 'px)');
+        if (isPhoneSize && isDesktopSize) {
+            location.reload();
+        }
+        if (!isPhoneSize && !isDesktopSize) {
+            location.reload();
+        }
+    });
+};
+
 var scroll = function($) {
 
       var getMax = function(){
@@ -1052,6 +1272,195 @@ var scroll = function($) {
               setWidth();
           });
       }
+};
+
+var searchMobile = function($) {
+    'use strict';
+
+    var searchPage = $('.search-mobile');
+
+    $('.search-mobile-button, .close-search-mobile').click(function() {
+        searchPage.toggleClass('closed');
+        setTimeout(function () {
+            $('.input-search-mobile').focus();
+        }, 500);
+    });
+
+    var selectedTags = [];
+    var currentMatches = [];
+    var $availableTag = $('#mobile-filter .available-tag');
+    var $inputSearch = $('#mobile-filter .publishing-filter-search-input');
+    var $btnSearch = $('#mobile-filter .publishing-filter-search-btn');
+    var $tagsColumn = $('#mobile-filter .tag-container');
+    var $authorsColumn = $('#mobile-filter .author-container');
+    var $geoColumn = $('#mobile-filter .geo-container');
+    var $tagsCounter = $('#mobile-filter .tag-container-counter');
+    var $authorsCounter = $('#mobile-filter .author-container-counter');
+    var $geoCounter = $('#mobile-filter .geo-container-counter');
+
+    bindEventsWithHandlers();
+
+    function bindEventsWithHandlers() {
+        $availableTag.on('click', selectTag);
+        $inputSearch.keypress(onInputKeyPressed);
+        $inputSearch.on('input', searchValueUpdated);
+        $btnSearch.on('click', searchByTags);
+    }
+
+    function removeTagFromColumn() {
+        this.remove();
+        restoreTag(this);
+        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
+    }
+
+    function selectTag() {
+        this.remove();
+        var $tag = $(this);
+        var from = $tag.attr('from');
+        var tagValue = $tag.attr('tag-value');
+        var id = $tag.attr('id');
+        var tagModel = getTagModel('selected-tag', from, 'bbva-icon-close', tagValue, id);
+        var newTag = createTag(tagModel);
+        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+    }
+
+    function onInputKeyPressed(e) {
+        if (e.keyCode === 13) {
+            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+            this.value = '';
+            removeAllMatchedTags();
+        }
+    }
+
+    function searchValueUpdated() {
+        var $this = $(this);
+        var value = $this.val();
+        if (value.length > 2) {
+            var matchedResults = _.filter(data.availableTags, function (obj) {
+                return obj.text.includes(value);
+            });
+            refreshTagMatches(matchedResults);
+        } else {
+            removeAllMatchedTags();
+        }
+
+        refreshTagCounters(currentMatches);
+    }
+
+    function searchByTags() {
+        $('.cards-grid').css('opacity', '1');
+    }
+
+    //private methods
+    function restoreTag(element) {
+        var $element = $(element);
+        var from = $element.attr('from');
+        if (from) {
+            var tagValue = $element.attr('tag-value');
+            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, from, selectTag);
+        }
+    }
+
+    function addTagToContainer(tag, targetContainer, clickCallback) {
+        var $tag = $(tag);
+        $tag.click(clickCallback).appendTo($('#mobile-filter ' + '.' + targetContainer));
+        var tagValue = $tag.attr('tag-value');
+        if (targetContainer === 'selected-tags-container') {
+            addTagToArray(tagValue);
+        }
+    }
+
+    function createTag(tag) {
+        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
+        newTag += tag.icon ? '<span class="' + tag.icon + '"></span>' : '';
+        newTag += '<span>' + tag.text + '</span>' + '</div>';
+        $(newTag).click(removeTagFromColumn);
+        return newTag;
+    }
+
+    function getTagModel(type, from, icon, text, id) {
+        return {
+            type: type + ' wow fadeIn',
+            from: from,
+            icon: icon,
+            text: text,
+            id: id,
+        };
+    }
+
+    function removeTagFromArray(_array, tag) {
+        var pos = _array.indexOf(tag);
+        if (pos > -1) {
+            _array.splice(pos, 1);
+        }
+    }
+
+    function addTagToArray(value) {
+        selectedTags.push(value);
+    }
+
+    function refreshTagMatches(matchedResults) {
+        var l = matchedResults.length;
+        for (var i = 0; i < l; i++) {
+            var tag = matchedResults[i];
+            var notPresentInCurrentMatches = _.where(currentMatches, { text: tag.text }).length < 1;
+            var notPresentInSelectedTags = _.indexOf(selectedTags, tag.text) < 0;
+            if (notPresentInCurrentMatches && notPresentInSelectedTags) {
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        }
+
+        cleanOldMatches(_.difference(currentMatches, matchedResults));
+    }
+
+    function removeAllMatchedTags() {
+        currentMatches = [];
+        $authorsColumn.empty();
+        $tagsColumn.empty();
+        $geoColumn.empty();
+    }
+
+    function cleanOldMatches(oldMatches) {
+        var l = oldMatches.length;
+        for (var i = 0; i < l; i++) {
+            var oldMatch = oldMatches[i];
+            $('#mobile-filter ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
+            for (var m = 0; m < currentMatches.length; m++) {
+                if (currentMatches[m].id === oldMatch.id) {
+                    currentMatches.splice(m, 1);
+                }
+            }
+        }
+    }
+
+    function refreshTagCounters(currentMatches) {
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        var l = currentMatches.length;
+        for (var i = 0; i < l; i++) {
+            var $target = $('#mobile-filter ' + '.' + currentMatches[i].from + '-counter');
+            var currentVal = parseInt($target.text());
+            $target.text(++currentVal);
+        }
+    }
+
+    function emptyData() {
+        removeAllMatchedTags();
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        $inputSearch.val('');
+        selectedTags = [];
+        $('#mobile-filter .selected-tags-container').empty();
+    }
 };
 
 var selectLanguage = function($) {
@@ -1222,29 +1631,33 @@ var dataEvents = [
 
 jQuery.noConflict();
 jQuery(document).ready(function ($) {
-        'use strict';
-        selectLanguage($);
-        fixedMenu($);
-        navPhone($);
-        footerMenu($);
-        animationWow($);
-        animationWowAppear($);
-        landing($);
-        cookies($);
-        progresscircle($);
-        progressbar($);
-        popover($);
-        googleMaps($);
-        scroll($);
-        dropdowns($);
-        momentjs($);
-        googlemap($);
-        publishingFilter($);
-        navBar($);
-        menuSearch($);
-        sortOptions($);
-        homeStopCarouselOnMobile($);
-      });
+    'use strict';
+    selectLanguage($);
+    fixedMenu($);
+    navPhone($);
+    footerMenu($);
+    animationWow($);
+    animationWowAppear($);
+    landing($);
+    cookies($);
+    progresscircle($);
+    progressbar($);
+    popover($);
+    googleMaps($);
+    scroll($);
+    dropdowns($);
+    momentjs($);
+    googlemap($);
+    publishingFilter($);
+    navBar($);
+    menuSearch($);
+    sortOptions($);
+    searchMobile($);
+    refreshPage($);
+    homeStopCarouselOnMobile($);
+    homeCarouselSwipe($);
+    publishingFilterMobile($);
+});
 
 var lgScreenMin = 1200;
 
