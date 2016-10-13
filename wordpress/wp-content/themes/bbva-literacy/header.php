@@ -27,9 +27,12 @@
                             <div class="logo-search ml-sm"><span class="bbva-icon-search"></span></div>
                         </div>
                     </div>
-                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo"><a href="index.html" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span><span class="hidden">Logo BBVA</span></a></div>
+                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo">
+                        <a href="index.html" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span><span class="hidden">Logo BBVA</span></a>
+                    </div>
                     <div class="hidden-xs col-xs-12 col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-5 col-lg-4 col-lg-offset-4 header-text">
-                        <h1>Educación Financiera</h1></div>
+                        <h1>Educación Financiera</h1>
+                    </div>
                 </div>
             </div>
             <!-- EO header -->

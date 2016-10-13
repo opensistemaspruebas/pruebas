@@ -212,11 +212,13 @@ function languages_list_header(){
         <div class="container">
             <div class="languages-menu">
                 <label for="language-header" class="hidden"><?php _e('Idioma'); ?></label>
-                <select id="language-header" class="selectpicker">
-                	<?php foreach ($languages as $l) : ?>
-                		<option value="<?php echo $l['url']; ?>" <?php if ($l['active']) echo 'selected="selected"'; ?>><?php echo $l['native_name']; ?></option>
+            	<div class="btn-group languages-buttons" data-toggle="buttons">
+            		<?php $i = 1; ?>
+            		<?php foreach ($languages as $l) : ?>
+                		<label class="btn btn-primary <?php if ($l['active']) echo 'active'; ?>"><input type="radio" name="options" id="option'<?php echo $i; ?>'" autocomplete="off" <?php if ($l['active']) echo 'checked'; ?>><?php echo strtoupper($l['code']); ?></label>
+                		<?php $i++; ?>
                 	<?php endforeach; ?>
-                </select>
+            	</div>
             </div>
         </div>
     </div>
@@ -238,3 +240,20 @@ function languages_list_header_responsive(){
 	</div>
     <?php
 }
+
+/* dgonzalez:new Rewrite for authors */
+add_action( 'generate_rewrite_rules', 'add_rule_coauthors' );
+function add_rule_coauthors() {
+            global $wp_rewrite;
+            $new_rules = array(
+                'perfiles/(.+)$' => 'index.php?pagename=perfiles&coauthor=' . $wp_rewrite->preg_index(1)
+            );
+		error_log("paso por el rewrite ". print_r($new_rules,true));
+            $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+}
+
+function add_coauthor_query_var($vars) {
+	 $vars[] .= 'coauthor';
+	 return $vars;
+}
+add_filter( 'query_vars', 'add_coauthor_query_var' );

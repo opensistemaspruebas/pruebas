@@ -56,6 +56,21 @@ if (empty($wp)) {
 				$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
 				break;
 
+			case "taller":
+				$json["titulo"] = get_the_title($post_id);
+				$json["descripcion"] = get_post_meta($post_id, 'descp', true);
+				$json["link_taller"] = get_post_meta($post_id, 'link_taller', true);
+				$json["pais"] = wp_get_post_terms($post_id, "ambito_geografico");
+				break;
+
+			case "partners":
+				$json["nombre"] = get_post_meta($post_id, 'nombre', true);
+				$json["descripcion"] = get_post_meta($post_id, 'descripcion', true);
+				$json["link"] = get_post_meta($post_id, 'link', true);
+				$json["urlLogoMP"] = get_post_meta($post_id, 'logoMP', true);
+				$json["pais"] = wp_get_post_terms($post_id, "ambito_geografico");
+				break;
+
 			default:
 				$json["error"] = "Tipo de contenido desconocido";
 				break;

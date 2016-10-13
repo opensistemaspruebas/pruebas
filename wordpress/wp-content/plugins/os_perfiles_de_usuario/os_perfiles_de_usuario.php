@@ -27,12 +27,16 @@ class OS_Perfiles_de_Usuario {
 
     public function load_javascript($hook) {
 
+        global $post_type;
+
         if (!current_user_can('edit_posts'))
             return;
 
         if ($hook == 'post-new.php' || $hook == 'post.php') {
-            wp_enqueue_script('os_perfiles_de_usuario_js', plugins_url('js/os_perfiles_de_usuario.js', __FILE__), array('jquery'));
-            wp_enqueue_style('os_perfiles_de_usuario_css', plugins_url('css/os_perfiles_de_usuario.css', __FILE__));
+            if ('guest-author' == $post_type ) {
+                wp_enqueue_script('os_perfiles_de_usuario_js', plugins_url('js/os_perfiles_de_usuario.js', __FILE__), array('jquery'));
+                wp_enqueue_style('os_perfiles_de_usuario_css', plugins_url('css/os_perfiles_de_usuario.css', __FILE__));
+            }
         }
     
     }
@@ -65,8 +69,8 @@ class OS_Perfiles_de_Usuario {
         $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3', true);
         $linkedin = get_post_meta($post_id, 'linkedin', true);
         $twitter = get_post_meta($post_id, 'twitter', true);
-        $correo_electronico = $user_info->user_email;
-        $url_web = $user_info->url_web;
+        $correo_electronico = get_post_meta($post_id, 'correo_electronico', true);
+        $url_web = get_post_meta($post_id, 'url_web', true);
         $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
         $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
         $trabajos = get_post_meta($post_id, 'trabajos', true);
@@ -84,11 +88,9 @@ class OS_Perfiles_de_Usuario {
         $autor_id = $autor->term_id;
         
         $ponente = get_term_by('slug', 'ponente', 'perfil');
-        $ponenteo_id = $ponente->term_id;
-
+        $ponente_id = $ponente->term_id;
 
         ?>
-
         <div id="informacion_personal" name="informacion_personal">
             <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
@@ -304,7 +306,7 @@ class OS_Perfiles_de_Usuario {
             <?php else : ?>
                 <?php $i = 0; ?>
                 <?php foreach ($trabajos as $trabajo) : ?>
-                    <div class="campo_personalizado" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
+                    <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
                         <table class="form-table">
                             <tr>
                                 <th>
@@ -493,3 +495,27 @@ function create_perfiles_taxonomy() {
 
 }
 add_action('init', 'create_perfiles_taxonomy', 0);
+
+
+add_action( 'init', 'add_author_rules' );
+function add_author_rules() { 
+    add_rewrite_rule(
+        "writer/([^/]+)/?",
+        "index.php?author_name=$matches[1]",
+        "top");
+   
+    add_rewrite_rule(
+  "writer/([^/]+)/page/?([0-9]{1,})/?",
+  "index.php?author_name=$matches[1]&paged=$matches[2]",
+  "top");
+   
+    add_rewrite_rule(
+  "writer/([^/]+)/(feed|rdf|rss|rss2|atom)/?",
+  "index.php?author_name=$matches[1]&feed=$matches[2]",
+  "top");
+     
+    add_rewrite_rule(
+  "writer/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?",
+  "index.php?author_name=$matches[1]&feed=$matches[2]",
+  "top");
+}

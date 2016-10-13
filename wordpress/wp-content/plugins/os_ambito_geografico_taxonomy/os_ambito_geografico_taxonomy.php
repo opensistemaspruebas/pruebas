@@ -57,6 +57,11 @@ add_action( 'init', 'create_ambito_geografico_taxonomy', 0 );
 function ambito_geografico_add_new_meta_fields(){
     ?>
     <div class="form-field">
+        <label for="term_meta[isoCode]">Código ISO del país</label>
+        <input type="text" name="term_meta[isoCode]" id="term_meta[isoCode]" value="">
+        <p class="description">Introduzca el código ISO que identifica al nuevo ámbito geográfico</p>
+    </div>
+    <div class="form-field">
         <label for="term_meta[descripcion]">Descripción del enlace</label>
         <input type="text" name="term_meta[descripcion]" id="term_meta[descripcion]" value="">
         <p class="description">Nombre descriptivo de la URL</p>
@@ -83,6 +88,15 @@ function ambito_geografico_edit_meta_fields($term){
  
     $term_meta = get_option("ambito_geografico_$t_id");
     ?>
+        <tr class="form-field">
+            <th scope="row" valign="top">
+                <label for="term_meta[isoCode]">Código ISO del país</label>
+            </th>
+            <td>
+                <input type="text" name="term_meta[isoCode]" id="term_meta[isoCode]" value="<?php echo esc_attr( $term_meta['isoCode'] ) ? esc_attr( $term_meta['isoCode'] ) : ''; ?>">
+                <p class="description">Introduzca el código ISO que identifica al nuevo ámbito geográfico</p>
+            </td>
+        </tr>
         <tr class="form-field">
             <th scope="row" valign="top">
                 <label for="term_meta[descripcion]">Descripción del enlace</label>
