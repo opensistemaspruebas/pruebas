@@ -4,11 +4,6 @@
 
 <?php
 
-	/*$parts = parse_url($_SERVER['REQUEST_URI']);
-	if (preg_match("/perfiles\/(\S+)/", $parts['path'], $match)) {
-	    $author_name = str_replace('/', '', $match[1]);
-	}*/
-
     $author_name = get_query_var('coauthor', 'nada');
 
 ?>
@@ -60,7 +55,7 @@
         <article class="consultant-cv">
             <header>
                 <div class="hidden-xs back-wrapper">
-                    <a href="/sobre-nosotros/"><span class="icon bbva-icon-arrow"></span><span class="text"><?php _e('Volver'); ?></span></a>
+                    <a href="<?php _e('/sobre-nosotros/'); ?>"><span class="icon bbva-icon-arrow"></span><span class="text"><?php _e('Volver'); ?></span></a>
                 </div>
                 <img class="img-responsive" src="<?php echo $imagen_cabecera; ?>" alt="" />
                 <div class="hidden-xs title-wrapper">

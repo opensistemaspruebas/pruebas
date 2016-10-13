@@ -311,18 +311,23 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 
 
 // 2 posts en una linea, 3 en otra
-function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
+function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name) {
 	
 	if (count($posts) < $numero_posts_mostrar) {
 		$numero_posts_mostrar = count($posts);
 	}
 
 	$count_posts = wp_count_posts($tipo_post);
-	$published_posts = $count_posts->publish;
 
-	if (empty($enlace_detalle) && empty($author_name)) : ?>
+	if (empty($author_name)) {
+		$published_posts = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name));
+	} else {
+		$published_posts = $count_posts->publish;
+	}
+
+	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
-		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
+		<input type="hidden" id="orden" name="orden" value="<?php echo 'AUTOR_'. $author_name; ?>">
 		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
 		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
@@ -333,8 +338,10 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	    <div class="main-wrapper">
 	        <header class="container">
 	            <h1><?php echo $titulo; ?></h1>
-	            <h2><?php echo $texto; ?></h2>
-	            <?php if (!empty($author_name)) : ?>
+	            <?php if (!empty($texto)) : ?>	
+	            	<h2><?php echo $texto; ?></h2>
+	        	<?php endif; ?>
+	            <?php if (empty($author_name)) : ?>
 		            <div class="visible-xs mobile-filter">
 		                <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget_json'); ?></a>
 		            </div>
