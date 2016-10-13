@@ -28,6 +28,9 @@ function save_json_to_file($json, $post_type, $identificador, $json_type){
 		case "indice":
 			file_put_contents($path . "/" . $identificador . ".json", json_encode($json));
 			break;
+		case "autores":
+			file_put_contents($path . "/AUTOR_" . $identificador . ".json", json_encode($json));
+			break;
 		case "destacados":
 			file_put_contents($path . "/" . "DESTACADOS" . ".json", json_encode($json));
 			break;
@@ -94,6 +97,12 @@ function update_post_index($post_type){
 	fetch_destacados($post_type, "DESC");
 }
 
+
+function update_post_index_autores($post_type, $author) {
+	fetch_autores($post_type, "DESC", $author);	
+}
+
+
 function fetch($post_type, $order){
 	
 	$args = array(
@@ -142,29 +151,16 @@ function fetch_destacados($post_type, $order){
 
 
 function fetch_autores($post_type, $order, $author){
-	$args = array(
-		'posts_per_page'   => 70,
-		'offset'           => 0,
-		'orderby'          => 'date',
-		'order'            => $order,
-		'post_type'        => $post_type,
-		'post_status'      => 'publish',
-		'author'		   => $author,
-		//'suppress_filters' => true 
-	);
 
-	print_r($author);
-
-	$posts = get_posts($args);
 	$index_array = array();
 
-	os_imprimir($posts);
+	$posts = query_posts("post_status=publish&post_type=" . $post_type . "&author_name=" . $author . "&order=" . $order);
 
-	/*for ($i = 0; $i < count($posts); $i++) { 
+	for ($i = 0; $i < count($posts); $i++) { 
 		$index_array[] = $posts[$i]->ID;
 	}
 
-	save_json_to_file($index_array, $post_type, $order, "destacados");*/
+	save_json_to_file($index_array, $post_type, $author, "autores");
 }
 
 
@@ -182,7 +178,23 @@ function save_post_and_update($post_id) {
 	post_to_json($post_id, $post_type);
 	
 	// Actualizar indice
+	$authors = get_coauthors($post_id);
+	if (!empty($authors)) {
+		foreach ($authors as $author) {
+			$name = '';
+			if (is_a($author, 'WP_User')) {
+				$name = $author->data->user_login;
+			} else {
+				$name = $author->user_login;
+			}
+			if (!empty($name)) {
+				update_post_index_autores($post_type, $name);
+			}
+		}
+	}
+
 	update_post_index($post_type);
+
 }
 add_action('save_post', 'save_post_and_update');
 add_action('delete_post', 'save_post_and_update');
