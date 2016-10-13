@@ -58,30 +58,39 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	$enlace_detalle = (!empty($instance['enlace_detalle'])) ? $instance['enlace_detalle'] : '';
 	    	$orden = (!empty($instance['orden_posts'])) ? $instance['orden_posts'] : 'DESC';
 
-	    	$author = isset($instance['filtrar_por_autor']) ? $curauth->ID : 0;
+	    	$parts = parse_url($_SERVER['REQUEST_URI']);
+	    	$author_name = '';
+			if (preg_match("/perfiles\/(\S+)/", $parts['path'], $match)) {
+			    $author_name = str_replace('/', '', $match[1]);
+			}
 
-	    	$args = array(
-				'posts_per_page'   => $numero_posts_mostrar,
-				'offset'           => 0,
-				'category'         => '',
-				'orderby'          => 'post_date',
-				'order'            => 'DESC',
-				'meta_key'         => '',
-				'meta_value'       => '',
-				'post_type'        => $tipo_post,
-				'post_status'      => 'publish',
-				'suppress_filters' => true,
-				'author'           => $author,
-			);
+	    	$author = isset($instance['filtrar_por_autor']) ? $author_name : '';
 
-	    	$posts = get_posts($args);
+	    	if (empty($author)) {
+	    		$args = array(
+					'posts_per_page'   => $numero_posts_mostrar,
+					'offset'           => 0,
+					'category'         => '',
+					'orderby'          => 'post_date',
+					'order'            => 'DESC',
+					'meta_key'         => '',
+					'meta_value'       => '',
+					'post_type'        => $tipo_post,
+					'post_status'      => 'publish',
+					'suppress_filters' => true
+				);
+		    	$posts = get_posts($args);
+	    	} else {
+	    		$posts = query_posts("posts_per_page=" . $numero_posts_mostrar . "&post_status=publish&post_type=" . $tipo_post . "&author_name=" . $author . "&order=" . $orden);
+	    	}
+
 
 	    	switch ($plantilla) {
 	    		case 'plantilla_1' :
 	    			imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
 	    			break;
 	    		case 'plantilla_2' :
-	    			imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
+	    			imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name);
 	    			break;
 	    		case 'plantilla_3' :
 	    			imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
@@ -311,7 +320,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	$count_posts = wp_count_posts($tipo_post);
 	$published_posts = $count_posts->publish;
 
-	if (empty($enlace_detalle)) : ?>
+	if (empty($enlace_detalle) && empty($author_name)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
 		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
 		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
@@ -325,24 +334,26 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	        <header class="container">
 	            <h1><?php echo $titulo; ?></h1>
 	            <h2><?php echo $texto; ?></h2>
-	            <div class="visible-xs mobile-filter">
-	                <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget_json'); ?></a>
-	            </div>
-	            <div class="sort-items-container">
-	                <a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-arrow arrow arrowUp"></span>
-	                    <span class="text"><?php _e('Más recientes', 'os_cards_widget_json'); ?></span>
-	                </a>
-	                <a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-arrow arrow arrowDown"></span>
-	                    <span class="text"><?php _e('Más antiguos', 'os_cards_widget_json'); ?></span>
-	                </a>
-	                <a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-view"></span>
-	                    <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
-	                </a>
-	            </div>
-	            <a class="filter hidden-xs" href="#"> <span class="bbva-icon-filter"></span> <span><?php _e('Filtrar', 'os_cards_widget_json'); ?></span> </a>
+	            <?php if (!empty($author_name)) : ?>
+		            <div class="visible-xs mobile-filter">
+		                <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget_json'); ?></a>
+		            </div>
+		            <div class="sort-items-container">
+		                <a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
+		                    <span class="icon bbva-icon-arrow arrow arrowUp"></span>
+		                    <span class="text"><?php _e('Más recientes', 'os_cards_widget_json'); ?></span>
+		                </a>
+		                <a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
+		                    <span class="icon bbva-icon-arrow arrow arrowDown"></span>
+		                    <span class="text"><?php _e('Más antiguos', 'os_cards_widget_json'); ?></span>
+		                </a>
+		                <a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
+		                    <span class="icon bbva-icon-view"></span>
+		                    <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
+		                </a>
+		            </div>
+		            <a class="filter hidden-xs" href="#"> <span class="bbva-icon-filter"></span> <span><?php _e('Filtrar', 'os_cards_widget_json'); ?></span> </a>
+	        	 <?php endif; ?>
 	        </header>
 	        <?php if (!empty($posts)) : ?>
 	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>
