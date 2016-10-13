@@ -51,7 +51,7 @@ function post_to_json($post_id, $post_type){
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
 			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
 			break;
-		
+			
 		case "historia":
 			$json["titulo"] = get_the_title($post_id);
 			$json["descripcion"] = get_post_field('post_content', $post_id);
@@ -61,6 +61,21 @@ function post_to_json($post_id, $post_type){
 			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
 			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+			break;
+		
+		case "taller":
+			$json["titulo"] = get_the_title($post_id);
+			$json["descripcion"] = get_post_meta($post_id, 'descp', true);
+			$json["link_taller"] = get_post_meta($post_id, 'link_taller', true);
+			$json["pais"] = wp_get_post_terms($post_id, "ambito_geografico");
+			break;
+
+		case "partners":
+			$json["nombre"] = get_post_meta($post_id, 'nombre', true);
+			$json["descripcion"] = get_post_meta($post_id, 'descripcion', true);
+			$json["link"] = get_post_meta($post_id, 'link', true);
+			$json["urlLogoMP"] = get_post_meta($post_id, 'logoMP', true);
+			$json["pais"] = wp_get_post_terms($post_id, "ambito_geografico");
 			break;
 
 		default:
@@ -156,7 +171,7 @@ function fetch_autores($post_type, $order, $author){
 // Generar jsones al guardar un post
 function save_post_and_update($post_id) {
 	// Tipos de post para los que guardamos jsones
-	$valid_types = array("publicacion", "historia");
+	$valid_types = array("publicacion", "historia", "taller", "partners");
 
 	$post_type = get_post_type($post_id);
 	
