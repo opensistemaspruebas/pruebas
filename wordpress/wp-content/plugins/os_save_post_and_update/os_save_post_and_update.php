@@ -28,6 +28,9 @@ function save_json_to_file($json, $post_type, $identificador, $json_type){
 		case "indice":
 			file_put_contents($path . "/" . $identificador . ".json", json_encode($json));
 			break;
+		case "autores":
+			file_put_contents($path . "/AUTOR_" . $identificador . ".json", json_encode($json));
+			break;
 		case "destacados":
 			file_put_contents($path . "/" . "DESTACADOS" . ".json", json_encode($json));
 			break;
@@ -51,7 +54,7 @@ function post_to_json($post_id, $post_type){
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
 			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
 			break;
-		
+			
 		case "historia":
 			$json["titulo"] = get_the_title($post_id);
 			$json["descripcion"] = get_post_field('post_content', $post_id);
@@ -61,6 +64,21 @@ function post_to_json($post_id, $post_type){
 			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
 			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+			break;
+		
+		case "taller":
+			$json["titulo"] = get_the_title($post_id);
+			$json["descripcion"] = get_post_meta($post_id, 'descp', true);
+			$json["link_taller"] = get_post_meta($post_id, 'link_taller', true);
+			$json["pais"] = wp_get_post_terms($post_id, "ambito_geografico");
+			break;
+
+		case "partners":
+			$json["nombre"] = get_post_meta($post_id, 'nombre', true);
+			$json["descripcion"] = get_post_meta($post_id, 'descripcion', true);
+			$json["link"] = get_post_meta($post_id, 'link', true);
+			$json["urlLogoMP"] = get_post_meta($post_id, 'logoMP', true);
+			$json["pais"] = wp_get_post_terms($post_id, "ambito_geografico");
 			break;
 
 		default:
@@ -78,6 +96,12 @@ function update_post_index($post_type){
 	fetch($post_type, "DESC");
 	fetch_destacados($post_type, "DESC");
 }
+
+
+function update_post_index_autores($post_type, $author) {
+	fetch_autores($post_type, "DESC", $author);	
+}
+
 
 function fetch($post_type, $order){
 	
@@ -126,10 +150,24 @@ function fetch_destacados($post_type, $order){
 }
 
 
+function fetch_autores($post_type, $order, $author){
+
+	$index_array = array();
+
+	$posts = query_posts("post_status=publish&post_type=" . $post_type . "&author_name=" . $author . "&order=" . $order);
+
+	for ($i = 0; $i < count($posts); $i++) { 
+		$index_array[] = $posts[$i]->ID;
+	}
+
+	save_json_to_file($index_array, $post_type, $author, "autores");
+}
+
+
 // Generar jsones al guardar un post
 function save_post_and_update($post_id) {
 	// Tipos de post para los que guardamos jsones
-	$valid_types = array("publicacion", "historia");
+	$valid_types = array("publicacion", "historia", "taller", "partners");
 
 	$post_type = get_post_type($post_id);
 	
@@ -140,7 +178,23 @@ function save_post_and_update($post_id) {
 	post_to_json($post_id, $post_type);
 	
 	// Actualizar indice
+	$authors = get_coauthors($post_id);
+	if (!empty($authors)) {
+		foreach ($authors as $author) {
+			$name = '';
+			if (is_a($author, 'WP_User')) {
+				$name = $author->data->user_login;
+			} else {
+				$name = $author->user_login;
+			}
+			if (!empty($name)) {
+				update_post_index_autores($post_type, $name);
+			}
+		}
+	}
+
 	update_post_index($post_type);
+
 }
 add_action('save_post', 'save_post_and_update');
 add_action('delete_post', 'save_post_and_update');

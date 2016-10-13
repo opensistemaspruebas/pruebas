@@ -110,7 +110,6 @@ function ocultar_campos() {
 	jQuery("#perfilchecklist input:checked").each(function() {
 		perfil = jQuery(this);
 		jQuery(".campo_personalizado").each(function() {
-
 			var elem = perfil.attr("value");
 			var clases = jQuery(this).attr("class").split(' ');
 			if (clases.indexOf(elem) !== -1) {
@@ -118,6 +117,13 @@ function ocultar_campos() {
 			}
 		});
 	});
+
+	jQuery('.campo_personalizado:hidden input[type=text]').val('');
+	jQuery('.campo_personalizado:hidden input[type=url]').val('');
+	jQuery('.campo_personalizado:hidden textarea').html('');
+	jQuery('.campo_personalizado:hidden img').attr('src', '').hide();
+	jQuery('div#informacion_trabajos_relacionados').children("p").children("div").remove();
+
 }
 
 

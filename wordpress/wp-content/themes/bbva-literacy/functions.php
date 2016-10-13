@@ -240,3 +240,20 @@ function languages_list_header_responsive(){
 	</div>
     <?php
 }
+
+/* dgonzalez:new Rewrite for authors */
+add_action( 'generate_rewrite_rules', 'add_rule_coauthors' );
+function add_rule_coauthors() {
+            global $wp_rewrite;
+            $new_rules = array(
+                'perfiles/(.+)$' => 'index.php?pagename=perfiles&coauthor=' . $wp_rewrite->preg_index(1)
+            );
+		error_log("paso por el rewrite ". print_r($new_rules,true));
+            $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+}
+
+function add_coauthor_query_var($vars) {
+	 $vars[] .= 'coauthor';
+	 return $vars;
+}
+add_filter( 'query_vars', 'add_coauthor_query_var' );

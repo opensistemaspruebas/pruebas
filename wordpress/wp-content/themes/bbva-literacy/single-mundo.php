@@ -4,10 +4,7 @@
 get_header(); 
 ?>
 
-
-
-        
-        <div class="contents">
+  <div class="contents">
             
     <section class="back-map">
     <div class="container">
@@ -71,7 +68,7 @@ get_header();
             Tarjetas de crédito
           </h2>
           <p class="description">
-            WAprende cómo usar tu tarjeta y cuándo pagarla, sólo así podrás olvidarte de las deudas y tendrás una vida más placentera.
+            Aprende cómo usar tu tarjeta y cuándo pagarla, sólo así podrás olvidarte de las deudas y tendrás una vida más placentera.
           </p>
           <p class="link">
             <a href="#">Deudas y crédito<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>

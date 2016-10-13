@@ -212,7 +212,8 @@ class CoAuthors_WP_List_Table extends WP_List_Table {
 				'_wpnonce'     => wp_create_nonce( 'guest-author-delete' ),
 			);
 		$item_delete_link = add_query_arg( array_map( 'rawurlencode', $args ), menu_page_url( 'view-guest-authors', false ) );
-		$item_view_link = get_author_posts_url( $item->ID, $item->user_nicename );
+		//$item_view_link = get_author_posts_url( $item->ID, $item->user_nicename );
+		$item_view_link = '/perfiles/' . $item->user_nicename;
 
 		$output = '';
 
@@ -231,7 +232,17 @@ class CoAuthors_WP_List_Table extends WP_List_Table {
 		if ( current_user_can( 'delete_post', $item->ID ) ) {
 			$actions['delete'] = '<a href="' . esc_url( $item_delete_link ) . '">' . __( 'Delete', 'co-authors-plus' ) . '</a>';
 		}
-		$actions['view'] = '<a href="' . esc_url( $item_view_link ) . '">' . __( 'Ver página de detalle', 'os_perfiles_usuario' ) . '</a>';
+
+		$perfiles = wp_get_post_terms($item->ID, 'perfil');
+		$texto = array();
+		$roles = array();
+		foreach ($perfiles as $perfil) {
+			$texto[] = $perfil->name;
+			$roles[] = $perfil->slug;
+		}
+		if (in_array("asesor", $roles) || in_array("coordinador", $roles)) {
+			$actions['view'] = '<a href="' . esc_url( $item_view_link ) . '">' . __( 'Ver página de detalle', 'os_perfiles_usuario' ) . '</a>';
+		}
 		$actions = apply_filters( 'coauthors_guest_author_row_actions', $actions, $item );
 		$output .= $this->row_actions( $actions, false );
 

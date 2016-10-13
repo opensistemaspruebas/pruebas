@@ -112,12 +112,6 @@ class OS_Perfiles_de_Usuario {
                         <span class="description"><?php _e('Cargo o estudios de la persona', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
-            </table>
-        </div>
-
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="información_acerca_de" name="informacion_acerca_de">
-            <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
-            <table class="form-table">
                 <tr>
                     <th>
                         <label for="imagen_perfil"><?php _e('Imagen de perfil', 'os_perfiles_de_usuario'); ?></label>
@@ -130,6 +124,12 @@ class OS_Perfiles_de_Usuario {
                         <img id="mostrar_imagen_perfil" name="mostrar_imagen_perfil" src="<?php echo esc_url($imagen_perfil); ?>" style="width:50px;<?php if (empty($imagen_perfil)) echo 'display:none;';?>">
                     </td>
                 </tr>
+            </table>
+        </div>
+
+        <div class="campo_personalizado <?php echo $asesor_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="información_acerca_de" name="informacion_acerca_de">
+            <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
+            <table class="form-table">
                 <tr>
                     <th>
                         <label for="descripcion"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
@@ -141,7 +141,7 @@ class OS_Perfiles_de_Usuario {
             </table>
         </div>
 
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_trabajo" name="informacion_trabajo">
+        <div class="campo_personalizado <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_trabajo" name="informacion_trabajo">
             <h3><?php _e('Información sobre el trabajo', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
                 <tr>
@@ -168,7 +168,7 @@ class OS_Perfiles_de_Usuario {
             </table>
         </div>
 
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_expertise" name="informacion_expertise">
+        <div class="campo_personalizado <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_expertise" name="informacion_expertise">
             <h3><?php _e('Áreas de expertise', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
                 <tr>
@@ -200,7 +200,7 @@ class OS_Perfiles_de_Usuario {
             </table>
         </div>
 
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_contacto" name="informacion_contacto">
+        <div class="campo_personalizado <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_contacto" name="informacion_contacto">
             <h3><?php _e('Información de contacto', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
                 <tr>
@@ -245,7 +245,7 @@ class OS_Perfiles_de_Usuario {
             </table>
         </div>
 
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_cabecera" name="informacion_cabecera">
+        <div class="campo_personalizado <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_cabecera" name="informacion_cabecera">
             <h3><?php _e('Información de cabecera', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
                 <tr>
@@ -272,7 +272,7 @@ class OS_Perfiles_de_Usuario {
             </table>
         </div>
 
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
+        <div class="campo_personalizado <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_trabajos_relacionados" name="informacion_trabajos_relacionados">
             <h3><?php _e('Trabajos relacionados', 'os_perfiles_de_usuario'); ?></h3>
             <?php if (empty($trabajos)) : ?>
                 <div style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
@@ -306,7 +306,7 @@ class OS_Perfiles_de_Usuario {
             <?php else : ?>
                 <?php $i = 0; ?>
                 <?php foreach ($trabajos as $trabajo) : ?>
-                    <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?>" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
+                    <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
                         <table class="form-table">
                             <tr>
                                 <th>
@@ -495,3 +495,27 @@ function create_perfiles_taxonomy() {
 
 }
 add_action('init', 'create_perfiles_taxonomy', 0);
+
+
+add_action( 'init', 'add_author_rules' );
+function add_author_rules() { 
+    add_rewrite_rule(
+        "writer/([^/]+)/?",
+        "index.php?author_name=$matches[1]",
+        "top");
+   
+    add_rewrite_rule(
+  "writer/([^/]+)/page/?([0-9]{1,})/?",
+  "index.php?author_name=$matches[1]&paged=$matches[2]",
+  "top");
+   
+    add_rewrite_rule(
+  "writer/([^/]+)/(feed|rdf|rss|rss2|atom)/?",
+  "index.php?author_name=$matches[1]&feed=$matches[2]",
+  "top");
+     
+    add_rewrite_rule(
+  "writer/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?",
+  "index.php?author_name=$matches[1]&feed=$matches[2]",
+  "top");
+}

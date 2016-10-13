@@ -64,60 +64,30 @@ if (!class_exists('OS_Filtro_Widget')) :
 				)
 			);
 
-			echo $args['before_title']; 
-			_e('Filtros', 'os_filtro_widget');
-			echo $args['after_title']; 
 			
-			?>
-			<form action="#" method="get" name="form_filter" id="form_filter">
-				<label for="inputText" class="assistive-text hidden"><?php _e('Texto', 'os_filtro_widget'); ?></label>
-				<input type="text" class="field" name="inputText" id="inputText">
-				<div id="caja_seleccion">
-					<ul id="seleccion" name="seleccion"></ul>
-				</div>
-				<input type="submit" name="submitButton" id="submitButton" value="<?php _e('Buscar', 'os_filtro_widget'); ?>">
-				<input type="hidden" name="topic" id="topic" value="publicacion">
-				<input type="hidden" name="size" id="size" value="7">
-				<input type="hidden" name="start" id="start" value="0">
-				<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
-				<div id="caja_categorias" id="caja_categorias" style="display: none;">
-					<h2><?php _e('Categorías', 'os_filtro_widget'); ?> <span class="num">(<?php echo wp_count_terms("category"); ?>)</span></h2>
-					<?php if (!empty($categories)) : ?>
-					<ul id="categorias" name="categorias">
-						<?php foreach ($categories as $category) : ?>
-							<li class="categoria" term-id="<?php echo $category->term_id; ?>" style="display: none;"><a href="#"><?php echo $category->name; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php endif; ?>
-				</div>
+	    	$orden = 'DESC';
 
-				<div id="caja_autores" id="caja_autores" style="display: none;">
-					<h2><?php _e('Autores', 'os_filtro_widget'); ?> <span class="num">(<?php echo count($authors); ?>)</span></h2>
-					<?php if (!empty($authors)) : ?>
-					<ul id="autores" name="autores">
-						<?php foreach ($authors as $author) : ?>
-							<li class="autor" term-id="<?php echo $author->display_name; ?>" style="display: none;"><a href="#"><?php echo $author->display_name; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php endif; ?>
-				</div>
-				<div id="caja_paises" id="caja_paises" style="display: none;">
-					<h2><?php _e('Ámbito geográfico', 'os_filtro_widget'); ?> <span class="num">(<?php echo wp_count_terms("ambito_geografico"); ?>)</span></h2>
-					<?php if (!empty($countries)) : ?>
-					<ul id="paises" name="paises">
-						<?php foreach ($countries as $country) : ?>
-							<li class="pais" term-id="<?php echo $country->term_id; ?>"><a href="#"><?php echo $country->name; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php endif; ?>
-				</div>
-			</form>
-			<div id="sortLinks"></div>
-			<div id="results"></div>			
-			<div id="moreLink"></div>
+			?>
+			<div class="visible-xs mobile-filter filter-mobile-button">
+				<a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_filtro_widget'); ?></a>
+			</div>
+			<div class="sort-items-container">
+				<a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
+					<span class="icon bbva-icon-arrow arrow arrowUp"></span>
+					<span class="text"><?php _e('Más recientes', 'os_filtro_widget'); ?></span>
+				</a>
+				<a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
+					<span class="icon bbva-icon-arrow arrow arrowDown"></span>
+					<span class="text"><?php _e('Más antiguos', 'os_filtro_widget'); ?></span>
+				</a>
+				<a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
+					<span class="icon bbva-icon-view"></span>
+					<span class="text"><?php _e('Más leídos', 'os_filtro_widget'); ?></span>
+				</a>
+			</div>
+			<a class="filter show-publishing-filter hidden-xs" href="#" data-toggle="modal" data-target=".publishing-filter-modal"> <span class="bbva-icon-filter"></span> <span><?php _e('Filtrar', 'os_filtro_widget'); ?></span> </a>
 			<?php
 
-			echo $args['after_widget'];
 	    }
 
 

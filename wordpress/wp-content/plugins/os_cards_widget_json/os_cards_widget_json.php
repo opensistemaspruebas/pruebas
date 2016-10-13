@@ -25,33 +25,25 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	            	'description' => __('Muestra tarjetas para distintos tipos de posts a partir de un json.', 'os_cards_widget_json')
 	        	)
 	        );
-	        add_action('wp_enqueue_scripts', array(&$this, 'add_script_filter_widget'));
+			wp_register_script('os_cards_widget_json_js', plugins_url('js/os_cards_widget_json.js' , __FILE__), array('jquery'));
+			$translation_array = array(
+				'leer_mas' => __('Leer más', 'os_cards_widget_json'),
+				'enero' => __('Enero', 'os_cards_widget_json'),
+				'febrero' => __('Febrero', 'os_cards_widget_json'),
+				'marzo' => __('Marzo', 'os_cards_widget_json'),
+				'abril' => __('Abril', 'os_cards_widget_json'),
+				'mayo' => __('Mayo', 'os_cards_widget_json'),
+				'junio' => __('Junio', 'os_cards_widget_json'),
+				'julio' => __('Julio', 'os_cards_widget_json'),
+				'agosto' => __('Agosto', 'os_cards_widget_json'),
+				'septiembre' => __('Septiembre', 'os_cards_widget_json'),
+				'octubre' => __('Octubre', 'os_cards_widget_json'),
+				'noviembre' => __('Noviembre', 'os_cards_widget_json'),
+				'diciembre' => __('Diciembre', 'os_cards_widget_json'),
+			);
+			wp_localize_script('os_cards_widget_json_js', 'object_name_cards', $translation_array);
+			wp_enqueue_script('os_cards_widget_json_js');
         }
-
-
-		function add_script_filter_widget() {
-            if (is_active_widget(false, false, $this->id_base, true)) {
-		        wp_register_script('os_cards_widget_json_js', plugins_url('js/os_cards_widget_json.js' , __FILE__), array('jquery'));
-		        $translation_array = array(
-					'leer_mas' => __('Leer más', 'os_cards_widget_json'),
-					'enero' => __('Enero', 'os_cards_widget_json'),
-					'febrero' => __('Febrero', 'os_cards_widget_json'),
-					'marzo' => __('Marzo', 'os_cards_widget_json'),
-					'abril' => __('Abril', 'os_cards_widget_json'),
-					'mayo' => __('Mayo', 'os_cards_widget_json'),
-					'junio' => __('Junio', 'os_cards_widget_json'),
-					'julio' => __('Julio', 'os_cards_widget_json'),
-					'agosto' => __('Agosto', 'os_cards_widget_json'),
-					'septiembre' => __('Septiembre', 'os_cards_widget_json'),
-					'octubre' => __('Octubre', 'os_cards_widget_json'),
-					'noviembre' => __('Noviembre', 'os_cards_widget_json'),
-					'diciembre' => __('Diciembre', 'os_cards_widget_json'),
-				);
-	            wp_localize_script('os_cards_widget_json_js', 'object_name_cards', $translation_array);
-	            wp_enqueue_script('os_cards_widget_json_js');
-            }
-        } 
-
 
 
         // Widget del front-end
@@ -66,30 +58,39 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	$enlace_detalle = (!empty($instance['enlace_detalle'])) ? $instance['enlace_detalle'] : '';
 	    	$orden = (!empty($instance['orden_posts'])) ? $instance['orden_posts'] : 'DESC';
 
-	    	$author = isset($instance['filtrar_por_autor']) ? $curauth->ID : 0;
+	    	$parts = parse_url($_SERVER['REQUEST_URI']);
+	    	$author_name = '';
+			if (preg_match("/perfiles\/(\S+)/", $parts['path'], $match)) {
+			    $author_name = str_replace('/', '', $match[1]);
+			}
 
-	    	$args = array(
-				'posts_per_page'   => $numero_posts_mostrar,
-				'offset'           => 0,
-				'category'         => '',
-				'orderby'          => 'post_date',
-				'order'            => 'DESC',
-				'meta_key'         => '',
-				'meta_value'       => '',
-				'post_type'        => $tipo_post,
-				'post_status'      => 'publish',
-				'suppress_filters' => true,
-				'author'           =>  0,
-			);
+	    	$author = isset($instance['filtrar_por_autor']) ? $author_name : '';
 
-	    	$posts = get_posts($args);
+	    	if (empty($author)) {
+	    		$args = array(
+					'posts_per_page'   => $numero_posts_mostrar,
+					'offset'           => 0,
+					'category'         => '',
+					'orderby'          => 'post_date',
+					'order'            => 'DESC',
+					'meta_key'         => '',
+					'meta_value'       => '',
+					'post_type'        => $tipo_post,
+					'post_status'      => 'publish',
+					'suppress_filters' => true
+				);
+		    	$posts = get_posts($args);
+	    	} else {
+	    		$posts = query_posts("posts_per_page=" . $numero_posts_mostrar . "&post_status=publish&post_type=" . $tipo_post . "&author_name=" . $author . "&order=" . $orden);
+	    	}
+
 
 	    	switch ($plantilla) {
 	    		case 'plantilla_1' :
 	    			imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
 	    			break;
 	    		case 'plantilla_2' :
-	    			imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
+	    			imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name);
 	    			break;
 	    		case 'plantilla_3' :
 	    			imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
@@ -310,18 +311,23 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 
 
 // 2 posts en una linea, 3 en otra
-function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
+function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name) {
 	
 	if (count($posts) < $numero_posts_mostrar) {
 		$numero_posts_mostrar = count($posts);
 	}
 
 	$count_posts = wp_count_posts($tipo_post);
-	$published_posts = $count_posts->publish;
+
+	if (empty($author_name)) {
+		$published_posts = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name));
+	} else {
+		$published_posts = $count_posts->publish;
+	}
 
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
-		<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
+		<input type="hidden" id="orden" name="orden" value="<?php echo 'AUTOR_'. $author_name; ?>">
 		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
 		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
@@ -332,25 +338,10 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	    <div class="main-wrapper">
 	        <header class="container">
 	            <h1><?php echo $titulo; ?></h1>
-	            <h2><?php echo $texto; ?></h2>
-	            <div class="visible-xs mobile-filter">
-	                <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget_json'); ?></a>
-	            </div>
-	            <div class="sort-items-container">
-	                <a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-arrow arrow arrowUp"></span>
-	                    <span class="text"><?php _e('Más recientes', 'os_cards_widget_json'); ?></span>
-	                </a>
-	                <a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-arrow arrow arrowDown"></span>
-	                    <span class="text"><?php _e('Más antiguos', 'os_cards_widget_json'); ?></span>
-	                </a>
-	                <a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
-	                    <span class="icon bbva-icon-view"></span>
-	                    <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
-	                </a>
-	            </div>
-	            <a class="filter hidden-xs" href="#"> <span class="bbva-icon-filter"></span> <span><?php _e('Filtrar', 'os_cards_widget_json'); ?></span> </a>
+	            <?php if (!empty($texto)) : ?>	
+	            	<h2><?php echo $texto; ?></h2>
+	        	<?php endif; ?>
+	            <?php if (empty($author_name)) the_widget('os_filtro_widget'); ?>
 	        </header>
 	        <?php if (!empty($posts)) : ?>
 	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>

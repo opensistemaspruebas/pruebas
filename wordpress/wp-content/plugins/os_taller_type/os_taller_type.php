@@ -78,12 +78,15 @@ if (!class_exists('TallerCustomType')) :
             
             $descp = get_post_meta($post->ID, 'descp', true);
             $link_taller = get_post_meta( $post->ID, 'link_taller', true);
-            $pais = get_post_meta( $post->ID, 'pais', true);
-            $link_pais = get_post_meta( $post->ID, 'link_pais', true);
+            $nombre_link = get_post_meta( $post->ID, 'nombre_link', true);
             ?>          
             <p>
                 <label for="descp"><?php _e('Descripción', 'os_taller_type')?></label>
                <textarea rows="4" class="widefat" name="descp" id="descp" ><?php if ( isset($descp) ) echo $descp; ?></textarea>
+            </p>
+            <p>
+                <label for="nombre_link"><?php _e('Nombre del enlace', 'os_taller_type')?></label>
+                <input class="widefat" type="text" name="nombre_link" id="nombre_link" value="<?php if ( isset($nombre_link) ) echo $nombre_link; ?>" />
             </p>
             <p>
                 <label for="link_taller"><?php _e('Enlace al taller', 'os_taller_type')?></label>
@@ -97,6 +100,9 @@ if (!class_exists('TallerCustomType')) :
         function meta_boxes_save($post_id) {            
             if (isset($_POST['descp'])) {
                 update_post_meta($post_id, 'descp', strip_tags($_POST['descp']));
+            }
+            if (isset($_POST['nombre_link'])) {
+                update_post_meta( $post_id, 'nombre_link', strip_tags($_POST['nombre_link']));
             }
             if (isset($_POST['link_taller'])) {
                 update_post_meta( $post_id, 'link_taller', strip_tags($_POST['link_taller']));
