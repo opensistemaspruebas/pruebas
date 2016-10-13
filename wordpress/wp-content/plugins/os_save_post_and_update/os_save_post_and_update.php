@@ -95,7 +95,6 @@ function update_post_index($post_type){
 	fetch($post_type, "ASC");
 	fetch($post_type, "DESC");
 	fetch_destacados($post_type, "DESC");
-	fetch_autores($post_type, "DESC", $author);
 }
 
 
@@ -188,9 +187,14 @@ function save_post_and_update($post_id) {
 			} else {
 				$name = $author->user_login;
 			}
-			update_post_index_autores($post_type, $name);
+			if (!empty($name)) {
+				update_post_index_autores($post_type, $name);
+			}
 		}
 	}
+
+	update_post_index($post_type);
+
 }
 add_action('save_post', 'save_post_and_update');
 add_action('delete_post', 'save_post_and_update');

@@ -9,6 +9,7 @@ get_header(); ?>
 <?php 
 
     $post_id = 701;
+    $author_name = 'katie-morell';
 
     $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $twitter = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
     $trabajos = array();
@@ -30,9 +31,8 @@ get_header(); ?>
     $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
     $trabajos = get_post_meta($post_id, 'trabajos', true);
     
-    $numero_publicaciones = 20;
+    $numero_publicaciones = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name));
 
-    os_imprimir(count_user_posts($post_id));
 
 ?>
 
