@@ -212,11 +212,13 @@ function languages_list_header(){
         <div class="container">
             <div class="languages-menu">
                 <label for="language-header" class="hidden"><?php _e('Idioma'); ?></label>
-                <select id="language-header" class="selectpicker">
-                	<?php foreach ($languages as $l) : ?>
-                		<option value="<?php echo $l['url']; ?>" <?php if ($l['active']) echo 'selected="selected"'; ?>><?php echo $l['native_name']; ?></option>
+            	<div class="btn-group languages-buttons" data-toggle="buttons">
+            		<?php $i = 1; ?>
+            		<?php foreach ($languages as $l) : ?>
+                		<label class="btn btn-primary <?php if ($l['active']) echo 'active'; ?>"><input type="radio" name="options" id="option'<?php echo $i; ?>'" autocomplete="off" <?php if ($l['active']) echo 'checked'; ?>><?php echo strtoupper($l['code']); ?></label>
+                		<?php $i++; ?>
                 	<?php endforeach; ?>
-                </select>
+            	</div>
             </div>
         </div>
     </div>
