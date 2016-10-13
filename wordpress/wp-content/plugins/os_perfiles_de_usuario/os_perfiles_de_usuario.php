@@ -112,12 +112,6 @@ class OS_Perfiles_de_Usuario {
                         <span class="description"><?php _e('Cargo o estudios de la persona', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
-            </table>
-        </div>
-
-        <div class="campo_personalizado <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="información_acerca_de" name="informacion_acerca_de">
-            <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
-            <table class="form-table">
                 <tr>
                     <th>
                         <label for="imagen_perfil"><?php _e('Imagen de perfil', 'os_perfiles_de_usuario'); ?></label>
@@ -130,7 +124,13 @@ class OS_Perfiles_de_Usuario {
                         <img id="mostrar_imagen_perfil" name="mostrar_imagen_perfil" src="<?php echo esc_url($imagen_perfil); ?>" style="width:50px;<?php if (empty($imagen_perfil)) echo 'display:none;';?>">
                     </td>
                 </tr>
-                <tr class="<?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>">
+            </table>
+        </div>
+
+        <div class="campo_personalizado <?php echo $asesor_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="información_acerca_de" name="informacion_acerca_de">
+            <h3><?php _e("Acerca de", "os_perfiles_de_usuario"); ?></h3>
+            <table class="form-table">
+                <tr>
                     <th>
                         <label for="descripcion"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
                     </th>

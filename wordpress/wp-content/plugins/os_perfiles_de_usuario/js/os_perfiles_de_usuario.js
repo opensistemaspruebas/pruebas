@@ -1,7 +1,6 @@
 jQuery(document).ready(function($) {
 	
 	jQuery(".campo_personalizado").hide();
-	jQuery("textarea#descripcion").parent().parent().hide();
 	ocultar_campos();
 	
 	jQuery("#perfilchecklist input").click(function(e) {
@@ -108,20 +107,8 @@ jQuery(document).ready(function($) {
 
 
 function ocultar_campos() {
-
-	jQuery("textarea#descripcion").parent().parent().hide();
-
 	jQuery("#perfilchecklist input:checked").each(function() {
 		perfil = jQuery(this);
-
-		console.log(perfil);
-		var elem2 = perfil.attr("value");
-		var clases2 = jQuery("textarea#descripcion").parent().parent().attr("class").split(' ');
-		if (clases2.indexOf(elem2) !== -1) {
-			 jQuery("textarea#descripcion").parent().parent().show();
-		}
-
-
 		jQuery(".campo_personalizado").each(function() {
 			var elem = perfil.attr("value");
 			var clases = jQuery(this).attr("class").split(' ');
