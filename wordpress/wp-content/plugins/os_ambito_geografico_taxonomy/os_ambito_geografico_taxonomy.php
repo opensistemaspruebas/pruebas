@@ -123,16 +123,15 @@ add_action( 'ambito_geografico_edit_form_fields', 'ambito_geografico_edit_meta_f
 
 //Funcion para guardar los datos
 function ambito_geografico_save_custom_meta( $term_id ) {
-    if ( isset( $_POST['term_meta'] ) ) {
-        $t_id = $term_id;
-        $term_meta = get_option( "ambito_geografico_$t_id" );
-        $cat_keys = array_keys( $_POST['term_meta'] );
-        foreach ( $cat_keys as $key ) {
-            if ( isset ( $_POST['term_meta'][$key] ) ) {
-                $term_meta[$key] = $_POST['term_meta'][$key];
-            }
-        }
-        update_option( "ambito_geografico_$t_id", $term_meta );
+
+    if (isset($_POST['term_meta']['isoCode'])) {
+        update_term_meta($term_id, "isoCode" , $_POST['term_meta']['isoCode']);
+    }
+    if (isset($_POST['term_meta']['descripcion'])) {
+        update_term_meta($term_id, "descripcion" , $_POST['term_meta']['descripcion']);
+    }
+    if (isset($_POST['term_meta']['link'])) {
+        update_term_meta($term_id, "link" , $_POST['term_meta']['link']);
     }
 }  
 add_action( 'edited_ambito_geografico', 'ambito_geografico_save_custom_meta', 0, 2 );  
