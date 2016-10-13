@@ -122,8 +122,7 @@ function ocultar_campos() {
 	jQuery('.campo_personalizado:hidden input[type=url]').val('');
 	jQuery('.campo_personalizado:hidden textarea').html('');
 	jQuery('.campo_personalizado:hidden img').attr('src', '').hide();
-	jQuery('div#informacion_trabajos_relacionados:hidden').html('');
-	jQuery('div#informacion_trabajos_relacionados:hidden').children('div').not(':first').remove();
+	jQuery('div#informacion_trabajos_relacionados').children("p").children("div").remove();
 
 }
 
