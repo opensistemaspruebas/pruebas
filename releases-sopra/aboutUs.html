@@ -23,14 +23,10 @@
     <div class="container">
         <div class="languages-menu">
             <label for="language-header" class="hidden">Idioma</label>
-            <div class="btn-group languages-buttons" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> ES
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> EN
-              </label>
-            </div>
+            <select id="language-header" class="selectpicker mgr-10">
+                <option>Español</option>
+                <option>English</option>
+            </select>
         </div>
     </div>
 </div>
@@ -64,9 +60,7 @@
 <!-- EO header -->
             </header>
             <div class="nav-content open">
-                
-
-<!-- navbar menu -->
+                <!-- navbar menu -->
 <div class="container">
     <nav class="navbar">
         <div class="row visible-xs">
@@ -104,7 +98,7 @@
                         <span class="visible-xs pl-lg">Publicaciones</span>
                         
                     </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publishing">
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publish">
                         <span>Publicaciones</span>
                         
                     </a>
@@ -147,12 +141,12 @@
                 </li>
             
                 <li class="panel">
-                    <a class=" collapsed active_menu mr-sm" href="aboutUs.html">
+                    <a class=" collapsed  mr-sm" href="aboutUs.html">
                         <span class="hidden-xs">Sobre Nosotros</span>
                         <span class="visible-xs pl-lg">Sobre Nosotros</span>
                         
                     </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutUs">
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutus">
                         <span>Sobre Nosotros</span>
                         
                     </a>
@@ -161,11 +155,7 @@
         </ul>
         <div class="hidden-xs logo-search">
             <span class="search-icon bbva-icon-search"></span>
-            <div class="search-form-container hidden">
-              <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
-              <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
-              <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-            </div>
+            <input class="input-search hidden" type="text" name="name" value="">
         </div>
         <div class="visible-xs">
             <div class="languages-menu pb-lg pl-lg">
@@ -174,48 +164,6 @@
             </div>
         </div>
     </nav>
-    <div class="navbar navbar-search">
-      
-<div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
-
-  <header>
-    <div class="form-wrapper">
-      <div class="title">
-        <span class="text-uppercase text">filtros</span>
-        <button type="button" class="close close-menu-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-      </div>
-    </div>
-
-    <div class="selected-tags-container"></div>
-  </header>
-
-  <section>
-    <div class="row available-tags-wrapper">
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
-          <div class="tag-container">
-          </div>
-        </div>
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
-          <div class="author-container">
-          </div>
-        </div>
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-          <div class="geo-container">
-          </div>
-        </div>
-      
-    </div>
-  </section>
-
-</div>
-
-    </div>
 </div>
 <!-- EO navbar menu -->
             </div>
@@ -972,6 +920,7 @@
         </div>
         <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
             <ul class="footer-menu footer-social">
+                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
             </ul>
@@ -983,6 +932,7 @@
         </div>
         <div class="visible-xs col-xs-12">
 			<ul class="footer-menu footer-social">
+                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
             </ul>

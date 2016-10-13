@@ -29,7 +29,7 @@ var dropdowns = function ($) {
   $dropdown.click(function () {
     var selText = $(this).text();
     $(this).parents('.dropdown').find('.dropdown-toggle').html(selText +
-       '<span class="icon bbva-icon-arrow_bottom"></span>');
+       '<b class="caret mt-md"></b>');
   });
 };
 
@@ -156,13 +156,6 @@ var googlemap = function ($) {
     }
 };
 
-var homeStopCarouselOnMobile = function ($) {
-  var mobileRegexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-  if (navigator && navigator.userAgent && mobileRegexp.test(navigator.userAgent)) {
-    $('#home-slider.carousel').carousel({ interval: false, });
-  }
-};
-
 var landing = function($) {
     'use strict';
 	$('.main-page').each(function(){
@@ -205,9 +198,6 @@ var googleMaps = function($) {
     if (hasMap) {
         google.charts.load('visualization', '1', {'packages':['geochart']});
         google.charts.setOnLoadCallback(drawRegionsMap);
-        google.maps.event.addDomListener(window, 'resize', function() {
-            chart.draw(dataTable, optionsChart);
-        });
     }
 
     var chart, dataTable, init_event = null;
@@ -360,195 +350,9 @@ var googleMaps = function($) {
         e.stopPropagation();
     });
 
-};
-
-var menuSearch = function($) {
-    'use strict';
-
-    var selectedTags = [];
-    var currentMatches = [];
-    var $selectedTag = $('#menu-search .selected-tag');
-    var $availableTag = $('#menu-search .available-tag');
-    var $inputSearch = $('.navbar .navbar-search-input');
-    var $btnSearch = $('.navbar .publishing-filter-search-btn');
-    var $btnCloseFilter = $('.navbar .close-navbar-filter');
-    var $btnFilter = $('.show-menu-filter');
-    var $tagsColumn = $('#menu-search .tag-container');
-    var $authorsColumn = $('#menu-search .author-container');
-    var $geoColumn = $('#menu-search .geo-container');
-    var $tagsCounter = $('#menu-search .tag-container-counter');
-    var $authorsCounter = $('#menu-search .author-container-counter');
-    var $geoCounter = $('#menu-search .geo-container-counter');
-
-    $availableTag.on('click', selectTag);
-    $inputSearch.keypress(onInputKeyPressed);
-    $inputSearch.on('input', searchValueUpdated)
-    $btnSearch.on('click', searchByTags);
-    $btnCloseFilter.on('click', toggleFilter);
-    $btnFilter.on('click', toggleFilter);
-
-    //public methods
-    function removeTagFromColumn(e) {
-        this.remove();
-        restoreTag(this);
-        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
-    }
-
-    function selectTag(e) {
-        this.remove();
-        var $tag = $(this);
-        var tagModel = getTagModel('selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
-        var newTag = createTag(tagModel);
-        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
-    }
-
-    function onInputKeyPressed(e) {
-        if(e.keyCode == 13){
-            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
-            var newTag = createTag(tagModel);
-            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
-            this.value = "";
-            removeAllMatchedTags();
-        }
-    }
-
-    function searchValueUpdated(e) {
-        var $this = $(this);
-        var value = $this.val();
-        if (value.length > 2) {
-            var matchedResults = _.filter(data.availableTags, function(obj){
-                return obj.text.includes(value);
-            });
-            refreshTagMatches(matchedResults);
-        } else {
-            removeAllMatchedTags();
-        }
-        refreshTagCounters(currentMatches);
-    }
-
-    function searchByTags() {
-		    $('.cards-grid').css('opacity', '1');
-        console.log(selectedTags);
-        if (selectedTags.length > 0) {
-            window.location.href = "index.html";
-        }
-    }
-
-    function toggleFilter() {
-        var $filterWrapper = $('#menu-search.menu-filter-wrapper');
-
-        if ($filterWrapper.hasClass('hidden')) {
-            $filterWrapper.removeClass('hidden').addClass('displayed');
-            $('.cards-grid').css('opacity', '0.4');
-        } else {
-            $filterWrapper.removeClass('displayed').addClass('hidden');
-            $('.cards-grid').css('opacity', '1');
-            emptyData();
-        }
-    }
-
-    //private methods
-    function restoreTag(element) {
-      var $element = $(element);
-      var from = $element.attr('from');
-      if (from) {
-          var tagValue = $element.attr('tag-value');
-          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
-          var newTag = createTag(tagModel);
-          addTagToContainer(newTag, from, selectTag);
-      }
-    }
-
-    function addTagToContainer(tag, targetContainer, clickCallback) {
-        var $tag = $(tag);
-        $tag.click(clickCallback).appendTo($('#menu-search ' + '.' + targetContainer));
-        var tagValue = $tag.attr('tag-value');
-        targetContainer === 'selected-tags-container' ? addTagToArray(tagValue) : null;
-    }
-
-    function createTag(tag) {
-        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
-        newTag += tag.icon ? '<span class="' + tag.icon +'"></span>' : '';
-        newTag += '<span>' + tag.text +'</span>' +
-              '</div>';
-        $(newTag).click(removeTagFromColumn);
-        return newTag;
-    }
-
-    function getTagModel(type, from, icon, text, id) {
-        return {
-            type: type + ' wow fadeIn',
-            from: from,
-            icon: icon,
-            text: text,
-            id: id
-        }
-    }
-
-    function removeTagFromArray(_array, tag) {
-        var pos = _array.indexOf(tag);
-        pos > -1 ? _array.splice(pos, 1) : null;
-    }
-
-    function addTagToArray(value) {
-        selectedTags.push(value);
-    }
-
-    function refreshTagMatches(matchedResults) {
-        var l = matchedResults.length;
-        for (var i = 0; i < l; i++) {
-            var tag = matchedResults[i];
-            if (_.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
-                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
-                var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
-                currentMatches.push(tag);
-            }
-        }
-        cleanOldMatches(_.difference(currentMatches, matchedResults));
-    }
-
-    function removeAllMatchedTags() {
-        currentMatches = [];
-        $authorsColumn.empty();
-        $tagsColumn.empty();
-        $geoColumn.empty();
-    }
-
-    function cleanOldMatches(oldMatches) {
-        var l = oldMatches.length;
-        for (var i = 0; i < l; i++) {
-            var oldMatch = oldMatches[i];
-            $('#menu-search ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
-            for (var m = 0; m < currentMatches.length; m++) {
-                if (currentMatches[m].id === oldMatch.id) {
-                    currentMatches.splice(m, 1);
-                }
-            }
-        }
-    }
-
-    function refreshTagCounters(currentMatches) {
-        $authorsCounter.text('0');
-        $tagsCounter.text('0');
-        $geoCounter.text('0');
-        var l = currentMatches.length;
-        for (var i = 0; i < l; i++) {
-            var $target = $('#menu-search ' + '.' + currentMatches[i].from + '-counter');
-            var currentVal = parseInt($target.text());
-            $target.text(++currentVal);
-        }
-    }
-
-    function emptyData() {
-        removeAllMatchedTags();
-        $authorsCounter.text('0');
-        $tagsCounter.text('0');
-        $geoCounter.text('0');
-        $inputSearch.val('');
-        selectedTags = [];
-        $('#menu-search .selected-tags-container').empty();
-    }
+    google.maps.event.addDomListener(window, 'resize', function() {
+        chart.draw(dataTable, optionsChart);
+    });
 };
 
 var momentjs = function ($) {
@@ -602,41 +406,21 @@ var navBar = function ($) {
 
   var $searchContainer = $('.logo-search');
   var $searchIcon = $('.search-icon');
-  var $closeNavbarFilter = $('.close-navbar-filter');
-  var $searchFormContainer = $('.search-form-container');
+  var $inputSearch = $('.input-search');
   var $navBarNav = $('.navbar-nav');
-  var $searchMenu = $('.navbar-search');
-  var $filterWrapper = $('.navbar .menu-filter-wrapper');
-  var $inputFilter = $('.navbar .navbar-search-input');
-  var $webContent = $('.webpage .contents');
 
   $searchIcon.click(onClickedSearch);
-  $closeNavbarFilter.click(onClickedSearch);
-  $inputFilter.on('input', function() {
-      this.value.length > 2 ? $filterWrapper.removeClass('hidden') : null;
-  });
 
   function onClickedSearch() {
 
       if ($navBarNav.hasClass('hidden')) {
-          $searchFormContainer.toggleClass('hidden');
+          $inputSearch.toggleClass('hidden');
           $searchContainer.toggleClass('active');
-
-          $searchMenu.fadeToggle(750);
-
-          setTimeout(function() {
-              $navBarNav.toggleClass('hidden');
-          }, 800);
-          $webContent.css("opacity", "1").css('pointer-events', 'all');
+          setTimeout(function() { $navBarNav.toggleClass('hidden'); }, 800);
       } else {
           $navBarNav.toggleClass('hidden');
-
-          $searchFormContainer.toggleClass('hidden');
+          $inputSearch.toggleClass('hidden');
           $searchContainer.toggleClass('active');
-
-          //$filterWrapper.removeClass('hidden');
-          $searchMenu.fadeToggle(750);
-          $webContent.css("opacity", "0.4").css('pointer-events', 'none');
       }
   }
 };
@@ -819,18 +603,18 @@ var publishingFilter = function($) {
 
     var selectedTags = [];
     var currentMatches = [];
-    var $selectedTag = $('#publishing-filter .selected-tag');
-    var $availableTag = $('#publishing-filter .available-tag');
-    var $inputSearch = $('#publishing-filter .publishing-filter-search-input');
-    var $btnSearch = $('#publishing-filter .publishing-filter-search-btn');
-    var $btnCloseFilter = $('#publishing-filter .close-publishing-filter');
+    var $selectedTag = $('.selected-tag');
+    var $availableTag = $('.available-tag');
+    var $inputSearch = $('.publishing-filter-search-input');
+    var $btnSearch = $('.publishing-filter-search-btn');
+    var $btnCloseFilter = $('.close-publishing-filter');
     var $btnFilter = $('.show-publishing-filter');
-    var $tagsColumn = $('#publishing-filter .tag-container');
-    var $authorsColumn = $('#publishing-filter .author-container');
-    var $geoColumn = $('#publishing-filter .geo-container');
-    var $tagsCounter = $('#publishing-filter .tag-container-counter');
-    var $authorsCounter = $('#publishing-filter .author-container-counter');
-    var $geoCounter = $('#publishing-filter .geo-container-counter');
+    var $tagsColumn = $('.tag-container');
+    var $authorsColumn = $('.author-container');
+    var $geoColumn = $('.geo-container');
+    var $tagsCounter = $('.tag-container-counter');
+    var $authorsCounter = $('.author-container-counter');
+    var $geoCounter = $('.geo-container-counter');
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
@@ -884,7 +668,7 @@ var publishingFilter = function($) {
     }
 
     function toggleFilter() {
-        var $filterWrapper = $('#publishing-filter.publishing-filter-wrapper');
+        var $filterWrapper = $('.publishing-filter-wrapper');
 
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
@@ -892,7 +676,6 @@ var publishingFilter = function($) {
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
             $('.cards-grid').css('opacity', '1');
-            emptyData();
         }
     }
 
@@ -910,7 +693,7 @@ var publishingFilter = function($) {
 
     function addTagToContainer(tag, targetContainer, clickCallback) {
         var $tag = $(tag);
-        $tag.click(clickCallback).appendTo($('#publishing-filter ' + '.' + targetContainer));
+        $tag.click(clickCallback).appendTo($('.' + targetContainer));
         var tagValue = $tag.attr('tag-value');
         targetContainer === 'selected-tags-container' ? addTagToArray(tagValue) : null;
     }
@@ -944,11 +727,10 @@ var publishingFilter = function($) {
     }
 
     function refreshTagMatches(matchedResults) {
-        console.log(selectedTags);
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
-            if (_.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+            if (_.where(currentMatches, {'text': tag.text}).length < 1) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -969,7 +751,7 @@ var publishingFilter = function($) {
         var l = oldMatches.length;
         for (var i = 0; i < l; i++) {
             var oldMatch = oldMatches[i];
-            $('#publishing-filter ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
+            $('#' + oldMatch.id).remove();
             for (var m = 0; m < currentMatches.length; m++) {
                 if (currentMatches[m].id === oldMatch.id) {
                     currentMatches.splice(m, 1);
@@ -984,20 +766,10 @@ var publishingFilter = function($) {
         $geoCounter.text('0');
         var l = currentMatches.length;
         for (var i = 0; i < l; i++) {
-            var $target = $('#publishing-filter ' + '.' + currentMatches[i].from + '-counter');
+            var $target = $('.' + currentMatches[i].from + '-counter');
             var currentVal = parseInt($target.text());
             $target.text(++currentVal);
         }
-    }
-
-    function emptyData() {
-        removeAllMatchedTags();
-        $authorsCounter.text('0');
-        $tagsCounter.text('0');
-        $geoCounter.text('0');
-        $inputSearch.val('');
-        selectedTags = [];
-        $('#publishing-filter .selected-tags-container').empty();
     }
 };
 
@@ -1072,16 +844,6 @@ var selectLanguage = function($) {
         $(this).addClass('active');
     });
 };
-
-var sortOptions = function ($) {
-    'use strict';
-    var $sortItemsContainer = $('.sort-items-container');
-
-    $sortItemsContainer.on('click', 'a', function () {
-        $sortItemsContainer.find('a').removeClass('selected');
-        $(this).addClass('selected');
-      });
-  };
 
 var animationWow = function($) {
     'use strict';
@@ -1240,10 +1002,7 @@ jQuery(document).ready(function ($) {
         momentjs($);
         googlemap($);
         publishingFilter($);
-        navBar($);
-        menuSearch($);
-        sortOptions($);
-        homeStopCarouselOnMobile($);
+		navBar($);
       });
 
 var lgScreenMin = 1200;
