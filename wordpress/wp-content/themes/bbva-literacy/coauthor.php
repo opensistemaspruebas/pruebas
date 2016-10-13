@@ -4,10 +4,12 @@
 
 <?php
 
-	$parts = parse_url($_SERVER['REQUEST_URI']);
+	/*$parts = parse_url($_SERVER['REQUEST_URI']);
 	if (preg_match("/perfiles\/(\S+)/", $parts['path'], $match)) {
 	    $author_name = str_replace('/', '', $match[1]);
-	}
+	}*/
+
+    $author_name = get_query_var('coauthor', 'nada');
 
 ?>
 

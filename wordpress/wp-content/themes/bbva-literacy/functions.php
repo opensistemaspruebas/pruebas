@@ -252,3 +252,8 @@ function add_rule_coauthors() {
             $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
 }
 
+function add_coauthor_query_var($vars) {
+	 $vars[] .= 'coauthor';
+	 return $vars;
+}
+add_filter( 'query_vars', 'add_coauthor_query_var' );
