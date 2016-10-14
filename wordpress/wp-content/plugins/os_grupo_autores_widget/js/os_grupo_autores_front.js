@@ -13,11 +13,14 @@ jQuery(document).ready(function($) {
             var parentId = $('.people-grid-wrapper.medium')[j].id;
             var miembros = $('#' + parentId + ' div.card-container[id^=' + parentId + ']');
             var numInicial = $('#' + parentId + ' #num_cards').html();
-            var numPartners = miembros.length;
+            // Si hay destacado (miembro fijo), tengo que mostrar uno menos de los demás
+            var numDestacados = $('#' + parentId + ' div.card-container-destacado').length;
+            numInicial = numInicial - numDestacados;
+            var numPartners = miembros.length; // Número total de miembros que hay
             var miembrosToShow = (numPartners > numInicial) ? numInicial : numPartners;
 
             // Mostramos miembros aleatorios
-            if(numPartners > 0) {
+            if(numPartners > 0 && miembrosToShow != 0) {
                 var id = miembros[0].id.split('_')[0];
                 while(miembrosID.length < miembrosToShow){
 
@@ -33,9 +36,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if(!found) {
-
                         miembrosID[miembrosID.length] = randomNumber;
-
                     }
 
                 }
@@ -54,6 +55,16 @@ jQuery(document).ready(function($) {
 
     jQuery('.readmore').click(function() {
         var id_grupo = jQuery(this).attr('id');
-        jQuery('#' + id_grupo + ' div.card-container[id^=' + id_grupo + ']').fadeIn();
+        var parent = jQuery('#' + id_grupo + ' div.card-container[id^=' + id_grupo + ']:hidden').parent();
+        // Cojo los elementos ocultos
+        var hidden_elems = jQuery('#' + id_grupo + ' div.card-container[id^=' + id_grupo + ']:hidden');
+        // Los elimino
+        jQuery('#' + id_grupo + ' div.card-container[id^=' + id_grupo + ']:hidden').remove();
+        // Quito el display:none de cada elemento y lo añado al final
+        for(var i = 0; i < hidden_elems.length; i++) {
+            hidden_elems[i].setAttribute("style","");
+            jQuery(hidden_elems[i].outerHTML).appendTo(parent);
+        }
+        jQuery(this).hide();
     });
 });

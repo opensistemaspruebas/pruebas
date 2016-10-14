@@ -2,3 +2,7 @@
 	border: 1px solid #ccc;
     padding: 5px 10px;
 }
+
+div.asesores_destacados, div.coordinador_destacado, div.miembros_asesores, div.miembros_posibles {
+	margin-bottom: 1em;
+}

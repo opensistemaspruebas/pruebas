@@ -44,12 +44,24 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				  <section>
 				    <h1><?php echo $instance['titulo_grupo']; ?></h1>
 				    <div class="row">
-				    	<?php if($instance['tipo_grupo'] == 'manual' && $instance['miembro_destacado'] != ''): ?>
-				    		<?php
-				    			$destacado = $this->get_author_print_fields($instance['miembro_destacado']);
-				    		?>
+				    	<?php 
+					    	if($instance['tipo_grupo'] == 'consejo_asesor') {
+					    		$destacados = $instance['asesores_destacados'];
+					    		$perfil = 'asesor';
+					    		$miembros = $instance['miembros_asesores'];
+					    	} else {
+					    		$destacados[] = $instance['coordinador_destacado'];
+					    		$perfil = 'coordinador';
+					    		$miembros = $instance['miembros'];
+					    	}
+					    	$num_miembros = count($destacados) + count($miembros);
+				    	?>
 
-				    		<div class="card-container col-xs-12 col-sm-6">     
+				    	<?php foreach ($destacados as $key => $destacado_id): ?>
+				    		<?php			    			
+				    			$destacado = $this->get_author_print_fields($destacado_id,$perfil);
+				    		?>
+				    		<div class="card-container card-container-destacado col-xs-12 col-sm-6">     
 								<!-- person -->
 								<section class="container-fluid person">
 									<a href="#" class="link-layer visible-xs">&nbsp;</a>
@@ -61,19 +73,20 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 										<p><?php echo $destacado['descripcion']; ?></p>
 										
 										<?php if(isset($destacado['enlace'])): ?>
-									  	<a href="<?php echo $destacado['enlace']; ?>"><?php _e('Ficha del asesor','os_grupo_autores_widget'); ?></a>
+									  	<a href="<?php echo $destacado['enlace']; ?>"><?php _e('Ficha del ','os_grupo_autores_widget'); ?><?php echo $destacado['perfil']; ?></a>
 									  	<?php endif; ?>
 										
 									</div>
 								</section>
 								<!-- EO person -->
 					        </div>
-				    	<?php endif; ?>
+				    	<?php endforeach; ?>
 				      
-				      	<?php foreach ($instance['miembros'] as $key => $id_miembro): ?>
+
+				      	<?php foreach ($miembros as $key => $id_miembro): ?>
 
 				      		<?php 
-				      			$miembro = $this->get_author_print_fields($id_miembro);
+				      			$miembro = $this->get_author_print_fields($id_miembro,'');
 				      		?>
 			
 					        <div class="card-container col-xs-12 col-sm-6" id="<?php echo $args['widget_id'] . '_' . $key; ?>" style="display:none;">     
@@ -88,7 +101,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 										<p><?php echo $miembro['descripcion']; ?></p>
 										
 										<?php if(isset($miembro['enlace'])): ?>
-									  	<a href="<?php echo $miembro['enlace']; ?>"><?php _e('Ficha del asesor','os_grupo_autores_widget'); ?></a>
+									  	<a href="<?php echo $miembro['enlace']; ?>"><?php _e('Ficha del ','os_grupo_autores_widget'); ?><?php echo $miembro['perfil']; ?></a>
 									  	<?php endif; ?>
 										
 									</div>
@@ -102,7 +115,9 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 					<footer class="grid-footer">
 					  <div class="row">
 					    <div class="col-md-12 text-center">
+					    <?php if($num_miembros >= $instance['num_miembros']): ?>
 					      <a href="javascript:void(0)" id="<?php echo $args['widget_id']; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Más miembros",'os_grupo_autores_widget'); ?></a>
+					     <?php endif; ?>
 					    </div>
 					  </div>
 					</footer>
@@ -122,23 +137,78 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
 	    public function form($instance) {
 	    	$titulo_grupo = !empty($instance['titulo_grupo']) ? $instance['titulo_grupo'] : '';
-	    	$tipo_grupo = !empty($instance['tipo_grupo']) ? $instance['tipo_grupo'] : 'manual';
-	    	$miembro_destacado = !empty($instance['miembro_destacado']) ? $instance['miembro_destacado'] : '';
-	    	$miembros = !empty($instance['miembros']) ? $instance['miembros'] : array();
-	    	$num_miembros = !empty($instance['num_miembros']) ? $instance['num_miembros'] : 6;
+	    	$tipo_grupo = !empty($instance['tipo_grupo']) ? $instance['tipo_grupo'] : 'consejo_asesor';
 
-	    	$args_authors = array(
+	    	$asesores_destacados = !empty($instance['asesores_destacados']) ? $instance['asesores_destacados'] : array();
+	    	if(empty($asesores_destacados)) {
+	    		$asesores_destacados[0] = '';
+	    		$asesores_destacados[1] = '';
+	    	}
+	    	$miembros_asesores = !empty($instance['miembros_asesores']) ? $instance['miembros_asesores'] : array();
+
+	    	$coordinador_destacado = !empty($instance['coordinador_destacado']) ? $instance['coordinador_destacado'] : '';
+	    	$miembros = !empty($instance['miembros']) ? $instance['miembros'] : array();
+
+
+	    	$args_asesores = array(
 				'posts_per_page'   => -1,
 				'offset'           => 0,
 				'orderby'          => 'post_title',
-				'order'            => 'DESC',
+				'order'            => 'ASC',
 				'post_type'        => 'guest-author',
 				'post_status'      => 'publish',
-				'suppress_filters' => true 
+				'suppress_filters' => true,
+				'tax_query' => array(
+			        array(
+			            'taxonomy' => 'perfil',
+			            'field'    => 'slug',
+			            'terms'    => 'asesor'
+			        )
+			    )
 			);
-			$authors_aux = get_posts( $args_authors );
+			$asesores_aux = get_posts( $args_asesores );
 			// Llamo a una función auxiliar para obtener el nombre a mostrar y el perfil de cada usuario
-			$authors = $this->get_authors_info($authors_aux);
+			$asesores = $this->get_authors_info($asesores_aux,'asesor');
+
+			$args_coordinadores = array(
+				'posts_per_page'   => -1,
+				'offset'           => 0,
+				'orderby'          => 'post_title',
+				'order'            => 'ASC',
+				'post_type'        => 'guest-author',
+				'post_status'      => 'publish',
+				'suppress_filters' => true,
+				'tax_query' => array(
+			        array(
+			            'taxonomy' => 'perfil',
+			            'field'    => 'slug',
+			            'terms'    => 'coordinador'
+			        )
+			    )
+			);
+			$coordinadores_aux = get_posts( $args_coordinadores );
+			// Llamo a una función auxiliar para obtener el nombre a mostrar y el perfil de cada usuario
+			$coordinadores = $this->get_authors_info($coordinadores_aux,'coordinador');
+
+			$args_miembros = array(
+				'posts_per_page'   => -1,
+				'offset'           => 0,
+				'orderby'          => 'post_title',
+				'order'            => 'ASC',
+				'post_type'        => 'guest-author',
+				'post_status'      => 'publish',
+				'suppress_filters' => true,
+				'tax_query' => array(
+			        array(
+			            'taxonomy' => 'perfil',
+			            'field'    => 'slug',
+			            'terms'    => 'miembro'
+			        )
+			    )
+			);
+			$miembros_aux = get_posts( $args_miembros );
+			// Llamo a una función auxiliar para obtener el nombre a mostrar y el perfil de cada usuario
+			$miembros_posibles = $this->get_authors_info($miembros_aux,null);
 
 	    	?>
 
@@ -148,50 +218,64 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 			</p>
 
 			<p>
-				<label for="<?php echo $this->get_field_id('num_miembros'); ?>"><?php _e('Nº de miembros a mostrar inicialmente:', 'os_grupo_autores_widget'); ?></label>
-                <select id="<?php echo $this->get_field_id('num_miembros'); ?>" name="<?php echo $this->get_field_name('num_miembros'); ?>" >
-	                <option value="6" <?php if($num_miembros == 6) { echo 'selected="selected"'; } ?>>6</option>
-	                <option value="8" <?php if($num_miembros == 8) { echo 'selected="selected"'; } ?>>8</option>
-	            </select>
+				<input class="tipo_checkbox" id="<?php echo $this->get_field_id('tipo_grupo') . '-consejo_asesor'; ?>" <?php if($tipo_grupo == 'consejo_asesor') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_grupo'); ?>" type="radio" value="consejo_asesor"><label for="<?php echo $this->get_field_id('tipo_grupo') . '-consejo_asesor'; ?>"><?php _e('Consejo asesor', 'os_grupo_autores_widget'); ?></label>
+				<input class="tipo_checkbox" id="<?php echo $this->get_field_id('tipo_grupo') . '-grupo_trabajo'; ?>" <?php if($tipo_grupo == 'grupo_trabajo') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_grupo'); ?>" type="radio" value="grupo_trabajo"><label for="<?php echo $this->get_field_id('tipo_grupo') . '-grupo_trabajo'; ?>"><?php _e('Grupo de trabajo', 'os_grupo_autores_widget'); ?></label>
 			</p>
 
-			<p>
-				<input class="tipo_checkbox" id="<?php echo $this->get_field_id('tipo_grupo') . '-auto'; ?>" <?php if($tipo_grupo == 'auto') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_grupo'); ?>" type="radio" value="auto"><label for="<?php echo $this->get_field_id('tipo_grupo') . '-auto'; ?>"><?php _e('Automático', 'os_grupo_autores_widget'); ?></label>
-				<input class="tipo_checkbox" id="<?php echo $this->get_field_id('tipo_grupo') . '-manual'; ?>" <?php if($tipo_grupo == 'manual') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_grupo'); ?>" type="radio" value="manual"><label for="<?php echo $this->get_field_id('tipo_grupo') . '-manual'; ?>"><?php _e('Manual', 'os_grupo_autores_widget'); ?></label>
-			</p>
+			<div class="asesores_destacados" <?php if($tipo_grupo == 'grupo_trabajo') { print('style="display:none;"'); } ?>>
+				<?php foreach($asesores_destacados as $key => $asesor_destacado): ?>
+				<div class="destacado_asesor-<?php echo $key+1; ?>">
+					<label for="<?php echo $this->get_field_id('asesores_destacados') . '[' . $key . ']'; ?>"><?php _e('Asesor destacado ', 'os_grupo_autores_widget'); ?><?php echo $key+1; ?></label>
+	                <select id="<?php echo $this->get_field_id('asesores_destacados'); ?>" class="job-disp-sel" name="<?php echo $this->get_field_name('asesores_destacados') . '[' . $key . ']'; ?>" >
+	                				<option value="" selected="selected"><?php _e('Seleccione un asesor','os_grupo_autores_widget'); ?></option>
+	                	<?php foreach ($asesores as $key2 => $asesor): ?>
 
-			<p class="miembro_destacado" <?php if($tipo_grupo == 'auto') { print('style="display:none;"'); } ?>>
-				<label for="<?php echo $this->get_field_id('miembro_destacado'); ?>"><?php _e('Autor destacado:', 'os_grupo_autores_widget'); ?></label>
-                <select id="<?php echo $this->get_field_id('miembro_destacado'); ?>" class="job-disp-sel" name="<?php echo $this->get_field_name('miembro_destacado'); ?>" >
-                
-                <?php foreach ($authors as $key2 => $author): ?>
+	                        <?php if($asesor['id'] == $asesor_destacado) { ?>
+	                                <option value="<?php echo $asesor['id']; ?>" selected="selected"><?php echo $asesor['nombre']; ?></option>
+	                        <?php } else { ?>
+	                                <option value="<?php echo $asesor['id']; ?>"><?php echo $asesor['nombre']; ?></option>
+	                        <?php } ?>
 
-                        <?php if($author['id'] == $miembro_destacado) { ?>
-                                <option value="<?php echo $author['id']; ?>" selected="selected"><?php echo $author['nombre']; ?></option>
+	                	<?php endforeach; ?>
+	                </select>
+	           	</div>
+	            <?php endforeach; ?>
+
+			</div>
+
+			<div class="coordinador_destacado" <?php if($tipo_grupo == 'consejo_asesor') { print('style="display:none;"'); } ?>>
+				<label for="<?php echo $this->get_field_id('coordinador_destacado'); ?>"><?php _e('Coordinador destacado ', 'os_grupo_autores_widget'); ?></label>
+                <select id="<?php echo $this->get_field_id('coordinador_destacado'); ?>" class="job-disp-sel" name="<?php echo $this->get_field_name('coordinador_destacado'); ?>" >
+                				<option value="" selected="selected"><?php _e('Seleccione un coordinador','os_grupo_autores_widget'); ?></option>
+                	<?php foreach ($coordinadores as $key2 => $coordinador): ?>
+
+                        <?php if($coordinador['id'] == $coordinador_destacado) { ?>
+                                <option value="<?php echo $coordinador['id']; ?>" selected="selected"><?php echo $coordinador['nombre']; ?></option>
                         <?php } else { ?>
-                                <option value="<?php echo $author['id']; ?>"><?php echo $author['nombre']; ?></option>
+                                <option value="<?php echo $coordinador['id']; ?>"><?php echo $coordinador['nombre']; ?></option>
                         <?php } ?>
 
-                <?php endforeach; ?>
+                	<?php endforeach; ?>
                 </select>
-			</p>
+			</div>
 
-			<div class="miembros">
+			<div class="miembros_asesores" <?php if($tipo_grupo == 'grupo_trabajo') { print('style="display:none;"'); } ?>>
+				<label for="<?php echo $this->get_field_id('miembros_asesores'); ?>"><?php _e('Asesores del grupo:', 'os_grupo_autores_widget'); ?></label>
+				<ul>
+				<?php foreach ($asesores as $key2 => $miembro): ?>
+					<li>
+                		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros_asesores') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros_asesores') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros_asesores']) != false) { echo 'checked';} ?>><?php echo $miembro['nombre']; ?></label>
+                	</li>
+                <?php endforeach; ?>
+                </ul>
+			</div>
+
+			<div class="miembros_posibles" <?php if($tipo_grupo == 'consejo_asesor') { print('style="display:none;"'); } ?>>
 				<label for="<?php echo $this->get_field_id('miembros'); ?>"><?php _e('Miembros del grupo:', 'os_grupo_autores_widget'); ?></label>
 				<ul>
-				<?php foreach ($authors as $key2 => $author): ?>
-					<?php 
-						$perfs = '';
-						if(!empty($author['perfiles'])) {
-							$perfs = ' (';
-							foreach ($author['perfiles'] as $key3 => $value) {
-								$perfs .= $value . ', '; 
-							}
-							$perfs = substr($perfs,0,-2) . ')';
-						}
-					?>
+				<?php foreach ($miembros_posibles as $key2 => $miembro): ?>
 					<li>
-                		<label class="selectit"><input value="<?php echo $author['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros') . $author['id']; ?>" <?php if(array_search($author['id'],$instance['miembros']) !== false) { echo 'checked';} ?>><?php echo $author['nombre'] . $perfs; ?></label>
+                		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros']) != false) { echo 'checked';} ?>><?php echo $miembro['nombre']; ?></label>
                 	</li>
                 <?php endforeach; ?>
                 </ul>
@@ -207,27 +291,47 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
 			$instance['titulo_grupo'] = (!empty( $new_instance['titulo_grupo'])) ? strip_tags($new_instance['titulo_grupo']) : '';
 			$instance['tipo_grupo'] = (!empty( $new_instance['tipo_grupo'])) ? strip_tags($new_instance['tipo_grupo']) : '';
-			$instance['miembro_destacado'] = (!empty( $new_instance['miembro_destacado'])) ? strip_tags($new_instance['miembro_destacado']) : '';
-			$instance['num_miembros'] = (!empty( $new_instance['num_miembros'])) ? strip_tags($new_instance['num_miembros']) : '';
 
 			$instance['miembros'] = array();
+			$instance['miembros_asesores'] = array();
+			$instance['asesores_destacados'] = array();
 
-			if ( isset ( $new_instance['miembros'] ) ) {
-	            foreach ( $new_instance['miembros'] as $key => $id ) {
-                    $instance['miembros'][$key] = $id;
-	            }
-        	}
 
+			// Guardo coordinador y lista de miembros
+			if($instance['tipo_grupo'] == 'grupo_trabajo') {
+				$instance['coordinador_destacado'] = (!empty( $new_instance['coordinador_destacado'])) ? strip_tags($new_instance['coordinador_destacado']) : '';
+				
+				if ( isset ( $new_instance['miembros'] ) ) {
+		            foreach ( $new_instance['miembros'] as $key => $id ) {
+	                    $instance['miembros'][$key] = $id;
+		            }
+	        	}
+			}
+
+			// Guardo asesores destacados y lista de asesores
+			if($instance['tipo_grupo'] == 'consejo_asesor') {
+				if ( isset ( $new_instance['asesores_destacados'] ) ) {
+		            foreach ( $new_instance['asesores_destacados'] as $key => $id ) {
+	                    $instance['asesores_destacados'][$key] = $id;
+		            }
+	        	}
+				
+				if ( isset ( $new_instance['miembros_asesores'] ) ) {
+		            foreach ( $new_instance['miembros_asesores'] as $key => $id ) {
+	                    $instance['miembros_asesores'][$key] = $id;
+		            }
+	        	}
+			}			
+				
+			// El número de elementos a mostrar se automatiza dependiendo del tipo de grupo elegido 
+			if($instance['tipo_grupo'] == 'consejo_asesor') {
+				$instance['num_miembros'] = 8;
+			} else {
+				$instance['num_miembros'] = 6;
+			}
+			
 			return $instance;
 	    }
-
-	    /*function add_scripts($hook) 
-        {
-            if(is_active_widget( false, false, $this->id_base, true)) { // check if widget is used
-                wp_register_script('os_grupo_autores_widget-js', plugins_url( 'js/os_grupo_autores.js' , __FILE__ ), array('jquery'));
-                wp_enqueue_script('os_grupo_autores_widget-js');
-            }
-        }*/
 
         function register_admin_styles($hook) {
             wp_enqueue_style( 'os-grupo_autores-widget-css', plugin_dir_url( __FILE__ ) . 'css/os_grupo_autores.css' );
@@ -255,31 +359,40 @@ if (!class_exists('OSGrupoAutoresWidget')) :
         	foreach ($authors_array as $key => $author) {
         		$returned_authors[$key]['id'] = $author->ID;
         		$returned_authors[$key]['nombre'] = get_post_meta($author->ID,'cap-display_name')[0];
-        		$returned_authors[$key]['perfiles'] = array();
-
-        		$perfiles = get_the_terms($author->ID,'perfil');
-        		foreach ($perfiles as $key2 => $perfil) {
-        			$returned_authors[$key]['perfiles'][$key2] = $perfil->name;
-        		}
         	}
 
         	return $returned_authors;
         }
 
-        private function get_author_print_fields($author_id) {
+        private function get_author_print_fields($author_id,$perfil) {
         	$author = array();
         	$author['nombre'] = get_post_meta($author_id,'cap-display_name')[0];
         	$author['imagen_perfil'] = get_post_meta($author_id,'imagen_perfil')[0];
-        	$author['descripcion'] = get_post_meta($author_id,'cap-description')[0];
+        	$author['descripcion'] = get_post_meta($author_id,'descripcion')[0];
 
         	$perfiles_aux = get_the_terms($author_id,'perfil');
         	$perfiles = array();
-        	foreach ($perfiles_aux as $key => $perfil) {
-        		$perfiles[] = $perfil->name;
-        	}
-        	if(array_search('Asesor', $perfiles) !== false) {
-        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
-        	}
+
+        	if(!empty($perfiles_aux)) {
+	        	foreach ($perfiles_aux as $key => $perfil_aux) {
+	        		$perfiles[] = $perfil_aux->name;
+	        	}
+	        	if(array_search('Asesor', $perfiles) !== false) {
+	        		if($perfil == '') {
+	        			$author['perfil'] = 'asesor';
+	        		} else {
+	        			$author['perfil'] = $perfil;
+	        		}
+	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
+	        	} else if(array_search('Coordinador', $perfiles) !== false) {
+	        		if($perfil == '') {
+	        			$author['perfil'] = 'coordinador';
+	        		} else {
+	        			$author['perfil'] = $perfil;
+	        		}
+	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
+	        	}
+	        }
 
         	return $author;
         }
