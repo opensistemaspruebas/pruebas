@@ -10,7 +10,7 @@
 		<?php the_content(); ?>
 		<?php get_sidebar('sidebar-0'); ?>
 
-	</article>article>
+	</article>
 </div>
     
 <?php get_footer(); ?>

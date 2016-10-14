@@ -1,0 +1,12 @@
+.os_imagentitulo_widget-control {
+    border: 1px dashed #aaa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.os_imagentitulo_widget-control img {
+    display: block;
+    height: auto;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
