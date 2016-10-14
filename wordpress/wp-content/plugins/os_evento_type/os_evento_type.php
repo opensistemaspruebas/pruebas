@@ -81,6 +81,7 @@ if (!class_exists('OS_Evento_Type')) {
         function add_custom_meta_boxes() {
 		  add_meta_box('evento_descripcion_corta',  __('Descripción corta del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_corta'), 'evento', 'normal', 'high');
 		  add_meta_box('evento_descripcion_larga',  __('Descripción larga del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_larga'), 'evento', 'normal', 'high');
+		  add_meta_box('evento_highlights',  __('Highlights', 'os_evento_type'), array(&$this, 'meta_box_evento_highlights'), 'evento', 'normal', 'high');
 		}
 
 
@@ -114,6 +115,18 @@ if (!class_exists('OS_Evento_Type')) {
 			<p><?php _e('Este es el texto descriptivo que aparecerá en la página de detalle del evento.', 'os_evento_type'); ?></p>
 			<?php
 			wp_editor($evento_descripcion_larga, 'eventodescripcionlarga', $settings);
+		}
+
+
+		function meta_box_evento_highlights($post) {
+			wp_nonce_field(basename(__FILE__), 'meta_box_evento_highlights-nonce');
+			$evento_highlights = get_post_meta($post->ID, 'evento_highlights', true);
+			?>
+			<p><?php _e('Estos son los highlights del evento.', 'os_evento_type'); ?></p>
+			<input type="text" id="evento_highlights[0]" name="evento_highlights[0]" class="widefat" placeholder="<?php _e('Highlight 1', 'os_evento_type'); ?>" value="<?php echo $evento_highlights[0]; ?>">
+			<input type="text" id="evento_highlights[1]" name="evento_highlights[1]" class="widefat" placeholder="<?php _e('Highlight 2', 'os_evento_type'); ?>" value="<?php echo $evento_highlights[1]; ?>">
+			<input type="text" id="evento_highlights[2]" name="evento_highlights[2]" class="widefat" placeholder="<?php _e('Highlight 3', 'os_evento_type'); ?>" value="<?php echo $evento_highlights[2]; ?>">
+			<?php 	
 		}
 
 
