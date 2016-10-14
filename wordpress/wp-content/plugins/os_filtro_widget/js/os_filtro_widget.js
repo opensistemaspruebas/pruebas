@@ -1,6 +1,5 @@
 jQuery(document).ready(function() {
 
-
 	jQuery("input#inputText").focusin(function() {
 		jQuery(this).val("");
 		jQuery("div#caja_categorias").hide();

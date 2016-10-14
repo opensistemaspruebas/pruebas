@@ -366,7 +366,9 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	        <?php if (!empty($posts)) : ?>
 	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>
 	        <section>
-	        	<?php the_widget('os_filtro_widget'); ?>
+	        	<?php if (empty($author_name)) : ?>
+	        		<?php //the_widget('os_filtro_widget'); ?>
+	        	<?php endif; ?>
 	            <article class="cards-grid">
 	                <section class="container">
 	                    <div class="row">
