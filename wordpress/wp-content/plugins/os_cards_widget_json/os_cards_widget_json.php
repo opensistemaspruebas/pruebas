@@ -90,7 +90,8 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    			imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
 	    			break;
 	    		case 'plantilla_2' :
-	    			imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name);
+	    			if (!empty($posts))
+	    				imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name);
 	    			break;
 	    		case 'plantilla_3' :
 	    			imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
@@ -341,43 +342,33 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	            <?php if (!empty($texto)) : ?>	
 	            	<h2><?php echo $texto; ?></h2>
 	        	<?php endif; ?>
-	            <?php if (empty($author_name)) the_widget('os_filtro_widget'); ?>
+	            <?php if (empty($author_name)) : ?>
+					<div class="visible-xs mobile-filter filter-mobile-button">
+						<a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_filtro_widget'); ?></a>
+					</div>
+					<div class="sort-items-container">
+						<a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#">
+							<span class="icon bbva-icon-arrow arrow arrowUp"></span>
+							<span class="text"><?php _e('Más recientes', 'os_filtro_widget'); ?></span>
+						</a>
+						<a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#">
+							<span class="icon bbva-icon-arrow arrow arrowDown"></span>
+							<span class="text"><?php _e('Más antiguos', 'os_filtro_widget'); ?></span>
+						</a>
+						<a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#">
+							<span class="icon bbva-icon-view"></span>
+							<span class="text"><?php _e('Más leídos', 'os_filtro_widget'); ?></span>
+						</a>
+					</div>
+					<a class="filter show-publishing-filter hidden-xs" href="#" data-toggle="modal" data-target=".publishing-filter-modal"> <span class="bbva-icon-filter"></span> <span><?php _e('Filtrar', 'os_filtro_widget'); ?></span> </a>
+	            <?php endif; ?>
 	        </header>
 	        <?php if (!empty($posts)) : ?>
 	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>
 	        <section>
-			    <div class="content publishing-filter-wrapper container hidden">
-			        <header>
-			            <div class="title">
-			                <span class="text-uppercase text"><?php _e('filtros', 'os_cards_widget_json'); ?></span>
-			                <button type="button" class="close close-publishing-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-			            </div>
-			            <div class="search">
-			                <input class="publishing-filter-search-input" type="text" name="publishing-filter-search-input" value="">
-			                <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Buscar', 'os_cards_widget_json'); ?></button>
-			            </div>
-			            <div class="selected-tags-container"></div>
-			        </header>
-			        <section>
-			            <div class="row available-tags-wrapper">
-			                <div class="col-xs-4">
-			                    <p class="text-uppercase column-name"><?php _e('tags', 'os_cards_widget_json'); ?> (<span class="tag-container-counter">0</span>)</p>
-			                    <div class="tag-container">
-			                    </div>
-			                </div>
-			                <div class="col-xs-4">
-			                    <p class="text-uppercase column-name"><?php _e('Autores', 'os_cards_widget_json'); ?> (<span class="author-container-counter">0</span>)</p>
-			                    <div class="author-container">
-			                    </div>
-			                </div>
-			                <div class="col-xs-4">
-			                    <p class="text-uppercase column-name"><?php _e('ámbito geográfico', 'os_cards_widget_json'); ?> (<span class="geo-container-counter">0</span>)</p>
-			                    <div class="geo-container">
-			                    </div>
-			                </div>
-			            </div>
-			        </section>
-			    </div>
+	        	<?php if (empty($author_name)) : ?>
+	        		<?php //the_widget('os_filtro_widget'); ?>
+	        	<?php endif; ?>
 	            <article class="cards-grid">
 	                <section class="container">
 	                    <div class="row">
