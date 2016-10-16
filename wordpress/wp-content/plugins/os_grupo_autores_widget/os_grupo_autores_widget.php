@@ -70,7 +70,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 									</div>
 									<div class="data-wrapper">
 										<span><?php echo $destacado['nombre']; ?></span>
-										<p><?php echo $destacado['descripcion']; ?></p>
+										<p><?php echo $destacado['cargo']; ?></p>
 										
 										<?php if(isset($destacado['enlace'])): ?>
 									  	<a href="<?php echo $destacado['enlace']; ?>"><?php _e('Ficha del ','os_grupo_autores_widget'); ?><?php echo $destacado['perfil']; ?></a>
@@ -98,7 +98,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 									</div>
 									<div class="data-wrapper">
 										<span><?php echo $miembro['nombre']; ?></span>
-										<p><?php echo $miembro['descripcion']; ?></p>
+										<p><?php echo $miembro['cargo']; ?></p>
 										
 										<?php if(isset($miembro['enlace'])): ?>
 									  	<a href="<?php echo $miembro['enlace']; ?>"><?php _e('Ficha del ','os_grupo_autores_widget'); ?><?php echo $miembro['perfil']; ?></a>
@@ -115,7 +115,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 					<footer class="grid-footer">
 					  <div class="row">
 					    <div class="col-md-12 text-center">
-					    <?php if($num_miembros >= $instance['num_miembros']): ?>
+					    <?php if($num_miembros > $instance['num_miembros']): ?>
 					      <a href="javascript:void(0)" id="<?php echo $args['widget_id']; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Más miembros",'os_grupo_autores_widget'); ?></a>
 					     <?php endif; ?>
 					    </div>
@@ -227,11 +227,15 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				<div class="destacado_asesor-<?php echo $key+1; ?>">
 					<label for="<?php echo $this->get_field_id('asesores_destacados') . '[' . $key . ']'; ?>"><?php _e('Asesor destacado ', 'os_grupo_autores_widget'); ?><?php echo $key+1; ?></label>
 	                <select id="<?php echo $this->get_field_id('asesores_destacados'); ?>" class="job-disp-sel" name="<?php echo $this->get_field_name('asesores_destacados') . '[' . $key . ']'; ?>" >
-	                				<option value="" selected="selected"><?php _e('Seleccione un asesor','os_grupo_autores_widget'); ?></option>
+	                				<?php if($asesor_destacado == "") {?>
+	                					<option value="" selected><?php _e('Seleccione un asesor','os_grupo_autores_widget'); ?></option>
+	                				<?php } else { ?>
+	                					<option value=""><?php _e('Seleccione un asesor','os_grupo_autores_widget'); ?></option>
+	                				<?php } ?>
 	                	<?php foreach ($asesores as $key2 => $asesor): ?>
 
 	                        <?php if($asesor['id'] == $asesor_destacado) { ?>
-	                                <option value="<?php echo $asesor['id']; ?>" selected="selected"><?php echo $asesor['nombre']; ?></option>
+	                                <option value="<?php echo $asesor['id']; ?>" selected><?php echo $asesor['nombre']; ?></option>
 	                        <?php } else { ?>
 	                                <option value="<?php echo $asesor['id']; ?>"><?php echo $asesor['nombre']; ?></option>
 	                        <?php } ?>
@@ -246,11 +250,11 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 			<div class="coordinador_destacado" <?php if($tipo_grupo == 'consejo_asesor') { print('style="display:none;"'); } ?>>
 				<label for="<?php echo $this->get_field_id('coordinador_destacado'); ?>"><?php _e('Coordinador destacado ', 'os_grupo_autores_widget'); ?></label>
                 <select id="<?php echo $this->get_field_id('coordinador_destacado'); ?>" class="job-disp-sel" name="<?php echo $this->get_field_name('coordinador_destacado'); ?>" >
-                				<option value="" selected="selected"><?php _e('Seleccione un coordinador','os_grupo_autores_widget'); ?></option>
+                				<option value="" selected><?php _e('Seleccione un coordinador','os_grupo_autores_widget'); ?></option>
                 	<?php foreach ($coordinadores as $key2 => $coordinador): ?>
 
                         <?php if($coordinador['id'] == $coordinador_destacado) { ?>
-                                <option value="<?php echo $coordinador['id']; ?>" selected="selected"><?php echo $coordinador['nombre']; ?></option>
+                                <option value="<?php echo $coordinador['id']; ?>" selected><?php echo $coordinador['nombre']; ?></option>
                         <?php } else { ?>
                                 <option value="<?php echo $coordinador['id']; ?>"><?php echo $coordinador['nombre']; ?></option>
                         <?php } ?>
@@ -264,7 +268,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				<ul>
 				<?php foreach ($asesores as $key2 => $miembro): ?>
 					<li>
-                		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros_asesores') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros_asesores') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros_asesores']) != false) { echo 'checked';} ?>><?php echo $miembro['nombre']; ?></label>
+                		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros_asesores') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros_asesores') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros_asesores']) !== false) { echo 'checked';} ?> <?php if(array_search($miembro['id'],$asesores_destacados) !== false) { echo 'disabled';} ?>><?php echo $miembro['nombre']; ?></label>
                 	</li>
                 <?php endforeach; ?>
                 </ul>
@@ -275,7 +279,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				<ul>
 				<?php foreach ($miembros_posibles as $key2 => $miembro): ?>
 					<li>
-                		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros']) != false) { echo 'checked';} ?>><?php echo $miembro['nombre']; ?></label>
+                		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros']) !== false) { echo 'checked';} ?>><?php echo $miembro['nombre']; ?></label>
                 	</li>
                 <?php endforeach; ?>
                 </ul>
@@ -368,7 +372,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
         	$author = array();
         	$author['nombre'] = get_post_meta($author_id,'cap-display_name')[0];
         	$author['imagen_perfil'] = get_post_meta($author_id,'imagen_perfil')[0];
-        	$author['descripcion'] = get_post_meta($author_id,'descripcion')[0];
+        	$author['cargo'] = get_post_meta($author_id,'cargo')[0];
 
         	$perfiles_aux = get_the_terms($author_id,'perfil');
         	$perfiles = array();

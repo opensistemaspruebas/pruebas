@@ -1,7 +1,9 @@
-jQuery(document).ajaxComplete(function($){
+jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
 
-  if(typeof(loaded) == 'undefined') {
-    var loaded = true;
+  var custom_uploader;
+
+  if(ajaxOptions.data.indexOf("action=so_panels_widget_form&widget=OSImagenTituloWidget") != -1) {
+
     jQuery("input#upload_image").click(function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -11,7 +13,6 @@ jQuery(document).ajaxComplete(function($){
           custom_uploader.open();
           return;
       } else {
-        var custom_uploader;
         //Extend the wp.media object
         custom_uploader = wp.media.frames.file_frame = wp.media({
             title: 'Selecciona Imagen',
