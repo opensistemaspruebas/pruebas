@@ -18,8 +18,6 @@ function load_text_domain_publicacion() {
 add_action('plugins_loaded', 'load_text_domain_publicacion', 10);
 
 
-add_theme_support('post-thumbnails');
-add_post_type_support('publicacion', 'thumbnail');  
 function publicacion_type() {
   $labels = array(
     'name'                => _x('Publicaciones', 'post type general name', 'os_publicacion_type'),
