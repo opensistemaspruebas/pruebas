@@ -1,4 +1,4 @@
-git<?php
+<?php
 
 /*
 	Plugin Name: OS Publicación Type
