@@ -59,7 +59,7 @@ add_action('init', 'historia_type', 0);
 function register_admin_scripts_historia() {
     global $typenow, $post;
     
-    if ($typenow == $post->post_type) {
+    if ($typenow == 'historia') {
       wp_enqueue_media();
       wp_register_script('os_historia_type-js', plugins_url('js/os_historia_type.js' , __FILE__), array('jquery'));           
       $translation_array = array(
@@ -77,6 +77,7 @@ function historia_meta_boxes() {
   add_meta_box("historia_destacada" ,__("Historia destacada", "os_historia_type"), "meta_box_destacada_historia", 'historia', 'side', 'high');
   add_meta_box("historia_imagen_card" ,__("Imagen Card", "os_historia_type"), "meta_box_imagen_card_historia", 'historia', 'normal', 'high');
   add_meta_box("historia_imagen_cabecera" ,__("Imagen de la cabecera", "os_historia_type"), "meta_box_imagen_cabecera_historia", 'historia', 'normal', 'high');
+  add_meta_box("historia_video" ,__("Video de la historia", "os_historia_type"), "meta_box_video_historia", 'historia', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'historia_meta_boxes');
 
@@ -98,6 +99,33 @@ function meta_box_destacada_historia($post) {
        
 }
 
+function meta_box_subtitulo_historia($post) {
+  wp_nonce_field(basename(__FILE__), 'meta_box_subtitulo_historia-nonce');
+
+  $subtitulo = get_post_meta($post->ID, 'subtitulo', true);
+
+  ?>
+
+  <p>
+
+  </p>
+
+  <?php
+}
+
+function meta_box_texto_destacado_historia($post) {
+  wp_nonce_field(basename(__FILE__), 'meta_box_texto_destacado_historia-nonce');
+
+  $texto_destacado = get_post_meta($post->ID, 'texto_destacado', true);
+
+  ?>
+
+  <p>
+
+  </p>
+
+  <?php
+}
 
 function meta_box_imagen_cabecera_historia($post) {         
 
@@ -143,19 +171,98 @@ function meta_box_imagen_card_historia($post) {
        
 }
 
+function meta_box_video_historia($post) {
+  wp_nonce_field( basename( __FILE__ ), 'video_historia-nonce' );
+
+  $video_type = get_post_meta($post->ID,'video-type',true); 
+  if($video_type == '') {
+    $video_type = 'youtube';
+  }
+  $wp_video_url = get_post_meta($post->ID,'wp-video-url',true);
+  $yt_video_url = get_post_meta($post->ID,'yt-video-url',true);
+
+  ?>
+
+    <p>
+      <label for="video-type"><?php _e('Fuente: ','os_historia_type'); ?></label>
+      <input type="radio" name="video-type" id="video-type-yt" value="youtube" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'youtube' );} ?>>
+      <label for="video-type-yt"><?php _e( 'Youtube', 'os_historia_type' )?></label>
+      <input type="radio" name="video-type" id="video-type-wp" value="wordpress" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'wordpress' ); } ?>>
+      <label for="video-type-wp"><?php _e( 'Wordpress', 'os_historia_type' )?></label>
+    </p>
+
+    <p class="video-youtube" <?php if($video_type != 'youtube') { echo 'style="display: none;"'; } ?>>
+      <label for="yt-video-url"><?php _e('Enlace de Youtube', 'os_historia_type'); ?></label>
+      <input class="widefat" id="yt-video-url" name="yt-video-url" type="text" value="<?php if (isset($yt_video_url)) echo $yt_video_url; ?>"/>
+    </p>
+
+    <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
+      <label for="wp-video-url"><?php _e('URL video', 'os_historia_type'); ?></label>
+      <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>" readonly="readonly"/>
+    </p>    
+    <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
+      <input id="upload_videoHistoria" name="upload_videoHistoria" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+    </p>
+
+  <?php 
+}
+
 
 
 function meta_boxes_save_historia($post_id) {
-  if (isset($_POST['imagenCard'])) {
-   update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
+
+  if(user_can_save($post_id, 'meta_box_imagen_card_historia-nonce')) {
+    if (isset($_POST['imagenCard'])) {
+      update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
+    }
   }
-  if (isset($_POST['imagenCabecera'])) {
-   update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
+  
+  if(user_can_save($post_id, 'meta_box_imagen_cabecera_historia-nonce')) {
+    if (isset($_POST['imagenCabecera'])) {
+     update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
+    }
   }
-  if (isset($_POST['destacada'])) {
-    update_post_meta($post_id, 'destacada', strip_tags($_POST['destacada']));
-  } else {
-    update_post_meta($post_id, 'destacada', "off");
+
+  if(user_can_save($post_id, 'meta_box_destacada_historia-nonce')) {
+    if (isset($_POST['destacada'])) {
+      update_post_meta($post_id, 'destacada', strip_tags($_POST['destacada']));
+    } else {
+      update_post_meta($post_id, 'destacada', "off");
+    }
+  }
+
+  if(user_can_save($post_id, 'video_historia-nonce')) {
+    if (isset($_POST['video-type'])) {
+      update_post_meta($post_id, 'video-type', strip_tags($_POST['video-type']));
+      if($_POST['video-type'] == 'youtube') {
+        if(isset($_POST['yt-video-url'])) {
+          update_post_meta($post_id, 'yt-video-url', strip_tags($_POST['yt-video-url']));
+        }
+      } else if($_POST['video-type'] == 'wordpress') {
+        if(isset($_POST['wp-video-url'])) {
+          update_post_meta($post_id, 'wp-video-url', strip_tags($_POST['wp-video-url']));
+        }
+      }
+    }
   }
 }
 add_action('save_post', "meta_boxes_save_historia");
+
+//////////////// FUNCIONES PRIVADAS ////////////////////
+
+/*
+* Comprueba si el usuario puede salvar los cambios
+*/
+function user_can_save( $post_id, $nonce ) {
+
+   // Checks save status
+    $is_autosave = wp_is_post_autosave( $post_id );
+    $is_revision = wp_is_post_revision( $post_id );
+    $is_valid_nonce = ( isset( $_POST[ $nonce ] ) && wp_verify_nonce( $_POST[ $nonce ], basename( __FILE__ ) ) ) ? 'true' : 'false';
+ 
+    // Exits script depending on save status
+    if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+        return false;
+    }
+   return true;
+}
