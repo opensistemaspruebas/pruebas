@@ -1,4 +1,4 @@
-<?php
+git<?php
 
 /*
 	Plugin Name: OS Publicación Type
@@ -57,9 +57,9 @@ add_action('init', 'publicacion_type', 0);
 
 
 function register_admin_scripts() {
-    global $typenow;
+    global $typenow, $post;
     
-    if ($typenow == 'publicacion') {
+    if ($typenow == $post->post_type) {
       wp_enqueue_media();
       wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type.js' , __FILE__), array('jquery'));           
       $translation_array = array(
