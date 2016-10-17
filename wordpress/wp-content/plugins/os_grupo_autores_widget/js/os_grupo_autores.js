@@ -2,7 +2,7 @@ jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
   var previous1;
   var previous2;
 
-  if(ajaxOptions.data.indexOf("action=so_panels_widget_form&widget=OSGrupoAutoresWidget") != -1) {
+  if(typeof(ajaxOptions.data) !== 'undefined' && ajaxOptions.data.indexOf("action=so_panels_widget_form&widget=OSGrupoAutoresWidget") != -1) {
       
     jQuery("input.tipo_checkbox").click(function(e) {
       if(jQuery(this).val() == 'consejo_asesor') {

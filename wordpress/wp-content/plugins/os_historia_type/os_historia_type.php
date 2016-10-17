@@ -74,10 +74,12 @@ add_action('admin_enqueue_scripts', 'register_admin_scripts_historia');
 
 
 function historia_meta_boxes() {
+  add_meta_box("historia_subtitulo" ,__("Subtítulo", "os_historia_type"), "meta_box_subtitulo_historia", 'historia', 'advanced', 'high');
+  add_meta_box("historia_texto_destacado" ,__("Texto destacado", "os_historia_type"), "meta_box_texto_destacado_historia", 'historia', 'advanced', 'high');
   add_meta_box("historia_destacada" ,__("Historia destacada", "os_historia_type"), "meta_box_destacada_historia", 'historia', 'side', 'high');
   add_meta_box("historia_imagen_card" ,__("Imagen Card", "os_historia_type"), "meta_box_imagen_card_historia", 'historia', 'normal', 'high');
-  add_meta_box("historia_imagen_cabecera" ,__("Imagen de la cabecera", "os_historia_type"), "meta_box_imagen_cabecera_historia", 'historia', 'normal', 'high');
-  add_meta_box("historia_video" ,__("Video de la historia", "os_historia_type"), "meta_box_video_historia", 'historia', 'normal', 'high');
+  add_meta_box("historia_imagen_cabecera" ,__("Imagen cabecera", "os_historia_type"), "meta_box_imagen_cabecera_historia", 'historia', 'normal', 'high');
+  add_meta_box("historia_video" ,__("Video cabecera", "os_historia_type"), "meta_box_video_historia", 'historia', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'historia_meta_boxes');
 
@@ -107,7 +109,7 @@ function meta_box_subtitulo_historia($post) {
   ?>
 
   <p>
-
+  <input class="widefat" id="subtitulo" name="subtitulo" value="<?php if (isset($subtitulo)) echo $subtitulo; ?>" />
   </p>
 
   <?php
@@ -116,12 +118,12 @@ function meta_box_subtitulo_historia($post) {
 function meta_box_texto_destacado_historia($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_texto_destacado_historia-nonce');
 
-  $texto_destacado = get_post_meta($post->ID, 'texto_destacado', true);
+  $texto_destacado = get_post_meta($post->ID, 'texto-destacado', true);
 
   ?>
 
   <p>
-
+  <textarea style="width:100%;" rows="3" id="texto-destacado" name="texto-destacado"><?php if (isset($texto_destacado)) echo $texto_destacado; ?></textarea>
   </p>
 
   <?php
@@ -136,12 +138,13 @@ function meta_box_imagen_cabecera_historia($post) {
 ?>
 
   <p>
-    <label for="imagenCabecera"><?php _e('Imagen de la cabecera', 'os_historia_type'); ?></label>
+    <label for="imagenCabecera"><?php _e('Imagen cabecera', 'os_historia_type'); ?></label>
     <input class="widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" readonly="readonly"/>
     <img id="show_imagenCabecera" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_thumbnail)) echo esc_attr($imagen_cabecera_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_thumbnail)) echo "display: none;"; ?>">
   </p>
   <p>
     <input id="upload_imagenCabecera" name="upload_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+    <i><?php _e('Si el campo "Video cabecera" está relleno, se mostrará este en vez de "Imagen cabecera"','os_historia_type'); ?></i>
   </p>
             
 <?php
@@ -194,11 +197,13 @@ function meta_box_video_historia($post) {
     <p class="video-youtube" <?php if($video_type != 'youtube') { echo 'style="display: none;"'; } ?>>
       <label for="yt-video-url"><?php _e('Enlace de Youtube', 'os_historia_type'); ?></label>
       <input class="widefat" id="yt-video-url" name="yt-video-url" type="text" value="<?php if (isset($yt_video_url)) echo $yt_video_url; ?>"/>
+      <i><?php _e('Si el campo "Video cabecera" está relleno, se mostrará este en vez de "Imagen cabecera"','os_historia_type'); ?></i>
     </p>
 
     <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
       <label for="wp-video-url"><?php _e('URL video', 'os_historia_type'); ?></label>
-      <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>" readonly="readonly"/>
+      <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>"/>
+      <i><?php _e('Si el campo "Video cabecera" está relleno, se mostrará este en vez de "Imagen cabecera"','os_historia_type'); ?></i>
     </p>    
     <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
       <input id="upload_videoHistoria" name="upload_videoHistoria" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
@@ -207,9 +212,35 @@ function meta_box_video_historia($post) {
   <?php 
 }
 
+/* Utilizo esta función para mover los metaboxes con ubicación "advanced" encima del editor de Wordpress */
+function mover_advanced_arriba() {
+
+    # Get the globals:
+    global $post, $wp_meta_boxes;
+    # Output the "advanced" meta boxes:
+    do_meta_boxes(get_current_screen(), 'advanced', $post);
+    # Remove the initial "advanced" meta boxes:
+    unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+
+}
+
+add_action('edit_form_after_title', 'mover_advanced_arriba');
+
 
 
 function meta_boxes_save_historia($post_id) {
+
+  if(user_can_save($post_id, 'meta_box_subtitulo_historia-nonce')) {
+    if(isset($_POST['subtitulo'])) {
+      update_post_meta($post_id, 'subtitulo', strip_tags($_POST['subtitulo']));
+    }
+  }
+
+  if(user_can_save($post_id, 'meta_box_texto_destacado_historia-nonce')) {
+    if(isset($_POST['texto-destacado'])) {
+      update_post_meta($post_id, 'texto-destacado', strip_tags($_POST['texto-destacado']));
+    }
+  }
 
   if(user_can_save($post_id, 'meta_box_imagen_card_historia-nonce')) {
     if (isset($_POST['imagenCard'])) {
