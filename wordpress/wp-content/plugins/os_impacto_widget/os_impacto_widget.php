@@ -1,28 +1,28 @@
 <?php
 
 /*
-	Plugin Name: OS Impactos Home Widget
+	Plugin Name: OS Impactos Widget
 	Plugin URI: https://www.opensistemas.com/
-	Description: Crea un widget que los impactos en la home.
+	Description: Crea un widget con los impactos seleccionados
 	Version: 1.0
-	Author: Marta Oliver
+	Author: Marta Oliver / Roberto Moreno
 	Author URI: https://www.opensistemas.com/
 	License: GPLv2 or later
-	Text Domain: os_impactos_home_widget
+	Text Domain: os_impactos_widget
 */
 
 
-if (!class_exists('OS_Impactos_Home_Widget')) :
+if (!class_exists('OS_Impactos_Widget')) :
 
-	class OS_Impactos_Home_Widget extends WP_Widget {
+	class OS_Impactos_Widget extends WP_Widget {
 
 
 	    function __construct() {
 	        parent::__construct(
-	        	'os_impactos_home_widget',
-	        	__('OS Impactos Home Widget', 'os_impactos_home_widget'),
+	        	'os_impactos_widget',
+	        	__('OS Impactos Widget', 'os_impactos_widget'),
 	        	array(
-	            	'description' => __('Widget que los impactos en la home.', 'os_impactos_home_widget')
+	            	'description' => __('Widget con los impactos seleccionados.', 'os_impactos_widget')
 	        	)
 	        );
         }
@@ -38,10 +38,12 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 
 	    	$title = $instance['title'];
 	    	$texto = $instance['texto'];
+	    	$tipo_widget = $instance['tipo_widget'];
 	    	$impacto_1 = $instance['impacto_1'];
 	    	$impacto_2 = $instance['impacto_2'];
 	    	$impacto_3 = $instance['impacto_3'];
 	    	$url_impactos = $instance['url_impactos'];
+
 
 	    	?>
             <section class="pt-xl pb-lg">
@@ -70,10 +72,8 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 									$etiqueta = mb_strtoupper(get_post_meta($post_id, 'etiqueta', true), 'UTF-8');
 									$objetivo = get_post_meta($post_id, 'objetivo', true);
 									$completado = get_post_meta($post_id, 'completado', true);
-									$titulo = get_post_meta($post_id, 'titulo', true);
-									$subtitulo = get_post_meta($post_id, 'subtitulo', true);
-									$animacion = get_post_meta($post_id, 'animacion', true);
 
+									
 									switch ($visualizacion) {
 										case 'circulo':
 											pintaCirculo($etiqueta, $color, $objetivo, $completado);
@@ -81,20 +81,20 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 										case 'barra':
 											pintaBarra($etiqueta, $color, $objetivo, $completado);
 											break;
-										case 'icono':
-											pintaIcono();
+										case 'dato':
+											pintaDato($etiqueta, $color, $completado);
 											break;
 									}
 								endwhile;
 								wp_reset_postdata();
 							} else {
-								_e("No hay impactos disponibles.", "os_impactos_home_widget");
+								_e("No hay impactos disponibles.", "os_impactos_widget");
 							}
 
 			            ?>
                     </div>
                     <div class="text-center">
-                        <a href="<?php echo $url_impactos; ?>" class="btn btn-bbva-aqua"><?php _e("Ver impactos", "os_impactos_home_widget"); ?></a>
+                        <a href="<?php echo $url_impactos; ?>" class="btn btn-bbva-aqua"><?php _e("Ver impactos", "os_impactos_widget"); ?></a>
                     </div>
                 </div>
             </section>
@@ -107,6 +107,7 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 	    	
 	    	$title = ! empty($instance['title']) ? $instance['title'] : '';
 	    	$texto = ! empty($instance['texto']) ? $instance['texto'] : '';
+	    	$tipo_texto = !empty($instance['tipo_texto']) ? $instance['tipo_texto'] : '';
 	    	$url_impactos = ! empty($instance['url_impactos']) ? $instance['url_impactos'] : 'http://';
 	    	$impacto_1 = ! empty($instance['impacto_1']) ? $instance['impacto_1'] : '';
 	    	$impacto_2 = ! empty($instance['impacto_2']) ? $instance['impacto_2'] : '';
@@ -132,64 +133,71 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 
 	    	?>
 	    	<p>
-	    		<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Título:', 'os_impactos_home_widget'); ?></label>
+	    		<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Título:', 'os_impactos_widget'); ?></label>
 				<input required="required" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="url" value="<?php echo esc_attr($title); ?>">
 			</p>
 	    	<p>
-	    		<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_impactos_home_widget'); ?></label>
+	    		<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_impactos_widget'); ?></label>
 				<textarea required="required" class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
 			</p>
+			<p>Tipo de widget:</p>
+  			<input type="radio" id="<?php echo $this->get_field_id('tipo_widget') . '-home'; ?>"  <?php if($tipo_widget == 'widgetHome') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_widget'); ?>" value="widgetHome"><label for="<?php echo $this->get_field_id('tipo_widget') . '-home'; ?>"><?php _e('Widget Home', 'os_impactos_widget'); ?></label></br>
+  			<input type="radio" id="<?php echo $this->get_field_id('tipo_widget') . '-subhomeIntro'; ?>" <?php if($tipo_widget == 'widgetSubhomeIntroduccion') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_widget'); ?>" value="widgetSubhomeIntroduccion"><label for="<?php echo $this->get_field_id('tipo_widget') . '-subhomeIntro'; ?>"><?php _e('Widget subhome impactos introducción', 'os_impactos_widget'); ?></label></br>	
+  			<input type="radio" id="<?php echo $this->get_field_id('tipo_widget') . '-subhomeSecundario'; ?>" <?php if($tipo_widget == 'widgetSubhomeSecundario') echo 'checked'; ?> name="<?php echo $this->get_field_name('tipo_widget'); ?>" value="widgetSubhomeSecundario"><label for="<?php echo $this->get_field_id('tipo_widget') . '-subhomeSecundario'; ?>"><?php _e('Widget subhome impactos secundario', 'os_impactos_widget'); ?></label></br>	
 	    	<p>
-				<label for="<?php echo $this->get_field_id('url_impactos'); ?>"><?php _e('URL de página de todos los impactos:', 'os_impactos_home_widget'); ?></label>
+				<label for="<?php echo $this->get_field_id('url_impactos'); ?>"><?php _e('URL del botón de enlace:', 'os_impactos_widget'); ?></label>
 				<input required="required" class="widefat" id="<?php echo $this->get_field_id('url_impactos'); ?>" name="<?php echo $this->get_field_name('url_impactos'); ?>" type="url" value="<?php echo esc_attr($url_impactos); ?>">
+
+				<span class="description">(Introducir enlace solo si el tipo de widget es: Widget Home)</span>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('impacto_1'); ?>"><?php _e('Impacto 1:', 'os_impactos_home_widget'); ?></label>
+				<label for="<?php echo $this->get_field_id('impacto_1'); ?>"><?php _e('Impacto 1:', 'os_impactos_widget'); ?></label>
 				<select required="required" class="widefat" id="<?php echo $this->get_field_id('impacto_1'); ?>" name="<?php echo $this->get_field_name('impacto_1'); ?>">
 				  <?php if (!(empty($impactos))) : ?>
 				  <?php foreach ($impactos as $impacto) : ?>
 				  <?php 
-				  	$impacto_title = !(empty($impacto->post_title)) ? $impacto->post_title : __("Sin título", "os_impactos_home_widget");
+				  	$impacto_title = !(empty($impacto->post_title)) ? $impacto->post_title : __("Sin título", "os_impactos_widget");
 				  ?>
 				  <?php $selected = ($impacto->ID == $impacto_1) ? 'selected="selected"' : ':'; ?>
 				  <option value="<?php echo $impacto->ID; ?>" <?php echo $selected; ?>><?php echo $impacto_title; ?></option>
 				  <?php endforeach; ?>
 				  <?php else: ?>
-				  <option value=""><?php _e('No hay impactos disponibles', 'os_impactos_home_widget'); ?></option>
+				  <option value=""><?php _e('No hay impactos disponibles', 'os_impactos_widget'); ?></option>
 				  <?php endif; ?>
 				</select>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('impacto_2'); ?>"><?php _e('Impacto 2:', 'os_impactos_home_widget'); ?></label>
+				<label for="<?php echo $this->get_field_id('impacto_2'); ?>"><?php _e('Impacto 2:', 'os_impactos_widget'); ?></label>
 				<select required="required" class="widefat" id="<?php echo $this->get_field_id('impacto_2'); ?>" name="<?php echo $this->get_field_name('impacto_2'); ?>">
 				  <?php if (!(empty($impactos))) : ?>
 				  <?php foreach ($impactos as $impacto) : ?>
 				  <?php 
-				  	$impacto_title = !(empty($impacto->post_title)) ? $impacto->post_title : __("Sin título", "os_impactos_home_widget");
+				  	$impacto_title = !(empty($impacto->post_title)) ? $impacto->post_title : __("Sin título", "os_impactos_widget");
 				  ?>
 				  <?php $selected = ($impacto->ID == $impacto_2) ? 'selected="selected"' : ':'; ?>
 				  <option value="<?php echo $impacto->ID; ?>" <?php echo $selected; ?>><?php echo $impacto_title; ?></option>
 				  <?php endforeach; ?>
 				  <?php else: ?>
-				  <option value=""><?php _e('No hay impactos disponibles', 'os_impactos_home_widget'); ?></option>
+				  <option value=""><?php _e('No hay impactos disponibles', 'os_impactos_widget'); ?></option>
 				  <?php endif; ?>
 				</select>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('impacto_3'); ?>"><?php _e('Impacto 3:', 'os_impactos_home_widget'); ?></label>
+				<label for="<?php echo $this->get_field_id('impacto_3'); ?>"><?php _e('Impacto 3:', 'os_impactos_widget'); ?></label>
 				<select required="required" class="widefat" id="<?php echo $this->get_field_id('impacto_3'); ?>" name="<?php echo $this->get_field_name('impacto_3'); ?>">
 				  <?php if (!(empty($impactos))) : ?>
 				  <?php foreach ($impactos as $impacto) : ?>
 				  <?php 
-				  	$impacto_title = !(empty($impacto->post_title)) ? $impacto->post_title : __("Sin título", "os_impactos_home_widget");
+				  	$impacto_title = !(empty($impacto->post_title)) ? $impacto->post_title : __("Sin título", "os_impactos_widget");
 				  ?>
 				  <?php $selected = ($impacto->ID == $impacto_3) ? 'selected="selected"' : ':'; ?>
 				  <option value="<?php echo $impacto->ID; ?>" <?php echo $selected; ?>><?php echo $impacto_title; ?></option>
 				  <?php endforeach; ?>
 				  <?php else: ?>
-				  <option value=""><?php _e('No hay impactos disponibles', 'os_impactos_home_widget'); ?></option>
+				  <option value=""><?php _e('No hay impactos disponibles', 'os_impactos_widget'); ?></option>
 				  <?php endif; ?>
 				</select>
+				<span class="description">(Este impacto no se mostrará en caso de que sea de tipo barra)</span>
 			</p>
 
 	    	<?php
@@ -200,6 +208,7 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 	    	$instance = array();
 	    	$instance['title'] = (!empty( $new_instance['title'])) ? strip_tags($new_instance['title']) : '';
 	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : '';
+	    	$instance['tipo_texto'] = (!empty( $new_instance['tipo_texto'])) ? strip_tags($new_instance['tipo_texto']) : '';
 	    	$instance['impacto_1'] = (!empty( $new_instance['impacto_1'])) ? strip_tags($new_instance['impacto_1']) : '';
 	    	$instance['impacto_2'] = (!empty( $new_instance['impacto_2'])) ? strip_tags($new_instance['impacto_2']) : '';
 	    	$instance['impacto_3'] = (!empty( $new_instance['impacto_3'])) ? strip_tags($new_instance['impacto_3']) : '';
@@ -209,12 +218,12 @@ if (!class_exists('OS_Impactos_Home_Widget')) :
 
 	}
 
-	function os_impactos_home_widget() {
-	    register_widget('os_impactos_home_widget');
+	function os_impactos_widget() {
+	    register_widget('os_impactos_widget');
 	}
 
 	// Initialize Plugin
-	add_action('widgets_init', 'os_impactos_home_widget');
+	add_action('widgets_init', 'os_impactos_widget');
 
 
 endif;
@@ -266,9 +275,37 @@ function pintaCirculo($etiqueta, $color, $objetivo, $completado) {
 	<?php
 }
 
-function pintaBarra() {
+function pintaBarra($etiqueta, $color, $objetivo, $completado) {
+
+	switch ($color) {
+		case '#004481':
+			$colorClass = 'blue';
+			break;
+		default:
+			$colorClass = 'blue';
+			break;
+	}($color);
+
+
 
 }
 
-function pintaIcono() {
+function pintaDato($etiqueta, $color, $completado) {
+
+	switch ($color) {
+		case '#f35e61':
+			$colorClass = 'no-circle-red';
+			break;
+		case '#d8be75':
+			$colorClass = 'no-circle-yellow';
+			break;
+		case '#004481':
+			$colorClass = 'no-circle-blue';
+			break;		
+		default:
+			$colorClass = 'no-circle-red';
+			break;
+	}($color);
+
+
 }

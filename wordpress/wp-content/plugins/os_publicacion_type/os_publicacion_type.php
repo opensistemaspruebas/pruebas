@@ -18,8 +18,6 @@ function load_text_domain_publicacion() {
 add_action('plugins_loaded', 'load_text_domain_publicacion', 10);
 
 
-add_theme_support('post-thumbnails');
-add_post_type_support('publicacion', 'thumbnail');  
 function publicacion_type() {
   $labels = array(
     'name'                => _x('Publicaciones', 'post type general name', 'os_publicacion_type'),
@@ -59,9 +57,9 @@ add_action('init', 'publicacion_type', 0);
 
 
 function register_admin_scripts() {
-    global $typenow;
+    global $typenow, $post;
     
-    if ($typenow == 'publicacion') {
+    if ($typenow == $post->post_type) {
       wp_enqueue_media();
       wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type.js' , __FILE__), array('jquery'));           
       $translation_array = array(

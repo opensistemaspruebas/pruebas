@@ -91,18 +91,18 @@ function meta_box_tipo($post) {
   $completado = get_post_meta($post->ID, 'completado', true);
   $titulo = get_post_meta($post->ID, 'titulo', true);
   $subtitulo = get_post_meta($post->ID, 'subtitulo', true);
-  $animacion = get_post_meta($post->ID, 'animacion', true);
+  $dato = get_post_meta($post->ID, 'dato', true);
 
   ?>
   <p>
-    <label for="visualizacion"><?php _e('Tipo de visualización', 'os_publicacion_type'); ?></label>
+    <label for="visualizacion"><?php _e('Tipo de visualización', 'os_impacto_type'); ?></label>
     <select class="widefat" name="visualizacion" id="visualizacion">
       <option value="circulo" <?php if ($visualizacion == "circulo") echo 'selected="selected"'; ?>><?php _e('Círculo', 'os_impacto_type'); ?></option>
       <option value="barra" <?php if ($visualizacion == "barra") echo 'selected="selected"'; ?>><?php _e('Barra', 'os_impacto_type'); ?></option>
-      <option value="animacion" <?php if ($visualizacion == "animacion") echo 'selected="selected"'; ?>><?php _e('Icono', 'os_impacto_type'); ?></option>
+      <option value="dato" <?php if ($visualizacion == "dato") echo 'selected="selected"'; ?>><?php _e('Dato', 'os_impacto_type'); ?></option>
     </select>
   </p>
-  <div id="form1" name="form1" <?php if ($visualizacion == "circulo" || $visualizacion == "barra") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
+  <div id="form1" name="form1" <?php if ($visualizacion == "circulo") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
     <div class="form-group">
       <label class="col-sm-4 control-label" for="colorpicker-bootstrap3-form"><?php _e('Seleccione un color', 'os_impacto_type'); ?></label>
       <div class="col-sm-6">
@@ -114,34 +114,68 @@ function meta_box_tipo($post) {
       </div>
     </div>
     <p>
-      <label for="etiqueta"><?php _e('Etiqueta de texto', 'os_publicacion_type'); ?></label>
+      <label for="etiqueta"><?php _e('Etiqueta de texto', 'os_impacto_type'); ?></label>
       <input type="text" class="widefat" id="etiqueta" name="etiqueta" value="<?php if (isset($etiqueta)) echo $etiqueta; ?>"/>
     </p>
     <p>
-      <label for="objetivo"><?php _e('Valor objetivo', 'os_publicacion_type'); ?></label>
+      <label for="objetivo"><?php _e('Valor objetivo', 'os_impacto_type'); ?></label>
       <input type="number" min="1" max="999999999999999" class="widefat" id="objetivo" name="objetivo" value="<?php if (isset($objetivo)) echo $objetivo; ?>"/>
-      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_publicacion_type'); ?>: 1400000</i>
+      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 1400000</i>
     </p>
     <p>
-      <label for="completado"><?php _e('Valor completado', 'os_publicacion_type'); ?></label>
+      <label for="completado"><?php _e('Valor completado', 'os_impacto_type'); ?></label>
       <input type="number" min="1" max="999999999999999" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>"/>
-      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_publicacion_type'); ?>: 2500000</i>
+      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 2500000</i>
     </p>
   </div>
-  <div id="form2" name="form2" <?php if ($visualizacion == "animacion") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
+  
+  <div id="form2" name="form2" <?php if ($visualizacion == "barra") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
+   <div class="form-group">
+    <label class="col-sm-4 control-label" for="colorpicker-bootstrap3-form"><?php _e('Seleccione un color', 'os_impacto_type'); ?></label>
+      <div class="col-sm-6">
+        <select name="color" id="color" class="form-control">
+          <option value="#004481" <?php if ($color == "#004481") echo 'selected="selected"'; ?>><?php _e('Azul oscuro', 'os_impacto_type'); ?></option>
+        </select>
+      </div>
+    </div>
     <p>
-      <label for="titulo"><?php _e('Título', 'os_publicacion_type'); ?></label>
-      <input type="text" class="widefat" id="titulo" name="titulo" value="<?php if (isset($titulo)) echo $titulo; ?>"/>
+      <label for="etiqueta"><?php _e('Etiqueta de texto', 'os_impacto_type'); ?></label>
+      <input type="text" class="widefat" id="etiqueta" name="etiqueta" value="<?php if (isset($etiqueta)) echo $etiqueta; ?>"/>
     </p>
     <p>
-      <label for="subtitulo"><?php _e('Subtítulo', 'os_publicacion_type'); ?></label>
-      <input type="text" class="widefat" id="subtitulo" name="subtitulo" value="<?php if (isset($subtitulo)) echo $subtitulo; ?>"/>
+      <label for="objetivo"><?php _e('Valor objetivo', 'os_impacto_type'); ?></label>
+      <input type="number" min="1" max="999999999999999" class="widefat" id="objetivo" name="objetivo" value="<?php if (isset($objetivo)) echo $objetivo; ?>"/>
+      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 1400000</i>
     </p>
     <p>
-      <label for="animacion"><?php _e('Animación', 'os_publicacion_type'); ?></label>
-      <input type="text" class="widefat" id="animacion" name="animacion" value="<?php if (isset($animacion)) echo $animacion; ?>"/>
+      <label for="completado"><?php _e('Valor completado', 'os_impacto_type'); ?></label>
+      <input type="number" min="1" max="999999999999999" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>"/>
+      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 2500000</i>
     </p>
   </div>
+
+  <div id="form3" name="form3" <?php if ($visualizacion == "dato") echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>>
+   <div class="form-group">
+    <label class="col-sm-4 control-label" for="colorpicker-bootstrap3-form"><?php _e('Seleccione un color', 'os_impacto_type'); ?></label>
+      <div class="col-sm-6">
+        <select name="color" id="color" class="form-control">
+          <option value="#f35e61" <?php if ($color == "#f35e61") echo 'selected="selected"'; ?>><?php _e('Rosado', 'os_impacto_type'); ?></option>
+          <option value="#d8be75" <?php if ($color == "#d8be75") echo 'selected="selected"'; ?>><?php _e('Dorado', 'os_impacto_type'); ?></option>
+          <option value="#004481" <?php if ($color == "#004481") echo 'selected="selected"'; ?>><?php _e('Azul oscuro', 'os_impacto_type'); ?></option>
+        </select>
+      </div>
+    </div>
+    <p>
+      <label for="etiqueta"><?php _e('Etiqueta de texto', 'os_impacto_type'); ?></label>
+      <input type="text" class="widefat" id="etiqueta" name="etiqueta" value="<?php if (isset($etiqueta)) echo $etiqueta; ?>"/>
+    </p>
+    <p>
+      <label for="completado"><?php _e('Valor completado', 'os_impacto_type'); ?></label>
+      <input type="number" min="1" max="999999999999999" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>"/>
+      <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 2500000</i>
+    </p>
+  </div>
+
   <?php
 }
 
@@ -166,18 +200,6 @@ function meta_boxes_impacto_save($post_id) {
 
   if (isset($_POST['completado'])) {
     update_post_meta($post_id, 'completado', strip_tags($_POST['completado']));
-  }
-
-  if (isset($_POST['titulo'])) {
-    update_post_meta($post_id, 'titulo', strip_tags($_POST['titulo']));
-  }
-
-  if (isset($_POST['subtitulo'])) {
-    update_post_meta($post_id, 'subtitulo', strip_tags($_POST['subtitulo']));
-  }
-
-  if (isset($_POST['animacion'])) {
-    update_post_meta($post_id, 'animacion', strip_tags($_POST['animacion']));
   }
 
 }
