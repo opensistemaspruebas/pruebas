@@ -69,7 +69,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 			        <footer class="pt-md">
 			            <div class="row">
 			                <div class="col-md-12 text-center">
-			                    <a target="_blank" href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
+			                    <a <?php if ($instance['externo4'] == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
 			                </div>
 			            </div>
 			        </footer>
@@ -85,6 +85,7 @@ if (!class_exists('OS_Twitter_Widget')) :
   			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : _('Últimos tweets', 'os_twitter_widget');
   			$texto = !empty($instance['texto']) ? $instance['texto'] : _('Estos son los últimos twits sobre educación financiera en el mundo', 'os_twitter_widget');
   			$url_canal = !empty($instance['url_canal']) ? $instance['url_canal'] : 'http://';
+  			$externo4 = $instance['externo4'];
 
 
 	        ?>
@@ -100,6 +101,10 @@ if (!class_exists('OS_Twitter_Widget')) :
 				<label for="<?php echo $this->get_field_id('url_canal'); ?>"><?php _e('URL del canal de Twitter:', 'os_twitter_widget'); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id('url_canal'); ?>" name="<?php echo $this->get_field_name('url_canal'); ?>" type="url" value="<?php echo esc_attr($url_canal); ?>">
 			</p>
+			<p>
+				<input class="widefat" type="checkbox" name="<?php echo $this->get_field_name('externo4');?>" <?php checked(${"externo4"}, 'on'); ?>/>
+                <span><?php _e("Abrir enlace en una nueva ventana"); ?></span>
+			</p>
 	        <?php
 	    }
 
@@ -110,6 +115,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : _('Últimos tweets', 'os_twitter_widget');
 	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : __("Estos son los últimos twits sobre educación financiera en el mundo", "os_twitter_widget");
 	    	$instance['url_twitter'] = (!empty( $new_instance['url_twitter'])) ? strip_tags($new_instance['url_twitter']) : '';
+	    	$instance['externo4'] = strip_tags($new_instance['externo4']);
 
 	    	return $new_instance;
 	    }

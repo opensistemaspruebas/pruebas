@@ -43,7 +43,8 @@ get_header(); ?>
     error_log("paso por ".$tag->slug);
 
     $arrayTaxAG = get_term_meta($tag->term_id);
-    $isoCode = $arrayTaxAG['isoCode'][0];
+    $isoCodeAux = $arrayTaxAG['isoCode'][0];
+    $isoCode = strtolower($isoCodeAux);
     $linkPais = $arrayTaxAG['link'][0];  ?>
 
     <div class="workshops <?php echo $isoCode?>">

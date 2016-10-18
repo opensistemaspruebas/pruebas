@@ -82,7 +82,10 @@ if (!class_exists('OrganizacionesPartnersCustomType')) :
             $link = get_post_meta( $post->ID, 'link');
             $logoMP = get_post_meta($post->ID, 'logoMP', true);
             $logoMP_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($logoMP));
-            ?>          
+            $externo5 = get_post_meta($post->ID, 'externo5', true);
+
+            ?>      
+
             <p>
                 <label for="nombre"><?php _e('Nombre', 'os_organizaciones_partners_parent_type')?></label>
                 <input type="text" class="widefat" name="nombre" id="nombre" value="<?php if ( isset($nombre) ) echo $nombre[0]; ?>" />
@@ -95,6 +98,10 @@ if (!class_exists('OrganizacionesPartnersCustomType')) :
                 <label for="link"><?php _e('Link', 'os_organizaciones_partners_parent_type')?></label>
                 <input type="url" class="widefat" name="link" id="link" value="<?php if ( isset($link) ) echo $link[0]; ?>" />
             </p>
+              <p>
+                <input class="widefat" id="externo5" name="externo5" type="checkbox" <?php checked($externo5, 'on'); ?> />
+                <label for="externo5"><?php _e('Abrir enlace en una nueva ventana', 'os_organizaciones_partners_parent_type'); ?></label>
+              </p>
              <p>
                 <label for="logoMP"><?php _e('Logo', 'os_organizaciones_partners_parent_type'); ?></label>
                 <input class="widefat" id="logoMP" name="logoMP" type="text" value="<?php if (!empty($logoMP)) echo $logoMP; ?>" readonly="readonly"/>
@@ -103,7 +110,7 @@ if (!class_exists('OrganizacionesPartnersCustomType')) :
             <p>
                 <input id="upload_logoMP" name="upload_logoMP" type="button" value="<?php _e('Explorar/Subir', 'os_organizaciones_partners_parent_type'); ?>" />
             </p>
-            <?php
+            <?php 
         }
 
 
@@ -119,6 +126,11 @@ if (!class_exists('OrganizacionesPartnersCustomType')) :
             }
             if (isset($_POST['logoMP'])) {
                 update_post_meta($post_id, 'logoMP', strip_tags($_POST['logoMP']));
+            }
+            if (isset($_POST['externo5'])) {
+                update_post_meta($post_id, 'externo5', strip_tags($_POST['externo5']));
+            } else {
+                 update_post_meta($post_id, 'externo5', "off");
             }
         }
 
