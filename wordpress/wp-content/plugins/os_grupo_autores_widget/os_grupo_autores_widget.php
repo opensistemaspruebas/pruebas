@@ -365,15 +365,16 @@ if (!class_exists('OSGrupoAutoresWidget')) :
         }
 
         function register_wp_styles() { 
-        	//if(is_active_widget( false, false, $this->id_base, true)) { // check if widget is used
+        	if(is_active_widget( false, false, $this->id_base, true) || $this->checkActiveWidgetPageBuilder()) { // check if widget is used
             	wp_enqueue_style( 'os-grupoautores-front-css', plugin_dir_url( __FILE__ ) . 'css/os_grupo_autores_front.css' ); 
-        	//}
+        	}
         }
 
         function register_wp_scripts() { 
-        	//if(is_active_widget( false, false, $this->id_base, true)) { // check if widget is used
+        	if(is_active_widget( false, false, $this->id_base, true) || $this->checkActiveWidgetPageBuilder()) { // check if widget is used
+        		os_imprimir("cargado");
             	wp_enqueue_script( 'os-grupoautores-front-js', plugin_dir_url( __FILE__ ) . 'js/os_grupo_autores_front.js' ); 
-        	//}
+        	}
         }
 
         private function get_authors_info($authors_array) {
@@ -423,6 +424,18 @@ if (!class_exists('OSGrupoAutoresWidget')) :
         private function get_url_perfil($nombre) {
         	$url = get_site_url() . '/perfiles/' . sanitize_title($nombre) . '/';
         	return $url;
+        }
+
+        private function checkActiveWidgetPageBuilder() {
+        	$panels_data = get_post_meta( get_the_ID(), 'panels_data', true );
+			if(empty($panels_data['widgets'])) return false;
+
+			foreach( $panels_data['widgets'] as $widget ) {
+				if($widget['panels_info']['class'] == $this->widget_options['classname']) {
+					return true;
+				}
+			}
+			return false;
         }
 
 	}

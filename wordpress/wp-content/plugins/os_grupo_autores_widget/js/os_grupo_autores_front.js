@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
         }
     }
 
-    jQuery('.readmore').click(function() {
+    jQuery('.people-grid-wrapper .readmore').click(function() {
         var id_grupo = jQuery(this).attr('id');
         var parent = jQuery('#' + id_grupo + ' div.card-container[id^=' + id_grupo + ']:hidden').parent();
         // Cojo los elementos ocultos
