@@ -372,7 +372,6 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
         function register_wp_scripts() { 
         	if(is_active_widget( false, false, $this->id_base, true) || $this->checkActiveWidgetPageBuilder()) { // check if widget is used
-        		os_imprimir("cargado");
             	wp_enqueue_script( 'os-grupoautores-front-js', plugin_dir_url( __FILE__ ) . 'js/os_grupo_autores_front.js' ); 
         	}
         }
