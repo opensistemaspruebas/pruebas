@@ -328,7 +328,11 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 
 	if (empty($enlace_detalle)) : ?>
 		<input type="hidden" id="tipo" name="tipo" value="<?php echo $tipo_post; ?>">
-		<input type="hidden" id="orden" name="orden" value="<?php echo 'AUTOR_'. $author_name; ?>">
+		<?php if (empty($author_name)) : ?>
+			<input type="hidden" id="orden" name="orden" value="<?php echo $orden; ?>">
+		<?php else : ?>
+			<input type="hidden" id="orden" name="orden" value="<?php echo 'AUTOR_'. $author_name; ?>">
+		<?php endif; ?>	
 		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
 		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
