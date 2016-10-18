@@ -2,7 +2,7 @@ jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
 
   var custom_uploader;
 
-  if(ajaxOptions.data.indexOf("action=so_panels_widget_form&widget=OSImagenTituloWidget") != -1) {
+  if(typeof(ajaxOptions.data) !== 'undefined' && ajaxOptions.data.indexOf("action=so_panels_widget_form&widget=OSImagenTituloWidget") != -1) {
 
     jQuery("input#upload_image").click(function(e) {
       e.preventDefault();

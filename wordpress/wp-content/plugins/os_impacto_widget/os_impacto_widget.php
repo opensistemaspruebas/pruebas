@@ -44,7 +44,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 	    	$impacto_3 = $instance['impacto_3'];
 	    	$url_impactos = $instance['url_impactos'];
 
-os_imprimir($tipo_texto);
+
 	    	?>
             <section class="pt-xl pb-lg">
                 <div class="container">
