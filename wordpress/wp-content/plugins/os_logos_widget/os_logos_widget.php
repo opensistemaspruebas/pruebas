@@ -152,7 +152,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			                    	</div>
 			                	</div>
 			                	<div class="modal-footer">
-			                   		<a target="blank" href="<?php echo $link; ?>" class="btn btn-bbva-aqua">><?php _e("Más información", "os_logos_widget"); ?></a>
+			                   		<a target="blank" href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información", "os_logos_widget"); ?></a>
 			                	</div>
 			            	</div>
 			        	</div>
