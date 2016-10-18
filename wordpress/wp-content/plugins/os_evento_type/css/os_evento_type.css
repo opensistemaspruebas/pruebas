@@ -1,3 +1,3 @@
 textarea#evento_descripcion_corta {display: block; margin: 12px 0 0; height: 4em; width: 100%;}
-div#evento_te_interesa input.widefat, div#evento_highlights input.widefat {margin: 5px 0px 5px 0px;}
+div#evento_topics input.widefat, div#evento_te_interesa input.widefat, div#evento_highlights input.widefat {margin: 5px 0px 5px 0px;}
 img#show_imagenCard, img#show_imagenCabecera {margin-top: 10px;}
