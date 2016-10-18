@@ -38,8 +38,8 @@ if (!class_exists('OSImagenTituloWidget')) :
     	?>
 
     		<header class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-		      <span><?php echo $instance['titulo']; ?></span><br>
-		      <img class="img-responsive" src="<?php echo $imagen_url; ?>" alt=""><br>
+		      <span><?php echo $instance['titulo']; ?></span>
+		      <img class="img-responsive" src="<?php echo $imagen_url; ?>" alt="">
 		    </header>
 
 	    	<?php

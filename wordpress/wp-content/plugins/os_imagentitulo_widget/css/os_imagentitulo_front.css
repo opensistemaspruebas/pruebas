@@ -1,34 +1,54 @@
-/* line 3, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_aboutUs.scss */
-#about-us header {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center;
+/* line 75, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/modules/_font-sizes.scss */
+.about-us header span {
+  font-size: 54px;
 }
 
-/* line 8, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_aboutUs.scss */
-#about-us header span {
+/* line 2, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/views/_aboutUs.scss */
+.about-us header {
+  position: relative;
+  text-align: center;
+}
+@media (max-width: 767px) {
+.about-us header span {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* line 2, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/views/_aboutUs.scss */
+  .about-us header {
+    height: 180px;
+  }
+}
+
+/* line 8, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/views/_aboutUs.scss */
+.about-us header span {
   position: absolute;
-  color: white;
+  top: 45%;
+  right: 0;
+  left: 0;
+  color: #ffffff;
   font-weight: 700;
 }
 
-/* line 14, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_aboutUs.scss */
-#about-us header img {
+@media (max-width: 767px) {
+  /* line 8, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/views/_aboutUs.scss */
+  .about-us header span {
+    font-size: 32px;
+  }
+}
+
+/* line 20, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/views/_aboutUs.scss */
+.about-us header img {
+  object-fit: cover;
+  font-family: "object-fit: cover";
   max-height: 450px;
   width: 100%;
 }
 
-
-#about-us header span {
-  font-size: 54px;
-}
-
 @media (max-width: 767px) {
-  #about-us header span {
-    font-size: 40px;
+  /* line 20, /Users/josedrac/gitsopra/bbva-educacionFinanciera/app/assets/sass/views/_aboutUs.scss */
+  .about-us header img {
+    height: 100%;
   }
 }
