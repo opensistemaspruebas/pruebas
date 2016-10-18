@@ -27,6 +27,7 @@ function create_ambito_geografico_taxonomy(){
         'all_items'          => __('Todos', 'os_ambito_geografico_taxonomy'),
         'parent_item'        => __('Superior', 'os_ambito_geografico_taxonomy'),
         'parent_item_colon'  => __('Superior:', 'os_ambito_geografico_taxonomy'),
+        
         'update_item'        => __('Actualizar ámbito geográfico', 'os_ambito_geografico_taxonomy'),
         'edit_item'          => __('Editar ámbito geográfico', 'os_ambito_geografico_taxonomy'),
         'add_new_item'       => __('Añadir nuevo ámbito geográfico', 'os_ambito_geografico_taxonomy'), 
@@ -87,7 +88,6 @@ function ambito_geografico_edit_meta_fields($term){
     $t_id = $term->term_id;
  
     $term_meta = get_term_meta($t_id);
-
 
     ?>
         <tr class="form-field">
