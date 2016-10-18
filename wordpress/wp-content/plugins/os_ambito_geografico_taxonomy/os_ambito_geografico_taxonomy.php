@@ -86,14 +86,16 @@ add_action('ambito_geografico_add_form_fields', 'ambito_geografico_add_new_meta_
 function ambito_geografico_edit_meta_fields($term){
     $t_id = $term->term_id;
  
-    $term_meta = get_option("ambito_geografico_$t_id");
+    $term_meta = get_term_meta($t_id);
+
+
     ?>
         <tr class="form-field">
             <th scope="row" valign="top">
                 <label for="term_meta[isoCode]">Código ISO del país</label>
             </th>
             <td>
-                <input type="text" name="term_meta[isoCode]" id="term_meta[isoCode]" value="<?php echo esc_attr( $term_meta['isoCode'] ) ? esc_attr( $term_meta['isoCode'] ) : ''; ?>">
+                <input type="text" name="term_meta[isoCode]" id="term_meta[isoCode]" value="<?php echo esc_attr( $term_meta['isoCode'][0] ) ? esc_attr( $term_meta['isoCode'][0] ) : ''; ?>">
                 <p class="description">Introduzca el código ISO que identifica al nuevo ámbito geográfico</p>
             </td>
         </tr>
@@ -102,7 +104,7 @@ function ambito_geografico_edit_meta_fields($term){
                 <label for="term_meta[descripcion]">Descripción del enlace</label>
             </th>
             <td>
-                <input type="text" name="term_meta[descripcion]" id="term_meta[descripcion]" value="<?php echo esc_attr( $term_meta['descripcion'] ) ? esc_attr( $term_meta['descripcion'] ) : ''; ?>">
+                <input type="text" name="term_meta[descripcion]" id="term_meta[descripcion]" value="<?php echo esc_attr( $term_meta['descripcion'][0] ) ? esc_attr( $term_meta['descripcion'][0] ) : ''; ?>">
                 <p class="description">Nombre descriptivo de la URL</p>
             </td>
         </tr>
@@ -111,7 +113,7 @@ function ambito_geografico_edit_meta_fields($term){
                 <label for="term_meta[link]">Link de la web</label>
             </th>
             <td>
-                <input type="url" name="term_meta[link]" id="term_meta[link]" value="<?php echo esc_attr( $term_meta['link'] ) ? esc_attr( $term_meta['link'] ) : ''; ?>">
+                <input type="url" name="term_meta[link]" id="term_meta[link]" value="<?php echo esc_attr( $term_meta['link'][0] ) ? esc_attr( $term_meta['link'][0] ) : ''; ?>">
                 <p class="description">URL de la página del país</p>
             </td>
         </tr>
