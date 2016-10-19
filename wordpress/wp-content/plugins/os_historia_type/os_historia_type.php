@@ -78,8 +78,9 @@ function historia_meta_boxes() {
   add_meta_box("historia_texto_destacado" ,__("Texto destacado", "os_historia_type"), "meta_box_texto_destacado_historia", 'historia', 'advanced', 'high');
   add_meta_box("historia_destacada" ,__("Historia destacada", "os_historia_type"), "meta_box_destacada_historia", 'historia', 'side', 'high');
   add_meta_box("historia_imagen_card" ,__("Imagen Card", "os_historia_type"), "meta_box_imagen_card_historia", 'historia', 'normal', 'high');
-  add_meta_box("historia_imagen_cabecera" ,__("Imagen cabecera", "os_historia_type"), "meta_box_imagen_cabecera_historia", 'historia', 'normal', 'high');
-  add_meta_box("historia_video" ,__("Video cabecera", "os_historia_type"), "meta_box_video_historia", 'historia', 'normal', 'high');
+  //add_meta_box("historia_imagen_cabecera" ,__("Imagen cabecera", "os_historia_type"), "meta_box_imagen_cabecera_historia", 'historia', 'normal', 'high');
+  add_meta_box("historia_video_intro" ,__("Video de introducción cabecera", "os_historia_type"), "meta_box_videoIntro_historia", 'historia', 'normal', 'high');
+  add_meta_box("historia_video" ,__("Video final cabecera", "os_historia_type"), "meta_box_video_historia", 'historia', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'historia_meta_boxes');
 
@@ -129,7 +130,7 @@ function meta_box_texto_destacado_historia($post) {
   <?php
 }
 
-function meta_box_imagen_cabecera_historia($post) {         
+/*function meta_box_imagen_cabecera_historia($post) {         
 
   wp_nonce_field(basename(__FILE__), 'meta_box_imagen_cabecera_historia-nonce');
 
@@ -149,7 +150,7 @@ function meta_box_imagen_cabecera_historia($post) {
             
 <?php
        
-}
+}*/
 
 
         
@@ -172,6 +173,25 @@ function meta_box_imagen_card_historia($post) {
             
 <?php
        
+}
+
+function meta_box_videoIntro_historia($post) {
+  wp_nonce_field( basename( __FILE__ ), 'videoIntro_historia-nonce' );
+
+  $videoIntro_url = get_post_meta($post->ID,'videoIntro-url',true);
+
+  ?>
+
+    <p class="videoIntro-wordpress">
+      <label for="videoIntro-url"><?php _e('URL video', 'os_historia_type'); ?></label>
+      <input class="widefat" id="videoIntro-url" name="videoIntro-url" type="text" value="<?php if (isset($videoIntro_url)) echo $videoIntro_url; ?>"/>
+      <i><?php _e('Es el video que se mostrará al cargar la página en estado autoplay','os_historia_type'); ?></i>
+    </p>    
+    <p class="videoIntro-wordpress">
+      <input id="upload_videoIntroHistoria" name="upload_videoIntroHistoria" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+    </p>
+
+  <?php 
 }
 
 function meta_box_video_historia($post) {
@@ -203,7 +223,7 @@ function meta_box_video_historia($post) {
     <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
       <label for="wp-video-url"><?php _e('URL video', 'os_historia_type'); ?></label>
       <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>"/>
-      <i><?php _e('Si el campo "Video cabecera" está relleno, se mostrará este en vez de "Imagen cabecera"','os_historia_type'); ?></i>
+      <i><?php _e('Este video aparecerá al hacer click sobre el icono play. Aparecerá en una ventana modal','os_historia_type'); ?></i>
     </p>    
     <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
       <input id="upload_videoHistoria" name="upload_videoHistoria" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
@@ -248,17 +268,23 @@ function meta_boxes_save_historia($post_id) {
     }
   }
   
-  if(user_can_save($post_id, 'meta_box_imagen_cabecera_historia-nonce')) {
+  /*if(user_can_save($post_id, 'meta_box_imagen_cabecera_historia-nonce')) {
     if (isset($_POST['imagenCabecera'])) {
      update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
     }
-  }
+  }*/
 
   if(user_can_save($post_id, 'meta_box_destacada_historia-nonce')) {
     if (isset($_POST['destacada'])) {
       update_post_meta($post_id, 'destacada', strip_tags($_POST['destacada']));
     } else {
       update_post_meta($post_id, 'destacada', "off");
+    }
+  }
+
+  if(user_can_save($post_id, 'videoIntro_historia-nonce')) {
+    if(isset($_POST['videoIntro-url'])) {
+      update_post_meta($post_id, 'videoIntro-url', strip_tags($_POST['videoIntro-url']));
     }
   }
 
