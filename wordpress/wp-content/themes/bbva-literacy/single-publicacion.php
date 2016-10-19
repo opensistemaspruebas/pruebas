@@ -263,7 +263,7 @@ get_header(); ?>
                               $name = '';
                               $cargo = '';
                               if (is_a($author, 'WP_User')) {
-                                $name = $author->data->user_login;
+                                $name = $author->data->display_name;
                                 $cargo = get_the_author_meta('cargo',$author->data->ID);
                               } else {
                                 $name = $author->display_name;
