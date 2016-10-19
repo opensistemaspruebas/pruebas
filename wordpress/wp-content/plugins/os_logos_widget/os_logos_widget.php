@@ -130,6 +130,7 @@ if (!class_exists('OS_Logos_Widget')) :
 								$descripcion = get_post_meta($post_id, 'descripcion', true);
 								$link = get_post_meta($post_id, 'link', true);
 								$logoMP = get_post_meta($post_id, 'logoMP', true);
+								$externo5 = get_post_meta($post_id, 'externo5', true);
 			    	?>
 
 				<section class="lightbox modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
@@ -152,7 +153,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			                    	</div>
 			                	</div>
 			                	<div class="modal-footer">
-			                   		<a target="blank" href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información", "os_logos_widget"); ?></a>
+			                   		<a <?php if ($externo5 == "on") echo 'target="_blank"';?> href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información", "os_logos_widget"); ?></a>
 			                	</div>
 			            	</div>
 			        	</div>
@@ -208,6 +209,7 @@ if (!class_exists('OS_Logos_Widget')) :
 						$descripcion = get_post_meta($post_id, 'descripcion', true);
 						$link = get_post_meta($post_id, 'link', true);
 						$logoMP = get_post_meta($post_id, 'logoMP', true);
+						$externo5 = get_post_meta($post_id, 'externo5', true);
 			        ?>
 
 			        <section class="lightbox modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
@@ -230,7 +232,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			                            </div>
 			                        </div>
 			                        <div class="modal-footer">
-			                        <a target="blank" href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información"); ?></a>
+			                        <a <?php if ($externo5 == "on") echo 'target="_blank"';?>" href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información"); ?></a>
 			                        </div>
 			                    </div>
 			                </div>
@@ -289,6 +291,7 @@ if (!class_exists('OS_Logos_Widget')) :
 	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : _('Organizaciones del consejo asesor', 'os_logos_widget');
 	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : __("Estas son varias de las organizaciones que apoyan a la educación financiera en los diferentes países en los que estamos presentes", "os_logos_widget");
 	    	$instance['tipo_post'] = (!empty($new_instance['tipo_post'])) ? strip_tags($new_instance['tipo_post']) : '';
+	    	$instance['externo5'] = strip_tags($new_instance['externo5']);
 
 	    	return $instance;
 	    }

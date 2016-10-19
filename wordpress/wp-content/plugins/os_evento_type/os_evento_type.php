@@ -65,7 +65,7 @@ if (!class_exists('OS_Evento_Type')) {
 				'hierarchical'       => false,
 				'menu_position'      => null,
 				'supports'           => array('title'),
-                'taxonomies'            => array('topic'),
+                'taxonomies'         => false,
 			);
 			register_post_type($this->post_type, $args );
         }
@@ -92,13 +92,15 @@ if (!class_exists('OS_Evento_Type')) {
             add_meta_box('evento_imagen_card',  __('Imagen para tarjeta', 'os_evento_type'), array(&$this, 'meta_box_evento_imagen_card'), 'evento', 'normal', 'high');
         	add_meta_box('evento_imagen',  __('Imagen de cabecera', 'os_evento_type'), array(&$this, 'meta_box_evento_imagen'), 'evento', 'normal', 'high');
         	add_meta_box('evento_video',  __('Vídeo de cabecera', 'os_evento_type'), array(&$this, 'meta_box_evento_video'), 'evento', 'normal', 'high');
+        	add_meta_box('evento_documento',  __('Documento', 'os_evento_type'), array(&$this, 'meta_box_evento_documento'), 'evento', 'normal', 'high');
         	add_meta_box('evento_fecha',  __('Fecha del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_fecha'), 'evento', 'normal', 'high');
 			add_meta_box('evento_localizacion',  __('Localización del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_localizacion'), 'evento', 'normal', 'high');
 			add_meta_box('evento_descripcion_corta',  __('Descripción corta del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_corta'), 'evento', 'normal', 'high');
 			add_meta_box('evento_descripcion_corta',  __('Descripción corta del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_corta'), 'evento', 'normal', 'high');
 			add_meta_box('evento_descripcion_larga',  __('Descripción larga del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_larga'), 'evento', 'normal', 'high');
-			add_meta_box('evento_highlights',  __('Highlights', 'os_evento_type'), array(&$this, 'meta_box_evento_highlights'), 'evento', 'normal', 'high');
-			add_meta_box('evento_te_interesa',  __('Te interesa', 'os_evento_type'), array(&$this, 'meta_box_evento_te_interesa'), 'evento', 'normal', 'high');
+			add_meta_box('evento_topics',  __('Topics', 'os_evento_type'), array(&$this, 'meta_box_evento_topics'), 'evento', 'side', 'high');
+			add_meta_box('evento_highlights',  __('Highlights', 'os_evento_type'), array(&$this, 'meta_box_evento_highlights'), 'evento', 'side', 'high');
+			add_meta_box('evento_te_interesa',  __('Te interesa', 'os_evento_type'), array(&$this, 'meta_box_evento_te_interesa'), 'evento', 'side', 'high');
 		}
 
 
@@ -110,12 +112,12 @@ if (!class_exists('OS_Evento_Type')) {
 			?>
 			<p><?php _e('Esta es la imagen que se muestra en la tarjeta del evento.','os_evento_type'); ?></p>
 			<p>
-				<label for="imagenCard"><?php _e('URL de una imagen alojada en WordPress', 'os_historia_type'); ?></label>
+				<label for="imagenCard"><?php _e('URL de una imagen alojada en WordPress', 'os_evento_type'); ?></label>
 				<input class="widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" readonly="readonly"/>
 				<img id="show_imagenCard" draggable="false" alt="" name="show_imagenCard" src="<?php if (!empty($imagen_card_thumbnail)) echo esc_attr($imagen_card_thumbnail); ?>" style="<?php if (empty($imagen_card_thumbnail)) echo "display: none;"; ?>">
 			</p>
 			<p>
-				<input id="upload_imagenCard" name="upload_imagenCard" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+				<input id="upload_evento_imagenCard" name="upload_evento_imagenCard" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
 			</p>
 			<?php
 		}
@@ -129,12 +131,12 @@ if (!class_exists('OS_Evento_Type')) {
 			?>
 			<p><?php _e('Esta es la imagen que se muestra en la cabecera de la página de detalle del evento. Si hay un vídeo, se mostrará el vídeo en lugar de ésta.','os_evento_type'); ?></p>
 			<p>
-				<label for="imagenCabecera"><?php _e('URL de una imagen alojada en WordPress', 'os_historia_type'); ?></label>
+				<label for="imagenCabecera"><?php _e('URL de una imagen alojada en WordPress', 'os_evento_type'); ?></label>
 				<input class="widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" readonly="readonly"/>
 				<img id="show_imagenCabecera" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_thumbnail)) echo esc_attr($imagen_cabecera_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_thumbnail)) echo "display: none;"; ?>">
 			</p>
 			<p>
-				<input id="upload_imagenCabecera" name="upload_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
+				<input id="upload_evento_imagenCabecera" name="upload_evento_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
 			</p>
 			<?php
 		}
@@ -169,9 +171,25 @@ if (!class_exists('OS_Evento_Type')) {
 				<input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>" readonly="readonly"/>
 			</p>    
 			<p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
-				<input id="upload_videoEvento" name="upload_videoEvento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+				<input id="upload_evento_videoEvento" name="upload_evento_videoEvento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
 			</p>
 		  <?php 
+		}
+
+
+		function meta_box_evento_documento($post) {
+			wp_nonce_field( basename( __FILE__ ), 'meta_box_evento_documento-nonce');
+			$evento_documento = get_post_meta($post->ID, 'evento_documento', true); 
+			?>
+			<p><?php _e('Este es el enlace al documento que se muestra en la página de detalle del evento.','os_evento_type'); ?></p>
+			<p>
+				<label for="evento_documento"><?php _e('URL de un documento alojado en WordPress', 'os_evento_type'); ?></label>
+				<input class="widefat" id="evento_documento" name="evento_documento" type="text" value="<?php if (!empty($evento_documento)) echo $evento_documento; ?>" readonly="readonly"/>
+			</p>
+			<p>
+				<input id="upload_evento_documento" name="upload_evento_documento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+			</p>
+			<?php
 		}
 
 
@@ -264,6 +282,18 @@ if (!class_exists('OS_Evento_Type')) {
 		}
 
 
+		function meta_box_evento_topics($post) {
+			wp_nonce_field(basename(__FILE__), 'meta_box_evento_topics-nonce');
+			$evento_topics = get_post_meta($post->ID, 'evento_topics', true);
+			?>
+			<p><?php _e('Estos son los topics del evento.', 'os_evento_type'); ?></p>
+			<input type="text" id="evento_topics[0]" name="evento_topics[0]" class="widefat" placeholder="<?php _e('Topic 1', 'os_evento_type'); ?>" value="<?php echo $evento_topics[0]; ?>">
+			<input type="text" id="evento_topics[1]" name="evento_topics[1]" class="widefat" placeholder="<?php _e('Topic 2', 'os_evento_type'); ?>" value="<?php echo $evento_topics[1]; ?>">
+			<input type="text" id="evento_topics[2]" name="evento_topics[2]" class="widefat" placeholder="<?php _e('Topic 3', 'os_evento_type'); ?>" value="<?php echo $evento_topics[2]; ?>">
+			<?php 	
+		}
+
+
 		function meta_box_evento_highlights($post) {
 			wp_nonce_field(basename(__FILE__), 'meta_box_evento_highlights-nonce');
 			$evento_highlights = get_post_meta($post->ID, 'evento_highlights', true);
@@ -296,6 +326,10 @@ if (!class_exists('OS_Evento_Type')) {
 
 		    if (isset($_POST['imagenCabecera'])) {
 		    	update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
+		    }
+
+		    if (isset($_POST['evento_documento'])) {
+		    	update_post_meta($post_id, 'evento_documento', strip_tags($_POST['evento_documento']));
 		    }
 
 			if (isset($_POST['video-type'])) {
@@ -334,6 +368,17 @@ if (!class_exists('OS_Evento_Type')) {
 			if (isset($_POST['eventodescripcionlarga'])) {
 				update_post_meta($post_id, 'evento_descripcion_larga', $_POST['eventodescripcionlarga']);
 			}
+
+	        if (isset($_POST['evento_topics'])) {
+	            $evento_topics = $_POST['evento_topics'];
+	            $evento_topics_save =  array();
+	            foreach ($evento_topics as $p) {
+	                if (!empty($p)) {
+	                    array_push($evento_topics_save, $p);
+	                }
+	            }
+	            update_post_meta($post_id, 'evento_topics', $evento_topics_save);
+	        }
 	        
 	        if (isset($_POST['evento_highlights'])) {
 	            $evento_highlights = $_POST['evento_highlights'];

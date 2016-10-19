@@ -10,14 +10,14 @@ jQuery(document).ready(function($) {
         $('.video-youtube').hide();
     });
 
-    $("input#upload_videoEvento").click(function(e) {
+    $("#evento_video input#upload_evento_videoEvento").click(function(e) {
         e.preventDefault();
-        var custom_uploader;
-        if (custom_uploader) {
-            custom_uploader.open();
+        var video_file_frame;
+        if (video_file_frame) {
+            video_file_frame.open();
             return;
         }
-        custom_uploader = wp.media.frames.file_frame = wp.media({
+        video_file_frame = wp.media.frames.file_frame = wp.media({
             title: object_name.choose_source_logo,
             button: {
                 text: object_name.choose_source_logo
@@ -25,21 +25,21 @@ jQuery(document).ready(function($) {
             multiple: false,
             library: { type: 'video' },
         });
-        custom_uploader.on('select', function() {
-            var attachment = custom_uploader.state().get('selection').first().toJSON();
+        video_file_frame.on('select', function() {
+            var attachment = video_file_frame.state().get('selection').first().toJSON();
             $('input#wp-video-url').val(attachment.url);
         });
-        custom_uploader.open();
+        video_file_frame.open();
     });
 
-    $("input#upload_imagenCabecera").click(function(e) {
+    $("#evento_imagen input#upload_evento_imagenCabecera").click(function(e) {
         e.preventDefault();
-        var custom_uploader;
-        if (custom_uploader) {
-            custom_uploader.open();
+        var imagen_cabecera_file_frame;
+        if (imagen_cabecera_file_frame) {
+            imagen_cabecera_file_frame.open();
             return;
         }
-        custom_uploader = wp.media.frames.file_frame = wp.media({
+        imagen_cabecera_file_frame = wp.media.frames.file_frame = wp.media({
             title: object_name.choose_source_logo,
             button: {
                 text: object_name.choose_source_logo
@@ -47,8 +47,8 @@ jQuery(document).ready(function($) {
             multiple: false,
             library: { type: 'image' },
         });
-        custom_uploader.on('select', function() {
-            var attachment = custom_uploader.state().get('selection').first().toJSON();
+        imagen_cabecera_file_frame.on('select', function() {
+            var attachment = imagen_cabecera_file_frame.state().get('selection').first().toJSON();
             $('input#imagenCabecera').val(attachment.url);
             if(typeof(attachment.sizes.thumbnail) !== 'undefined') {
                 $('img#show_imagenCabecera').attr("src", attachment.sizes.thumbnail.url);
@@ -57,17 +57,17 @@ jQuery(document).ready(function($) {
             }
             $('img#show_imagenCabecera').show();
         });
-        custom_uploader.open();
+        imagen_cabecera_file_frame.open();
     });
 
-    $("input#upload_imagenCard").click(function(e) {
+    $("#evento_imagen_card input#upload_evento_imagenCard").click(function(e) {
         e.preventDefault();
-        var custom_uploader;
-        if (custom_uploader) {
-            custom_uploader.open();
+        var imagen_card_file_frame;
+        if (imagen_card_file_frame) {
+            imagen_card_file_frame.open();
             return;
         }
-        custom_uploader = wp.media.frames.file_frame = wp.media({
+        imagen_card_file_frame = wp.media.frames.file_frame = wp.media({
             title: object_name.choose_source_logo,
             button: {
                 text: object_name.choose_source_logo
@@ -75,8 +75,8 @@ jQuery(document).ready(function($) {
             multiple: false,
             library: { type: 'image' },
         });
-        custom_uploader.on('select', function() {
-            var attachment = custom_uploader.state().get('selection').first().toJSON();
+        imagen_card_file_frame.on('select', function() {
+            var attachment = imagen_card_file_frame.state().get('selection').first().toJSON();
             $('input#imagenCard').val(attachment.url);
             if(typeof(attachment.sizes.thumbnail) !== 'undefined') {
                 $('img#show_imagenCard').attr("src", attachment.sizes.thumbnail.url);
@@ -85,7 +85,29 @@ jQuery(document).ready(function($) {
             }
             $('img#show_imagenCard').show();
         });
-        custom_uploader.open();
+        imagen_card_file_frame.open();
+    });
+
+    $("#evento_documento input#upload_evento_documento").click(function(e) {
+        e.preventDefault();
+        var pdf_file_frame;
+        if (pdf_file_frame) {
+            pdf_file_frame.open();
+            return;
+        }
+        pdf_file_frame = wp.media.frames.file_frame = wp.media({
+            title: object_name.choose_source_logo,
+            button: {
+                text: object_name.choose_source_logo
+            },
+            multiple: false,
+            library: { type: 'application/pdf' },
+        });
+        pdf_file_frame.on('select', function() {
+            var attachment = pdf_file_frame.state().get('selection').first().toJSON();
+            $('input#evento_documento').val(attachment.url);
+        });
+        pdf_file_frame.open();
     });
 
 });
