@@ -115,6 +115,23 @@ function fetch($post_type, $order){
 		'suppress_filters' => true 
 	);
 
+	/*$args = array(
+        'posts_per_page' => 70,
+        'offset'           => 0,
+        'post_type' => $post_type,
+        'meta_key' => 'publication_date', 
+        'meta_value' => date("Y-m-d",time()),
+        'post_status'      => 'publish',
+        //'meta_compare' => $compare,
+        'orderby' => 'meta_value'
+      //'suppress_filters' => 1,
+    );*/
+
+               // Eventos locales
+              // $local_posts = get_posts( $args );
+
+
+
 	$posts = get_posts($args);
 	$index_array = array();
 

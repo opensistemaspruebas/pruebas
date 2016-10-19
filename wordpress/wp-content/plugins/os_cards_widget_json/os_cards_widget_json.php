@@ -48,6 +48,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 
         // Widget del front-end
 	    public function widget($args, $instance) {
+	    	
 
 	    	$titulo = (!empty($instance['titulo'])) ? $instance['titulo'] : '';
 	    	$texto = (!empty($instance['texto'])) ? $instance['texto'] : '';
@@ -154,7 +155,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 				<label for="<?php echo $this->get_field_id('orden_posts'); ?>"><?php _e('Orden de los posts', 'os_cards_widget_json'); ?>:</label>
 				<select class="widefat" id="<?php echo $this->get_field_id('orden_posts'); ?>" name="<?php echo $this->get_field_name('orden_posts'); ?>">
 					<option value="ASC" <?php $selected = ($orden == 'ASC') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Ascendente', 'os_cards_widget_json'); ?></option>
-					<option value="<?php echo $orden; ?>" <?php $selected = ($orden == 'DESC') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Descendente', 'os_cards_widget_json'); ?></option>
+					<option value="DESC" <?php $selected = ($orden == 'DESC') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Descendente', 'os_cards_widget_json'); ?></option>
 					<option value="DESTACADOS" <?php $selected = ($orden == 'DESTACADOS') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Destacados', 'os_cards_widget_json'); ?></option>
 				</select>
 			</p>
@@ -179,7 +180,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	$instance['tipo_post'] = (!empty($new_instance['tipo_post'])) ? strip_tags($new_instance['tipo_post']) : '';
 	    	$instance['enlace_detalle'] = (!empty($new_instance['enlace_detalle'])) ? strip_tags($new_instance['enlace_detalle']) : '';
 	    	$instance['filtrar_por_autor'] = (!empty($new_instance['filtrar_por_autor'])) ? strip_tags($new_instance['filtrar_por_autor']) : false;
-	    	$instance['orden_posts'] = (!empty($new_instance['orden_posts'])) ? strip_tags($new_instance['orden_posts']) : "";
+	    	$instance['orden_posts'] = (!empty($new_instance['orden_posts'])) ? strip_tags($new_instance['orden_posts']) : "DESC";
 
 			return $instance;
 	    }

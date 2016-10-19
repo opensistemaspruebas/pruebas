@@ -257,3 +257,37 @@ function add_coauthor_query_var($vars) {
 	 return $vars;
 }
 add_filter( 'query_vars', 'add_coauthor_query_var' );
+
+/* Añade metadatos a los posts que se comparten en Facebook y Google+ */
+function add_opengraph_meta() {
+	global $post;
+
+	if(!is_single())
+		return;
+
+	// Si es un tipo de post que vamos a compartir, incluimos los metadatos
+	if($post->post_type == 'historia') {
+		// La imagen se obtiene de un campo diferente según el tipo de post
+		$imagen = '';
+		if($post->post_type == 'historia') {
+			$imagenCard = get_post_meta($post->ID, 'imagenCard', true);
+			$imagen = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCard));
+		}
+
+		?>
+
+		<link rel="canonical" href="<?php echo get_permalink(); ?>">
+	    <meta property="og:image" content="<?php echo $imagen; ?>">
+	    <meta property="og:type" content="article">
+	    <meta property="og:url" content="<?php echo get_permalink(); ?>">
+	    <meta property="og:title" content="<?php the_title(); ?>">
+	    <meta property="og:description" content="<?php echo get_the_excerpt(); ?>">
+	    <meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
+
+	    <?php
+
+	} else {
+		return;
+	}
+}
+add_action( 'wp_head', 'add_opengraph_meta', 5 );
