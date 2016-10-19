@@ -30,66 +30,56 @@ function getIndice(indice) {
 	var npv = parseInt(jQuery("#npv").val());
 	var npt = parseInt(jQuery("#npt").val());
 	var npc = parseInt(jQuery("#npc").val());
+
+	var fin = 0;
 	if (npc == 0) {
-		for (var i = npc; i < npc + npt; i++) {
-			//console.log(indice[i]);
-			if (indice[i] == undefined) {
-				// Si el indice no existe, se oculta el boton de mostrar mas y se sale del bucle
-				jQuery('a#readmore').hide();
-				break;
-			}
-			jQuery('a#readmore').show();
-			crearPost(indice[i]);
-		}
-		npc += npt;
+		fin = npc + npt;
 	} else {
-		for (var i = npc; i < npc + npv; i++) {
-			//console.log(indice[i]);
-			if (indice[i] == undefined) {
-				// Si el indice no existe, se oculta el boton de mostrar mas y se sale del bucle
-				jQuery('a#readmore').hide();
-				break;
-			}
-			jQuery('a#readmore').show();
-			crearPost(indice[i]);
-		}
-		npc += npv;
+		fin = npc + npv;
 	}
-	jQuery("#npc").val(npc);
-	if (indice.length <= npc) {
-		jQuery('a#readmore').hide();
-	}
+	loop(npc, fin, indice);
+
 }
 
 
-// Crear post
-function crearPost(indice){
-	var tipo = jQuery("#tipo").val();
-	var orden = jQuery("#orden").val();
-	var path = "/wp-content/jsons/" + tipo + "/";
-	jQuery.getJSON(path + indice + ".json", montarPost);
-}
-
-
-// Montar post
-function montarPost(post){
-	//console.log(post);
-	var plantilla = jQuery("#plantilla").val();
-	switch(plantilla) {
+function loop(i, fin, indice, onDone){
+    if (i >= indice.length || i >= fin){
+        //base case
+        if (i >= indice.length)
+        	jQuery('a#readmore').hide();
+        else
+        	jQuery('a#readmore').show();
+        jQuery("#npc").val(i);
+    } else {
 		
-		case 'plantilla_1':
-			jQuery('section.latests-posts .card-container div:first').append(getPost(post));
-			break;
+		var tipo = jQuery("#tipo").val();
+		var orden = jQuery("#orden").val();
+		var path = "/wp-content/jsons/" + tipo + "/";
+		
+		jQuery.getJSON(path + indice[i] + ".json", function(post) {
+			var plantilla = jQuery("#plantilla").val();
+			switch(plantilla) {
 
-		case 'plantilla_2':
-			jQuery('.cards-grid .container div.row').first().append(getPost(post));
-			break;
+			case 'plantilla_1':
+				jQuery('section.latests-posts .card-container div:first').append(getPost(post));
+				break;
 
-		case 'plantilla_3':
-			jQuery('section.outstanding-histories .card-container div:first').first().append(getPost(post));
-			break;
+			case 'plantilla_2':
+				jQuery('.cards-grid .container div.row').first().append(getPost(post));
+				break;
 
-	}
+			case 'plantilla_3':
+				jQuery('section.outstanding-histories .card-container div:first').first().append(getPost(post));
+				break;
+
+			}
+		});
+
+		//console.log(indice[i]);
+
+		loop(i+1, fin, indice);
+    
+    }
 }
 
 
