@@ -259,8 +259,19 @@ get_header(); ?>
                               <div class="pre-rectangle"></div>
                           </div>
                           <div class="col-xs-11">
-                             <h2><?php echo $author->data->display_name; ?></h2>
-                                <p><?php echo get_the_author_meta('cargo', $author->data->ID); ?></p>
+                            <?php
+                              $name = '';
+                              $cargo = '';
+                              if (is_a($author, 'WP_User')) {
+                                $name = $author->data->user_login;
+                                $cargo = get_the_author_meta('cargo',$author->data->ID);
+                              } else {
+                                $name = $author->display_name;
+                                $cargo = get_post_meta($author->ID, 'cargo', true);
+                              }
+                            ?>
+                            <h2><?php echo $name; ?></h2>
+                            <p><?php echo $cargo; ?></p>
                           </div>
                       </div>
                   </div>
