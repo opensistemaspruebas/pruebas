@@ -53,6 +53,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 	    	$titulo = $instance['titulo'];
 	    	$texto = $instance['texto'];
 	    	$url_canal = $instance['url_canal'];
+	    	$externo4 = $instance['externo4'];
 
 	    	?>
 	    	<section class="latests-tweets pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
@@ -69,7 +70,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 			        <footer class="pt-md">
 			            <div class="row">
 			                <div class="col-md-12 text-center">
-			                    <a <?php if ($instance['externo4'] == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
+			                    <a <?php if ($externo4 == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
 			                </div>
 			            </div>
 			        </footer>

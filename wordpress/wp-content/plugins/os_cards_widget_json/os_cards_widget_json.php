@@ -48,6 +48,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 
         // Widget del front-end
 	    public function widget($args, $instance) {
+	    	
 
 	    	$titulo = (!empty($instance['titulo'])) ? $instance['titulo'] : '';
 	    	$texto = (!empty($instance['texto'])) ? $instance['texto'] : '';
@@ -57,7 +58,6 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	$tipo_post = (!empty($instance['tipo_post'])) ? $instance['tipo_post'] : 'publicacion';
 	    	$enlace_detalle = (!empty($instance['enlace_detalle'])) ? $instance['enlace_detalle'] : '';
 	    	$orden = (!empty($instance['orden_posts'])) ? $instance['orden_posts'] : 'DESC';
-	    	$externo = $instance['externo'];
 
 	    	$parts = parse_url($_SERVER['REQUEST_URI']);
 	    	$author_name = '';
@@ -88,14 +88,14 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 
 	    	switch ($plantilla) {
 	    		case 'plantilla_1' :
-	    			imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $externo);
+	    			imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
 	    			break;
 	    		case 'plantilla_2' :
 	    			if (!empty($posts))
-	    				imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name, $externo);
+	    				imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name);
 	    			break;
 	    		case 'plantilla_3' :
-	    			imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $externo);
+	    			imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden);
 	    			break;
 	    	}
 
@@ -114,7 +114,6 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	$enlace_detalle = (!empty($instance['enlace_detalle'])) ? $instance['enlace_detalle'] : '';
 	    	$filtrar_por_autor = isset($instance[ 'filtrar_por_autor' ]) ? $instance['filtrar_por_autor'] : 'off';
 	    	$orden = (!empty($instance["orden_posts"])) ? $instance["orden_posts"] : "";
-	    	$externo = isset($instance['externo']) ? $instance['externo'] : 'off';
 	    	
 	    	?>	
 	    	<p>
@@ -153,14 +152,10 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 				<input class="widefat" id="<?php echo $this->get_field_id('enlace_detalle'); ?>" name="<?php echo $this->get_field_name('enlace_detalle'); ?>" type="url" value="<?php echo esc_attr($enlace_detalle); ?>">
 			</p>
 			<p>
-               <input class="widefat" type="checkbox" name="<?php echo $this->get_field_name('externo');?>" <?php checked(${"externo"}, 'on'); ?>/>
-               <span><?php _e("Abrir enlace en una nueva ventana"); ?></span>
-            </p>
-			<p>
 				<label for="<?php echo $this->get_field_id('orden_posts'); ?>"><?php _e('Orden de los posts', 'os_cards_widget_json'); ?>:</label>
 				<select class="widefat" id="<?php echo $this->get_field_id('orden_posts'); ?>" name="<?php echo $this->get_field_name('orden_posts'); ?>">
 					<option value="ASC" <?php $selected = ($orden == 'ASC') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Ascendente', 'os_cards_widget_json'); ?></option>
-					<option value="<?php echo $orden; ?>" <?php $selected = ($orden == 'DESC') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Descendente', 'os_cards_widget_json'); ?></option>
+					<option value="DESC" <?php $selected = ($orden == 'DESC') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Descendente', 'os_cards_widget_json'); ?></option>
 					<option value="DESTACADOS" <?php $selected = ($orden == 'DESTACADOS') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Destacados', 'os_cards_widget_json'); ?></option>
 				</select>
 			</p>
@@ -185,8 +180,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	$instance['tipo_post'] = (!empty($new_instance['tipo_post'])) ? strip_tags($new_instance['tipo_post']) : '';
 	    	$instance['enlace_detalle'] = (!empty($new_instance['enlace_detalle'])) ? strip_tags($new_instance['enlace_detalle']) : '';
 	    	$instance['filtrar_por_autor'] = (!empty($new_instance['filtrar_por_autor'])) ? strip_tags($new_instance['filtrar_por_autor']) : false;
-	    	$instance['orden_posts'] = (!empty($new_instance['orden_posts'])) ? strip_tags($new_instance['orden_posts']) : "";
-	    	$instance['externo'] = strip_tags($new_instance['externo']);
+	    	$instance['orden_posts'] = (!empty($new_instance['orden_posts'])) ? strip_tags($new_instance['orden_posts']) : "DESC";
 
 			return $instance;
 	    }
@@ -208,7 +202,7 @@ endif;
 
 
 // 3 posts en cada linea
-function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $externo) {
+function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
 
 	if (count($posts) < $numero_posts_mostrar) {
 		$numero_posts_mostrar = count($posts);
@@ -306,7 +300,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                     <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if ($externo == "on") echo 'target="_blank"';?> <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Todas las publicaciones', 'os_cards_widget_json'); ?></a>
+	                     <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Todas las publicaciones', 'os_cards_widget_json'); ?></a>
 	                </div>
 	            </div>
 	        </footer>
@@ -318,7 +312,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 
 
 // 2 posts en una linea, 3 en otra
-function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name, $externo) {
+function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $author_name) {
 	
 	if (count($posts) < $numero_posts_mostrar) {
 		$numero_posts_mostrar = count($posts);
@@ -454,7 +448,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    <footer class="grid-footer">
 	                        <div class="row">
 	                            <div class="col-md-12 text-center">
-	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> <?php if ($externo == "on") echo 'target="_blank"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
+	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
 	                            </div>
 	                        </div>
 	                    </footer>
@@ -469,7 +463,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 
 
 // 1 post a la izquierda, 2 posts a la derecha
-function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden, $externo) {
+function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales, $numero_posts_mostrar, $enlace_detalle, $tipo_post, $orden) {
 	
 	if (count($posts) < $numero_posts_mostrar) {
 		$numero_posts_mostrar = count($posts);
@@ -575,7 +569,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> <?php if ($externo == "on") echo 'target="_blank"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las Historias", "os_cards_widget_json");?></a>
+	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las Historias", "os_cards_widget_json");?></a>
 	                </div>
 	            </div>
 	        </footer>

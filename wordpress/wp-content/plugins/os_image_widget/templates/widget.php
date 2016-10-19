@@ -19,9 +19,9 @@
     <div class="container">
         <div class="block-content-center background-container">
             <h2><?php echo $title; ?></h2>
-            <p><?php echo wpautop($text); ?></p>
+            <p><?php echo strip_tags($text); ?></p>
 			<div class="container-button">
-				<a href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php echo $link_text; ?></a>
+				<a <?php if ($new_window == "on") echo 'target="_blank"';?> href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php echo $link_text; ?></a>
 			</div>
         </div>
     </div>

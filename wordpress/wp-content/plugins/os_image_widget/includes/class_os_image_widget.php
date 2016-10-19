@@ -297,7 +297,7 @@ class OS_Image_Widget extends WP_Widget {
 							<?php
 							break;*/
 
-						/*case 'link' :
+						case 'link' :
 							?>
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'link' ) ); ?>">
 								<label for="<?php echo esc_attr( $this->get_field_id( 'link' ) ); ?>"><?php _e('Link'); ?>:</label>
@@ -309,13 +309,13 @@ class OS_Image_Widget extends WP_Widget {
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'new_window' ) ); ?>" style="margin-top: -0.75em; padding-left: 2px">
 								<label for="<?php echo esc_attr( $this->get_field_id( 'new_window' ) ); ?>">
 									<input type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'new_window' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'new_window' ) ); ?>" <?php checked( $instance['new_window'] ); ?>>
-									<?php _e( 'Open in new window'); ?>
+									<?php _e( 'Abrir enlace en una nueva ventana'); ?>
 								</label>
 							</p>
 							<?php
-							break;*/
+							break;
 
-						case 'link' :
+						/*case 'link' :
 							?>
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'link' ) ); ?>">
 								<label for="<?php echo esc_attr( $this->get_field_id( 'link' ) ); ?>"><?php _e('Link'); ?>:</label>
@@ -325,7 +325,7 @@ class OS_Image_Widget extends WP_Widget {
 								</span>
 							</p>
 							<?php
-							break;
+							break;*/
 						/*case 'link_classes' :
 							?>
 							<p class="<?php echo esc_attr( $this->siw_field_class( 'link_classes' ) ); ?>">
