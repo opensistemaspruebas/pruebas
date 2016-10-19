@@ -75,6 +75,7 @@ get_header(); ?>
         $descp = get_post_meta($post->ID, 'descp', true);
         $nombre_link = get_post_meta($post->ID, 'nombre_link', true);
         $link_taller = get_post_meta($post->ID, 'link_taller', true);
+        $externo = get_post_meta($post->ID, 'externo', true);
 ?>
 
         <?php if($tag->slug != $estado) {
@@ -95,7 +96,7 @@ get_header(); ?>
                     <section id="taller_<?php echo $i; ?>" name="taller_<?php echo $i; ?>" class="data-block" <?php if ($i > 5) echo 'style="display:none;"'; ?>>
                       <h2><?php echo $title;?></h2>
                       <p class="description"><?php echo $descp;?></p>
-                      <p class="link"><a href="<?php echo $link_taller;?>"><?php echo $nombre_link;?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                      <p class="link"><a <?php if ($externo == "on") echo 'target="_blank"';?> href="<?php echo $link_taller;?>"><?php echo $nombre_link;?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
                     </section>
             
              <?php $i++; ?>       

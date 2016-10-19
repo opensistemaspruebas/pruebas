@@ -79,6 +79,7 @@ if (!class_exists('TallerCustomType')) :
             $descp = get_post_meta($post->ID, 'descp', true);
             $link_taller = get_post_meta( $post->ID, 'link_taller', true);
             $nombre_link = get_post_meta( $post->ID, 'nombre_link', true);
+            $externo = get_post_meta($post->ID, 'externo', true);
             ?>          
             <p>
                 <label for="descp"><?php _e('Descripción', 'os_taller_type')?></label>
@@ -91,6 +92,10 @@ if (!class_exists('TallerCustomType')) :
             <p>
                 <label for="link_taller"><?php _e('Enlace al taller', 'os_taller_type')?></label>
                 <input class="widefat" type="url" name="link_taller" id="link_taller" value="<?php if ( isset($link_taller) ) echo $link_taller; ?>" />
+            </p>
+            <p>
+                <input class="widefat" id="externo" name="externo" type="checkbox" <?php checked($externo, 'on'); ?> />
+                <label for="externo"><?php _e('Abrir enlace en una nueva ventana', 'os_taller_type'); ?></label>
             </p>
             <?php
         }
@@ -106,6 +111,11 @@ if (!class_exists('TallerCustomType')) :
             }
             if (isset($_POST['link_taller'])) {
                 update_post_meta( $post_id, 'link_taller', strip_tags($_POST['link_taller']));
+            }
+            if (isset($_POST['externo'])) {
+                update_post_meta($post_id, 'externo', strip_tags($_POST['externo']));
+            } else {
+                 update_post_meta($post_id, 'externo', "off");
             }
         }
 
