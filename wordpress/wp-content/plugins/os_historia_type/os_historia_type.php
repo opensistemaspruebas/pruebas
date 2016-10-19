@@ -217,13 +217,14 @@ function meta_box_video_historia($post) {
     <p class="video-youtube" <?php if($video_type != 'youtube') { echo 'style="display: none;"'; } ?>>
       <label for="yt-video-url"><?php _e('Enlace de Youtube', 'os_historia_type'); ?></label>
       <input class="widefat" id="yt-video-url" name="yt-video-url" type="text" value="<?php if (isset($yt_video_url)) echo $yt_video_url; ?>"/>
-      <i><?php _e('Si el campo "Video cabecera" está relleno, se mostrará este en vez de "Imagen cabecera"','os_historia_type'); ?></i>
+      <i><?php _e('Este video aparecerá en una ventana modal al hacer click sobre el icono Play. ','os_historia_type'); ?></i>
+      <i><?php _e('Se debe coger la URL del campo src (sin las comillas) que aparece al hacer click en "Insertar", en la página del video de Youtube que se quiera mostrar','os_historia_type'); ?></i>
     </p>
 
     <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
       <label for="wp-video-url"><?php _e('URL video', 'os_historia_type'); ?></label>
       <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>"/>
-      <i><?php _e('Este video aparecerá al hacer click sobre el icono play. Aparecerá en una ventana modal','os_historia_type'); ?></i>
+      <i><?php _e('Este video aparecerá en una ventana modal al hacer click sobre el icono Play','os_historia_type'); ?></i>
     </p>    
     <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
       <input id="upload_videoHistoria" name="upload_videoHistoria" type="button" value="<?php _e('Explorar/Subir', 'os_historia_type'); ?>" />
