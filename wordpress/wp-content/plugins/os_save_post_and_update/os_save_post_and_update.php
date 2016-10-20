@@ -104,31 +104,33 @@ function update_post_index_autores($post_type, $author) {
 
 
 function fetch($post_type, $order){
-	
-	/*$args = array(
-		'posts_per_page'   => 70,
-		'offset'           => 0,
-		'orderby'          => 'date',
-		'order'            => $order,
-		'post_type'        => $post_type,
-		'post_status'      => 'publish',
-		'suppress_filters' => true 
-	);
-*/
-	$args = array(
-        'posts_per_page' => 70,
-        'offset'           => 0,
-        'post_type' => $post_type,
-        'meta_key' => 'publication_date', 
-        'post_status'      => 'publish',
-        'orderby' => 'meta_value',
-        'order' => $order
-    );
 
-               // Eventos locales
-              // $local_posts = get_posts( $args );
+	if($post_type == "publicacion"){
 
+		$args = array(
+	        'posts_per_page' => 70,
+	        'offset'           => 0,
+	        'post_type' => $post_type,
+	        'meta_key' => 'publication_date', 
+	        'post_status'      => 'publish',
+	        'orderby' => 'meta_value',
+	        'order' => $order
+    	);
 
+	}
+	else{
+
+		$args = array(
+			'posts_per_page'   => 70,
+			'offset'           => 0,
+			'orderby'          => 'date',
+			'order'            => $order,
+			'post_type'        => $post_type,
+			'post_status'      => 'publish',
+			'suppress_filters' => true 
+		);
+
+	}
 
 	$posts = get_posts($args);
 	$index_array = array();
@@ -141,18 +143,46 @@ function fetch($post_type, $order){
 }
 
 function fetch_destacados($post_type, $order){
-	$args = array(
-		'posts_per_page'   => 70,
-		'offset'           => 0,
-		'orderby'          => 'date',
-		'order'            => $order,
-		'post_type'        => $post_type,
-		'post_status'      => 'publish',
-		'meta_key'         => 'destacada',
-		'meta_value'       => 'on',
-		'meta_compare'     => '=',
-		'suppress_filters' => true 
-	);
+
+
+	if($post_type == "publicacion"){
+
+    	$args = array(
+	        'posts_per_page' => 70,
+	        'offset'           => 0,
+	        'post_type' => $post_type,
+	        'meta_key' => 'publication_date', 
+	        'post_status'      => 'publish',
+	        'orderby' => 'meta_value',
+	        'order' => $order,
+	        'meta_query' => array(
+		        array(
+					'key'         => 'destacada',
+					'value'       => 'on',
+					'compare'     => '=',
+		        ),
+		    )
+    	);
+
+	}
+	else{
+
+		$args = array(
+			'posts_per_page'   => 70,
+			'offset'           => 0,
+			'orderby'          => 'date',
+			'order'            => $order,
+			'post_type'        => $post_type,
+			'post_status'      => 'publish',
+			'meta_key'         => 'destacada',
+			'meta_value'       => 'on',
+			'meta_compare'     => '=',
+			'suppress_filters' => true 
+		);
+
+
+	}
+
 
 	$posts = get_posts($args);
 	$index_array = array();
