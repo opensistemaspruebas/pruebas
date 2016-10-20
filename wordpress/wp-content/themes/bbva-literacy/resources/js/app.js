@@ -302,7 +302,7 @@ var googleMaps = function($) {
         html += '<span class="map-info-close">&times;</span>';
         html += '<h1>' + data.title + '</h1>';
         html += '<p>' + data.text + '</p>';
-        html += '<a class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
+        html += '<a target="_blank" class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
         return html;
     }
 
@@ -1517,7 +1517,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'PT',
@@ -1525,7 +1525,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'MX',
@@ -1533,7 +1533,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'TR',
@@ -1541,7 +1541,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'US',
@@ -1549,7 +1549,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'CO',
@@ -1557,7 +1557,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'VE',
@@ -1565,7 +1565,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'PE',
@@ -1573,7 +1573,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'CL',
@@ -1581,7 +1581,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'AR',
@@ -1589,7 +1589,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'PY',
@@ -1597,7 +1597,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     },
     {
         'id'        : 'UY',
@@ -1605,7 +1605,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : '#'
+        'link'      : 'http://www.google.es'
     }
 ];
 

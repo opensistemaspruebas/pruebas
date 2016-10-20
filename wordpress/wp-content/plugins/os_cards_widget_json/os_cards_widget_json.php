@@ -67,21 +67,45 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 
 	    	$author = isset($instance['filtrar_por_autor']) ? $author_name : '';
 
+
 	    	if (empty($author)) {
-	    		$args = array(
-					'posts_per_page'   => $numero_posts_mostrar,
-					'offset'           => 0,
-					'category'         => '',
-					'orderby'          => 'post_date',
-					'order'            => 'DESC',
-					'meta_key'         => '',
-					'meta_value'       => '',
-					'post_type'        => $tipo_post,
-					'post_status'      => 'publish',
-					'suppress_filters' => true
-				);
+
+	    		if($tipo_post == "publicacion"){
+
+		    		$args = array(
+						'posts_per_page'   => $numero_posts_mostrar,
+						'offset'           => 0,
+						'orderby'          => 'post_date',
+						'meta_key' 		   => 'publication_date', 
+						'order'            => 'DESC',
+						'orderby' 		   => 'meta_value',
+						'post_type'        => $tipo_post,
+						'post_status'      => 'publish',
+						'suppress_filters' => true
+					);
+	    		}
+	    		else{
+
+		    		$args = array(
+						'posts_per_page'   => $numero_posts_mostrar,
+						'offset'           => 0,
+						'category'         => '',
+						'orderby'          => 'post_date',
+						'order'            => 'DESC',
+						'meta_key'         => '',
+						'meta_value'       => '',
+						'post_type'        => $tipo_post,
+						'post_status'      => 'publish',
+						'suppress_filters' => true
+					);
+
+	    		}
+
 		    	$posts = get_posts($args);
-	    	} else {
+	    	
+	    	} 
+	    	else {
+	    		
 	    		$posts = query_posts("posts_per_page=" . $numero_posts_mostrar . "&post_status=publish&post_type=" . $tipo_post . "&author_name=" . $author . "&order=" . $orden);
 	    	}
 
@@ -237,7 +261,6 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 
                 			$post_title = $posts[$i]->post_title;
                 			$post_date = get_the_date('j F Y', $posts[$i]->ID);
-                			//$post_guid = $posts[$i]->guid;
                 			$post_guid = get_permalink($posts[$i]->ID);
                 			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
                 			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
@@ -384,7 +407,6 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 
 	                    			$post_title = $post->post_title;
 	                    			$post_date = get_the_date('j F Y', $post->ID);
-	                    			//$post_guid = $post->guid;
 	                    			$post_guid = get_permalink($post->ID);
 	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
 	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
@@ -502,7 +524,6 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 
                 	        $post_title = $post->post_title;
                 			$post_date = get_the_date('j F Y', $post->ID);
-                			//$post_guid = $post->guid;
                 			$post_guid = get_permalink($post->ID);
                 			$post_content = substr($post->post_content, 0, 140) . '...';
 	            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
