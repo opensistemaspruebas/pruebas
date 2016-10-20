@@ -22,7 +22,7 @@ get_header(); ?>
         <h2 class="hidden-xs"><?php _e("Programa de educación financiera"); ?></h2>
         <div class="controls">
             <select id="select-country" class="selectpicker-form countries"></select>
-            <a href="#" class="link-web"><?php _e("Ir a la web Bancomer "); ?><span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
+            <a target="_blank" href="http://www.google.es" class="link-web"><?php _e("Ir a la web Bancomer "); ?><span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
         </div>
     </div>
 </div>
@@ -58,7 +58,7 @@ get_header(); ?>
           <div>
             <h3><?php _e("En estos momentos no tenemos talleres disponibles en "); ?><span class="current-country"></span></h3>
             <p><?php _e("Puedes consultar el portal de Educación Financiera para conocer mejor la oferta educativa del país."); ?></p>
-            <a href="<?php echo $linkPais ?>"><?php _e("Aprender más"); ?></a>
+            <a target="_blank" href="<?php echo $linkPais ?>"><?php _e("Aprender más"); ?></a>
           </div>
         </div>
       </div>
