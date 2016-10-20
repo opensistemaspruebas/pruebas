@@ -407,9 +407,9 @@ if (!class_exists('OS_Evento_Type')) {
 				<div class="elementos_de_programa">
 				    <p class="radiobuttons">
 				      <input type="radio" name="evento_elemento_programa[0][tipo]" id="ponencia" value="ponencia" checked>
-				      <label for="ponencia"><?php _e('Ponencia', 'os_evento_type')?></label><br>
+				      <?php _e('Ponencia', 'os_evento_type')?><br>
 				      <input type="radio" name="evento_elemento_programa[0][tipo]" id="descanso" value="descanso">
-				      <label for="descanso"><?php _e('Descanso', 'os_evento_type')?></label><br>
+				      <?php _e('Descanso', 'os_evento_type')?><br>
 				    </p>
 					<p>
 						<label for="evento_elemento_programa[0][inicio]"><?php _e('Hora de inicio', 'os_evento_type'); ?></label>
@@ -431,7 +431,7 @@ if (!class_exists('OS_Evento_Type')) {
 					</p>
 					<p>
 						<label for="evento_elemento_programa[0][ponentes]"><?php _e('Ponentes', 'os_evento_type'); ?></label>
-						<select class="widefat" id="evento_elemento_programa[0][ponentes][]" name="evento_elemento_programa[0][ponentes][]" multiple="multiple">
+						<select class="widefat ponentes" id="evento_elemento_programa[0][ponentes][]" name="evento_elemento_programa[0][ponentes][]" multiple="multiple">
 						<?php
 						if (!empty($ponentes)) {
 							foreach ($ponentes as $p) {
@@ -457,9 +457,9 @@ if (!class_exists('OS_Evento_Type')) {
 				<div class="elementos_de_programa">
 				    <p class="radiobuttons">
 				      <input type="radio" name="evento_elemento_programa[<?php echo $i; ?>][tipo]" id="ponencia" value="ponencia" <?php if (!empty($evento_elemento_programa[$i]['tipo'])) checked($evento_elemento_programa[$i]['tipo'], 'ponencia'); else echo "checked"; ?>>
-				      <label for="ponencia"><?php _e('Ponencia', 'os_evento_type')?></label><br>
+				      <?php _e('Ponencia', 'os_evento_type')?><br>
 				      <input type="radio" name="evento_elemento_programa[<?php echo $i; ?>][tipo]" id="descanso" value="descanso" <?php if (!empty($evento_elemento_programa[$i]['tipo'])) checked($evento_elemento_programa[$i]['tipo'], 'descanso'); ?>>
-				      <label for="descanso"><?php _e('Descanso', 'os_evento_type')?></label><br>
+				      <?php _e('Descanso', 'os_evento_type')?><br>
 				    </p>
 					<p>
 						<label for="evento_elemento_programa[<?php echo $i; ?>][inicio]"><?php _e('Hora de inicio', 'os_evento_type'); ?></label>
@@ -481,7 +481,7 @@ if (!class_exists('OS_Evento_Type')) {
 					</p>
 					<p>
 						<label for="evento_elemento_programa[<?php echo $i; ?>][ponentes]"><?php _e('Ponentes', 'os_evento_type'); ?></label>
-						<select class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][ponentes][]" name="evento_elemento_programa[<?php echo $i; ?>][ponentes][]" multiple="multiple">
+						<select class="widefat ponentes" id="evento_elemento_programa[<?php echo $i; ?>][ponentes][]" name="evento_elemento_programa[<?php echo $i; ?>][ponentes][]" multiple="multiple">
 						<?php
 						if (!empty($ponentes)) {
 							foreach ($ponentes as $p) {								?>
