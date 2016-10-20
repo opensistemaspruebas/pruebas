@@ -105,7 +105,7 @@ function update_post_index_autores($post_type, $author) {
 
 function fetch($post_type, $order){
 	
-	$args = array(
+	/*$args = array(
 		'posts_per_page'   => 70,
 		'offset'           => 0,
 		'orderby'          => 'date',
@@ -114,18 +114,16 @@ function fetch($post_type, $order){
 		'post_status'      => 'publish',
 		'suppress_filters' => true 
 	);
-
-	/*$args = array(
+*/
+	$args = array(
         'posts_per_page' => 70,
         'offset'           => 0,
         'post_type' => $post_type,
         'meta_key' => 'publication_date', 
-        'meta_value' => date("Y-m-d",time()),
         'post_status'      => 'publish',
-        //'meta_compare' => $compare,
-        'orderby' => 'meta_value'
-      //'suppress_filters' => 1,
-    );*/
+        'orderby' => 'meta_value',
+        'order' => $order
+    );
 
                // Eventos locales
               // $local_posts = get_posts( $args );
