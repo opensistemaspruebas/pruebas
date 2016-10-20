@@ -29,37 +29,70 @@ var dropdowns = function ($) {
   $dropdown.click(function () {
     var selText = $(this).text();
     $(this).parents('.dropdown').find('.dropdown-toggle').html(selText +
-       '<b class="caret mt-md"></b>');
+       '<span class="icon bbva-icon-arrow_bottom"></span>');
   });
+
+  var $contentTabs = $('#select-tab-results');
+  $contentTabs.on('change', function () {
+      var $socialCurrent = '.' + $(this).val();
+      $('#results-tabs li').find($socialCurrent).tab('show');
+  });
+
+  $('.results-content-tabs a[data-toggle="tab"]')
+      .on('shown.bs.tab', function (e) {
+          $contentTabs.selectpicker('val', $(e.target)[0].className);
+      });
 };
 
-var fixedMenu = function($) {
+var fixedMenu = function ($) {
     $(window).scroll(function () {
-        var nav = $('.nav-content');
-        var content = $('.contents');
-        var pos = content.offset().top - nav.height();
+        var $nav = $('.nav-content');
+        var $content = $('.contents');
+        var pos = $content.offset().top - $nav.height();
         var isScrollDownOfNav = $(this).scrollTop() > pos;
 
         if (isScrollDownOfNav) {
-          nav.addClass('navbar-fixed-top');
+            $nav.addClass('navbar-fixed-top');
+            $content.addClass('fix-navbar-in-top');
         } else {
-          nav.removeClass('navbar-fixed-top');
+            $nav.removeClass('navbar-fixed-top');
+            $content.removeClass('fix-navbar-in-top');
         }
 
         var $header = $('.header-fixed-top');
         var $image = $('.image-section');
+        var pos2;
         if ($image.offset()) {
-          var pos2 = $image.offset().top - $header.height();
+            pos2 = $image.offset().top - $header.height();
         }
 
         var isScrollDownOfImage = $(this).scrollTop() > pos2;
 
         if (!isScrollDownOfImage) {
-          $header.addClass('hidden');
+            $header.addClass('hidden');
         } else {
-          $header.removeClass('hidden');
+            $header.removeClass('hidden');
         }
+
+        enableStickyMenuMobile($);
     });
+
+    function enableStickyMenuMobile($) {
+        var $nav = $('.stycky-menu-in-mobile');
+        var $content = $('.contents');
+        var distanceScrolled = $(window).scrollTop();
+        if (distanceScrolled > $nav.height()) {
+            $nav.addClass('fixed-top-on-mobile');
+            closeAllPopovers();
+        } else {
+            $nav.removeClass('fixed-top-on-mobile');
+            $content.removeClass('fix-navbar-in-top');
+        }
+    }
+
+    function closeAllPopovers() {
+        $('.popover').popover('hide');
+    }
 };
 
 var footerMenu = function($) {
@@ -77,11 +110,9 @@ var footerMenu = function($) {
 };
 
 var googlemap = function ($) {
-
     var hasMap = $('#mapSection').length;
 
     function initialize() {
-
         var mapOptions = {
             center: new google.maps.LatLng(-34.397, 150.644),
             scrollwheel: false,
@@ -91,7 +122,7 @@ var googlemap = function ($) {
         };
 
         var icon = {
-            path: 'M12.395 11.708c0-1.993 1.614-3.608 3.604-3.608s3.605 1.616 3.605 3.608-1.614 3.608-3.605 3.608c-1.991 0-3.604-1.615-3.604-3.608zM15.729 2.625c-6.065 0-9.3 3.896-9.3 9.467 0 7.414 9.197 17.176 9.197 17.176 0.149 0.142 0.393 0.142 0.543 0.001 0 0 9.402-9.722 9.402-17.094 0-5.529-3.442-9.55-9.424-9.55h-0.418z',
+            path: 'M0,12.8843964 C0,14.7474513 0.484912462,16.7785387 1.39810883,18.9525168 C2.6165542,21.8531782 4.55909161,24.9284809 7.02713408,28.072398 C8.55240231,30.0153616 10.1855184,31.8666903 11.8186921,33.565401 C12.3904451,34.1600977 12.9215696,34.6934376 13.398573,35.1577293 C13.5658531,35.3205515 13.7145284,35.4632107 13.8429116,35.5847433 C13.8880402,35.6274639 13.9274617,35.6645402 13.960965,35.6958516 C14.3823445,36.0941778 14.9962311,36.0957466 15.3813932,35.732905 C15.4516361,35.6682188 15.4913586,35.6313016 15.5368324,35.5887643 C15.6662002,35.4677503 15.8160171,35.3257016 15.9845825,35.1635784 C16.4652566,34.7012748 17.0004707,34.170239 17.5766282,33.5781371 C19.2223999,31.8868212 20.8681199,30.0437437 22.4051738,28.1096779 C24.8856732,24.9884801 26.8396147,21.9355794 28.0683611,19.0557506 C28.9952281,16.8834407 29.4875765,14.8544759 29.4875765,12.9940925 C29.4875765,5.54868695 23.2048877,0 15.0179237,0 L14.4696528,0 C6.16491217,0 0,5.39002078 0,12.8843964 Z M9.48506498,13.20876 C9.48506498,10.2356904 11.8931466,7.82569827 14.863472,7.82569827 C17.8337973,7.82569827 20.241879,10.2356904 20.241879,13.20876 C20.241879,16.1818296 17.8337973,18.5918217 14.863472,18.5918217 C11.8931466,18.5918217 9.48506498,16.1818296 9.48506498,13.20876 Z',
             fillColor: '#004481',
             fillOpacity: 1,
             anchor: new google.maps.Point(0, 0),
@@ -151,45 +182,31 @@ var googlemap = function ($) {
         });
     }
 
-    if(hasMap){
+    if (hasMap) {
         google.maps.event.addDomListener(window, 'load', initialize);
     }
 };
 
-var landing = function($) {
-    'use strict';
-	$('.main-page').each(function(){
-		var $caption = $(this).find('.data-container');
-		var headerHeight = $(this).find('.header-container').height();
-		var pheight = $(this).height();
-		$caption.css('top', '0');
+var homeCarouselSwipe = function ($) {
+  $('#home-slider.carousel').swipe({
+    swipeLeft: function () {
+      $(this).carousel('next');
+    },
 
-		$(this).hover(
+    swipeRight: function () {
+      $(this).carousel('prev');
+    },
 
-			function(){
-				$caption.stop(1);
-				$caption.addClass('data-containerHover');
-				$caption.animate({
-					top: -headerHeight
-				});
-			},
-			function(){
-				$caption.stop(1);
-				$caption.animate({
-					top: '0'
-				});
-				$caption.removeClass('data-containerHover');
-			}
-		)
+    allowPageScroll: 'vertical',
+    excludedElements: 'button, input, select, textarea, .noSwipe',
+  });
+};
 
-	}).find('.data-container').click(function(){
-		var link = $(this.parentNode).find('a');
-		link.attr('target', '_blank');
-		if (link.length) {
-			location.href = link.attr('href');
-		}
-	});
-
+var homeStopCarouselOnMobile = function ($) {
+  var mobileRegexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  if (navigator && navigator.userAgent && mobileRegexp.test(navigator.userAgent)) {
+    $('#home-slider.carousel').carousel({ interval: false, });
+  }
 };
 
 var googleMaps = function($) {
@@ -198,6 +215,9 @@ var googleMaps = function($) {
     if (hasMap) {
         google.charts.load('visualization', '1', {'packages':['geochart']});
         google.charts.setOnLoadCallback(drawRegionsMap);
+        google.maps.event.addDomListener(window, 'resize', function() {
+            chart.draw(dataTable, optionsChart);
+        });
     }
 
     var chart, dataTable, init_event = null;
@@ -214,7 +234,8 @@ var googleMaps = function($) {
             isHtml  : true,
             textStyle: {
                 color   : '#BDBDBD',
-                fontSize: 11
+                fontSize: 11,
+                fontFamily: 'BentonSans'
             }
         },
         defaultColor : '#2A86CA',
@@ -350,9 +371,206 @@ var googleMaps = function($) {
         e.stopPropagation();
     });
 
-    google.maps.event.addDomListener(window, 'resize', function() {
-        chart.draw(dataTable, optionsChart);
-    });
+};
+
+var menuSearch = function($) {
+    'use strict';
+
+    var selectedTags = [];
+    var currentMatches = [];
+    var $selectedTag = $('#menu-search .selected-tag');
+    var $availableTag = $('#menu-search .available-tag');
+    var $inputSearch = $('.navbar .navbar-search-input');
+    var $btnSearch = $('.navbar .publishing-filter-search-btn');
+    var $btnCloseFilter = $('.navbar .close-navbar-filter');
+    var $btnFilter = $('.show-menu-filter');
+    var $tagsColumn = $('#menu-search .tag-container');
+    var $authorsColumn = $('#menu-search .author-container');
+    var $geoColumn = $('#menu-search .geo-container');
+    var $tagsCounter = $('#menu-search .tag-container-counter');
+    var $authorsCounter = $('#menu-search .author-container-counter');
+    var $geoCounter = $('#menu-search .geo-container-counter');
+
+    $availableTag.on('click', selectTag);
+    $inputSearch.keypress(onInputKeyPressed);
+    $inputSearch.on('input', searchValueUpdated)
+    $btnSearch.on('click', searchByTags);
+    $btnCloseFilter.on('click', toggleFilter);
+    $btnFilter.on('click', toggleFilter);
+
+    //public methods
+    function removeTagFromColumn(e) {
+        var $tag = $(this);
+        $tag.remove();
+        restoreTag(this);
+        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
+    }
+
+    function selectTag(e) {
+        var $tag = $(this);
+        $tag.remove();
+        var tagModel = getTagModel('animated fadeIn selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
+        var newTag = createTag(tagModel);
+        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+    }
+
+    function onInputKeyPressed(e) {
+        if(e.keyCode == 13){
+            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+            this.value = "";
+            removeAllMatchedTags();
+        }
+    }
+
+    function searchValueUpdated(e) {
+        var $this = $(this);
+        var value = $this.val();
+        removeAllMatchedTags();
+        if (value.length > 2) {
+            var matchedResults = _.filter(data.availableTags, function(obj){
+                return obj.text.includes(value);
+            });
+            refreshTagMatches(matchedResults);
+            showGeoTags();
+        }
+        refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
+    }
+
+    function searchByTags() {
+        console.log(selectedTags);
+        if (selectedTags.length > 0) {
+            window.location.href = "index.html";
+        }
+    }
+
+    function toggleFilter() {
+        var $filterWrapper = $('#menu-search.menu-filter-wrapper');
+
+        if ($filterWrapper.hasClass('hidden')) {
+            $filterWrapper.removeClass('hidden').addClass('displayed');
+        } else {
+            $filterWrapper.removeClass('displayed').addClass('hidden');
+            emptyData();
+        }
+    }
+
+    //private methods
+    function restoreTag(element) {
+      var $element = $(element);
+      var from = $element.attr('from');
+      if (from) {
+          var tagValue = $element.attr('tag-value');
+          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+          var newTag = createTag(tagModel);
+          addTagToContainer(newTag, from, selectTag);
+      }
+    }
+
+    function addTagToContainer(tag, targetContainer, clickCallback) {
+        var $tag = $(tag);
+        $tag.click(clickCallback).appendTo($('#menu-search ' + '.' + targetContainer));
+        var tagValue = $tag.attr('tag-value');
+        targetContainer === 'selected-tags-container' ? addTagToArray(tagValue) : null;
+    }
+
+    function createTag(tag) {
+        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
+        newTag += tag.icon ? '<span class="' + tag.icon +'"></span>' : '';
+        newTag += '<span>' + tag.text +'</span>' +
+              '</div>';
+        $(newTag).click(removeTagFromColumn);
+        return newTag;
+    }
+
+    function getTagModel(type, from, icon, text, id) {
+        return {
+            type: type,
+            from: from,
+            icon: icon,
+            text: text,
+            id: id
+        }
+    }
+
+    function removeTagFromArray(_array, tag) {
+        var pos = _array.indexOf(tag);
+        pos > -1 ? _array.splice(pos, 1) : null;
+    }
+
+    function addTagToArray(value) {
+        selectedTags.push(value);
+    }
+
+    function refreshTagMatches(matchedResults) {
+        var l = matchedResults.length;
+        for (var i = 0; i < l; i++) {
+            var tag = matchedResults[i];
+            if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        }
+        cleanOldMatches(_.difference(currentMatches, matchedResults));
+    }
+
+    function removeAllMatchedTags() {
+        currentMatches = [];
+        $authorsColumn.empty();
+        $tagsColumn.empty();
+        $geoColumn.empty();
+    }
+
+    function cleanOldMatches(oldMatches) {
+        var l = oldMatches.length;
+        for (var i = 0; i < l; i++) {
+            var oldMatch = oldMatches[i];
+            $('#menu-search ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
+            for (var m = 0; m < currentMatches.length; m++) {
+                if (currentMatches[m].id === oldMatch.id) {
+                    currentMatches.splice(m, 1);
+                }
+            }
+        }
+    }
+
+    function refreshTagCounters(currentMatches) {
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        var l = currentMatches.length;
+        for (var i = 0; i < l; i++) {
+            var $target = $('#menu-search ' + '.' + currentMatches[i].from + '-counter');
+            var currentVal = parseInt($target.text());
+            $target.text(++currentVal);
+        }
+    }
+
+    function emptyData() {
+        removeAllMatchedTags();
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        $inputSearch.val('');
+        selectedTags = [];
+        $('#menu-search .selected-tags-container').empty();
+    }
 };
 
 var momentjs = function ($) {
@@ -406,21 +624,46 @@ var navBar = function ($) {
 
   var $searchContainer = $('.logo-search');
   var $searchIcon = $('.search-icon');
-  var $inputSearch = $('.input-search');
+  var $closeNavbarFilter = $('.close-navbar-filter');
+  var $searchFormContainer = $('.search-form-container');
   var $navBarNav = $('.navbar-nav');
+  var $searchMenu = $('.navbar-search');
+  var $filterWrapper = $('.navbar .menu-filter-wrapper');
+  var $inputFilter = $('.navbar .navbar-search-input');
+  var $webContent = $('.webpage .contents');
+  var $searchLayer = $('.webpage .contents #search-layer');
 
   $searchIcon.click(onClickedSearch);
+  $closeNavbarFilter.click(onClickedSearch);
+  $inputFilter.on('input', function() {
+      if(this.value.length > 2) {
+          $filterWrapper.removeClass('hidden');
+          $webContent.css("position", "relative");
+          $searchLayer.addClass('search-layer');
+      }
+  });
 
   function onClickedSearch() {
 
       if ($navBarNav.hasClass('hidden')) {
-          $inputSearch.toggleClass('hidden');
+          $searchFormContainer.toggleClass('hidden');
           $searchContainer.toggleClass('active');
-          setTimeout(function() { $navBarNav.toggleClass('hidden'); }, 800);
+
+          $searchMenu.fadeToggle(750);
+
+          setTimeout(function() {
+              $navBarNav.toggleClass('hidden');
+          }, 800);
+          $webContent.css("position", "inherit");
+          $searchLayer.removeClass('search-layer');
       } else {
           $navBarNav.toggleClass('hidden');
-          $inputSearch.toggleClass('hidden');
+
+          $searchFormContainer.toggleClass('hidden');
           $searchContainer.toggleClass('active');
+
+          //$filterWrapper.removeClass('hidden');
+          $searchMenu.fadeToggle(750);
       }
   }
 };
@@ -432,6 +675,7 @@ var popover = function ($) {
   var $headerFixed = $('.header-fixed-top h1');
   var $buttonFixed = $('#share-fixed-button');
   var $buttonShare = $('#share-button');
+  var $twitter = $('.pop-div-twitter');
 
   //Initializes popovers
   $element.popover();
@@ -465,11 +709,15 @@ var popover = function ($) {
       $buttonShare.addClass('icon bbva-icon-share');
     }
   });
+
+  $twitter.on('click', function () {
+    var id = $(this).attr('data-popover-id');
+    $('[data-popover-id=' + id + ']').toggleClass('hidden');
+    $('.share [data-popover-id=' + id + ']').toggleClass('hidden');
+  });
 };
 
 var progressbar = function ($) {
-
-var hasGraphs = $('#impactPage').length;
 
   function getConfig(max) {
     return {
@@ -486,7 +734,7 @@ var hasGraphs = $('#impactPage').length;
         },
         autoStyleContainer: false,
       },
-      step: (state, bar) => {
+      step: function (state, bar) {
         bar.setText('<div class="progressNumber">' + Math.round(bar.value() * max)
         + '</div><div class="progressSuffix ml-xs">MM</div>');
       },
@@ -504,98 +752,39 @@ var hasGraphs = $('#impactPage').length;
       text: {
         autoStyleContainer: false,
       },
-      step: (state, circle) => {
-        circle.setText('<div class="circleNumber">' + Math.round(bar.value() * max)
+      step: function (state, circle) {
+        circle.setText('<div class="circleNumber">' + Math.round(circle.value() * max)
         + '<label>' + suffix + '</label></div>' +
         '<div class="circleSubText ' + subColor + '">' + subtext + '</div>');
       },
     };
   };
 
-if (hasGraphs)
-{
-  var bar = new ProgressBar.Line('#lineContainer', getConfig(70));
-  bar.animate(0.8);
+  function setProgressBarLine(identifier, config, animate) {
+      try {
+          var bar = new ProgressBar.Line(identifier, config);
+          bar.animate(animate);
+      }
+      catch (e) {
+      }
+  }
+  function setProgressBarCircle(identifier, config, animate) {
+      try {
+          var circle = new ProgressBar.Circle(identifier, config);
+          circle.animate(animate);
+      }
+      catch (e) {
+      }
+  }
+  setProgressBarLine('#lineContainer', getConfig(70), 0.8);
+  setProgressBarLine('#lineContainer2', getConfig(6), 0.75);
 
-  var bar2 = new ProgressBar.Line('#lineContainer2', getConfig(6));
-  bar2.animate(0.75);
-
-  var circle = new ProgressBar.Circle('#circleContainer',
-              getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'));
-  circle.animate(0.5);
-
-  var circle2 = new ProgressBar.Circle('#circleContainer2',
-                getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'));
-  circle2.animate(0.8);
-
-  var circle3 = new ProgressBar.Circle('#circleContainer3',
-                getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'));
-  circle3.animate(0.5);
-
-  var circle4 = new ProgressBar.Circle('#circleContainer4',
-              getCircleConfig(1000, '#FFFFFF', '#FFFFFF', 'K', 'red', 'MUJERES'));
-  circle4.animate(0.8);
-
-  var circle5 = new ProgressBar.Circle('#circleContainer5',
-                getCircleConfig(300, '#FFFFFF', '#FFFFFF', 'K', 'yellow', 'ENTORNOS RURALES'));
-  circle5.animate(0.6);
-
-  var circle6 = new ProgressBar.Circle('#circleContainer6',
-                getCircleConfig(200, '#FFFFFF', '#FFFFFF', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'));
-  circle6.animate(0.5);
-}
-
-};
-
-var progresscircle = function($) {
-    'use strict';
-
-    var selectorPercicle = '.procircle';
-    var config = {
-        startAngle: -Math.PI / 2,
-        emptyFill: '#f3f1f3',
-        thickness: 10,
-        lineCap: 'butt' // "butt" or "round"
-    };
-    var configBlue = {};
-    var configYellow = {};
-    var configTeel = {};
-    var configWhite = {};
-
-    $.extend(configBlue, config, {
-        fill: {
-            color: '#5bbeff'
-        }
-    });
-    $.extend(configYellow, config, {
-        fill: {
-            color: '#f8cd51'
-        }
-    });
-    $.extend(configTeel, config, {
-        fill: {
-            color: '#14afb0'
-        }
-    });
-
-    var config2 = {
-        startAngle: -Math.PI / 2,
-        emptyFill: '#FFFFFF',
-        thickness: 10,
-        lineCap: 'butt' // "butt" or "round"
-    };
-    $.extend(configWhite, config2, {
-        fill: {
-            color: '#FFFFFF'
-        }
-    });
-
-    $('.blue ' + selectorPercicle).circleProgress(configBlue);
-    $('.yellow ' + selectorPercicle).circleProgress(configYellow);
-    $('.teel ' + selectorPercicle).circleProgress(configTeel);
-    $('.no-circle-red ' + selectorPercicle).circleProgress(configWhite);
-    $('.no-circle-yellow ' + selectorPercicle).circleProgress(configWhite);
-    $('.no-circle-blue ' + selectorPercicle).circleProgress(configWhite);
+  setProgressBarCircle('#circleContainer', getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
+  setProgressBarCircle('#circleContainer2', getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
+  setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
+  setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
+  setProgressBarCircle('#circleContainer5', getCircleConfig(300, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
+  setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
 };
 
 var publishingFilter = function($) {
@@ -603,18 +792,19 @@ var publishingFilter = function($) {
 
     var selectedTags = [];
     var currentMatches = [];
-    var $selectedTag = $('.selected-tag');
-    var $availableTag = $('.available-tag');
-    var $inputSearch = $('.publishing-filter-search-input');
-    var $btnSearch = $('.publishing-filter-search-btn');
-    var $btnCloseFilter = $('.close-publishing-filter');
+    var $selectedTag = $('#publishing-filter .selected-tag');
+    var $availableTag = $('#publishing-filter .available-tag');
+    var $inputSearch = $('#publishing-filter .publishing-filter-search-input');
+    var $btnSearch = $('#publishing-filter .publishing-filter-search-btn');
+    var $btnCloseFilter = $('#publishing-filter .close-publishing-filter');
     var $btnFilter = $('.show-publishing-filter');
-    var $tagsColumn = $('.tag-container');
-    var $authorsColumn = $('.author-container');
-    var $geoColumn = $('.geo-container');
-    var $tagsCounter = $('.tag-container-counter');
-    var $authorsCounter = $('.author-container-counter');
-    var $geoCounter = $('.geo-container-counter');
+    var $tagsColumn = $('#publishing-filter .tag-container');
+    var $authorsColumn = $('#publishing-filter .author-container');
+    var $geoColumn = $('#publishing-filter .geo-container');
+    var $tagsCounter = $('#publishing-filter .tag-container-counter');
+    var $authorsCounter = $('#publishing-filter .author-container-counter');
+    var $geoCounter = $('#publishing-filter .geo-container-counter');
+	var $sortItemsContainer = $('.sort-items-container');
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
@@ -625,15 +815,16 @@ var publishingFilter = function($) {
 
     //public methods
     function removeTagFromColumn(e) {
-        this.remove();
+        var $tag = $(this);
+        $tag.remove();
         restoreTag(this);
         removeTagFromArray(selectedTags, $(this).attr('tag-value'));
     }
 
     function selectTag(e) {
-        this.remove();
         var $tag = $(this);
-        var tagModel = getTagModel('selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
+        $tag.remove();
+        var tagModel = getTagModel('wow fadeIn selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
         var newTag = createTag(tagModel);
         addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
     }
@@ -651,15 +842,28 @@ var publishingFilter = function($) {
     function searchValueUpdated(e) {
         var $this = $(this);
         var value = $this.val();
+        removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function(obj){
                 return obj.text.includes(value);
             });
             refreshTagMatches(matchedResults);
-        } else {
-            removeAllMatchedTags();
+            showGeoTags();
         }
         refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
     }
 
     function searchByTags() {
@@ -668,14 +872,19 @@ var publishingFilter = function($) {
     }
 
     function toggleFilter() {
-        var $filterWrapper = $('.publishing-filter-wrapper');
+        var $filterWrapper = $('#publishing-filter.publishing-filter-wrapper');
 
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
             $('.cards-grid').css('opacity', '0.4');
+			$sortItemsContainer.hide();
+			$btnFilter.hide();
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
+			$btnFilter.show();
+			$sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
+            emptyData();
         }
     }
 
@@ -693,7 +902,7 @@ var publishingFilter = function($) {
 
     function addTagToContainer(tag, targetContainer, clickCallback) {
         var $tag = $(tag);
-        $tag.click(clickCallback).appendTo($('.' + targetContainer));
+        $tag.click(clickCallback).appendTo($('#publishing-filter ' + '.' + targetContainer));
         var tagValue = $tag.attr('tag-value');
         targetContainer === 'selected-tags-container' ? addTagToArray(tagValue) : null;
     }
@@ -709,7 +918,7 @@ var publishingFilter = function($) {
 
     function getTagModel(type, from, icon, text, id) {
         return {
-            type: type + ' wow fadeIn',
+            type: type,
             from: from,
             icon: icon,
             text: text,
@@ -727,10 +936,11 @@ var publishingFilter = function($) {
     }
 
     function refreshTagMatches(matchedResults) {
+        console.log(selectedTags);
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
-            if (_.where(currentMatches, {'text': tag.text}).length < 1) {
+            if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -751,7 +961,7 @@ var publishingFilter = function($) {
         var l = oldMatches.length;
         for (var i = 0; i < l; i++) {
             var oldMatch = oldMatches[i];
-            $('#' + oldMatch.id).remove();
+            $('#publishing-filter ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
             for (var m = 0; m < currentMatches.length; m++) {
                 if (currentMatches[m].id === oldMatch.id) {
                     currentMatches.splice(m, 1);
@@ -766,11 +976,238 @@ var publishingFilter = function($) {
         $geoCounter.text('0');
         var l = currentMatches.length;
         for (var i = 0; i < l; i++) {
-            var $target = $('.' + currentMatches[i].from + '-counter');
+            var $target = $('#publishing-filter ' + '.' + currentMatches[i].from + '-counter');
             var currentVal = parseInt($target.text());
             $target.text(++currentVal);
         }
     }
+
+    function emptyData() {
+        removeAllMatchedTags();
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        $inputSearch.val('');
+        selectedTags = [];
+        $('#publishing-filter .selected-tags-container').empty();
+    }
+};
+
+var publishingFilterMobile = function($) {
+    'use strict';
+
+    var searchPage = $('.filter-mobile');
+
+    $('.filter-mobile-button, .close-filter-mobile').click(function() {
+        searchPage.toggleClass('closed');
+    });
+
+    var selectedTags = [];
+    var currentMatches = [];
+    var $availableTag = $('#publishing-filter-mobile .available-tag');
+    var $inputSearch = $('#publishing-filter-mobile .publishing-filter-search-input');
+    var $btnSearch = $('#publishing-filter-mobile .publishing-filter-search-btn');
+    var $tagsColumn = $('#publishing-filter-mobile .tag-container');
+    var $authorsColumn = $('#publishing-filter-mobile .author-container');
+    var $geoColumn = $('#publishing-filter-mobile .geo-container');
+    var $tagsCounter = $('#publishing-filter-mobile .tag-container-counter');
+    var $authorsCounter = $('#publishing-filter-mobile .author-container-counter');
+    var $geoCounter = $('#publishing-filter-mobile .geo-container-counter');
+
+    bindEventsWithHandlers();
+
+    function bindEventsWithHandlers() {
+        $availableTag.on('click', selectTag);
+        $inputSearch.keypress(onInputKeyPressed);
+        $inputSearch.on('input', searchValueUpdated);
+        $btnSearch.on('click', searchByTags);
+    }
+
+    function removeTagFromColumn() {
+        var $tag = $(this);
+        $tag.remove();
+        restoreTag(this);
+        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
+    }
+
+    function selectTag() {
+        var $tag = $(this);
+        $tag.remove();
+        var from = $tag.attr('from');
+        var tagValue = $tag.attr('tag-value');
+        var id = $tag.attr('id');
+        var tagModel = getTagModel('wow fadeIn selected-tag', from, 'bbva-icon-close', tagValue, id);
+        var newTag = createTag(tagModel);
+        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+    }
+
+    function onInputKeyPressed(e) {
+        if (e.keyCode === 13) {
+            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+            this.value = '';
+            removeAllMatchedTags();
+        }
+    }
+
+    function searchValueUpdated() {
+        var $this = $(this);
+        var value = $this.val();
+        removeAllMatchedTags();
+        if (value.length > 2) {
+            var matchedResults = _.filter(data.availableTags, function (obj) {
+                return obj.text.includes(value);
+            });
+            refreshTagMatches(matchedResults);
+            showGeoTags()
+        }
+
+        refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
+    }
+
+    function searchByTags() {
+        $('.cards-grid').css('opacity', '1');
+    }
+
+    //private methods
+    function restoreTag(element) {
+        var $element = $(element);
+        var from = $element.attr('from');
+        if (from) {
+            var tagValue = $element.attr('tag-value');
+            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, from, selectTag);
+        }
+    }
+
+    function addTagToContainer(tag, targetContainer, clickCallback) {
+        var $tag = $(tag);
+        $tag.click(clickCallback).appendTo($('#publishing-filter-mobile ' + '.' + targetContainer));
+        var tagValue = $tag.attr('tag-value');
+        if (targetContainer === 'selected-tags-container') {
+            addTagToArray(tagValue);
+        }
+    }
+
+    function createTag(tag) {
+        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
+        newTag += tag.icon ? '<span class="' + tag.icon + '"></span>' : '';
+        newTag += '<span>' + tag.text + '</span>' + '</div>';
+        $(newTag).click(removeTagFromColumn);
+        return newTag;
+    }
+
+    function getTagModel(type, from, icon, text, id) {
+        return {
+            type: type,
+            from: from,
+            icon: icon,
+            text: text,
+            id: id,
+        };
+    }
+
+    function removeTagFromArray(_array, tag) {
+        var pos = _array.indexOf(tag);
+        if (pos > -1) {
+            _array.splice(pos, 1);
+        }
+    }
+
+    function addTagToArray(value) {
+        selectedTags.push(value);
+    }
+
+    function refreshTagMatches(matchedResults) {
+        var l = matchedResults.length;
+        for (var i = 0; i < l; i++) {
+            var tag = matchedResults[i];
+            var notPresentInCurrentMatches = _.where(currentMatches, { text: tag.text }).length < 1;
+            var notPresentInSelectedTags = _.indexOf(selectedTags, tag.text) < 0;
+            if (tag.from !== 'geo-container' && notPresentInCurrentMatches && notPresentInSelectedTags) {
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        }
+
+        cleanOldMatches(_.difference(currentMatches, matchedResults));
+    }
+
+    function removeAllMatchedTags() {
+        currentMatches = [];
+        $authorsColumn.empty();
+        $tagsColumn.empty();
+        $geoColumn.empty();
+    }
+
+    function cleanOldMatches(oldMatches) {
+        var l = oldMatches.length;
+        for (var i = 0; i < l; i++) {
+            var oldMatch = oldMatches[i];
+            $('#publishing-filter-mobile ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
+            for (var m = 0; m < currentMatches.length; m++) {
+                if (currentMatches[m].id === oldMatch.id) {
+                    currentMatches.splice(m, 1);
+                }
+            }
+        }
+    }
+
+    function refreshTagCounters(currentMatches) {
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        var l = currentMatches.length;
+        for (var i = 0; i < l; i++) {
+            var $target = $('#publishing-filter-mobile ' + '.' + currentMatches[i].from + '-counter');
+            var currentVal = parseInt($target.text());
+            $target.text(++currentVal);
+        }
+    }
+
+    function emptyData() {
+        removeAllMatchedTags();
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        $inputSearch.val('');
+        selectedTags = [];
+        $('#publishing-filter-mobile .selected-tags-container').empty();
+    }
+};
+
+var refreshPage = function($) {
+    'use strict';
+
+    var isPhoneSize = null;
+    var isDesktopSize = Modernizr.mq('(min-width: ' + xsScreenMax + 'px)');
+
+    $(window).resize(function() {
+        isPhoneSize = Modernizr.mq('(max-width: ' + xsScreenMax + 'px)');
+        if (isPhoneSize && isDesktopSize) {
+            location.reload();
+        }
+        if (!isPhoneSize && !isDesktopSize) {
+            location.reload();
+        }
+    });
 };
 
 var scroll = function($) {
@@ -826,6 +1263,210 @@ var scroll = function($) {
       }
 };
 
+var searchMobile = function($) {
+    'use strict';
+
+    var searchPage = $('.search-mobile');
+
+    $('.search-mobile-button, .close-search-mobile').click(function() {
+        window.scrollTo(0, 0);
+        searchPage.toggleClass('closed');
+        setTimeout(function () {
+            $('.input-search-mobile').focus();
+        }, 500);
+    });
+
+    var selectedTags = [];
+    var currentMatches = [];
+    var $availableTag = $('#mobile-filter .available-tag');
+    var $inputSearch = $('#mobile-filter .publishing-filter-search-input');
+    var $btnSearch = $('#mobile-filter .publishing-filter-search-btn');
+    var $tagsColumn = $('#mobile-filter .tag-container');
+    var $authorsColumn = $('#mobile-filter .author-container');
+    var $geoColumn = $('#mobile-filter .geo-container');
+    var $tagsCounter = $('#mobile-filter .tag-container-counter');
+    var $authorsCounter = $('#mobile-filter .author-container-counter');
+    var $geoCounter = $('#mobile-filter .geo-container-counter');
+
+    bindEventsWithHandlers();
+
+    function bindEventsWithHandlers() {
+        $availableTag.on('click', selectTag);
+        $inputSearch.keypress(onInputKeyPressed);
+        $inputSearch.on('input', searchValueUpdated);
+        $btnSearch.on('click', searchByTags);
+    }
+
+    function removeTagFromColumn() {
+        var $tag = $(this);
+        $tag.remove();
+        restoreTag(this);
+        removeTagFromArray(selectedTags, $(this).attr('tag-value'));
+    }
+
+    function selectTag() {
+        var $tag = $(this);
+        $tag.remove();
+        var from = $tag.attr('from');
+        var tagValue = $tag.attr('tag-value');
+        var id = $tag.attr('id');
+        var tagModel = getTagModel('wow fadeIn selected-tag', from, 'bbva-icon-close', tagValue, id);
+        var newTag = createTag(tagModel);
+        addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+    }
+
+    function onInputKeyPressed(e) {
+        if (e.keyCode === 13) {
+            var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
+            this.value = '';
+            removeAllMatchedTags();
+        }
+    }
+
+    function searchValueUpdated() {
+        var $this = $(this);
+        var value = $this.val();
+        removeAllMatchedTags();
+        if (value.length > 2) {
+            var matchedResults = _.filter(data.availableTags, function (obj) {
+                return obj.text.includes(value);
+            });
+            refreshTagMatches(matchedResults);
+            showGeoTags();
+        }
+
+        refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
+    }
+
+    function searchByTags() {
+        $('.cards-grid').css('opacity', '1');
+    }
+
+    //private methods
+    function restoreTag(element) {
+        var $element = $(element);
+        var from = $element.attr('from');
+        if (from) {
+            var tagValue = $element.attr('tag-value');
+            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, from, selectTag);
+        }
+    }
+
+    function addTagToContainer(tag, targetContainer, clickCallback) {
+        var $tag = $(tag);
+        $tag.click(clickCallback).appendTo($('#mobile-filter ' + '.' + targetContainer));
+        var tagValue = $tag.attr('tag-value');
+        if (targetContainer === 'selected-tags-container') {
+            addTagToArray(tagValue);
+        }
+    }
+
+    function createTag(tag) {
+        var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
+        newTag += tag.icon ? '<span class="' + tag.icon + '"></span>' : '';
+        newTag += '<span>' + tag.text + '</span>' + '</div>';
+        $(newTag).click(removeTagFromColumn);
+        return newTag;
+    }
+
+    function getTagModel(type, from, icon, text, id) {
+        return {
+            type: type,
+            from: from,
+            icon: icon,
+            text: text,
+            id: id,
+        };
+    }
+
+    function removeTagFromArray(_array, tag) {
+        var pos = _array.indexOf(tag);
+        if (pos > -1) {
+            _array.splice(pos, 1);
+        }
+    }
+
+    function addTagToArray(value) {
+        selectedTags.push(value);
+    }
+
+    function refreshTagMatches(matchedResults) {
+        var l = matchedResults.length;
+        for (var i = 0; i < l; i++) {
+            var tag = matchedResults[i];
+            var notPresentInCurrentMatches = _.where(currentMatches, { text: tag.text }).length < 1;
+            var notPresentInSelectedTags = _.indexOf(selectedTags, tag.text) < 0;
+            if (tag.from !== 'geo-container' && notPresentInCurrentMatches && notPresentInSelectedTags) {
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        }
+
+        cleanOldMatches(_.difference(currentMatches, matchedResults));
+    }
+
+    function removeAllMatchedTags() {
+        currentMatches = [];
+        $authorsColumn.empty();
+        $tagsColumn.empty();
+        $geoColumn.empty();
+    }
+
+    function cleanOldMatches(oldMatches) {
+        var l = oldMatches.length;
+        for (var i = 0; i < l; i++) {
+            var oldMatch = oldMatches[i];
+            $('#mobile-filter ' + '.available-tags-wrapper ' + '#' + oldMatch.id).remove();
+            for (var m = 0; m < currentMatches.length; m++) {
+                if (currentMatches[m].id === oldMatch.id) {
+                    currentMatches.splice(m, 1);
+                }
+            }
+        }
+    }
+
+    function refreshTagCounters(currentMatches) {
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        var l = currentMatches.length;
+        for (var i = 0; i < l; i++) {
+            var $target = $('#mobile-filter ' + '.' + currentMatches[i].from + '-counter');
+            var currentVal = parseInt($target.text());
+            $target.text(++currentVal);
+        }
+    }
+
+    function emptyData() {
+        removeAllMatchedTags();
+        $authorsCounter.text('0');
+        $tagsCounter.text('0');
+        $geoCounter.text('0');
+        $inputSearch.val('');
+        selectedTags = [];
+        $('#mobile-filter .selected-tags-container').empty();
+    }
+};
+
 var selectLanguage = function($) {
     'use strict';
     $('.selectpicker')
@@ -844,6 +1485,16 @@ var selectLanguage = function($) {
         $(this).addClass('active');
     });
 };
+
+var sortOptions = function ($) {
+    'use strict';
+    var $sortItemsContainer = $('.sort-items-container');
+
+    $sortItemsContainer.on('click', 'a', function () {
+        $sortItemsContainer.find('a').removeClass('selected');
+        $(this).addClass('selected');
+      });
+  };
 
 var animationWow = function($) {
     'use strict';
@@ -967,16 +1618,16 @@ var dataEvents = [
     {
         'id'        : '2014',
         'title'     : 'Bancomer Educación Financiera',
-        'content'   : '30 South 14th St, México D.F, AL, 35233',
-        'distance'  : '0.8',
+        'content'   : '30 South 14th St, <br> México D.F, AL, 35233',
+        'distance'  : '0.8 Miles',
         'latitude'  : '-34.397',
         'longitude' : '150.644'
     },
     {
         'id'        : '2015',
         'title'     : 'Bancomer Educación Financiera',
-        'content'   : '15 South 20th St, México D.F, AL, 35233',
-        'distance'  : '2.8',
+        'content'   : '15 South 20th St, <br> México D.F, AL, 35233',
+        'distance'  : '2.8 Miles',
         'latitude'  : '-34.197',
         'longitude' : '150.844'
     }
@@ -984,26 +1635,32 @@ var dataEvents = [
 
 jQuery.noConflict();
 jQuery(document).ready(function ($) {
-        'use strict';
-        selectLanguage($);
-        fixedMenu($);
-        navPhone($);
-        footerMenu($);
-        animationWow($);
-        animationWowAppear($);
-        landing($);
-        cookies($);
-        progresscircle($);
-        progressbar($);
-        popover($);
-        googleMaps($);
-        scroll($);
-        dropdowns($);
-        momentjs($);
-        googlemap($);
-        publishingFilter($);
-		navBar($);
-      });
+    'use strict';
+    selectLanguage($);
+    fixedMenu($);
+    navPhone($);
+    footerMenu($);
+    animationWow($);
+    animationWowAppear($);
+    cookies($);
+    progressbar($);
+    popover($);
+    googleMaps($);
+    scroll($);
+    dropdowns($);
+    momentjs($);
+    googlemap($);
+    publishingFilter($);
+    navBar($);
+    menuSearch($);
+    sortOptions($);
+    searchMobile($);
+    refreshPage($);
+    homeStopCarouselOnMobile($);
+    homeCarouselSwipe($);
+    publishingFilterMobile($);
+    window.objectFitImages();
+});
 
 var lgScreenMin = 1200;
 

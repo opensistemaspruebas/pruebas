@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/vendor.css" />
         <link rel="stylesheet" href="css/app.css" />
+	    <link rel="shortcut icon" href="images/favicon.ico">
         <title>BBVA</title>
     
 </head>
@@ -17,7 +18,9 @@
     <div class="webpage">
         
             <header class="header">
-                <!-- header -->
+                
+
+<!-- header -->
 <div class="top hidden-xs">
     <div class="container">
         <div class="languages-menu">
@@ -33,9 +36,9 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container stycky-menu-in-mobile">
     <div class="row vertical-align header-logo">
-        <div class="visible-xs col-xs-12 header-phone">
+        <div class="visible-xs col-xs-12 header-phone text-center">
             <div class="launcher-menu-mobil visible-xs">
                 <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
             </div>
@@ -44,7 +47,7 @@
                     <span class="bbva-icon-BBVA"></span>
                 </a>
                 <h1>Educación Financiera</h1>
-                <div class="logo-search ml-sm">
+                <div class="logo-search ml-sm search-mobile-button">
                     <span class="bbva-icon-search"></span>
                 </div>
             </div>
@@ -60,6 +63,65 @@
         </div>
     </div>
 </div>
+
+<div class="search-mobile closed hidden-sm hidden-md hidden-lg">
+    <div class="container">
+        <div class="header-phone">
+            <div class="logo">
+                <a href="index.html" class="bbva-icon-BBVA-wrap">
+                    <span class="bbva-icon-BBVA"></span>
+                </a>
+                <h1>Educación Financiera</h1>
+            </div>
+            <div class="close-search-mobile ml-sm">
+                <span class="bbva-icon-close"></span>
+            </div>
+        </div>
+        <section class="content">
+            
+<div id="mobile-filter" class="publishing-filter-wrapper-mobile">
+
+    <header>
+        <div class="form-group has-feedback">
+            <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
+            <span class="bbva-icon-search form-control-feedback"></span>
+        </div>
+        <div class="selected-tags-container"></div>
+        <div class="button-filter">
+            <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a>
+        </div>
+    </header>
+
+    <section>
+        <div class="row available-tags-wrapper">
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                <div class="tag-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                <div class="author-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                <div class="geo-container">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+</div>
+
+        </section>
+    </div>
+</div>
+
 <!-- EO header -->
             </header>
             <div class="nav-content open">
@@ -220,6 +282,7 @@
             </div>
         
         <div class="contents">
+            <div id="search-layer"></div>
             
     <div class="container error404">
       <section class="mb-4xl mt-lg">
@@ -394,7 +457,6 @@
     <script src="js/modernizr.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/picturefill.min.js"></script>
-    <script src="js/circle-progress.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_bv7e4BrxwnaEVfLCPMKAyKoQnv15Lo"></script>
@@ -402,6 +464,8 @@
     <script src="js/moment-precise-range.js"></script>
     <script src="js/progressbar.min.js"></script>
 	<script src="js/underscore-min.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/ofi.browser.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

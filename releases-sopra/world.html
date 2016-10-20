@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/vendor.css" />
         <link rel="stylesheet" href="css/app.css" />
+	    <link rel="shortcut icon" href="images/favicon.ico">
         <title>BBVA</title>
     
 </head>
@@ -17,21 +18,27 @@
     <div class="webpage">
         
             <header class="header">
-                <!-- header -->
+                
+
+<!-- header -->
 <div class="top hidden-xs">
     <div class="container">
         <div class="languages-menu">
             <label for="language-header" class="hidden">Idioma</label>
-            <select id="language-header" class="selectpicker mgr-10">
-                <option>Español</option>
-                <option>English</option>
-            </select>
+            <div class="btn-group languages-buttons" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> ES
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> EN
+              </label>
+            </div>
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container stycky-menu-in-mobile">
     <div class="row vertical-align header-logo">
-        <div class="visible-xs col-xs-12 header-phone">
+        <div class="visible-xs col-xs-12 header-phone text-center">
             <div class="launcher-menu-mobil visible-xs">
                 <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
             </div>
@@ -40,7 +47,7 @@
                     <span class="bbva-icon-BBVA"></span>
                 </a>
                 <h1>Educación Financiera</h1>
-                <div class="logo-search ml-sm">
+                <div class="logo-search ml-sm search-mobile-button">
                     <span class="bbva-icon-search"></span>
                 </div>
             </div>
@@ -56,10 +63,71 @@
         </div>
     </div>
 </div>
+
+<div class="search-mobile closed hidden-sm hidden-md hidden-lg">
+    <div class="container">
+        <div class="header-phone">
+            <div class="logo">
+                <a href="index.html" class="bbva-icon-BBVA-wrap">
+                    <span class="bbva-icon-BBVA"></span>
+                </a>
+                <h1>Educación Financiera</h1>
+            </div>
+            <div class="close-search-mobile ml-sm">
+                <span class="bbva-icon-close"></span>
+            </div>
+        </div>
+        <section class="content">
+            
+<div id="mobile-filter" class="publishing-filter-wrapper-mobile">
+
+    <header>
+        <div class="form-group has-feedback">
+            <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
+            <span class="bbva-icon-search form-control-feedback"></span>
+        </div>
+        <div class="selected-tags-container"></div>
+        <div class="button-filter">
+            <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a>
+        </div>
+    </header>
+
+    <section>
+        <div class="row available-tags-wrapper">
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                <div class="tag-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                <div class="author-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                <div class="geo-container">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+</div>
+
+        </section>
+    </div>
+</div>
+
 <!-- EO header -->
             </header>
             <div class="nav-content open">
-                <!-- navbar menu -->
+                
+
+<!-- navbar menu -->
 <div class="container">
     <nav class="navbar">
         <div class="row visible-xs">
@@ -80,7 +148,7 @@
         <ul class="nav navbar-nav" id="topmenu">
             
                 <li class="panel">
-                    <a class=" collapsed active_menu mr-sm" href="index.html">
+                    <a class=" collapsed  mr-sm" href="index.html">
                         <span class="hidden-xs">Home</span>
                         <span class="visible-xs pl-lg">Home</span>
                         
@@ -97,14 +165,14 @@
                         <span class="visible-xs pl-lg">Publicaciones</span>
                         
                     </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publish">
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publishing">
                         <span>Publicaciones</span>
                         
                     </a>
                 </li>
             
                 <li class="panel">
-                    <a class=" collapsed  mr-sm" href="world.html">
+                    <a class=" collapsed active_menu mr-sm" href="world.html">
                         <span class="hidden-xs">En el mundo</span>
                         <span class="visible-xs pl-lg">En el mundo</span>
                         
@@ -145,7 +213,7 @@
                         <span class="visible-xs pl-lg">Sobre Nosotros</span>
                         
                     </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutus">
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutUs">
                         <span>Sobre Nosotros</span>
                         
                     </a>
@@ -154,7 +222,11 @@
         </ul>
         <div class="hidden-xs logo-search">
             <span class="search-icon bbva-icon-search"></span>
-            <input class="input-search hidden" type="text" name="name" value="">
+            <div class="search-form-container hidden">
+              <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
+              <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+              <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+            </div>
         </div>
         <div class="visible-xs">
             <div class="languages-menu pb-lg pl-lg">
@@ -163,16 +235,59 @@
             </div>
         </div>
     </nav>
+    <div class="navbar navbar-search">
+      
+<div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
+
+  <header>
+    <div class="form-wrapper">
+      <div class="title">
+        <span class="text-uppercase text">filtros</span>
+        <button type="button" class="close close-menu-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+      </div>
+    </div>
+
+    <div class="selected-tags-container"></div>
+  </header>
+
+  <section>
+    <div class="row available-tags-wrapper">
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
+          <div class="tag-container">
+          </div>
+        </div>
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
+          <div class="author-container">
+          </div>
+        </div>
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+          <div class="geo-container">
+          </div>
+        </div>
+      
+    </div>
+  </section>
+
+</div>
+
+    </div>
 </div>
 <!-- EO navbar menu -->
             </div>
         
         <div class="contents">
+            <div id="search-layer"></div>
             
     <section class="back-map">
     <div class="container">
         <h1>En el mundo</h1>
-        <p>Clicka en el mapa el país al que quieras acceder y consulto todo el catálogo de información financiera específica de ese del país.</p>
+        <p class="map-explanation">Clicka en el mapa el país al que quieras acceder y consulta todo el catálogo de información financiera específica de ese país.</p>
         <div class="container_map hidden-xs">
             <div id="map_canvas" class="content_map"></div>
             <div class="map_message"></div>
@@ -292,15 +407,28 @@
 	<div class="container">
 		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
 		<div class="text-center">
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-oecd" src="images/home/map1.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-wb" src="images/home/map2.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-gflec" src="images/home/map3.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-sgi" src="images/home/map4.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide" src="images/home/map5.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide2" src="images/home/map6.jpg" alt="image title" />
+			</div>
 		</div>
 	</div>
 	
-<section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -311,7 +439,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-oecd.jpg" alt="image title" />
+                            <img src="images/home/map1.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">OECD</h2>
@@ -328,7 +456,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -339,7 +467,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-wb.jpg" alt="image title" />
+                            <img src="images/home/map2.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">WB</h2>
@@ -356,7 +484,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -367,7 +495,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-gflec.jpg" alt="image title" />
+                            <img src="images/home/map3.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">GFLEC</h2>
@@ -384,7 +512,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -395,7 +523,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-sgi.jpg" alt="image title" />
+                            <img src="images/home/map4.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">SGI</h2>
@@ -412,7 +540,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -423,7 +551,35 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-mide.jpg" alt="image title" />
+                            <img src="images/home/map5.jpg" alt="image title" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8 mt-md">
+                            <h2 class="text-left ml-md">MIDE</h2>
+                            <p class="ml-md">El MIDE, Museo Interactivo de Economía, es una institución educativa y cultural independiente sin fines de lucro. Creado por el Banco de México y diversas instituciones financieras privadas del país, el MIDE está dedicado a la divulgación de la economía y la promoción de la educación financiera. Su meta es que los visitantes reconozcan el papel de la economía en su vida cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-header">
+                    <h1 class="modal-title">Miembros del consejo asesor</h1>
+                </div>
+                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
+                            <img src="images/home/map6.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">MIDE</h2>
@@ -561,15 +717,28 @@
 	<div class="container">
 		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
 		<div class="text-center">
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-oecd" src="images/home/map1.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-wb" src="images/home/map2.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-gflec" src="images/home/map3.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-sgi" src="images/home/map4.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide" src="images/home/map5.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide2" src="images/home/map6.jpg" alt="image title" />
+			</div>
 		</div>
 	</div>
 	
-<section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -580,7 +749,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-oecd.jpg" alt="image title" />
+                            <img src="images/home/map1.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">OECD</h2>
@@ -597,7 +766,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -608,7 +777,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-wb.jpg" alt="image title" />
+                            <img src="images/home/map2.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">WB</h2>
@@ -625,7 +794,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -636,7 +805,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-gflec.jpg" alt="image title" />
+                            <img src="images/home/map3.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">GFLEC</h2>
@@ -653,7 +822,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -664,7 +833,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-sgi.jpg" alt="image title" />
+                            <img src="images/home/map4.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">SGI</h2>
@@ -681,7 +850,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -692,7 +861,35 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-mide.jpg" alt="image title" />
+                            <img src="images/home/map5.jpg" alt="image title" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8 mt-md">
+                            <h2 class="text-left ml-md">MIDE</h2>
+                            <p class="ml-md">El MIDE, Museo Interactivo de Economía, es una institución educativa y cultural independiente sin fines de lucro. Creado por el Banco de México y diversas instituciones financieras privadas del país, el MIDE está dedicado a la divulgación de la economía y la promoción de la educación financiera. Su meta es que los visitantes reconozcan el papel de la economía en su vida cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-header">
+                    <h1 class="modal-title">Miembros del consejo asesor</h1>
+                </div>
+                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
+                            <img src="images/home/map6.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">MIDE</h2>
@@ -830,15 +1027,28 @@
 	<div class="container">
 		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
 		<div class="text-center">
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-oecd" src="images/home/map1.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-wb" src="images/home/map2.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-gflec" src="images/home/map3.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-sgi" src="images/home/map4.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide" src="images/home/map5.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide2" src="images/home/map6.jpg" alt="image title" />
+			</div>
 		</div>
 	</div>
 	
-<section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -849,7 +1059,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-oecd.jpg" alt="image title" />
+                            <img src="images/home/map1.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">OECD</h2>
@@ -866,7 +1076,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -877,7 +1087,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-wb.jpg" alt="image title" />
+                            <img src="images/home/map2.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">WB</h2>
@@ -894,7 +1104,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -905,7 +1115,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-gflec.jpg" alt="image title" />
+                            <img src="images/home/map3.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">GFLEC</h2>
@@ -922,7 +1132,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -933,7 +1143,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-sgi.jpg" alt="image title" />
+                            <img src="images/home/map4.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">SGI</h2>
@@ -950,7 +1160,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -961,7 +1171,35 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-mide.jpg" alt="image title" />
+                            <img src="images/home/map5.jpg" alt="image title" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8 mt-md">
+                            <h2 class="text-left ml-md">MIDE</h2>
+                            <p class="ml-md">El MIDE, Museo Interactivo de Economía, es una institución educativa y cultural independiente sin fines de lucro. Creado por el Banco de México y diversas instituciones financieras privadas del país, el MIDE está dedicado a la divulgación de la economía y la promoción de la educación financiera. Su meta es que los visitantes reconozcan el papel de la economía en su vida cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-header">
+                    <h1 class="modal-title">Miembros del consejo asesor</h1>
+                </div>
+                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
+                            <img src="images/home/map6.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">MIDE</h2>
@@ -1099,15 +1337,28 @@
 	<div class="container">
 		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
 		<div class="text-center">
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-oecd" src="images/home/map1.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-wb" src="images/home/map2.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-gflec" src="images/home/map3.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-sgi" src="images/home/map4.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide" src="images/home/map5.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide2" src="images/home/map6.jpg" alt="image title" />
+			</div>
 		</div>
 	</div>
 	
-<section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1118,7 +1369,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-oecd.jpg" alt="image title" />
+                            <img src="images/home/map1.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">OECD</h2>
@@ -1135,7 +1386,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1146,7 +1397,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-wb.jpg" alt="image title" />
+                            <img src="images/home/map2.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">WB</h2>
@@ -1163,7 +1414,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1174,7 +1425,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-gflec.jpg" alt="image title" />
+                            <img src="images/home/map3.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">GFLEC</h2>
@@ -1191,7 +1442,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1202,7 +1453,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-sgi.jpg" alt="image title" />
+                            <img src="images/home/map4.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">SGI</h2>
@@ -1219,7 +1470,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1230,7 +1481,35 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-mide.jpg" alt="image title" />
+                            <img src="images/home/map5.jpg" alt="image title" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8 mt-md">
+                            <h2 class="text-left ml-md">MIDE</h2>
+                            <p class="ml-md">El MIDE, Museo Interactivo de Economía, es una institución educativa y cultural independiente sin fines de lucro. Creado por el Banco de México y diversas instituciones financieras privadas del país, el MIDE está dedicado a la divulgación de la economía y la promoción de la educación financiera. Su meta es que los visitantes reconozcan el papel de la economía en su vida cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-header">
+                    <h1 class="modal-title">Miembros del consejo asesor</h1>
+                </div>
+                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
+                            <img src="images/home/map6.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">MIDE</h2>
@@ -1368,15 +1647,28 @@
 	<div class="container">
 		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
 		<div class="text-center">
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-oecd" src="images/home/map1.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-wb" src="images/home/map2.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-gflec" src="images/home/map3.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-sgi" src="images/home/map4.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide" src="images/home/map5.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide2" src="images/home/map6.jpg" alt="image title" />
+			</div>
 		</div>
 	</div>
 	
-<section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1387,7 +1679,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-oecd.jpg" alt="image title" />
+                            <img src="images/home/map1.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">OECD</h2>
@@ -1404,7 +1696,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1415,7 +1707,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-wb.jpg" alt="image title" />
+                            <img src="images/home/map2.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">WB</h2>
@@ -1432,7 +1724,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1443,7 +1735,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-gflec.jpg" alt="image title" />
+                            <img src="images/home/map3.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">GFLEC</h2>
@@ -1460,7 +1752,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1471,7 +1763,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-sgi.jpg" alt="image title" />
+                            <img src="images/home/map4.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">SGI</h2>
@@ -1488,7 +1780,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1499,7 +1791,35 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-mide.jpg" alt="image title" />
+                            <img src="images/home/map5.jpg" alt="image title" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8 mt-md">
+                            <h2 class="text-left ml-md">MIDE</h2>
+                            <p class="ml-md">El MIDE, Museo Interactivo de Economía, es una institución educativa y cultural independiente sin fines de lucro. Creado por el Banco de México y diversas instituciones financieras privadas del país, el MIDE está dedicado a la divulgación de la economía y la promoción de la educación financiera. Su meta es que los visitantes reconozcan el papel de la economía en su vida cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-header">
+                    <h1 class="modal-title">Miembros del consejo asesor</h1>
+                </div>
+                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
+                            <img src="images/home/map6.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">MIDE</h2>
@@ -1637,15 +1957,28 @@
 	<div class="container">
 		<h2 class="title-map">Partners del programa en <span class="current-country"></span></h2>
 		<div class="text-center">
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-oecd" src="images/home/asesor-oecd.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-wb" src="images/home/asesor-wb.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-gflec" src="images/home/asesor-gflec.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-sgi" src="images/home/asesor-sgi.jpg" alt="image title" />
-			<img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-mide" src="images/home/asesor-mide.jpg" alt="image title" />
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-oecd" src="images/home/map1.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-wb" src="images/home/map2.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-gflec" src="images/home/map3.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-sgi" src="images/home/map4.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide" src="images/home/map5.jpg" alt="image title" />
+			</div>
+			<div class="img-map">
+				<img data-toggle="modal" data-target="#modal-mide2" src="images/home/map6.jpg" alt="image title" />
+			</div>
 		</div>
 	</div>
 	
-<section class="lightbox modal fade" id="modal-oecd" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-oecd" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1656,7 +1989,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-oecd.jpg" alt="image title" />
+                            <img src="images/home/map1.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">OECD</h2>
@@ -1673,7 +2006,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-wb" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-wb" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1684,7 +2017,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-wb.jpg" alt="image title" />
+                            <img src="images/home/map2.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">WB</h2>
@@ -1701,7 +2034,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-gflec" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-gflec" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1712,7 +2045,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-gflec.jpg" alt="image title" />
+                            <img src="images/home/map3.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">GFLEC</h2>
@@ -1729,7 +2062,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-sgi" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-sgi" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1740,7 +2073,7 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-sgi.jpg" alt="image title" />
+                            <img src="images/home/map4.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">SGI</h2>
@@ -1757,7 +2090,7 @@
 </section>
 
 	
-<section class="lightbox modal fade" id="modal-mide" tabindex="-1" role="dialog">
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="container">
@@ -1768,7 +2101,35 @@
                 <div class="modal-body mr-xxl ml-xxxl pl-lg">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
-                            <img src="images/home/asesor-mide.jpg" alt="image title" />
+                            <img src="images/home/map5.jpg" alt="image title" />
+                        </div>
+                        <div class="col-xs-12 col-sm-8 mt-md">
+                            <h2 class="text-left ml-md">MIDE</h2>
+                            <p class="ml-md">El MIDE, Museo Interactivo de Economía, es una institución educativa y cultural independiente sin fines de lucro. Creado por el Banco de México y diversas instituciones financieras privadas del país, el MIDE está dedicado a la divulgación de la economía y la promoción de la educación financiera. Su meta es que los visitantes reconozcan el papel de la economía en su vida cotidiana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+	
+<section class="lightbox modal wow fadeInUp" id="modal-mide" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-header">
+                    <h1 class="modal-title">Miembros del consejo asesor</h1>
+                </div>
+                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md">
+                            <img src="images/home/map6.jpg" alt="image title" />
                         </div>
                         <div class="col-xs-12 col-sm-8 mt-md">
                             <h2 class="text-left ml-md">MIDE</h2>
@@ -1811,6 +2172,7 @@
       <div class="row">
           <div class="col-xs-12 col-sm-12 mt-lg mb-lg footer-menu-group">
               <div class="row">
+
                   <div class="col-xs-12 col-sm-4 footer-menu-item">
                       <div>
                           <p class="hidden-xs title mb-md">
@@ -1830,15 +2192,18 @@
                                   <li class="mb-md"><a href="#">Sobre Nosotros</a></li>
                               </ul>
                               <div class="visible-xs row prefooter-menu-collapsed">
+                                  <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
                                   <a href="#" class="col-xs-6">Publicaciones</a>
                                   <a href="#" class="col-xs-6">En el mundo</a>
                                   <a href="#" class="col-xs-6">Impacto</a>
                                   <a href="#" class="col-xs-6">Eventos</a>
                                   <a href="#" class="col-xs-6">Sobre Nosotros</a>
+                                  <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
                               </div>
                           </div>
                       </div>
                   </div>
+
                   <div class="col-xs-12 col-sm-4 footer-menu-item">
                       <div>
                           <p class="hidden-xs title mb-md">
@@ -1851,6 +2216,7 @@
                           </p>
                           <div class="collapse" id="collapseTwo">
                             <div class="row mgl-0 prefooter-menu-collapsed">
+                                <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
                                 <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
                                     <li class="mb-md"><a href="#">España</a></li>
                                     <li class="mb-md"><a href="#">USA</a></li>
@@ -1867,10 +2233,12 @@
                                     <li class="mb-md"><a href="#">México</a></li>
                                     <li class="mb-md"><a href="#">Perú</a></li>
                                 </ul>
+                                <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
                             </div>
                           </div>
                       </div>
                   </div>
+
                   <div class="col-xs-12 col-sm-4 footer-menu-item">
                       <p class="hidden-xs title mb-md">
                           <a role="button">Enlaces de interés</a>
@@ -1886,11 +2254,14 @@
                               <li class="mb-md"><a href="#">Empleo BBVA</a></li>
                           </ul>
                           <div class="visible-xs row prefooter-menu-collapsed">
+                              <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
                               <a href="#" class="col-xs-8">Web corporativa BBVA.com</a>
                               <a href="#" class="col-xs-4">Empleo BBVA</a>
+                              <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
                           </div>
                       </div>
                   </div>
+
               </div>
           </div>
       </div>
@@ -1921,7 +2292,6 @@
         </div>
         <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
             <ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
             </ul>
@@ -1933,7 +2303,6 @@
         </div>
         <div class="visible-xs col-xs-12">
 			<ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
             </ul>
@@ -1954,7 +2323,6 @@
     <script src="js/modernizr.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/picturefill.min.js"></script>
-    <script src="js/circle-progress.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_bv7e4BrxwnaEVfLCPMKAyKoQnv15Lo"></script>
@@ -1962,6 +2330,8 @@
     <script src="js/moment-precise-range.js"></script>
     <script src="js/progressbar.min.js"></script>
 	<script src="js/underscore-min.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/ofi.browser.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

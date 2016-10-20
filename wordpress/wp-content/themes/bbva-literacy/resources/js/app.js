@@ -31,35 +31,68 @@ var dropdowns = function ($) {
     $(this).parents('.dropdown').find('.dropdown-toggle').html(selText +
        '<span class="icon bbva-icon-arrow_bottom"></span>');
   });
+
+  var $contentTabs = $('#select-tab-results');
+  $contentTabs.on('change', function () {
+      var $socialCurrent = '.' + $(this).val();
+      $('#results-tabs li').find($socialCurrent).tab('show');
+  });
+
+  $('.results-content-tabs a[data-toggle="tab"]')
+      .on('shown.bs.tab', function (e) {
+          $contentTabs.selectpicker('val', $(e.target)[0].className);
+      });
 };
 
-var fixedMenu = function($) {
+var fixedMenu = function ($) {
     $(window).scroll(function () {
-        var nav = $('.nav-content');
-        var content = $('.contents');
-        var pos = content.offset().top - nav.height();
+        var $nav = $('.nav-content');
+        var $content = $('.contents');
+        var pos = $content.offset().top - $nav.height();
         var isScrollDownOfNav = $(this).scrollTop() > pos;
 
         if (isScrollDownOfNav) {
-          nav.addClass('navbar-fixed-top');
+            $nav.addClass('navbar-fixed-top');
+            $content.addClass('fix-navbar-in-top');
         } else {
-          nav.removeClass('navbar-fixed-top');
+            $nav.removeClass('navbar-fixed-top');
+            $content.removeClass('fix-navbar-in-top');
         }
 
         var $header = $('.header-fixed-top');
         var $image = $('.image-section');
+        var pos2;
         if ($image.offset()) {
-          var pos2 = $image.offset().top - $header.height();
+            pos2 = $image.offset().top - $header.height();
         }
 
         var isScrollDownOfImage = $(this).scrollTop() > pos2;
 
         if (!isScrollDownOfImage) {
-          $header.addClass('hidden');
+            $header.addClass('hidden');
         } else {
-          $header.removeClass('hidden');
+            $header.removeClass('hidden');
         }
+
+        enableStickyMenuMobile($);
     });
+
+    function enableStickyMenuMobile($) {
+        var $nav = $('.stycky-menu-in-mobile');
+        var $content = $('.contents');
+        var distanceScrolled = $(window).scrollTop();
+        if (distanceScrolled > $nav.height()) {
+            $nav.addClass('fixed-top-on-mobile');
+            closeAllPopovers();
+        } else {
+            $nav.removeClass('fixed-top-on-mobile');
+            $content.removeClass('fix-navbar-in-top');
+        }
+    }
+
+    function closeAllPopovers() {
+        $('.popover').popover('hide');
+    }
 };
 
 var footerMenu = function($) {
@@ -77,11 +110,9 @@ var footerMenu = function($) {
 };
 
 var googlemap = function ($) {
-
     var hasMap = $('#mapSection').length;
 
     function initialize() {
-
         var mapOptions = {
             center: new google.maps.LatLng(-34.397, 150.644),
             scrollwheel: false,
@@ -91,7 +122,7 @@ var googlemap = function ($) {
         };
 
         var icon = {
-            path: 'M12.395 11.708c0-1.993 1.614-3.608 3.604-3.608s3.605 1.616 3.605 3.608-1.614 3.608-3.605 3.608c-1.991 0-3.604-1.615-3.604-3.608zM15.729 2.625c-6.065 0-9.3 3.896-9.3 9.467 0 7.414 9.197 17.176 9.197 17.176 0.149 0.142 0.393 0.142 0.543 0.001 0 0 9.402-9.722 9.402-17.094 0-5.529-3.442-9.55-9.424-9.55h-0.418z',
+            path: 'M0,12.8843964 C0,14.7474513 0.484912462,16.7785387 1.39810883,18.9525168 C2.6165542,21.8531782 4.55909161,24.9284809 7.02713408,28.072398 C8.55240231,30.0153616 10.1855184,31.8666903 11.8186921,33.565401 C12.3904451,34.1600977 12.9215696,34.6934376 13.398573,35.1577293 C13.5658531,35.3205515 13.7145284,35.4632107 13.8429116,35.5847433 C13.8880402,35.6274639 13.9274617,35.6645402 13.960965,35.6958516 C14.3823445,36.0941778 14.9962311,36.0957466 15.3813932,35.732905 C15.4516361,35.6682188 15.4913586,35.6313016 15.5368324,35.5887643 C15.6662002,35.4677503 15.8160171,35.3257016 15.9845825,35.1635784 C16.4652566,34.7012748 17.0004707,34.170239 17.5766282,33.5781371 C19.2223999,31.8868212 20.8681199,30.0437437 22.4051738,28.1096779 C24.8856732,24.9884801 26.8396147,21.9355794 28.0683611,19.0557506 C28.9952281,16.8834407 29.4875765,14.8544759 29.4875765,12.9940925 C29.4875765,5.54868695 23.2048877,0 15.0179237,0 L14.4696528,0 C6.16491217,0 0,5.39002078 0,12.8843964 Z M9.48506498,13.20876 C9.48506498,10.2356904 11.8931466,7.82569827 14.863472,7.82569827 C17.8337973,7.82569827 20.241879,10.2356904 20.241879,13.20876 C20.241879,16.1818296 17.8337973,18.5918217 14.863472,18.5918217 C11.8931466,18.5918217 9.48506498,16.1818296 9.48506498,13.20876 Z',
             fillColor: '#004481',
             fillOpacity: 1,
             anchor: new google.maps.Point(0, 0),
@@ -151,7 +182,7 @@ var googlemap = function ($) {
         });
     }
 
-    if(hasMap){
+    if (hasMap) {
         google.maps.event.addDomListener(window, 'load', initialize);
     }
 };
@@ -176,42 +207,6 @@ var homeStopCarouselOnMobile = function ($) {
   if (navigator && navigator.userAgent && mobileRegexp.test(navigator.userAgent)) {
     $('#home-slider.carousel').carousel({ interval: false, });
   }
-};
-
-var landing = function($) {
-    'use strict';
-	$('.main-page').each(function(){
-		var $caption = $(this).find('.data-container');
-		var headerHeight = $(this).find('.header-container').height();
-		var pheight = $(this).height();
-		$caption.css('top', '0');
-
-		$(this).hover(
-
-			function(){
-				$caption.stop(1);
-				$caption.addClass('data-containerHover');
-				$caption.animate({
-					top: -headerHeight
-				});
-			},
-			function(){
-				$caption.stop(1);
-				$caption.animate({
-					top: '0'
-				});
-				$caption.removeClass('data-containerHover');
-			}
-		)
-
-	}).find('.data-container').click(function(){
-		var link = $(this.parentNode).find('a');
-		link.attr('target', '_blank');
-		if (link.length) {
-			location.href = link.attr('href');
-		}
-	});
-
 };
 
 var googleMaps = function($) {
@@ -239,7 +234,8 @@ var googleMaps = function($) {
             isHtml  : true,
             textStyle: {
                 color   : '#BDBDBD',
-                fontSize: 11
+                fontSize: 11,
+                fontFamily: 'BentonSans'
             }
         },
         defaultColor : '#2A86CA',
@@ -302,7 +298,7 @@ var googleMaps = function($) {
         html += '<span class="map-info-close">&times;</span>';
         html += '<h1>' + data.title + '</h1>';
         html += '<p>' + data.text + '</p>';
-        html += '<a target="_blank" class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
+        html += '<a class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
         return html;
     }
 
@@ -404,15 +400,16 @@ var menuSearch = function($) {
 
     //public methods
     function removeTagFromColumn(e) {
-        this.remove();
+        var $tag = $(this);
+        $tag.remove();
         restoreTag(this);
         removeTagFromArray(selectedTags, $(this).attr('tag-value'));
     }
 
     function selectTag(e) {
-        this.remove();
         var $tag = $(this);
-        var tagModel = getTagModel('selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
+        $tag.remove();
+        var tagModel = getTagModel('animated fadeIn selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
         var newTag = createTag(tagModel);
         addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
     }
@@ -430,19 +427,31 @@ var menuSearch = function($) {
     function searchValueUpdated(e) {
         var $this = $(this);
         var value = $this.val();
+        removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function(obj){
                 return obj.text.includes(value);
             });
             refreshTagMatches(matchedResults);
-        } else {
-            removeAllMatchedTags();
+            showGeoTags();
         }
         refreshTagCounters(currentMatches);
     }
 
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
+    }
+
     function searchByTags() {
-		    $('.cards-grid').css('opacity', '1');
         console.log(selectedTags);
         if (selectedTags.length > 0) {
             window.location.href = "index.html";
@@ -454,10 +463,8 @@ var menuSearch = function($) {
 
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
-            $('.cards-grid').css('opacity', '0.4');
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
-            $('.cards-grid').css('opacity', '1');
             emptyData();
         }
     }
@@ -492,7 +499,7 @@ var menuSearch = function($) {
 
     function getTagModel(type, from, icon, text, id) {
         return {
-            type: type + ' wow fadeIn',
+            type: type,
             from: from,
             icon: icon,
             text: text,
@@ -513,7 +520,7 @@ var menuSearch = function($) {
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
-            if (_.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+            if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -624,13 +631,15 @@ var navBar = function ($) {
   var $filterWrapper = $('.navbar .menu-filter-wrapper');
   var $inputFilter = $('.navbar .navbar-search-input');
   var $webContent = $('.webpage .contents');
+  var $searchLayer = $('.webpage .contents #search-layer');
 
   $searchIcon.click(onClickedSearch);
   $closeNavbarFilter.click(onClickedSearch);
   $inputFilter.on('input', function() {
       if(this.value.length > 2) {
           $filterWrapper.removeClass('hidden');
-          $webContent.css("opacity", "0.4").css('pointer-events', 'none');
+          $webContent.css("position", "relative");
+          $searchLayer.addClass('search-layer');
       }
   });
 
@@ -645,7 +654,8 @@ var navBar = function ($) {
           setTimeout(function() {
               $navBarNav.toggleClass('hidden');
           }, 800);
-          $webContent.css("opacity", "1").css('pointer-events', 'all');
+          $webContent.css("position", "inherit");
+          $searchLayer.removeClass('search-layer');
       } else {
           $navBarNav.toggleClass('hidden');
 
@@ -665,6 +675,7 @@ var popover = function ($) {
   var $headerFixed = $('.header-fixed-top h1');
   var $buttonFixed = $('#share-fixed-button');
   var $buttonShare = $('#share-button');
+  var $twitter = $('.pop-div-twitter');
 
   //Initializes popovers
   $element.popover();
@@ -698,11 +709,15 @@ var popover = function ($) {
       $buttonShare.addClass('icon bbva-icon-share');
     }
   });
+
+  $twitter.on('click', function () {
+    var id = $(this).attr('data-popover-id');
+    $('[data-popover-id=' + id + ']').toggleClass('hidden');
+    $('.share [data-popover-id=' + id + ']').toggleClass('hidden');
+  });
 };
 
 var progressbar = function ($) {
-
-var hasGraphs = $('#impactPage').length;
 
   function getConfig(max) {
     return {
@@ -719,7 +734,7 @@ var hasGraphs = $('#impactPage').length;
         },
         autoStyleContainer: false,
       },
-      step: (state, bar) => {
+      step: function (state, bar) {
         bar.setText('<div class="progressNumber">' + Math.round(bar.value() * max)
         + '</div><div class="progressSuffix ml-xs">MM</div>');
       },
@@ -737,98 +752,39 @@ var hasGraphs = $('#impactPage').length;
       text: {
         autoStyleContainer: false,
       },
-      step: (state, circle) => {
-        circle.setText('<div class="circleNumber">' + Math.round(bar.value() * max)
+      step: function (state, circle) {
+        circle.setText('<div class="circleNumber">' + Math.round(circle.value() * max)
         + '<label>' + suffix + '</label></div>' +
         '<div class="circleSubText ' + subColor + '">' + subtext + '</div>');
       },
     };
   };
 
-if (hasGraphs)
-{
-  var bar = new ProgressBar.Line('#lineContainer', getConfig(70));
-  bar.animate(0.8);
+  function setProgressBarLine(identifier, config, animate) {
+      try {
+          var bar = new ProgressBar.Line(identifier, config);
+          bar.animate(animate);
+      }
+      catch (e) {
+      }
+  }
+  function setProgressBarCircle(identifier, config, animate) {
+      try {
+          var circle = new ProgressBar.Circle(identifier, config);
+          circle.animate(animate);
+      }
+      catch (e) {
+      }
+  }
+  setProgressBarLine('#lineContainer', getConfig(70), 0.8);
+  setProgressBarLine('#lineContainer2', getConfig(6), 0.75);
 
-  var bar2 = new ProgressBar.Line('#lineContainer2', getConfig(6));
-  bar2.animate(0.75);
-
-  var circle = new ProgressBar.Circle('#circleContainer',
-              getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'));
-  circle.animate(0.5);
-
-  var circle2 = new ProgressBar.Circle('#circleContainer2',
-                getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'));
-  circle2.animate(0.8);
-
-  var circle3 = new ProgressBar.Circle('#circleContainer3',
-                getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'));
-  circle3.animate(0.5);
-
-  var circle4 = new ProgressBar.Circle('#circleContainer4',
-              getCircleConfig(1000, '#FFFFFF', '#FFFFFF', 'K', 'red', 'MUJERES'));
-  circle4.animate(0.8);
-
-  var circle5 = new ProgressBar.Circle('#circleContainer5',
-                getCircleConfig(300, '#FFFFFF', '#FFFFFF', 'K', 'yellow', 'ENTORNOS RURALES'));
-  circle5.animate(0.6);
-
-  var circle6 = new ProgressBar.Circle('#circleContainer6',
-                getCircleConfig(200, '#FFFFFF', '#FFFFFF', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'));
-  circle6.animate(0.5);
-}
-
-};
-
-var progresscircle = function($) {
-    'use strict';
-
-    var selectorPercicle = '.procircle';
-    var config = {
-        startAngle: -Math.PI / 2,
-        emptyFill: '#f3f1f3',
-        thickness: 10,
-        lineCap: 'butt' // "butt" or "round"
-    };
-    var configBlue = {};
-    var configYellow = {};
-    var configTeel = {};
-    var configWhite = {};
-
-    $.extend(configBlue, config, {
-        fill: {
-            color: '#5bbeff'
-        }
-    });
-    $.extend(configYellow, config, {
-        fill: {
-            color: '#f8cd51'
-        }
-    });
-    $.extend(configTeel, config, {
-        fill: {
-            color: '#14afb0'
-        }
-    });
-
-    var config2 = {
-        startAngle: -Math.PI / 2,
-        emptyFill: '#FFFFFF',
-        thickness: 10,
-        lineCap: 'butt' // "butt" or "round"
-    };
-    $.extend(configWhite, config2, {
-        fill: {
-            color: '#FFFFFF'
-        }
-    });
-
-    $('.blue ' + selectorPercicle).circleProgress(configBlue);
-    $('.yellow ' + selectorPercicle).circleProgress(configYellow);
-    $('.teel ' + selectorPercicle).circleProgress(configTeel);
-    $('.no-circle-red ' + selectorPercicle).circleProgress(configWhite);
-    $('.no-circle-yellow ' + selectorPercicle).circleProgress(configWhite);
-    $('.no-circle-blue ' + selectorPercicle).circleProgress(configWhite);
+  setProgressBarCircle('#circleContainer', getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
+  setProgressBarCircle('#circleContainer2', getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
+  setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
+  setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
+  setProgressBarCircle('#circleContainer5', getCircleConfig(300, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
+  setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
 };
 
 var publishingFilter = function($) {
@@ -848,6 +804,7 @@ var publishingFilter = function($) {
     var $tagsCounter = $('#publishing-filter .tag-container-counter');
     var $authorsCounter = $('#publishing-filter .author-container-counter');
     var $geoCounter = $('#publishing-filter .geo-container-counter');
+	var $sortItemsContainer = $('.sort-items-container');
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
@@ -858,15 +815,16 @@ var publishingFilter = function($) {
 
     //public methods
     function removeTagFromColumn(e) {
-        this.remove();
+        var $tag = $(this);
+        $tag.remove();
         restoreTag(this);
         removeTagFromArray(selectedTags, $(this).attr('tag-value'));
     }
 
     function selectTag(e) {
-        this.remove();
         var $tag = $(this);
-        var tagModel = getTagModel('selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
+        $tag.remove();
+        var tagModel = getTagModel('wow fadeIn selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
         var newTag = createTag(tagModel);
         addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
     }
@@ -884,15 +842,28 @@ var publishingFilter = function($) {
     function searchValueUpdated(e) {
         var $this = $(this);
         var value = $this.val();
+        removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function(obj){
                 return obj.text.includes(value);
             });
             refreshTagMatches(matchedResults);
-        } else {
-            removeAllMatchedTags();
+            showGeoTags();
         }
         refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
     }
 
     function searchByTags() {
@@ -906,8 +877,12 @@ var publishingFilter = function($) {
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
             $('.cards-grid').css('opacity', '0.4');
+			$sortItemsContainer.hide();
+			$btnFilter.hide();
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
+			$btnFilter.show();
+			$sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
             emptyData();
         }
@@ -943,7 +918,7 @@ var publishingFilter = function($) {
 
     function getTagModel(type, from, icon, text, id) {
         return {
-            type: type + ' wow fadeIn',
+            type: type,
             from: from,
             icon: icon,
             text: text,
@@ -965,7 +940,7 @@ var publishingFilter = function($) {
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
-            if (_.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+            if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -1049,18 +1024,19 @@ var publishingFilterMobile = function($) {
     }
 
     function removeTagFromColumn() {
-        this.remove();
+        var $tag = $(this);
+        $tag.remove();
         restoreTag(this);
         removeTagFromArray(selectedTags, $(this).attr('tag-value'));
     }
 
     function selectTag() {
-        this.remove();
         var $tag = $(this);
+        $tag.remove();
         var from = $tag.attr('from');
         var tagValue = $tag.attr('tag-value');
         var id = $tag.attr('id');
-        var tagModel = getTagModel('selected-tag', from, 'bbva-icon-close', tagValue, id);
+        var tagModel = getTagModel('wow fadeIn selected-tag', from, 'bbva-icon-close', tagValue, id);
         var newTag = createTag(tagModel);
         addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
     }
@@ -1078,16 +1054,29 @@ var publishingFilterMobile = function($) {
     function searchValueUpdated() {
         var $this = $(this);
         var value = $this.val();
+        removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function (obj) {
                 return obj.text.includes(value);
             });
             refreshTagMatches(matchedResults);
-        } else {
-            removeAllMatchedTags();
+            showGeoTags()
         }
 
         refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
     }
 
     function searchByTags() {
@@ -1125,7 +1114,7 @@ var publishingFilterMobile = function($) {
 
     function getTagModel(type, from, icon, text, id) {
         return {
-            type: type + ' wow fadeIn',
+            type: type,
             from: from,
             icon: icon,
             text: text,
@@ -1150,7 +1139,7 @@ var publishingFilterMobile = function($) {
             var tag = matchedResults[i];
             var notPresentInCurrentMatches = _.where(currentMatches, { text: tag.text }).length < 1;
             var notPresentInSelectedTags = _.indexOf(selectedTags, tag.text) < 0;
-            if (notPresentInCurrentMatches && notPresentInSelectedTags) {
+            if (tag.from !== 'geo-container' && notPresentInCurrentMatches && notPresentInSelectedTags) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -1280,6 +1269,7 @@ var searchMobile = function($) {
     var searchPage = $('.search-mobile');
 
     $('.search-mobile-button, .close-search-mobile').click(function() {
+        window.scrollTo(0, 0);
         searchPage.toggleClass('closed');
         setTimeout(function () {
             $('.input-search-mobile').focus();
@@ -1308,18 +1298,19 @@ var searchMobile = function($) {
     }
 
     function removeTagFromColumn() {
-        this.remove();
+        var $tag = $(this);
+        $tag.remove();
         restoreTag(this);
         removeTagFromArray(selectedTags, $(this).attr('tag-value'));
     }
 
     function selectTag() {
-        this.remove();
         var $tag = $(this);
+        $tag.remove();
         var from = $tag.attr('from');
         var tagValue = $tag.attr('tag-value');
         var id = $tag.attr('id');
-        var tagModel = getTagModel('selected-tag', from, 'bbva-icon-close', tagValue, id);
+        var tagModel = getTagModel('wow fadeIn selected-tag', from, 'bbva-icon-close', tagValue, id);
         var newTag = createTag(tagModel);
         addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
     }
@@ -1337,16 +1328,29 @@ var searchMobile = function($) {
     function searchValueUpdated() {
         var $this = $(this);
         var value = $this.val();
+        removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function (obj) {
                 return obj.text.includes(value);
             });
             refreshTagMatches(matchedResults);
-        } else {
-            removeAllMatchedTags();
+            showGeoTags();
         }
 
         refreshTagCounters(currentMatches);
+    }
+
+    function showGeoTags() {
+        var allTags = data.availableTags;
+        $.each(data.availableTags, function(index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+                console.log(tag.from);
+                var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
+                var newTag = createTag(tagModel);
+                addTagToContainer(newTag, tag.from, selectTag);
+                currentMatches.push(tag);
+            }
+        });
     }
 
     function searchByTags() {
@@ -1384,7 +1388,7 @@ var searchMobile = function($) {
 
     function getTagModel(type, from, icon, text, id) {
         return {
-            type: type + ' wow fadeIn',
+            type: type,
             from: from,
             icon: icon,
             text: text,
@@ -1409,7 +1413,7 @@ var searchMobile = function($) {
             var tag = matchedResults[i];
             var notPresentInCurrentMatches = _.where(currentMatches, { text: tag.text }).length < 1;
             var notPresentInSelectedTags = _.indexOf(selectedTags, tag.text) < 0;
-            if (notPresentInCurrentMatches && notPresentInSelectedTags) {
+            if (tag.from !== 'geo-container' && notPresentInCurrentMatches && notPresentInSelectedTags) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -1517,7 +1521,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'PT',
@@ -1525,7 +1529,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'MX',
@@ -1533,7 +1537,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'TR',
@@ -1541,7 +1545,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'US',
@@ -1549,7 +1553,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'CO',
@@ -1557,7 +1561,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'VE',
@@ -1565,7 +1569,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'PE',
@@ -1573,7 +1577,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'CL',
@@ -1581,7 +1585,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'AR',
@@ -1589,7 +1593,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'PY',
@@ -1597,7 +1601,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     },
     {
         'id'        : 'UY',
@@ -1605,7 +1609,7 @@ var dataMap = [
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',
-        'link'      : 'http://www.google.es'
+        'link'      : '#'
     }
 ];
 
@@ -1614,16 +1618,16 @@ var dataEvents = [
     {
         'id'        : '2014',
         'title'     : 'Bancomer Educación Financiera',
-        'content'   : '30 South 14th St, México D.F, AL, 35233',
-        'distance'  : '0.8',
+        'content'   : '30 South 14th St, <br> México D.F, AL, 35233',
+        'distance'  : '0.8 Miles',
         'latitude'  : '-34.397',
         'longitude' : '150.644'
     },
     {
         'id'        : '2015',
         'title'     : 'Bancomer Educación Financiera',
-        'content'   : '15 South 20th St, México D.F, AL, 35233',
-        'distance'  : '2.8',
+        'content'   : '15 South 20th St, <br> México D.F, AL, 35233',
+        'distance'  : '2.8 Miles',
         'latitude'  : '-34.197',
         'longitude' : '150.844'
     }
@@ -1638,9 +1642,7 @@ jQuery(document).ready(function ($) {
     footerMenu($);
     animationWow($);
     animationWowAppear($);
-    landing($);
     cookies($);
-    progresscircle($);
     progressbar($);
     popover($);
     googleMaps($);
@@ -1657,6 +1659,7 @@ jQuery(document).ready(function ($) {
     homeStopCarouselOnMobile($);
     homeCarouselSwipe($);
     publishingFilterMobile($);
+    window.objectFitImages();
 });
 
 var lgScreenMin = 1200;

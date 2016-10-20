@@ -166,87 +166,9 @@
 
 
             <!-- latests-posts -->
-            <section class="latests-posts pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-              <div class="container">
-                
-            <header class="title-description">
-                <h1>Otras Historias</h1>
-                <div class="description-container">
-                    <p></p>
-                </div>
-            </header>
 
-                <div class="card-container nopadding container-fluid mt-md mb-md">
-                  <div class="row">
-
-                    
-                      <div class="main-card-container col-xs-12 col-sm-4 noppading">
-                        
-                        <!-- main-card -->
-                        <section class="container-fluid main-card">
-                            <header class="row header-container">
-                                <div class="image-container col-xs-12">
-                                  <a href="#" class="link-header-layer visible-xs">
-                                    <img src="images/home/informe1.png" alt="">
-                                  </a>
-                                  <img src="images/home/informe1.png" alt="" class="hidden-xs">
-                                </div>
-                                <div class="hidden-xs floating-text col-xs-9">
-                                    <p class="date">27 Agosto 2016</p>
-                                    <h1>Situación regulación</h1>
-                                </div>
-                            </header>
-                            <div class="row data-container">
-                                <a href="#" class="link-layer visible-xs">&nbsp;</a>
-                                <div class="nopadding date">27 Agosto 2016</div>
-                                <div class="main-card-data-container-title-wrapper">
-                                    <h1 class="title nopadding">
-                                        Situación regulación
-                                    </h1>
-                                </div>
-                                <p class="main-card-data-container-description-wrapper">Este mes tratamos los siguientes temas: el papel de la deuda para la absorción de Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-                                <footer>
-                                    <div class="icon-row">
-                                    
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-quote"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-audio"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    
-                                        <div class="card-icon">
-                                            <span class="icon bbva-icon-comments"></span>
-                                            <div class="triangle triangle-up-left"></div>
-                                            <div class="triangle triangle-down-right"></div>
-                                        </div>
-                                    
-                                    </div>
-                                </footer>
-                            </div>
-                        </section>
-                        <!-- EO main-card -->
-
-                      </div>
-
-                  </div>
-                </div>
-                <footer>
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-                      <a href="<?php echo $url_impactos; ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Ver más historias','os_historia_type') ?></a>
-                    </div>
-                  </div>
-              </footer>
-              </div>
-            </section>
             <!-- EO latests-posts -->
+            
             </article>
     </div>
 

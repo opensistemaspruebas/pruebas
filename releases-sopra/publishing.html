@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,6 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/vendor.css" />
         <link rel="stylesheet" href="css/app.css" />
+	    <link rel="shortcut icon" href="images/favicon.ico">
         <title>BBVA</title>
     
 </head>
@@ -20,21 +22,27 @@
     <div class="webpage">
         
             <header class="header">
-                <!-- header -->
+                
+
+<!-- header -->
 <div class="top hidden-xs">
     <div class="container">
         <div class="languages-menu">
             <label for="language-header" class="hidden">Idioma</label>
-            <select id="language-header" class="selectpicker mgr-10">
-                <option>Español</option>
-                <option>English</option>
-            </select>
+            <div class="btn-group languages-buttons" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> ES
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> EN
+              </label>
+            </div>
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container stycky-menu-in-mobile">
     <div class="row vertical-align header-logo">
-        <div class="visible-xs col-xs-12 header-phone">
+        <div class="visible-xs col-xs-12 header-phone text-center">
             <div class="launcher-menu-mobil visible-xs">
                 <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
             </div>
@@ -43,7 +51,7 @@
                     <span class="bbva-icon-BBVA"></span>
                 </a>
                 <h1>Educación Financiera</h1>
-                <div class="logo-search ml-sm">
+                <div class="logo-search ml-sm search-mobile-button">
                     <span class="bbva-icon-search"></span>
                 </div>
             </div>
@@ -59,10 +67,71 @@
         </div>
     </div>
 </div>
+
+<div class="search-mobile closed hidden-sm hidden-md hidden-lg">
+    <div class="container">
+        <div class="header-phone">
+            <div class="logo">
+                <a href="index.html" class="bbva-icon-BBVA-wrap">
+                    <span class="bbva-icon-BBVA"></span>
+                </a>
+                <h1>Educación Financiera</h1>
+            </div>
+            <div class="close-search-mobile ml-sm">
+                <span class="bbva-icon-close"></span>
+            </div>
+        </div>
+        <section class="content">
+            
+<div id="mobile-filter" class="publishing-filter-wrapper-mobile">
+
+    <header>
+        <div class="form-group has-feedback">
+            <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
+            <span class="bbva-icon-search form-control-feedback"></span>
+        </div>
+        <div class="selected-tags-container"></div>
+        <div class="button-filter">
+            <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a>
+        </div>
+    </header>
+
+    <section>
+        <div class="row available-tags-wrapper">
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                <div class="tag-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                <div class="author-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                <div class="geo-container">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+</div>
+
+        </section>
+    </div>
+</div>
+
 <!-- EO header -->
             </header>
             <div class="nav-content open">
-                <!-- navbar menu -->
+                
+
+<!-- navbar menu -->
 <div class="container">
     <nav class="navbar">
         <div class="row visible-xs">
@@ -95,12 +164,12 @@
                 </li>
             
                 <li class="panel">
-                    <a class=" collapsed  mr-sm" href="publishing.html">
+                    <a class=" collapsed active_menu mr-sm" href="publishing.html">
                         <span class="hidden-xs">Publicaciones</span>
                         <span class="visible-xs pl-lg">Publicaciones</span>
                         
                     </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publish">
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publishing">
                         <span>Publicaciones</span>
                         
                     </a>
@@ -148,7 +217,7 @@
                         <span class="visible-xs pl-lg">Sobre Nosotros</span>
                         
                     </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutus">
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutUs">
                         <span>Sobre Nosotros</span>
                         
                     </a>
@@ -157,7 +226,11 @@
         </ul>
         <div class="hidden-xs logo-search">
             <span class="search-icon bbva-icon-search"></span>
-            <input class="input-search hidden" type="text" name="name" value="">
+            <div class="search-form-container hidden">
+              <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
+              <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+              <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+            </div>
         </div>
         <div class="visible-xs">
             <div class="languages-menu pb-lg pl-lg">
@@ -166,57 +239,16 @@
             </div>
         </div>
     </nav>
-</div>
-<!-- EO navbar menu -->
-            </div>
-        
-        <div class="contents">
-            
-<article id="publishing-view">
-  <div class="main-wrapper">
-
-    <header class="container">
-      <h1>Publicaciones</h1>
-      <h2>Consulta las últimas publicaciones escritas por expertos de cara a mejorar tu economía y planificación de futuro.</h2>
-      <div class="visible-xs mobile-filter">
-        <a href="#"><span class="bbva-icon-filter"></span> filtrar</a>
-      </div>
+    <div class="navbar navbar-search">
       
-  <div class="sort-items-container">
-    
-      <a href="#">
-        <span class="icon bbva-icon-arrow arrow arrowUp"></span>
-        <span class="text">Más recientes</span>
-      </a>
-    
-      <a href="#">
-        <span class="icon bbva-icon-arrow arrow arrowDown"></span>
-        <span class="text">Más antiguos</span>
-      </a>
-    
-      <a href="#">
-        <span class="icon bbva-icon-view "></span>
-        <span class="text">Más leídos</span>
-      </a>
-    
-  </div>
-
-      <a class="filter show-publishing-filter hidden-xs" href="#" data-toggle="modal" data-target=".publishing-filter-modal"> <span class="bbva-icon-filter"></span> <span>Filtrar</span> </a>
-    </header>
-
-    <section>
-      
-<div class="content publishing-filter-wrapper container hidden">
+<div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
 
   <header>
-    <div class="title">
-      <span class="text-uppercase text">filtros</span>
-      <button type="button" class="close close-publishing-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-    </div>
-
-    <div class="search">
-      <input class="publishing-filter-search-input" type="text" name="publishing-filter-search-input" value="">
-      <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+    <div class="form-wrapper">
+      <div class="title">
+        <span class="text-uppercase text">filtros</span>
+        <button type="button" class="close close-menu-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+      </div>
     </div>
 
     <div class="selected-tags-container"></div>
@@ -248,6 +280,91 @@
 
 </div>
 
+    </div>
+</div>
+<!-- EO navbar menu -->
+            </div>
+        
+        <div class="contents">
+            <div id="search-layer"></div>
+            
+<article id="publishing-view">
+  <div class="main-wrapper">
+
+    <header class="container">
+      <h1>Publicaciones</h1>
+      <h2>Consulta las últimas publicaciones escritas por expertos de cara a mejorar tu economía y planificación de futuro.</h2>
+      <div class="visible-xs mobile-filter filter-mobile-button">
+        <a href="#"><span class="bbva-icon-filter"></span> filtrar</a>
+      </div>
+      
+  <div class="sort-items-container">
+    
+      <a href="#" class="">
+        <span class="icon bbva-icon-arrow arrow arrowUp"></span>
+        <span class="text">Más recientes</span>
+      </a>
+    
+      <a href="#" class="">
+        <span class="icon bbva-icon-arrow arrow arrowDown"></span>
+        <span class="text">Más antiguos</span>
+      </a>
+    
+      <a href="#" class="">
+        <span class="icon bbva-icon-view extra-space "></span>
+        <span class="text">Más leídos</span>
+      </a>
+    
+  </div>
+
+      <a class="filter show-publishing-filter hidden-xs" href="#" data-toggle="modal" data-target=".publishing-filter-modal"> <span class="bbva-icon-filter"></span> <span>Filtrar</span> </a>
+	  <div class="options-filter">
+		  
+<div id="publishing-filter" class="content publishing-filter-wrapper hidden filter-container">
+
+  	<div class="form-wrapper">
+          <div class="title">
+            <span class="text-uppercase text">filtros</span>
+            <button type="button" class="close close-publishing-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+          </div>
+          <div class="search">
+            <input class="publishing-filter-search-input" type="text" name="publishing-filter-search-input" value="">
+            <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+          </div>
+        	<div class="selected-tags-container"></div>
+    </div>
+
+
+  <section>
+    <div class="row available-tags-wrapper">
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
+          <div class="tag-container">
+          </div>
+        </div>
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
+          <div class="author-container">
+          </div>
+        </div>
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+          <div class="geo-container">
+          </div>
+        </div>
+      
+    </div>
+  </section>
+
+</div>
+
+	  </div>
+    </header>
+
+    <section>
       
 
 
@@ -262,44 +379,48 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/historia1.png" alt="" />
+          </a>
+          <img src="images/home/historia1.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">27 Agosto 2016</p>
-            <h1>Beyond Ties and Cofee Mugs...</h1>
+            <h1>Beyond Ties and Cofee Mugs</h1>
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">27 Agosto 2016</p>
-        <h1 class="title nopadding col-xs-9">Beyond Ties and Cofee Mugs...</h1>
-        <p>Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">27 Agosto 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Beyond Ties and Cofee Mugs
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-comments"></span>
+                    <span class="icon bbva-icon-chat2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -313,7 +434,10 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/historia1.png" alt="" />
+          </a>
+          <img src="images/home/historia1.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">23 Agosto 2016</p>
@@ -321,36 +445,37 @@
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">23 Agosto 2016</p>
-        <h1 class="title nopadding col-xs-9">Smart Mom, Rich Mom: Build...</h1>
-        <p>There's a massive disconnect between the financial services and ohter important thing like all people know.</p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">23 Agosto 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Smart Mom, Rich Mom: Build...
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">There's a massive disconnect between the financial services and ohter important thing like all people know.</p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-comments"></span>
+                    <span class="icon bbva-icon-chat2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -364,44 +489,48 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/informe1.png" alt="" />
+          </a>
+          <img src="images/home/informe1.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">17 Agosto 2016</p>
-            <h1>Situación regulación</h1>
+            <h1>Situación regulación financiera</h1>
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">17 Agosto 2016</p>
-        <h1 class="title nopadding col-xs-9">Situación regulación</h1>
-        <p>Este mes tratamos los siguientes temas: el papel de la deuda para la absorción de p...</p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">17 Agosto 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Situación regulación financiera
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">Este mes tratamos los siguientes temas: el papel de la deuda para la absorción de p...</p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-comments"></span>
+                    <span class="icon bbva-icon-chat2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -415,36 +544,42 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/informe2.png" alt="" />
+          </a>
+          <img src="images/home/informe2.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">22 Julio 2016</p>
-            <h1>Heterogeneidad y difusión de la econo...</h1>
+            <h1>Heterogeneidad y difusión de la economía digital: el caso español.</h1>
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">22 Julio 2016</p>
-        <h1 class="title nopadding col-xs-9">Heterogeneidad y difusión de la econo...</h1>
-        <p>El tradicional modelo de Bass (1969) sobre adopción y difusión de nuevos productos... </p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">22 Julio 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Heterogeneidad y difusión de la economía digital: el caso español.
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">El tradicional modelo de Bass (1969) sobre adopción y difusión de nuevos productos... </p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -458,7 +593,10 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/informe3.png" alt="" />
+          </a>
+          <img src="images/home/informe3.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">12 abril 2016</p>
@@ -466,28 +604,31 @@
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">12 abril 2016</p>
-        <h1 class="title nopadding col-xs-9">Midiendo la inclusión financiera</h1>
-        <p>Existe un amplio consenso respecto al rol que juega la inclusión financiera para pr... </p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">12 abril 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Midiendo la inclusión financiera
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">Existe un amplio consenso respecto al rol que juega la inclusión financiera para pr... </p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -501,7 +642,10 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/informe1.png" alt="" />
+          </a>
+          <img src="images/home/informe1.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">17 Agosto 2016</p>
@@ -509,36 +653,37 @@
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">17 Agosto 2016</p>
-        <h1 class="title nopadding col-xs-9">Moving on a Budget</h1>
-        <p>Moving to a new home can be stressful. And that's even before you calculate the thousands of dollars you may spend on packing.</p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">17 Agosto 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Moving on a Budget
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">Moving to a new home can be stressful. And that's even before you calculate the thousands of dollars you may spend on packing.</p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-comments"></span>
+                    <span class="icon bbva-icon-chat2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -552,7 +697,10 @@
 <section class="container-fluid main-card">
     <header class="row header-container">
         <div class="image-container col-xs-12">
+          <a href="#" class="link-header-layer visible-xs">
             <img src="images/home/informe2.png" alt="" />
+          </a>
+          <img src="images/home/informe2.png" alt="" class="hidden-xs" />
         </div>
         <div class="hidden-xs floating-text col-xs-9">
             <p class="date">17 Agosto 2016</p>
@@ -560,28 +708,31 @@
         </div>
     </header>
     <div class="row data-container">
-        <p class="nopadding col-xs-9 date">17 Agosto 2016</p>
-        <h1 class="title nopadding col-xs-9">Six Ways to inspire Charity in Your Children</h1>
-        <p>Arguably every parent would love to see their kids grow into the kind of people who give back to society. But how can we instill charitable…</p>
-        <a href="#" class="hidden-xs readmore">Leer más</a>
-        <footer class="row">
+        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+        <div class="nopadding date">17 Agosto 2016</div>
+        <div class="main-card-data-container-title-wrapper">
+            <h1 class="title nopadding">
+                Six Ways to inspire Charity in Your Children
+            </h1>
+        </div>
+        <p class="main-card-data-container-description-wrapper">Arguably every parent would love to see their kids grow into the kind of people who give back to society. But how can we instill charitable…</p>
+        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+        <footer>
+            <div class="icon-row">
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-quote"></span>
+                    <span class="icon bbva-icon-quote2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
-            <div class="col-xs-2 col-lg-1">
                 <div class="card-icon">
-                    <span class="icon bbva-icon-audio"></span>
+                    <span class="icon bbva-icon-audio2"></span>
                     <div class="triangle triangle-up-left"></div>
                     <div class="triangle triangle-down-right"></div>
                 </div>
-            </div>
             
+            </div>
         </footer>
     </div>
 </section>
@@ -594,7 +745,7 @@
 <footer class="grid-footer">
   <div class="row">
     <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más publicaciones</a>
+      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las publicaciones</a>
     </div>
   </div>
 </footer>
@@ -606,6 +757,151 @@
   </div>
 </article>
 
+<div class="prefooter-bbva background-white">
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 mt-lg mb-lg footer-menu-group">
+              <div class="row">
+
+                  <div class="col-xs-12 col-sm-4 footer-menu-item">
+                      <div>
+                          <p class="hidden-xs title mb-md">
+                              <a role="button">Sobre Educación Financiera</a>
+                          </p>
+                          <p class="visible-xs title">
+                              <a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
+                                Sobre Educación Financiera<span class="icon-plus icon-collapsable"></span>
+                              </a>
+                          </p>
+                          <div class="collapse" id="collapseOne">
+                              <ul class="hidden-xs prefooter-menu">
+                                  <li class="mb-md"><a href="#">Publicaciones</a></li>
+                                  <li class="mb-md"><a href="#">En el mundo</a></li>
+                                  <li class="mb-md"><a href="#">Impacto</a></li>
+                                  <li class="mb-md"><a href="#">Eventos</a></li>
+                                  <li class="mb-md"><a href="#">Sobre Nosotros</a></li>
+                              </ul>
+                              <div class="visible-xs row prefooter-menu-collapsed">
+                                  <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
+                                  <a href="#" class="col-xs-6">Publicaciones</a>
+                                  <a href="#" class="col-xs-6">En el mundo</a>
+                                  <a href="#" class="col-xs-6">Impacto</a>
+                                  <a href="#" class="col-xs-6">Eventos</a>
+                                  <a href="#" class="col-xs-6">Sobre Nosotros</a>
+                                  <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4 footer-menu-item">
+                      <div>
+                          <p class="hidden-xs title mb-md">
+                              <a role="button">En el mundo</a>
+                          </p>
+                          <p class="visible-xs title">
+                              <a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
+                                En el mundo<span class="icon-plus icon-collapsable"></span>
+                              </a>
+                          </p>
+                          <div class="collapse" id="collapseTwo">
+                            <div class="row mgl-0 prefooter-menu-collapsed">
+                                <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
+                                <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
+                                    <li class="mb-md"><a href="#">España</a></li>
+                                    <li class="mb-md"><a href="#">USA</a></li>
+                                    <li class="mb-md"><a href="#">Turquía</a></li>
+                                    <li class="mb-md"><a href="#">Portugal</a></li>
+                                    <li class="mb-md"><a href="#">Chile</a></li>
+                                    <li class="mb-md"><a href="#">Colombia</a></li>
+                                </ul>
+                                <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
+                                    <li class="mb-md"><a href="#">Venezuela</a></li>
+                                    <li class="mb-md"><a href="#">Uruguay</a></li>
+                                    <li class="mb-md"><a href="#">Paraguay</a></li>
+                                    <li class="mb-md"><a href="#">Argentina</a></li>
+                                    <li class="mb-md"><a href="#">México</a></li>
+                                    <li class="mb-md"><a href="#">Perú</a></li>
+                                </ul>
+                                <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4 footer-menu-item">
+                      <p class="hidden-xs title mb-md">
+                          <a role="button">Enlaces de interés</a>
+                      </p>
+                      <p class="visible-xs title">
+                          <a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample">
+                            Enlaces de interés<span class="icon-plus icon-collapsable"></span>
+                          </a>
+                      </p>
+                      <div class="collapse" id="collapseThree">
+                          <ul class="hidden-xs prefooter-menu">
+                              <li class="mb-md"><a href="#">Web corporativa BBVA.com</a></li>
+                              <li class="mb-md"><a href="#">Empleo BBVA</a></li>
+                          </ul>
+                          <div class="visible-xs row prefooter-menu-collapsed">
+                              <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
+                              <a href="#" class="col-xs-8">Web corporativa BBVA.com</a>
+                              <a href="#" class="col-xs-4">Empleo BBVA</a>
+                              <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+ 
+<div class="filter-mobile closed hidden-sm hidden-md hidden-lg">
+    <div class="container">
+        <div class="close-filter-mobile">
+            <span class="bbva-icon-close"></span>
+        </div>
+        <section class="content">
+            
+<div id="publishing-filter-mobile" class="publishing-filter-wrapper-mobile">
+    <header>
+        <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
+        <div class="selected-tags-container"></div>
+        <div class="button-filter">
+            <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Filtrar</a>
+        </div>
+    </header>
+    <section>
+        <div class="row available-tags-wrapper">
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                <div class="tag-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                <div class="author-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                <div class="geo-container">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</div>
+
+        </section>
+    </div>
+</div>
 
         </div>
         <footer class="footer-bbva">
@@ -630,7 +926,6 @@
         </div>
         <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
             <ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
             </ul>
@@ -642,7 +937,6 @@
         </div>
         <div class="visible-xs col-xs-12">
 			<ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
                 <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
             </ul>
@@ -663,7 +957,6 @@
     <script src="js/modernizr.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/picturefill.min.js"></script>
-    <script src="js/circle-progress.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj_bv7e4BrxwnaEVfLCPMKAyKoQnv15Lo"></script>
@@ -671,6 +964,8 @@
     <script src="js/moment-precise-range.js"></script>
     <script src="js/progressbar.min.js"></script>
 	<script src="js/underscore-min.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/ofi.browser.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
