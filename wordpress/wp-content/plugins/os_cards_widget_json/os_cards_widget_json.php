@@ -237,7 +237,8 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 
                 			$post_title = $posts[$i]->post_title;
                 			$post_date = get_the_date('j F Y', $posts[$i]->ID);
-                			$post_guid = $posts[$i]->guid;
+                			//$post_guid = $posts[$i]->guid;
+                			$post_guid = get_permalink($posts[$i]->ID);
                 			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
                 			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
                 			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
@@ -383,7 +384,8 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 
 	                    			$post_title = $post->post_title;
 	                    			$post_date = get_the_date('j F Y', $post->ID);
-	                    			$post_guid = $post->guid;
+	                    			//$post_guid = $post->guid;
+	                    			$post_guid = get_permalink($post->ID);
 	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
 	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
 			            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
@@ -500,7 +502,8 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 
                 	        $post_title = $post->post_title;
                 			$post_date = get_the_date('j F Y', $post->ID);
-                			$post_guid = $post->guid;
+                			//$post_guid = $post->guid;
+                			$post_guid = get_permalink($post->ID);
                 			$post_content = substr($post->post_content, 0, 140) . '...';
 	            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
 
