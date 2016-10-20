@@ -73,11 +73,8 @@ function loop(i, fin, indice, onDone){
 				break;
 
 			}
+			loop(i+1, fin, indice);
 		});
-
-		//console.log(indice[i]);
-
-		loop(i+1, fin, indice);
     
     }
 }
