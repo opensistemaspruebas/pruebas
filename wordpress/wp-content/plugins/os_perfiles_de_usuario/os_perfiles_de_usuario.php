@@ -486,11 +486,11 @@ function create_perfiles_taxonomy() {
     // Call the register_taxonomy function
     register_taxonomy($taxonomy, $object_type, $args); 
 
-    wp_insert_term(__('Miembro', 'os_perfiles_de_usuario'), 'perfil');
+    /*wp_insert_term(__('Miembro', 'os_perfiles_de_usuario'), 'perfil');
     wp_insert_term(__('Coordinador', 'os_perfiles_de_usuario'), 'perfil');
     wp_insert_term(__('Asesor', 'os_perfiles_de_usuario'), 'perfil');
     wp_insert_term(__('Autor', 'os_perfiles_de_usuario'), 'perfil');
-    wp_insert_term(__('Ponente', 'os_perfiles_de_usuario'), 'perfil');
+    wp_insert_term(__('Ponente', 'os_perfiles_de_usuario'), 'perfil');*/
 
 }
 add_action('init', 'create_perfiles_taxonomy', 0);
