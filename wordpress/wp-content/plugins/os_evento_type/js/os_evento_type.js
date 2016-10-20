@@ -10,14 +10,49 @@ jQuery(document).ready(function($) {
         $('.video-youtube').hide();
     });
 
-    $("#evento_video input#upload_evento_videoEvento").click(function(e) {
+    if ($('input#ponencia').checked) {
+        jQuery(this).parent().parent().children(":nth-child(5)").show();
+        jQuery(this).parent().parent().children(":nth-child(6)").show();
+        jQuery(this).parent().parent().children(":nth-child(7)").show();
+    }
+
+
+    if ($('input#descanso').checked) {
+        jQuery(this).parent().parent().children(":nth-child(5)").hide();
+        jQuery(this).parent().parent().children(":nth-child(6)").hide();
+        jQuery(this).parent().parent().children(":nth-child(7)").hide();
+    }
+
+    $('input#ponencia').live('click', function(e) {
+        jQuery(this).parent().parent().children(":nth-child(5)").show();
+        jQuery(this).parent().parent().children(":nth-child(6)").show();
+        jQuery(this).parent().parent().children(":nth-child(7)").show();
+    });
+
+    $('input#descanso').live('click', function(e) {
+        jQuery(this).parent().parent().children(":nth-child(5)").hide();
+        jQuery(this).parent().parent().children(":nth-child(6)").hide();
+        jQuery(this).parent().parent().children(":nth-child(7)").hide();
+    });
+
+    var count = 0;
+    jQuery("#add-elemento-programa").click(function(e) {        
+        count++;
+        $('<div class="elementos_de_programa"><p class="radiobuttons"><input type="radio" name="evento_elemento_programa[' + count + '][tipo]" id="ponencia" value="ponencia" checked=""><label for="ponencia">Ponencia</label><br><input type="radio" name="evento_elemento_programa[' + count + '][tipo]" id="descanso" value="descanso"><label for="descanso">Descanso</label><br></p><p><label for="evento_elemento_programa[' + count + '][inicio]">Hora de inicio</label><input class="widefat" id="evento_elemento_programa[' + count + '][inicio]" name="evento_elemento_programa[' + count + '][inicio]" type="time" value=""><span class="description">(Formato: HH:MM)</span></p><p><label for="evento_elemento_programa[' + count + '][duracion]">Duración</label><input class="widefat" id="evento_elemento_programa[' + count + '][duracion]" name="evento_elemento_programa[' + count + '][duracion]" type="text" value=""><span class="description">(Por ejemplo: 15min)</span></p><p><label for="evento_elemento_programa[' + count + '][titulo]">Titulo</label><input class="widefat" id="evento_elemento_programa[' + count + '][titulo]" name="evento_elemento_programa[' + count + '][titulo]" type="text" value=""></p><p><label for="evento_elemento_programa[' + count + '][descripcion]">Descripción</label><textarea rows="1" cols="4' + count + '" maxlength="28' + count + '" name="evento_elemento_programa[' + count + '][descripcion]" id="evento_elemento_programa[' + count + '][descripcion]"></textarea></p><p><label for="evento_elemento_programa[' + count + '][ponentes]">Ponentes</label><select class="widefat" id="evento_elemento_programa[' + count + '][ponentes][]" name="evento_elemento_programa[' + count + '][ponentes][]" multiple="multiple"><option value="7' + count + '1">Katie Morell</option><option value="748">Nombre de prueba</option></select></p><p><label for="evento_elemento_programa[' + count + '][moderador]">Moderador</label><input class="widefat" id="evento_elemento_programa[' + count + '][moderador]" name="evento_elemento_programa[' + count + '][moderador]" type="text" value=""></p><button id="delete-elemento-programa" type="button">Eliminar este elemento</button></div>').insertBefore(this);
+    });
+
+    jQuery("#delete-elemento-programa").live("click", function(e) {
+        jQuery(this).parent().remove();
+    });
+
+    $("input#upload_videoEvento").click(function(e) {
         e.preventDefault();
-        var video_file_frame;
-        if (video_file_frame) {
-            video_file_frame.open();
+        var custom_uploader;
+        if (custom_uploader) {
+            custom_uploader.open();
             return;
         }
-        video_file_frame = wp.media.frames.file_frame = wp.media({
+        custom_uploader = wp.media.frames.file_frame = wp.media({
             title: object_name.choose_source_logo,
             button: {
                 text: object_name.choose_source_logo
@@ -25,11 +60,33 @@ jQuery(document).ready(function($) {
             multiple: false,
             library: { type: 'video' },
         });
-        video_file_frame.on('select', function() {
-            var attachment = video_file_frame.state().get('selection').first().toJSON();
+        custom_uploader.on('select', function() {
+            var attachment = custom_uploader.state().get('selection').first().toJSON();
             $('input#wp-video-url').val(attachment.url);
         });
-        video_file_frame.open();
+        custom_uploader.open();
+    });
+
+    $("input#upload_videoIntroEvento").click(function(e) {
+        e.preventDefault();
+        var custom_uploader;
+        if (custom_uploader) {
+            custom_uploader.open();
+            return;
+        }
+        custom_uploader = wp.media.frames.file_frame = wp.media({
+            title: object_name.choose_source_logo,
+            button: {
+                text: object_name.choose_source_logo
+            },
+            multiple: false,
+            library: { type: 'video' },
+        });
+        custom_uploader.on('select', function() {
+            var attachment = custom_uploader.state().get('selection').first().toJSON();
+            $('input#videoIntro-url').val(attachment.url);
+        });
+        custom_uploader.open();
     });
 
     $("#evento_imagen input#upload_evento_imagenCabecera").click(function(e) {
@@ -108,6 +165,34 @@ jQuery(document).ready(function($) {
             $('input#evento_documento').val(attachment.url);
         });
         pdf_file_frame.open();
+    });
+
+    $("#evento_persona_de_contacto input#upload_evento_imagen_perfil").click(function(e) {
+        e.preventDefault();
+        var imagen_perfil_file_frame;
+        if (imagen_perfil_file_frame) {
+            imagen_perfil_file_frame.open();
+            return;
+        }
+        imagen_perfil_file_frame = wp.media.frames.file_frame = wp.media({
+            title: object_name.choose_source_logo,
+            button: {
+                text: object_name.choose_source_logo
+            },
+            multiple: false,
+            library: { type: 'image' },
+        });
+        imagen_perfil_file_frame.on('select', function() {
+            var attachment = imagen_perfil_file_frame.state().get('selection').first().toJSON();
+            $('#evento_persona_de_contacto p:nth-child(6) input').val(attachment.url);
+            if(typeof(attachment.sizes.thumbnail) !== 'undefined') {
+                $('img#show_imagen_perfil').attr("src", attachment.sizes.thumbnail.url);
+            } else {
+                $('img#show_imagen_perfil').attr("src", attachment.sizes.full.url);
+            }
+            $('img#show_imagen_perfil').show();
+        });
+        imagen_perfil_file_frame.open();
     });
 
 });

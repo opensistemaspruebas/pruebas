@@ -65,7 +65,7 @@ if (!class_exists('OS_Evento_Type')) {
 				'hierarchical'       => false,
 				'menu_position'      => null,
 				'supports'           => array('title'),
-                'taxonomies'         => false,
+                'taxonomies'         => array(),
 			);
 			register_post_type($this->post_type, $args );
         }
@@ -91,18 +91,21 @@ if (!class_exists('OS_Evento_Type')) {
         function add_custom_meta_boxes() {
             add_meta_box('evento_imagen_card',  __('Imagen para tarjeta', 'os_evento_type'), array(&$this, 'meta_box_evento_imagen_card'), 'evento', 'normal', 'high');
         	add_meta_box('evento_imagen',  __('Imagen de cabecera', 'os_evento_type'), array(&$this, 'meta_box_evento_imagen'), 'evento', 'normal', 'high');
-        	add_meta_box('evento_video',  __('Vídeo de cabecera', 'os_evento_type'), array(&$this, 'meta_box_evento_video'), 'evento', 'normal', 'high');
+			add_meta_box("evento_video_intro" ,__("Video de introducción cabecera", "os_evento_type"),array(&$this, "meta_box_videoIntro_evento"), 'evento', 'normal', 'high');
+			add_meta_box("evento_video" ,__("Video final cabecera", "os_evento_type"), array(&$this, "meta_box_video_evento"), 'evento', 'normal', 'high');
         	add_meta_box('evento_documento',  __('Documento', 'os_evento_type'), array(&$this, 'meta_box_evento_documento'), 'evento', 'normal', 'high');
-        	add_meta_box('evento_fecha',  __('Fecha del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_fecha'), 'evento', 'normal', 'high');
+        	add_meta_box('evento_url_registro',  __('URL de registro en el evento', 'os_evento_type'), array(&$this, 'meta_box_evento_url_registro'), 'evento', 'side', 'high');
+        	add_meta_box('evento_fecha',  __('Fecha del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_fecha'), 'evento', 'side', 'low');
 			add_meta_box('evento_localizacion',  __('Localización del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_localizacion'), 'evento', 'normal', 'high');
 			add_meta_box('evento_descripcion_corta',  __('Descripción corta del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_corta'), 'evento', 'normal', 'high');
 			add_meta_box('evento_descripcion_corta',  __('Descripción corta del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_corta'), 'evento', 'normal', 'high');
 			add_meta_box('evento_descripcion_larga',  __('Descripción larga del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion_larga'), 'evento', 'normal', 'high');
-			add_meta_box('evento_topics',  __('Topics', 'os_evento_type'), array(&$this, 'meta_box_evento_topics'), 'evento', 'side', 'high');
-			add_meta_box('evento_highlights',  __('Highlights', 'os_evento_type'), array(&$this, 'meta_box_evento_highlights'), 'evento', 'side', 'high');
-			add_meta_box('evento_te_interesa',  __('Te interesa', 'os_evento_type'), array(&$this, 'meta_box_evento_te_interesa'), 'evento', 'side', 'high');
+			add_meta_box('evento_topics',  __('Topics', 'os_evento_type'), array(&$this, 'meta_box_evento_topics'), 'evento', 'side', 'low');
+			add_meta_box('evento_highlights',  __('Highlights', 'os_evento_type'), array(&$this, 'meta_box_evento_highlights'), 'evento', 'side', 'low');
+			add_meta_box('evento_te_interesa',  __('Te interesa', 'os_evento_type'), array(&$this, 'meta_box_evento_te_interesa'), 'evento', 'side', 'low');
+			add_meta_box('evento_persona_de_contacto',  __('Persona de contacto', 'os_evento_type'), array(&$this, 'meta_box_evento_persona_de_contacto'), 'evento', 'normal', 'high');
+			add_meta_box('evento_programa',  __('Programa del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_programa'), 'evento', 'normal', 'high');
 		}
-
 
 
 		function meta_box_evento_imagen_card($post) {         
@@ -142,37 +145,57 @@ if (!class_exists('OS_Evento_Type')) {
 		}
 
 
-
-		function meta_box_evento_video($post) {
-			wp_nonce_field( basename( __FILE__ ), 'meta_box_evento_video-nonce' );
-			$video_type = get_post_meta($post->ID,'video-type',true); 
-			if ($video_type == '') {
-				$video_type = 'youtube';
-			}
-			$wp_video_url = get_post_meta($post->ID, 'wp-video-url', true);
-			$yt_video_url = get_post_meta($post->ID, 'yt-video-url', true);
-			?>
-			<p><?php _e('Este será el vídeo que se muestre en la cabecera de la página de detalle del evento.','os_evento_type'); ?></p>
-			<p><?php _e('Fuente: ','os_evento_type'); ?></p>
-			<p>
-				<input type="radio" name="video-type" id="video-type-yt" value="youtube" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'youtube' );} ?>>
-				<label for="video-type-yt"><?php _e( 'Youtube', 'os_evento_type' )?></label>
-			</p>
-			<p>
-				<input type="radio" name="video-type" id="video-type-wp" value="wordpress" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'wordpress' ); } ?>>
-				<label for="video-type-wp"><?php _e( 'WordPress', 'os_evento_type' )?></label>
-			</p>
-			<p class="video-youtube" <?php if($video_type != 'youtube') { echo 'style="display: none;"'; } ?>>
-				<label for="yt-video-url"><?php _e('Enlace a un vídeo de Youtube', 'os_evento_type'); ?></label>
-				<input class="widefat" id="yt-video-url" name="yt-video-url" type="text" value="<?php if (isset($yt_video_url)) echo $yt_video_url; ?>"/>
-			</p>
-			<p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
-				<label for="wp-video-url"><?php _e('URL de un vídeo alojado en WordPress', 'os_evento_type'); ?></label>
-				<input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>" readonly="readonly"/>
+		function meta_box_videoIntro_evento($post) {
+		 	wp_nonce_field( basename( __FILE__ ), 'videoIntro_evento-nonce' );
+		  	$videoIntro_url = get_post_meta($post->ID,'videoIntro-url',true);
+		 	?>
+			<p class="videoIntro-wordpress">
+				<label for="videoIntro-url"><?php _e('URL video', 'os_evento_type'); ?></label>
+				<input class="widefat" id="videoIntro-url" name="videoIntro-url" type="text" value="<?php if (isset($videoIntro_url)) echo $videoIntro_url; ?>"/>
+				<i><?php _e('Es el video que se mostrará al cargar la página en estado autoplay','os_evento_type'); ?></i>
 			</p>    
-			<p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
-				<input id="upload_evento_videoEvento" name="upload_evento_videoEvento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+			<p class="videoIntro-wordpress">
+				<input id="upload_videoIntroEvento" name="upload_videoIntroEvento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
 			</p>
+			<?php 
+		}
+
+
+		function meta_box_video_evento($post) {
+		  wp_nonce_field( basename( __FILE__ ), 'video_evento-nonce' );
+
+		  $video_type = get_post_meta($post->ID,'video-type',true); 
+		  if ($video_type == '') {
+		    $video_type = 'youtube';
+		  }
+		  $wp_video_url = get_post_meta($post->ID,'wp-video-url',true);
+		  $yt_video_url = get_post_meta($post->ID,'yt-video-url',true);
+
+		  ?>
+
+		    <p>
+		      <label for="video-type"><?php _e('Fuente: ','os_evento_type'); ?></label>
+		      <input type="radio" name="video-type" id="video-type-yt" value="youtube" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'youtube' );} ?>>
+		      <label for="video-type-yt"><?php _e( 'Youtube', 'os_evento_type' )?></label>
+		      <input type="radio" name="video-type" id="video-type-wp" value="wordpress" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'wordpress' ); } ?>>
+		      <label for="video-type-wp"><?php _e( 'Wordpress', 'os_evento_type' )?></label>
+		    </p>
+
+		    <p class="video-youtube" <?php if ($video_type != 'youtube') { echo 'style="display: none;"'; } ?>>
+		      <label for="yt-video-url"><?php _e('Enlace de Youtube', 'os_evento_type'); ?></label>
+		      <input class="widefat" id="yt-video-url" name="yt-video-url" type="text" value="<?php if (isset($yt_video_url)) echo $yt_video_url; ?>"/>
+		      <i><?php _e('Si el campo "Video cabecera" está relleno, se mostrará este en vez de "Imagen cabecera"','os_evento_type'); ?></i>
+		    </p>
+
+		    <p class="video-wordpress" <?php if ($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
+		      <label for="wp-video-url"><?php _e('URL video', 'os_evento_type'); ?></label>
+		      <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>"/>
+		      <i><?php _e('Este video aparecerá al hacer click sobre el icono play. Aparecerá en una ventana modal','os_evento_type'); ?></i>
+		    </p>    
+		    <p class="video-wordpress" <?php if ($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
+		      <input id="upload_videoEvento" name="upload_videoEvento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+		    </p>
+
 		  <?php 
 		}
 
@@ -181,13 +204,27 @@ if (!class_exists('OS_Evento_Type')) {
 			wp_nonce_field( basename( __FILE__ ), 'meta_box_evento_documento-nonce');
 			$evento_documento = get_post_meta($post->ID, 'evento_documento', true); 
 			?>
-			<p><?php _e('Este es el enlace al documento que se muestra en la página de detalle del evento.','os_evento_type'); ?></p>
+			<p><?php _e('Este es el enlace al documento de la ficha que se muestra en la página de detalle del evento.','os_evento_type'); ?></p>
 			<p>
 				<label for="evento_documento"><?php _e('URL de un documento alojado en WordPress', 'os_evento_type'); ?></label>
 				<input class="widefat" id="evento_documento" name="evento_documento" type="text" value="<?php if (!empty($evento_documento)) echo $evento_documento; ?>" readonly="readonly"/>
 			</p>
 			<p>
 				<input id="upload_evento_documento" name="upload_evento_documento" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+			</p>
+			<?php
+		}
+
+
+		function meta_box_evento_url_registro($post) {
+			wp_nonce_field(basename(__FILE__), 'meta_box_evento_url_registro-nonce');
+			$evento_url_registro = get_post_meta($post->ID, 'evento_url_registro', true);
+			?>
+			<p><?php _e('Este es la URL del enlace para registrarse en el evento.', 'os_evento_type'); ?></p>
+			<p>
+				<label class="classfat" for="evento_url_registro"><?php _e('URL', 'os_evento_type'); ?></label>
+				<input type="url" id="evento_url_registro" name="evento_url_registro" class="widefat" placeholder="<?php _e('URL', 'os_evento_type'); ?>" value="<?php echo $evento_url_registro; ?>">
+				<span class="description">(<?php _e('Por ejemplo: http://www.example.com/', 'os_evento_type'); ?>)</span>
 			</p>
 			<?php
 		}
@@ -209,7 +246,6 @@ if (!class_exists('OS_Evento_Type')) {
 				<input type="date" id="evento_fecha_de_final" name="evento_fecha_de_final" class="widefat" value="<?php echo $evento_fecha_de_final; ?>">
 				<span class="description">(<?php _e('Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
 			</p>
-
 			<?php
 		}
 
@@ -230,19 +266,26 @@ if (!class_exists('OS_Evento_Type')) {
 				<input type="text" id="evento_localizacion[1]" name="evento_localizacion[1]" class="widefat" placeholder="<?php _e('Dirección', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[1]; ?>">
 				<span class="description">(<?php _e('Por ejemplo: 30 South 14th St, México D.F, AL, 35233', 'os_evento_type'); ?>)</span>
 			</p>
+
+
 			<p>
-				<label class="classfat" for="evento_localizacion[2]"><?php _e('Latitud', 'os_evento_type'); ?></label>
-				<input type="number" step="any" id="evento_localizacion[2]" name="evento_localizacion[2]" class="widefat" placeholder="<?php _e('Latitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[2]; ?>">
+				<label class="classfat" for="evento_localizacion[2]"><?php _e('Ciudad', 'os_evento_type'); ?></label>
+				<input type="text" id="evento_localizacion[2]" name="evento_localizacion[2]" class="widefat" placeholder="<?php _e('Ciudad', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[2]; ?>">
+				<span class="description">(<?php _e('Por ejemplo: Madrid', 'os_evento_type'); ?>)</span>
+			</p>
+			<p>
+				<label class="classfat" for="evento_localizacion[3]"><?php _e('Latitud', 'os_evento_type'); ?></label>
+				<input type="number" step="any" id="evento_localizacion[3]" name="evento_localizacion[3]" class="widefat" placeholder="<?php _e('Latitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[3]; ?>">
 				<span class="description">(<?php _e('Por ejemplo: -34.397', 'os_evento_type'); ?>)</span>
 			</p>
 			<p>
-				<label class="classfat" for="evento_localizacion[3]"><?php _e('Longitud', 'os_evento_type'); ?></label>
-				<input type="number" step="any" id="evento_localizacion[3]" name="evento_localizacion[3]" class="widefat" placeholder="<?php _e('Longitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[3]; ?>">
+				<label class="classfat" for="evento_localizacion[4]"><?php _e('Longitud', 'os_evento_type'); ?></label>
+				<input type="number" step="any" id="evento_localizacion[4]" name="evento_localizacion[4]" class="widefat" placeholder="<?php _e('Longitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[4]; ?>">
 				<span class="description">(<?php _e('Por ejemplo: 150.644', 'os_evento_type'); ?>)</span>
 			</p>
 			<p>
-				<label class="classfat" for="evento_localizacion[4]"><?php _e('Altitud', 'os_evento_type'); ?></label>
-				<input type="number" step="any" id="evento_localizacion[4]" name="evento_localizacion[4]" class="widefat" placeholder="<?php _e('Altitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[4]; ?>">
+				<label class="classfat" for="evento_localizacion[5]"><?php _e('Altitud', 'os_evento_type'); ?></label>
+				<input type="number" step="any" id="evento_localizacion[5]" name="evento_localizacion[5]" class="widefat" placeholder="<?php _e('Altitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[5]; ?>">
 				<span class="description">(<?php _e('Por ejemplo: 0.8', 'os_evento_type'); ?>)</span>
 			</p>
 			<?php   
@@ -318,7 +361,160 @@ if (!class_exists('OS_Evento_Type')) {
 		}
 
 
+		function meta_box_evento_persona_de_contacto($post) {
+			wp_nonce_field(basename(__FILE__), 'meta_box_evento_persona_de_contacto-nonce');
+			$evento_persona_de_contacto = get_post_meta($post->ID, 'evento_persona_de_contacto', true);
+			$imagen_perfil = $evento_persona_de_contacto[2];
+			$imagen_perfil_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagen_perfil));
+			?>
+			<p><?php _e('Esta es la persona de contacto del evento.','os_evento_type'); ?></p>
+			<p>
+				<label class="classfat" for="evento_persona_de_contacto[0]"><?php _e('Nombre y apellidos', 'os_evento_type'); ?></label>
+				<input type="text" id="evento_persona_de_contacto[0]" name="evento_persona_de_contacto[0]" class="widefat" placeholder="<?php _e('Nombre Apellido', 'os_evento_type'); ?>" value="<?php echo $evento_persona_de_contacto[0]; ?>">
+				<span class="description">(<?php _e('Por ejemplo: John Deer', 'os_evento_type'); ?>)</span>
+			</p>
+			<p>
+				<label class="classfat" for="evento_persona_de_contacto[1]"><?php _e('Cargo/Estudios', 'os_evento_type'); ?></label>
+				<input type="text" id="evento_persona_de_contacto[1]" name="evento_persona_de_contacto[1]" class="widefat" placeholder="<?php _e('Cargo/Estudios', 'os_evento_type'); ?>" value="<?php echo $evento_persona_de_contacto[1]; ?>">
+				<span class="description">(<?php _e('Por ejemplo: Doctora honoris causa de estadística por la Universidad Complutense', 'os_evento_type'); ?>)</span>
+			</p>
+			<p>
+				<label for="evento_persona_de_contacto[2]"><?php _e('Imagen de perfil', 'os_evento_type'); ?></label>
+				<input class="widefat" id="evento_persona_de_contacto[2]" name="evento_persona_de_contacto[2]" type="text" value="<?php if (!empty($imagen_perfil)) echo $imagen_perfil; ?>" readonly="readonly"/>
+				<img id="show_imagen_perfil" draggable="false" alt="" name="show_imagen_perfil" src="<?php if (!empty($imagen_perfil_thumbnail)) echo esc_attr($imagen_perfil_thumbnail); ?>" style="<?php if (empty($imagen_perfil_thumbnail)) echo "display: none;"; ?>">
+			</p>
+			<p>
+				<input id="upload_evento_imagen_perfil" name="upload_evento_imagen_perfil" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+			</p>
+			<?php
+		}
+
+
+		function meta_box_evento_programa($post) {
+			wp_nonce_field( basename( __FILE__ ), 'meta_box_evento_programa-nonce');
+			$evento_elemento_programa = get_post_meta($post->ID, 'evento_elemento_programa', true); 
+			$ponentes = query_posts(
+				array(
+					'post_type'=> 'guest-author',
+					'perfil' => 'ponente',
+					'orderby' => 'title',
+					'order'    => 'ASC'
+				)
+			);
+			?>
+			<p><?php _e('Este es el programa del evento.','os_evento_type'); ?></p>
+			<?php if (empty($evento_elemento_programa)) : ?>
+				<div class="elementos_de_programa">
+				    <p class="radiobuttons">
+				      <input type="radio" name="evento_elemento_programa[0][tipo]" id="ponencia" value="ponencia" checked>
+				      <label for="ponencia"><?php _e('Ponencia', 'os_evento_type')?></label><br>
+				      <input type="radio" name="evento_elemento_programa[0][tipo]" id="descanso" value="descanso">
+				      <label for="descanso"><?php _e('Descanso', 'os_evento_type')?></label><br>
+				    </p>
+					<p>
+						<label for="evento_elemento_programa[0][inicio]"><?php _e('Hora de inicio', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[0][inicio]" name="evento_elemento_programa[0][inicio]" type="time" value="" />
+						<span class="description">(<?php _e('Formato: HH:MM', 'os_evento_type'); ?>)</span>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[0][duracion]"><?php _e('Duración', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[0][duracion]" name="evento_elemento_programa[0][duracion]" type="text" value="" />
+						<span class="description">(<?php _e('Por ejemplo: 15min', 'os_evento_type'); ?>)</span>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[0][titulo]"><?php _e('Titulo', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[0][titulo]" name="evento_elemento_programa[0][titulo]" type="text" value="" />
+					</p>
+					<p>
+						<label for="evento_elemento_programa[0][descripcion]"><?php _e('Descripción', 'os_evento_type'); ?></label>
+						<textarea rows="1" cols="40" maxlength="280" name="evento_elemento_programa[0][descripcion]" id="evento_elemento_programa[0][descripcion]"></textarea>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[0][ponentes]"><?php _e('Ponentes', 'os_evento_type'); ?></label>
+						<select class="widefat" id="evento_elemento_programa[0][ponentes][]" name="evento_elemento_programa[0][ponentes][]" multiple="multiple">
+						<?php
+						if (!empty($ponentes)) {
+							foreach ($ponentes as $p) {
+								?>
+								<option value="<?php echo $p->ID; ?>"><?php echo $p->post_title; ?></option>
+								<?php
+							}
+						}
+						?>
+						</select>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[0][moderador]"><?php _e('Moderador', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[0][moderador]" name="evento_elemento_programa[0][moderador]" type="text" value="" />
+					</p>
+				</div>
+	            <p>
+	                <button id="add-elemento-programa" type="button"><?php _e('Añadir elemento', 'os_evento_type')?></button>
+	            </p>
+			<?php else : ?>
+			<?php $i = 0; ?>
+			<?php foreach ($evento_elemento_programa as $e) : ?>
+				<div class="elementos_de_programa">
+				    <p class="radiobuttons">
+				      <input type="radio" name="evento_elemento_programa[<?php echo $i; ?>][tipo]" id="ponencia" value="ponencia" <?php if (!empty($evento_elemento_programa[$i]['tipo'])) checked($evento_elemento_programa[$i]['tipo'], 'ponencia'); else echo "checked"; ?>>
+				      <label for="ponencia"><?php _e('Ponencia', 'os_evento_type')?></label><br>
+				      <input type="radio" name="evento_elemento_programa[<?php echo $i; ?>][tipo]" id="descanso" value="descanso" <?php if (!empty($evento_elemento_programa[$i]['tipo'])) checked($evento_elemento_programa[$i]['tipo'], 'descanso'); ?>>
+				      <label for="descanso"><?php _e('Descanso', 'os_evento_type')?></label><br>
+				    </p>
+					<p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][inicio]"><?php _e('Hora de inicio', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][inicio]" name="evento_elemento_programa[<?php echo $i; ?>][inicio]" type="time" value="<?php if (!empty($evento_elemento_programa[$i]['inicio'])) echo $evento_elemento_programa[$i]['inicio']; ?>" />
+						<span class="description">(<?php _e('Formato: HH:MM', 'os_evento_type'); ?>)</span>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][duracion]"><?php _e('Duración', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][duracion]" name="evento_elemento_programa[<?php echo $i; ?>][duracion]" type="text" value="<?php if (!empty($evento_elemento_programa[$i]['duracion'])) echo $evento_elemento_programa[$i]['duracion']; ?>" />
+						<span class="description">(<?php _e('Por ejemplo: 15min', 'os_evento_type'); ?>)</span>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][titulo]"><?php _e('Titulo', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][titulo]" name="evento_elemento_programa[<?php echo $i; ?>][titulo]" type="text" value="<?php if (!empty($evento_elemento_programa[$i]['titulo'])) echo $evento_elemento_programa[$i]['titulo']; ?>" />
+					</p>
+					<p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][descripcion]"><?php _e('Descripción', 'os_evento_type'); ?></label>
+						<textarea rows="1" cols="40" maxlength="280" name="evento_elemento_programa[<?php echo $i; ?>][descripcion]" id="evento_elemento_programa[<?php echo $i; ?>][descripcion]"><?php if (!empty($evento_elemento_programa[$i]['descripcion'])) echo $evento_elemento_programa[$i]['descripcion']; ?></textarea>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][ponentes]"><?php _e('Ponentes', 'os_evento_type'); ?></label>
+						<select class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][ponentes][]" name="evento_elemento_programa[<?php echo $i; ?>][ponentes][]" multiple="multiple">
+						<?php
+						if (!empty($ponentes)) {
+							foreach ($ponentes as $p) {								?>
+								<option value="<?php echo $p->ID; ?>" <?php if (in_array($p->ID, $evento_elemento_programa[$i]['ponentes'])) echo "selected"; ?>><?php echo $p->post_title; ?></option>
+								<?php
+							}
+						}
+						?>
+						</select>
+					</p>
+					<p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][moderador]"><?php _e('Moderador', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][moderador]" name="evento_elemento_programa[<?php echo $i; ?>][moderador]" type="text" value="<?php if (!empty($evento_elemento_programa[$i]['moderador'])) echo $evento_elemento_programa[$i]['moderador']; ?>" />
+					</p>
+				    <?php if ($i > 0) : ?>
+                        <button id="delete-elemento-programa" type="button"><?php _e('Eliminar este elemento', 'os_evento_type'); ?></button>
+                    <?php endif; ?>
+				</div>
+	            <?php $i++; ?>
+			<?php endforeach; ?>
+				<p>
+	                <button id="add-elemento-programa" type="button"><?php _e('Añadir elemento', 'os_evento_type')?></button>
+	            </p>
+			<?php endif; ?>
+			<?php
+		}
+
+
 		function meta_boxes_save($post_id) {
+
+			if (isset($_POST['evento_url_registro'])) {
+				update_post_meta($post_id, 'evento_url_registro', strip_tags($_POST['evento_url_registro']));
+			}
 
 			if (isset($_POST['imagenCard'])) {
 				update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
@@ -334,14 +530,20 @@ if (!class_exists('OS_Evento_Type')) {
 
 			if (isset($_POST['video-type'])) {
 				update_post_meta($post_id, 'video-type', strip_tags($_POST['video-type']));
-				if($_POST['video-type'] == 'youtube') {
+				if ($_POST['video-type'] == 'youtube') {
 					if (isset($_POST['yt-video-url'])) {
-						update_post_meta($post_id, 'yt-video-url', strip_tags($_POST['yt-video-url']));
+					  update_post_meta($post_id, 'yt-video-url', strip_tags($_POST['yt-video-url']));
 					}
-				} else if($_POST['video-type'] == 'wordpress') {
+				} else if ($_POST['video-type'] == 'wordpress') {
 					if (isset($_POST['wp-video-url'])) {
-						update_post_meta($post_id, 'wp-video-url', strip_tags($_POST['wp-video-url']));
+					  update_post_meta($post_id, 'wp-video-url', strip_tags($_POST['wp-video-url']));
 					}
+				}
+			}
+
+			if (user_can_save($post_id, 'videoIntro_historia-nonce')) {
+				if (isset($_POST['videoIntro-url'])) {
+					update_post_meta($post_id, 'videoIntro-url', strip_tags($_POST['videoIntro-url']));
 				}
 			}
 
@@ -355,7 +557,7 @@ if (!class_exists('OS_Evento_Type')) {
 
 			if (isset($_POST['evento_localizacion'])) {
 				$evento_localizacion = $_POST['evento_localizacion'];
-				for ($i = 2; $i < 5; $i++) { 
+				for ($i = 2; $i < 6; $i++) { 
 					$evento_localizacion[$i] = str_replace(',', '.', $evento_localizacion[$i]);
 				}
 				update_post_meta($post_id, 'evento_localizacion', $evento_localizacion);
@@ -401,9 +603,24 @@ if (!class_exists('OS_Evento_Type')) {
 	            }
 	            update_post_meta($post_id, 'evento_te_interesa', $evento_te_interesa_save);
 	        }
+
+			if (isset($_POST['evento_persona_de_contacto'])) {
+				update_post_meta($post_id, 'evento_persona_de_contacto', $_POST['evento_persona_de_contacto']);
+			}
+
+			error_log(print_r($_POST['evento_elemento_programa'], true));
+			if (isset($_POST['evento_elemento_programa'])) {
+	            $evento_elemento_programa = $_POST['evento_elemento_programa'];
+	            $evento_elemento_programa_save = array();
+	            foreach ($evento_elemento_programa as $e) {
+	                if (!(empty($e['titulo']))) {
+	                    array_push($evento_elemento_programa_save, $e);
+	                }
+	            }
+	            update_post_meta($post_id, 'evento_elemento_programa', $evento_elemento_programa_save);
+	        }
 		
 		}
-
 
     }
 

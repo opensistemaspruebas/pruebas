@@ -89,7 +89,6 @@ class OS_Perfiles_de_Usuario {
         
         $ponente = get_term_by('slug', 'ponente', 'perfil');
         $ponente_id = $ponente->term_id;
-
         ?>
         <div id="informacion_personal" name="informacion_personal">
             <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
