@@ -71,6 +71,8 @@ get_header(); ?>
       <?php $i = 0; ?>
       <?php foreach ($posts as $post) :
        
+        $numTalleres = count($posts);
+
         $title = $post->post_title;
         $descp = get_post_meta($post->ID, 'descp', true);
         $nombre_link = get_post_meta($post->ID, 'nombre_link', true);
@@ -104,13 +106,19 @@ get_header(); ?>
                  </div>
                 </div>
 
-                <footer class="grid-footer">
+
+              
+       <?php  if($numTalleres > 6){ ?>
+
+                <footer id="esconder" class="grid-footer">
                   <div class="row">
                     <div class="col-md-12 text-center">
                       <a href="javascript:void(0)" id="readmore_talleres" name="readmore_talleres" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e(" Más talleres"); ?></a>
                     </div>
                   </div>
                 </footer>
+
+       <?php  } ?>        
 
               </article>
  

@@ -31,21 +31,6 @@ jQuery(document).ready(function($) {
 	});
 
 
-	/*jQuery(document).ajaxComplete(function(event,xhr,ajaxOptions) {
-		if(typeof(ajaxOptions.url) !== "undefined" && ajaxOptions.url.indexOf('ipinfo.io') != -1) {
-			pais = jQuery("#select-country :selected").val();
-			pais =  pais.toLowerCase();
-			numero_talleres = jQuery('.' + pais +  ' article#otros_talleres .content .data-block').length;
-			
-			if (numero_talleres < 6) {
-	        	jQuery('a#readmore_talleres').hide();
-			} else {
-	    		jQuery('a#readmore_talleres').show();
-	   		}
-		}
-	});*/
-
-
 	jQuery('#readmore_talleres').on('click', function(e) {
 	    e.preventDefault();
 		pais = jQuery('.workshops:visible').attr("class").split(' ')[1];
@@ -63,9 +48,9 @@ jQuery(document).ready(function($) {
 	    });
 	    numero_talleres_ocultos = jQuery('.' + pais +  ' article#otros_talleres .content .data-block:hidden').length;
 	    if (numero_talleres_ocultos == 0) {
-	        jQuery('a#readmore_talleres').hide();
+	        jQuery('#esconder').hide();
 	    } else {
-	    	jQuery('a#readmore_talleres').show();
+	    	jQuery('#esconder').show();
 	    }
 	});
 	 
