@@ -1,5 +1,6 @@
 textarea {display: block; margin: 12px 0 0; height: 4em; width: 100%;margin-top:0px;}
-div#evento_topics input.widefat, div#evento_te_interesa input.widefat, div#evento_highlights input.widefat {margin: 5px 0px 5px 0px;}
+.inside input.widefat {margin: 5px 0px 5px 0px;}
 img#show_imagen_perfil, img#show_imagenCard, img#show_imagenCabecera {margin-top: 10px;}
 .elementos_de_programa {border: 1px solid #ddd; padding: 10px;margin-bottom: 10px;}
 p.radiobuttons {margin-top: 0; }
+.inside h1 {font-size: 16px; font-weight: bold; margin-top: 10px;}

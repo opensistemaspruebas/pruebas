@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
         custom_uploader.open();
     });
 
-    $("#evento_imagen input#upload_evento_imagenCabecera").click(function(e) {
+    $("input#upload_evento_imagenCabecera").click(function(e) {
         e.preventDefault();
         var imagen_cabecera_file_frame;
         if (imagen_cabecera_file_frame) {
@@ -122,7 +122,7 @@ jQuery(document).ready(function($) {
         imagen_cabecera_file_frame.open();
     });
 
-    $("#evento_imagen_card input#upload_evento_imagenCard").click(function(e) {
+    $("input#upload_evento_imagenCard").click(function(e) {
         e.preventDefault();
         var imagen_card_file_frame;
         if (imagen_card_file_frame) {
@@ -150,7 +150,7 @@ jQuery(document).ready(function($) {
         imagen_card_file_frame.open();
     });
 
-    $("#evento_documento input#upload_evento_documento").click(function(e) {
+    $("input#upload_evento_documento").click(function(e) {
         e.preventDefault();
         var pdf_file_frame;
         if (pdf_file_frame) {
