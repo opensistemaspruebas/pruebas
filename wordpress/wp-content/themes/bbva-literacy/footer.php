@@ -32,7 +32,7 @@
         </footer>
     </div>
     
-    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/data.js"></script>
+    <!--<script src="<?php //echo get_template_directory_uri(); ?>/resources/js/data.js"></script>-->
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/jquery.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/bootstrap.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/jquery.mmenu.min.all.js"></script>
