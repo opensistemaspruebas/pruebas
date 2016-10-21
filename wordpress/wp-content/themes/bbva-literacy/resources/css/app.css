@@ -13158,16 +13158,17 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   /* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image .container-button {
     margin-bottom: 30px;
+    padding-top: 10px;
   }
 }
 
-/* line 50, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 51, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container {
   overflow: hidden;
 }
 
 @media (min-width: 767px) {
-  /* line 50, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+  /* line 51, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image .background-container {
     background: rgba(255, 255, 255, 0.75);
     padding: 35px;
@@ -13175,13 +13176,13 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 57, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 58, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container .home-title-layer {
   position: absolute;
   z-index: -1;
 }
 
-/* line 60, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 61, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container .home-title-layer.home-title-layer-one {
   background-image: linear-gradient(to right bottom, transparent 50%, white 50%);
   left: -500%;
@@ -13191,7 +13192,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   z-index: -1;
 }
 
-/* line 68, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 69, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container .home-title-layer.home-title-layer-two {
   background-image: linear-gradient(to right bottom, transparent 50%, rgba(255, 255, 255, 0.4) 50%);
   left: -30%;
@@ -14639,19 +14640,19 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 /* line 35, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-main-data.scss */
 .consultant-main-data-wrapper > p {
   width: 85%;
-  margin: 28px 0;
+  margin: 13px 0;
   font-family: "BentonSans";
   font-weight: 600;
   color: #121212;
 }
 
 @media (max-width: 768px) {
-  /* line 45, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-main-data.scss */
+  /* line 46, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-main-data.scss */
   .consultant-main-data-wrapper .consultant-pic {
     width: 76px;
     margin-top: -43px;
   }
-  /* line 50, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-main-data.scss */
+  /* line 51, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_consultant-main-data.scss */
   .consultant-main-data-wrapper > p {
     width: 100%;
     margin: 11px 0;
@@ -15401,7 +15402,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   -ms-flex-direction: column;
   flex-direction: column;
   background-color: #f4f4f4;
-  padding: 25px 30px;
+  padding: 18px 30px;
   margin: 40px 0 80px;
 }
 
@@ -15415,7 +15416,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 .not-workshops > div h3 {
   font-family: "BentonSans";
   font-weight: 600;
-  margin-top: 15px;
+  margin-top: 8px;
   letter-spacing: 0px;
   line-height: 23px;
   font-size: 17px;
@@ -15441,21 +15442,22 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 @media (min-width: 768px) {
   /* line 1, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
   .not-workshops {
+    padding: 25px 30px;
     -moz-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  /* line 36, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
+  /* line 37, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
   .not-workshops > div {
     margin-left: 20px;
   }
-  /* line 38, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
+  /* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
   .not-workshops > div h3 {
     margin-top: 0;
     line-height: 29px;
     font-size: 22px;
   }
-  /* line 43, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
+  /* line 44, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_not-workshops.scss */
   .not-workshops > div p {
     line-height: 23px;
     font-size: 15px;
@@ -15970,94 +15972,109 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 /* line 15, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+.mgt-25 {
+  margin-top: 25px;
+}
+
+/* line 19, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgt-30 {
   margin-top: 30px;
 }
 
-/* line 19, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 23, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgt-50 {
   margin-top: 50px;
 }
 
-/* line 23, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 27, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgt-70 {
   margin-top: 70px;
 }
 
-/* line 27, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 31, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgt-100 {
   margin-top: 100px;
 }
 
-/* line 31, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 35, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgb-5 {
   margin-bottom: 5px;
 }
 
-/* line 35, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+.mgb-30 {
+  margin-bottom: 30px;
+}
+
+/* line 43, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgb-50 {
   margin-bottom: 50px;
 }
 
-/* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 47, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgb-90 {
   margin-bottom: 90px;
 }
 
-/* line 43, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 51, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgb-100 {
   margin-bottom: 100px;
 }
 
-/* line 47, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 55, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgb-110 {
   margin-bottom: 110px;
 }
 
-/* line 51, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 59, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgb-120 {
   margin-bottom: 120px;
 }
 
-/* line 55, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 63, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgl-13 {
   margin-left: 13px;
 }
 
-/* line 59, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 67, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+.mgl-20 {
+  margin-left: 20px;
+}
+
+/* line 71, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgl-30 {
   margin-left: 30px;
 }
 
-/* line 63, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 75, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .mgl-40 {
   margin-left: 40px;
 }
 
-/* line 67, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 79, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .fix-navbar-in-top {
   margin-top: 60px;
 }
 
 @media (max-width: 768px) {
-  /* line 67, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+  /* line 79, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
   .fix-navbar-in-top {
     margin-top: 50px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 75, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+  /* line 87, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
   .mgt-sm-100 {
     margin-top: 100px;
   }
-  /* line 79, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+  /* line 91, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
   .mgb-sm-100 {
     margin-bottom: 100px;
   }
 }
 
-/* line 84, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
+/* line 96, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_helper.scss */
 .nopadding {
   padding: 0 !important;
 }
@@ -18433,6 +18450,10 @@ footer .icon-row:nth-child(2) .card-icon .icon {
     margin-top: 20px;
     margin-bottom: 50px;
   }
+  /* line 114, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_tabs.scss */
+  .tabs .tab-content .publishes-wrapper .sort-items-container {
+    padding: 20px 0 0;
+  }
 }
 
 /* line 1, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/partials/_publishing-filter.scss */
@@ -18662,6 +18683,12 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 /* line 3, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+.workshops-results.removePadding {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+/* line 7, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .controls {
   display: -moz-flex;
   display: -ms-flexbox;
@@ -18678,7 +18705,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   margin-top: 40px;
 }
 
-/* line 9, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 13, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .controls .link-web {
   margin-top: 25px;
   font-weight: 500;
@@ -18687,7 +18714,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   padding-right: 25px;
 }
 
-/* line 15, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 19, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .controls .link-web .icon {
   font-size: 24px;
   position: absolute;
@@ -18695,23 +18722,23 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   margin-left: 3px;
 }
 
-/* line 21, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 25, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .controls .link-web:hover {
   text-decoration: none;
   color: #1464A5;
 }
 
-/* line 26, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 30, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .controls .current-country {
   display: inline-block;
 }
 
-/* line 30, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 34, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .bootstrap-select {
   width: 100% !important;
 }
 
-/* line 32, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 36, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .bootstrap-select .dropdown-toggle {
   border-radius: 0;
   background-color: #ffffff;
@@ -18721,14 +18748,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   padding: 6px 25px;
 }
 
-/* line 39, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 43, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .bootstrap-select .dropdown-toggle .filter-option {
   font-family: "BentonSans";
   font-weight: 600;
   color: #121212;
 }
 
-/* line 45, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 49, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .bootstrap-select .caret {
   font-family: "bbva" !important;
   color: #2a86ca;
@@ -18745,14 +18772,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   margin-top: 0;
 }
 
-/* line 60, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 64, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .bootstrap-select .caret:before {
   font-family: "bbva" !important;
   color: #2a86ca;
   content: "\e937";
 }
 
-/* line 66, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+/* line 70, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
 .workshops-results .bootstrap-select.open .caret:before {
   font-family: "bbva" !important;
   color: #2a86ca;
@@ -18760,18 +18787,18 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (min-width: 768px) {
-  /* line 74, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+  /* line 78, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
   .workshops-results .controls {
     -moz-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
     margin-top: 60px;
   }
-  /* line 77, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+  /* line 81, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
   .workshops-results .controls .link-web {
     margin-top: 0;
   }
-  /* line 81, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
+  /* line 85, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_workshopsResults.scss */
   .workshops-results .bootstrap-select.countries {
     width: 260px !important;
   }
@@ -19853,38 +19880,12 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 @media (max-width: 767px) {
   /* line 17, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents .container-button {
-    margin-top: 30px;
+    margin-top: 25px;
   }
 }
 
-/* line 24, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-.futureEvents .content-center {
-  text-align: center;
-}
-
-/* line 26, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-.futureEvents .content-center span {
-  font-family: "BentonSans";
-  font-weight: 600;
-  color: #121212;
-}
-
-/* line 32, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-.futureEvents .content-center .icon {
-  font-weight: 100;
-  color: #9b9b9b;
-}
-
-@media (max-width: 767px) {
-  /* line 32, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-  .futureEvents .content-center .icon {
-    font-size: 20px;
-    vertical-align: sub;
-  }
-}
-
-/* line 41, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-.futureEvents .content-center .container-button .btn {
+/* line 22, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+.futureEvents .container-button .btn {
   min-width: 190px;
   padding: 18px 49px;
   font-size: 13px;
@@ -19892,9 +19893,36 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 41, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-  .futureEvents .content-center .container-button .btn {
+  /* line 22, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  .futureEvents .container-button .btn {
     margin-top: 0px;
+    padding: 15px 49px;
+  }
+}
+
+/* line 34, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+.futureEvents .content-center {
+  text-align: center;
+}
+
+/* line 36, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+.futureEvents .content-center span {
+  font-family: "BentonSans";
+  font-weight: 600;
+  color: #121212;
+}
+
+/* line 42, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+.futureEvents .content-center .icon {
+  font-weight: 100;
+  color: #9b9b9b;
+}
+
+@media (max-width: 767px) {
+  /* line 42, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  .futureEvents .content-center .icon {
+    font-size: 20px;
+    vertical-align: sub;
   }
 }
 
@@ -20204,12 +20232,19 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   margin-top: 35px;
 }
 
-/* line 262, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+@media (max-width: 767px) {
+  /* line 256, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  .futureEvents section.description-section h1 {
+    margin-top: 25px;
+  }
+}
+
+/* line 265, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.file-section .pdf-rectangle {
   background-color: #f4f4f4;
 }
 
-/* line 264, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 267, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.file-section .pdf-rectangle .icon {
   color: #bdbdbd;
   position: relative;
@@ -20218,14 +20253,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 264, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 267, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.file-section .pdf-rectangle .icon {
     top: 21px;
     left: 10px;
   }
 }
 
-/* line 275, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 278, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.file-section .pdf-rectangle h2 {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20233,7 +20268,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   line-height: 1.32;
 }
 
-/* line 282, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 285, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.file-section .pdf-rectangle p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20242,24 +20277,24 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 290, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 293, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.file-section .pdf-rectangle .container-button {
     text-align: center;
   }
 }
 
-/* line 294, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 297, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.file-section .pdf-rectangle .btn {
   padding: 14px 38px;
   min-width: 170px;
 }
 
-/* line 301, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 304, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.contact-person {
   background-color: #f4f4f4;
 }
 
-/* line 303, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 306, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.contact-person h1 {
   -ms-transform: translate(0%, 0%);
   transform: translate(0%, 0%);
@@ -20273,13 +20308,13 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 303, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 306, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.contact-person h1 {
     text-align: left;
   }
 }
 
-/* line 314, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 317, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.contact-person h2 {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20289,12 +20324,12 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 323, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 326, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.contact-person .person {
   margin-bottom: 80px;
 }
 
-/* line 325, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 328, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.contact-person .person p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20304,26 +20339,26 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 325, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 328, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.contact-person .person p {
     line-height: 18px;
   }
 }
 
-/* line 338, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 341, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.attend {
   margin-top: 0;
   background-color: #2DCCCD;
 }
 
 @media (max-width: 767px) {
-  /* line 342, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 345, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.attend .container-button {
     text-align: center;
   }
 }
 
-/* line 346, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 349, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.attend h1 {
   -ms-transform: translate(0%, 0%);
   transform: translate(0%, 0%);
@@ -20339,7 +20374,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 346, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 349, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.attend h1 {
     text-align: center;
     margin-top: 32px;
@@ -20347,36 +20382,19 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 361, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-.futureEvents section.attend .btn {
-  padding: 0px 38px;
-  min-width: 170px;
-  height: 60px;
-  line-height: 60px;
-  margin-top: 37px;
-}
-
-@media (max-width: 767px) {
-  /* line 361, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
-  .futureEvents section.attend .btn {
-    margin-top: 0px;
-    margin-bottom: 10px;
-  }
-}
-
-/* line 374, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 366, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.map-section {
   height: 550px;
   padding: 0;
   margin-top: 0;
 }
 
-/* line 379, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 371, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.map-section .gm-style-iw + div {
   display: none;
 }
 
-/* line 382, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 374, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.map-section .gm-style-iw h1,
 .futureEvents section.map-section .gm-style-iw .bodyContent,
 .futureEvents section.map-section .gm-style-iw .distanceContent {
@@ -20384,7 +20402,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   padding-right: 15px;
 }
 
-/* line 388, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 380, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.map-section .gm-style-iw h1 {
   position: inherit;
   -ms-transform: none;
@@ -20397,7 +20415,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 388, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 380, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.map-section .gm-style-iw h1 {
     margin-top: 9px;
     width: 100%;
@@ -20405,7 +20423,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 402, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 394, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.map-section .gm-style-iw .bodyContent {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20415,7 +20433,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #535353;
 }
 
-/* line 410, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 402, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.map-section .gm-style-iw .distanceContent {
   font-family: "BentonSans";
   font-weight: 500;
@@ -20426,41 +20444,41 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   padding-bottom: 30px;
 }
 
-/* line 423, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 415, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .nav-tabs {
   border: none;
 }
 
-/* line 426, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 418, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .nav-tabs .active .dropdown-toggle {
   background-color: #f4f4f4;
   border: none;
 }
 
-/* line 431, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 423, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .nav-tabs .dropdown {
   width: 100%;
   background-color: #f4f4f4;
 }
 
-/* line 434, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 426, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .nav-tabs .dropdown .dropdown-toggle {
   color: #121212;
 }
 
-/* line 436, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 428, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .nav-tabs .dropdown .dropdown-toggle .icon {
   float: right;
   color: #2a86ca;
   font-size: 22px;
 }
 
-/* line 442, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 434, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .nav-tabs .dropdown .dropdown-menu {
   width: 100%;
 }
 
-/* line 448, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 440, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section h2 {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20470,12 +20488,12 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 460, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 452, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day h2:first-child {
   margin-top: 20px;
 }
 
-/* line 465, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 457, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info {
   display: -ms-flexbox;
   display: flex;
@@ -20483,7 +20501,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   /* talk bubble contents */
 }
 
-/* line 467, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 459, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .break-icon {
   z-index: 9;
   background: #ffffff;
@@ -20492,7 +20510,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #666666;
 }
 
-/* line 474, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 466, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .redbullet {
   width: 21px;
   height: 21px;
@@ -20502,7 +20520,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   z-index: 0;
 }
 
-/* line 482, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 474, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .time {
   position: relative;
   display: -ms-flexbox;
@@ -20512,7 +20530,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   line-height: 1.53em;
 }
 
-/* line 487, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 479, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .time .hour {
   top: 0px;
   left: 10px;
@@ -20523,14 +20541,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 487, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 479, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.program-section .program .program-day .program-content .individual-info .time .hour {
     margin-left: 10px;
     position: initial;
   }
 }
 
-/* line 499, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 491, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .time .duration {
   top: 20px;
   left: 10px;
@@ -20541,20 +20559,20 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 499, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 491, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.program-section .program .program-day .program-content .individual-info .time .duration {
     margin-left: 10px;
     position: initial;
   }
 }
 
-/* line 514, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 506, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info.break .hour, .futureEvents section.program-section .program .program-day .program-content .individual-info.break .duration {
   margin-left: 10px;
   position: initial;
 }
 
-/* line 520, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 512, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .information {
   background-color: #f4f4f4;
   position: relative;
@@ -20563,7 +20581,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   top: 10px;
 }
 
-/* line 527, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 519, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .information h3 {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20573,7 +20591,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 536, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 528, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .information p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20583,14 +20601,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 545, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 537, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .information strong {
   font-family: "BentonSans";
   font-weight: 500;
   color: #2a86ca;
 }
 
-/* line 552, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 544, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .coffee-break {
   position: relative;
   max-width: 610px;
@@ -20599,22 +20617,22 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #666666;
 }
 
-/* line 559, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 551, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .coffee-break span {
   display: inline-block;
 }
 
-/* line 561, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 553, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .coffee-break span.bbva-icon-coffe {
   padding-right: 5px;
 }
 
-/* line 564, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 556, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .coffee-break span.text {
   font-weight: 500;
 }
 
-/* line 571, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 563, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .tri-right.border.left-top:before {
   content: ' ';
   position: absolute;
@@ -20628,7 +20646,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   border-color: #666666 transparent transparent transparent;
 }
 
-/* line 583, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 575, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .tri-right.left-top:after {
   content: ' ';
   position: absolute;
@@ -20642,12 +20660,12 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   border-color: #f4f4f4 transparent transparent transparent;
 }
 
-/* line 597, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 589, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info .talktext {
   padding: 1em;
 }
 
-/* line 601, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 593, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .individual-info:before {
   content: '';
   position: absolute;
@@ -20658,25 +20676,25 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 601, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+  /* line 593, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
   .futureEvents section.program-section .program .program-day .program-content .individual-info:before {
     height: 7%;
   }
 }
 
-/* line 614, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 606, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .last-child:before {
   content: '';
   background-color: white;
 }
 
-/* line 619, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 611, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .information-xs {
   background-color: #f4f4f4;
   position: relative;
 }
 
-/* line 623, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 615, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .information-xs h3 {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20686,7 +20704,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 632, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 624, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .information-xs p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -20696,14 +20714,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 641, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 633, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .information-xs strong {
   font-family: "BentonSans";
   font-weight: 500;
   color: #2a86ca;
 }
 
-/* line 647, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
+/* line 639, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_futureEvents.scss */
 .futureEvents section.program-section .program .program-day .program-content .information-xs:before {
   content: ' ';
   position: absolute;
@@ -21100,9 +21118,10 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   text-align: center;
   padding-top: 0px;
   overflow: hidden;
+  margin-right: 13px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* line 275, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
   .pastEvents .content-wrap section.highlights-section .card-icon {
     margin-left: 15px;
@@ -21110,24 +21129,25 @@ footer .icon-row:nth-child(2) .card-icon .icon {
     padding-bottom: 5px;
     height: 60px;
     width: 30px;
+    margin-right: 0;
   }
 }
 
-/* line 289, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+/* line 291, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
 .pastEvents .content-wrap section.highlights-section .card-icon .triangle {
   height: 100%;
   width: 0;
   position: absolute;
 }
 
-/* line 294, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+/* line 296, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
 .pastEvents .content-wrap section.highlights-section .card-icon .icon {
   z-index: 5;
   color: #666666;
   opacity: 0.6;
 }
 
-/* line 300, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+/* line 302, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
 .pastEvents .content-wrap section.highlights-section .card-icon .triangle-up-left {
   border-left: 0px solid transparent;
   border-right: 40px solid transparent;
@@ -21136,14 +21156,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 300, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+  /* line 302, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
   .pastEvents .content-wrap section.highlights-section .card-icon .triangle-up-left {
     border-right: 21px solid transparent;
     border-top: 21px solid #f4f4f4;
   }
 }
 
-/* line 310, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+/* line 312, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
 .pastEvents .content-wrap section.highlights-section .card-icon .triangle-down-right {
   border-left: 40px solid transparent;
   border-right: 0px solid transparent;
@@ -21153,14 +21173,14 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 310, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+  /* line 312, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
   .pastEvents .content-wrap section.highlights-section .card-icon .triangle-down-right {
     border-left: 21px solid transparent;
     border-bottom: 21px solid #ffffff;
   }
 }
 
-/* line 321, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+/* line 323, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
 .pastEvents .content-wrap section.highlights-section .card-icon span {
   font-size: 18px;
   z-index: 1;
@@ -21175,7 +21195,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 321, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+  /* line 323, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
   .pastEvents .content-wrap section.highlights-section .card-icon span {
     font-size: 13px;
     line-height: 24px;
@@ -21184,7 +21204,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 343, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
+/* line 345, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_pastEvents.scss */
 .pastEvents .content-wrap section.topics-section .topics-section-topic-text {
   margin-left: 29px;
 }
@@ -21353,12 +21373,22 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   margin: 0;
 }
 
-/* line 140, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
-.impact section.quote-section .quote-rectangle {
-  background-color: #f4f4f4;
+@media (max-width: 768px) {
+  /* line 132, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  .impact section.quote-section .quote-icon {
+    font-size: 80px;
+    line-height: 30px;
+    top: 50px;
+  }
 }
 
-/* line 142, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+/* line 145, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+.impact section.quote-section .quote-rectangle {
+  background-color: #f4f4f4;
+  padding: 70px 90px 76px;
+}
+
+/* line 148, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
 .impact section.quote-section .quote-rectangle h1 {
   font-size: 30px;
   font-family: "TiemposHeadline";
@@ -21366,17 +21396,10 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
   font-style: italic;
   line-height: 40px;
+  margin-bottom: 37px;
 }
 
-@media (max-width: 768px) {
-  /* line 142, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
-  .impact section.quote-section .quote-rectangle h1 {
-    font-size: 22px;
-    line-height: 30px;
-  }
-}
-
-/* line 155, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+/* line 158, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
 .impact section.quote-section .quote-rectangle p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -21389,37 +21412,45 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   .impact section.quote-section {
     text-align: left;
   }
-  /* line 166, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  /* line 169, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
   .impact section.quote-section .quote-icon {
-    font-size: 105px;
-    top: 60px;
+    font-size: 113px;
+    top: 50px;
+    padding-left: 90px;
   }
 }
 
 @media (max-width: 768px) {
-  /* line 172, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  /* line 176, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
   .impact section.quote-section .quote-icon {
     padding: 0 !important;
   }
-  /* line 176, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  /* line 179, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  .impact section.quote-section .quote-rectangle {
+    padding: 40px 30px;
+  }
+  /* line 181, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
   .impact section.quote-section .quote-rectangle h1 {
     text-align: left;
-    padding-top: 70px;
+    padding-top: 0;
+    font-size: 22px;
+    line-height: 32px;
+    margin-bottom: 20px;
   }
-  /* line 180, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  /* line 188, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
   .impact section.quote-section .quote-rectangle p {
     text-align: left;
   }
 }
 
 @media (max-width: 767px) {
-  /* line 187, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  /* line 195, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
   .impact section.micro-section {
     margin-bottom: 0;
   }
 }
 
-/* line 191, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+/* line 199, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
 .impact section.micro-section h1 {
   font-family: "BentonSans";
   font-weight: 500;
@@ -21427,7 +21458,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   line-height: 1.24em;
 }
 
-/* line 198, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+/* line 206, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
 .impact section.micro-section p {
   font-family: "BentonSans";
   font-weight: 600;
@@ -21437,7 +21468,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 198, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
+  /* line 206, /Users/josedrac/gitsopra/bbva-educacionFinanciera-releases/app/assets/sass/views/_impact.scss */
   .impact section.micro-section p {
     color: #121212;
   }
