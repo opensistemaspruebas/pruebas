@@ -1659,7 +1659,6 @@ jQuery(document).ready(function ($) {
     homeStopCarouselOnMobile($);
     homeCarouselSwipe($);
     publishingFilterMobile($);
-    window.objectFitImages();
 });
 
 var lgScreenMin = 1200;

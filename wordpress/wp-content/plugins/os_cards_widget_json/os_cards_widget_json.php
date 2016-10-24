@@ -67,38 +67,75 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 
 	    	$author = isset($instance['filtrar_por_autor']) ? $author_name : '';
 
-
 	    	if (empty($author)) {
-
-	    		if($tipo_post == "publicacion"){
-
-		    		$args = array(
-						'posts_per_page'   => $numero_posts_mostrar,
-						'offset'           => 0,
-						'orderby'          => 'post_date',
-						'meta_key' 		   => 'publication_date', 
-						'order'            => 'DESC',
-						'orderby' 		   => 'meta_value',
-						'post_type'        => $tipo_post,
-						'post_status'      => 'publish',
-						'suppress_filters' => true
-					);
-	    		}
-	    		else{
-
-		    		$args = array(
-						'posts_per_page'   => $numero_posts_mostrar,
-						'offset'           => 0,
-						'category'         => '',
-						'orderby'          => 'post_date',
-						'order'            => 'DESC',
-						'meta_key'         => '',
-						'meta_value'       => '',
-						'post_type'        => $tipo_post,
-						'post_status'      => 'publish',
-						'suppress_filters' => true
-					);
-
+	    		if ($tipo_post == "publicacion") {
+	    			if ($orden == 'DESTACADOS') {
+			    		$args = array(
+							'posts_per_page'   => $numero_posts_mostrar,
+							'offset'           => 0,
+							'orderby'          => 'post_date',
+							'meta_key' 		   => 'publication_date', 
+							'order'            => 'DESC',
+							'orderby' 		   => 'meta_value',
+							'post_type'        => $tipo_post,
+							'post_status'      => 'publish',
+							'suppress_filters' => true,
+							'meta_query' => array(
+						        array(
+									'key'         => 'destacada',
+									'value'       => 'on',
+									'compare'     => '=',
+						        ),
+						    )
+						);
+	    			} else {
+			    		$args = array(
+							'posts_per_page'   => $numero_posts_mostrar,
+							'offset'           => 0,
+							'orderby'          => 'post_date',
+							'meta_key' 		   => 'publication_date', 
+							'order'            => 'DESC',
+							'orderby' 		   => 'meta_value',
+							'post_type'        => $tipo_post,
+							'post_status'      => 'publish',
+							'suppress_filters' => true
+						);
+	    			}
+	    		} else {
+	    			if ($orden == 'DESTACADOS') {
+		    			$args = array(
+							'posts_per_page'   => $numero_posts_mostrar,
+							'offset'           => 0,
+							'category'         => '',
+							'orderby'          => 'post_date',
+							'order'            => 'DESC',
+							'meta_key'         => '',
+							'meta_value'       => '',
+							'post_type'        => $tipo_post,
+							'post_status'      => 'publish',
+							'suppress_filters' => true,
+							'meta_query' => array(
+						        array(
+									'key'         => 'destacada',
+									'value'       => 'on',
+									'compare'     => '=',
+						        ),
+						    )
+						);
+	    			} else {
+		    			$args = array(
+							'posts_per_page'   => $numero_posts_mostrar,
+							'offset'           => 0,
+							'category'         => '',
+							'orderby'          => 'post_date',
+							'order'            => 'DESC',
+							'meta_key'         => '',
+							'meta_value'       => '',
+							'post_type'        => $tipo_post,
+							'post_status'      => 'publish',
+							'suppress_filters' => true
+						);
+	    			}
 	    		}
 
 		    	$posts = get_posts($args);

@@ -93,8 +93,8 @@
                     </div>          
                       <?php get_template_part('content','rrssmovil'); ?>
                   </div>
-                  <div class="row mb-xs hidden-xs">
-                    <div class="icon-section col-sm-offset-2 col-sm-2">
+                  <div class="mb-xs hidden-xs icon-section-desktop">
+                    <div class="icon-section">
                         <?php if (true) : ?>
                           <div class="card-icon ml-xs">
                               <span class="icon bbva-icon-quote2"></span>
