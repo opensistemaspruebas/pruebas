@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Plugin Name: OS SAVE POST TO JSON AND INDEX
+	Plugin Name: OS Generación de jsones
 	Plugin URI: https://www.opensistemas.com/
 	Description: Convierte el post a json y actualiza el indice
 	Version: 1.0
