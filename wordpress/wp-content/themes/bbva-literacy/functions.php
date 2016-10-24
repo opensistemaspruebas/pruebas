@@ -53,6 +53,18 @@ function add_search_meta() {
     
     if (in_array($post_type, $types) && is_single()) : $p = get_post(get_the_ID()); $attrs = get_atts($p);
     	$post_content = '';
+    	$authors = get_coauthors(get_the_ID());
+    	$autores = [];
+    	if (!empty($authors)) {
+    		foreach ($authors as $author) {
+				if (is_a($author, 'WP_User')) {
+					$name = $author->data->display_name;
+				} else {
+					$name = $author->display_name;
+				}
+    			$autores[] = getCleanedString($name);
+    		}
+    	}
     	if ($post_type == 'publicacion') {
     		$abstract_destacado = get_post_meta($p->ID, 'abstract_destacado', true);
     		$abstract_contenido = get_post_meta($p->ID, 'abstract_contenido', true);
@@ -68,7 +80,7 @@ function add_search_meta() {
         <meta name="wp_search" content="true"/>
         <meta name="wp_content" content="<?php echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($post_content))); ?>"/>
         <meta name="wp_title" content="<?php echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($p->post_title))); ?>"/>
-        <meta name="wp_text_array" content="<?php echo getCleanedString(get_the_author_meta('display_name', $p->post_author)); ?>"/>
+        <meta name="wp_text_array" content="<?php echo implode($autores, ',');  ?>"/>
         <meta name="wp_double_array" content="<?php echo implode($attrs, ','); ?>"/>
         <meta name="wp_date" content="<?php echo get_the_date('Y-m-d'); ?>"/>
         <meta name="wp_topic" content="<?php echo get_post_type(); ?>"/>
