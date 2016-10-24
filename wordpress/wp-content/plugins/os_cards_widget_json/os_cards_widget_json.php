@@ -281,7 +281,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
 	<?php endif; ?>
 
-	<section class="latests-posts pt-xl wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+	<section class="latests-posts pt-xl wow fadeInUp">
 	    <div class="container">
 	        <header class="title-description">
 	            <h1><?php echo $titulo; ?></h1>
@@ -312,45 +312,39 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 						<?php endif; ?>
 		                    <section class="container-fluid main-card">
 		                        <header class="row header-container">
-		                            <div class="image-container nopadding col-xs-12"><img src="<?php echo $imagen; ?>" alt="" /></div>
+		                            <div class="image-container nopadding col-xs-12">
+		                            	<a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs">
+		                            		<img src="<?php echo $imagen; ?>" alt="" />
+		                            	</a>
+		                            	<img src="<?php echo $imagen; ?>" alt="" class="hidden-xs" />
+		                            </div>
 		                            <div class="hidden-xs floating-text col-xs-9">
 		                                <p class="date"><?php echo $post_date; ?></p>
 		                                <h1><?php echo $post_title; ?></h1>
 		                            </div>
 		                        </header>
 		                        <div class="row data-container">
-		                            <p class="nopadding col-xs-9 date"><?php echo $post_date; ?></p>
-		                            <h1 class="title nopadding col-xs-9"><?php echo $post_title; ?></h1>
-		                            <p><?php echo $post_abstract; ?></p>
-		                            <a href="<?php echo $post_guid; ?>" class="hidden-xs readmore"><?php _e("Leer más", "os_cards_widget_json"); ?></a>
-		                            <footer class="row">
-		                            	<?php if (false) : ?>
-			                                <div class="col-xs-2 col-lg-1">
-			                                    <div class="card-icon">
-			                                        <span class="icon bbva-icon-quote"></span>
-			                                        <div class="triangle triangle-up-left"></div>
-			                                        <div class="triangle triangle-down-right"></div>
-			                                    </div>
-			                                </div>
-		                                <?php endif; ?>
-		                                <?php if (false) :?>
-			                                <div class="col-xs-2 col-lg-1">
-			                                    <div class="card-icon">
-			                                        <span class="icon bbva-icon-audio"></span>
-			                                        <div class="triangle triangle-up-left"></div>
-			                                        <div class="triangle triangle-down-right"></div>
-			                                    </div>
-			                                </div>
-										<?php endif; ?>
-		                                <?php if ($pdf) : ?>
-			                                <div class="col-xs-2 col-lg-1">
-			                                    <div class="card-icon">
-			                                        <span class="icon bbva-icon-comments"></span>
-			                                        <div class="triangle triangle-up-left"></div>
-			                                        <div class="triangle triangle-down-right"></div>
-			                                    </div>
-			                                </div>
-		                                <?php endif; ?>
+		                            <div class="nopadding date"><?php echo $post_date; ?></div>
+		                            <div class="main-card-data-container-title-wrapper">
+		                            	<h1 class="title nopadding"><?php echo $post_title; ?></h1>
+		                            </div>
+		                            <p class="main-card-data-container-description-wrapper"><?php echo $post_abstract; ?></p>
+		                            <a href="<?php echo $post_guid; ?>" class="hidden-xs mb-xs readmore"><?php _e("Leer más", "os_cards_widget_json"); ?></a>
+		                            <footer>
+		                            	<div class="icon-row">
+			                            	<?php if (false) : ?>
+								                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+								                    <div class="triangle triangle-up-left"></div>
+								                    <div class="triangle triangle-down-right"></div>
+								                </div>
+			                                <?php endif; ?>
+			                                <?php if ($pdf) : ?>
+								                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+								                    <div class="triangle triangle-up-left"></div>
+								                    <div class="triangle triangle-down-right"></div>
+								                </div>
+			                                <?php endif; ?>
+		                                </div>
 		                            </footer>
 		                        </div>
 		                    </section>
