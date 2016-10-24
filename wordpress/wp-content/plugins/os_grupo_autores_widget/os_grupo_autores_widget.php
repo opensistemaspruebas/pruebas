@@ -65,9 +65,6 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 								<!-- person -->
 								<section class="container-fluid person">
 									<a href="#" class="link-layer visible-xs">&nbsp;</a>
-									<?php if($perfil == 'coordinador') {?>
-										<div class="leader-gray-mark"></div>
-									<?php } ?>
 									<div class="image-wrapper">
 										<img src="<?php echo $destacado['imagen_perfil']; ?>" alt="">
 									</div>

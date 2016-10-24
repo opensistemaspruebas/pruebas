@@ -41,7 +41,7 @@ if (!class_exists('OSTextoWidget')) :
 		    <?php endif; ?>
 
 		    <?php if($instance['color_fondo'] == 'gris') : ?>
-			    <section class="people-grid-wrapper ini wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+			    <section class="people-grid-wrapper wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
 			      <div class="container">
 			        <h1><?php echo $instance['titulo']; ?></h1>
 			        <h2><?php echo $instance['texto_destacado']; ?></h2>
