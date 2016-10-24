@@ -133,10 +133,10 @@ get_header(); ?>
                         <?php endif; ?>
                     </div>
                     <div class="share-rrss-section rrss-xs">
-                        <span id="share-button" class="icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a title='<?php echo $title; ?>' href='https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>'' target='popup' onclick='window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')'><span data-wow-delay='0.4s' class='bbva-icon-twitter-circle twitter-icon mr-xs wow rollIn'></span></a>
-                        <a href='https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>' target='popup' onclick='window.open(this.href,'name','width=600,height=500')'><span data-wow-delay='0.3s' class='bbva-icon-facebook-circle facebook-icon mr-xs wow rollIn'></span></a>
-                        <a title='<?php echo $title; ?>' href='https://plus.google.com/share?url=<?php echo $permalink; ?>' target='popup' onclick='window.open('https://plus.google.com/share?url=<?php echo $permalink; ?>','name','width=600,height=500')'><span data-wow-delay='0.2s' class='bbva-icon-google-plus-circle googleplus-icon mr-xs wow rollIn'></span></a>                      
-                        <a title='<?php echo $title; ?>' href='http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>' target='popup' onclick='window.open(this.href,'name','width=520,height=570')'><span data-wow-delay='0s' class='bbva-icon-linkedin-circle linkedin-icon mr-xs wow rollIn'></span></a>"></span>
+                        <span id="share-button" class="icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a data-wow-delay='0.4s' class='bbva-icon-twitter-circle twitter-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>'' target='popup' onclick='window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')'></a>
+                        <a data-wow-delay='0.3s' class='bbva-icon-facebook-circle facebook-icon mr-xs wow rollIn' href='https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>' target='popup' onclick='window.open(this.href,'name','width=600,height=500')'></a>
+                        <a data-wow-delay='0.2s' class='bbva-icon-google-plus-circle googleplus-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='https://plus.google.com/share?url=<?php echo $permalink; ?>' target='popup' onclick='window.open('https://plus.google.com/share?url=<?php echo $permalink; ?>','name','width=600,height=500')'></a>
+                        <a data-wow-delay='0s' class='bbva-icon-linkedin-circle linkedin-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>' target='popup' onclick='window.open(this.href,'name','width=520,height=570')'></a>"></span>
                     </div>
                 </div>
                 <div class="mb-xs hidden-xs icon-section-desktop">
@@ -165,26 +165,18 @@ get_header(); ?>
                     </div>
                     <div class="share-rrss-section">
                         <p class="share-in"><?php _e('Compartir en','os_publicacion_type'); ?></p>
-                       <div class="card-icon">
-                          <a title="<?php echo $title; ?>" href="https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>" target="popup" onclick="window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')">
-                          <span class="icon icon-twitter bbva-icon-twitter-circle mr-xs"></span>
-                          </a>
-                      </div>
-                      <div class="card-icon">
-                          <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>" target="popup" onclick="window.open(this.href,'name','width=600,height=500')">
-                          <span class="icon icon-facebook bbva-icon-facebook-circle mr-xs"></span>
-                          </a>
-                      </div>
-                      <div class="card-icon">
-                          <a title="<?php echo $title; ?>" href="https://plus.google.com/share?url=<?php echo $permalink; ?>" target="popup" onclick="window.open('https://plus.google.com/share?url=<?php echo $permalink; ?>','name','width=600,height=500')">
-                          <span class="icon icon-googleplus bbva-icon-google-plus-circle mr-xs"></span>
-                          </a>
-                      </div>
-                      <div class="card-icon">
-                          <a title="<?php echo $title; ?>" href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>" target="popup" onclick="window.open(this.href,'name','width=520,height=570')">
-                            <span class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs"></span>
-                          </a>
-                      </div>
+                        <div class="card-icon">
+                            <a class="icon icon-twitter bbva-icon-twitter-circle mr-xs" title="<?php echo $title; ?>" href="https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>" target="popup" onclick="window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')"></a>
+                        </div>
+                        <div class="card-icon">
+                            <a class="icon icon-facebook bbva-icon-facebook-circle mr-xs" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>" target="popup" onclick="window.open(this.href,'name','width=600,height=500')"></a>
+                        </div>
+                        <div class="card-icon">
+                            <a class="icon icon-googleplus bbva-icon-google-plus-circle mr-xs" title="<?php echo $title; ?>" href="https://plus.google.com/share?url=<?php echo $permalink; ?>" target="popup" onclick="window.open('https://plus.google.com/share?url=<?php echo $permalink; ?>','name','width=600,height=500')"></a>
+                        </div>
+                        <div class="card-icon">
+                            <a class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs title="<?php echo $title; ?>" href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>" target="popup" onclick="window.open(this.href,'name','width=520,height=570')"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,10 +189,10 @@ get_header(); ?>
                                 <p></p>
                             </div>
                         </header>
-                        <div id="share-fixed-button" class="share-rrss-section rrss-xs icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a title='<?php echo $title; ?>' href='https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>'' target='popup' onclick='window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')'><span data-wow-delay='0.4s' class='bbva-icon-twitter-circle twitter-icon mr-xs wow rollIn'></span></a>
-                        <a href='https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>' target='popup' onclick='window.open(this.href,'name','width=600,height=500')'><span data-wow-delay='0.3s' class='bbva-icon-facebook-circle facebook-icon mr-xs wow rollIn'></span></a>
-                        <a title='<?php echo $title; ?>' href='https://plus.google.com/share?url=<?php echo $permalink; ?>' target='popup' onclick='window.open('https://plus.google.com/share?url=<?php echo $permalink; ?>','name','width=600,height=500')'><span data-wow-delay='0.2s' class='bbva-icon-google-plus-circle googleplus-icon mr-xs wow rollIn'></span></a>
-                        <a title='<?php echo $title; ?>' href='http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>' target='popup' onclick='window.open(this.href,'name','width=520,height=570')'><span data-wow-delay='0s' class='bbva-icon-linkedin-circle linkedin-icon mr-xs wow rollIn'></span></a>">
+                        <div id="share-fixed-button" class="share-rrss-section rrss-xs icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a data-wow-delay='0.4s' class='bbva-icon-twitter-circle twitter-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>'' target='popup' onclick='window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')'></a>
+                        <a data-wow-delay='0.3s' class='bbva-icon-facebook-circle facebook-icon mr-xs wow rollIn' href='https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>' target='popup' onclick='window.open(this.href,'name','width=600,height=500')'></a>
+                        <a data-wow-delay='0.2s' class='bbva-icon-google-plus-circle googleplus-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='https://plus.google.com/share?url=<?php echo $permalink; ?>' target='popup' onclick='window.open('https://plus.google.com/share?url=<?php echo $permalink; ?>','name','width=600,height=500')'></a>
+                        <a data-wow-delay='0s' class='bbva-icon-linkedin-circle linkedin-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>' target='popup' onclick='window.open(this.href,'name','width=520,height=570')'></a>">
                         </div>
                     </div>
                 </div>

@@ -37,7 +37,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
     	?>
 
-    		<section class="people-grid-wrapper medium wow fadeIn" id="<?php echo $args['widget_id']; ?>" style="visibility: visible;">
+    		<section class="people-grid-wrapper medium wow fadeIn" id="<?php echo $args['widget_id']; ?>">
 		      <div class="container">
 		        <article class="people-grid">
 		        	<div id="num_cards" style="display:none;"><?php echo $instance['num_miembros']; ?></div>
