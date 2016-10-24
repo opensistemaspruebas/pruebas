@@ -163,17 +163,17 @@ function getPost(post){
 			} else if (grid == "secondary") {
 				html = '<div class="_main-card col-xs-12 col-sm-6 noppading _secondary-card">';
 			}
-			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container nopadding col-xs-12"><img class="img-responsive" src="' + urlImagen + '" alt=""></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><p class="nopadding col-xs-9 date">' + fecha + '</p><h1 class="title nopadding col-xs-9">' + titulo + '</h1><p>' + descripcion + '</p><a href="' + urlPublicacion  + '" class="hidden-xs readmore">' + object_name_cards.leer_mas + '</a><footer class="row">';		        	
-		    if (cita == true)  {
-		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-quote"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt="" /></a><img src="' + urlImagen + '" alt="" class="hidden-xs" /></div><div class="hidden-xs floating-text col-xs-9"><p class="date">27 Agosto 2016</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="' + urlPublicacion + '" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">27 Agosto 2016</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas + '</a><footer>';		        	
+		    if (cita == true || true)  {
+		        html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 		    }
-		    if (video == true)  {
-		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-audio"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    if (video == true || true)  {
+		        html += '<div class="card-icon"><span class="icon bbva-icon-audio2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 		    }
-		    if (pdf == true)  {
-		        html += '<div class="col-xs-2 col-lg-1"><div class="card-icon"><span class="icon bbva-icon-comments"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div></div>';
+		    if (pdf == true || true)  {
+		        html += '<div class="card-icon"><span class="icon bbva-icon-chat2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 			}
-			html += '</footer></div></section></div>';
+			html += '</div></footer></div></section></div>';
 			break;
 
 	}
