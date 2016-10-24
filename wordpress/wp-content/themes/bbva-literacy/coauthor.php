@@ -51,54 +51,71 @@
 
 ?>
 
-    <div class="contents">
-        <article class="consultant-cv">
-            <header>
-                <div class="hidden-xs back-wrapper">
-                    <a href="<?php _e('/sobre-nosotros/'); ?>"><span class="icon bbva-icon-arrow"></span><span class="text"><?php _e('Volver'); ?></span></a>
-                </div>
-                <img class="img-responsive" src="<?php echo $imagen_cabecera; ?>" alt="" />
-                <div class="hidden-xs title-wrapper">
-                    <h1><?php echo $frase_cabecera; ?></h1>
-                </div>
-            </header>
-            <section class="container">
-                <div class="row info-wrapper">
-                    <div class="col-xs-12 col-sm-8 main-data">
-                        <!-- consultant-main-data -->
-                        <section class="consultant-main-data-wrapper">
-                            <img class="img-responsive consultant-pic" src="<?php echo $imagen_perfil; ?>" alt="" />
-                            <h1><?php echo $nombre; ?></h1>
-                            <h4><?php echo $cargo; ?></h4>
-                            <div class="current-work">
-                                <img src="<?php echo $logo_trabajo; ?>" alt="" />
-                                <span><?php echo $lugar_trabajo; ?></span>
-                            </div>
-                            <?php echo wpautop($descripcion); ?>
-                        </section>
-                        <!-- EO consultant-main-data -->
+<div class="contents">
+            <div id="search-layer"></div>
+            <article class="consultant-cv">
+                <header>
+                    <div class="hidden-xs back-wrapper">
+                        <a href="#"><span class="icon bbva-icon-arrow"></span><span class="text">Volver</span></a>
                     </div>
-                    <div class="col-xs-12 col-sm-4 secondary-data">
+                    <div class="visible-xs img-overlay"> 
+                        <div class="overlay"></div>
+                        <?php if (!empty($imagen_cabecera)) : ?>
+                            <img class="img-responsive" src="<?php echo $imagen_cabecera; ?>" alt="" />
+                        <?php endif; ?>
+                    </div>
+                    	<?php if (!empty($imagen_cabecera)) : ?>
+                    		<img class="hidden-xs img-responsive" src="<?php echo $imagen_cabecera; ?>" alt="" />
+                    	<?php endif; ?>
+                    <div class="hidden-xs title-wrapper">
+                    <div class="container">
+                        <<h1><?php echo $frase_cabecera; ?></h1>
+                    </div>
+                        
+                    </div>
+                </header>
+             <section class="container">
+                    <div class="row info-wrapper">
+                        <div class="col-xs-12 col-sm-8 main-data">
+
+ <!-- consultant-main-data -->
+                 <section class="consultant-main-data-wrapper">
+                    <?php if (!empty($imagen_perfil)) : ?>
+                        <img class="img-responsive consultant-pic" src="<?php echo $imagen_perfil; ?>" alt="" />
+                     <?php endif; ?>
+                        <h1><?php echo $nombre; ?></h1>
+                        <h4><?php echo $cargo; ?></h4>
+                        <div class="current-work mt-md mb-md">
+                            <?php if (!empty($logo_trabajo)) : ?>
+                            <img src="<?php echo $logo_trabajo; ?>" alt="" />
+                            <?php endif; ?>
+                                <span><?php echo $lugar_trabajo; ?></span>
+                        </div>
+                                <?php echo wpautop($descripcion); ?>
+                 </section>
+                            <!-- EO consultant-main-data -->
+                        </div>
+                        <div class="col-xs-12 col-sm-4 secondary-data">
                         <?php if (!empty($correo_electronico) || !empty($url_web) || !empty($twitter) || !empty($linkedin)) : ?>
-                        <div class="contacts-wrapper">
+                            <div class="contacts-wrapper">
                             <?php if (!empty($correo_electronico)) : ?>
                                 <a target="_top" href="mailto:<?php echo $correo_electronico; ?>" data-rel="external"><span class="bbva-icon-mail"></span></a>
                             <?php endif; ?>
                             <?php if (!empty($url_web)) : ?>
-                                <a target="_blank" href="<?php echo $url_web; ?>"><span class="bbva-icon-web"></span></a>
+                                <a target="_blank" href="<?php echo $url_web; ?>"><span class="bbva-icon-web2"></span></a>
                             <?php endif; ?>
                             <?php if (!empty($twitter)) : ?>
                                 <a target="_blank" href="<?php echo $twitter; ?>"><span class="bbva-icon-twitter"></span></a>
                             <?php endif; ?>
                             <?php if (!empty($linkedin)) : ?>
-                                <a target="_blank" href="<?php echo $twitter; ?>"><span class="bbva-icon-linkedin"></span></a>
+                                <a target="_blank" href="<?php echo $linkedin; ?>"><span class="bbva-icon-linkedin2"></span></a>
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
-                        <!-- consultant-secondary-data -->
-                        <section class="consultant-secondary-data-wrapper">
+                            <!-- consultant-secondary-data -->
+                            <section class="consultant-secondary-data-wrapper">
                             <?php if ($numero_publicaciones > 0) : ?>
-                            <div class="reports-wrapper">
+                                <div class="reports-wrapper">
                                 <h2><?php echo $numero_publicaciones; ?></h2>
                                 <h4><?php _e('Informes escritos'); ?></h4>
                             </div>
@@ -125,15 +142,18 @@
                                         </div>
                                     <?php endif; ?>
                                 </div>
-                         <?php endif; ?>
-                        </section>
-                        <!-- EO consultant-secondary-data -->
+                             <?php endif; ?>
+                            </section>
+                            <!-- EO consultant-secondary-data -->
                     </div>
                 </div>
             </section>
         </article>
 
-        <?php 
+        <!-- Publicaciones del autor -->
+        
+
+<?php 
 
             wp_register_script('os_cards_widget_json_js', plugins_url('js/os_cards_widget_json.js' , __FILE__), array('jquery'));
             the_widget(
@@ -151,9 +171,11 @@
                 )
             );
 
-        ?>
-        
-        <?php if (!empty($trabajos)) : ?>
+?>
+      
+<!-- Otros trabajos del autor --> 
+<?php if (!empty($trabajos)) : ?>
+        <div class="consultant-data-grid">
             <article id="otros_trabajos" name="otros_trabajos" class="container data-grid">
                 <header>
                     <h1><?php _e('Otros trabajos del autor'); ?></h1>
@@ -167,7 +189,7 @@
                                 $texto = $trabajo['texto'];
                                 $enlace = $trabajo['enlace']
                             ?>
-                            <section id="trabajo_<?php echo $i; ?>" name="trabajo_<?php echo $i; ?>" class="data-block" <?php if ($i > 2) echo 'style="display:none;"'; ?>>
+                            <section id="trabajo_<?php echo $i; ?>" name="trabajo_<?php echo $i; ?>" class="data-block" <?php if ($i > 5) echo 'style="display:none;"'; ?>>
                                 <h2><?php echo $titulo; ?></h2>
                                 <p class="description"><?php echo $texto; ?></p>
                                 <p class="link">
@@ -176,6 +198,7 @@
                             </section>
                             <?php $i++; ?>
                         <?php endforeach; ?>
+
                     </div>
                 </div>
                 <footer class="grid-footer">
@@ -186,7 +209,13 @@
                     </div>
                 </footer>
             </article>
-        <?php endif; ?>
+        </div>
+<?php endif; ?>
+
+        </div>
+    
+                
+       
 
     </div>
 
