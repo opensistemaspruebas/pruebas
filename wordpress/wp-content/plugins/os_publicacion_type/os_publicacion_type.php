@@ -5,7 +5,7 @@
 	Plugin URI: https://www.opensistemas.com/
 	Description: Crea el tipo de contenido 'publicación'.
 	Version: 1.0
-	Author: Marta Oliver
+	Author: Marta Oliver / Roberto Moreno
 	Author URI: https://www.opensistemas.com/
 	License: GPLv2 or later
 	Text Domain: os_publicacion_type
@@ -59,7 +59,7 @@ add_action('init', 'publicacion_type', 0);
 function register_admin_scripts() {
     global $typenow, $post;
     
-    if ($typenow == $post->post_type) {
+    if ($typenow == "publicacion") {
       wp_enqueue_media();
       wp_register_script('os_publicacion_type-js', plugins_url('js/os_publicacion_type.js' , __FILE__), array('jquery'));           
       $translation_array = array(
@@ -72,6 +72,14 @@ function register_admin_scripts() {
 add_action('admin_enqueue_scripts', 'register_admin_scripts');
 
 
+function register_admin_styles() {
+    global $typenow;
+    if ($typenow == "publicacion") {
+        wp_enqueue_style('os-publicacion-type-css', plugin_dir_url(__FILE__) . 'css/os_publicacion_type.css');           
+    }
+}
+add_action('admin_print_styles', 'register_admin_styles');
+
 
 function publicacion_meta_boxes() {
   add_meta_box("publicacion_destacada" ,__("Publicación destacada", "os_publicacion_type"), "meta_box_destacada", 'publicacion', 'side', 'high');
@@ -82,6 +90,9 @@ function publicacion_meta_boxes() {
   add_meta_box('publicacion_pdf', __('Informe en PDF', 'os_publicacion_type'), 'meta_box_publicacion_pdf', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_source_link', __('Link a la fuente', 'os_publicacion_type'), 'meta_box_source_link', 'publicacion', 'normal', 'high');
   add_meta_box('publicacion_info', __('Información adicional', 'os_publicacion_type'), 'meta_box_publicacion_info', 'publicacion', 'normal', 'high');
+  add_meta_box("publicacion_video_intro" ,__("Video de introducción", "os_publicacion_type"), "meta_box_videoIntro_publicacion", 'publicacion', 'normal', 'high');
+  add_meta_box("publicacion_video" ,__("Video completo", "os_publicacion_type"), "meta_box_video_publicacion", 'publicacion', 'normal', 'high');
+  add_meta_box("publicacion_puntos_clave" ,__("Puntos clave", "os_publicacion_type"), "meta_box_puntos_clave_publicacion", 'publicacion', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'publicacion_meta_boxes');
 
@@ -146,6 +157,83 @@ function meta_box_imagen_card($post) {
             
 <?php
        
+}
+
+function meta_box_videoIntro_publicacion($post) {
+  wp_nonce_field( basename( __FILE__ ), 'videoIntro_publicacion-nonce' );
+
+  $videoIntro_url = get_post_meta($post->ID,'videoIntro-url',true);
+
+  ?>
+
+    <p class="videoIntro-wordpress">
+      <label for="videoIntro-url"><?php _e('Video presentación', 'os_publicacion_type'); ?></label>
+      <input class="widefat" id="videoIntro-url" name="videoIntro-url" type="text" value="<?php if (isset($videoIntro_url)) echo $videoIntro_url; ?>"/>
+      <i><?php _e('Es el video que se mostrará al cargar la página en estado autoplay','os_publicacion_type'); ?></i>
+    </p>    
+    <p class="videoIntro-wordpress">
+      <input id="upload_videoIntroPublicacion" name="upload_videoIntroPublicacion" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
+    </p>
+
+  <?php 
+}
+
+function meta_box_video_publicacion($post) {
+  wp_nonce_field( basename( __FILE__ ), 'video_publicacion-nonce' );
+
+  $video_type = get_post_meta($post->ID,'video-type',true); 
+  if($video_type == '') {
+    $video_type = 'youtube';
+  }
+  $wp_video_url = get_post_meta($post->ID,'wp-video-url',true);
+  $yt_video_url = get_post_meta($post->ID,'yt-video-url',true);
+
+  ?>
+
+    <p>
+      <label for="video-type"><?php _e('Fuente: ','os_publicacion_type'); ?></label>
+      <input type="radio" name="video-type" id="video-type-yt" value="youtube" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'youtube' );} ?>>
+      <label for="video-type-yt"><?php _e( 'Youtube', 'os_publicacion_type' )?></label>
+      <input type="radio" name="video-type" id="video-type-wp" value="wordpress" <?php if ( !empty ( $video_type ) ) { checked( $video_type, 'wordpress' ); } ?>>
+      <label for="video-type-wp"><?php _e( 'Wordpress', 'os_publicacion_type' )?></label>
+    </p>
+
+    <p class="video-youtube" <?php if($video_type != 'youtube') { echo 'style="display: none;"'; } ?>>
+      <label for="yt-video-url"><?php _e('Enlace de Youtube', 'os_publicacion_type'); ?></label>
+      <input class="widefat" id="yt-video-url" name="yt-video-url" type="text" value="<?php if (isset($yt_video_url)) echo $yt_video_url; ?>"/>
+      <i><?php _e('Este video aparecerá en una ventana modal al hacer click sobre el icono Play. ','os_publicacion_type'); ?></i>
+      <i><?php _e('Se debe coger la URL del campo src (sin las comillas) que aparece al hacer click en "Insertar", en la página del video de Youtube que se quiera mostrar','os_publicacion_type'); ?></i>
+    </p>
+
+    <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
+      <label for="wp-video-url"><?php _e('URL video', 'os_publicacion_type'); ?></label>
+      <input class="widefat" id="wp-video-url" name="wp-video-url" type="text" value="<?php if (isset($wp_video_url)) echo $wp_video_url; ?>"/>
+      <i><?php _e('Este video aparecerá en una ventana modal al hacer click sobre el icono Play','os_publicacion_type'); ?></i>
+    </p>    
+    <p class="video-wordpress" <?php if($video_type != 'wordpress') { echo 'style="display: none;"'; } ?>>
+      <input id="upload_videoPublicacion" name="upload_videoPublicacion" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
+    </p>
+
+  <?php 
+}
+
+
+function meta_box_puntos_clave_publicacion($post){
+
+  wp_nonce_field(basename(__FILE__), 'meta_box_evento_descripcion-nonce');
+
+  $publicacion_puntosClave = get_post_meta($post->ID, 'publicacion_puntosClave', true);
+
+  ?>
+
+ 
+  <input type="text" id="publicacion_puntosClave[0]" name="publicacion_puntosClave[0]" class="widefat ptoClave" placeholder="<?php _e('1º Punto clave', 'os_publicacion_type'); ?>" value="<?php echo $publicacion_puntosClave[0]; ?>">
+  <input type="text" id="publicacion_puntosClave[1]" name="publicacion_puntosClave[1]" class="widefat ptoClave" placeholder="<?php _e('2º Punto clave', 'os_publicacion_type'); ?>" value="<?php echo $publicacion_puntosClave[1]; ?>">
+  <input type="text" id="publicacion_puntosClave[2]" name="publicacion_puntosClave[2]" class="widefat" placeholder="<?php _e('3º Punto clave', 'os_publicacion_type'); ?>" value="<?php echo $publicacion_puntosClave[2]; ?>">
+
+   <p><?php _e('Estos son los puntos clave de la publicación.', 'os_publicacion_type'); ?></p>
+
+  <?php
 }
 
 
@@ -347,8 +435,35 @@ function meta_boxes_save($post_id) {
   } else {
     update_post_meta($post_id, 'destacada', "off");
   }
-
-
+  if(user_can_save($post_id, 'videoIntro_publicacion-nonce')) {
+    if(isset($_POST['videoIntro-url'])) {
+      update_post_meta($post_id, 'videoIntro-url', strip_tags($_POST['videoIntro-url']));
+    }
+  }
+  if(user_can_save($post_id, 'video_publicacion-nonce')) {
+    if (isset($_POST['video-type'])) {
+      update_post_meta($post_id, 'video-type', strip_tags($_POST['video-type']));
+      if($_POST['video-type'] == 'youtube') {
+        if(isset($_POST['yt-video-url'])) {
+          update_post_meta($post_id, 'yt-video-url', strip_tags($_POST['yt-video-url']));
+        }
+      } else if($_POST['video-type'] == 'wordpress') {
+        if(isset($_POST['wp-video-url'])) {
+          update_post_meta($post_id, 'wp-video-url', strip_tags($_POST['wp-video-url']));
+        }
+      }
+    }
+  }
+  if (isset($_POST['publicacion_puntosClave'])) {
+    $publicacion_puntosClave = $_POST['publicacion_puntosClave'];
+    $publicacion_puntosClave_save =  array();
+    foreach ($publicacion_puntosClave as $h) {
+        if (!empty($h)) {
+           array_push($publicacion_puntosClave_save, $h);
+        }
+    }
+    update_post_meta($post_id, 'publicacion_puntosClave', $publicacion_puntosClave_save);
+  }
 
 }
 add_action('save_post', "meta_boxes_save");
