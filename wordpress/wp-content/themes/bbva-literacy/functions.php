@@ -84,9 +84,7 @@ function add_search_meta() {
         <meta name="wp_double_array" content="<?php echo implode($attrs, ','); ?>"/>
         <meta name="wp_date" content="<?php echo get_the_date('Y-m-d'); ?>"/>
         <meta name="wp_topic" content="<?php echo get_post_type(); ?>"/>
-        <?php if (has_post_thumbnail()) : ?>
-            <meta name="image_src" content="<?php echo str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_the_post_thumbnail_url()); ?>"/>
-        <?php endif; ?>
+        <meta name="image_src" content="<?php echo str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) ); ?>"/>
     <?php endif;
 }
 add_action('wp_head', 'add_search_meta', 100);
