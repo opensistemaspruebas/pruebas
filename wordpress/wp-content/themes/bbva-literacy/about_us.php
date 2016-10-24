@@ -5,6 +5,7 @@
 <?php get_header(); ?>
 
 <div class="contents">
+	<div id="search-layer"></div>
 	<article id="about-us" class="about-us">
 	
 		<?php the_content(); ?>
