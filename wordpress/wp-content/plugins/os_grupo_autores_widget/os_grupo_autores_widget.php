@@ -37,7 +37,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
     	?>
 
-    		<section class="people-grid-wrapper medium wow fadeIn" id="<?php echo $args['widget_id']; ?>" style="visibility: visible;">
+    		<section class="people-grid-wrapper wow fadeIn" id="<?php echo $args['widget_id']; ?>" style="visibility: visible;">
 		      <div class="container">
 		        <article class="people-grid">
 		        	<div id="num_cards" style="display:none;"><?php echo $instance['num_miembros']; ?></div>
@@ -61,13 +61,10 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				    		<?php			    			
 				    			$destacado = $this->get_author_print_fields($destacado_id,$perfil);
 				    		?>
-				    		<div class="card-container card-container-destacado col-xs-12 col-sm-6">     
+				    		<div class="card-container col-xs-12 col-sm-6">     
 								<!-- person -->
 								<section class="container-fluid person">
 									<a href="#" class="link-layer visible-xs">&nbsp;</a>
-									<?php if($perfil == 'coordinador') {?>
-										<div class="leader-gray-mark"></div>
-									<?php } ?>
 									<div class="image-wrapper">
 										<img src="<?php echo $destacado['imagen_perfil']; ?>" alt="">
 									</div>
