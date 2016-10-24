@@ -69,12 +69,12 @@ function add_search_meta() {
     		$abstract_destacado = get_post_meta($p->ID, 'abstract_destacado', true);
     		$abstract_contenido = get_post_meta($p->ID, 'abstract_contenido', true);
     		if (empty($abstract_destacado) && empty($abstract_contenido)) {
-    			$post_content = $p->post_content;
+    			$post_content = strip_tags($p->post_content);
     		} else {
-    			$post_content = get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true);
+    			$post_content = strip_tags(get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true));
     		}
     	} else {
-    		$post_content = $p->post_content;
+    		$post_content = strip_tags($p->post_content);
     	}
         ?>
         <meta name="wp_search" content="true"/>
