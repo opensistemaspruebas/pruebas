@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+/*jQuery(document).ready(function() {
 
 	jQuery("input#inputText").focusin(function() {
 		jQuery(this).val("");
@@ -148,7 +148,7 @@ jQuery(document).ready(function() {
 	
 	});
 
-});
+});*/
  
 
 function getCleanedString(cadena){
@@ -168,3 +168,153 @@ function getCleanedString(cadena){
 	
 	return cadena;
 }
+
+
+function getSelectedTags() {
+	texto = [];
+	categorias = [];
+	autores = [];
+	paises = [];
+	targetContainer = jQuery('#publishing-filter .selected-tags-container');
+	if (targetContainer.is(':empty') == false) {
+		targetContainer.children('.tag.selected-tag').each(function(i) {
+			console.log(jQuery(this));
+			type = jQuery(this).attr('from');
+			id = (jQuery(this).attr('id')).replace('tag-', '');
+			nombre = getCleanedString(jQuery(this).children('span').last().html());
+			switch(type) {
+			    case 'geo-container':
+			        paises.push(id);
+			        break;
+			    case 'author-container':
+			        autores.push(nombre);
+			        break;
+			    case 'tag-container':
+			        categorias.push(id);
+			        break;
+			    default:
+			        texto.push(nombre);
+			}
+		});
+	}
+	tags = [texto, categorias, autores, paises];
+	return tags;	
+}
+
+
+function getPostFiltro(post){
+
+	var html = '';
+
+	var titulo = post['title'];
+	var descripcion = post['content'];
+	var fecha = new Date(post['date'].substring(0, 10));
+	var urlImagen = post['image_src'];
+	var urlPublicacion = post['resourcename'];
+	var cita = true;
+	var video = true;
+	var pdf = true;
+
+
+	var meses = [
+		object_name_cards.enero, 
+		object_name_cards.febrero,
+		object_name_cards.marzo,
+		object_name_cards.abril,
+		object_name_cards.mayo,
+		object_name_cards.junio,
+		object_name_cards.julio,
+		object_name_cards.agosto,
+		object_name_cards.septiembre,
+		object_name_cards.octubre,
+		object_name_cards.noviembre,
+		object_name_cards.diciembre,
+	];
+
+	fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
+	fecha = fecha.toString();
+	fecha = fecha.toUpperCase();
+
+
+	order = ['double', 'double', 'triple', 'triple', 'triple'];
+	i = jQuery('.card-container').size();
+	grid = order[(i % 5)];
+	if (grid == "double") {
+		html = '<div class="col-xs-12 col-sm-6 double-card card-container">';
+	} else {
+		html = '<div class="col-xs-12 col-sm-4 triple-card card-container">';
+	}
+	html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt=""></a><img src="' + urlImagen + '" alt="" class="hidden-xs"></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="#" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas + '</a><footer><div class="icon-row">';
+    if (cita == true || true)  {
+        html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
+    }
+    if (video == true || true)  {
+        html += '<div class="card-icon"><span class="icon bbva-icon-audio2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
+    }
+    if (pdf == true || true)  {
+        html += '<div class="card-icon"><span class="icon bbva-icon-chat2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
+	}
+	html += '</div></footer></div></section></div>';
+
+	return html;
+}
+
+
+jQuery(document).ready(function($) {
+	
+	$('button.btn-bbva-aqua.publishing-filter-search-btn').on('click', function(e) {
+
+		e.preventDefault();
+		e.stopPropagation();
+		
+		console.log("He hecho click");
+		
+		tags = getSelectedTags();
+		
+		texto = tags[0].join(' ');
+		categorias = tags[1];
+		autores = tags[2];
+		paises = tags[3];
+		
+		query_paises = "";
+		query_autores = "";
+		query_categorias = "";
+
+		filter = false;
+		if (paises.length > 0) {
+		    filter = true;
+		    query_paises = " (or wp_double_array:" + paises.join(" wp_double_array:") + ")";
+		}
+		if (autores.length > 0) {
+		    filter = true;
+		    query_autores = " (or wp_text_array:'" + autores.join("' wp_text_array:'") + "')";
+		}
+		if (categorias.length > 0) {
+		    filter = true;
+		    query_categorias = " (or wp_double_array:" + categorias.join(" wp_double_array:") + ")";
+		}
+
+		/*if (texto == "" && filter == false)
+		    return false;*/
+
+		var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
+		if (filter) {
+		    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + ')';
+		}
+
+		var d = {"code": 200, "data": {"status": {"rid": "nNfPtv8qyAIKYY/r", "time-ms": 26 }, "hits": {"found": 1, "start": 0, "hit": [{"id": "is8lyrywhistoria/lorem-ipsum-dolor-sit-amet-eu-paulo-suscipiantur-est-alia-posidonium-ne-ius/index.html", "fields": {"content": "Lorem ipsum dolor sit amet, eu paulo suscipiantur est, alia posidonium ne ius. Detraxit tractatos principes eu cum, an eum affert vituperata. Tollit qualisque scripserit qui eu, sea aperiam reprimique sadipscing eu. Semper instructior per cu, sed eu facer semper imperdiet, est eu doctus omittam temporibus. Liber dicunt persecuti mel ad.", "title": "Lorem ipsum dolor sit amet, eu paulo suscipiantur est, alia posidonium ne ius", "project": "is8lyryw", "topic": "historia", "content_language": "es", "date": "2016-10-05T17:00:00Z", "resourcename": "historia/lorem-ipsum-dolor-sit-amet-eu-paulo-suscipiantur-est-alia-posidonium-ne-ius/index.html", "wp_text_array": ["marta oliver"] } }] } } };
+
+		//jQuery.get(url_buscador, function(d) {
+
+		    if (d.code === 200 && d.data.hits.found > 0) {
+		        jQuery('.cards-grid .container div.row').first().empty();
+		        jQuery.each(d.data.hits.hit, function(i, result) {
+		            jQuery('.cards-grid .container div.row').first().append(getPostFiltro(result.fields));
+		        });
+		    } else {
+		        jQuery('.cards-grid .container div.row').html(object.no_results);
+		    }
+
+		//}, 'json');
+	});
+});
