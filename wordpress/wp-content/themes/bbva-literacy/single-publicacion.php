@@ -231,6 +231,7 @@ get_header(); ?>
                   <p><?php echo $abstract_contenido; ?></p>
                   <?php endif; ?>
                 <?php endif; ?>
+                <?php if (count($publicacion_puntosClave) != 0) : ?>
                 <section class="key-points mb-lg">
                     <h1 class="mt-lg mb-md"><?php _e('Puntos clave', 'os_publicacion_type'); ?></h1>
                     <div class="row keyPoint">
@@ -250,7 +251,9 @@ get_header(); ?>
                         <?php endwhile; ?>
                     </div>
                 </section>
+                <?php endif; ?>
             </div>
+            <?php if (!empty($videoIntro_url)) : ?>
             <div class="video-container">
                 <video src="<?php echo $videoIntro_url; ?>" autoplay loop="loop" preload="auto"></video>
                 <?php if($videoFinal_url != ''): ?>
@@ -276,6 +279,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             <div class="container content-wrap">
             <?php if (!empty($pdf)) : ?>
                 <section class="pdf-rectangle mt-xl">
