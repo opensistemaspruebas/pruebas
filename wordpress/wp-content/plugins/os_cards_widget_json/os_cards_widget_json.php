@@ -557,7 +557,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 			                        <header class="row header-container">
 							            <div class="image-container col-xs-12">
 							                <a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs">
-							                    <img src="<?php echo $imagen; ?>f" alt="" />
+							                    <img src="<?php echo $imagen; ?>" alt="" />
 							                </a>
 							                <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs" />
 							            </div>
