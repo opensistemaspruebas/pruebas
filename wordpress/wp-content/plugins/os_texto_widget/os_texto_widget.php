@@ -31,7 +31,7 @@ if (!class_exists('OSTextoWidget')) :
 
     	?>
     		<?php if($instance['color_fondo'] == 'blanco') : ?>
-	    		<section class="who-we-are-wrapper wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+	    		<section class="who-we-are-wrapper wow fadeIn">
 			      <div class="container">
 			        <h1><?php echo $instance['titulo']; ?></h1>
 			        <h2><?php echo $instance['texto_destacado']; ?></h2>
@@ -41,7 +41,7 @@ if (!class_exists('OSTextoWidget')) :
 		    <?php endif; ?>
 
 		    <?php if($instance['color_fondo'] == 'gris') : ?>
-			    <section class="people-grid-wrapper wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+			    <section class="people-grid-wrapper wow fadeIn">
 			      <div class="container">
 			        <h1><?php echo $instance['titulo']; ?></h1>
 			        <h2><?php echo $instance['texto_destacado']; ?></h2>
