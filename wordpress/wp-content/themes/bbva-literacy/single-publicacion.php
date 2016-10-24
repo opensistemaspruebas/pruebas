@@ -231,11 +231,6 @@ get_header(); ?>
                   <p><?php echo $abstract_contenido; ?></p>
                   <?php endif; ?>
                 <?php endif; ?>
-
-
-
-
-                <!-- Añadir back y poner variables -->
                 <section class="key-points mb-lg">
                     <h1 class="mt-lg mb-md"><?php _e('Puntos clave', 'os_publicacion_type'); ?></h1>
                     <div class="row keyPoint">
