@@ -260,8 +260,8 @@ if (!class_exists('OS_Logos_Widget')) :
   	public function form($instance) {
 
 
-  			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : _('Organizaciones del consejo asesor', 'os_logos_widget');
-  			$texto = !empty($instance['texto']) ? $instance['texto'] : _('Estas son varias de las organizaciones que apoyan a la educación financiera en los diferentes países en los que estamos presentes', 'os_logos_widget');
+  			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : __('Organizaciones del consejo asesor', 'os_logos_widget');
+  			$texto = !empty($instance['texto']) ? $instance['texto'] : __('Estas son varias de las organizaciones que apoyan a la educación financiera en los diferentes países en los que estamos presentes', 'os_logos_widget');
   			$tipo_post = (!empty($instance['tipo_post'])) ? $instance['tipo_post'] : '';
 
 	        ?>
@@ -288,7 +288,7 @@ if (!class_exists('OS_Logos_Widget')) :
 
 	    	$instance = $old_instance;
 
-	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : _('Organizaciones del consejo asesor', 'os_logos_widget');
+	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : __('Organizaciones del consejo asesor', 'os_logos_widget');
 	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : __("Estas son varias de las organizaciones que apoyan a la educación financiera en los diferentes países en los que estamos presentes", "os_logos_widget");
 	    	$instance['tipo_post'] = (!empty($new_instance['tipo_post'])) ? strip_tags($new_instance['tipo_post']) : '';
 	    	$instance['externo5'] = strip_tags($new_instance['externo5']);
