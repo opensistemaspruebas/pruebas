@@ -3,7 +3,7 @@
 ?>
 
 <?php
-
+    
     $author_name = get_query_var('coauthor', 'nada');
 ?>
 
@@ -14,12 +14,11 @@
 	$found_post = null;
 
 	if ( $posts = get_posts( array( 
-	    'name' => $author_name, 
+	    'name' => 'cap-' . $author_name, 
 	    'post_type' => 'guest-author',
 	    'post_status' => 'publish',
 	    'posts_per_page' => 1
 	) ) ) $found_post = $posts[0];
-
 
 	$post_id = $found_post->ID;
 
