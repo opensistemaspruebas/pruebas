@@ -704,7 +704,7 @@ class CoAuthors_Guest_Authors
 		if ( ! isset( $_POST['guest-author-nonce'] ) || ! wp_verify_nonce( $_POST['guest-author-nonce'], 'guest-author-nonce' ) ) {
 			return $post_data;
 		}
-		
+
 		// Validate the display name
 		if ( empty( $_POST['cap-display_name'] ) ) {
 			wp_die( esc_html__( 'Guest authors cannot be created without display names.', 'co-authors-plus' ) );
@@ -715,14 +715,12 @@ class CoAuthors_Guest_Authors
 		if ( ! $slug ) {
 			$slug = sanitize_title( $_POST['cap-display_name'] );
 		}
-		$slug = sanitize_title( $_POST['cap-display_name'] );
-		
+
 		// Uh oh, no guest authors without slugs
 		if ( ! $slug ) {
 			wp_die( esc_html__( 'Guest authors cannot be created without display names.', 'co-authors-plus' ) );
 		}
-		//$post_data['post_name'] = $this->get_post_meta_key( $slug );
-		$post_data['post_name'] = $slug;
+		$post_data['post_name'] = $this->get_post_meta_key( $slug );
 
 		// Guest authors can't be created with the same user_login as a user
 		$user_nicename = str_replace( 'cap-', '', $slug );
@@ -738,6 +736,7 @@ class CoAuthors_Guest_Authors
 		if ( $guest_author && $guest_author->ID != $original_args['ID'] ) {
 			wp_die( esc_html__( 'Display name conflicts with another guest author display name.', 'co-authors-plus' ) );
 		}
+
 		return $post_data;
 	}
 
@@ -764,7 +763,9 @@ class CoAuthors_Guest_Authors
 
 			$key = $this->get_post_meta_key( $author_field['key'] );
 			// 'user_login' should only be saved on post update if it doesn't exist
-			if ( 'user_login' == $author_field['key'] && ! get_post_meta( $post_id, $key, true ) ) {
+			//if ( 'user_login' == $author_field['key'] && ! get_post_meta( $post_id, $key, true ) ) {
+			// Permito que se actualice el user_login
+			if ( 'user_login' == $author_field['key']) {
 				$display_name_key = $this->get_post_meta_key( 'display_name' );
 				$temp_slug = sanitize_title( $_POST[ $display_name_key ] );
 				update_post_meta( $post_id, $key, $temp_slug );
@@ -897,12 +898,11 @@ class CoAuthors_Guest_Authors
 			$pm_key = $this->get_post_meta_key( $field['key'] );
 			$guest_author[ $key ] = get_post_meta( $post_id, $pm_key, true );
 		}
-		
 		// Support for non-Latin characters. They're stored as urlencoded slugs
 		$guest_author['user_login'] = urldecode( $guest_author['user_login'] );
 
 		// Hack to model the WP_User object
-		$guest_author['user_nicename'] = sanitize_title( $guest_author['display_name'] );
+		$guest_author['user_nicename'] = sanitize_title( $guest_author['user_login'] );
 		$guest_author['type'] = 'guest-author';
 
 		wp_cache_set( $cache_key, (object) $guest_author, self::$cache_group );

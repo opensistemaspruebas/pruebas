@@ -240,6 +240,7 @@ class CoAuthors_WP_List_Table extends WP_List_Table {
 			$texto[] = $perfil->name;
 			$roles[] = $perfil->slug;
 		}
+
 		if (in_array("asesor", $roles) || in_array("coordinador", $roles)) {
 			$actions['view'] = '<a href="' . esc_url( $item_view_link ) . '">' . __( 'Ver página de detalle', 'os_perfiles_usuario' ) . '</a>';
 		}
