@@ -40,6 +40,7 @@ function save_json_to_file($json, $post_type, $identificador, $json_type){
 }
 
 function post_to_json($post_id, $post_type){
+
 	$json = array("_id" => $post_id, "type" => $post_type);
 
 	$format = "Y-m-d";
@@ -217,6 +218,12 @@ function fetch_autores($post_type, $order, $author){
 
 // Generar jsones al guardar un post
 function save_post_and_update($post_id) {
+
+	// si entramos a crear un post
+	if ('auto-draft' === get_post_status($post_id))
+		return false;
+
+
 	// Tipos de post para los que guardamos jsones
 	$valid_types = array("publicacion", "historia", "taller", "partners");
 
