@@ -704,23 +704,25 @@ class CoAuthors_Guest_Authors
 		if ( ! isset( $_POST['guest-author-nonce'] ) || ! wp_verify_nonce( $_POST['guest-author-nonce'], 'guest-author-nonce' ) ) {
 			return $post_data;
 		}
-
+		
 		// Validate the display name
 		if ( empty( $_POST['cap-display_name'] ) ) {
 			wp_die( esc_html__( 'Guest authors cannot be created without display names.', 'co-authors-plus' ) );
 		}
 		$post_data['post_title'] = sanitize_text_field( $_POST['cap-display_name'] );
 
-		$slug = sanitize_title( get_post_meta( $original_args['ID'], $this->get_post_meta_key( 'user_login' ), true ) );
+		//$slug = sanitize_title( get_post_meta( $original_args['ID'], $this->get_post_meta_key( 'user_login' ), true ) );
 		if ( ! $slug ) {
 			$slug = sanitize_title( $_POST['cap-display_name'] );
 		}
-
+		$slug = sanitize_title( $_POST['cap-display_name'] );
+		
 		// Uh oh, no guest authors without slugs
 		if ( ! $slug ) {
 			wp_die( esc_html__( 'Guest authors cannot be created without display names.', 'co-authors-plus' ) );
 		}
-		$post_data['post_name'] = $this->get_post_meta_key( $slug );
+		//$post_data['post_name'] = $this->get_post_meta_key( $slug );
+		$post_data['post_name'] = $slug;
 
 		// Guest authors can't be created with the same user_login as a user
 		$user_nicename = str_replace( 'cap-', '', $slug );
@@ -736,7 +738,6 @@ class CoAuthors_Guest_Authors
 		if ( $guest_author && $guest_author->ID != $original_args['ID'] ) {
 			wp_die( esc_html__( 'Display name conflicts with another guest author display name.', 'co-authors-plus' ) );
 		}
-
 		return $post_data;
 	}
 
@@ -896,11 +897,12 @@ class CoAuthors_Guest_Authors
 			$pm_key = $this->get_post_meta_key( $field['key'] );
 			$guest_author[ $key ] = get_post_meta( $post_id, $pm_key, true );
 		}
+		
 		// Support for non-Latin characters. They're stored as urlencoded slugs
 		$guest_author['user_login'] = urldecode( $guest_author['user_login'] );
 
 		// Hack to model the WP_User object
-		$guest_author['user_nicename'] = sanitize_title( $guest_author['user_login'] );
+		$guest_author['user_nicename'] = sanitize_title( $guest_author['display_name'] );
 		$guest_author['type'] = 'guest-author';
 
 		wp_cache_set( $cache_key, (object) $guest_author, self::$cache_group );
