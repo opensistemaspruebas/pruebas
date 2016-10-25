@@ -172,20 +172,20 @@ if (!class_exists('OS_Evento_Type')) {
 			<h1><?php _e('Fecha', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es el rango de fechas de cuándo tendrá lugar el evento.', 'os_evento_type'); ?></p>
 			<p>
-				<label class="classfat" for="evento_fecha_de_inicio"><?php _e('Fecha de inicio', 'os_evento_type'); ?></label>
-				<input type="date" id="evento_fecha_de_inicio" name="evento_fecha_de_inicio" class="widefat" value="<?php echo $evento_fecha_de_inicio; ?>">
-				<span class="description">(<?php _e('Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
+				<label class="classfat" for="evento_fecha_de_inicio"><?php _e('Fecha de inicio (*)', 'os_evento_type'); ?></label>
+				<input required type="date" id="evento_fecha_de_inicio" name="evento_fecha_de_inicio" class="widefat" value="<?php echo $evento_fecha_de_inicio; ?>">
+				<span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
 			</p>
 			<p>
-				<label class="classfat" for="evento_fecha_de_final"><?php _e('Fecha de final', 'os_evento_type'); ?></label>
-				<input type="date" id="evento_fecha_de_final" name="evento_fecha_de_final" class="widefat" value="<?php echo $evento_fecha_de_final; ?>">
-				<span class="description">(<?php _e('Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
+				<label class="classfat" for="evento_fecha_de_final"><?php _e('Fecha de final (*)', 'os_evento_type'); ?></label>
+				<input required type="date" id="evento_fecha_de_final" name="evento_fecha_de_final" class="widefat" value="<?php echo $evento_fecha_de_final; ?>">
+				<span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
 			</p>
 		 	<h1><?php _e('Lugar', 'os_evento_type'); ?></h1>
 			<p>
-				<label class="classfat" for="evento_localizacion[2]"><?php _e('Ciudad', 'os_evento_type'); ?></label>
-				<input type="text" id="evento_localizacion[2]" name="evento_localizacion[2]" class="widefat" placeholder="<?php _e('Ciudad', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[2]; ?>">
-				<span class="description">(<?php _e('Por ejemplo: Madrid', 'os_evento_type'); ?>)</span>
+				<label class="classfat" for="evento_localizacion[2]"><?php _e('Ciudad (*)', 'os_evento_type'); ?></label>
+				<input required type="text" id="evento_localizacion[2]" name="evento_localizacion[2]" class="widefat" placeholder="<?php _e('Ciudad', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[2]; ?>">
+				<span class="description">(<?php _e('*Campo obligatorio. Por ejemplo: Madrid', 'os_evento_type'); ?>)</span>
 			</p>
 		 	<h1><?php _e('Registro', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es la URL del enlace para registrarse en el evento.', 'os_evento_type'); ?></p>
@@ -222,9 +222,9 @@ if (!class_exists('OS_Evento_Type')) {
 			?>
 			<h1><?php _e('Descripción corta', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es el texto introductorio que aparecerá en la tarjeta que muestra el resumen del evento.', 'os_evento_type'); ?></p>
-			<label class="screen-reader-text" for="evento_descripcion_corta"><?php _e('Descripción corta del evento', 'os_evento_type'); ?></label>
+			<label class="screen-reader-text" for="evento_descripcion_corta"><?php _e('Descripción corta del evento (*)*', 'os_evento_type'); ?></label>
 			<textarea rows="1" cols="40" maxlength="280" name="evento_descripcion_corta" id="evento_descripcion_corta"><?php echo $evento_descripcion_corta; ?></textarea>
-			<span class="description">(<?php _e('Máx. 300 carácteres', 'os_evento_type'); ?>)</span>
+			<span class="description">(<?php _e('*Campo obligatorio. Máx. 300 carácteres', 'os_evento_type'); ?>)</span>
 			<h1><?php _e('Descripción larga', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es el texto descriptivo que aparecerá en la página de detalle del evento.', 'os_evento_type'); ?></p>
 			<?php wp_editor($evento_descripcion_larga, 'eventodescripcionlarga', $settings); ?>
@@ -380,7 +380,7 @@ if (!class_exists('OS_Evento_Type')) {
 						?>
 						</select>
 					</p>
-					<p <?php if ($evento_elemento_programa[$i]['tipo'] == 'descanso') echo 'style="display:none;"' ?>>
+					<p>
 						<label for="evento_elemento_programa[0][moderador]"><?php _e('Moderador', 'os_evento_type'); ?></label>
 						<input class="widefat" id="evento_elemento_programa[0][moderador]" name="evento_elemento_programa[0][moderador]" type="text" value="" />
 					</p>
