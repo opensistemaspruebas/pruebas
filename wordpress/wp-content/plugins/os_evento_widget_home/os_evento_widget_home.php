@@ -46,9 +46,43 @@ if (!class_exists('os_evento_widget_home')) :
 
 	    	$evento = get_posts($args);
 
-	    	os_imprimir($evento);
 
 	    	if (!empty($evento)) {
+
+	    		$evento_localizacion = get_post_meta($evento[0]->ID, 'evento_localizacion', true);
+
+	    		$format = "Y-m-d";
+
+	    		$evento_fecha_de_inicio = get_post_meta($evento[0]->ID, 'evento_fecha_de_inicio', true);
+	    		$evento_fecha_de_final = get_post_meta($evento[0]->ID, 'evento_fecha_de_final', true);
+
+	    		$dateobj_inicio = DateTime::createFromFormat($format, $evento_fecha_de_inicio);
+	    		$dateobj_final = DateTime::createFromFormat($format, $evento_fecha_de_final);
+
+	    		$fecha_evento = '';
+	    		$meses = array(
+					__("enero", "os_cards_widget_json"), 
+					__("febrero", "os_cards_widget_json"), 
+					__("marzo", "os_cards_widget_json"), 
+					__("abril", "os_cards_widget_json"), 
+					__("mayo", "os_cards_widget_json"), 
+					__("junio", "os_cards_widget_json"), 
+					__("julio", "os_cards_widget_json"), 
+					__("agosto", "os_cards_widget_json"), 
+					__("septiembre", "os_cards_widget_json"), 
+					__("octubre", "os_cards_widget_json"), 
+					__("noviembre", "os_cards_widget_json"), 
+					__("diciembre", "os_cards_widget_json")
+				);
+	    		if ($dateobj_inicio->format('m') == $dateobj_final->format('m') && $dateobj_inicio->format('Y') == $dateobj_final->format('Y')) {
+	    			$fecha_evento = $dateobj_inicio->format('d') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
+	    		} else if ($dateobj_inicio->format('Y') == $dateobj_final->format('Y')) {
+	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
+	    		} else {
+	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_final->format('Y');
+	    		}
+
+
 	    	?>
 			<section class="block-image summit wow fadeInUp">
 			    <div class="img-overlay">
@@ -60,8 +94,8 @@ if (!class_exists('os_evento_widget_home')) :
 			            <label><?php _e('Próximo evento', 'os_evento_widget_home'); ?></label>
 			            <h1 class="mt-xs mb-sm"><?php echo $evento[0]->post_title; ?></h1>
 			            <div class="row">
-			            	<span class="col-xs-6 col-sm-4 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span>22-23 de octubre, 2017</span></span>
-			            	<span class="col-xs-6 col-sm-3 info-event"><span class="icon bbva-icon-pin mr-xs"></span><span><?php $evento_localizacion = get_post_meta($evento[0]->ID, 'evento_localizacion', true); echo $evento_localizacion[2]; ?></span></span>
+			            	<span class="col-xs-6 col-sm-4 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span><?php echo $fecha_evento; ?></span></span>
+			            	<span class="col-xs-6 col-sm-3 info-event"><span class="icon bbva-icon-pin mr-xs"></span><span><?php echo $evento_localizacion[2]; ?></span></span>
 			            </div>
 			            <div class="content-wrap">
 			                <p class="mt-md"><?php echo get_post_meta($evento[0]->ID, 'evento_descripcion_corta', true); ?></p>
