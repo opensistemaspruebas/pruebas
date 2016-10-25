@@ -40,7 +40,10 @@ function save_json_to_file($json, $post_type, $identificador, $json_type){
 }
 
 function post_to_json($post_id, $post_type){
+
 	$json = array("_id" => $post_id, "type" => $post_type);
+
+	$format = "Y-m-d";
 
 	// Campos del post a recoger en el json
 	switch ($post_type) {
@@ -49,7 +52,11 @@ function post_to_json($post_id, $post_type){
 			$json["descripcion"] = get_post_meta($post_id, 'abstract_destacado', true);
 			$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
 			$json["urlPublicacion"] = get_permalink($post_id);
-			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
+			
+			$fecha_publicacion = get_post_meta($post_id, 'publication_date', true);
+			$dateobj = DateTime::createFromFormat($format, $fecha_publicacion);
+			$json["fecha"] = $dateobj->format('Y/m/d') . ' - 00:00 AM';
+			
 			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
 			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
@@ -211,6 +218,12 @@ function fetch_autores($post_type, $order, $author){
 
 // Generar jsones al guardar un post
 function save_post_and_update($post_id) {
+
+	// si entramos a crear un post
+	if ('auto-draft' === get_post_status($post_id))
+		return false;
+
+
 	// Tipos de post para los que guardamos jsones
 	$valid_types = array("publicacion", "historia", "taller", "partners");
 

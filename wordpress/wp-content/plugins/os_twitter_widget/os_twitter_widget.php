@@ -84,8 +84,8 @@ if (!class_exists('OS_Twitter_Widget')) :
   		public function form($instance) {
 
 
-  			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : _('Últimos tweets', 'os_twitter_widget');
-  			$texto = !empty($instance['texto']) ? $instance['texto'] : _('Estos son los últimos twits sobre educación financiera en el mundo', 'os_twitter_widget');
+  			$titulo = !empty($instance['titulo']) ? $instance['titulo'] : __('Últimos tweets', 'os_twitter_widget');
+  			$texto = !empty($instance['texto']) ? $instance['texto'] : __('Estos son los últimos twits sobre educación financiera en el mundo', 'os_twitter_widget');
   			$url_canal = !empty($instance['url_canal']) ? $instance['url_canal'] : 'http://';
   			$externo4 = $instance['externo4'];
 
@@ -114,7 +114,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 	    function update($new_instance, $old_instance) {
 
 	    	$instance = array();
-	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : _('Últimos tweets', 'os_twitter_widget');
+	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : __('Últimos tweets', 'os_twitter_widget');
 	    	$instance['texto'] = (!empty( $new_instance['texto'])) ? strip_tags($new_instance['texto']) : __("Estos son los últimos twits sobre educación financiera en el mundo", "os_twitter_widget");
 	    	$instance['url_twitter'] = (!empty( $new_instance['url_twitter'])) ? strip_tags($new_instance['url_twitter']) : '';
 	    	$instance['externo4'] = strip_tags($new_instance['externo4']);

@@ -335,3 +335,24 @@ function my_save_extra_profile_fields( $user_id ) {
 }
 add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
 add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
+
+
+function get_fecha_formateada($publication_date) {
+	$meses = array(
+		__("Enero", "os_cards_widget_json"), 
+		__("Febrero", "os_cards_widget_json"), 
+		__("Marzo", "os_cards_widget_json"), 
+		__("Abril", "os_cards_widget_json"), 
+		__("Mayo", "os_cards_widget_json"), 
+		__("Junio", "os_cards_widget_json"), 
+		__("Julio", "os_cards_widget_json"), 
+		__("Agosto", "os_cards_widget_json"), 
+		__("Septiembre", "os_cards_widget_json"), 
+		__("Octubre", "os_cards_widget_json"), 
+		__("Noviembre", "os_cards_widget_json"), 
+		__("Diciembre", "os_cards_widget_json")
+	);
+	$format = "Y-m-d";
+	$dateobj = DateTime::createFromFormat($format, $publication_date);
+	return $dateobj->format('d') . ' ' . $meses[$dateobj->format('m') - 1] . ' ' . $dateobj->format('Y');
+}

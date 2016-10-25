@@ -297,7 +297,15 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
                 		<?php
 
                 			$post_title = $posts[$i]->post_title;
-                			$post_date = get_the_date('j F Y', $posts[$i]->ID);
+
+                			$post_type = $posts[$i]->post_type;
+                			if ($post_type == 'publicacion') {
+                				$fecha_publicacion = get_post_meta($posts[$i]->ID, 'publication_date', true);
+                				$post_date = get_fecha_formateada($fecha_publicacion);
+                			} else {
+                				$post_date = get_the_date('j F Y', $posts[$i]->ID);
+                			}
+
                 			$post_guid = get_permalink($posts[$i]->ID);
                 			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
                 			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
@@ -414,7 +422,15 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    		<?php 
 
 	                    			$post_title = $post->post_title;
-	                    			$post_date = get_the_date('j F Y', $post->ID);
+									
+									$post_type = $posts[$i]->post_type;
+									if ($post_type == 'publicacion') {
+										$fecha_publicacion = get_post_meta($posts[$i]->ID, 'publication_date', true);
+										$post_date = get_fecha_formateada($fecha_publicacion);
+									} else {
+										$post_date = get_the_date('j F Y', $posts[$i]->ID);
+									}
+	                    			
 	                    			$post_guid = get_permalink($post->ID);
 	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
 	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
@@ -531,7 +547,15 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
                 	        if (strlen($post_title) > 38) {
 								$post_title = substr($post_title,0,38) . "...";
 							}
-                			$post_date = get_the_date('j F Y', $post->ID);
+
+							$post_type = $posts[$i]->post_type;
+							if ($post_type == 'publicacion') {
+								$fecha_publicacion = get_post_meta($posts[$i]->ID, 'publication_date', true);
+								$post_date = get_fecha_formateada($fecha_publicacion);
+							} else {
+								$post_date = get_the_date('j F Y', $posts[$i]->ID);
+							}
+
                 			$post_guid = get_permalink($post->ID);
                 			$post_content = substr($post->post_content, 0, 140) . '...';
 	            			$imagen = get_post_meta($post->ID, 'imagenCard', true);

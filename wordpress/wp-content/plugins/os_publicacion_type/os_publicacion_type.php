@@ -329,7 +329,7 @@ function meta_box_publicacion_info($post) {
 
   <p>
     <label for="publication_date"><?php _e('Fecha de publicación', 'os_publicacion_type'); ?></label>
-    <input type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
+    <input required type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
   </p>
   <p>
     <label for="type"><?php _e('Tipo', 'os_publicacion_type'); ?></label>
