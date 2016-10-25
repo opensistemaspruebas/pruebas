@@ -5,7 +5,7 @@
 	Plugin URI: https://www.opensistemas.com/
 	Description: Crea un widget con el evento seleccionado
 	Version: 1.0
-	Author: Marta Oliver / Roberto Moreno
+	Author: Marta Oliver
 	Author URI: https://www.opensistemas.com/
 	License: GPLv2 or later
 	Text Domain: os_evento_widget_home
@@ -20,7 +20,7 @@ if (!class_exists('os_evento_widget_home')) :
 	    function __construct() {
 	        parent::__construct(
 	        	'os_evento_widget_home',
-	        	__('OS Impactos Widget', 'os_evento_widget_home'),
+	        	__('OS Evento Widget Home', 'os_evento_widget_home'),
 	        	array(
 	            	'description' => __('Widget con el evento seleccionado.', 'os_evento_widget_home')
 	        	)
