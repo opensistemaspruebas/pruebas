@@ -109,6 +109,7 @@ get_header(); ?>
                     </div>
                 </header>
                 <div class="row visible-xs">
+                    <?php if ((false) || (false) || ($pdf)) : ?>
                     <div class="icon-section col-xs-6">
                         <?php if (false) : ?>
                         <div class="card-icon icon-publication ml-xs">
@@ -132,6 +133,7 @@ get_header(); ?>
                         </div>
                         <?php endif; ?>
                     </div>
+                    <?php endif; ?>
                     <div class="share-rrss-section rrss-xs">
                         <span id="share-button" class="icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a data-wow-delay='0.4s' class='bbva-icon-twitter-circle twitter-icon mr-xs wow rollIn' title='<?php echo $title; ?>' href='https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>'' target='popup' onclick='window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')'></a>
                         <a data-wow-delay='0.3s' class='bbva-icon-facebook-circle facebook-icon mr-xs wow rollIn' href='https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>' target='popup' onclick='window.open(this.href,'name','width=600,height=500')'></a>
@@ -140,6 +142,7 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="mb-xs hidden-xs icon-section-desktop">
+                    <?php if ((false) || (false) || ($pdf)) : ?>
                     <div class="icon-section">
                         <?php if (false) : ?>
                         <div class="card-icon ml-xs">
@@ -163,6 +166,7 @@ get_header(); ?>
                         </div>
                         <?php endif; ?>
                     </div>
+                    <?php endif; ?>
                     <div class="share-rrss-section">
                         <p class="share-in"><?php _e('Compartir en','os_publicacion_type'); ?></p>
                         <div class="card-icon">
@@ -522,7 +526,7 @@ get_header(); ?>
                                         <h1 class="title nopadding"><?php the_title(); ?></h1>
                                     </div>
                                     <p class="main-card-data-container-description-wrapper"><?php echo $abstract_destacado; ?></p>
-                                    <a href="<?php the_permalink(); ?>" class="hidden-xs mb-xs readmore">Leer más</a>
+                                    <a href="<?php the_permalink(); ?>" class="hidden-xs mb-xs readmore"><?php _e('Leer más', 'os_publicacion_type'); ?></a>
                                     <footer>
                                         <?php if ((false) || (false) || ($pdf)) : ?>
                                         <div class="icon-row">
@@ -560,7 +564,7 @@ get_header(); ?>
                 <footer>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las publicaciones</a>
+                            <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
                         </div>
                     </div>
                 </footer>
