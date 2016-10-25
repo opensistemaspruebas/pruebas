@@ -220,10 +220,10 @@ if (!class_exists('OS_Evento_Type')) {
 			$evento_highlights = get_post_meta($post->ID, 'evento_highlights', true);
 			
 			?>
-			<h1><?php _e('Descripción corta', 'os_evento_type'); ?></h1>
+			<h1><?php _e('Descripción corta (*)', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es el texto introductorio que aparecerá en la tarjeta que muestra el resumen del evento.', 'os_evento_type'); ?></p>
-			<label class="screen-reader-text" for="evento_descripcion_corta"><?php _e('Descripción corta del evento (*)*', 'os_evento_type'); ?></label>
-			<textarea rows="1" cols="40" maxlength="280" name="evento_descripcion_corta" id="evento_descripcion_corta"><?php echo $evento_descripcion_corta; ?></textarea>
+			<label class="screen-reader-text" for="evento_descripcion_corta"><?php _e('Descripción corta del evento', 'os_evento_type'); ?></label>
+			<textarea required rows="1" cols="40" maxlength="280" name="evento_descripcion_corta" id="evento_descripcion_corta"><?php echo $evento_descripcion_corta; ?></textarea>
 			<span class="description">(<?php _e('*Campo obligatorio. Máx. 300 carácteres', 'os_evento_type'); ?>)</span>
 			<h1><?php _e('Descripción larga', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es el texto descriptivo que aparecerá en la página de detalle del evento.', 'os_evento_type'); ?></p>

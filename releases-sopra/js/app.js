@@ -573,6 +573,15 @@ var menuSearch = function($) {
     }
 };
 
+setProgressBarLine('#lineContainer', getConfig(70), 0.8);
+setProgressBarLine('#lineContainer2', getConfig(6), 0.75);
+setProgressBarCircle('#circleContainer', getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
+setProgressBarCircle('#circleContainer2', getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
+setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
+setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
+setProgressBarCircle('#circleContainer5', getCircleConfig(300, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
+setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
+
 var momentjs = function ($) {
 
   var today = moment();
@@ -715,76 +724,6 @@ var popover = function ($) {
     $('[data-popover-id=' + id + ']').toggleClass('hidden');
     $('.share [data-popover-id=' + id + ']').toggleClass('hidden');
   });
-};
-
-var progressbar = function ($) {
-
-  function getConfig(max) {
-    return {
-      strokeWidth: 1,
-      easing: 'easeInOut',
-      duration: 1400,
-      color: '#004481',
-      trailColor: '#F4F4F4',
-      trailWidth: 1,
-      text: {
-        style: {
-          color: '#121212',
-          transform: null,
-        },
-        autoStyleContainer: false,
-      },
-      step: function (state, bar) {
-        bar.setText('<div class="progressNumber">' + Math.round(bar.value() * max)
-        + '</div><div class="progressSuffix ml-xs">MM</div>');
-      },
-    };
-  };
-
-  function getCircleConfig(max, color, trailColor, suffix, subColor, subtext) {
-    return {
-      strokeWidth: 4,
-      easing: 'easeInOut',
-      duration: 1400,
-      color: color,
-      trailColor: trailColor,
-      trailWidth: 4,
-      text: {
-        autoStyleContainer: false,
-      },
-      step: function (state, circle) {
-        circle.setText('<div class="circleNumber">' + Math.round(circle.value() * max)
-        + '<label>' + suffix + '</label></div>' +
-        '<div class="circleSubText ' + subColor + '">' + subtext + '</div>');
-      },
-    };
-  };
-
-  function setProgressBarLine(identifier, config, animate) {
-      try {
-          var bar = new ProgressBar.Line(identifier, config);
-          bar.animate(animate);
-      }
-      catch (e) {
-      }
-  }
-  function setProgressBarCircle(identifier, config, animate) {
-      try {
-          var circle = new ProgressBar.Circle(identifier, config);
-          circle.animate(animate);
-      }
-      catch (e) {
-      }
-  }
-  setProgressBarLine('#lineContainer', getConfig(70), 0.8);
-  setProgressBarLine('#lineContainer2', getConfig(6), 0.75);
-
-  setProgressBarCircle('#circleContainer', getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
-  setProgressBarCircle('#circleContainer2', getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
-  setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
-  setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
-  setProgressBarCircle('#circleContainer5', getCircleConfig(300, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
-  setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
 };
 
 var publishingFilter = function($) {
@@ -1643,7 +1582,6 @@ jQuery(document).ready(function ($) {
     animationWow($);
     animationWowAppear($);
     cookies($);
-    progressbar($);
     popover($);
     googleMaps($);
     scroll($);
