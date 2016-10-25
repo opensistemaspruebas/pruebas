@@ -96,8 +96,11 @@
                         <div class="col-xs-12 col-sm-4 secondary-data">
                         <?php if (!empty($correo_electronico) || !empty($url_web) || !empty($twitter) || !empty($linkedin)) : ?>
                             <div class="contacts-wrapper">
+                            <?php if (!empty($linkedin)) : ?>
+                                <a target="_blank" href="<?php echo $linkedin; ?>"><span class="bbva-icon-linkedin2"></span></a>
+                            <?php endif; ?>
                             <?php if (!empty($correo_electronico)) : ?>
-                                <a target="_top" href="mailto:<?php echo $correo_electronico; ?>" data-rel="external"><span class="bbva-icon-mail"></span></a>
+                                <a target="_top" href="mailto:<?php echo $correo_electronico; ?>" data-rel="external"><span class="bbva-icon-ico_email"></span></a>
                             <?php endif; ?>
                             <?php if (!empty($url_web)) : ?>
                                 <a target="_blank" href="<?php echo $url_web; ?>"><span class="bbva-icon-web2"></span></a>
@@ -105,9 +108,7 @@
                             <?php if (!empty($twitter)) : ?>
                                 <a target="_blank" href="<?php echo $twitter; ?>"><span class="bbva-icon-twitter"></span></a>
                             <?php endif; ?>
-                            <?php if (!empty($linkedin)) : ?>
-                                <a target="_blank" href="<?php echo $linkedin; ?>"><span class="bbva-icon-linkedin2"></span></a>
-                            <?php endif; ?>
+                            
                         </div>
                         <?php endif; ?>
                             <!-- consultant-secondary-data -->
