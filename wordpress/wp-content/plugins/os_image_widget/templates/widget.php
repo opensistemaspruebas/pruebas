@@ -18,6 +18,8 @@
     </div>
     <div class="container">
         <div class="block-content-center background-container">
+            <div class="home-title-layer home-title-layer-one"></div>
+            <div class="home-title-layer home-title-layer-two"></div>
             <h2><?php echo $title; ?></h2>
             <p><?php echo strip_tags($text); ?></p>
 			<div class="container-button">
