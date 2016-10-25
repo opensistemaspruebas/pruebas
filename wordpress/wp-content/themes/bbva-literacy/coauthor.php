@@ -106,7 +106,7 @@
                                 <a target="_blank" href="<?php echo $url_web; ?>"><span class="bbva-icon-web2"></span></a>
                             <?php endif; ?>
                             <?php if (!empty($twitter)) : ?>
-                                <a target="_blank" href="<?php echo $twitter; ?>"><span class="bbva-icon-twitter"></span></a>
+                                <a target="_blank" href="<?php echo $twitter; ?>"><span class="bbva-icon-twitter2"></span></a>
                             <?php endif; ?>
                             
                         </div>

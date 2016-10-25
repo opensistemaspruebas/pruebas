@@ -148,12 +148,12 @@ if (!class_exists('slider_widget')) :
             <div class="slider">
                 <div id="home-slider" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#home-slider" data-slide-to="0" class=""><span class="bbva-icon-commerce"></span></li>
-                        <li data-target="#home-slider" data-slide-to="1" class="active"><span class="bbva-icon-cash"></span></li>
+                        <li data-target="#home-slider" data-slide-to="0" class="active"><span class="bbva-icon-commerce"></span></li>
+                        <li data-target="#home-slider" data-slide-to="1" class=""><span class="bbva-icon-cash"></span></li>
                         <li data-target="#home-slider" data-slide-to="2" class=""><span class="bbva-icon-loan"></span></li>
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <article class="item">
+                        <article class="item active">
                             <div class="spotlight spotlight-dark-blue">
                                 <div class="film-one"></div>
                                 <div class="film-two"></div>
@@ -171,8 +171,8 @@ if (!class_exists('slider_widget')) :
                                 </div>
                             </div>
                         </article>
-                        <article class="item active">
-                            <div class="spotlight spotlight-blue">
+                        <article class="item">
+                            <div class="spotlight spotlight-dark-blue">
                                 <div class="film-one"></div>
                                 <div class="film-two"></div>
                                 <div class="film-three"></div>
@@ -184,13 +184,13 @@ if (!class_exists('slider_widget')) :
                                     <div class="caption-container">
                                         <h1><?php echo $instance['title2']; ?></h1>
                                         <p><?php echo $instance['descr2']; ?></p>
-                                        <a <?php if ($instance['externo2'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink2']; ?>" class="btn btn-bbva-aqua"><?php echo $instance['tlink2']; ?></a>
+                                        <a <?php if ($instance['externo2'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink2']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink2']; ?></a>
                                     </div>
                                 </div>
                             </div>
                         </article>
                         <article class="item">
-                            <div class="spotlight spotlight-aqua">
+                            <div class="spotlight spotlight-dark-blue">
                                 <div class="film-one"></div>
                                 <div class="film-two"></div>
                                 <div class="film-three"></div>
@@ -202,7 +202,7 @@ if (!class_exists('slider_widget')) :
                                     <div class="caption-container">
                                         <h1><?php echo $instance['title3']; ?></h1>
                                         <p><?php echo $instance['descr3']; ?></p>
-                                        <a <?php if ($instance['externo3'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink3']; ?>" class="btn btn-bbva-dark-blue"><?php echo $instance['tlink3']; ?></a>
+                                        <a <?php if ($instance['externo3'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink3']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink3']; ?></a>
                                     </div>
                                 </div>
                             </div>
