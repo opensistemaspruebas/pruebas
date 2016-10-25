@@ -78,7 +78,7 @@
 
  <!-- consultant-main-data -->
                  <section class="consultant-main-data-wrapper">
-                    <?php if (!empty($imagen_perfil)) : ?>
+                    <?php if (!empty($imagen_perfil) && !empty($imagen_cabecera)) : ?>
                         <img class="img-responsive consultant-pic" src="<?php echo $imagen_perfil; ?>" alt="" />
                      <?php endif; ?>
                         <h1><?php echo $nombre; ?></h1>
