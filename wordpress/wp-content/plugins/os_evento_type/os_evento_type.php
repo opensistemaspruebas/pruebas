@@ -545,7 +545,6 @@ if (!class_exists('OS_Evento_Type')) {
 				update_post_meta($post_id, 'evento_persona_de_contacto', $_POST['evento_persona_de_contacto']);
 			}
 
-			error_log(print_r($_POST['evento_elemento_programa'], true));
 			if (isset($_POST['evento_elemento_programa'])) {
 	            $evento_elemento_programa = $_POST['evento_elemento_programa'];
 	            $evento_elemento_programa_save = array();
