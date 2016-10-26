@@ -34,6 +34,7 @@ jQuery(document).ready(function() {
 	        		var usuario = '@' + result.retweeted_status.user.screen_name;
 	        		var imagen = result.retweeted_status.user.profile_image_url_https;
 	        		var nombre = result.retweeted_status.user.name;
+	        		var nombreRetweet = result.user.name;
 	        	}
 
 
@@ -49,8 +50,11 @@ jQuery(document).ready(function() {
 	        		object_name_twitter.septiembre,
 	        		object_name_twitter.octubre,
 	        		object_name_twitter.noviembre,
-	        		object_name_twitter.diciembre,
+	        		object_name_twitter.diciembre
 	        	];
+
+	        	var compartirEn = object_name_twitter.compartir;
+	        	var urlRedesSociales = 'https://twitter.com/' + nombre + '/status/' + id; 
 
 
 	        	fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()];
@@ -61,7 +65,16 @@ jQuery(document).ready(function() {
 	        	texto = texto.replace(/@(\S*)/g,'<b>@$1</b>');
 	        	texto = texto.replace(/http(\S*)/g,'<b>http$1</b>');
 
-	        	jQuery('.row.tweets-container').append('<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4"> <section class="row tweet"> <div class="image-container nopadding col-xs-3"> <img src="' + imagen + '" alt=""> </div> <div class="data-container col-xs-9"> <div class="user-info"> <span class="user-name">' + nombre + '</span> <span class="account">' + usuario + '</span> </div> <p class="tweet-content mt-xxs mb-xxs"> ' + texto + ' </p> <div class="row statistics"> <div class="col-xs-2 col-sm-2 nopadding likes"> <a target="popup" href="https://twitter.com/intent/like?tweet_id=' + id + '&&original_referer=https://dev.twitter.com" onclick="window.open(this.href,\'name\',\'width=600,height=500\')"><span class="bbva-icon-favorite"></span></a> <span>' + likes + '</span> </div> <div class="col-xs-1 col-sm-2 nopadding share"> <a target="popup" href="https://twitter.com/intent/retweet?tweet_id=' + id + '&&original_referer=https://dev.twitter.com" onclick="window.open(this.href,\'name\',\'width=600,height=500\')"><span class="bbva-icon-share"></span></a> </div> <div class="col-xs-9 col-sm-8 nopadding date"> <span>' + fecha + '</span> </div> </div> </div> </section> </div>');
+	        	if (result.retweeted_status == undefined){
+
+	        		jQuery('.row.tweets-container').append('<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4"><section class="row tweet"><div class="col-xs-12 retweet-row"></div><div class="image-container nopadding col-xs-3"><img src="' + imagen + '" alt="" /></div><div class="data-container col-xs-9"><div class="user-info"><span class="user-name">' + nombre + '</span><span class="account">' + usuario + '</span></div><p class="tweet-content mt-xxs mb-xxs">' + texto + '</p><div class="row statistics"><div class="likes"><a target="_blank" href="https://twitter.com/intent/like?tweet_id=' + id + '&&original_referer=https://dev.twitter.com" class="bbva-icon-favorite"></a><span class="tweet-like-count">' + likes + '</span></div><div class="share"> <span class="bbva-icon-share pop-div-twitter" data-popover-id="' + i + '"></span> </div><div class="date"> <span>' + fecha + '</span> </div></div><div class="hidden popover-twitter arrow_box" data-popover-id="' + i + '"><label>' + compartirEn + '</label><ul class="rrss-links"><li><a target="_blank" href="https://twitter.com/intent/retweet?tweet_id=' + id + '&&original_referer=https://dev.twitter.com">Twitter</a></li><li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=' + urlRedesSociales + '">Facebook</a></li><li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=' + urlRedesSociales + '">Linkedin</a></li><li><a target="_blank" href="#">Tumblr</a></li></ul></div></div></section></div>');
+	        	}
+	        	else{
+
+	        		jQuery('.row.tweets-container').append('<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4"><section class="row tweet"><div class="col-xs-12 retweet-row"><span class="retweet-icon fa fa-retweet"></span><p> ' + nombreRetweet + ' Retweeted</p></div><div class="image-container nopadding col-xs-3"><img src="' + imagen + '" alt="" /></div><div class="data-container col-xs-9"><div class="user-info"><span class="user-name">' + nombre + '</span><span class="account">' + usuario + '</span></div><p class="tweet-content mt-xxs mb-xxs">' + texto + '</p><div class="row statistics"><div class="likes"><a target="_blank" href="https://twitter.com/intent/like?tweet_id=' + id + '&&original_referer=https://dev.twitter.com" class="bbva-icon-favorite"></a><span class="tweet-like-count">' + likes + '</span></div><div class="share"> <span class="bbva-icon-share pop-div-twitter" data-popover-id="' + i + '"></span> </div><div class="date"> <span>' + fecha + '</span> </div></div><div class="hidden popover-twitter arrow_box" data-popover-id="' + i + '"><label>' + compartirEn + '</label><ul class="rrss-links"><li><a target="_blank" href="https://twitter.com/intent/retweet?tweet_id=' + id + '&&original_referer=https://dev.twitter.com">Twitter</a></li><li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=' + urlRedesSociales + '">Facebook</a></li><li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=' + urlRedesSociales + '&title=wwwww&summary=wwwwwweeeeeeee&source=bbva">Linkedin</a></li><li><a target="_blank" href="#">Tumblr</a></li></ul></div></div></section></div>');
+	        	}
+
+	        	
 
 	        });
 		

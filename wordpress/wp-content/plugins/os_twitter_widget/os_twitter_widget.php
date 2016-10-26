@@ -26,6 +26,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 	        	)
 	        );
 	        wp_register_script('os_twitter_widget_js', plugins_url('js/os_twitter_widget.js' , __FILE__), array('jquery'));
+	       
 	        $translation_array = array(
 				'enero' => __('Enero', 'os_twitter_widget'),
 				'febrero' => __('Febrero', 'os_twitter_widget'),
@@ -39,7 +40,7 @@ if (!class_exists('OS_Twitter_Widget')) :
 				'octubre' => __('Octubre', 'os_twitter_widget'),
 				'noviembre' => __('Noviembre', 'os_twitter_widget'),
 				'diciembre' => __('Diciembre', 'os_twitter_widget'),
-				
+				'compartir' => __('Compartir en:', 'os_twitter_widget')
 			);
 			wp_localize_script('os_twitter_widget_js', 'object_name_twitter', $translation_array);
             wp_enqueue_script('os_twitter_widget_js');
@@ -56,27 +57,30 @@ if (!class_exists('OS_Twitter_Widget')) :
 	    	$externo4 = $instance['externo4'];
 
 	    	?>
-	    	<section class="latests-tweets pt-xl wow fadeInUp">
-			    <div class="container">
-			        <header>
-			            <p class="icon bbva-icon-twitter"></p>
-			            <h1 class="pt-xs pb-sm"><?php echo $titulo; ?></h1>
-			            <p><?php echo $texto; ?></p>
-			        </header>
-			        <section class="container-fluid mt-md mb-md">
-			            <div class="row tweets-container">
 
-			            </div>
-			        </section>
-			        <footer>
-			            <div class="row">
-			                <div class="col-md-12 text-center">
-			                    <a <?php if ($externo4 == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?> <span class="bbva-icon-link_external"></span></a>
-			                </div>
-			            </div>
-			        </footer>
-			    </div>
-			</section>
+	    	<section class="latests-tweets pt-xl wow fadeInUp">
+                <div class="container">
+                    <header>
+                        <p class="icon bbva-icon-twitter"></p>
+                        <h1 class="pt-xs pb-sm"><?php echo $titulo; ?></h1>
+                        <p><?php echo $texto; ?></p>
+                    </header>
+                    <section class="container-fluid mt-md mb-md">
+                        <div class="row tweets-container">
+
+
+                       </div>
+                    </section>
+                    <footer>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a <?php if ($externo4 == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?><span class="bbva-icon-link_external"></span></a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </section>
+
 	    	<?php
 	    }
 
