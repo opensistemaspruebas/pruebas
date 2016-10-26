@@ -503,6 +503,45 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	    	<?php endif; ?>
 	    </div>
 	</article>
+	<?php if (empty($author_name)): ?>
+		<div class="filter-mobile closed hidden-sm hidden-md hidden-lg">
+		    <div class="container">
+		        <div class="close-filter-mobile">
+		            <span class="bbva-icon-close"></span>
+		        </div>
+		        <section class="content">
+		            <div id="publishing-filter-mobile" class="publishing-filter-wrapper-mobile">
+		                <header>
+		                    <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input">
+		                    <div class="selected-tags-container"></div>
+		                    <div class="button-filter">
+		                        <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Filtrar', 'os_filtro_widget'); ?></a>
+		                    </div>
+		                </header>
+		                <section>
+		                    <div class="row available-tags-wrapper">
+		                        <div class="col-xs-12">
+		                            <p class="text-capitalize column-name"><?php _e('tags', 'os_filtro_widget'); ?> (<span class="tag-container-counter">0</span>)</p>
+		                            <div class="tag-container">
+		                            </div>
+		                        </div>
+		                        <div class="col-xs-12">
+		                            <p class="text-capitalize column-name"><?php _e('Autores', 'os_filtro_widget'); ?> (<span class="author-container-counter">0</span>)</p>
+		                            <div class="author-container">
+		                            </div>
+		                        </div>
+		                        <div class="col-xs-12">
+		                            <p class="text-capitalize column-name"><?php _e('ámbito geográfico', 'os_filtro_widget'); ?> (<span class="geo-container-counter">0</span>)</p>
+		                            <div class="geo-container">
+		                            </div>
+		                        </div>
+		                    </div>
+		                </section>
+		            </div>
+		        </section>
+		    </div>
+		</div>
+	<?php endif; ?>
 	<?php
 }
 
@@ -560,9 +599,15 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
                 			$post_content = substr($post->post_content, 0, 140) . '...';
 	            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
 
+	            			$videoIntro_url = get_post_meta($post->ID,'videoIntro-url',true);
+
        						$style = '';
        						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
        							$style = 'style="display: none;';
+
+       						$subtitulo = get_post_meta($post->ID,'subtitulo',true);
+    						$texto_destacado = get_post_meta($post->ID,'texto-destacado',true);
+
 
 	                	?>
 	                	<?php $grid = $order[$i % 3]; ?>
@@ -595,19 +640,19 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 			                            
 			                            <footer>
 			                            	<div class="icon-row">
-				                            	<?php if (false) : ?>
+				                            	<?php if (!empty($post_content) || !empty($subtitulo) || !empty($texto_destacado)) : ?>
 								                    <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
 								                        <div class="triangle triangle-up-left"></div>
 								                        <div class="triangle triangle-down-right"></div>
 								                    </div>
 				                                <?php endif; ?>
-				                                <?php if (false) :?>
+				                                <?php if (!empty($videoIntro_url)) :?>
 								                    <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
 								                        <div class="triangle triangle-up-left"></div>
 								                        <div class="triangle triangle-down-right"></div>
 								                    </div>
 												<?php endif; ?>
-				                                <?php if ($pdf) : ?>
+				                                <?php if (false) : ?>
 								                    <div class="card-icon"><span class="icon bbva-icon-chat2"></span>
 								                        <div class="triangle triangle-up-left"></div>
 								                        <div class="triangle triangle-down-right"></div>
@@ -643,15 +688,15 @@ function imprime_links_ordenacion($orden) {
         <a href="#"><span class="bbva-icon-filter"></span> <?php _e('filtrar', 'os_cards_widget_json'); ?></a>
     </div>
     <div class="sort-items-container">
-        <a data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="#" class="selected">
+        <a data-order-filter="date desc" data-order="DESC" class="<?php if ($orden == 'DESC') echo 'selected';?>" href="" class="selected">
             <span class="icon bbva-icon-arrow arrow arrowUp"></span>
             <span class="text"><?php _e('Más recientes', 'os_cards_widget_json'); ?></span>
         </a>
-        <a data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="#" class="">
+        <a data-order-filter="date asc" data-order="ASC" class="<?php if ($orden == 'ASC') echo 'selected';?>" href="" class="">
             <span class="icon bbva-icon-arrow arrow arrowDown"></span>
             <span class="text"><?php _e('Más antiguos', 'os_cards_widget_json'); ?></span>
         </a>
-        <a data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="#" class="">
+        <a data-order-filter="date asc" data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="" class="">
             <span class="icon bbva-icon-view extra-space "></span>
             <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
         </a>

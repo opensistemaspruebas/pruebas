@@ -69,21 +69,21 @@
                   </header>
                   <div class="row visible-xs">
                     <div class="icon-section col-xs-6">
-                        <?php if (true) : ?>
+                        <?php if (!empty($post_content) || !empty($subtitulo) || !empty($texto_destacado)) : ?>
                           <div class="card-icon icon-publication ml-xs">
                               <span class="icon bbva-icon-quote2"></span>
                               <div class="triangle triangle-up-left"></div>
                               <div class="triangle triangle-down-right"></div>
                           </div>
                         <?php endif; ?>
-                        <?php if (true) : ?>
+                        <?php if (!empty($videoIntro_url)) : ?>
                           <div class="card-icon icon-publication ml-xs">
                               <span class="icon bbva-icon-audio2"></span>
                               <div class="triangle triangle-up-left"></div>
                               <div class="triangle triangle-down-right"></div>
                           </div>
                         <?php endif; ?>
-                        <?php if ($videoFinal_url !== '' || true) : ?>
+                        <?php if (false) : ?>
                           <div class="card-icon icon-publication ml-xs">
                               <span class="icon bbva-icon-chat2"></span>
                               <div class="triangle triangle-up-left"></div>
@@ -95,21 +95,21 @@
                   </div>
                   <div class="mb-xs hidden-xs icon-section-desktop">
                     <div class="icon-section">
-                        <?php if (true) : ?>
+                        <?php if (!empty($post_content) || !empty($subtitulo) || !empty($texto_destacado)) : ?>
                           <div class="card-icon ml-xs">
                               <span class="icon bbva-icon-quote2"></span>
                               <div class="triangle triangle-up-left"></div>
                               <div class="triangle triangle-down-right"></div>
                           </div>
                         <?php endif; ?>
-                        <?php if (true) : ?>
+                        <?php if (!empty($videoIntro_url)) : ?>
                           <div class="card-icon ml-xs">
                               <span class="icon bbva-icon-audio2"></span>
                               <div class="triangle triangle-up-left"></div>
                               <div class="triangle triangle-down-right"></div>
                           </div>
                         <?php endif; ?>
-                        <?php if ($videoFinal_url !== '' || true) : ?>
+                        <?php if (false) : ?>
                           <div class="card-icon ml-xs">
                               <span class="icon bbva-icon-chat2"></span>
                               <div class="triangle triangle-up-left"></div>
@@ -140,31 +140,33 @@
               </div>
           </div>
           <section class="content-section">
-              <div class="video-container">
-                  <video src="<?php echo $videoIntro_url; ?>" autoplay="" loop="loop" preload="auto"></video>
-                  <?php if($videoFinal_url !== ''): ?>
-                  <div class="video-text">
-                      <button type="button" class="play-button" name="button" data-toggle="modal" data-target="#publicationVideo">
-                          <span class="icon-play bbva-icon-play"></span>
-                      </button>
-                  </div>
-                  <?php endif; ?>
-                  <!-- Modal -->
-                  <div class="modal fade" id="publicationVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                              </div>
-                              <div class="modal-body">
-                                  <div class="embed-responsive embed-responsive-16by9">
-                                      <iframe class="embed-responsive-item" src="<?php echo $videoFinal_url; ?>"></iframe>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            <?php if (!empty($videoIntro_url)) : ?>
+                <div class="video-container">
+                    <video src="<?php echo $videoIntro_url; ?>" autoplay="" loop="loop" preload="auto"></video>
+                    <?php if($videoFinal_url !== ''): ?>
+                    <div class="video-text">
+                        <button type="button" class="play-button" name="button" data-toggle="modal" data-target="#publicationVideo">
+                            <span class="icon-play bbva-icon-play"></span>
+                        </button>
+                    </div>
+                    <?php endif; ?>
+                    <!-- Modal -->
+                    <div class="modal fade" id="publicationVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="<?php echo $videoFinal_url; ?>"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <?php endif; ?>
               <div class="container content-wrap content-text">
                   <h1 class="mt-xs"><?php echo $subtitulo; ?></h1>
                   <h2><?php echo $texto_destacado; ?></h2>
