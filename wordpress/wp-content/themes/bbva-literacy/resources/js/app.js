@@ -573,14 +573,14 @@ var menuSearch = function($) {
     }
 };
 
-setProgressBarLine('#lineContainer', getConfig(70), 0.8);
+/*setProgressBarLine('#lineContainer', getConfig(70), 0.8);
 setProgressBarLine('#lineContainer2', getConfig(6), 0.75);
 setProgressBarCircle('#circleContainer', getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
 setProgressBarCircle('#circleContainer2', getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
 setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
 setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
 setProgressBarCircle('#circleContainer5', getCircleConfig(300, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
-setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
+setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);*/
 
 var momentjs = function ($) {
 
