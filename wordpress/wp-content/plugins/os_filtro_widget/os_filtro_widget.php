@@ -86,7 +86,8 @@ if (!class_exists('OS_Filtro_Widget')) :
 			<div id="sortLinks"></div>
 			<div id="results"></div>			
 			<div id="moreLink"></div>-->
-
+			<input type="hidden" name="start" id="start" value="0">
+			<input type="hidden" name="inputSortBy" id="inputSortBy" value="date desc">
 			<a class="filter show-publishing-filter hidden-xs" href="#" data-toggle="modal" data-target=".publishing-filter-modal"><span class="bbva-icon-filter"></span><span><?php _e('Filtrar', 'os_filtro_widget'); ?></span></a>
 			<div class="options-filter">
 			    <div id="publishing-filter" class="content publishing-filter-wrapper hidden filter-container">

@@ -1,6 +1,9 @@
 // Ver mas publicaciones
 jQuery(document).on("click", "#readmore", function(event) {
 	event.preventDefault();
+	if (buscando) {
+		return;
+	}
 	var tipo = jQuery("#tipo").val();
 	var orden = jQuery("#orden").val();
 	var path = "/wp-content/jsons/" + tipo + "/";
