@@ -14,6 +14,9 @@ jQuery(document).on("click", "#readmore", function(event) {
 // Cambiar el orden
 jQuery(document).on("click", '.sort-items-container a', function(event) {
 	event.preventDefault();
+	if (buscando) {
+		return;
+	}
 	var tipo = jQuery("#tipo").val();
 	var orden = jQuery(this).attr("data-order");
 	jQuery("#orden").val(orden);

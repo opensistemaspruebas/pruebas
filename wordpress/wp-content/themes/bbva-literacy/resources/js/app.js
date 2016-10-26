@@ -465,7 +465,7 @@ var menuSearch = function($) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
-            emptyData();
+            //emptyData();
         }
     }
 
@@ -823,7 +823,7 @@ var publishingFilter = function($) {
 			$btnFilter.show();
 			$sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
-            emptyData();
+            //emptyData();
         }
     }
 
