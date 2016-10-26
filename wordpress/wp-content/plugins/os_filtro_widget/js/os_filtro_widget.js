@@ -269,6 +269,12 @@ function buscar() {
 
 	start = jQuery("input#start").val();
 	order = jQuery("input#sortBy").val();
+	if (order == 'destacados') {
+		order = 'date desc';
+		tipo = 'publicacion_destacada';
+	} else {
+		tipo = 'publicacion';
+	}
 	
 	query_paises="";
 	query_autores="";
@@ -290,9 +296,9 @@ function buscar() {
 
 	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
 	if (filter) {
-	    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'publicacion\')(or content_language:\'' + object_name.lang + '\'))';
+	    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\'))';
 	} else {
-		url_buscador += '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name.lang + '\'))';
+		url_buscador += '&fq=(and(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\'))';
 	}
 	url_buscador += '&start=' + start + '&sort=' + order;
 
@@ -311,7 +317,8 @@ function buscar() {
 	        	jQuery('a#readmore').show();
 	        }
 	    } else {
-	        jQuery('.cards-grid .container div.row').first().html(object_name.no_results);
+	        jQuery('.cards-grid .container div.row').first().html('<p>' + object_name.no_results + '</p>');
+	        jQuery('a#readmore').hide();
 	    }
 	}, 'json');
 }

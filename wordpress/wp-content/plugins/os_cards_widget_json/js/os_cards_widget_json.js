@@ -19,6 +19,8 @@ jQuery(document).on("click", '.sort-items-container a', function(event) {
 	}
 	var tipo = jQuery("#tipo").val();
 	var orden = jQuery(this).attr("data-order");
+	orden_filter = jQuery(this).attr("data-order-filter");
+	jQuery("input#sortBy").val(orden_filter);
 	jQuery("#orden").val(orden);
 	var path = "/wp-content/jsons/" + tipo + "/";
 	jQuery('.cards-grid .container div.row').first().html('');

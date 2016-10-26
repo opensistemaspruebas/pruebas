@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
 
+	buscando = false;
+
+
 	numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
 	if (numero_trabajos_ocultos == 0) {
 	    jQuery('a#readmore_trabajos').remove();

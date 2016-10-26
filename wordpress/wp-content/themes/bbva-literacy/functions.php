@@ -65,6 +65,7 @@ function add_search_meta() {
     			$autores[] = getCleanedString($name);
     		}
     	}
+    	$destacada = get_post_meta($p->ID, 'destacada', true);
     	if ($post_type == 'publicacion') {
     		$abstract_destacado = get_post_meta($p->ID, 'abstract_destacado', true);
     		$abstract_contenido = get_post_meta($p->ID, 'abstract_contenido', true);
@@ -85,7 +86,7 @@ function add_search_meta() {
         <meta name="wp_text_array" content="<?php echo implode($autores, ',');  ?>"/>
         <meta name="wp_double_array" content="<?php echo implode($attrs, ','); ?>"/>
         <meta name="wp_date" content="<?php echo $fecha; ?>"/>
-        <meta name="wp_topic" content="<?php echo get_post_type(); ?>"/>
+        <meta name="wp_topic" content="<?php echo get_post_type(); if ($destacada) echo '_destacada'; ?>"/>
         <meta name="image_src" content="<?php echo str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) ); ?>"/>
     <?php endif;
 }
