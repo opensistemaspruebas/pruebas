@@ -54,8 +54,9 @@ get_header(); ?>
     $tags = wp_get_post_terms(get_the_ID(), 'category', array("fields" => "all"));
 
     $ambitos_geograficos = wp_get_post_terms(get_the_ID(), 'ambito_geografico', array("fields" => "all"));
-    if (!empty($ambitos_geograficos)) {
-        $ambito_geografico = $ambitos_geograficos[0]->name;
+    $ambitos_geograficos_aux = wp_get_post_terms(get_the_ID(), 'ambito_geografico', array("fields" => "names"));
+    if (!empty($ambitos_geograficos_aux)) {
+        $ambito_geografico = implode(', ', $ambitos_geograficos_aux);
     } else {
         $ambito_geografico = '';
     }
