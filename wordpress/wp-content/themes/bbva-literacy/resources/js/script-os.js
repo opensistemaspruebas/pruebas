@@ -1,11 +1,5 @@
 jQuery(document).ready(function($) {
 
-	$("select#language-header").change(function() {
-		console.log("cambio");
-		var val = jQuery(this).find(":selected").val();
-		window.location.href = val;
-	});
-	
 	numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
 	if (numero_trabajos_ocultos == 0) {
 	    jQuery('a#readmore_trabajos').remove();

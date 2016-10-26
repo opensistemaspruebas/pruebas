@@ -246,10 +246,12 @@ function languages_list_header_responsive(){
     ?>
 	<div class="visible-xs">
 	    <div class="languages-menu pb-lg pl-lg">
+	    	<?php $i = 0; ?>
 	    	<?php foreach ($languages as $l) : ?>
-		    	<a role="button" class="languages-mobile-button <?php if ($l['active']) echo 'active'; else echo 'ml-lg'; ?>">
+		    	<a href="<?php echo $l['url']; ?>" role="button" class="languages-mobile-button <?php if ($l['active']) echo 'active';?> <?php if ($i == 1) echo 'ml-lg'; ?>">
 		    		<span class="language"><?php echo $l['native_name']; ?></span>
 		    	</a>
+		    	<?php $i++; ?>
 	    	<?php endforeach; ?>
 	    </div>
 	</div>

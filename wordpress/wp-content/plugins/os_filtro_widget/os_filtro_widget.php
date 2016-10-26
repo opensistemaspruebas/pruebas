@@ -144,6 +144,7 @@ if (!class_exists('OS_Filtro_Widget')) :
 		        	'sort_by_asc_date' => __('Más antiguos', 'os_filtro_widget'),
 		        	'sort_by_desc_date' => __('Más recientes', 'os_filtro_widget'),
 		        	'sort_by_popular' => __('Más leídos', 'os_filtro_widget'),
+		        	'lang' => str_replace('_', '-', get_locale()),
 		      	);
 		        wp_localize_script('os_filtro_widget_js', 'object_name', $translation_array );
 	            wp_enqueue_script('os_filtro_widget_js');
