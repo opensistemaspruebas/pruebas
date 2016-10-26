@@ -25,8 +25,10 @@ if (!class_exists('os_evento_widget_home')) :
 	            	'description' => __('Widget con el evento seleccionado.', 'os_evento_widget_home')
 	        	)
 	        );
-	        wp_enqueue_script('os_evento_widget_home-js', plugins_url( 'js/os_evento_widget_home.js' , __FILE__ ), array('jquery'));
-	        wp_enqueue_style('os_evento_widget_home-css', plugin_dir_url( __FILE__ ) . 'css/os_evento_widget_home.css' ); 
+	        if (is_admin()) {
+		        wp_enqueue_script('os_evento_widget_home-js', plugins_url( 'js/os_evento_widget_home.js' , __FILE__ ), array('jquery'));
+		        wp_enqueue_style('os_evento_widget_home-css', plugin_dir_url( __FILE__ ) . 'css/os_evento_widget_home.css' ); 
+		    }
         }
 
 
