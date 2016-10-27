@@ -684,7 +684,7 @@ var popover = function ($) {
   var $headerFixed = $('.header-fixed-top h1');
   var $buttonFixed = $('#share-fixed-button');
   var $buttonShare = $('#share-button');
-  var $twitter = $('.pop-div-twitter');
+  var $twitter = $('.tweets-container');
 
   //Initializes popovers
   $element.popover();
@@ -719,7 +719,7 @@ var popover = function ($) {
     }
   });
 
-  $twitter.on('click', function () {
+  $twitter.on('click', '.pop-div-twitter', function () {
     var id = $(this).attr('data-popover-id');
     $('[data-popover-id=' + id + ']').toggleClass('hidden');
     $('.share [data-popover-id=' + id + ']').toggleClass('hidden');
