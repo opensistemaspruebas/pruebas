@@ -5,29 +5,31 @@ jQuery(document).on("click", "#readmore", function(event) {
 		return;
 	}
 	var tipo = jQuery("#tipo").val();
-	var orden = jQuery("#orden").val();
+	var orden_cards = jQuery("#orden").val();
 	var path = "/wp-content/jsons/" + tipo + "/";
-	jQuery.getJSON(path + orden + ".json", getIndice);
+	jQuery.getJSON(path + orden_cards + ".json", getIndice);
 });
 
 
 // Cambiar el orden
 jQuery(document).on("click", '.sort-items-container a', function(event) {
 	event.preventDefault();
-	if (buscando) {
+	var orden_cards = jQuery(this).attr("data-order");
+	console.log(orden_cards);
+	if (orden_cards !== "DESTACADOS" && buscando) {
 		return;
 	}
+	buscando = false;
 	var tipo = jQuery("#tipo").val();
-	var orden = jQuery(this).attr("data-order");
 	orden_filter = jQuery(this).attr("data-order-filter");
 	jQuery("input#sortBy").val(orden_filter);
-	jQuery("#orden").val(orden);
+	jQuery("#orden").val(orden_cards);
 	var path = "/wp-content/jsons/" + tipo + "/";
 	jQuery('.cards-grid .container div.row').first().html('');
 	jQuery('#card-container').html('');
 	jQuery('.outstanding-histories .card-container .row').first().html('');
 	jQuery("#npc").val(0);
-	jQuery.getJSON(path + orden + ".json", getIndice);
+	jQuery.getJSON(path + orden_cards + ".json", getIndice);
 	jQuery('.sort-items-container a.selected').removeClass("selected");
 	jQuery(this).addClass("selected");
 });
@@ -61,7 +63,7 @@ function loop(i, fin, indice, onDone){
     } else {
 		
 		var tipo = jQuery("#tipo").val();
-		var orden = jQuery("#orden").val();
+		var orden_cards = jQuery("#orden").val();
 		var path = "/wp-content/jsons/" + tipo + "/";
 		
 		jQuery.getJSON(path + indice[i] + ".json", function(post) {
