@@ -62,7 +62,10 @@
 
     $evento_elemento_programa = get_post_meta($evento_id, 'evento_elemento_programa', true);
 
-    $evento_documento = get_post_meta($evento_id, 'evento_documento', true);  
+    $evento_documento = get_post_meta($evento_id, 'evento_documento', true); 
+
+    $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
+
 
 ?>
 
@@ -377,19 +380,22 @@
                 </section>
             <?php endif; ?>
         </div>
-        <section class="contact-person">
-            <div class="container content-wrap">
-                <h1 class="mt-xl">Persona de contacto</h1>
-                <h2 class="mb-md">Si tienes alguna duda sobre el evento, puedes ponerte en contacto con:</h2>
-                <!-- person -->
-                <section class="container-fluid person"><a href="#" class="link-layer visible-xs">&nbsp;</a>
-                    <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
-                    <div class="data-wrapper"><span>Diana Repiso</span>
-                        <p>Doctora honoris causa de estadística por la Universidad Complutense.</p><a href="#">Ficha de la asesora</a></div>
-                </section>
-                <!-- EO person -->
-            </div>
-        </section>
+        <?php if (!empty($evento_persona_de_contacto)) : ?>
+            <section class="contact-person">
+                <div class="container content-wrap">
+                    <h1 class="mt-xl"><?php _e('Persona de contacto'); ?></h1>
+                    <h2 class="mb-md"><?php _e('Si tienes alguna duda sobre el evento, puedes ponerte en contacto con:'); ?></h2>
+                    <!-- person -->
+                    <section class="container-fluid person">
+                        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+                        <div class="image-wrapper"><img src="<?php echo $evento_persona_de_contacto[2]; ?>" alt="" /></div>
+                        <div class="data-wrapper"><span><?php echo $evento_persona_de_contacto[0]; ?></span>
+                            <p><?php echo $evento_persona_de_contacto[1]; ?></p>
+                    </section>
+                    <!-- EO person -->
+                </div>
+            </section>
+        <?php endif; ?>
         <section class="attend">
             <div class="container content-wrap">
                 <div class="row mb-lg">
