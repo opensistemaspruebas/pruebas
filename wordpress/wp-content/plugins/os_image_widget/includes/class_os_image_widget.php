@@ -40,7 +40,7 @@ class OS_Image_Widget extends WP_Widget {
 	 */
 	public function __construct( $id_base = false, $name = false, $widget_options = array(), $control_options = array() ) {
 		$id_base = ( $id_base ) ? $id_base : 'simpleimage'; // Legacy ID.
-		$name    = ( $name ) ? $name : __( 'OS Image Widget');
+		$name    = ( $name ) ? $name : __( 'OS Imagen Header Widget');
 
 		$widget_options = wp_parse_args(
 			$widget_options,

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: OS Image Widget
+ * Plugin Name: OS Imagen Header
  * Plugin URI: http://www.opensistemas.com/
  * Description: Widget que muestra una imagen con un cuadro de texto y un link.
  * Version: 1.0
