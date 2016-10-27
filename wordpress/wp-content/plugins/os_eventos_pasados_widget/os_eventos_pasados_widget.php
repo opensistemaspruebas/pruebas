@@ -34,108 +34,149 @@ if (!class_exists('os_eventos_pasados_widget')) :
 
 	    public function widget($args, $instance) {
 
+	    	$titulo = $instance['titulo'];
+	    	$numero_eventos = $instance['numero_eventos'];
+
+	    	$format = "Y-m-d";
+
+	    	$hoy = current_time($format); 
+			
 			$args = array(
-				'posts_per_page'   => 1,
+				'posts_per_page'   => $numero_eventos,
 				'offset'           => 0,
 				'orderby'          => 'post_date',
 				'meta_key' 		   => 'evento_fecha_de_inicio', 
-				'order'            => 'DESC',
+				'order'            => 'ASC',
 				'orderby' 		   => 'meta_value',
 				'post_type'        => 'evento',
 				'post_status'      => 'publish',
 				'suppress_filters' => true,
+				'meta_query' => array(
+			        array(
+						'key'         => 'evento_fecha_de_inicio',
+						'value'       => $hoy,
+						'compare'     => '<',
+			        ),
+		    	)
 			);
 
-	    	$evento = get_posts($args);
+	    	$eventos = get_posts($args);
+
+    		$meses = array(
+				__("enero", "os_eventos_pasados_widget"), 
+				__("febrero", "os_eventos_pasados_widget"), 
+				__("marzo", "os_eventos_pasados_widget"), 
+				__("abril", "os_eventos_pasados_widget"), 
+				__("mayo", "os_eventos_pasados_widget"), 
+				__("junio", "os_eventos_pasados_widget"), 
+				__("julio", "os_eventos_pasados_widget"), 
+				__("agosto", "os_eventos_pasados_widget"), 
+				__("septiembre", "os_eventos_pasados_widget"), 
+				__("octubre", "os_eventos_pasados_widget"), 
+				__("noviembre", "os_eventos_pasados_widget"), 
+				__("diciembre", "os_eventos_pasados_widget")
+			);
 
 
-	    	if (!empty($evento)) {
+	    	if (!empty($eventos)) {
 
-	    		$evento_localizacion = get_post_meta($evento[0]->ID, 'evento_localizacion', true);
+	    		?>
+	    		<section class="past-summits">
+				    <div class="container">
+				        <div class="row">
+				            <header class="col-xs-12">
+				                <h2 class="text-center past-summits-title"><?php echo $titulo; ?></h2>
+				            </header>
+				        </div>
+				        <div class="row">
+	    		<?php
 
-	    		$format = "Y-m-d";
+	    		foreach ($eventos as $evento) {
 
-	    		$evento_fecha_de_inicio = get_post_meta($evento[0]->ID, 'evento_fecha_de_inicio', true);
-	    		$evento_fecha_de_final = get_post_meta($evento[0]->ID, 'evento_fecha_de_final', true);
+	    			$evento_localizacion = get_post_meta($evento->ID, 'evento_localizacion', true);
 
-	    		$dateobj_inicio = DateTime::createFromFormat($format, $evento_fecha_de_inicio);
-	    		$dateobj_final = DateTime::createFromFormat($format, $evento_fecha_de_final);
+		    		$evento_fecha_de_inicio = get_post_meta($evento->ID, 'evento_fecha_de_inicio', true);
 
-	    		$fecha_evento = '';
-	    		$meses = array(
-					__("enero", "os_cards_widget_json"), 
-					__("febrero", "os_cards_widget_json"), 
-					__("marzo", "os_cards_widget_json"), 
-					__("abril", "os_cards_widget_json"), 
-					__("mayo", "os_cards_widget_json"), 
-					__("junio", "os_cards_widget_json"), 
-					__("julio", "os_cards_widget_json"), 
-					__("agosto", "os_cards_widget_json"), 
-					__("septiembre", "os_cards_widget_json"), 
-					__("octubre", "os_cards_widget_json"), 
-					__("noviembre", "os_cards_widget_json"), 
-					__("diciembre", "os_cards_widget_json")
-				);
-	    		if ($dateobj_inicio->format('m') == $dateobj_final->format('m') && $dateobj_inicio->format('Y') == $dateobj_final->format('Y')) {
-	    			$fecha_evento = $dateobj_inicio->format('d') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
-	    		} else if ($dateobj_inicio->format('Y') == $dateobj_final->format('Y')) {
-	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
-	    		} else {
-	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_final->format('Y');
-	    		}
+		    		$dateobj_inicio = DateTime::createFromFormat($format, $evento_fecha_de_inicio);
+
+		    		$fecha_evento = '';
 
 
-	    	?>
-			<section class="block-image summit wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-			    <div class="img-overlay  summits-page ">
-			        <div class="overlay"></div>
-			        <img src="<?php echo $instance['imagen_fondo']; ?>" alt="image title">
-			    </div>
-			    <div class="container">
-			        <div class="block-content-center">
-			            <h1 class="bold summit-title"><?php _e('Eventos', 'os_eventos_pasados_widget'); ?></h1>
-			            <label><?php _e('Próximo evento', 'os_eventos_pasados_widget'); ?></label>
-			            <h2 class="mt-xs mb-sm"><?php echo $evento[0]->post_title; ?></h2>
-			            <div class="row">
-			            	<span class="col-xs-6 col-sm-4 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span><?php echo $fecha_evento; ?></span></span>
-			            	<span class="col-xs-6 col-sm-3 info-event"><span class="icon bbva-icon-pin mr-xs"></span><span><?php echo $evento_localizacion[2]; ?></span></span>
-			            </div>
-			            <div class="content-wrap">
-			                <p class="mt-md"><?php echo get_post_meta($evento[0]->ID, 'evento_descripcion_corta', true); ?></p>
-			            </div>
-			            <div class="container-button mt-lg">
-			            	<a href="<?php echo get_permalink($evento[0]->ID); ?>" class="col-sm-offset-0 col-sm-3 btn btn-bbva-dark-blue  big "><?php _e('Ver evento', 'os_eventos_pasados_widget'); ?></a>
-			            </div>
+		    		$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
+		    		
+
+		    		$evento_highlights = get_post_meta($evento->ID, 'evento_highlights', true);
+
+		    		$imagenCard = get_post_meta($evento->ID, 'imagenCard', true);
+	   
+			    	?>
+					<section class="col-xs-12">
+					   <div class="summit-card">
+					       <div class="row">
+					           <div class="col-xs-12 col-sm-6 summit-image">
+					               <header class="summit-image-title-wrapper">
+					                   <p class="text-center hidden-xs text-700"><?php echo $evento->post_title; ?><br><?php echo $dateobj_inicio->format('Y'); ?></p>
+					               </header><img src="<?php echo $imagenCard; ?>" alt="<?php echo $evento->post_title; ?>"></div>
+					           <div class="col-xs-12 col-sm-6 summit-content">
+					               <div class="row">
+					                   <header class="col-xs-12">
+					                       <p class="summit-mobile-title text-420 hidden-sm hidden-md hidden-lg"><?php echo $evento->post_title; ?></p>
+					                   </header>
+					                   <div class="col-xs-12">
+					                       <div class="header-date text-left"><span class="icon bbva-icon-calendar-01 mr-xs text-501"></span><span class="summit-date"><?php echo $fecha_evento; ?></span></div>
+					                       <div class="header-location text-left"><span class="icon bbva-icon-pin mr-xs text-501"></span><span class="summit-location"><?php echo $evento_localizacion[2]; ?></span></div>
+					                   </div>
+					               </div>
+					               <div class="row">
+					                   <div class="col-xs-12 summit-highlights">
+					                       <p class="summit-highlights-title hidden-xs"><?php _e('HIGHLIGHTS', 'os_eventos_pasados_widget'); ?></p>
+					                       <?php if (!empty($evento_highlights)) : ?>
+						                       <div class="row">
+						                       		<?php foreach ($evento_highlights as $evento_highlight) : ?>
+														<div class="col-xs-1">
+															<div class="rectangle"></div>
+															<div class="pre-rectangle"></div>
+														</div>
+														<div>
+															<p class="summit-highlight-element text-300"><?php echo $evento_highlight; ?></p>
+														</div>
+													<?php endforeach; ?>
+						                       </div>
+						                    <?php endif; ?>
+					                   </div>
+					                   	<div class="col-xs-12 hidden-xs">
+					                   		<a href="<?php echo get_permalink($evento->ID); ?>" class="summit-link"><?php _e('Ver evento', 'os_eventos_pasados_widget'); ?></a>
+					                   	</div>
+					               </div>
+					           </div>
+					       </div>
+					   </div>
+					</section>
+			    	<?php
+			    }
+			    ?>		</div>
 			        </div>
-			    </div>
-			</section>
-	    	<?php
+				</section>
+			    <?php
 	    	}
 	    }
 
 
 	    public function form($instance) {
-	    	$imagen_fondo =  !empty($instance['imagen_fondo']) ? $instance['imagen_fondo'] : '';
-	    	$args = array(
-			    'depth'                 => 0,
-			    'child_of'              => 0,
-			    'selected'              => $subhome_eventos,
-			    'echo'                  => 1,
-			    'name'                  => $this->get_field_name('subhome_eventos'),
-			    'id'                    => $this->get_field_id('subhome_eventos'), // string
-			    'class'                 => 'widefat', // string
-			    'show_option_none'      => null, // string
-			    'show_option_no_change' => null, // string
-			    'option_none_value'     => null, // string
-			);
+	    	$titulo =  !empty($instance['titulo']) ? $instance['titulo'] : '';
+	    	$numero_eventos =  !empty($instance['numero_eventos']) ? $instance['numero_eventos'] : 3;
 	    	?>
 	    	<p>
 	    		<?php _e('Este es el widget que muestra los eventos pasados.'); ?>
 	    	</p>
+	    	<p>
+				<label for="<?php echo $this->get_field_id('titulo'); ?>"><?php _e('Título', 'os_eventos_pasados_widget'); ?></label>
+			    <input class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" type="text" value="<?php echo $titulo; ?>" />
+	    	</p>
 			<p>
-			    <label for="<?php echo $this->get_field_id('numero_eventos'); ?>"><?php _e('Numero de eventos a mostrar', 'os_publicacion_type'); ?></label>
-			    <input class="imagen_fondo widefat" id="<?php echo $this->get_field_id('imagen_fondo'); ?>" name="<?php echo $this->get_field_name('imagen_fondo'); ?>" type="text" value="<?php if (!empty($imagen_fondo)) echo $imagen_fondo; ?>" readonly />
-			    <img id="show_imagen_fondo" draggable="false" alt="" name="show_imagen_fondo" src="<?php if (!empty($imagen_fondo)) echo esc_attr($imagen_fondo); ?>" style="<?php if (empty($imagen_fondo)) echo "display: none;"; ?>">
+			    <label for="<?php echo $this->get_field_id('numero_eventos'); ?>"><?php _e('Numero de eventos a mostrar', 'os_eventos_pasados_widget'); ?></label>
+			    <input class="widefat" id="<?php echo $this->get_field_id('numero_eventos'); ?>" name="<?php echo $this->get_field_name('numero_eventos'); ?>" type="number" value="<?php echo $numero_eventos; ?>" />
+				<span class="description"><?php _e('Valor por defecto: 3.', 'os_eventos_pasados_widget'); ?></span>
 			</p>
 	    	<?php
 
@@ -144,7 +185,8 @@ if (!class_exists('os_eventos_pasados_widget')) :
 
 	    function update($new_instance, $old_instance) {
 	    	$instance = array();
-			$instance['imagen_fondo'] = (!empty( $new_instance['imagen_fondo'])) ? strip_tags($new_instance['imagen_fondo']) : '';
+	    	$instance['titulo'] = (!empty( $new_instance['titulo'])) ? strip_tags($new_instance['titulo']) : '';
+			$instance['numero_eventos'] = (!empty( $new_instance['numero_eventos'])) ? strip_tags($new_instance['numero_eventos']) : 3;
 			return $instance;
 	    }
 
