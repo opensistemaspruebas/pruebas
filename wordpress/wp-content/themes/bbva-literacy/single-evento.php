@@ -84,7 +84,9 @@
                             <span><span class="icon bbva-icon-calendar-01 mr-xs"></span><?php echo $fecha_evento; ?></span>
                             <span class="mgl-13"><span class="icon bbva-icon-pin mr-xs"></span><?php echo $evento_localizacion[2]; ?></span>
                         </div>
-                        <div class="container-button mb-lg mt-lg"><a href="" class="text-center btn btn-bbva-aqua"><?php _e('Registrarme'); ?></a></div>
+                        <?php if ($evento_url_registro) : ?>
+                            <div class="container-button mb-lg mt-lg"><a href="" class="text-center btn btn-bbva-aqua"><?php _e('Registrarme'); ?></a></div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -398,14 +400,18 @@
                 </div>
             </section>
         <?php endif; ?>
-        <section class="attend">
-            <div class="container content-wrap">
-                <div class="row mb-lg">
-                    <h1 class="col-xs-12 col-sm-7">Quiero asistir</h1>
-                    <div class="col-xs-12 col-sm-offset-1 col-sm-4 text-right container-button"><a href="" class="btn btn-bbva-aqua">Registrarme</a></div>
+        <?php if ($evento_url_registro) : ?>
+            <section class="attend">
+                <div class="container content-wrap">
+                    <div class="row mb-lg">
+                        <h1 class="col-xs-12 col-sm-7"><?php _e('Quiero asistir'); ?></h1>
+                        <div class="col-xs-12 col-sm-offset-1 col-sm-4 text-right container-button">
+                            <a target="_blank" href="<?php echo $evento_url_registro; ?>" class="btn btn-bbva-aqua"><?php _e('Registrarme'); ?></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        <?php endif; ?>
         <?php if (!empty($evento_localizacion)) : ?>
             <?php
 
