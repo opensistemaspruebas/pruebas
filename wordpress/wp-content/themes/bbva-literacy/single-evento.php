@@ -54,6 +54,12 @@
 
     $evento_url_registro = get_post_meta($evento_id, 'evento_url_registro', true);
 
+    $evento_descripcion_larga = get_post_meta($evento_id, 'evento_descripcion_larga', true);
+
+    $evento_topics = get_post_meta($evento_id, 'evento_topics', true);
+
+    $evento_te_interesas = get_post_meta($evento_id, 'evento_te_interesa', true);
+
 ?>
 
 <div class="contents">
@@ -92,61 +98,42 @@
                 </div>
             </div>
         </section>
-        
         <div class="container content-wrap mb-xl">
             <?php get_template_part('content','rrsseventos'); ?>
-            <section class="description-section">
-                <h1 class="mb-md">Descripción</h1>
-                <p> This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy. Power up your printers, make copies of this list, and start jotting down notes that can help you create the summer of your dreams. The food in Europe is some of the best you'll find in the world, which can make it tempting to splurge. Fight this temptation and go to local markets and have picnics in parks instead. If you must go out to eat, limit those excursions to a few times per week and only go to the places that are packed with locals. France's capital, the City of Light, is a wanderer's dream, with an exciting mix of wide boulevards and tiny brick alleyways hiding delicious restaurants and boutique shops. When in Paris, it's best to take in the city by walking until you can't walk anymore. Picnic in front of the Eiffel Tower, take a nighttime boat ride down the Seine, and relax in the Luxembourg Gardens. Florence is a magical city filled with historical attractions, art galleries, and tempting gelato shops. Among the many must-dos is climbing a hill on the south side of the Arno River to Piazzale Michelangelo. This is a lookout point with tiered seating that offers some of the city's best views, especially at sunset. If you're lucky, street performers will serenade you as the sun goes down. </p>
-            </section>
-            <section class="topics-section mt-lg">
-                <h1 class="mb-md">Topics</h1>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="rectangle"></div>
-                        <div class="pre-rectangle"></div>
-                        <p>Introductory purchase & balance transfer APRs</p>
+            <?php if (!empty($evento_descripcion_larga)) : ?>
+                <section class="description-section">
+                    <h1 class="mb-md"><?php _e('Descripción'); ?></h1>
+                    <?php echo wpautop($evento_descripcion_larga); ?>
+                </section>
+            <?php endif; ?>
+            <?php if (!empty($evento_topics)) : ?>
+                <section class="topics-section mt-lg">
+                    <h1 class="mb-md"><?php _e('Topics'); ?></h1>
+                    <div class="row">
+                        <?php foreach ($evento_topics as $evento_topic) : ?>
+                            <div class="col-xs-12">
+                                <div class="rectangle"></div>
+                                <div class="pre-rectangle"></div>
+                                <p><?php echo $evento_topic; ?></p>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="rectangle"></div>
-                        <div class="pre-rectangle"></div>
-                        <p>CompassPoints rewards program</p>
+                </section>
+            <?php endif; ?>
+            <?php if (!empty($evento_te_interesas)) : ?>
+                <section class="interest-section mt-lg">
+                    <h1 class="mb-md"><?php _e('Te interesa si...'); ?></h1>
+                    <div class="row">
+                        <?php foreach ($evento_te_interesas as $evento_te_interesa) : ?>
+                            <div class="col-xs-12">
+                                <div class="rectangle"></div>
+                                <div class="pre-rectangle"></div>
+                                <p><?php echo $evento_te_interesa; ?></p>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="rectangle"></div>
-                        <div class="pre-rectangle"></div>
-                        <p>No annual fee</p>
-                    </div>
-                </div>
-            </section>
-            <section class="interest-section mt-lg">
-                <h1 class="mb-md">Te interesa si...</h1>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="rectangle"></div>
-                        <div class="pre-rectangle"></div>
-                        <p>Introductory purchase & balance transfer APRs</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="rectangle"></div>
-                        <div class="pre-rectangle"></div>
-                        <p>CompassPoints rewards program</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="rectangle"></div>
-                        <div class="pre-rectangle"></div>
-                        <p>No annual fee</p>
-                    </div>
-                </div>
-            </section>
+                </section>
+            <?php endif; ?>
             <section class="program-section mt-lg">
                 <h1 class="mb-md">Programa</h1>
                 <div class="visible-xs">
