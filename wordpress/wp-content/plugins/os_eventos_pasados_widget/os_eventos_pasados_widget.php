@@ -115,7 +115,7 @@ if (!class_exists('os_eventos_pasados_widget')) :
 					       <div class="row">
 					           <div class="col-xs-12 col-sm-6 summit-image">
 					               <header class="summit-image-title-wrapper">
-					                   <p class="text-center hidden-xs text-700"><?php echo $evento->post_title; ?><br><?php echo $dateobj_inicio->format('Y'); ?></p>
+					                   <p class="text-center hidden-xs text-700"><?php echo $evento->post_title; ?></p>
 					               </header><img src="<?php echo $imagenCard; ?>" alt="<?php echo $evento->post_title; ?>"></div>
 					           <div class="col-xs-12 col-sm-6 summit-content">
 					               <div class="row">
