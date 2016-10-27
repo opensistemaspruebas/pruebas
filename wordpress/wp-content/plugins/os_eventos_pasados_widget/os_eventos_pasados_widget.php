@@ -1,33 +1,33 @@
 <?php
 
 /*
-	Plugin Name: OS Evento Widget Home
+	Plugin Name: OS Eventos Pasados Widget Subhome
 	Plugin URI: https://www.opensistemas.com/
-	Description: Crea un widget con el evento futuro
+	Description: Crea un widget para mostrar los eventos pasados
 	Version: 1.0
 	Author: Marta Oliver
 	Author URI: https://www.opensistemas.com/
 	License: GPLv2 or later
-	Text Domain: os_evento_widget_home
+	Text Domain: os_eventos_pasados_widget
 */
 
 
-if (!class_exists('os_evento_widget_home')) :
+if (!class_exists('os_eventos_pasados_widget')) :
 
-	class OS_Evento_Widget_Home extends WP_Widget {
+	class OS_Eventos_Pasados_Widget extends WP_Widget {
 
 
 	    function __construct() {
 	        parent::__construct(
-	        	'os_evento_widget_home',
-	        	__('OS Evento Widget Home', 'os_evento_widget_home'),
+	        	'os_eventos_pasados_widget',
+	        	__('OS Eventos Pasados Widget Subhome', 'os_eventos_pasados_widget'),
 	        	array(
-	            	'description' => __('Widget con el evento seleccionado.', 'os_evento_widget_home')
+	            	'description' => __('Widget con los eventos pasados.', 'os_eventos_pasados_widget')
 	        	)
 	        );
 	        if (is_admin()) {
-		        wp_enqueue_script('os_evento_widget_home-js', plugins_url( 'js/os_evento_widget_home.js' , __FILE__ ), array('jquery'));
-		        wp_enqueue_style('os_evento_widget_home-css', plugin_dir_url( __FILE__ ) . 'css/os_evento_widget_home.css' ); 
+		        wp_enqueue_script('os_eventos_pasados_widget-js', plugins_url( 'js/os_eventos_pasados_widget.js' , __FILE__ ), array('jquery'));
+		        wp_enqueue_style('os_eventos_pasados_widget-css', plugin_dir_url( __FILE__ ) . 'css/os_eventos_pasados_widget.css' ); 
 		    }
         }
 
@@ -63,38 +63,39 @@ if (!class_exists('os_evento_widget_home')) :
 
 	    		$fecha_evento = '';
 	    		$meses = array(
-					__("enero", "os_evento_widget_home"), 
-					__("febrero", "os_evento_widget_home"), 
-					__("marzo", "os_evento_widget_home"), 
-					__("abril", "os_evento_widget_home"), 
-					__("mayo", "os_evento_widget_home"), 
-					__("junio", "os_evento_widget_home"), 
-					__("julio", "os_evento_widget_home"), 
-					__("agosto", "os_evento_widget_home"), 
-					__("septiembre", "os_evento_widget_home"), 
-					__("octubre", "os_evento_widget_home"), 
-					__("noviembre", "os_evento_widget_home"), 
-					__("diciembre", "os_evento_widget_home")
+					__("enero", "os_cards_widget_json"), 
+					__("febrero", "os_cards_widget_json"), 
+					__("marzo", "os_cards_widget_json"), 
+					__("abril", "os_cards_widget_json"), 
+					__("mayo", "os_cards_widget_json"), 
+					__("junio", "os_cards_widget_json"), 
+					__("julio", "os_cards_widget_json"), 
+					__("agosto", "os_cards_widget_json"), 
+					__("septiembre", "os_cards_widget_json"), 
+					__("octubre", "os_cards_widget_json"), 
+					__("noviembre", "os_cards_widget_json"), 
+					__("diciembre", "os_cards_widget_json")
 				);
 	    		if ($dateobj_inicio->format('m') == $dateobj_final->format('m') && $dateobj_inicio->format('Y') == $dateobj_final->format('Y')) {
-	    			$fecha_evento = $dateobj_inicio->format('d') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
+	    			$fecha_evento = $dateobj_inicio->format('d') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
 	    		} else if ($dateobj_inicio->format('Y') == $dateobj_final->format('Y')) {
-	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
+	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_inicio->format('Y');
 	    		} else {
-	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_widget_home') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_final->format('Y');
+	    			$fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_eventos_pasados_widget') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_final->format('Y');
 	    		}
 
 
 	    	?>
-			<section class="block-image summit wow fadeInUp">
-			    <div class="img-overlay">
+			<section class="block-image summit wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			    <div class="img-overlay  summits-page ">
 			        <div class="overlay"></div>
-			        <img src="<?php echo $instance['imagen_fondo']; ?>" alt="image title" />
+			        <img src="<?php echo $instance['imagen_fondo']; ?>" alt="image title">
 			    </div>
 			    <div class="container">
 			        <div class="block-content-center">
-			            <label><?php _e('Próximo evento', 'os_evento_widget_home'); ?></label>
-			            <h1 class="mt-xs mb-sm"><?php echo $evento[0]->post_title; ?></h1>
+			            <h1 class="bold summit-title"><?php _e('Eventos', 'os_eventos_pasados_widget'); ?></h1>
+			            <label><?php _e('Próximo evento', 'os_eventos_pasados_widget'); ?></label>
+			            <h2 class="mt-xs mb-sm"><?php echo $evento[0]->post_title; ?></h2>
 			            <div class="row">
 			            	<span class="col-xs-6 col-sm-4 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span><?php echo $fecha_evento; ?></span></span>
 			            	<span class="col-xs-6 col-sm-3 info-event"><span class="icon bbva-icon-pin mr-xs"></span><span><?php echo $evento_localizacion[2]; ?></span></span>
@@ -103,8 +104,7 @@ if (!class_exists('os_evento_widget_home')) :
 			                <p class="mt-md"><?php echo get_post_meta($evento[0]->ID, 'evento_descripcion_corta', true); ?></p>
 			            </div>
 			            <div class="container-button mt-lg">
-			            	<a href="<?php echo get_permalink($evento[0]->ID); ?>" class="col-sm-offset-0 col-sm-3 btn btn-bbva-dark-blue "><?php _e('Ver evento', 'os_evento_widget_home'); ?></a>
-			            	<a href="<?php echo get_page_uri($instance['subhome_eventos']); ?>" class="col-xs-12 col-sm-4 mt-md link text-center"><span class="bbva-icon-more mr-xs"></span><?php _e('Ver más eventos', 'os_evento_widget_home'); ?></a>
+			            	<a href="<?php echo get_permalink($evento[0]->ID); ?>" class="col-sm-offset-0 col-sm-3 btn btn-bbva-dark-blue  big "><?php _e('Ver evento', 'os_eventos_pasados_widget'); ?></a>
 			            </div>
 			        </div>
 			    </div>
@@ -115,7 +115,6 @@ if (!class_exists('os_evento_widget_home')) :
 
 
 	    public function form($instance) {
-	    	$subhome_eventos = !empty($instance['subhome_eventos']) ? $instance['subhome_eventos'] : 0;
 	    	$imagen_fondo =  !empty($instance['imagen_fondo']) ? $instance['imagen_fondo'] : '';
 	    	$args = array(
 			    'depth'                 => 0,
@@ -131,19 +130,12 @@ if (!class_exists('os_evento_widget_home')) :
 			);
 	    	?>
 	    	<p>
-	    		<?php _e('Este es el widget que muestra el próximo evento que tendrá lugar.'); ?>
+	    		<?php _e('Este es el widget que muestra los eventos pasados.'); ?>
 	    	</p>
 			<p>
-			    <label for="<?php echo $this->get_field_id('imagen_fondo'); ?>"><?php _e('Imagen de fondo', 'os_evento_widget_home'); ?></label>
+			    <label for="<?php echo $this->get_field_id('numero_eventos'); ?>"><?php _e('Numero de eventos a mostrar', 'os_publicacion_type'); ?></label>
 			    <input class="imagen_fondo widefat" id="<?php echo $this->get_field_id('imagen_fondo'); ?>" name="<?php echo $this->get_field_name('imagen_fondo'); ?>" type="text" value="<?php if (!empty($imagen_fondo)) echo $imagen_fondo; ?>" readonly />
 			    <img id="show_imagen_fondo" draggable="false" alt="" name="show_imagen_fondo" src="<?php if (!empty($imagen_fondo)) echo esc_attr($imagen_fondo); ?>" style="<?php if (empty($imagen_fondo)) echo "display: none;"; ?>">
-			</p>
-			<p>
-				<input id="upload_imagen_fondo" name="upload_imagen_fondo" type="button" value="<?php _e('Explorar/Subir', 'os_evento_widget_home'); ?>" />
-			</p>
-	    	<p>
-				<label for="<?php echo $this->get_field_id('subhome_eventos'); ?>"><?php _e('Subhome de eventos', 'os_texto_widget'); ?></label>
-				<?php wp_dropdown_pages($args); ?>
 			</p>
 	    	<?php
 
@@ -152,7 +144,6 @@ if (!class_exists('os_evento_widget_home')) :
 
 	    function update($new_instance, $old_instance) {
 	    	$instance = array();
-			$instance['subhome_eventos'] = (!empty( $new_instance['subhome_eventos'])) ? strip_tags($new_instance['subhome_eventos']) : 0;
 			$instance['imagen_fondo'] = (!empty( $new_instance['imagen_fondo'])) ? strip_tags($new_instance['imagen_fondo']) : '';
 			return $instance;
 	    }
@@ -160,12 +151,12 @@ if (!class_exists('os_evento_widget_home')) :
 
 	}
 
-	function os_evento_widget_home() {
-	    register_widget('os_evento_widget_home');
+	function os_eventos_pasados_widget() {
+	    register_widget('os_eventos_pasados_widget');
 	}
 
 	// Initialize Plugin
-	add_action('widgets_init', 'os_evento_widget_home');
+	add_action('widgets_init', 'os_eventos_pasados_widget');
 
 
 endif;
