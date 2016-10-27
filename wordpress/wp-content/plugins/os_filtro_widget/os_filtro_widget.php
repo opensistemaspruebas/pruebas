@@ -167,7 +167,7 @@ if (!class_exists('OS_Filtro_Widget')) :
 				)
 			);
 	    	$id = 1;
-	    	$dataEvents = array();
+	    	$data = array();
 	    	if (!empty($categories)) {
 	    		foreach ($categories as $key => $category) {
 	    			$tag = array();
