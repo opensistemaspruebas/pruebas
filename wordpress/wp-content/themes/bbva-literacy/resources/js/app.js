@@ -378,7 +378,6 @@ var menuSearch = function($) {
 
     var selectedTags = [];
     var currentMatches = [];
-    var $selectedTag = $('#menu-search .selected-tag');
     var $availableTag = $('#menu-search .available-tag');
     var $inputSearch = $('.navbar .navbar-search-input');
     var $btnSearch = $('.navbar .publishing-filter-search-btn');
@@ -442,10 +441,11 @@ var menuSearch = function($) {
         var allTags = data.availableTags;
         $.each(data.availableTags, function(index, tag) {
             if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
-                console.log(tag.from);
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         });
@@ -465,7 +465,7 @@ var menuSearch = function($) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
-            //emptyData();
+            emptyData();
         }
     }
 
@@ -523,7 +523,9 @@ var menuSearch = function($) {
             if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         }
@@ -569,18 +571,17 @@ var menuSearch = function($) {
         $geoCounter.text('0');
         $inputSearch.val('');
         selectedTags = [];
-        $('#menu-search .selected-tags-container').empty();
     }
 };
 
-/*setProgressBarLine('#lineContainer', getConfig(70), 0.8);
+setProgressBarLine('#lineContainer', getConfig(70), 0.8);
 setProgressBarLine('#lineContainer2', getConfig(6), 0.75);
 setProgressBarCircle('#circleContainer', getCircleConfig(3, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
 setProgressBarCircle('#circleContainer2', getCircleConfig(7, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
 setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
 setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
 setProgressBarCircle('#circleContainer5', getCircleConfig(300, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
-setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);*/
+setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
 
 var momentjs = function ($) {
 
@@ -731,7 +732,6 @@ var publishingFilter = function($) {
 
     var selectedTags = [];
     var currentMatches = [];
-    var $selectedTag = $('#publishing-filter .selected-tag');
     var $availableTag = $('#publishing-filter .available-tag');
     var $inputSearch = $('#publishing-filter .publishing-filter-search-input');
     var $btnSearch = $('#publishing-filter .publishing-filter-search-btn');
@@ -799,7 +799,9 @@ var publishingFilter = function($) {
                 console.log(tag.from);
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         });
@@ -823,7 +825,7 @@ var publishingFilter = function($) {
 			$btnFilter.show();
 			$sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
-            //emptyData();
+            emptyData();
         }
     }
 
@@ -875,14 +877,15 @@ var publishingFilter = function($) {
     }
 
     function refreshTagMatches(matchedResults) {
-        console.log(selectedTags);
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
             if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         }
@@ -928,7 +931,6 @@ var publishingFilter = function($) {
         $geoCounter.text('0');
         $inputSearch.val('');
         selectedTags = [];
-        $('#publishing-filter .selected-tags-container').empty();
     }
 };
 

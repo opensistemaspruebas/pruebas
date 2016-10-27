@@ -378,7 +378,6 @@ var menuSearch = function($) {
 
     var selectedTags = [];
     var currentMatches = [];
-    var $selectedTag = $('#menu-search .selected-tag');
     var $availableTag = $('#menu-search .available-tag');
     var $inputSearch = $('.navbar .navbar-search-input');
     var $btnSearch = $('.navbar .publishing-filter-search-btn');
@@ -442,10 +441,11 @@ var menuSearch = function($) {
         var allTags = data.availableTags;
         $.each(data.availableTags, function(index, tag) {
             if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
-                console.log(tag.from);
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         });
@@ -523,7 +523,9 @@ var menuSearch = function($) {
             if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         }
@@ -569,7 +571,6 @@ var menuSearch = function($) {
         $geoCounter.text('0');
         $inputSearch.val('');
         selectedTags = [];
-        $('#menu-search .selected-tags-container').empty();
     }
 };
 
@@ -684,7 +685,7 @@ var popover = function ($) {
   var $headerFixed = $('.header-fixed-top h1');
   var $buttonFixed = $('#share-fixed-button');
   var $buttonShare = $('#share-button');
-  var $twitter = $('.pop-div-twitter');
+  var $twitter = $('.tweets-container');
 
   //Initializes popovers
   $element.popover();
@@ -719,7 +720,7 @@ var popover = function ($) {
     }
   });
 
-  $twitter.on('click', function () {
+  $twitter.on('click', '.pop-div-twitter', function () {
     var id = $(this).attr('data-popover-id');
     $('[data-popover-id=' + id + ']').toggleClass('hidden');
     $('.share [data-popover-id=' + id + ']').toggleClass('hidden');
@@ -731,7 +732,6 @@ var publishingFilter = function($) {
 
     var selectedTags = [];
     var currentMatches = [];
-    var $selectedTag = $('#publishing-filter .selected-tag');
     var $availableTag = $('#publishing-filter .available-tag');
     var $inputSearch = $('#publishing-filter .publishing-filter-search-input');
     var $btnSearch = $('#publishing-filter .publishing-filter-search-btn');
@@ -799,7 +799,9 @@ var publishingFilter = function($) {
                 console.log(tag.from);
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         });
@@ -875,14 +877,15 @@ var publishingFilter = function($) {
     }
 
     function refreshTagMatches(matchedResults) {
-        console.log(selectedTags);
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
             if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                addTagToContainer(newTag, tag.from, selectTag);
+                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                    addTagToContainer(newTag, tag.from, selectTag);
+                }
                 currentMatches.push(tag);
             }
         }
@@ -928,7 +931,6 @@ var publishingFilter = function($) {
         $geoCounter.text('0');
         $inputSearch.val('');
         selectedTags = [];
-        $('#publishing-filter .selected-tags-container').empty();
     }
 };
 

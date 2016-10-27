@@ -11284,7 +11284,7 @@ $screen-lg-min: 1200px;
 
 /* line 49, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
 .text-300, .main-card .data-container a.readmore, .block-outstanding-image p, .title-description .description-container p, .slider .slider-caption p, .latests-tweets header p:last-child, .latests-tweets footer a.readmore, .data-grid .content .grid-wrapper .data-block .description, .data-grid .content .grid-wrapper .data-block .link a, .data-grid footer .wrap, .consultant-main-data-wrapper > h4, .consultant-main-data-wrapper > p, .consultant-secondary-data-wrapper .expertise-wrapper div span, .summit .block-content-center .info-event span:last-child, .summit .block-content-center p, .summit .block-content-center .link, .grid-footer a.readmore, .person .data-wrapper p, .person .data-wrapper a, .sort-items-container a, .summit-card .summit-content .summit-date,
-.summit-card .summit-content .summit-location, .summit-card .summit-content .summit-link, .footer-menu-list a, #publishing-view .main-wrapper > header .filter, .publication section p, .publication section.content-section .video-container .video-text .info, .publication section.content-section .pdf-rectangle p, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p, .publication section.additional-section span, .publication section.additional-section a, .publication .latests-posts .readmore, .about-us .who-we-are-wrapper .container p, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper p, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper p, .about-us .who-we-are-wrapper .nav-content .submenu-content p, .nav-content .about-us .who-we-are-wrapper .submenu-content p, .about-us .people-grid-wrapper .person p, .futureEvents .content-center span, .futureEvents section.description-section p, .futureEvents section.topics-section p, .futureEvents section.interest-section p, .futureEvents section.program-section p, .futureEvents section.file-section p, .futureEvents section.file-section .pdf-rectangle p, .pastEvents .video-container .video-text .info, .pastEvents .content-wrap section p, .pastEvents .content-wrap section.file-section .pdf-rectangle p, .impact section.beneficiaries-section p, .impact section.micro-section p, .simpleCard p, .simpleCard .current-work span, .error404 section p {
+.summit-card .summit-content .summit-location, .summit-card .summit-content .summit-link, .footer-menu-list a, #publishing-view .main-wrapper > header .filter, .publication section p, .publication section.content-section .video-container .video-text .info, .publication section.content-section .pdf-rectangle p, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p, .publication section.additional-section span, .publication section.additional-section a, .publication .latests-posts .readmore, .about-us .who-we-are-wrapper .container p, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper p, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper p, .about-us .who-we-are-wrapper .nav-content .submenu-content p, .nav-content .about-us .who-we-are-wrapper .submenu-content p, .about-us .people-grid-wrapper .person p, .futureEvents .content-center span, .futureEvents section.description-section p, .futureEvents section.topics-section p, .futureEvents section.interest-section p, .futureEvents section.program-section p, .futureEvents section.file-section p, .futureEvents section.file-section .pdf-rectangle p, .pastEvents .video-container .video-text .info, .pastEvents .content-wrap section p, .pastEvents .content-wrap section.file-section .pdf-rectangle p, .impact section.beneficiaries-section p, .impact section.micro-section p, .simpleCard p, .simpleCard .current-work span, .general-content-text section p {
   font-size: 15px;
 }
 
@@ -11334,7 +11334,7 @@ $screen-lg-min: 1200px;
 }
 
 /* line 59, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-.text-501, .lightbox.modal .modal-body h2, .outstanding-histories .card-container ._secondary-card .title, .data-grid .content .grid-wrapper .data-block h2, .back-map p, #publishing-view .main-wrapper > header h2, .publication section h2, .publication section.content-section .pdf-rectangle h1, .about-us .who-we-are-wrapper .container h2, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper h2, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper h2, .about-us .who-we-are-wrapper .nav-content .submenu-content h2, .nav-content .about-us .who-we-are-wrapper .submenu-content h2, .about-us .people-grid-wrapper .container > h2, .about-us .people-grid-wrapper .consultant-cv > header .back-wrapper > h2, .consultant-cv > header .about-us .people-grid-wrapper .back-wrapper > h2, .about-us .people-grid-wrapper .nav-content .submenu-content > h2, .nav-content .about-us .people-grid-wrapper .submenu-content > h2, .results .tabs header .description-container p, .futureEvents section.file-section .pdf-rectangle h2, .futureEvents section.contact-person h2, .pastEvents .content-wrap section h2, .pastEvents .content-wrap section.file-section .pdf-rectangle h2, .pastEvents .content-wrap section.highlights-section .highlight-text, .impact section.impact-section p, .impact section.quote-section .quote-rectangle p, .error404 section h2 {
+.text-501, .lightbox.modal .modal-body h2, .outstanding-histories .card-container ._secondary-card .title, .data-grid .content .grid-wrapper .data-block h2, .back-map p, #publishing-view .main-wrapper > header h2, .publication section h2, .publication section.content-section .pdf-rectangle h1, .about-us .who-we-are-wrapper .container h2, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper h2, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper h2, .about-us .who-we-are-wrapper .nav-content .submenu-content h2, .nav-content .about-us .who-we-are-wrapper .submenu-content h2, .about-us .people-grid-wrapper .container > h2, .about-us .people-grid-wrapper .consultant-cv > header .back-wrapper > h2, .consultant-cv > header .about-us .people-grid-wrapper .back-wrapper > h2, .about-us .people-grid-wrapper .nav-content .submenu-content > h2, .nav-content .about-us .people-grid-wrapper .submenu-content > h2, .results .tabs header .description-container p, .futureEvents section.file-section .pdf-rectangle h2, .futureEvents section.contact-person h2, .pastEvents .content-wrap section h2, .pastEvents .content-wrap section.file-section .pdf-rectangle h2, .pastEvents .content-wrap section.highlights-section .highlight-text, .impact section.impact-section p, .impact section.quote-section .quote-rectangle p, .general-content-text section h2 {
   font-size: 22px;
 }
 
@@ -11389,7 +11389,7 @@ $screen-lg-min: 1200px;
 }
 
 /* line 70, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-.text-720, .consultant-main-data-wrapper > h1, .back-map h1, .tabs header.title-description h1, #publishing-view .main-wrapper > header h1, .publication .header-section header h1, .impact section.impact-section h1, .error404 section h1 {
+.text-720, .consultant-main-data-wrapper > h1, .back-map h1, .tabs header.title-description h1, #publishing-view .main-wrapper > header h1, .publication .header-section header h1, .impact section.impact-section h1, .general-content-text section h1 {
   font-size: 42px;
 }
 
@@ -11466,7 +11466,7 @@ $screen-lg-min: 1200px;
   }
   /* line 88, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
   .text-300, .main-card .data-container a.readmore, .block-outstanding-image p, .title-description .description-container p, .slider .slider-caption p, .latests-tweets header p:last-child, .latests-tweets footer a.readmore, .data-grid .content .grid-wrapper .data-block .description, .data-grid .content .grid-wrapper .data-block .link a, .data-grid footer .wrap, .consultant-main-data-wrapper > h4, .consultant-main-data-wrapper > p, .consultant-secondary-data-wrapper .expertise-wrapper div span, .summit .block-content-center .info-event span:last-child, .summit .block-content-center p, .summit .block-content-center .link, .grid-footer a.readmore, .person .data-wrapper p, .person .data-wrapper a, .sort-items-container a, .summit-card .summit-content .summit-date,
-  .summit-card .summit-content .summit-location, .summit-card .summit-content .summit-link, .footer-menu-list a, #publishing-view .main-wrapper > header .filter, .publication section p, .publication section.content-section .video-container .video-text .info, .publication section.content-section .pdf-rectangle p, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p, .publication section.additional-section span, .publication section.additional-section a, .publication .latests-posts .readmore, .about-us .who-we-are-wrapper .container p, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper p, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper p, .about-us .who-we-are-wrapper .nav-content .submenu-content p, .nav-content .about-us .who-we-are-wrapper .submenu-content p, .about-us .people-grid-wrapper .person p, .futureEvents .content-center span, .futureEvents section.description-section p, .futureEvents section.topics-section p, .futureEvents section.interest-section p, .futureEvents section.program-section p, .futureEvents section.file-section p, .futureEvents section.file-section .pdf-rectangle p, .pastEvents .video-container .video-text .info, .pastEvents .content-wrap section p, .pastEvents .content-wrap section.file-section .pdf-rectangle p, .impact section.beneficiaries-section p, .impact section.micro-section p, .simpleCard p, .simpleCard .current-work span, .error404 section p {
+  .summit-card .summit-content .summit-location, .summit-card .summit-content .summit-link, .footer-menu-list a, #publishing-view .main-wrapper > header .filter, .publication section p, .publication section.content-section .video-container .video-text .info, .publication section.content-section .pdf-rectangle p, .publication section.authors-section p, .publication section.sources-section .source a, .publication section.additional-section h2, .publication section.additional-section p, .publication section.additional-section span, .publication section.additional-section a, .publication .latests-posts .readmore, .about-us .who-we-are-wrapper .container p, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper p, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper p, .about-us .who-we-are-wrapper .nav-content .submenu-content p, .nav-content .about-us .who-we-are-wrapper .submenu-content p, .about-us .people-grid-wrapper .person p, .futureEvents .content-center span, .futureEvents section.description-section p, .futureEvents section.topics-section p, .futureEvents section.interest-section p, .futureEvents section.program-section p, .futureEvents section.file-section p, .futureEvents section.file-section .pdf-rectangle p, .pastEvents .video-container .video-text .info, .pastEvents .content-wrap section p, .pastEvents .content-wrap section.file-section .pdf-rectangle p, .impact section.beneficiaries-section p, .impact section.micro-section p, .simpleCard p, .simpleCard .current-work span, .general-content-text section p {
     font-size: 13px;
   }
   /* line 89, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
@@ -11510,7 +11510,7 @@ $screen-lg-min: 1200px;
     font-size: 22px;
   }
   /* line 99, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-  .text-501, .lightbox.modal .modal-body h2, .outstanding-histories .card-container ._secondary-card .title, .data-grid .content .grid-wrapper .data-block h2, .back-map p, #publishing-view .main-wrapper > header h2, .publication section h2, .publication section.content-section .pdf-rectangle h1, .about-us .who-we-are-wrapper .container h2, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper h2, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper h2, .about-us .who-we-are-wrapper .nav-content .submenu-content h2, .nav-content .about-us .who-we-are-wrapper .submenu-content h2, .about-us .people-grid-wrapper .container > h2, .about-us .people-grid-wrapper .consultant-cv > header .back-wrapper > h2, .consultant-cv > header .about-us .people-grid-wrapper .back-wrapper > h2, .about-us .people-grid-wrapper .nav-content .submenu-content > h2, .nav-content .about-us .people-grid-wrapper .submenu-content > h2, .results .tabs header .description-container p, .futureEvents section.file-section .pdf-rectangle h2, .futureEvents section.contact-person h2, .pastEvents .content-wrap section h2, .pastEvents .content-wrap section.file-section .pdf-rectangle h2, .pastEvents .content-wrap section.highlights-section .highlight-text, .impact section.impact-section p, .impact section.quote-section .quote-rectangle p, .error404 section h2 {
+  .text-501, .lightbox.modal .modal-body h2, .outstanding-histories .card-container ._secondary-card .title, .data-grid .content .grid-wrapper .data-block h2, .back-map p, #publishing-view .main-wrapper > header h2, .publication section h2, .publication section.content-section .pdf-rectangle h1, .about-us .who-we-are-wrapper .container h2, .about-us .who-we-are-wrapper .consultant-cv > header .back-wrapper h2, .consultant-cv > header .about-us .who-we-are-wrapper .back-wrapper h2, .about-us .who-we-are-wrapper .nav-content .submenu-content h2, .nav-content .about-us .who-we-are-wrapper .submenu-content h2, .about-us .people-grid-wrapper .container > h2, .about-us .people-grid-wrapper .consultant-cv > header .back-wrapper > h2, .consultant-cv > header .about-us .people-grid-wrapper .back-wrapper > h2, .about-us .people-grid-wrapper .nav-content .submenu-content > h2, .nav-content .about-us .people-grid-wrapper .submenu-content > h2, .results .tabs header .description-container p, .futureEvents section.file-section .pdf-rectangle h2, .futureEvents section.contact-person h2, .pastEvents .content-wrap section h2, .pastEvents .content-wrap section.file-section .pdf-rectangle h2, .pastEvents .content-wrap section.highlights-section .highlight-text, .impact section.impact-section p, .impact section.quote-section .quote-rectangle p, .general-content-text section h2 {
     font-size: 17px;
   }
   /* line 100, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
@@ -11554,7 +11554,7 @@ $screen-lg-min: 1200px;
     font-size: 24px;
   }
   /* line 110, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
-  .text-720, .consultant-main-data-wrapper > h1, .back-map h1, .tabs header.title-description h1, #publishing-view .main-wrapper > header h1, .publication .header-section header h1, .impact section.impact-section h1, .error404 section h1 {
+  .text-720, .consultant-main-data-wrapper > h1, .back-map h1, .tabs header.title-description h1, #publishing-view .main-wrapper > header h1, .publication .header-section header h1, .impact section.impact-section h1, .general-content-text section h1 {
     font-size: 25px;
   }
   /* line 111, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/_font-sizes.scss */
@@ -11885,64 +11885,65 @@ form label {
 /* line 10, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover.left {
   margin-left: -16px;
+  max-height: 50px;
 }
 
-/* line 14, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 15, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .twitter-icon {
   font-size: 30px;
   cursor: pointer;
   color: #1da1f2;
 }
 
-/* line 18, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 19, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .twitter-icon:hover, .popover .twitter-icon:focus, .popover .twitter-icon:active {
   text-decoration: none;
 }
 
-/* line 22, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 23, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .facebook-icon {
   font-size: 30px;
   cursor: pointer;
   color: #485dae;
 }
 
-/* line 26, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 27, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .facebook-icon:hover, .popover .facebook-icon:focus, .popover .facebook-icon:active {
   text-decoration: none;
 }
 
-/* line 30, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 31, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .googleplus-icon {
   font-size: 30px;
   cursor: pointer;
   color: #dc4e41;
 }
 
-/* line 34, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 35, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .googleplus-icon:hover, .popover .googleplus-icon:focus, .popover .googleplus-icon:active {
   text-decoration: none;
 }
 
-/* line 38, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 39, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .pinterest-icon {
   font-size: 30px;
   cursor: pointer;
   color: #d13e3e;
 }
 
-/* line 42, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 43, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .pinterest-icon:hover, .popover .pinterest-icon:focus, .popover .pinterest-icon:active {
   text-decoration: none;
 }
 
-/* line 46, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 47, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .linkedin-icon {
   font-size: 30px;
   cursor: pointer;
   color: #0f86bf;
 }
 
-/* line 50, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
+/* line 51, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/modules/forms/_popover.scss */
 .popover .linkedin-icon:hover, .popover .linkedin-icon:focus, .popover .linkedin-icon:active {
   text-decoration: none;
 }
@@ -13929,7 +13930,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 /* line 57, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_latests-tweets.scss */
-.latests-tweets footer a.readmore:hover {
+.latests-tweets footer a.readmore:hover, .latests-tweets footer a.readmore:focus, .latests-tweets footer a.readmore:active {
   text-decoration: none;
   color: #1464A5;
 }
@@ -13945,17 +13946,24 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 /* line 3, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .retweet-row {
   margin-bottom: 8px;
-  min-height: 10px;
+  min-height: 23px;
 }
 
-/* line 6, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+@media (max-width: 767px) {
+  /* line 3, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  .tweet .retweet-row {
+    min-height: 0;
+  }
+}
+
+/* line 9, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .retweet-row .retweet-icon {
   color: #ffffff;
   background-color: #19cf86;
   border-radius: 3px;
 }
 
-/* line 11, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 14, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .retweet-row p {
   font-family: "BentonSans";
   font-size: 13px;
@@ -13965,26 +13973,26 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   display: inline;
 }
 
-/* line 21, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 24, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .image-container {
   width: 68px;
   height: 68px;
 }
 
-/* line 24, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 27, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .image-container img {
   width: 100%;
   height: 100%;
   border-radius: 100%;
 }
 
-/* line 31, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 34, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container {
   width: calc(100% - 68px);
   font-size: 15px;
 }
 
-/* line 34, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 37, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .user-info {
   text-overflow: ellipsis;
   overflow-x: hidden;
@@ -13992,18 +14000,18 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   font-weight: 500;
 }
 
-/* line 37, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 40, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .user-info .user-name {
   margin-right: 0.5rem;
   color: #121212;
 }
 
-/* line 41, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 44, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .user-info .account {
   color: #bdbdbd;
 }
 
-/* line 46, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 49, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .tweet-content {
   margin-top: 0;
   background: transparent;
@@ -14025,7 +14033,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @-moz-document url-prefix() {
-  /* line 46, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  /* line 49, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
   .tweet .data-container .tweet-content {
     overflow: hidden;
     position: relative;
@@ -14053,20 +14061,20 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 46, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  /* line 49, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
   .tweet .data-container .tweet-content {
     color: #121212;
     font-size: 13px !important;
   }
 }
 
-/* line 57, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 60, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .tweet-content b {
   color: #2a86ca;
   font-weight: 500;
 }
 
-/* line 63, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 66, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics {
   text-overflow: ellipsis;
   overflow-x: hidden;
@@ -14075,12 +14083,12 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #666666;
 }
 
-/* line 68, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 71, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics > div {
   display: inline-block;
 }
 
-/* line 73, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 76, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes > span:first-child, .tweet .data-container .statistics .likes > a:first-child,
 .tweet .data-container .statistics .share > span:first-child,
 .tweet .data-container .statistics .share > a:first-child {
@@ -14089,7 +14097,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   font-size: 18px;
 }
 
-/* line 77, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 80, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes > span:first-child:hover, .tweet .data-container .statistics .likes > span:first-child:active, .tweet .data-container .statistics .likes > span:first-child:focus, .tweet .data-container .statistics .likes > a:first-child:hover, .tweet .data-container .statistics .likes > a:first-child:active, .tweet .data-container .statistics .likes > a:first-child:focus,
 .tweet .data-container .statistics .share > span:first-child:hover,
 .tweet .data-container .statistics .share > span:first-child:active,
@@ -14100,20 +14108,20 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   text-decoration: none;
 }
 
-/* line 81, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 84, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes span,
 .tweet .data-container .statistics .share span {
   font-size: 13px;
   font-weight: 600;
 }
 
-/* line 86, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 89, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .share,
 .tweet .data-container .statistics .date {
   padding-left: 20px;
 }
 
-/* line 90, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 93, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .date {
   height: 22px;
   line-height: 16px;
@@ -14122,51 +14130,51 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 97, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  /* line 100, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
   .tweet .data-container .statistics .share,
   .tweet .data-container .statistics .date {
     padding-left: 10px;
   }
-  /* line 101, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+  /* line 104, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
   .tweet .data-container .statistics .likes,
   .tweet .data-container .statistics .date {
     font-size: 13px;
   }
 }
 
-/* line 106, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 109, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes {
   position: relative;
 }
 
-/* line 108, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 111, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes .bbva-icon-favorite {
   cursor: pointer;
 }
 
-/* line 110, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 113, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes .bbva-icon-favorite:hover {
   color: #da3851;
 }
 
-/* line 114, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 117, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .likes .tweet-like-count {
   position: absolute;
   top: 1px;
   padding-left: 3px;
 }
 
-/* line 120, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 123, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .share .bbva-icon-share {
   cursor: pointer;
 }
 
-/* line 122, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 125, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .statistics .share .bbva-icon-share:hover {
   color: #1da1f2;
 }
 
-/* line 128, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 131, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .popover-twitter {
   background-color: #f4f4f4;
   padding-top: 15px;
@@ -14178,7 +14186,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   min-width: 165px;
 }
 
-/* line 137, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 140, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .popover-twitter label {
   opacity: 0.6;
   font-family: "BentonSans";
@@ -14188,7 +14196,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #666666;
 }
 
-/* line 145, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 148, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .popover-twitter .rrss-links {
   padding-left: 0;
   margin-bottom: 0;
@@ -14200,7 +14208,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   list-style: none;
 }
 
-/* line 147, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 150, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .popover-twitter .rrss-links a {
   font-family: "BentonSans";
   font-weight: 600;
@@ -14209,17 +14217,17 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   color: #121212;
 }
 
-/* line 153, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
-.tweet .data-container .popover-twitter .rrss-links a:hover {
+/* line 156, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+.tweet .data-container .popover-twitter .rrss-links a:hover, .tweet .data-container .popover-twitter .rrss-links a:focus, .tweet .data-container .popover-twitter .rrss-links a:active {
   text-decoration: none;
 }
 
-/* line 159, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 162, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .arrow_box {
   margin-top: 10px;
 }
 
-/* line 162, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
+/* line 165, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_tweet.scss */
 .tweet .data-container .arrow_box:after {
   bottom: 100%;
   left: 50%;
@@ -17035,7 +17043,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 /* line 159, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/_navbar.scss */
 .nav-content .navbar-search {
   position: absolute;
-  z-index: 5;
+  z-index: 10;
   display: none;
 }
 
@@ -21678,7 +21686,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 /* line 3, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-.error404 section h1 {
+.general-content-text section h1 {
   font-family: "BentonSans";
   font-weight: 700;
   line-height: 50px;
@@ -21686,7 +21694,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 /* line 11, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-.error404 section h2 {
+.general-content-text section h2 {
   font-family: "BentonSans";
   font-weight: 600;
   line-height: 29px;
@@ -21694,7 +21702,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 /* line 19, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-.error404 section p {
+.general-content-text section p {
   font-family: "BentonSans";
   font-weight: 600;
   line-height: 23px;
@@ -21702,21 +21710,26 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   max-width: 750px;
 }
 
+/* line 28, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
+.general-content-text.bg-gray {
+  background-color: #f4f4f4;
+}
+
 @media (max-width: 768px) {
-  /* line 29, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-  .error404 section {
+  /* line 32, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
+  .general-content-text section {
     margin-bottom: 80px;
   }
-  /* line 32, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-  .error404 section h1 {
+  /* line 35, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
+  .general-content-text section h1 {
     line-height: 30px;
   }
-  /* line 33, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-  .error404 section h2 {
+  /* line 36, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
+  .general-content-text section h2 {
     line-height: 23px;
   }
-  /* line 35, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
-  .error404 section p {
+  /* line 38, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/views/_error404.scss */
+  .general-content-text section p {
     color: #121212;
     line-height: 18px;
     margin-top: 15px;
