@@ -1555,7 +1555,7 @@ var dataMap = [
 ];
 
 
-var dataEvents = [
+/*var dataEvents = [
     {
         'id'        : '2014',
         'title'     : 'Bancomer Educación Financiera',
@@ -1572,7 +1572,7 @@ var dataEvents = [
         'latitude'  : '-34.197',
         'longitude' : '150.844'
     }
-];
+];*/
 
 jQuery.noConflict();
 jQuery(document).ready(function ($) {

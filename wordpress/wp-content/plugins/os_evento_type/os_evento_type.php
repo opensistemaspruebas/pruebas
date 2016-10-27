@@ -92,6 +92,7 @@ if (!class_exists('OS_Evento_Type')) {
         	add_meta_box('evento_video_o_imagen_de_cabecera',  __('Cabecera del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_video_o_imagen_de_cabecera'), 'evento', 'normal', 'high');
         	add_meta_box('evento_descripcion',  __('Descripción del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_descripcion'), 'evento', 'normal', 'high');
 			add_meta_box('evento_documento',  __('Documento', 'os_evento_type'), array(&$this, 'meta_box_evento_documento'), 'evento', 'normal', 'high');
+			add_meta_box('evento_localizacion',  __('Localización', 'os_evento_type'), array(&$this, 'meta_box_evento_localizacion'), 'evento', 'normal', 'high');
         	add_meta_box('evento_programa',  __('Programa del evento', 'os_evento_type'), array(&$this, 'meta_box_evento_programa'), 'evento', 'normal', 'high');
             add_meta_box('evento_persona_de_contacto',  __('Persona de contacto', 'os_evento_type'), array(&$this, 'meta_box_evento_persona_de_contacto'), 'evento', 'normal', 'high');
 		}
@@ -268,7 +269,7 @@ if (!class_exists('OS_Evento_Type')) {
 			$evento_localizacion = get_post_meta($post->ID, 'evento_localizacion', true);
 			?>
 			<p><?php _e('Esta es la localización del evento. Los campos de título y dirección se mostrarán de manera informativa en los widgets y páginas de detalle de eventos.', 'os_evento_type'); ?></p>
-			<p><?php _e('Para colocar el tooltip del mapa en la página de detalle de evento futuro se utilizarán los campos de latitud, longitud y altitud.', 'os_evento_type'); ?></p>
+			<p><?php _e('Para colocar el tooltip del mapa en la página de detalle de evento futuro se utilizarán los campos de latitud, longitud y distancia.', 'os_evento_type'); ?></p>
 			<p>
 				<label class="classfat" for="evento_localizacion[0]"><?php _e('Título de la localización', 'os_evento_type'); ?></label>
 				<input type="text" id="evento_localizacion[0]" name="evento_localizacion[0]" class="widefat" placeholder="<?php _e('Título', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[0]; ?>">
@@ -290,9 +291,9 @@ if (!class_exists('OS_Evento_Type')) {
 				<span class="description">(<?php _e('Por ejemplo: 150.644', 'os_evento_type'); ?>)</span>
 			</p>
 			<p>
-				<label class="classfat" for="evento_localizacion[5]"><?php _e('Altitud', 'os_evento_type'); ?></label>
-				<input type="number" step="any" id="evento_localizacion[5]" name="evento_localizacion[5]" class="widefat" placeholder="<?php _e('Altitud', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[5]; ?>">
-				<span class="description">(<?php _e('Por ejemplo: 0.8', 'os_evento_type'); ?>)</span>
+				<label class="classfat" for="evento_localizacion[5]"><?php _e('Distancia', 'os_evento_type'); ?></label>
+				<input type="text" step="any" id="evento_localizacion[5]" name="evento_localizacion[5]" class="widefat" placeholder="<?php _e('Distancia', 'os_evento_type'); ?>" value="<?php echo $evento_localizacion[5]; ?>">
+				<span class="description">(<?php _e('Por ejemplo: 2.8 Miles', 'os_evento_type'); ?>)</span>
 			</p>
 			<?php   
 		}

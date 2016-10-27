@@ -66,6 +66,8 @@
 
     $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
 
+    $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
+
 
 ?>
 
@@ -404,7 +406,22 @@
                 </div>
             </div>
         </section>
-        <section id="mapSection" class="map-section id-2015"></section>
+        <?php if (!empty($evento_localizacion)) : ?>
+            <?php
+
+                $dataEvents = array();
+                $dataEvents['id'] = $evento_id;
+                $dataEvents['title'] = $evento_localizacion[0];
+                $dataEvents['content'] = $evento_localizacion[1];
+                $dataEvents['distance'] = $evento_localizacion[5];
+                $dataEvents['latitude'] = $evento_localizacion[3];
+                $dataEvents['longitude'] = $evento_localizacion[4];
+
+                echo "<script>var dataEvents = [" . json_encode($dataEvents) . "];</script>";
+
+            ?>
+            <section id="mapSection" class="map-section id-<?php echo $evento_id; ?>"></section>
+        <?php endif; ?>
     </div>
     <?php the_widget('os_prefooter', array('color_fondo' => 'blanco', 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera')); ?>
 </div>
