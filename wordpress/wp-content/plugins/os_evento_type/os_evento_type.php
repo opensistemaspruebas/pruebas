@@ -324,6 +324,11 @@ if (!class_exists('OS_Evento_Type')) {
 			<p>
 				<input id="upload_evento_imagen_perfil" name="upload_evento_imagen_perfil" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
 			</p>
+			<p>
+				<label class="classfat" for="evento_persona_de_contacto[3]"><?php _e('Email', 'os_evento_type'); ?></label>
+				<input type="text" id="evento_persona_de_contacto[3]" name="evento_persona_de_contacto[3]" class="widefat" placeholder="<?php _e('Email', 'os_evento_type'); ?>" value="<?php echo $evento_persona_de_contacto[3]; ?>">
+				<span class="description">(<?php _e('Por ejemplo: example@mail.com', 'os_evento_type'); ?>)</span>
+			</p>
 			<?php
 		}
 

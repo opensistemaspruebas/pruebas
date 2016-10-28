@@ -10,14 +10,16 @@
 
 <?php
 
+    $evento_pasado = true;
+
     $evento_id = get_the_ID();
-
     $titulo = get_the_title();
-
     $imagenCabecera = get_post_meta($evento_id, 'imagenCabecera', true);
-
     $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
-
+    $evento_documento = get_post_meta($evento_id, 'evento_documento', true); 
+    $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
+    $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
+    $evento_highlights = get_post_meta($evento_id, 'evento_highlights', true);
     $format = "Y-m-d";
     $evento_fecha_de_inicio = get_post_meta($evento_id, 'evento_fecha_de_inicio', true);
     $evento_fecha_de_final = get_post_meta($evento_id, 'evento_fecha_de_final', true);
@@ -45,34 +47,15 @@
     } else {
         $fecha_evento = $dateobj_inicio->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_inicio->format('m') - 1] . ', ' . $dateobj_inicio->format('Y') . '-' . $dateobj_final->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_final->format('m') - 1] . ', ' . $dateobj_final->format('Y');
     }
-
     $now = new DateTime();
-
     $dateobj_inicio->setTime(0,0,0);
-
     $interval = $dateobj_inicio->diff($now);
-
     $evento_url_registro = get_post_meta($evento_id, 'evento_url_registro', true);
-
     $evento_descripcion_larga = get_post_meta($evento_id, 'evento_descripcion_larga', true);
-
     $evento_topics = get_post_meta($evento_id, 'evento_topics', true);
-
     $evento_te_interesas = get_post_meta($evento_id, 'evento_te_interesa', true);
-
     $evento_elemento_programa = get_post_meta($evento_id, 'evento_elemento_programa', true);
     if (!empty($evento_elemento_programa)) {
-        $sortArray = array(); 
-        foreach($evento_elemento_programa as $e){ 
-            foreach($e as $key=>$value){ 
-                if(!isset($sortArray[$key])){ 
-                    $sortArray[$key] = array(); 
-                } 
-                $sortArray[$key][] = $value; 
-            } 
-        } 
-        $orderby = "dia"; //change this to whatever key you want from the array 
-        array_multisort($sortArray[$orderby],SORT_ASC,$evento_elemento_programa);
         $programa = array();
         foreach ($evento_elemento_programa as $e) {
             $dia = $e['dia'];
@@ -80,23 +63,11 @@
         }
     }
 
-
-
-    $evento_documento = get_post_meta($evento_id, 'evento_documento', true); 
-
-    $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
-
-    $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
-
-
-
-
 ?>
 
 <div class="contents">
     <div id="search-layer"></div>
-    <div class="futureEvents">
-        
+    <div class="<?php if ($evento_pasado) echo 'pastEvents'; else echo 'futureEvents'; ?>">
         <section class="block-image wow fadeInUp">
             <div class="visible-xs">
                 <h1 class="screen-title mt-xs mb-sm"><?php echo $titulo; ?></h1><img class="img-responsive" src="<?php echo $imagenCabecera; ?>" alt="image title" />
@@ -133,8 +104,24 @@
         </section>
         <div class="container content-wrap mb-xl">
             <?php get_template_part('content','rrsseventos'); ?>
+            <?php if (!empty($evento_highlights)) : ?>
+                <section class="highlights-section mt-xl">
+                    <h1 class="mb-md mt-md"><?php _e('Highlights'); ?></h1>
+                        <?php $m = 0; ?>
+                        <?php foreach ($evento_highlights as $h) : ?>
+                            <?php if (empty($h)) continue; else $m++; ?>
+                            <div class="row mb-md">
+                                <div class="col-xs-1 card-icon icon-publication ml-xs"><span><?php echo $m; ?></span>
+                                    <div class="triangle triangle-up-left"></div>
+                                    <div class="triangle triangle-down-right"></div>
+                                </div>
+                                <span class="highlight-text"><?php echo $h; ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                </section>
+            <?php endif; ?>
             <?php if (!empty($evento_descripcion_larga)) : ?>
-                <section class="description-section">
+                <section class="description-section mt-lg">
                     <h1 class="mb-md"><?php _e('Descripción'); ?></h1>
                     <?php echo wpautop($evento_descripcion_larga); ?>
                 </section>
@@ -147,13 +134,13 @@
                             <div class="col-xs-12">
                                 <div class="rectangle"></div>
                                 <div class="pre-rectangle"></div>
-                                <p><?php echo $evento_topic; ?></p>
+                                <p class="topics-section-topic-text"><?php echo $evento_topic; ?></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </section>
             <?php endif; ?>
-            <?php if (!empty($evento_te_interesas)) : ?>
+            <?php if ($evento_pasado == false && !empty($evento_te_interesas)) : ?>
                 <section class="interest-section mt-lg">
                     <h1 class="mb-md"><?php _e('Te interesa si...'); ?></h1>
                     <div class="row">
@@ -167,139 +154,129 @@
                     </div>
                 </section>
             <?php endif; ?>
-            <?php if (!empty($programa)) : ?>
+            <?php if ($evento_pasado == false && !empty($programa)) : ?>
                 <section class="program-section mt-lg">
                     <h1 class="mb-md"><?php _e('Programa'); ?></h1>
                     <div class="visible-xs">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="dropdown mb-md"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Día 22 de octubre 2017<span class="icon bbva-icon-arrow_bottom"></span></a>
+                            <li class="dropdown mb-md">
+                                <?php 
+
+                                    foreach ($programa as $p) {
+                                        $dia = $p[0]['dia'];
+                                        $dateobj_dia = DateTime::createFromFormat($format, $dia);
+                                        $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');   
+                                        break;
+                                    }
+
+                                ?>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $dia_formateado; ?><span class="icon bbva-icon-arrow_bottom"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li role="presentation"><a href="#day1" aria-controls="day1" role="tab" data-toggle="tab">Día 22 de octubre 2017</a></li>
-                                    <li role="presentation"><a href="#day2" aria-controls="day2" role="tab" data-toggle="tab">Día 25 de mayo 2018</a></li>
+                                    <?php $l = 1; ?>
+                                    <?php foreach ($programa as $p) : ?>
+                                        <?php
+                                            
+                                            $dia = $p[0]['dia'];
+                                            $dateobj_dia = DateTime::createFromFormat($format, $dia);
+                                            $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');   
+                                            
+                                        ?>
+                                        <li role="presentation"><a href="#day<?php echo $l; ?>" aria-controls="day<?php echo $l; ?>" role="tab" data-toggle="tab"><?php echo $dia_formateado; ?></a></li>
+                                        <?php $l++; ?>
+                                    <?php endforeach; ?>
                                 </ul>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane  active " id="day1">
-                                <div>
-                                    <div class="program visible-xs">
-                                        <div class="program-day">
-                                            <div class="program-content">
-                                                <div class="individual-info  animate fadeIn  ">
-                                                    <div class="col-xs-1 nopadding">
-                                                        <div class="redbullet"></div>
-                                                    </div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">12:00 <span class="duration">(45min)</span></span>
-                                                        </div>
-                                                        <div class="information-xs talk-bubble tri-right">
-                                                            <div class="talktext">
-                                                                <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                            <?php $j = 1; ?>
+                            <?php foreach ($programa as $p) : ?>
+                                <?php 
+
+                                    $active = '';
+                                    if ($j == 1) $active = 'active';
+
+                                ?>
+                                <div role="tabpanel" class="tab-pane <?php echo $active; ?>" id="day<?php echo $j; ?>">
+                                    <div>
+                                        <div class="program visible-xs">
+                                            <div class="program-day">
+                                                <div class="program-content">
+                                                    <?php 
+
+                                                        $numItems = count($p);
+                                                        $k = 0;
+
+                                                    ?>
+                                                    <?php foreach ($p as $e) : ?>
+                                                        <?php
+
+                                                            $inicio = $e['inicio'];
+                                                            $duracion = $e['duracion'];
+                                                            $titulo = $e['titulo'];
+                                                            $descripcion = $e['descripcion'];
+                                                            $ponentes = $e['ponentes'];
+                                                            $moderador = $e['moderador'];
+                                                            $tipo = $e['tipo'];
+
+                                                            $class = '';
+                                                            if ($tipo == "descanso") {
+                                                                $class = "break";
+                                                                if (++$i === $numItems) {
+                                                                    $class .= ' last-child';
+                                                                }
+                                                            }
+
+                                                        ?>
+                                                        <div class="individual-info animate fadeIn <?php echo $class; ?>">
+                                                            <div class="col-xs-1 nopadding">
+                                                                <?php if ($tipo !== "descanso") : ?>
+                                                                    <div class="redbullet"></div>
+                                                                <?php else : ?>
+                                                                    <span class="break-icon bbva-icon-coffe"></span>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                            <div class="col-xs-11">
+                                                                <div class="time">
+                                                                    <span class="hour">
+                                                                        <?php echo $inicio; if ($tipo == "descanso") echo ' ' . $titulo; ?>
+                                                                        <span class="duration">(<?php echo $duracion; ?>)</span>
+                                                                    </span>
+                                                                </div>
+                                                                <?php if ($tipo !== "descanso") : ?>
+                                                                    <div class="information-xs talk-bubble tri-right">
+                                                                        <div class="talktext">
+                                                                            <h3 class="ml-md pr-md pt-md"><?php echo $titulo; ?></h3>
+                                                                            <p class="ml-md pr-md"><?php echo $descripcion; ?></p>
+                                                                            <?php if (!empty($ponentes)) : ?>
+                                                                                <p class="ml-md pr-md pb-md">
+                                                                                    <?php _e('Ponentes', 'os_evento_futuro_widget'); ?>:
+                                                                                    <?php foreach ($ponentes as $p) : ?>
+                                                                                        <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
+                                                                                    <?php endforeach; ?>
+                                                                                </p>
+                                                                                <?php if (!empty($moderador)) : ?>
+                                                                                    <p class="ml-md pr-md pb-md">
+                                                                                        <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
+                                                                                        <strong class="ml-xs"><?php echo $moderador; ?></strong>
+                                                                                    </p>
+                                                                                <?php endif; ?>
+                                                                            <?php endif; ?>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php endif; ?>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="individual-info  animate fadeIn  break">
-                                                    <div class="col-xs-1 nopadding"><span class="break-icon bbva-icon-coffe"></span></div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">13:00 Coffe break <span class="duration">(15min)</span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="individual-info last-child animate fadeIn  ">
-                                                    <div class="col-xs-1 nopadding">
-                                                        <div class="redbullet"></div>
-                                                    </div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">14:00 <span class="duration">(45min)</span></span>
-                                                        </div>
-                                                        <div class="information-xs talk-bubble tri-right">
-                                                            <div class="talktext">
-                                                                <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <?php endforeach; ?>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="program hidden-xs">
-                                        <div class="program-day"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane " id="day2">
-                                <div>
-                                    <div class="program visible-xs">
-                                        <div class="program-day">
-                                            <div class="program-content">
-                                                <div class="individual-info  animate fadeIn  ">
-                                                    <div class="col-xs-1 nopadding">
-                                                        <div class="redbullet"></div>
-                                                    </div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">22:00 <span class="duration">(45min)</span></span>
-                                                        </div>
-                                                        <div class="information-xs talk-bubble tri-right">
-                                                            <div class="talktext">
-                                                                <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="individual-info  animate fadeIn  break">
-                                                    <div class="col-xs-1 nopadding"><span class="break-icon bbva-icon-coffe"></span></div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">23:00 Coffe break <span class="duration">(15min)</span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="individual-info  animate fadeIn  ">
-                                                    <div class="col-xs-1 nopadding">
-                                                        <div class="redbullet"></div>
-                                                    </div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">24:00 <span class="duration">(45min)</span></span>
-                                                        </div>
-                                                        <div class="information-xs talk-bubble tri-right">
-                                                            <div class="talktext">
-                                                                <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="individual-info last-child animate fadeIn  ">
-                                                    <div class="col-xs-1 nopadding">
-                                                        <div class="redbullet"></div>
-                                                    </div>
-                                                    <div class="col-xs-11">
-                                                        <div class="time"><span class="hour">01:00 <span class="duration">(45min)</span></span>
-                                                        </div>
-                                                        <div class="information-xs talk-bubble tri-right">
-                                                            <div class="talktext">
-                                                                <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="program hidden-xs">
+                                            <div class="program-day"></div>
                                         </div>
                                     </div>
-                                    <div class="program hidden-xs">
-                                        <div class="program-day"></div>
-                                    </div>
                                 </div>
-                            </div>
+                                <?php $j++; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="hidden-xs">
@@ -311,35 +288,77 @@
                         <div class="program hidden-xs">
                             <div class="program-day">
                                 <?php foreach ($programa as $p) : ?>
-                                    <h2 class="mt-xl">Día 22 de octubre 2017 <?php echo $p[0]['dia']; ?></h2>
+                                    <?php 
+
+                                        $dia = $p[0]['dia'];
+                                        $dateobj_dia = DateTime::createFromFormat($format, $dia);
+                                        $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');
+
+                                    ?>
+                                    <h2 class="mt-xl"><?php echo $dia_formateado; ?></h2>
                                     <div class="program-content">
-                                        <div class="individual-info  wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">12:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                                        <?php
+
+                                            $numItems = count($p);
+                                            $i = 0;
+
+                                        ?>
+                                        <?php foreach ($p as $e) : ?>
+                                            <?php 
+                                            
+                                                $inicio = $e['inicio'];
+                                                $duracion = $e['duracion'];
+                                                $titulo = $e['titulo'];
+                                                $descripcion = $e['descripcion'];
+                                                $ponentes = $e['ponentes'];
+                                                $moderador = $e['moderador'];
+                                                $tipo = $e['tipo'];
+
+                                                $class = '';
+                                                if ($tipo == "descanso") {
+                                                    $class = "break";
+                                                    if (++$i === $numItems) {
+                                                        $class .= ' last-child';
+                                                    }
+                                                }
+
+
+                                            ?>
+                                            <div class="individual-info wow <?php echo $class; ?>">
+                                                <div class="redbullet"></div>
+                                                <div class="time">
+                                                    <span class="hour"><?php echo $inicio; ?></span>
+                                                    <span class="duration">(<?php echo $duracion; ?>)</span>
                                                 </div>
+                                                <?php if ($tipo !== "descanso") : ?>
+                                                    <div class="information ml-sm talk-bubble tri-right left-top">
+                                                        <div class="talktext">
+                                                            <h3 class="ml-md"><?php echo $titulo; ?></h3>
+                                                            <p class="ml-md"><?php echo $descripcion; ?></p>
+                                                            <?php if (!empty($ponentes)) : ?>
+                                                            <p class="ml-md mb-md">
+                                                                <?php _e('Ponentes', 'os_evento_futuro_widget'); ?>:
+                                                                <?php foreach ($ponentes as $p) : ?>
+                                                                    <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
+                                                                <?php endforeach; ?>
+                                                            </p>
+                                                            <?php endif; ?>
+                                                            <?php if (!empty($moderador)) : ?>
+                                                                <p class="ml-md mb-md">
+                                                                    <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
+                                                                    <strong class="ml-xs"><?php echo $moderador; ?></strong>
+                                                                </p>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                <?php else : ?>
+                                                    <div class="coffee-break">
+                                                        <span class="bbva-icon-coffe"></span>
+                                                        <span class="text"><?php echo $titulo; ?></span>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
-                                        </div>
-                                        <div class="individual-info  wow fadeIn break">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">13:00</span><span class="duration">(15min)</span></div>
-                                            <div class="coffee-break"><span class="bbva-icon-coffe"></span><span class="text">Coffee Break</span></div>
-                                        </div>
-                                        <div class="individual-info last-child wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">14:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -367,7 +386,7 @@
                 </section>
             <?php endif; ?>
         </div>
-        <?php if (!empty($evento_persona_de_contacto)) : ?>
+        <?php if ($evento_pasado == false && !empty($evento_persona_de_contacto)) : ?>
             <section class="contact-person">
                 <div class="container content-wrap">
                     <h1 class="mt-xl"><?php _e('Persona de contacto'); ?></h1>
@@ -378,12 +397,13 @@
                         <div class="image-wrapper"><img src="<?php echo $evento_persona_de_contacto[2]; ?>" alt="" /></div>
                         <div class="data-wrapper"><span><?php echo $evento_persona_de_contacto[0]; ?></span>
                             <p><?php echo $evento_persona_de_contacto[1]; ?></p>
+                            <a href="mailto:<?php echo $evento_persona_de_contacto[3]; ?>"><?php echo $evento_persona_de_contacto[3]; ?></a>
                     </section>
                     <!-- EO person -->
                 </div>
             </section>
         <?php endif; ?>
-        <?php if ($evento_url_registro) : ?>
+        <?php if ($evento_pasado == false &&  $evento_url_registro) : ?>
             <section class="attend">
                 <div class="container content-wrap">
                     <div class="row mb-lg">
@@ -395,7 +415,7 @@
                 </div>
             </section>
         <?php endif; ?>
-        <?php if (!empty($evento_localizacion)) : ?>
+        <?php if ($evento_pasado == false && !empty($evento_localizacion)) : ?>
             <?php
 
                 $dataEvents = array();
