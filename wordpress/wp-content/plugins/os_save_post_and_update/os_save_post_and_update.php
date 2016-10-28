@@ -220,7 +220,7 @@ function fetch_autores($post_type, $order, $author){
 function save_post_and_update($post_id) {
 
 	// si entramos a crear un post
-	if ('auto-draft' === get_post_status($post_id))
+	if ('auto-draft' === get_post_status($post_id) || 'draft' === get_post_status($post_id))
 		return false;
 
 

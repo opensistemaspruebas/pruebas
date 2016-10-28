@@ -10,6 +10,8 @@
 
 <?php
 
+    $evento_pasado = true;
+
     $evento_id = get_the_ID();
     $titulo = get_the_title();
     $imagenCabecera = get_post_meta($evento_id, 'imagenCabecera', true);
@@ -17,6 +19,7 @@
     $evento_documento = get_post_meta($evento_id, 'evento_documento', true); 
     $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
     $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
+    $evento_highlights = get_post_meta($evento_id, 'evento_highlights', true);
     $format = "Y-m-d";
     $evento_fecha_de_inicio = get_post_meta($evento_id, 'evento_fecha_de_inicio', true);
     $evento_fecha_de_final = get_post_meta($evento_id, 'evento_fecha_de_final', true);
@@ -64,8 +67,7 @@
 
 <div class="contents">
     <div id="search-layer"></div>
-    <div class="futureEvents">
-        
+    <div class="<?php if ($evento_pasado) echo 'pastEvents'; else echo 'futureEvents'; ?>">
         <section class="block-image wow fadeInUp">
             <div class="visible-xs">
                 <h1 class="screen-title mt-xs mb-sm"><?php echo $titulo; ?></h1><img class="img-responsive" src="<?php echo $imagenCabecera; ?>" alt="image title" />
@@ -102,6 +104,18 @@
         </section>
         <div class="container content-wrap mb-xl">
             <?php get_template_part('content','rrsseventos'); ?>
+            <?php if (!empty($evento_highlights)) : ?>
+            <section class="highlights-section mt-xl">
+                <h1 class="mb-md mt-md"><?php _e('Highlights'); ?></h1>
+                <div class="row mb-md">
+                    <div class="col-xs-1 card-icon icon-publication ml-xs"><span>1</span>
+                        <div class="triangle triangle-up-left"></div>
+                        <div class="triangle triangle-down-right"></div>
+                    </div>
+                    <span class="highlight-text">Heat is the best friend of Spain, but if you want to be a little cooler go.</span>
+                </div>
+            </section>
+            <?php endif; ?>
             <?php if (!empty($evento_descripcion_larga)) : ?>
                 <section class="description-section">
                     <h1 class="mb-md"><?php _e('Descripción'); ?></h1>
@@ -122,7 +136,7 @@
                     </div>
                 </section>
             <?php endif; ?>
-            <?php if (!empty($evento_te_interesas)) : ?>
+            <?php if ($evento_pasado == false && !empty($evento_te_interesas)) : ?>
                 <section class="interest-section mt-lg">
                     <h1 class="mb-md"><?php _e('Te interesa si...'); ?></h1>
                     <div class="row">
@@ -136,7 +150,7 @@
                     </div>
                 </section>
             <?php endif; ?>
-            <?php if (!empty($programa)) : ?>
+            <?php if ($evento_pasado == false && !empty($programa)) : ?>
                 <section class="program-section mt-lg">
                     <h1 class="mb-md"><?php _e('Programa'); ?></h1>
                     <div class="visible-xs">
@@ -368,7 +382,7 @@
                 </section>
             <?php endif; ?>
         </div>
-        <?php if (!empty($evento_persona_de_contacto)) : ?>
+        <?php if ($evento_pasado == false && !empty($evento_persona_de_contacto)) : ?>
             <section class="contact-person">
                 <div class="container content-wrap">
                     <h1 class="mt-xl"><?php _e('Persona de contacto'); ?></h1>
@@ -385,7 +399,7 @@
                 </div>
             </section>
         <?php endif; ?>
-        <?php if ($evento_url_registro) : ?>
+        <?php if ($evento_pasado == false &&  $evento_url_registro) : ?>
             <section class="attend">
                 <div class="container content-wrap">
                     <div class="row mb-lg">
@@ -397,7 +411,7 @@
                 </div>
             </section>
         <?php endif; ?>
-        <?php if (!empty($evento_localizacion)) : ?>
+        <?php if ($evento_pasado == false && !empty($evento_localizacion)) : ?>
             <?php
 
                 $dataEvents = array();
