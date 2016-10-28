@@ -48,7 +48,7 @@
                                 <div class="form-group has-feedback">
                                     <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input" /><span class="bbva-icon-search form-control-feedback"></span></div>
                                 <div class="selected-tags-container"></div>
-                                <div class="button-filter"><a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Buscar'); ?></a></div>
+                                <div class="button-filter"><a href="#" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Buscar'); ?></a></div>
                             </header>
                             <section>
                                 <div class="row available-tags-wrapper">

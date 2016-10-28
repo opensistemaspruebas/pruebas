@@ -515,7 +515,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 		                    <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input">
 		                    <div class="selected-tags-container"></div>
 		                    <div class="button-filter">
-		                        <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Filtrar', 'os_filtro_widget'); ?></a>
+		                        <a href="#" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn"><?php _e('Filtrar', 'os_filtro_widget'); ?></a>
 		                    </div>
 		                </header>
 		                <section>
