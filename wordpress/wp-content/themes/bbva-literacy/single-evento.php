@@ -105,19 +105,23 @@
         <div class="container content-wrap mb-xl">
             <?php get_template_part('content','rrsseventos'); ?>
             <?php if (!empty($evento_highlights)) : ?>
-            <section class="highlights-section mt-xl">
-                <h1 class="mb-md mt-md"><?php _e('Highlights'); ?></h1>
-                <div class="row mb-md">
-                    <div class="col-xs-1 card-icon icon-publication ml-xs"><span>1</span>
-                        <div class="triangle triangle-up-left"></div>
-                        <div class="triangle triangle-down-right"></div>
-                    </div>
-                    <span class="highlight-text">Heat is the best friend of Spain, but if you want to be a little cooler go.</span>
-                </div>
-            </section>
+                <section class="highlights-section mt-xl">
+                    <h1 class="mb-md mt-md"><?php _e('Highlights'); ?></h1>
+                        <?php $m = 0; ?>
+                        <?php foreach ($evento_highlights as $h) : ?>
+                            <?php if (empty($h)) continue; else $m++; ?>
+                            <div class="row mb-md">
+                                <div class="col-xs-1 card-icon icon-publication ml-xs"><span><?php echo $m; ?></span>
+                                    <div class="triangle triangle-up-left"></div>
+                                    <div class="triangle triangle-down-right"></div>
+                                </div>
+                                <span class="highlight-text"><?php echo $h; ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                </section>
             <?php endif; ?>
             <?php if (!empty($evento_descripcion_larga)) : ?>
-                <section class="description-section">
+                <section class="description-section mt-lg">
                     <h1 class="mb-md"><?php _e('Descripción'); ?></h1>
                     <?php echo wpautop($evento_descripcion_larga); ?>
                 </section>
@@ -130,7 +134,7 @@
                             <div class="col-xs-12">
                                 <div class="rectangle"></div>
                                 <div class="pre-rectangle"></div>
-                                <p><?php echo $evento_topic; ?></p>
+                                <p class="topics-section-topic-text"><?php echo $evento_topic; ?></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
