@@ -364,3 +364,96 @@ function get_fecha_formateada($publication_date) {
 	$dateobj = DateTime::createFromFormat($format, $publication_date);
 	return $dateobj->format('d') . ' ' . $meses[$dateobj->format('m') - 1] . ' ' . $dateobj->format('Y');
 }
+
+
+function imprimir_json_etiquetas() {
+	$categories = get_terms(
+		array(
+			"taxonomy" => array("category"),
+			"hide_empty" => false,
+			"fields" => "id=>name"
+		)
+	);
+	$args_autores = 
+	$autores = get_posts(
+		array(
+			'posts_per_page'   => -1,
+			'offset'           => 0,
+			'orderby'          => 'post_title',
+			'order'            => 'ASC',
+			'post_type'        => 'guest-author',
+			'post_status'      => 'publish',
+			'suppress_filters' => true,
+			'tax_query' => array(
+		        array(
+		            'taxonomy' => 'perfil',
+		            'field'    => 'slug',
+		            'terms'    => 'autor'
+		        )
+		    )
+		)
+	);
+	$author_names = array();
+	if (!empty($autores)) {
+		foreach ($autores as $autor) {
+			$name = $autor->post_title;
+			array_push($author_names, $name);
+		}
+	}
+	$autores = get_users(
+		array(
+			'who' => 'authors',
+		)
+	);
+	if (!empty($autores)) {
+		foreach ($autores as $autor) {
+			$name = $autor->data->display_name;
+			array_push($author_names, $name);
+		}
+	}
+	$countries = get_terms(
+		array(
+			"taxonomy" => array("ambito_geografico"),
+			"hide_empty" => false,
+			"fields" => "id=>name"
+		)
+	);
+	$id = 1;
+	$data = array();
+	if (!empty($categories)) {
+		foreach ($categories as $key => $category) {
+			$tag = array();
+			$tag['text'] = $category;
+			$tag['deleteButton'] = false;
+			$tag['class'] = 'available-tag';
+			$tag['from'] = 'tag-container';
+			$tag['id'] = 'tag-' . $key;
+			array_push($data, $tag);
+			$id++;
+		}
+	}
+	if (!empty($author_names)) {
+		foreach ($author_names as $author_name) {
+			$tag = array();
+			$tag['text'] = $author_name;
+			$tag['deleteButton'] = false;
+			$tag['class'] = 'available-tag';
+			$tag['from'] = 'author-container';
+			$tag['id'] = 'tag-' . $id;
+			array_push($data, $tag);
+			$id++;
+		}	
+	}
+	if (!empty($countries)) {
+		foreach ($countries as $key => $country) {
+			$tag['text'] = $country;
+			$tag['deleteButton'] = false;
+			$tag['class'] = 'available-tag';
+			$tag['from'] = 'geo-container';
+			$tag['id'] = 'tag-' . $key;
+			array_push($data, $tag);
+			$id++;
+		}
+	}
+	echo "<script>var data = {'availableTags':" . json_encode($data) . "};</script>";
+}

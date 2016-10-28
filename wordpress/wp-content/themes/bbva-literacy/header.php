@@ -97,6 +97,7 @@
                         );
                         wp_nav_menu($args);
                     ?>
+                    <?php imprimir_json_etiquetas(); ?>
                     <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
                         <div class="search-form-container hidden">
                             <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">

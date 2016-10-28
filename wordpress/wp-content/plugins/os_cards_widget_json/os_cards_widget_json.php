@@ -504,6 +504,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	    </div>
 	</article>
 	<?php if (empty($author_name)): ?>
+		<?php imprimir_json_etiquetas(); ?>
 		<div class="filter-mobile closed hidden-sm hidden-md hidden-lg">
 		    <div class="container">
 		        <div class="close-filter-mobile">
