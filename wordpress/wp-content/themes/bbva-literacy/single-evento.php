@@ -10,7 +10,7 @@
 
 <?php
 
-    $evento_pasado = true;
+    $evento_pasado = false;
 
     $evento_id = get_the_ID();
     $titulo = get_the_title();
@@ -20,6 +20,16 @@
     $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
     $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
     $evento_highlights = get_post_meta($evento_id, 'evento_highlights', true);
+    $videoIntro_url = get_post_meta($evento_id, 'videoIntro-url', true);
+    $video_type = get_post_meta($evento_id,'video-type',true); 
+    $video_modal = '';  
+    if ($video_type == 'wordpress') {
+        $video_modal = get_post_meta($evento_id,'wp-video-url',true);
+    } else if ($video_type == 'youtube') {
+        $video_modal = get_post_meta($evento_id,'yt-video-url',true);          
+    }
+
+
     $format = "Y-m-d";
     $evento_fecha_de_inicio = get_post_meta($evento_id, 'evento_fecha_de_inicio', true);
     $evento_fecha_de_final = get_post_meta($evento_id, 'evento_fecha_de_final', true);
@@ -49,6 +59,9 @@
     }
     $now = new DateTime();
     $dateobj_inicio->setTime(0,0,0);
+    if ($now > $dateobj_inicio) {
+        $evento_pasado = true;
+    }
     $interval = $dateobj_inicio->diff($now);
     $evento_url_registro = get_post_meta($evento_id, 'evento_url_registro', true);
     $evento_descripcion_larga = get_post_meta($evento_id, 'evento_descripcion_larga', true);
@@ -68,6 +81,7 @@
 <div class="contents">
     <div id="search-layer"></div>
     <div class="<?php if ($evento_pasado) echo 'pastEvents'; else echo 'futureEvents'; ?>">
+        <?php if ($evento_pasado == false && !empty($imagenCabecera)) : ?>
         <section class="block-image wow fadeInUp">
             <div class="visible-xs">
                 <h1 class="screen-title mt-xs mb-sm"><?php echo $titulo; ?></h1><img class="img-responsive" src="<?php echo $imagenCabecera; ?>" alt="image title" />
@@ -102,9 +116,48 @@
                 </div>
             </div>
         </section>
+        <?php endif; ?>
+        <?php if ($evento_pasado && !(empty($videoIntro_url))) : ?>
+            <div class="video-container">
+                <video src="<?php echo $videoIntro_url; ?>" autoplay loop="loop" preload="auto" controls="false"></video>
+                <div class="video-text">
+                    <div class="hidden-xs info mt-xxl">
+                        <span class="mr-md">
+                            <span class="icon bbva-icon-calendar-01"></span>
+                            <span><?php echo $fecha_evento; ?></span>
+                        </span>
+                        <span class="">
+                            <span class="icon bbva-icon-pin"></span>
+                            <span><?php echo $evento_localizacion[2]; ?></span>
+                        </span>
+                    </div>
+                    <h1><?php echo $titulo; ?></h1>
+                    <?php if (!empty($video_modal)) : ?>
+                    <button type="button" class="play-button" name="button" data-toggle="modal" data-target="#pastEventsModal"><span class="icon-play bbva-icon-play"></span></button>
+                    <?php endif; ?>
+                </div>
+                <?php if (!empty($video_modal)) : ?>
+                <!-- Modal -->
+                <div class="modal fade" id="pastEventsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="bbva-icon-close" aria-hidden="true"></span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="<?php echo $video_modal; ?>"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
         <div class="container content-wrap mb-xl">
             <?php get_template_part('content','rrsseventos'); ?>
-            <?php if (!empty($evento_highlights)) : ?>
+            <?php if ($evento_pasado && !empty($evento_highlights)) : ?>
                 <section class="highlights-section mt-xl">
                     <h1 class="mb-md mt-md"><?php _e('Highlights'); ?></h1>
                         <?php $m = 0; ?>
@@ -432,7 +485,13 @@
             <section id="mapSection" class="map-section id-<?php echo $evento_id; ?>"></section>
         <?php endif; ?>
     </div>
-    <?php the_widget('os_prefooter', array('color_fondo' => 'blanco', 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera')); ?>
+    <?php
+        $color = "blanco";
+        if ($evento_pasado) {
+            $color = 'gris';
+        } 
+        the_widget('os_prefooter_bbva', array('color_fondo' => $color, 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera')); 
+    ?>
 </div>
 
 <?php get_footer(); ?>
