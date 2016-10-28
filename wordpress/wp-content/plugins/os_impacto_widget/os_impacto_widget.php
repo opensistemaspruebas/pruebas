@@ -318,16 +318,19 @@ if (!class_exists('OS_Impactos_Widget')) :
 									</div>
 				<?php
 
-
-
 		    					}
-
-
-}
-
-
-
+							}
+							else {
+				
+								_e("No hay impactos disponibles.", "os_impactos_widget");
+							}
 	    				}break;
+
+
+
+
+
+
 
 	    				case 'dato':{
 
@@ -340,24 +343,90 @@ if (!class_exists('OS_Impactos_Widget')) :
 				        	);
 
 
-				        	if ($tipo_widget == 'widgetSubhomeIntroduccion'){
+				        	if ($query->have_posts()) {
+
+								$widgetId = $args['widget_id'];
+				        		$identificadores = array($widgetId.'g',$widgetId.'h',$widgetId.'i');
+								$i = 0;
 
 
+					        	if ($tipo_widget == 'widgetSubhomeIntroduccion'){
 
-	    					}
-	    					else if($tipo_widget == 'widgetSubhomeSecundario'){
+				?>						 
+									<div class="impact container">
+	    								<section class="impact-section">
+						                    <h1><?php echo $title; ?></h1>
+						                    <p class="initial-description"><?php echo $texto; ?></p>
+						                </section>
+						                <section class="micro-section mb-xxl">
+						                    <div class="row">					                 
+				<?php
+
+									while ($query->have_posts()) : $query->the_post();
+
+											$identificador = $identificadores[$i];
+
+											$post_id = get_the_id();
+											$visualizacion = (get_post_meta($post_id, 'visualizacion', true)) ? get_post_meta($post_id, 'visualizacion', true) : "circulo";
+											$color_dato = get_post_meta($post_id, 'color_dato', true);
+											$etiqueta = mb_strtoupper(get_post_meta($post_id, 'etiqueta', true), 'UTF-8');
+											$completado = get_post_meta($post_id, 'completado', true);
+
+											pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador);
+
+											$i++;
+										endwhile;
+
+										wp_reset_postdata();
+				?>
+
+									        </div>
+										</section>
+									</div>
+				<?php
+
+		    					}
+		    					else if($tipo_widget == 'widgetSubhomeSecundario'){
+
+		    	?>						 
+									<div class="impact container">
+										<section class="micro-section mb-xxl">
+						                    <h1><?php echo $title; ?></h1>
+						                    <p><?php echo $texto; ?></p>
+						                    <div class="row">
+	                 
+				<?php
+									while ($query->have_posts()) : $query->the_post();
+
+											$identificador = $identificadores[$i];
+
+											$post_id = get_the_id();
+											$visualizacion = (get_post_meta($post_id, 'visualizacion', true)) ? get_post_meta($post_id, 'visualizacion', true) : "circulo";
+											$color_dato = get_post_meta($post_id, 'color_dato', true);
+											$etiqueta = mb_strtoupper(get_post_meta($post_id, 'etiqueta', true), 'UTF-8');
+											$completado = get_post_meta($post_id, 'completado', true);
+
+											pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador);
+
+											$i++;
+										endwhile;
+
+										wp_reset_postdata();
 
 
+				?>
 
-	    					}
+									        </div>
+										</section>
+									</div>
+				<?php
 
-
-
-
-
-
-
-
+		    					}
+							}
+							else {
+				
+								_e("No hay impactos disponibles.", "os_impactos_widget");
+							}
 
 	    				}break;
 
@@ -740,7 +809,8 @@ function pintaWidgetBarras($etiqueta, $objetivo, $completado, $identificador){
 
 		$porcentaje = $completado / $objetivo;
 
-		$values = thousandsCurrencyFormat($objetivo);
+		$valuesObj = thousandsCurrencyFormat($objetivo);
+		$valuesCom = thousandsCurrencyFormat($completado);
 
 	?>
 
@@ -748,16 +818,48 @@ function pintaWidgetBarras($etiqueta, $objetivo, $completado, $identificador){
         <div class="progressLineBar">
             <div id="<?php echo $identificador; ?>"></div>
             <div class="line-objetive">
-                <span><?php echo $etiqueta; ?> <?php echo $values[0]; echo " "; echo $values[1]; ?></span>
+                <span><?php echo $etiqueta; ?> <?php echo $valuesObj[0]; echo " "; echo $valuesObj[1]; ?></span>
             </div>
         </div>
     </div>
 
 
 <?php
-	
 
-	echo "<script>jQuery(document).ready(function() {
-			setProgressBarLine('#".$identificador."', getConfig(".$objetivo."), ".$porcentaje.") });
+	 echo "<script>jQuery(document).ready(function() {
+			setProgressBarLine('#".$identificador."', getConfig(".$objetivo.", '".$valuesCom[1]."'), ".$porcentaje.") });
 		  </script>";
+}
+
+function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
+
+
+		$valuesCom = thousandsCurrencyFormat($completado);
+		$color = 'red';
+
+		switch ($color_dato) {
+
+			case '#f35e61': $color =  'red'; break;
+			
+			case '#d8be75': $color =  'yellow'; break;
+			
+			case '#004481':$color =  'blue'; break;
+		}
+
+	?>
+
+	<div class="col-xs-12 col-sm-4 mt-xs text-center">
+        <!-- percicle element -->
+        <div class="circle-container  circle-simple ">
+            <div id="<?php echo $identificador; ?>" class="circle-progress"></div>
+        </div>
+        <!-- EO percicle element -->
+    </div>
+
+    <?php
+	
+		echo "<script>jQuery(document).ready(function() {
+				setProgressBarCircle('#".$identificador."', getCircleConfig(".$completado.", 'transparent', 'transparent', '".$valuesCom[1]."', '".$color."', '".$etiqueta."'), 1) });
+			  </script>";
+
 }
