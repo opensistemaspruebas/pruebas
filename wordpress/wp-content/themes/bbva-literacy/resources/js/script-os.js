@@ -3,6 +3,11 @@ jQuery(document).ready(function($) {
 	buscando = false;
 
 
+	jQuery('.btn-group.languages-buttons a').on('click', function($) {
+		window.location = jQuery(this).attr('href');
+	});
+
+
 	numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
 	if (numero_trabajos_ocultos == 0) {
 	    jQuery('a#readmore_trabajos').remove();
