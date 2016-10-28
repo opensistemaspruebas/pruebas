@@ -11,34 +11,34 @@ jQuery(document).ready(function($) {
     });
 
     if ($('input#ponencia').checked) {
-        jQuery(this).parent().parent().children(":nth-child(5)").show();
         jQuery(this).parent().parent().children(":nth-child(6)").show();
         jQuery(this).parent().parent().children(":nth-child(7)").show();
+        jQuery(this).parent().parent().children(":nth-child(8)").show();
     }
 
 
     if ($('input#descanso').checked) {
-        jQuery(this).parent().parent().children(":nth-child(5)").hide();
         jQuery(this).parent().parent().children(":nth-child(6)").hide();
         jQuery(this).parent().parent().children(":nth-child(7)").hide();
+        jQuery(this).parent().parent().children(":nth-child(8)").hide();
     }
 
     $('input#ponencia').live('click', function(e) {
-        jQuery(this).parent().parent().children(":nth-child(5)").show();
         jQuery(this).parent().parent().children(":nth-child(6)").show();
         jQuery(this).parent().parent().children(":nth-child(7)").show();
+        jQuery(this).parent().parent().children(":nth-child(8)").show();
     });
 
     $('input#descanso').live('click', function(e) {
-        jQuery(this).parent().parent().children(":nth-child(5)").hide();
         jQuery(this).parent().parent().children(":nth-child(6)").hide();
         jQuery(this).parent().parent().children(":nth-child(7)").hide();
+        jQuery(this).parent().parent().children(":nth-child(8)").hide();
     });
 
     count = 0;
     jQuery("#add-elemento-programa").click(function(e) {        
         count++;
-        $('<div class="elementos_de_programa"><p class="radiobuttons"><input type="radio" name="evento_elemento_programa[' + count + '][tipo]" id="ponencia" value="ponencia" checked>Ponencia<br><input type="radio" name="evento_elemento_programa[' + count + '][tipo]" id="descanso" value="descanso">Descanso<br></p><p><label for="evento_elemento_programa[' + count + '][inicio]">Hora de inicio</label><input class="widefat" id="evento_elemento_programa[' + count + '][inicio]" name="evento_elemento_programa[' + count + '][inicio]" type="time" value=""><span class="description">(Formato: HH:MM)</span></p><p><label for="evento_elemento_programa[' + count + '][duracion]">Duración</label><input class="widefat" id="evento_elemento_programa[' + count + '][duracion]" name="evento_elemento_programa[' + count + '][duracion]" type="text" value=""><span class="description">(Por ejemplo: 15min)</span></p><p><label for="evento_elemento_programa[' + count + '][titulo]">Titulo</label><input class="widefat" id="evento_elemento_programa[' + count + '][titulo]" name="evento_elemento_programa[' + count + '][titulo]" type="text" value=""></p><p><label for="evento_elemento_programa[' + count + '][descripcion]">Descripción</label><textarea rows="1" cols="4' + count + '" maxlength="28' + count + '" name="evento_elemento_programa[' + count + '][descripcion]" id="evento_elemento_programa[' + count + '][descripcion]"></textarea></p><p><label for="evento_elemento_programa[' + count + '][ponentes]">Ponentes</label><select class="ponentes widefat" id="evento_elemento_programa[' + count + '][ponentes][]" name="evento_elemento_programa[' + count + '][ponentes][]" multiple="multiple"></select></p><p><label for="evento_elemento_programa[' + count + '][moderador]">Moderador</label><input class="widefat" id="evento_elemento_programa[' + count + '][moderador]" name="evento_elemento_programa[' + count + '][moderador]" type="text" value=""></p><button id="delete-elemento-programa" type="button">Eliminar este elemento</button></div>').insertBefore(this);
+        $('<div class="elementos_de_programa"><p class="radiobuttons"><input type="radio" name="evento_elemento_programa[' + count + '][tipo]" id="ponencia" value="ponencia" checked>Ponencia<br><input type="radio" name="evento_elemento_programa[' + count + '][tipo]" id="descanso" value="descanso">Descanso<br></p><p><label for="evento_elemento_programa[' + count +  '][inicio]">Día</label><input class="widefat" id="evento_elemento_programa[' + count +  '][dia]" name="evento_elemento_programa[' + count +  '][dia]" type="date" value=""><span class="description">(Formato: DD/MM/AAAA)</span></p><p><label for="evento_elemento_programa[' + count + '][inicio]">Hora de inicio</label><input class="widefat" id="evento_elemento_programa[' + count + '][inicio]" name="evento_elemento_programa[' + count + '][inicio]" type="time" value=""><span class="description">(Formato: HH:MM)</span></p><p><label for="evento_elemento_programa[' + count + '][duracion]">Duración</label><input class="widefat" id="evento_elemento_programa[' + count + '][duracion]" name="evento_elemento_programa[' + count + '][duracion]" type="text" value=""><span class="description">(Por ejemplo: 15min)</span></p><p><label for="evento_elemento_programa[' + count + '][titulo]">Titulo</label><input class="widefat" id="evento_elemento_programa[' + count + '][titulo]" name="evento_elemento_programa[' + count + '][titulo]" type="text" value=""></p><p><label for="evento_elemento_programa[' + count + '][descripcion]">Descripción</label><textarea rows="1" cols="4' + count + '" maxlength="28' + count + '" name="evento_elemento_programa[' + count + '][descripcion]" id="evento_elemento_programa[' + count + '][descripcion]"></textarea></p><p><label for="evento_elemento_programa[' + count + '][ponentes]">Ponentes</label><select class="ponentes widefat" id="evento_elemento_programa[' + count + '][ponentes][]" name="evento_elemento_programa[' + count + '][ponentes][]" multiple="multiple"></select></p><p><label for="evento_elemento_programa[' + count + '][moderador]">Moderador</label><input class="widefat" id="evento_elemento_programa[' + count + '][moderador]" name="evento_elemento_programa[' + count + '][moderador]" type="text" value=""></p><button id="delete-elemento-programa" type="button">Eliminar este elemento</button></div>').insertBefore(this);
         $('select.ponentes').first().find('option').each(function() {
             valor = jQuery(this).val();
             name = jQuery(this).html();
