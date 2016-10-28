@@ -66,12 +66,12 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 			                            	<?php endif; ?>
 			                                <?php if (!empty($elementos_menu_izquierdo)) : ?>
 			                                	<div class="visible-xs row prefooter-menu-collapsed">
-                                                	<!--<img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>-->
+                                                	<img class="visible-xs prefooter-mobile-shadow" src="<?php echo get_template_directory_uri(); ?>/resources/images/prefooter/shadow.png"/>
 			                                		<?php foreach ($elementos_menu_izquierdo as $e) : ?>
 			                                			<?php $classes = implode($e->classes); ?>
 			                                			<a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>" class="<?php echo $classes; ?>"><?php echo $e->post_title; ?></a>
 			                                		<?php endforeach; ?>
-                                                    <!--<img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>-->
+                                                    <img class="visible-xs prefooter-mobile-shadow reverse" src="<?php echo get_template_directory_uri(); ?>/resources/images/prefooter/shadow.png"/>
 			                                	</div>
 			                            	<?php endif; ?>
 			                            </div>
@@ -83,7 +83,7 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 			                            <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample"> En el mundo<span class="icon-plus icon-collapsable"></span></a></p>
 			                            <div class="collapse" id="collapseTwo">
 			                                <div class="row mgl-0 prefooter-menu-collapsed">
-                                            	<!--<img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>-->
+                                            	<img class="visible-xs prefooter-mobile-shadow" src="<?php echo get_template_directory_uri(); ?>/resources/images/prefooter/shadow.png"/>
 			                                    <?php if (!empty($elementos_menu_central)) : ?>
 			                                    	<?php $partes = array_chunk($elementos_menu_central, 6); ?>
 			                                    	<?php $parte1 = $partes[0]; $parte2 = $partes[1];  ?>
@@ -102,7 +102,7 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 					                                    </ul>
 				                                    <?php endif; ?>
 			                                	<?php endif; ?>
-                                                <!--<img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>-->
+                                                <img class="visible-xs prefooter-mobile-shadow reverse" src="<?php echo get_template_directory_uri(); ?>/resources/images/prefooter/shadow.png"/>
 			                                </div>
 			                            </div>
 			                        </div>
@@ -120,12 +120,12 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 			                            <?php endif; ?>
 			                            <?php if (!empty($elementos_menu_derecho)) : ?>
 				                            <div class="visible-xs row prefooter-menu-collapsed">
-                                            	<!--<img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>-->
+                                            	<img class="visible-xs prefooter-mobile-shadow" src="<?php echo get_template_directory_uri(); ?>/resources/images/prefooter/shadow.png"/>
 				                            	<?php foreach ($elementos_menu_derecho as $e) : ?>
 				                            		<?php $classes = implode($e->classes); ?>
 				                                	<a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>" class="<?php echo $classes; ?>"><?php echo $e->post_title; ?></a>
 				                                <?php endforeach; ?>
-                                                <!--<img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>-->
+                                                <img class="visible-xs prefooter-mobile-shadow reverse" src="<?php echo get_template_directory_uri(); ?>/resources/images/prefooter/shadow.png"/>
 				                            </div>
 			                        	<?php endif; ?>
 			                        </div>
