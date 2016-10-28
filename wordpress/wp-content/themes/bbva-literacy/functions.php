@@ -231,7 +231,7 @@ function languages_list_header(){
             	<div class="btn-group languages-buttons" data-toggle="buttons">
             		<?php $i = 1; ?>
             		<?php foreach ($languages as $l) : ?>
-                		<label class="btn btn-primary <?php if ($l['active']) echo 'active'; ?>"><input type="radio" name="options" id="option'<?php echo $i; ?>'" autocomplete="off" <?php if ($l['active']) echo 'checked'; ?>><?php echo strtoupper($l['code']); ?></label>
+                		<a href="<?php echo $l['url']; ?>" class="btn btn-primary <?php if ($l['active']) echo 'active'; ?>"><?php echo strtoupper($l['code']); ?></a>
                 		<?php $i++; ?>
                 	<?php endforeach; ?>
             	</div>
