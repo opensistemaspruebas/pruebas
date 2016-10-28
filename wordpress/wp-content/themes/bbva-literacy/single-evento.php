@@ -61,12 +61,34 @@
     $evento_te_interesas = get_post_meta($evento_id, 'evento_te_interesa', true);
 
     $evento_elemento_programa = get_post_meta($evento_id, 'evento_elemento_programa', true);
+    if (!empty($evento_elemento_programa)) {
+        $sortArray = array(); 
+        foreach($evento_elemento_programa as $e){ 
+            foreach($e as $key=>$value){ 
+                if(!isset($sortArray[$key])){ 
+                    $sortArray[$key] = array(); 
+                } 
+                $sortArray[$key][] = $value; 
+            } 
+        } 
+        $orderby = "dia"; //change this to whatever key you want from the array 
+        array_multisort($sortArray[$orderby],SORT_ASC,$evento_elemento_programa);
+        $programa = array();
+        foreach ($evento_elemento_programa as $e) {
+            $dia = $e['dia'];
+            $programa[$dia][] = $e;
+        }
+    }
+
+
 
     $evento_documento = get_post_meta($evento_id, 'evento_documento', true); 
 
     $evento_persona_de_contacto = get_post_meta($evento_id, 'evento_persona_de_contacto', true);
 
     $evento_localizacion = get_post_meta($evento_id, 'evento_localizacion', true);
+
+
 
 
 ?>
@@ -145,7 +167,7 @@
                     </div>
                 </section>
             <?php endif; ?>
-            <?php if (!empty($evento_elemento_programa)) : ?>
+            <?php if (!empty($programa)) : ?>
                 <section class="program-section mt-lg">
                     <h1 class="mb-md"><?php _e('Programa'); ?></h1>
                     <div class="visible-xs">
@@ -288,77 +310,38 @@
                         </div>
                         <div class="program hidden-xs">
                             <div class="program-day">
-                                <h2 class="mt-xl">Día 22 de octubre 2017</h2>
-                                <div class="program-content">
-                                    <div class="individual-info  wow fadeIn ">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">12:00</span><span class="duration">(45min)</span></div>
-                                        <div class="information ml-sm talk-bubble tri-right left-top">
-                                            <div class="talktext">
-                                                <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                                <?php foreach ($programa as $p) : ?>
+                                    <h2 class="mt-xl">Día 22 de octubre 2017 <?php echo $p[0]['dia']; ?></h2>
+                                    <div class="program-content">
+                                        <div class="individual-info  wow fadeIn ">
+                                            <div class="redbullet"></div>
+                                            <div class="time"><span class="hour">12:00</span><span class="duration">(45min)</span></div>
+                                            <div class="information ml-sm talk-bubble tri-right left-top">
+                                                <div class="talktext">
+                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="individual-info  wow fadeIn break">
+                                            <div class="redbullet"></div>
+                                            <div class="time"><span class="hour">13:00</span><span class="duration">(15min)</span></div>
+                                            <div class="coffee-break"><span class="bbva-icon-coffe"></span><span class="text">Coffee Break</span></div>
+                                        </div>
+                                        <div class="individual-info last-child wow fadeIn ">
+                                            <div class="redbullet"></div>
+                                            <div class="time"><span class="hour">14:00</span><span class="duration">(45min)</span></div>
+                                            <div class="information ml-sm talk-bubble tri-right left-top">
+                                                <div class="talktext">
+                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="individual-info  wow fadeIn break">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">13:00</span><span class="duration">(15min)</span></div>
-                                        <div class="coffee-break"><span class="bbva-icon-coffe"></span><span class="text">Coffee Break</span></div>
-                                    </div>
-                                    <div class="individual-info last-child wow fadeIn ">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">14:00</span><span class="duration">(45min)</span></div>
-                                        <div class="information ml-sm talk-bubble tri-right left-top">
-                                            <div class="talktext">
-                                                <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h2 class="mt-xl">Día 25 de mayo 2018</h2>
-                                <div class="program-content">
-                                    <div class="individual-info  wow fadeIn ">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">22:00</span><span class="duration">(45min)</span></div>
-                                        <div class="information ml-sm talk-bubble tri-right left-top">
-                                            <div class="talktext">
-                                                <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="individual-info  wow fadeIn break">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">23:00</span><span class="duration">(15min)</span></div>
-                                        <div class="coffee-break"><span class="bbva-icon-coffe"></span><span class="text">Coffee Break</span></div>
-                                    </div>
-                                    <div class="individual-info  wow fadeIn ">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">24:00</span><span class="duration">(45min)</span></div>
-                                        <div class="information ml-sm talk-bubble tri-right left-top">
-                                            <div class="talktext">
-                                                <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="individual-info last-child wow fadeIn ">
-                                        <div class="redbullet"></div>
-                                        <div class="time"><span class="hour">01:00</span><span class="duration">(45min)</span></div>
-                                        <div class="information ml-sm talk-bubble tri-right left-top">
-                                            <div class="talktext">
-                                                <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

@@ -350,6 +350,11 @@ if (!class_exists('OS_Evento_Type')) {
 				      <?php _e('Descanso', 'os_evento_type')?><br>
 				    </p>
 					<p>
+						<label for="evento_elemento_programa[0][dia]"><?php _e('Día', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[0][dia]" name="evento_elemento_programa[0][dia]" type="date" value="" />
+						<span class="description">(<?php _e('Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
+					</p>
+					<p>
 						<label for="evento_elemento_programa[0][inicio]"><?php _e('Hora de inicio', 'os_evento_type'); ?></label>
 						<input class="widefat" id="evento_elemento_programa[0][inicio]" name="evento_elemento_programa[0][inicio]" type="time" value="" />
 						<span class="description">(<?php _e('Formato: HH:MM', 'os_evento_type'); ?>)</span>
@@ -399,6 +404,11 @@ if (!class_exists('OS_Evento_Type')) {
 				      <input type="radio" name="evento_elemento_programa[<?php echo $i; ?>][tipo]" id="descanso" value="descanso" <?php if (!empty($evento_elemento_programa[$i]['tipo'])) checked($evento_elemento_programa[$i]['tipo'], 'descanso'); ?>>
 				      <?php _e('Descanso', 'os_evento_type')?><br>
 				    </p>
+				    <p>
+						<label for="evento_elemento_programa[<?php echo $i; ?>][inicio]"><?php _e('Día', 'os_evento_type'); ?></label>
+						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][dia]" name="evento_elemento_programa[<?php echo $i; ?>][dia]" type="date" value="<?php if (!empty($evento_elemento_programa[$i]['dia'])) echo $evento_elemento_programa[$i]['dia']; ?>" />
+						<span class="description">(<?php _e('Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
+					</p>
 					<p>
 						<label for="evento_elemento_programa[<?php echo $i; ?>][inicio]"><?php _e('Hora de inicio', 'os_evento_type'); ?></label>
 						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][inicio]" name="evento_elemento_programa[<?php echo $i; ?>][inicio]" type="time" value="<?php if (!empty($evento_elemento_programa[$i]['inicio'])) echo $evento_elemento_programa[$i]['inicio']; ?>" />
