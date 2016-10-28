@@ -1,24 +1,29 @@
 jQuery(document).ready(function() {
-	jQuery('select#color').simplecolorpicker({theme: 'glyphicons'});
-	jQuery('select#visualizacion').on("change", function() {
-		toggleFields();
-	});
+    jQuery('select#color_circulo').simplecolorpicker({theme: 'glyphicons'});
+    jQuery('select#color_barra').simplecolorpicker({theme: 'glyphicons'});
+    jQuery('select#color_dato').simplecolorpicker({theme: 'glyphicons'});
+    jQuery('select#visualizacion').on("change", function() {
+        toggleFields();
+    });
 });
 
 function toggleFields(){
    if (jQuery("#visualizacion").val() == "circulo") {
-        jQuery("#form1").show();
-        jQuery("#form2").hide();
-        jQuery("#form3").hide();
+        jQuery("#color-circulo").show();
+        jQuery("#valor_objetivo").show();
+        jQuery("#color-barra").hide();
+        jQuery("#color-dato").hide();
     }
     else if (jQuery("#visualizacion").val() == "barra"){
-        jQuery("#form2").show();
-        jQuery("#form1").hide();
-        jQuery("#form3").hide();
+        jQuery("#color-barra").show();
+        jQuery("#valor_objetivo").show();
+        jQuery("#color-circulo").hide();
+        jQuery("#color-dato").hide();
     }
     else {
-        jQuery("#form3").show();
-        jQuery("#form1").hide();
-        jQuery("#form2").hide();
+        jQuery("#color-dato").show();
+        jQuery("#color-circulo").hide();
+        jQuery("#color-barra").hide();
+        jQuery("#valor_objetivo").hide();
     }
 }
