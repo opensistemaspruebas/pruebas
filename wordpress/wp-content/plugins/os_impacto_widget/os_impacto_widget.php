@@ -5,7 +5,7 @@
 	Plugin URI: https://www.opensistemas.com/
 	Description: Crea un widget con los impactos seleccionados
 	Version: 1.0
-	Author: Marta Oliver / Roberto Moreno
+	Author: Roberto Moreno
 	Author URI: https://www.opensistemas.com/
 	License: GPLv2 or later
 	Text Domain: os_impactos_widget
