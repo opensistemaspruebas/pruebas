@@ -38,7 +38,7 @@ if (!class_exists('OSMundoWidget')) :
 				<section class="back-map">
 				    <div class="container">
 				        <h1><?php echo $titulo ?></h1>
-				        <p><?php echo $texto ?></p>
+				        <p class="map-explanation"><?php echo $texto ?></p>
 				        <div class="container_map hidden-xs">
 				            <div id="map_canvas" class="content_map"></div>
 				            <div class="map_message"></div>
@@ -68,15 +68,44 @@ if (!class_exists('OSMundoWidget')) :
 				        'taxonomy' => 'ambito_geografico',
 				        'hide_empty' => 0
 				    );
+
+				  $dataMap = array();
+
 				  foreach (get_terms('ambito_geografico', $args ) as $tag) :
-				    error_log("paso por ".$tag->slug);
 
 				    $arrayTaxAG = get_term_meta($tag->term_id);
 				    $isoCodeAux = $arrayTaxAG['isoCode'][0];
-				    $isoCode = strtolower($isoCodeAux);
-				    $linkPais = $arrayTaxAG['link'][0];  ?>
+				    $isoCodeLower = strtolower($isoCodeAux);
+				    $isoCodeUpper = strtoupper($isoCodeAux);
 
-				    <div class="workshops <?php echo $isoCode?>">
+				 	$nombrePais = $tag->name;
+				    $tituloModal = $arrayTaxAG['tituloModal'][0];
+				    $descripcionModal = $arrayTaxAG['descripcionModal'][0];
+				    $descripURLmasInfo = $arrayTaxAG['descripURLmasInfo'][0];
+				    $URLmasInfo = $arrayTaxAG['URLmasInfo'][0];
+				    $descripURLaprenderMas = $arrayTaxAG['descripURLaprenderMas'][0];
+				    $URLaprenderMas = $arrayTaxAG['URLaprenderMas'][0];
+				    $tituloMicrofinanzas = $arrayTaxAG['tituloMicrofinanzas'][0];
+				    $descripcionMicrofinanzas = $arrayTaxAG['descripcionMicrofinanzas'][0];
+				    $descripURLmicrofinanzasUno = $arrayTaxAG['descripURLmicrofinanzasUno'][0];
+				    $URLMicrofinanzasUno = $arrayTaxAG['URLMicrofinanzasUno'][0];
+				    $descripURLmicrofinanzasDos = $arrayTaxAG['descripURLmicrofinanzasDos'][0];
+				    $URLMicrofinanzasDos = $arrayTaxAG['URLMicrofinanzasDos'][0];
+
+				    $elemento = array();
+
+	                $elemento['id'] = $isoCodeUpper;
+	                $elemento['country'] = $nombrePais;
+	                $elemento['title'] = $tituloModal;
+	                $elemento['text'] = $descripcionModal;
+	                $elemento['button'] = $descripURLmasInfo;
+	                $elemento['link'] = $URLmasInfo;
+
+	                $dataMap[] = $elemento;
+
+         		?>
+
+				    <div class="workshops <?php echo $isoCodeLower; ?>">
 
 				    <?php $posts=query_posts('post_status=publish&post_type=taller&ambito_geografico='.$tag->slug);
 
@@ -87,7 +116,7 @@ if (!class_exists('OSMundoWidget')) :
 				          <div>
 				            <h3><?php _e("En estos momentos no tenemos talleres disponibles en "); ?><span class="current-country"></span></h3>
 				            <p><?php _e("Puedes consultar el portal de Educación Financiera para conocer mejor la oferta educativa del país."); ?></p>
-				            <a target="_blank" href="<?php echo $linkPais ?>"><?php _e("Aprender más"); ?></a>
+				            <a target="_blank" href="<?php echo $URLaprenderMas; ?>"><?php echo $descripURLaprenderMas; ?></a>
 				          </div>
 				        </div>
 				      </div>
@@ -169,8 +198,22 @@ if (!class_exists('OSMundoWidget')) :
 				?>
 				<!-- Hasta aqui va el widget Logos-->
 
+				                   <!-- EO council-members-map -->
+				    <?php if(!empty($tituloMicrofinanzas) || !empty($descripcionMicrofinanzas) || !empty($descripURLmicrofinanzasUno) || !empty($descripURLmicrofinanzasDos)) : ?>               
+	                    <div class="container microfinance">
+	                        <h2><?php echo $tituloMicrofinanzas;?></h2>
+	                        <p><?php echo $descripcionMicrofinanzas;?></p>
+	                        <a target="_blank" href="<?php echo $URLMicrofinanzasUno;?>"><?php echo $descripURLmicrofinanzasUno;?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a> <a target="_blank" href="<?php echo $URLMicrofinanzasDos;?>"><?php echo $descripURLmicrofinanzasDos;?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
+	                    </div>
+
+                    <?php endif; ?>
+
+
+
 				</div>
 				<?php endforeach; ?>
+
+				<?php echo "<script>var dataMap = " . json_encode($dataMap) . ";</script>"; ?>
 
 				</div>
 
