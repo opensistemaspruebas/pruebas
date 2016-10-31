@@ -573,6 +573,13 @@ get_header(); ?>
         </section>
         <!-- EO latests-posts -->
         <?php } ?>
+        <?php
+          
+            if ($query->have_posts()) $color = "blanco"; else $color = "gris";
+
+            the_widget('os_prefooter_bbva', array('color_fondo' => $color, 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera')); 
+
+          ?>
     </article>
 
 

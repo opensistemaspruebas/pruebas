@@ -467,3 +467,9 @@ function imprimir_json_etiquetas() {
 	}
 	echo "<script>var data = {'availableTags':" . json_encode($data) . "};</script>";
 }
+
+
+function wpdocs_theme_name_scripts() {
+    wp_enqueue_script('script_os_js', get_template_directory_uri() . '/resources/js/script-os.js', array('jQuery'));
+}
+add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
