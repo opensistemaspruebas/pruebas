@@ -827,7 +827,7 @@ function pintaWidgetBarras($etiqueta, $objetivo, $completado, $identificador){
 <?php
 
 	 echo "<script>jQuery(document).ready(function() {
-			setProgressBarLine('#".$identificador."', getConfig(".$objetivo.", '".$valuesCom[1]."'), ".$porcentaje.") });
+			setProgressBarLine('#".$identificador."', getConfig(".$valuesObj[0].", '".$valuesCom[1]."'), ".$porcentaje.") });
 		  </script>";
 }
 
@@ -835,6 +835,8 @@ function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
 
 
 		$valuesCom = thousandsCurrencyFormat($completado);
+
+		os_imprimir($valuesCom[0]);
 		$color = 'red';
 
 		switch ($color_dato) {
@@ -859,7 +861,7 @@ function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
     <?php
 	
 		echo "<script>jQuery(document).ready(function() {
-				setProgressBarCircle('#".$identificador."', getCircleConfig(".$completado.", 'transparent', 'transparent', '".$valuesCom[1]."', '".$color."', '".$etiqueta."'), 1) });
+				setProgressBarCircle('#".$identificador."', getCircleConfig(".$valuesCom[0].", 'transparent', 'transparent', '".$valuesCom[1]."', '".$color."', '".$etiqueta."'), 1) });
 			  </script>";
 
 }

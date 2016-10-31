@@ -102,8 +102,9 @@ if (!class_exists('OS_Logos_Widget')) :
 								$logoMP = get_post_meta($post_id, 'logoMP', true);
 			      
 			    	?>
-			      
-					    <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+			      		<div class="img-map">
+					    	<img data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+					    </div>
 					    
 					<?php
 						
@@ -133,7 +134,7 @@ if (!class_exists('OS_Logos_Widget')) :
 								$externo5 = get_post_meta($post_id, 'externo5', true);
 			    	?>
 
-				<section class="lightbox modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
+				<section class="lightbox modal wow fadeInUp" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
 			    	<div class="modal-dialog" role="document">
 			        	<div class="modal-content">
 			            	<div class="container">
@@ -153,7 +154,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			                    	</div>
 			                	</div>
 			                	<div class="modal-footer">
-			                   		<a <?php if ($externo5 == "on") echo 'target="_blank"';?> href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información", "os_logos_widget"); ?></a>
+			                   		<a class="btn btn-bbva-aqua" <?php if ($externo5 == "on") echo 'target="_blank"';?> href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información", "os_logos_widget"); ?></a>
 			                	</div>
 			            	</div>
 			        	</div>
@@ -192,8 +193,9 @@ if (!class_exists('OS_Logos_Widget')) :
 			          $post_id = get_the_id();
 			          $logoMP = get_post_meta($post_id, 'logoMP', true); 
 			      ?>
-
-			          <img class="ml-lg mr-lg mt-md mb-xl" data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+			      		<div class="img-map">
+			          		<img data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+			          	</div>
 
 			      <?php  endwhile; 
 			        wp_reset_postdata();
@@ -212,7 +214,7 @@ if (!class_exists('OS_Logos_Widget')) :
 						$externo5 = get_post_meta($post_id, 'externo5', true);
 			        ?>
 
-			        <section class="lightbox modal fade" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
+			        <section class="lightbox modal wow fadeInUp" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
 			            <div class="modal-dialog" role="document">
 			                <div class="modal-content">
 			                    <div class="container">
@@ -232,7 +234,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			                            </div>
 			                        </div>
 			                        <div class="modal-footer">
-			                        <a <?php if ($externo5 == "on") echo 'target="_blank"';?>" href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información"); ?></a>
+			                        	<a <?php if ($externo5 == "on") echo 'target="_blank"';?>" href="<?php echo $link; ?>" class="btn btn-bbva-aqua"><?php _e("Más información"); ?></a>
 			                        </div>
 			                    </div>
 			                </div>
