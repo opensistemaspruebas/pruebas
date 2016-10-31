@@ -75,6 +75,10 @@ function add_search_meta() {
     			$post_content = strip_tags(get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true));
     		}
     		$fecha = get_post_meta($p->ID, 'publication_date', true);
+    	} else if ($post_type == 'taller') {
+    		$descp = get_post_meta($p->ID, 'descp', true);
+    		$post_content = strip_tags($descp);
+    		$fecha = get_the_date('Y-m-d');
     	} else {
     		$post_content = strip_tags($p->post_content);
     		$fecha = get_the_date('Y-m-d');
