@@ -11,6 +11,9 @@
 	Text Domain: os_save_post_and_update
 */
 
+if ( !function_exists( 'get_home_path' ) )
+	require_once( dirname(__FILE__) . '/../../../wp-admin/includes/file.php' );
+
 function save_json_to_file($json, $post_type, $identificador, $json_type){
 	$path = get_home_path() . "wp-content/jsons/" . $post_type;
 
@@ -52,11 +55,11 @@ function post_to_json($post_id, $post_type){
 			$json["descripcion"] = get_post_meta($post_id, 'abstract_destacado', true);
 			$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
 			$json["urlPublicacion"] = get_permalink($post_id);
-			
 			$fecha_publicacion = get_post_meta($post_id, 'publication_date', true);
-			$dateobj = DateTime::createFromFormat($format, $fecha_publicacion);
-			$json["fecha"] = $dateobj->format('Y/m/d') . ' - 00:00 AM';
-			
+			if (!empty($fecha_publicacion)) {
+				$dateobj = DateTime::createFromFormat($format, $fecha_publicacion);
+				$json["fecha"] = $dateobj->format('Y/m/d') . ' - 00:00 AM';
+			}
 			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
 			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
 			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;

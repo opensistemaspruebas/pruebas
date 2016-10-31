@@ -75,19 +75,29 @@ function add_search_meta() {
     			$post_content = strip_tags(get_post_meta($p->ID, 'abstract_destacado', true) . ' ' . get_post_meta($p->ID, 'abstract_contenido', true));
     		}
     		$fecha = get_post_meta($p->ID, 'publication_date', true);
+    		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
+    		$text_array = implode($autores, ',');
+    	} else if ($post_type == 'taller') {
+    		$descp = get_post_meta($p->ID, 'descp', true);
+    		$post_content = strip_tags($descp);
+    		$fecha = get_the_date('Y-m-d');
+    		$image = get_post_meta( $p->ID, 'link_taller', true);
+    		$text_array = get_post_meta($p->ID, 'nombre_link', true);
     	} else {
     		$post_content = strip_tags($p->post_content);
     		$fecha = get_the_date('Y-m-d');
+    		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
+    		$text_array = implode($autores, ',');
     	}
         ?>
         <meta name="wp_search" content="true"/>
         <meta name="wp_content" content="<?php echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($post_content))); ?>"/>
         <meta name="wp_title" content="<?php echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($p->post_title))); ?>"/>
-        <meta name="wp_text_array" content="<?php echo implode($autores, ',');  ?>"/>
+        <meta name="wp_text_array" content="<?php echo $text_array;  ?>"/>
         <meta name="wp_double_array" content="<?php echo implode($attrs, ','); ?>"/>
         <meta name="wp_date" content="<?php echo $fecha; ?>"/>
         <meta name="wp_topic" content="<?php echo get_post_type(); /*if ($destacada) echo '_destacada';*/ ?>"/>
-        <meta name="image_src" content="<?php echo str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) ); ?>"/>
+        <meta name="image_src" content="<?php echo $image; ?>"/>
     <?php endif;
 }
 add_action('wp_head', 'add_search_meta', 100);

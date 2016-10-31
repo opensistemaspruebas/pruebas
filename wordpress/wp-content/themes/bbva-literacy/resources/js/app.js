@@ -454,7 +454,7 @@ var menuSearch = function($) {
     function searchByTags() {
         console.log(selectedTags);
         if (selectedTags.length > 0) {
-            window.location.href = "index.html";
+            //window.location.href = "index.html";
         }
     }
 

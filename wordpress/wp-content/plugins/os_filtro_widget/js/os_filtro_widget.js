@@ -1,22 +1,3 @@
-function getCleanedString(cadena) {
-
-	cadena = cadena.replace(/<(?:.|\n)*?>/gm, '');
-	cadena = cadena.toLowerCase();
-	cadena = cadena.replace(/á/gi,"a");
-	cadena = cadena.replace(/é/gi,"e");
-	cadena = cadena.replace(/í/gi,"i");
-	cadena = cadena.replace(/ó/gi,"o");
-	cadena = cadena.replace(/ú/gi,"u");
-	cadena = cadena.replace(/ñ/gi,"n");
-	cadena = cadena.replace(/ç/gi,"c");
-	cadena = cadena.replace(/[^a-z0-9]/gi,' ');
-	cadena = cadena.replace(/\s\s+/g, ' ');
-	cadena = cadena.trim();
-	
-	return cadena;
-}
-
-
 function getSelectedTags() {
 	texto = [];
 	categorias = [];
@@ -185,7 +166,7 @@ jQuery(document).ready(function($) {
 
 	buscando = false;
 	
-	$('button.btn-bbva-aqua.publishing-filter-search-btn').on('click', function(e) {
+	$('#publishing-filter .publishing-filter-search-btn').on('click', function(e) {
 
 		e.preventDefault();
 		e.stopPropagation();
