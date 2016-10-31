@@ -1455,6 +1455,7 @@ var animationWowAppear = function($) {
     wow.init();
 };
 
+/*
 var dataMap = [
     {
         'id'        : 'ES',
@@ -1552,7 +1553,7 @@ var dataMap = [
         'button'    : 'Más información',
         'link'      : '#'
     }
-];
+];*/
 
 
 /*var dataEvents = [
