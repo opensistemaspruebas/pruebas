@@ -70,7 +70,12 @@ jQuery(document).ready(function($) {
 	jQuery('#publishes a.readmore').on('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-				
+
+		start = parseInt(jQuery("input#start").val()) + 10;
+		
+		$("input#start").attr('value', start);
+		
+		buscar();		
 	});
 	 
 });
