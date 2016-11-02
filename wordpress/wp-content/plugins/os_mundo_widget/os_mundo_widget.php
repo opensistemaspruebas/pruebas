@@ -51,7 +51,7 @@ if (!class_exists('OSMundoWidget')) :
 				        <h2 class="hidden-xs"><?php _e("Programa de educación financiera"); ?></h2>
 				        <div class="controls">
 				            <select id="select-country" class="selectpicker-form countries"></select>
-				            <a target="_blank" href="http://www.google.es" class="link-web"><?php _e("Ir a la web Bancomer "); ?><span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
+				            <a target="_blank" href="" class="link-web"><span id="descrPaisId"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
 				        </div>
 				    </div>
 				</div>
@@ -91,6 +91,9 @@ if (!class_exists('OSMundoWidget')) :
 				    $URLMicrofinanzasUno = $arrayTaxAG['URLMicrofinanzasUno'][0];
 				    $descripURLmicrofinanzasDos = $arrayTaxAG['descripURLmicrofinanzasDos'][0];
 				    $URLMicrofinanzasDos = $arrayTaxAG['URLMicrofinanzasDos'][0];
+				    $descripURLpais = $arrayTaxAG['descripURLpais'][0];
+				    $URLpais = $arrayTaxAG['URLpais'][0];
+
 
 				    $elemento = array();
 
@@ -100,6 +103,8 @@ if (!class_exists('OSMundoWidget')) :
 	                $elemento['text'] = $descripcionModal;
 	                $elemento['button'] = $descripURLmasInfo;
 	                $elemento['link'] = $URLmasInfo;
+	               	$elemento['descPais'] = $descripURLpais;
+	                $elemento['urlPais'] = $URLpais;
 
 	                $dataMap[] = $elemento;
 
