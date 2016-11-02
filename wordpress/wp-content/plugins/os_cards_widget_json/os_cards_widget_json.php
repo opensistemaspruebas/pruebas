@@ -79,7 +79,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'orderby' 		   => 'meta_value',
 							'post_type'        => $tipo_post,
 							'post_status'      => 'publish',
-							'suppress_filters' => true,
+							'suppress_filters' => false,
 							'meta_query' => array(
 						        array(
 									'key'         => 'destacada',
@@ -98,7 +98,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'orderby' 		   => 'meta_value',
 							'post_type'        => $tipo_post,
 							'post_status'      => 'publish',
-							'suppress_filters' => true
+							'suppress_filters' => false
 						);
 	    			}
 	    		} else {
@@ -113,7 +113,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'meta_value'       => '',
 							'post_type'        => $tipo_post,
 							'post_status'      => 'publish',
-							'suppress_filters' => true,
+							'suppress_filters' => false,
 							'meta_query' => array(
 						        array(
 									'key'         => 'destacada',
@@ -133,7 +133,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'meta_value'       => '',
 							'post_type'        => $tipo_post,
 							'post_status'      => 'publish',
-							'suppress_filters' => true
+							'suppress_filters' => false
 						);
 	    			}
 	    		}
