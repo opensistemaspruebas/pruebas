@@ -357,6 +357,16 @@ function buscar_general(ver_mas) {
 		}
 	});
 
+
+	if (jQuery('#publishes .cards-grid .container div.row').first().children().size() == 0) {
+		if (jQuery('#histories .cards-grid .container div.row').first().children().size() == 0) {
+			jQuery('a.workshops').parent().addClass('active');
+		} else {
+			jQuery('a.histories').parent().addClass('active');
+		}
+	}
+
+
 }
 
 
@@ -429,7 +439,10 @@ function getPostFiltro_general(post, id) {
 
 		var titulo = post['title'];
 		var descripcion = post['content'];
-		var fecha = new Date(post['date'].substring(0, 10));
+		var fecha = '';
+		if (post['date'] !== undefined) {
+			fecha = new Date(post['date'].substring(0, 10));
+		}
 		var urlImagen = post['image_src'];
 		var urlPublicacion = post['resourcename'];
 		var cita = true;
@@ -452,9 +465,11 @@ function getPostFiltro_general(post, id) {
 			object_name_script_os_js.diciembre,
 		];
 
-		fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
-		fecha = fecha.toString();
-		fecha = fecha.toUpperCase();
+		if (fecha !== '') {
+			fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
+			fecha = fecha.toString();
+			fecha = fecha.toUpperCase();
+		}
 
 
 		order = ['double', 'double', 'triple', 'triple', 'triple'];
