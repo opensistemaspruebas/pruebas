@@ -147,9 +147,9 @@ function buscar_general() {
 
 	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
 	if (filter) {
-	    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'publicacion\' topic:\'historia\' topic:\'taller\')(or content_language:\'' + object_name.lang + '\'))';
+	    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'publicacion\' topic:\'historia\' topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 	} else {
-		url_buscador += '&fq=(and(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\'))';
+		url_buscador += '&fq=(and(or topic:\'' + tipo + '\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 	}
 	url_buscador += '&start=' + start + '&sort=' + order;
 
@@ -170,27 +170,27 @@ function buscar_general() {
 	        															<div class="results">\
 	        																<div class="tabs container">\
 	        																	<header class="title-description mt-lg">\
-	        																		<h1>Resultado de la búsqueda</h1>\
+	        																		<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
 	        																		<div class="description-container">\
-	        																			<p>Se han encontrado ' + d.data.hits.found + ' resultados que coinciden con la palabra <strong>Millenials</strong> y las etiquetas <strong>Fintech, Educación financiera</strong></p>\
+	        																			<p>' + object_name_script_os_js.se_han_encontrado + ' ' + d.data.hits.found + ' ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
 	        																		</div> \
 	        																	</header>\
 	        																	<section class="mt-lg results-content-tabs workshops-results">\
 	        																		<div class="controls">\
 	        																			<select id="select-tab-results" class="selectpicker-form visible-xs">\
-	        																				<option value="publishes">Publicaciones (' + numPublicaciones + ')</option>\
-	        																				<option value="histories">Historias (' + numHistorias + ')</option>\
-	        																				<option value="workshops">Talleres (' + numTalleres + ')</option>\
+	        																				<option value="publishes">' + object_name_script_os_js.publicaciones + ' (' + numPublicaciones + ')</option>\
+	        																				<option value="histories">' + object_name_script_os_js.historias + ' (' + numHistorias + ')</option>\
+	        																				<option value="workshops">' + object_name_script_os_js.talleres + ' (' + numTalleres + ')</option>\
 	        																			</select>\
 	        																			<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
 	        																				<li class="hidden-xs active">\
-	        																					<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">Publicaciones (' + numPublicaciones + ')</a>\
+	        																					<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">' + object_name_script_os_js.publicaciones + ' (' + numPublicaciones + ')</a>\
 	        																				</li>\
 	        																					<li class="hidden-xs">\
-	        																						<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">Historias (' + numHistorias + ')</a>\
+	        																						<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (' + numHistorias + ')</a>\
 	        																					</li>\
 	        																					<li class="hidden-xs">\
-	        																						<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">Talleres (' + numTalleres + ')</a>\
+	        																						<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (' + numTalleres + ')</a>\
 	        																				</li>\
 	        																			</ul>\
 	        																		</div>\
@@ -200,15 +200,15 @@ function buscar_general() {
 	        																					<div class="sort-items-container">\
 	        																						<a href="#" class=" selected ">\
 	        																							<span class="icon bbva-icon-arrow arrowUp"></span>\
-	        																							<span class="text">Más recientes</span>\
+	        																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
 	        																						</a>\
 	        																						<a href="#" class="">\
 	        																							<span class="icon bbva-icon-arrow arrowDown"></span>\
-	        																							<span class="text">Más antiguos</span>\
+	        																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
 	        																						</a>\
 	        																						<a href="#" class="">\
 	        																							<span class="icon bbva-icon-view extra-space "></span>\
-	        																							<span class="text">Más leídos</span>\
+	        																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
 	        																						</a>\
 	        																					</div>\
 	        																					<article class="cards-grid">\
@@ -219,7 +219,7 @@ function buscar_general() {
 	        																									<div class="col-md-12 text-center">\
 	        																										<a href="#" class="readmore">\
 	        																											<span class="bbva-icon-more font-xs mr-xs"></span>\
-	        																											Ver más publicaciones\
+	        																											' + object_name_script_os_js.ver_mas_publicaciones + '\
 	        																										</a>\
 	        																									</div>\
 	        																								</div>\
@@ -233,15 +233,15 @@ function buscar_general() {
 	        																				<div class="sort-items-container">\
 	        																					<a href="#" class=" selected ">\
 	        																						<span class="icon bbva-icon-arrow arrowUp"></span>\
-	        																						<span class="text">Más recientes</span>\
+	        																						<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
 	        																					</a>\
 	        																					<a href="#" class="">\
 	        																						<span class="icon bbva-icon-arrow arrowDown"></span>\
-	        																						<span class="text">Más antiguos</span>\
+	        																						<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
 	        																					</a>\
 	        																					<a href="#" class="">\
 	        																						<span class="icon bbva-icon-view extra-space "></span>\
-	        																						<span class="text">Más leídos</span>\
+	        																						<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
 	        																					</a>\
 	        																				</div>\
 	        																				<article class="cards-grid">\
@@ -250,7 +250,7 @@ function buscar_general() {
 	        																						<footer class="grid-footer">\
 	        																							<div class="row">\
 	        																								<div class="col-md-12 text-center">\
-	        																									<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>Ver más publicaciones</a>\
+	        																									<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>' + object_name_script_os_js.ver_mas_historias + '</a>\
 	        																								</div>\
 	        																							</div>\
 	        																						</footer>\
@@ -268,12 +268,12 @@ function buscar_general() {
 	        																								<option value="">Perú</option>\
 	        																								<option value="">Francia</option>\
 	        																							</select>\
-	        																							<a href="#" class="link-web">Ir a la web Bancomer <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
+	        																							<a href="#" class="link-web">' + object_name_script_os_js.ir_a_la_web_bancomer + ' <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
 	        																						</div>\
 	        																					</div>\
 	        																				<article class="container data-grid">\
 	        																					<header>\
-	        																						<h1>Talleres de <span class="current-country"></span></h1>\
+	        																						<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + '<span class="current-country"></span></h1>\
 	        																					</header>\
 	        																					<div class="content">\
 	        																						<div class="grid-wrapper"></div>\
@@ -281,7 +281,7 @@ function buscar_general() {
 	        																					<footer class="grid-footer">\
 	        																						<div class="row">\
 	        																							<div class="col-md-12 text-center">\
-	        																								<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más talleres</a>\
+	        																								<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
 	        																							</div>\
 	        																						</div>\
 	        																					</footer>\
@@ -314,7 +314,7 @@ function buscar_general() {
 	        	jQuery('a#readmore').show();
 	        }
 	    } else {
-	        jQuery('.cards-grid .container div.row').first().html('<p>' + object_name.no_results + '</p>');
+	        jQuery('.cards-grid .container div.row').first().html('<p>' + object_name_script_os_js.no_results + '</p>');
 	        jQuery('a#readmore').hide();
 	    }
 	//}, 'json');
@@ -399,18 +399,18 @@ function getPostFiltro_general(post, id) {
 
 
 		var meses = [
-			object_name_cards.enero, 
-			object_name_cards.febrero,
-			object_name_cards.marzo,
-			object_name_cards.abril,
-			object_name_cards.mayo,
-			object_name_cards.junio,
-			object_name_cards.julio,
-			object_name_cards.agosto,
-			object_name_cards.septiembre,
-			object_name_cards.octubre,
-			object_name_cards.noviembre,
-			object_name_cards.diciembre,
+			object_name_script_os_js.enero, 
+			object_name_script_os_js.febrero,
+			object_name_script_os_js.marzo,
+			object_name_script_os_js.abril,
+			object_name_script_os_js.mayo,
+			object_name_script_os_js.junio,
+			object_name_script_os_js.julio,
+			object_name_script_os_js.agosto,
+			object_name_script_os_js.septiembre,
+			object_name_script_os_js.octubre,
+			object_name_script_os_js.noviembre,
+			object_name_script_os_js.diciembre,
 		];
 
 		fecha = fecha.getDate() + ' ' +  meses[fecha.getMonth()] + ' ' + fecha.getFullYear();
@@ -426,7 +426,7 @@ function getPostFiltro_general(post, id) {
 		} else {
 			html = '<div class="col-xs-12 col-sm-4 triple-card card-container">';
 		}
-		html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt=""></a><img src="' + urlImagen + '" alt="" class="hidden-xs"></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="#" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas + '</a><footer><div class="icon-row">';
+		html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt=""></a><img src="' + urlImagen + '" alt="" class="hidden-xs"></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="#" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_script_os_js.leer_mas + '</a><footer><div class="icon-row">';
 	    if (cita == true || true)  {
 	        html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 	    }

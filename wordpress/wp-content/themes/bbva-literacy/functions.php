@@ -470,6 +470,40 @@ function imprimir_json_etiquetas() {
 
 
 function wpdocs_theme_name_scripts() {
-    wp_enqueue_script('script_os_js', get_template_directory_uri() . '/resources/js/script-os.js', array('jquery'));
+	wp_enqueue_script('script_os_js', get_template_directory_uri() . '/resources/js/script-os.js', array('jquery'));
+	$translation_array = array(
+		'enero' => __('Enero'),
+		'febrero' => __('Febrero'),
+		'marzo' => __('Marzo'),
+		'abril' => __('Abril'),
+		'mayo' => __('Mayo'),
+		'junio' => __('Junio'),
+		'julio' => __('Julio'),
+		'agosto' => __('Agosto'),
+		'septiembre' => __('Septiembre'),
+		'octubre' => __('Octubre'),
+		'noviembre' => __('Noviembre'),
+		'diciembre' => __('Diciembre'),
+		'lang' => str_replace('_', '-', get_locale()),
+		'no_results' => __("No hay resultados"),
+		'publicaciones' => __('Publicaciones'),
+		'historias' => __('Historias'),
+		'talleres' => __('Talleres'),
+		'resultado_de_busqueda' => __('Resultado de la búsqueda'),
+		'mas_recientes' => __('Más recientes'),
+		'mas_antiguos' => __('Más antiguos'),
+		'mas_leidos' => __('Más leídos'),
+		'ver_mas_publicaciones' => __('Ver más publicaciones'),
+		'ver_mas_historias' => __('Ver más historias'),
+		'ver_mas_talleres' => __('Ver más talleres'),
+		'leer_mas' => __('Leer más'),
+		'ir_a_la_web_bancomer' => __('Ir a la web Bancomer'),
+		'se_han_encontrado' => __('Se han encontrado'),
+		'resultados_que_coinciden_con_la_palabra' => __('resultados que coinciden con la palabra'),
+		'y_las_etiquetas' => __('y las etiquetas'),
+		'de' => __('de'),
+	);
+	wp_localize_script('script_os_js', 'object_name_script_os_js', $translation_array);
+	wp_enqueue_script('script_os_js');
 }
 add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
