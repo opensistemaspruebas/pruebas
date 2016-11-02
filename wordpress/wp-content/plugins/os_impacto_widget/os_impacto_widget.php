@@ -827,7 +827,7 @@ function pintaWidgetBarras($etiqueta, $objetivo, $completado, $identificador){
 <?php
 
 	 echo "<script>jQuery(document).ready(function() {
-			setProgressBarLine('#".$identificador."', getConfig(".$valuesObj[0].", '".$valuesCom[1]."'), ".$porcentaje.") });
+			setProgressBarLine('#".$identificador."', getConfig(".$valuesObj[0].", '".$valuesObj[1]."'), ".$porcentaje.") });
 		  </script>";
 }
 
