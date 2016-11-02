@@ -91,7 +91,7 @@ function add_search_meta() {
     	}
         ?>
         <meta name="wp_search" content="true"/>
-        <meta name="wp_content" content="<?php echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($post_content))); ?>"/>
+        <meta name="wp_content" content="<?php if (!empty($post_content)) echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($post_content))); else echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($p->post_title))); ?>"/>
         <meta name="wp_title" content="<?php echo htmlentities(str_replace(array("\r\n","\n"),'',strip_tags($p->post_title))); ?>"/>
         <meta name="wp_text_array" content="<?php echo $text_array;  ?>"/>
         <meta name="wp_double_array" content="<?php echo implode($attrs, ','); ?>"/>
