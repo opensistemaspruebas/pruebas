@@ -470,6 +470,6 @@ function imprimir_json_etiquetas() {
 
 
 function wpdocs_theme_name_scripts() {
-    wp_enqueue_script('script_os_js', get_template_directory_uri() . '/resources/js/script-os.js', array('jQuery'));
+    wp_enqueue_script('script_os_js', get_template_directory_uri() . '/resources/js/script-os.js', array('jquery'));
 }
 add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
