@@ -180,7 +180,7 @@ function buscar_general(ver_mas) {
 																	<header class="title-description mt-lg">\
 																		<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
 																		<div class="description-container">\
-																			<p>' + object_name_script_os_js.se_han_encontrado + ' 0 ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
+																			<p>' + object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
 																		</div> \
 																	</header>\
 																	<section class="mt-lg results-content-tabs workshops-results">\
@@ -304,6 +304,12 @@ function buscar_general(ver_mas) {
 		jQuery('.prefooter-bbva').removeClass('background-gray');
 	}
 
+	jQuery('span.num_resultados').html('0');
+
+	jQuery('a.publishes').parent().removeClass('active');
+	jQuery('a.histories').parent().removeClass('active');
+	jQuery('a.workshops').parent().removeClass('active');
+
 	//publicaciones
 	jQuery.get(url_buscador_publicaciones, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
@@ -314,6 +320,9 @@ function buscar_general(ver_mas) {
 	        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
 	        	jQuery('#publishes footer a.readmore').remove();
 	        }
+	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
+	        jQuery('span.num_resultados').html(num_resultados);
+	        jQuery('a.publishes').parent().addClass('active');
 		} else {
 			jQuery('a.publishes').remove();
 			jQuery('#publishes footer a.readmore').remove();
@@ -332,6 +341,11 @@ function buscar_general(ver_mas) {
 	        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
 	        	jQuery('#histories footer a.readmore').remove();
 	        }
+	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
+	        jQuery('span.num_resultados').html(num_resultados);
+	        if (!jQuery('a.publishes').parent().hasClass('active')) {
+	        	jQuery('a.histories').parent().addClass('active');
+	        }
 		} else {
 			jQuery('a.histories').remove();
 			jQuery('#histories footer a.readmore').remove();
@@ -349,6 +363,11 @@ function buscar_general(ver_mas) {
 			});
 	        if (d.data.hits.found == jQuery('#workshops .grid-wrapper').first().children().size()) {
 	        	jQuery('#workshops footer a.readmore').remove();
+	        }
+	       	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
+	        jQuery('span.num_resultados').html(num_resultados);
+	        if (!jQuery('a.publishes').parent().hasClass('active') && !jQuery('a.histories').parent().hasClass('active')) {
+	        	jQuery('a.workshops').parent().addClass('active');
 	        }
 		} else {
 			jQuery('a.workshops').remove();
