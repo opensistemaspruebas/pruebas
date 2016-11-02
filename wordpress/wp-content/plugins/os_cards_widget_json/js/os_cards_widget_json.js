@@ -1,5 +1,5 @@
 // Ver mas publicaciones
-jQuery(document).on("click", "#readmore", function(event) {
+jQuery(document).on("click", "#publishing-view #readmore", function(event) {
 	event.preventDefault();
 	if (buscando) {
 		return;
@@ -12,7 +12,7 @@ jQuery(document).on("click", "#readmore", function(event) {
 
 
 // Cambiar el orden
-jQuery(document).on("click", '.sort-items-container a', function(event) {
+jQuery(document).on("click", '#publishing-view .sort-items-container a', function(event) {
 	event.preventDefault();
 	var orden_cards = jQuery(this).attr("data-order");
 	console.log(orden_cards);

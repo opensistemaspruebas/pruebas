@@ -1,6 +1,10 @@
 jQuery(document).ready(function($) {
 
 	buscando = false;
+	tags = [];
+	texto = '';
+
+	prefooter = jQuery('.prefooter-bbva').html();
 
 
 	jQuery('.btn-group.languages-buttons a').on('click', function($) {
@@ -63,19 +67,31 @@ jQuery(document).ready(function($) {
 		
 		console.log("hago click en buscar");
 
-		buscar_general();
+		buscar_general(false);
 	
 	}); 
 
-	jQuery('#publishes a.readmore').on('click', function(e) {
-		e.preventDefault();
-		e.stopPropagation();
 
-		start = parseInt(jQuery("input#start").val()) + 10;
-		
-		$("input#start").attr('value', start);
-		
-		buscar();		
+	jQuery('body').on('click', '#publishes footer a.readmore', function(event) {
+		event.preventDefault();
+		start = parseInt(jQuery("input#startPublicaciones").val()) + 10;
+		jQuery("input#startPublicaciones").attr('value', start);
+		buscar_general(true);
+	});
+
+
+	jQuery('body').on('click', '#histories footer a.readmore', function(event) {
+		event.preventDefault();
+		start = parseInt(jQuery("input#startHistorias").val()) + 10;
+		jQuery("input#startHistorias").attr('value', start);
+		buscar_general(true);
+	});
+
+	jQuery('body').on('click', '#workshops footer a.readmore', function(event) {
+		event.preventDefault();
+		start = parseInt(jQuery("input#startTalleres").val()) + 6;
+		jQuery("input#startTalleres").attr('value', start);
+		buscar_general(true);
 	});
 	 
 });
@@ -96,17 +112,15 @@ function getNumResultados(d, tipo) {
 }
 
 
-function buscar_general() {
+function buscar_general(ver_mas) {
+
+	old_tags = tags;
+	old_texto = texto;
+
 	tags = getSelectedTags_general();
 	textoInput = jQuery('input.input-search.navbar-search-input').val();
 	texto = textoInput + ' ' + tags[0].join(' ');
 	texto = getCleanedString(texto);
-
-
-	if (tags[0].length == 0 && tags[1].length == 0 && tags[2].length == 0 && tags[3].length == 0 && texto.length == 0) {
-		jQuery('a[data-order=DESTACADOS]').show();
-	}
-
 
 	categorias = tags[1];
 	autores = tags[2];
@@ -157,11 +171,9 @@ function buscar_general() {
 	url_buscador_historias += '&start=' + start_historias + '&sort=' + order_historias + '&size=' + size_historias;
 	url_buscador_talleres += '&start=' + start_talleres + '&sort=' + order_talleres + '&size=' + size_talleres;
 
-	var publicaciones = '';
-	var historias = '';
-	var talleres = '';
-
-	jQuery('.contents div:nth-child(2)').first().html('<div class="contents">\
+	if (!ver_mas) {
+		jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
+		jQuery('.prefooter-bbva').before('<div class="contents">\
 															<div id="search-layer"></div>\
 															<div class="results">\
 																<div class="tabs container">\
@@ -288,8 +300,9 @@ function buscar_general() {
 																</section>\
 															</div>\
 														</div>\
-													</div>');
-
+														</div>');
+		jQuery('.prefooter-bbva').removeClass('background-gray');
+	}
 
 	//publicaciones
 	jQuery.get(url_buscador_publicaciones, function(d) {
@@ -299,15 +312,15 @@ function buscar_general() {
 				jQuery('#publishes .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'publishes'));
 			});
 	        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
-	        	jQuery('#publishes footer a.readmore').hide();
-	        } else {
-	        	jQuery('#publishes footer a.readmore').show();
+	        	jQuery('#publishes footer a.readmore').remove();
 	        }
 		} else {
-			jQuery('div#publishes').remove();
 			jQuery('a.publishes').remove();
+			jQuery('#publishes footer a.readmore').remove();
+			jQuery('#publishes .sort-items-container').children('a').remove();
 		}
 	});
+
 
 	//historias
 	jQuery.get(url_buscador_historias, function(d) {
@@ -317,15 +330,15 @@ function buscar_general() {
 				jQuery('#histories .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'histories'));
 			});
 	        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
-	        	jQuery('#histories footer a.readmore').hide();
-	        } else {
-	        	jQuery('#histories footer a.readmore').show();
+	        	jQuery('#histories footer a.readmore').remove();
 	        }
 		} else {
-			jQuery('div#histories').remove();
 			jQuery('a.histories').remove();
+			jQuery('#histories footer a.readmore').remove();
+			jQuery('#histories .sort-items-container').children('a').remove();
 		}
 	});
+
 
 	//talleres
 	jQuery.get(url_buscador_talleres, function(d) {
@@ -335,37 +348,13 @@ function buscar_general() {
 				jQuery('#workshops .grid-wrapper').first().append(getPostFiltro_general(result.fields, 'workshops'));
 			});
 	        if (d.data.hits.found == jQuery('#workshops .grid-wrapper').first().children().size()) {
-	        	jQuery('#workshops footer a.readmore').hide();
-	        } else {
-	        	jQuery('#workshops footer a.readmore').show();
+	        	jQuery('#workshops footer a.readmore').remove();
 	        }
 		} else {
-			jQuery('div#workshops').remove();
 			jQuery('a.workshops').remove();
+			jQuery('#workshops footer a.readmore').remove();
+			jQuery('#workshops .sort-items-container').children('a').remove();
 		}
-	});
-	
-
-	jQuery('#publishes footer a.readmore').on('click', function(event) {
-		event.preventDefault();
-		start = parseInt(jQuery("input#startPublicaciones").val()) + 10;
-		jQuery("input#startPublicaciones").attr('value', start);
-		buscar_general();
-	});
-
-
-	jQuery('#histories footer a.readmore').on('click', function(event) {
-		event.preventDefault();
-		start = parseInt(jQuery("input#startHistorias").val()) + 10;
-		jQuery("input#startHistorias").attr('value', start);
-		buscar_general();
-	});
-
-	jQuery('#workshops footer a.readmore').on('click', function(event) {
-		event.preventDefault();
-		start = parseInt(jQuery("input#startTalleres").val()) + 10;
-		jQuery("input#startTalleres").attr('value', start);
-		buscar_general();
 	});
 
 }
