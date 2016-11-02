@@ -264,7 +264,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 
 											$post_id = get_the_id();
 											$visualizacion = (get_post_meta($post_id, 'visualizacion', true)) ? get_post_meta($post_id, 'visualizacion', true) : "circulo";
-											$etiqueta = mb_strtoupper(get_post_meta($post_id, 'etiqueta', true), 'UTF-8');
+											$etiqueta = get_post_meta($post_id, 'etiqueta', true);
 											$objetivo = get_post_meta($post_id, 'objetivo', true);
 											$completado = get_post_meta($post_id, 'completado', true);
 							
@@ -301,7 +301,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 
 											$post_id = get_the_id();
 											$visualizacion = (get_post_meta($post_id, 'visualizacion', true)) ? get_post_meta($post_id, 'visualizacion', true) : "circulo";
-											$etiqueta = mb_strtoupper(get_post_meta($post_id, 'etiqueta', true), 'UTF-8');
+											$etiqueta = get_post_meta($post_id, 'etiqueta', true);
 											$objetivo = get_post_meta($post_id, 'objetivo', true);
 											$completado = get_post_meta($post_id, 'completado', true);
 							
