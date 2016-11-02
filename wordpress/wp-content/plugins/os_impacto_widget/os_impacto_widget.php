@@ -835,8 +835,7 @@ function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
 
 
 		$valuesCom = thousandsCurrencyFormat($completado);
-
-		os_imprimir($valuesCom[0]);
+		
 		$color = 'red';
 
 		switch ($color_dato) {

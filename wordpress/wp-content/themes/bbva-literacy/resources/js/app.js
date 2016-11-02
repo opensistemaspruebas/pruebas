@@ -266,7 +266,9 @@ var googleMaps = function($) {
                 if (selection.length > 0) {
                     var option = selection[0].row;
                     $('#select-country option:eq(' + (++option) + ')').prop('selected', true);
-                    $selectCountry.selectpicker('refresh');
+                    $selectCountry.selectpicker('refresh');  
+                    jQuery('.link-web').attr('href',dataMap[selection[0].row]['urlPais']);
+                    document.getElementById("descrPaisId").innerHTML = dataMap[selection[0].row]['descPais'];
                     showInfoCountry(selection);
                 }
             }, 100);
@@ -307,6 +309,8 @@ var googleMaps = function($) {
         $('.link-web').show();
         showWorkshops();
         showMessage(selection);
+        jQuery('.link-web').attr('href',dataMap[selection[0].row]['urlPais']);
+        document.getElementById("descrPaisId").innerHTML = dataMap[selection[0].row]['descPais'];
     }
 
     function showWorkshops() {
