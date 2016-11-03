@@ -93,6 +93,26 @@ jQuery(document).ready(function($) {
 		jQuery("input#startTalleres").attr('value', start);
 		buscar_general(true);
 	});
+
+	jQuery('body').on('click', '#publishes .sort-items-container a', function(event) {
+		event.preventDefault();
+		orden = jQuery(this).attr("data-order-filter");
+		jQuery("input#sortByPublicaciones").val(orden);
+		jQuery('#publishes .sort-items-container a.selected').removeClass("selected");
+		jQuery(this).addClass("selected");
+		jQuery("input#startPublicaciones").val(0);
+		buscar_general(false);
+	});
+
+	jQuery('body').on('click', '#histories .sort-items-container a', function(event) {
+		event.preventDefault();
+		orden = jQuery(this).attr("data-order-filter");
+		jQuery("input#sortByPublicaciones").val(orden);
+		jQuery('#histories .sort-items-container a.selected').removeClass("selected");
+		jQuery(this).addClass("selected");
+		jQuery("input#startPublicaciones").val(0);
+		buscar_general(false);
+	});
 	 
 });
 
@@ -126,6 +146,12 @@ function buscar_general(ver_mas) {
 	autores = tags[2];
 	paises = tags[3];
 
+	if (!ver_mas) {
+		jQuery("input#startPublicaciones").val(0);
+		jQuery("input#startHistorias").val(0);
+		jQuery("input#startTalleres").val(0);
+	}
+
 	start_publicaciones = jQuery("input#startPublicaciones").val();
 	order_publicaciones = jQuery("input#sortByPublicaciones").val();
 	size_publicaciones = jQuery("input#sizePublicaciones").val();
@@ -137,7 +163,6 @@ function buscar_general(ver_mas) {
 	start_talleres = jQuery("input#startTalleres").val();
 	order_talleres = jQuery("input#sortByTalleres").val();
 	size_talleres = jQuery("input#sizeTalleres").val();
-
 	
 	query_paises = "";
 	query_autores = "";
@@ -206,15 +231,15 @@ function buscar_general(ver_mas) {
 																			<div role="tabpanel" class="tab-pane active" id="publishes">\
 																				<section class="publishes-wrapper">\
 																					<div class="sort-items-container">\
-																						<a href="#" class=" selected ">\
+																						<a data-order-filter="date desc" data-order="DESC" href="#" class=" selected ">\
 																							<span class="icon bbva-icon-arrow arrowUp"></span>\
 																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
 																						</a>\
-																						<a href="#" class="">\
+																						<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
 																							<span class="icon bbva-icon-arrow arrowDown"></span>\
 																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
 																						</a>\
-																						<a href="#" class="">\
+																						<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
 																							<span class="icon bbva-icon-view extra-space "></span>\
 																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
 																						</a>\
@@ -239,18 +264,18 @@ function buscar_general(ver_mas) {
 																		<div role="tabpanel" class="tab-pane" id="histories">\
 																			<section class="histories-wrapper">\
 																				<div class="sort-items-container">\
-																					<a href="#" class=" selected ">\
-																						<span class="icon bbva-icon-arrow arrowUp"></span>\
-																						<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
-																					</a>\
-																					<a href="#" class="">\
-																						<span class="icon bbva-icon-arrow arrowDown"></span>\
-																						<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
-																					</a>\
-																					<a href="#" class="">\
-																						<span class="icon bbva-icon-view extra-space "></span>\
-																						<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
-																					</a>\
+																						<a data-order-filter="date desc" data-order="DESC" href="#" class=" selected ">\
+																							<span class="icon bbva-icon-arrow arrowUp"></span>\
+																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
+																						</a>\
+																						<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
+																							<span class="icon bbva-icon-arrow arrowDown"></span>\
+																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
+																						</a>\
+																						<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
+																							<span class="icon bbva-icon-view extra-space "></span>\
+																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
+																						</a>\
 																				</div>\
 																				<article class="cards-grid">\
 																					<section class="container">\
@@ -306,9 +331,6 @@ function buscar_general(ver_mas) {
 
 	jQuery('span.num_resultados').html('0');
 
-	jQuery('a.publishes').parent().removeClass('active');
-	jQuery('a.histories').parent().removeClass('active');
-	jQuery('a.workshops').parent().removeClass('active');
 
 	//publicaciones
 	jQuery.get(url_buscador_publicaciones, function(d) {
@@ -322,7 +344,6 @@ function buscar_general(ver_mas) {
 	        }
 	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
-	        jQuery('a.publishes').parent().addClass('active');
 		} else {
 			jQuery('a.publishes').remove();
 			jQuery('#publishes footer a.readmore').remove();
@@ -343,9 +364,6 @@ function buscar_general(ver_mas) {
 	        }
 	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
-	        if (!jQuery('a.publishes').parent().hasClass('active')) {
-	        	jQuery('a.histories').parent().addClass('active');
-	        }
 		} else {
 			jQuery('a.histories').remove();
 			jQuery('#histories footer a.readmore').remove();
@@ -366,9 +384,6 @@ function buscar_general(ver_mas) {
 	        }
 	       	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
-	        if (!jQuery('a.publishes').parent().hasClass('active') && !jQuery('a.histories').parent().hasClass('active')) {
-	        	jQuery('a.workshops').parent().addClass('active');
-	        }
 		} else {
 			jQuery('a.workshops').remove();
 			jQuery('#workshops footer a.readmore').remove();
@@ -377,13 +392,13 @@ function buscar_general(ver_mas) {
 	});
 
 
-	if (jQuery('#publishes .cards-grid .container div.row').first().children().size() == 0) {
+	/*if (jQuery('#publishes .cards-grid .container div.row').first().children().size() == 0) {
 		if (jQuery('#histories .cards-grid .container div.row').first().children().size() == 0) {
 			jQuery('a.workshops').parent().addClass('active');
 		} else {
 			jQuery('a.histories').parent().addClass('active');
 		}
-	}
+	}*/
 
 
 }
@@ -464,9 +479,20 @@ function getPostFiltro_general(post, id) {
 		}
 		var urlImagen = post['image_src'];
 		var urlPublicacion = post['resourcename'];
-		var cita = true;
-		var video = true;
-		var pdf = true;
+		
+		var keywords = post['keywords'];
+
+		var cita = false;
+		var video = false;
+		var pdf = false;
+
+		if (keywords !== undefined) {
+			if ( jQuery.inArray('video', keywords) > -1 ) {
+			    video = true;
+			}
+		}
+		
+
 
 
 		var meses = [
@@ -500,13 +526,13 @@ function getPostFiltro_general(post, id) {
 			html = '<div class="col-xs-12 col-sm-4 triple-card card-container">';
 		}
 		html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt=""></a><img src="' + urlImagen + '" alt="" class="hidden-xs"></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="#" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_script_os_js.leer_mas + '</a><footer><div class="icon-row">';
-	    if (cita == true || true)  {
+	    if (cita)  {
 	        html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 	    }
-	    if (video == true || true)  {
+	    if (video)  {
 	        html += '<div class="card-icon"><span class="icon bbva-icon-audio2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 	    }
-	    if (pdf == true || true)  {
+	    if (pdf)  {
 	        html += '<div class="card-icon"><span class="icon bbva-icon-chat2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 		}
 		html += '</div></footer></div></section></div>';

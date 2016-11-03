@@ -38,10 +38,18 @@ function getPostFiltro(post) {
 	var fecha = new Date(post['date'].substring(0, 10));
 	var urlImagen = post['image_src'];
 	var urlPublicacion = post['resourcename'];
-	var cita = true;
-	var video = true;
-	var pdf = true;
 
+	var keywords = post['keywords'];
+
+	var cita = false;
+	var video = false;
+	var pdf = false;
+
+	if (keywords !== undefined) {
+		if ( jQuery.inArray('video', keywords) > -1 ) {
+		    video = true;
+		}
+	}
 
 	var meses = [
 		object_name_cards.enero, 
@@ -72,13 +80,13 @@ function getPostFiltro(post) {
 		html = '<div class="col-xs-12 col-sm-4 triple-card card-container">';
 	}
 	html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt=""></a><img src="' + urlImagen + '" alt="" class="hidden-xs"></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="#" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas + '</a><footer><div class="icon-row">';
-    if (cita == true || true)  {
+    if (cita)  {
         html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
     }
-    if (video == true || true)  {
+    if (video)  {
         html += '<div class="card-icon"><span class="icon bbva-icon-audio2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
     }
-    if (pdf == true || true)  {
+    if (pdf)  {
         html += '<div class="card-icon"><span class="icon bbva-icon-chat2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 	}
 	html += '</div></footer></div></section></div>';
