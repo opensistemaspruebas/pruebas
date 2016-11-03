@@ -48,7 +48,7 @@ if (!class_exists('OSMundoWidget')) :
 
 				<div class="container">
 				    <div class="select-map">
-				        <h2 class="hidden-xs"><?php _e("Programa de educación financiera"); ?></h2>
+				        <h2 class="hidden-xs"><?php _e("Programa de educación financiera", "os_mundo_widget"); ?></h2>
 				        <div class="controls">
 				            <select id="select-country" class="selectpicker-form countries"></select>
 				            <a target="_blank" href="" class="link-web"><span id="descrPaisId"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
@@ -119,8 +119,8 @@ if (!class_exists('OSMundoWidget')) :
 				        <div class="not-workshops">
 				          <span class="icon bbva-icon-info"></span>
 				          <div>
-				            <h3><?php _e("En estos momentos no tenemos talleres disponibles en "); ?><span class="current-country"></span></h3>
-				            <p><?php _e("Puedes consultar el portal de Educación Financiera para conocer mejor la oferta educativa del país."); ?></p>
+				            <h3><?php _e("En estos momentos no tenemos talleres disponibles en ", "os_mundo_widget"); ?><span class="current-country"></span></h3>
+				            <p><?php _e("Puedes consultar el portal de Educación Financiera para conocer mejor la oferta educativa del país.", "os_mundo_widget"); ?></p>
 				            <a target="_blank" href="<?php echo $URLaprenderMas; ?>"><?php echo $descripURLaprenderMas; ?></a>
 				          </div>
 				        </div>
@@ -150,7 +150,7 @@ if (!class_exists('OSMundoWidget')) :
 				            <article id="otros_talleres" name="otros_talleres" class="container data-grid">
 
 				              <header>
-				                <h1><?php _e("Talleres del país"); ?></h1>
+				                <h1><?php _e("Talleres del país", "os_mundo_widget"); ?></h1>
 				              </header>
 
 				              <div class="content">
@@ -176,7 +176,7 @@ if (!class_exists('OSMundoWidget')) :
 				                <footer id="esconder" class="grid-footer">
 				                  <div class="row">
 				                    <div class="col-md-12 text-center">
-				                      <a href="javascript:void(0)" id="readmore_talleres" name="readmore_talleres" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e(" Más talleres"); ?></a>
+				                      <a href="javascript:void(0)" id="readmore_talleres" name="readmore_talleres" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e(" Más talleres", "os_mundo_widget"); ?></a>
 				                    </div>
 				                  </div>
 				                </footer>
