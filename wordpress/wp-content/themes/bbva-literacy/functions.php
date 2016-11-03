@@ -55,6 +55,7 @@ function add_search_meta() {
     	$post_content = '';
     	$authors = get_coauthors(get_the_ID());
     	$autores = [];
+    	$keyboards = [];
     	if (!empty($authors)) {
     		foreach ($authors as $author) {
 				if (is_a($author, 'WP_User')) {
@@ -77,6 +78,14 @@ function add_search_meta() {
     		$fecha = get_post_meta($p->ID, 'publication_date', true);
     		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
     		$text_array = implode($autores, ',');
+    		$videoIntro_url = get_post_meta($p->ID,'videoIntro-url',true);
+    		if (!empty($videoIntro_url)) {
+    			$keyboards[] = 'video';
+    		}
+    		$destacada = get_post_meta($p->ID, 'destacada', true);
+    		if ($destacada == 'on') {
+    			$keyboards[] = 'destacada';
+    		}
     	} else if ($post_type == 'taller') {
     		$descp = get_post_meta($p->ID, 'descp', true);
     		$post_content = strip_tags($descp);
@@ -88,6 +97,14 @@ function add_search_meta() {
     		$fecha = get_the_date('Y-m-d');
     		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
     		$text_array = implode($autores, ',');
+    		$videoIntro_url = get_post_meta($p->ID,'videoIntro-url',true);
+    		if (!empty($videoIntro_url)) {
+    			$keyboards[] = 'video';
+    		}
+    		$destacada = get_post_meta($p->ID, 'destacada', true);
+    		if ($destacada == 'on') {
+    			$keyboards[] = 'destacada';
+    		}
     	}
         ?>
         <meta name="wp_search" content="true"/>
@@ -98,6 +115,7 @@ function add_search_meta() {
         <meta name="wp_date" content="<?php echo $fecha; ?>"/>
         <meta name="wp_topic" content="<?php echo get_post_type(); /*if ($destacada) echo '_destacada';*/ ?>"/>
         <meta name="image_src" content="<?php echo $image; ?>"/>
+        <meta name="wp_keywords" content="<?php echo implode($keyboards, ','); ?>"/>
     <?php endif;
 }
 add_action('wp_head', 'add_search_meta', 100);
