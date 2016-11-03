@@ -70,7 +70,7 @@ if (!class_exists('OSMundoWidget')) :
 				    );
 
 				  $dataMap = array();
-
+			
 				  foreach (get_terms('ambito_geografico', $args ) as $tag) :
 
 				    $arrayTaxAG = get_term_meta($tag->term_id);
@@ -94,9 +94,8 @@ if (!class_exists('OSMundoWidget')) :
 				    $descripURLpais = $arrayTaxAG['descripURLpais'][0];
 				    $URLpais = $arrayTaxAG['URLpais'][0];
 
-
 				    $elemento = array();
-
+				  
 	                $elemento['id'] = $isoCodeUpper;
 	                $elemento['country'] = $nombrePais;
 	                $elemento['title'] = $tituloModal;
@@ -212,8 +211,6 @@ if (!class_exists('OSMundoWidget')) :
 	                    </div>
 
                     <?php endif; ?>
-
-
 
 				</div>
 				<?php endforeach; ?>
