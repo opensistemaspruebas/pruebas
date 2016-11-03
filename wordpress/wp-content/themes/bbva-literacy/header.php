@@ -108,15 +108,21 @@
                     <?php languages_list_header_responsive(); ?>
                 </nav>
                 <div class="navbar navbar-search">
+                    
                     <input type="hidden" name="startPublicaciones" id="startPublicaciones" value="0">
                     <input type="hidden" name="sortByPublicaciones" id="sortByPublicaciones" value="date desc">
                     <input type="hidden" name="sizePublicaciones" id="sizePublicaciones" value="10">
+                   
                     <input type="hidden" name="startHistorias" id="startHistorias" value="0">
                     <input type="hidden" name="sortByHistorias" id="sortByHistorias" value="date desc">
                     <input type="hidden" name="sizeHistorias" id="sizeHistorias" value="10">
+                    
                     <input type="hidden" name="startTalleres" id="startTalleres" value="0">
                     <input type="hidden" name="sortByTalleres" id="sortByTalleres" value="date desc">
                     <input type="hidden" name="sizeTalleres" id="sizeTalleres" value="6">
+
+                    <input type="hidden" name="currentTab" id="currentTab" value="publishes">
+                   
                     <div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
                         <header>
                             <div class="form-wrapper">

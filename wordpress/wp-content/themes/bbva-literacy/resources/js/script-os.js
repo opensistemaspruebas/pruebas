@@ -107,11 +107,15 @@ jQuery(document).ready(function($) {
 	jQuery('body').on('click', '#histories .sort-items-container a', function(event) {
 		event.preventDefault();
 		orden = jQuery(this).attr("data-order-filter");
-		jQuery("input#sortByPublicaciones").val(orden);
+		jQuery("input#sortByHistorias").val(orden);
 		jQuery('#histories .sort-items-container a.selected').removeClass("selected");
 		jQuery(this).addClass("selected");
-		jQuery("input#startPublicaciones").val(0);
+		jQuery("input#startHistorias").val(0);
 		buscar_general(false);
+	});
+
+	jQuery('body').on('click', 'ul#results-tabs li a', function() {
+		jQuery('#currentTab').val(jQuery(this).attr('class'));
 	});
 	 
 });
@@ -167,6 +171,8 @@ function buscar_general(ver_mas) {
 	query_paises = "";
 	query_autores = "";
 	query_categorias = "";
+	query_destacados_publicaciones = '';
+	query_destacados_historias = '';
 
 	filter = false;
 	if (paises.length > 0){
@@ -181,11 +187,19 @@ function buscar_general(ver_mas) {
 		filter = true;
 		query_categorias = "(or wp_double_array:" + categorias.join(" wp_double_array:") + ")";	
 	}
+	if (order_publicaciones == 'destacados') {
+		order_publicaciones = 'date desc';
+		query_destacados_publicaciones += '(or keywords:\'destacado\')';
+	}
+	if (order_historias == 'destacados') {
+		order_historias = 'date desc';
+		query_destacados_historias += '(or keywords:\'destacado\')';
+	}
 
 	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
 	if (filter) {
-		url_buscador_publicaciones = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
-		url_buscador_historias = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+		url_buscador_publicaciones = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_publicaciones + '(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+		url_buscador_historias = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_historias + '(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 		url_buscador_talleres = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 	} else {
 		url_buscador_publicaciones = url_buscador + '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
@@ -231,7 +245,7 @@ function buscar_general(ver_mas) {
 																			<div role="tabpanel" class="tab-pane active" id="publishes">\
 																				<section class="publishes-wrapper">\
 																					<div class="sort-items-container">\
-																						<a data-order-filter="date desc" data-order="DESC" href="#" class=" selected ">\
+																						<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
 																							<span class="icon bbva-icon-arrow arrowUp"></span>\
 																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
 																						</a>\
@@ -264,7 +278,7 @@ function buscar_general(ver_mas) {
 																		<div role="tabpanel" class="tab-pane" id="histories">\
 																			<section class="histories-wrapper">\
 																				<div class="sort-items-container">\
-																						<a data-order-filter="date desc" data-order="DESC" href="#" class=" selected ">\
+																						<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
 																							<span class="icon bbva-icon-arrow arrowUp"></span>\
 																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
 																						</a>\
@@ -327,8 +341,19 @@ function buscar_general(ver_mas) {
 														</div>\
 														</div>');
 		jQuery('.prefooter-bbva').removeClass('background-gray');
+
 	}
 
+
+	ordenacion = jQuery('#sortByPublicaciones').val();
+	jQuery('#publishes .sort-items-container a[data-order-filter="' + ordenacion + '"]').addClass('selected');
+
+	ordenacion = jQuery('#sortByHistorias').val();
+	jQuery('#histories .sort-items-container a[data-order-filter="' + ordenacion + '"]').addClass('selected');
+
+	tab = jQuery('#currentTab').val();
+	jQuery('ul#results-tabs li').removeClass('active');
+	jQuery('a.' + tab).parent().addClass('active');
 	jQuery('span.num_resultados').html('0');
 
 
