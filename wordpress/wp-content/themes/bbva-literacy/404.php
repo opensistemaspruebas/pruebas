@@ -8,8 +8,10 @@
 </div>
 
 <!--pagina principal error 404-->
-<div class="container error404">
-      <section class="mb-4xl mt-lg">
+
+<div class="general-content-text"><!--añadir bg-gray para fondo en gris -->
+    <div class="container">
+      <section class="mgb-50 mt-lg">
         <h1>Oops! Página no encontrada.</h1>
         <h2>Se ha producido un error 404.</h2>
         <p>Nunc dictum lorem nec lectus varius, eu porta tellus lobortis. Aliquam
@@ -24,7 +26,7 @@
         </p>
       </section>
     </div>
-
+</div>
 <!--prefooter-->
    
 <?php
