@@ -286,7 +286,7 @@ get_header(); ?>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <h1 class="mt-md pt-sm ml-xs publication-access-title">
-                            <?php _e('Acceso a la publicación', 'os_publicacion_type'); ?>
+                            <?php _e('Contenido completo de la publicación', 'os_publicacion_type'); ?>
                             </h1>
                         </div>
                         <div class="col-xs-12 col-sm-3 col-sm-offset-2">
