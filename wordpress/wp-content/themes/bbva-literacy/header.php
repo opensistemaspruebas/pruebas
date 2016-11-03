@@ -108,6 +108,8 @@
                     <?php languages_list_header_responsive(); ?>
                 </nav>
                 <div class="navbar navbar-search">
+
+                    <?php imprime_json_paises(); ?>
                     
                     <input type="hidden" name="startPublicaciones" id="startPublicaciones" value="0">
                     <input type="hidden" name="sortByPublicaciones" id="sortByPublicaciones" value="date desc">

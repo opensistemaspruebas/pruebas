@@ -216,134 +216,134 @@ function buscar_general(ver_mas, reordenar) {
 
 	if (!ver_mas) {
 		jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
-		jQuery('.prefooter-bbva').before('<div class="contents">\
-															<div id="search-layer"></div>\
-															<div class="results">\
-																<div class="tabs container">\
-																	<header class="title-description mt-lg">\
-																		<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
-																		<div class="description-container">\
-																			<p>' + object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
-																		</div> \
-																	</header>\
-																	<section class="mt-lg results-content-tabs workshops-results">\
-																		<div class="controls">\
-																			<select id="select-tab-results" class="selectpicker-form visible-xs">\
-																				<option value="publishes">' + object_name_script_os_js.publicaciones + ' (0)</option>\
-																				<option value="histories">' + object_name_script_os_js.historias + ' (0)</option>\
-																				<option value="workshops">' + object_name_script_os_js.talleres + ' (0)</option>\
-																			</select>\
-																			<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
-																				<li class="hidden-xs active">\
-																					<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">' + object_name_script_os_js.publicaciones + ' (0)</a>\
-																				</li>\
-																					<li class="hidden-xs">\
-																						<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (0)</a>\
-																					</li>\
-																					<li class="hidden-xs">\
-																						<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
-																				</li>\
-																			</ul>\
-																		</div>\
-																		<div class="tab-content">\
-																			<div role="tabpanel" class="tab-pane active" id="publishes">\
-																				<section class="publishes-wrapper">\
-																					<div class="sort-items-container">\
-																						<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowUp"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
-																						</a>\
-																						<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowDown"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
-																						</a>\
-																						<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
-																							<span class="icon bbva-icon-view extra-space "></span>\
-																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
-																						</a>\
-																					</div>\
-																					<article class="cards-grid">\
-																						<section class="container">\
-																							<div class="row"></div>\
-																							<footer class="grid-footer">\
-																								<div class="row">\
-																									<div class="col-md-12 text-center">\
-																										<a href="#" class="readmore">\
-																											<span class="bbva-icon-more font-xs mr-xs"></span>\
-																											' + object_name_script_os_js.ver_mas_publicaciones + '\
-																										</a>\
-																									</div>\
-																								</div>\
-																							</footer>\
-																						</section>\
-																					</article>\
-																				</section>\
-																			</div>\
-																		<div role="tabpanel" class="tab-pane" id="histories">\
-																			<section class="histories-wrapper">\
-																				<div class="sort-items-container">\
-																						<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowUp"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
-																						</a>\
-																						<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowDown"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
-																						</a>\
-																						<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
-																							<span class="icon bbva-icon-view extra-space "></span>\
-																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
-																						</a>\
-																				</div>\
-																				<article class="cards-grid">\
-																					<section class="container">\
-																						<div class="row"></div>\
-																						<footer class="grid-footer">\
-																							<div class="row">\
-																								<div class="col-md-12 text-center">\
-																									<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>' + object_name_script_os_js.ver_mas_historias + '</a>\
-																								</div>\
-																							</div>\
-																						</footer>\
-																					</section>\
-																				</article>\
-																			</section>\
-																		</div>\
-																			<div role="tabpanel" class="tab-pane" id="workshops">\
-																				<section class="workshops-wrapper">\
-																					<div class="workshops-results container removePadding">\
-																						<div class="controls">\
-																							<select id="select-country" class="selectpicker-form countries">\
-																								<option value="">Mexico</option>\
-																								<option value="">España</option>\
-																								<option value="">Perú</option>\
-																								<option value="">Francia</option>\
-																							</select>\
-																							<a href="#" class="link-web">' + object_name_script_os_js.ir_a_la_web_bancomer + ' <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
-																						</div>\
-																					</div>\
-																				<article class="container data-grid">\
-																					<header>\
-																						<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + '<span class="current-country"></span></h1>\
-																					</header>\
-																					<div class="content">\
-																						<div class="grid-wrapper"></div>\
-																					</div>\
-																					<footer class="grid-footer">\
-																						<div class="row">\
-																							<div class="col-md-12 text-center">\
-																								<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
-																							</div>\
-																						</div>\
-																					</footer>\
-																				</article>\
-																			</section>\
+		codigoBuscador = '<div class="contents">\
+							<div id="search-layer"></div>\
+								<div class="results">\
+									<div class="tabs container">\
+										<header class="title-description mt-lg">\
+											<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
+											<div class="description-container">\
+												<p>' + object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
+											</div> \
+										</header>\
+										<section class="mt-lg results-content-tabs workshops-results">\
+											<div class="controls">\
+												<select id="select-tab-results" class="selectpicker-form visible-xs">\
+													<option value="publishes">' + object_name_script_os_js.publicaciones + ' (0)</option>\
+													<option value="histories">' + object_name_script_os_js.historias + ' (0)</option>\
+													<option value="workshops">' + object_name_script_os_js.talleres + ' (0)</option>\
+												</select>\
+												<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
+													<li class="hidden-xs active">\
+														<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">' + object_name_script_os_js.publicaciones + ' (0)</a>\
+													</li>\
+														<li class="hidden-xs">\
+															<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (0)</a>\
+														</li>\
+														<li class="hidden-xs">\
+															<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
+													</li>\
+												</ul>\
+											</div>\
+											<div class="tab-content">\
+												<div role="tabpanel" class="tab-pane active" id="publishes">\
+													<section class="publishes-wrapper">\
+														<div class="sort-items-container">\
+															<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowUp"></span>\
+																<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
+															</a>\
+															<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowDown"></span>\
+																<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
+															</a>\
+															<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
+																<span class="icon bbva-icon-view extra-space "></span>\
+																<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
+															</a>\
+														</div>\
+														<article class="cards-grid">\
+															<section class="container">\
+																<div class="row"></div>\
+																<footer class="grid-footer">\
+																	<div class="row">\
+																		<div class="col-md-12 text-center">\
+																			<a href="#" class="readmore">\
+																				<span class="bbva-icon-more font-xs mr-xs"></span>\
+																				' + object_name_script_os_js.ver_mas_publicaciones + '\
+																			</a>\
 																		</div>\
 																	</div>\
-																</section>\
+																</footer>\
+															</section>\
+														</article>\
+													</section>\
+												</div>\
+											<div role="tabpanel" class="tab-pane" id="histories">\
+												<section class="histories-wrapper">\
+													<div class="sort-items-container">\
+															<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowUp"></span>\
+																<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
+															</a>\
+															<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowDown"></span>\
+																<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
+															</a>\
+															<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
+																<span class="icon bbva-icon-view extra-space "></span>\
+																<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
+															</a>\
+													</div>\
+													<article class="cards-grid">\
+														<section class="container">\
+															<div class="row"></div>\
+															<footer class="grid-footer">\
+																<div class="row">\
+																	<div class="col-md-12 text-center">\
+																		<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>' + object_name_script_os_js.ver_mas_historias + '</a>\
+																	</div>\
+																</div>\
+															</footer>\
+														</section>\
+													</article>\
+												</section>\
+											</div>\
+												<div role="tabpanel" class="tab-pane" id="workshops">\
+													<section class="workshops-wrapper">\
+														<div class="workshops-results container removePadding">\
+															<div class="controls">\
+																<select id="select-country" class="selectpicker-form countries">';
+																jQuery.each(paises, function( index, value ) {
+																  console.log(value);
+																});
+															codigoBuscador += '</select>\
+																<a href="#" class="link-web">' + object_name_script_os_js.ir_a_la_web_bancomer + ' <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
 															</div>\
 														</div>\
-														</div>');
+													<article class="container data-grid">\
+														<header>\
+															<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + '<span class="current-country"></span></h1>\
+														</header>\
+														<div class="content">\
+															<div class="grid-wrapper"></div>\
+														</div>\
+														<footer class="grid-footer">\
+															<div class="row">\
+																<div class="col-md-12 text-center">\
+																	<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
+																</div>\
+															</div>\
+														</footer>\
+													</article>\
+												</section>\
+											</div>\
+										</div>\
+									</section>\
+								</div>\
+							</div>\
+							</div>';
+		jQuery('.prefooter-bbva').before(codigoBuscador);
 		jQuery('.prefooter-bbva').removeClass('background-gray');
 
 	} else {

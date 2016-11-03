@@ -493,7 +493,10 @@ function imprimir_json_etiquetas() {
 	}
 	echo "<script>var data = {'availableTags':" . json_encode($data) . "};</script>";
 
+}
 
+
+function imprime_json_paises() {
 	$countries = get_terms(
 		array(
 			"taxonomy" => array("ambito_geografico"),
@@ -510,8 +513,7 @@ function imprimir_json_etiquetas() {
 			$data2[$country->term_id] = array($country->name, $descripURLpais, $URLpais);
 		}
 	}
-	echo "<script>paises = " . json_encode($data2) . ";</script>";
-
+	echo "<script>var paises = " . json_encode($data2) . ";</script>";
 
 }
 
