@@ -513,7 +513,7 @@ function imprime_json_paises() {
 			$data2[$country->term_id] = array($country->name, $descripURLpais, $URLpais);
 		}
 	}
-	echo "<script>var paises = " . json_encode($data2) . ";</script>";
+	echo "<script>var paisesJson = " . json_encode($data2) . ";</script>";
 
 }
 

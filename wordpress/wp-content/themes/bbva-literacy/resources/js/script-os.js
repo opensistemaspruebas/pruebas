@@ -314,9 +314,7 @@ function buscar_general(ver_mas, reordenar) {
 														<div class="workshops-results container removePadding">\
 															<div class="controls">\
 																<select id="select-country" class="selectpicker-form countries">';
-																jQuery.each(paises, function( index, value ) {
-																  console.log(value);
-																});
+																
 															codigoBuscador += '</select>\
 																<a href="#" class="link-web">' + object_name_script_os_js.ir_a_la_web_bancomer + ' <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
 															</div>\
