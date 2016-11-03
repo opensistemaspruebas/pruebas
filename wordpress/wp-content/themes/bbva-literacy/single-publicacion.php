@@ -350,7 +350,7 @@ get_header(); ?>
           <?php if (!empty($source_url) && !empty($name_url)) : ?>
           <section class="sources-section">
               <div class="container content-wrap">
-                  <h1 class="mt-lg mb-md"><?php _e('Fuente', 'os_publicacion_type'); ?></h1>
+                  <h1 class="mt-lg mb-md"><?php _e('Página web', 'os_publicacion_type'); ?></h1>
                   <div class="source">
                       <a target="_blank" class="readmore" href="<?php echo $source_url; ?>"><?php echo $name_url; ?></a>
                   </div>
@@ -382,7 +382,7 @@ get_header(); ?>
                                 <div class="pre-rectangle"></div>
                             </div>
                             <div class="text col-xs-11">
-                                 <h2><?php _e('Tipo', 'os_publicacion_type'); ?></h2>
+                                 <h2><?php _e('Tipo de documento', 'os_publicacion_type'); ?></h2>
                                   <p><?php echo $type; ?></p>
                             </div>
                         </div>
@@ -406,7 +406,7 @@ get_header(); ?>
                                 <div class="pre-rectangle"></div>
                             </div>
                             <div class="text col-xs-11">
-                                <h2><?php _e('Público objetivo', 'os_publicacion_type'); ?></h2>
+                                <h2><?php _e('A quién se dirige', 'os_publicacion_type'); ?></h2>
                                 <p><?php echo $target_audiences; ?></p>
                             </div>
                         </div>
