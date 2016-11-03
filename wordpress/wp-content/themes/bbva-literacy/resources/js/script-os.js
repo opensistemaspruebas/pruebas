@@ -332,7 +332,14 @@ function buscar_general(ver_mas, reordenar) {
 														</div>\
 													<article class="container data-grid">\
 														<header>\
-															<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + '<span class="current-country"></span></h1>\
+															<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + ' <span class="current-country">';
+															jQuery.each(paisesJson, function( index, value ) {
+															  if (value[0] == 'Mexico' || value[0] == 'México') {
+															  	codigoBuscador += value[0];
+															  	return;
+															  }
+															});
+													codigoBuscador += '</span></h1>\
 														</header>\
 														<div class="content">\
 															<div class="grid-wrapper"></div>\
