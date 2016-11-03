@@ -74,7 +74,7 @@ if (!class_exists('OS_Twitter_Widget')) :
                     <footer>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <a <?php if ($externo4 == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Canal oficial de Twitter', 'os_twitter_widget'); ?><span class="bbva-icon-link_external"></span></a>
+                                <a <?php if ($externo4 == "on") echo 'target="_blank"';?> href="<?php echo $url_canal; ?>" class="readmore"><?php _e('Síguenos en Twitter', 'os_twitter_widget'); ?><span class="bbva-icon-link_external"></span></a>
                             </div>
                         </div>
                     </footer>
