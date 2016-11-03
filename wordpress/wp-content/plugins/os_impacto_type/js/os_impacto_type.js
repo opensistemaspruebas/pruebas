@@ -5,6 +5,39 @@ jQuery(document).ready(function() {
     jQuery('select#visualizacion').on("change", function() {
         toggleFields();
     });
+
+
+
+    jQuery("input#objetivo, input#completado").on("focusout", function() {
+
+    if (jQuery("#visualizacion").val() == "circulo" || jQuery("#visualizacion").val() == "barra"){
+    
+        var objetivo = parseInt(jQuery('#objetivo').val());
+        var completado = parseInt(jQuery('#completado').val());
+
+
+
+        if(completado > objetivo){
+
+            jQuery('#publish').addClass('disabled');
+            jQuery('#objetivo').css('border-color','rgba(223,4,4,.8)');
+            jQuery('#objetivo').css('box-shadow', '0 0 2px rgba(223,4,4,.8)');
+            jQuery('#objetivo').css('-webkit-box-shadow', '0 0 2px rgba(223,4,4,.8)');
+          
+        }
+        else{
+
+            jQuery('#publish').removeClass('disabled');
+            jQuery('#objetivo').css('border-color','#ddd');
+            jQuery('#objetivo').css('box-shadow', '0 0 2px rgba(0,0,0,.07)');
+            jQuery('#objetivo').css('-webkit-box-shadow', '0 0 2px rgba(0,0,0,.07)');
+        }
+    }
+
+    });
+
+
+
 });
 
 function toggleFields(){
@@ -27,3 +60,24 @@ function toggleFields(){
         jQuery("#valor_objetivo").hide();
     }
 }
+
+function myFunction() {
+      
+    if (jQuery("#visualizacion").val() == "circulo" || jQuery("#visualizacion").val() == "barra"){
+    
+        var objetivo = jQuery('#objetivo').val();
+        var completado = jQuery('#completado').val();
+
+
+
+        if(completado > objetivo){
+
+            jQuery('#publish').addClass('disabled');
+          
+        }
+        else{
+
+            jQuery('#publish').removeClass('disabled');
+        }
+    }
+ }

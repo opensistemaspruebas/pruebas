@@ -142,12 +142,12 @@ function meta_box_tipo($post) {
   </p>
   <p id="valor_objetivo" <?php if ($visualizacion != "circulo" && $visualizacion != "barra" ) echo 'style="display: none;"'; ?>>
     <label for="objetivo"><?php _e('Valor objetivo', 'os_impacto_type'); ?></label>
-    <input type="number" min="1" max="999999999999999" class="widefat" id="objetivo" name="objetivo" value="<?php if (isset($objetivo)) echo $objetivo; ?>"/>
+    <input type="number" min="1" max="999999999999999" class="widefat" id="objetivo" name="objetivo" value="<?php if (isset($objetivo)) echo $objetivo; ?>" />
     <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 1400000</i>
   </p>
   <p>
     <label for="completado"><?php _e('Valor completado', 'os_impacto_type'); ?></label>
-    <input type="number" min="1" max="999999999999999" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>"/>
+    <input type="number" min="1" max="999999999999999" class="widefat" id="completado" name="completado" value="<?php if (isset($completado)) echo $completado; ?>" />
     <i><?php _e('El formato para este campo debe ser exclusivamente numérico. Ejemplo', 'os_impacto_type'); ?>: 2500000</i>
   </p>
 
