@@ -220,7 +220,7 @@ get_header(); ?>
                 <label class="mt-lg"><?php echo $date; ?></label>
                 <?php endif; ?>
                 <?php if (!empty($abstract_destacado) || !empty($abstract_contenido)) : ?>
-                  <h1 class="mt-xs"><?php _e('Abstract', 'os_publicacion_type'); ?></h1>
+                  <h1 class="mt-xs"><?php _e('Resumen', 'os_publicacion_type'); ?></h1>
                   <?php if (!empty($abstract_destacado)) : ?>
                   <h2><?php echo $abstract_destacado; ?></h2> 
                   <?php endif; ?>
