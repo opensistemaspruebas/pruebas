@@ -110,7 +110,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 
 								</div>
 			                    <div class="btn-container text-center">
-			                        <a href="<?php echo get_permalink($subhome_impactos); ?>" class="btn btn-bbva-aqua"><?php _e("Ver impactos", "os_impactos_widget"); ?></a>
+			                        <a href="<?php echo get_permalink($subhome_impactos); ?>" class="btn btn-bbva-aqua"><?php _e("Ver más", "os_impactos_widget"); ?></a>
 			                    </div>
 			                </div>
 			            </section>
