@@ -351,6 +351,8 @@ function buscar_general(ver_mas, reordenar) {
 		jQuery('#sortByHistorias').attr('value', 'date desc')
 	}
 
+	jQuery('select#select-country').selectpicker('refresh');
+
 
 	ordenacion = jQuery('#sortByPublicaciones').val();
 	jQuery('#publishes .sort-items-container a[data-order-filter="' + ordenacion + '"]').addClass('selected');
