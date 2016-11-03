@@ -353,15 +353,23 @@ function buscar_general(ver_mas) {
 
 	tab = jQuery('#currentTab').val();
 	jQuery('ul#results-tabs li').removeClass('active');
-	jQuery('a.' + tab).parent().addClass('active');
+	jQuery('a.' + tab).trigger('click');
 	jQuery('span.num_resultados').html('0');
+
 
 
 	//publicaciones
 	jQuery.get(url_buscador_publicaciones, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
+			jQuery('#publishes a[data-order-filter="destacados"]').hide();
 			jQuery.each(d.data.hits.hit, function(i, result) {
 				jQuery('a.publishes').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
+				keywords = result.fields['keywords'];
+				if (keywords !== undefined) {
+					if (jQuery.inArray('destacado', keywords) > -1 ) {
+					    jQuery('#publishes a[data-order-filter="destacados"]').show();
+					}
+				}
 				jQuery('#publishes .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'publishes'));
 			});
 	        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
@@ -380,8 +388,15 @@ function buscar_general(ver_mas) {
 	//historias
 	jQuery.get(url_buscador_historias, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
+			jQuery('#histories a[data-order-filter="destacados"]').hide();
 			jQuery.each(d.data.hits.hit, function(i, result) {
 				jQuery('a.histories').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
+				keywords = result.fields['keywords'];
+				if (keywords !== undefined) {
+					if (jQuery.inArray('destacado', keywords) > -1 ) {
+					    jQuery('#histories a[data-order-filter="destacados"]').show();
+					}
+				}
 				jQuery('#histories .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'histories'));
 			});
 	        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
@@ -415,15 +430,6 @@ function buscar_general(ver_mas) {
 			jQuery('#workshops .sort-items-container').children('a').remove();
 		}
 	});
-
-
-	/*if (jQuery('#publishes .cards-grid .container div.row').first().children().size() == 0) {
-		if (jQuery('#histories .cards-grid .container div.row').first().children().size() == 0) {
-			jQuery('a.workshops').parent().addClass('active');
-		} else {
-			jQuery('a.histories').parent().addClass('active');
-		}
-	}*/
 
 
 }
