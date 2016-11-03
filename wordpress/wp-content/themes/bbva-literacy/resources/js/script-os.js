@@ -314,10 +314,21 @@ function buscar_general(ver_mas, reordenar) {
 														<div class="workshops-results container removePadding">\
 															<div class="controls">\
 																<select id="select-country" class="selectpicker-form countries">';
-																
-															codigoBuscador += '</select>\
-																<a href="#" class="link-web">' + object_name_script_os_js.ir_a_la_web_bancomer + ' <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
-															</div>\
+																jQuery.each(paisesJson, function( index, value ) {
+																  selected = '';
+																  if (value[0] == 'Mexico' || value[0] == 'México') {
+																  	selected = 'selected';
+																  }
+																  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>'
+																});
+															codigoBuscador += '</select>';
+															jQuery.each(paisesJson, function( index, value ) {
+																  if (value[0] == 'Mexico' || value[0] == 'México') {
+																  	codigoBuscador += '<a href="' + value[2] + '" class="link-web"><span class="nombre">' + value[1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
+																  	return;
+																  }
+																});
+															codigoBuscador += '</div>\
 														</div>\
 													<article class="container data-grid">\
 														<header>\
