@@ -483,7 +483,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			if (!cambiando_talleres || !ver_mas) {
 			jQuery('#histories a[data-order-filter="destacados"]').hide();
-			if (start_publicaciones == 0) {
+			if (start_historias == 0) {
 				jQuery('#histories .cards-grid .container div.row').first().empty();
 			}
 				jQuery.each(d.data.hits.hit, function(i, result) {
@@ -516,7 +516,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
 			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
-			if (cambiando_talleres) {
+			if (cambiando_talleres || start_talleres == 0) {
 				jQuery('#workshops .grid-wrapper').first().empty();
 			}
 			jQuery.each(d.data.hits.hit, function(i, result) {
@@ -530,12 +530,9 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	       	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
+			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (0)');
+			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (0)');
 			jQuery('#workshops footer a.readmore').hide();
-			//jQuery('#workshops article.container.data-grid').hide();
-			//jQuery('#workshops .sort-items-container').children('a').hide();
-			//jQuery('#workshops article.container.data-grid').hide();
-			//jQuery('#workshops .btn-group.bootstrap-select.-form.countries').hide();
-			//jQuery('#workshops a.link-web').hide();
 			num_resultados = parseInt(jQuery('span.num_resultados').html()) + 0; 
 	        jQuery('span.num_resultados').html(num_resultados);
 			jQuery('#workshops .grid-wrapper').first().empty();
