@@ -15,8 +15,8 @@
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
                         <ul class="footer-menu footer-social">
-                            <li><a href="https://twitter.com/BBVALiteracy"><span class="bbva-icon-twitter_link"></span></a></li>
-                            <li><a href="https://www.youtube.com/user/bbva"><span class="bbva-icon-youtube"></span></a></li>
+                            <li><a target="_blank" href="https://twitter.com/BBVALiteracy"><span class="bbva-icon-twitter_link"></span></a></li>
+                            <li><a target="_blank" href="https://www.youtube.com/user/bbva"><span class="bbva-icon-youtube"></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -26,8 +26,8 @@
                     </div>
                     <div class="visible-xs col-xs-12">
                         <ul class="footer-menu footer-social">
-                            <li><a href="https://twitter.com/BBVALiteracy"><span class="bbva-icon-twitter_link"></span></a></li>
-                            <li><a href="https://www.youtube.com/user/bbva"><span class="bbva-icon-youtube"></span></a></li>
+                            <li><a target="_blank" href="https://twitter.com/BBVALiteracy"><span class="bbva-icon-twitter_link"></span></a></li>
+                            <li><a target="_blank" href="https://www.youtube.com/user/bbva"><span class="bbva-icon-youtube"></span></a></li>
                         </ul>
                     </div>
                 </div>
