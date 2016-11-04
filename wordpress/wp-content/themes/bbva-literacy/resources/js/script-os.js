@@ -148,8 +148,7 @@ function getNumResultados(d, tipo) {
 
 function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 
-	//jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
-	//jQuery('div#search-layer, div#menu-search').hide();
+	jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
 
 	tags = getSelectedTags_general();
 	textoInput = jQuery('input.input-search.navbar-search-input').val();
@@ -162,6 +161,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	categorias = tags[1];
 	autores = tags[2];
 	paises = tags[3];
+	cadenas = tags[4];
 
 	if (!ver_mas) {
 		jQuery("input#startPublicaciones").attr('value', 0);
@@ -193,6 +193,16 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	query_destacados_publicaciones = '';
 	query_destacados_historias = '';
 
+	frase = object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados;
+	if (textoInput !== '') {
+		frase += ' ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>' + textoInput + '</strong>';
+		if (cadenas.length > 0) {
+			frase += ' y ' + object_name_script_os_js.y_las_etiquetas + ' <strong>' + cadenas.join(', ') + '</strong>';	
+		}
+	} else if (cadenas.length > 0) {
+		frase += ' ' + object_name_script_os_js.resultados_que_coinciden_con + ' ' + object_name_script_os_js.y_las_etiquetas + ' <strong>' + cadenas.join(', ') + '</strong>';	
+	}
+
 	if (!ver_mas && !cambiando_talleres) {
 		jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
 		codigoBuscador = '<div class="contents">\
@@ -202,7 +212,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 										<header class="title-description mt-lg">\
 											<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
 											<div class="description-container">\
-												<p>' + object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
+												<p>'+ frase + '</p>\
 											</div> \
 										</header>\
 										<section class="mt-lg results-content-tabs workshops-results">\
@@ -364,7 +374,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 							</div>';
 		jQuery('.prefooter-bbva').before(codigoBuscador);
 		jQuery('.prefooter-bbva').removeClass('background-gray');
-		jQuery('select#select-country').selectpicker('refresh');
+		jQuery('select#select-country, select#select-tab-results').selectpicker('refresh');
 
 	} else if (!cambiando_talleres) {
 		jQuery('#sortByPublicaciones').attr('value', 'date desc');
@@ -548,12 +558,14 @@ function getSelectedTags_general() {
 	categorias = [];
 	autores = [];
 	paises = [];
+	cadenas = [];
 	targetContainer = jQuery('.navbar .selected-tags-container');
 	if (targetContainer.is(':empty') == false) {
 		targetContainer.children('.tag.selected-tag').each(function(i) {
 			type = jQuery(this).attr('from');
 			id = (jQuery(this).attr('id')).replace('tag-', '');
 			nombre = getCleanedString(jQuery(this).children('span').last().html());
+			nombreMayus = jQuery(this).attr('tag-value');
 			switch(type) {
 			    case 'geo-container':
 			        paises.push(id);
@@ -567,6 +579,7 @@ function getSelectedTags_general() {
 			    default:
 			        texto.push(nombre);
 			}
+			cadenas.push(nombreMayus); 
 		});
 	}
 	targetContainer = jQuery('#mobile-filter .selected-tags-container');
@@ -575,6 +588,7 @@ function getSelectedTags_general() {
 			type = jQuery(this).attr('from');
 			id = (jQuery(this).attr('id')).replace('tag-', '');
 			nombre = getCleanedString(jQuery(this).children('span').last().html());
+			nombreMayus = jQuery(this).attr('tag-value');
 			switch(type) {
 			    case 'geo-container':
 			        paises.push(id);
@@ -588,9 +602,10 @@ function getSelectedTags_general() {
 			    default:
 			        texto.push(nombre);
 			}
+			cadenas.push(nombreMayus); 
 		});
 	}
-	tags = [texto, categorias, autores, paises];
+	tags = [texto, categorias, autores, paises, cadenas];
 	return tags;	
 }
 

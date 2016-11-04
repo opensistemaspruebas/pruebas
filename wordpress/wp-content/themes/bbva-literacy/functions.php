@@ -548,8 +548,10 @@ function wpdocs_theme_name_scripts() {
 		'leer_mas' => __('Leer más'),
 		'ir_a_la_web_bancomer' => __('Ir a la web Bancomer'),
 		'se_han_encontrado' => __('Se han encontrado'),
-		'resultados_que_coinciden_con_la_palabra' => __('resultados que coinciden con la palabra'),
-		'y_las_etiquetas' => __('y las etiquetas'),
+		'resultados' => __('resultados'),
+		'resultados_que_coinciden_con_la_palabra' => __('que coinciden con el texto'),
+		'resultados_que_coinciden_con' => __('que coinciden con'),
+		'y_las_etiquetas' => __('las etiquetas'),
 		'de' => __('de'),
 	);
 	wp_localize_script('script_os_js', 'object_name_script_os_js', $translation_array);
