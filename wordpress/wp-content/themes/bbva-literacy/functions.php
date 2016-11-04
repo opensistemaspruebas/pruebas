@@ -264,7 +264,7 @@ function languages_list_header(){
         <div class="container">
             <div class="languages-menu">
                 <label for="language-header" class="hidden"><?php _e('Idioma'); ?></label>
-            	<div class="btn-group languages-buttons" data-toggle="buttons">
+               	<div class="languages-buttons">
             		<?php $i = 1; ?>
             		<?php foreach ($languages as $l) : ?>
                 		<a href="<?php echo $l['url']; ?>" class="btn btn-primary <?php if ($l['active']) echo 'active'; ?>"><?php echo strtoupper($l['code']); ?></a>
