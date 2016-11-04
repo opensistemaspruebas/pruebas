@@ -3,11 +3,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-4 footer-logo"><span class="bbva-icon-BBVA"></span></div>
-                    <div class="col-xs-12 col-sm-6 col-sm-offset-4 col-md-6 col-md-offset-4 col-lg-4 col-lg-offset-4 footer-text"><span>Educación Financiera</span></div>
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-4 col-md-6 col-md-offset-4 col-lg-4 col-lg-offset-4 footer-text"><span><?php _e('Educación Financiera'); ?></span></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
-                        <div class="footer-menu-list"><a href="/legal/">Aviso legal</a><a href="/condiciones/">Condiciones de uso</a><a href="/cookies/">Política de cookies</a></div>
+                        <div class="footer-menu-list">
+                            <a href="/legal/"><?php _e('Aviso legal'); ?></a>
+                            <a href="/condiciones/"><?php _e('Condiciones de uso'); ?></a>
+                            <a href="/cookies/"><?php _e('Política de cookies'); ?></a>
+                        </div>
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
                         <ul class="footer-menu footer-social">
