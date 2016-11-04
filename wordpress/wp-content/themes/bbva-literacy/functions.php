@@ -492,6 +492,29 @@ function imprimir_json_etiquetas() {
 		}
 	}
 	echo "<script>var data = {'availableTags':" . json_encode($data) . "};</script>";
+
+}
+
+
+function imprime_json_paises() {
+	$countries = get_terms(
+		array(
+			"taxonomy" => array("ambito_geografico"),
+			"hide_empty" => false,
+			"fields" => "all",
+			"suppress_filters" => 0,
+		)
+	);
+	$data2 = array();
+	if (!empty($countries)) {
+		foreach ($countries as $country) {
+			$descripURLpais = get_term_meta($country->term_id, 'descripURLpais', true);
+			$URLpais = get_term_meta($country->term_id, 'URLpais', true);
+			$data2[$country->term_id] = array($country->name, $descripURLpais, $URLpais);
+		}
+	}
+	echo "<script>var paisesJson = " . json_encode($data2) . ";</script>";
+
 }
 
 

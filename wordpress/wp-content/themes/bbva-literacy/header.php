@@ -98,6 +98,7 @@
                         wp_nav_menu($args);
                     ?>
                     <?php imprimir_json_etiquetas(); ?>
+                    <?php imprime_json_paises(); ?>
                     <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
                         <div class="search-form-container hidden">
                             <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
@@ -108,7 +109,6 @@
                     <?php languages_list_header_responsive(); ?>
                 </nav>
                 <div class="navbar navbar-search">
-                    
                     <input type="hidden" name="startPublicaciones" id="startPublicaciones" value="0">
                     <input type="hidden" name="sortByPublicaciones" id="sortByPublicaciones" value="date desc">
                     <input type="hidden" name="sizePublicaciones" id="sizePublicaciones" value="10">

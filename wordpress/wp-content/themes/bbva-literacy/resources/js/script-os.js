@@ -1,11 +1,6 @@
 jQuery(document).ready(function($) {
 
 	buscando = false;
-	tags = [];
-	texto = '';
-
-	prefooter = jQuery('.prefooter-bbva').html();
-
 
 	jQuery('.btn-group.languages-buttons a').on('click', function($) {
 		window.location = jQuery(this).attr('href');
@@ -14,7 +9,7 @@ jQuery(document).ready(function($) {
 
 	numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
 	if (numero_trabajos_ocultos == 0) {
-	    jQuery('a#readmore_trabajos').remove();
+	    jQuery('a#readmore_trabajos').hide();
 	}
 	numero_trabajos_visibles = jQuery('article#otros_trabajos .content .data-block:visible').length;
 	jQuery('#readmore_trabajos').on('click', function(e) {
@@ -32,7 +27,7 @@ jQuery(document).ready(function($) {
 	    });
 	    numero_trabajos_ocultos = jQuery('article#otros_trabajos .content .data-block:hidden').length;
 	    if (numero_trabajos_ocultos == 0) {
-	        jQuery('a#readmore_trabajos').remove();
+	        jQuery('a#readmore_trabajos').hide();
 	    }
 	});
 
@@ -60,15 +55,11 @@ jQuery(document).ready(function($) {
 	    }
 	});
 
-	jQuery('.navbar button.btn-bbva-aqua.publishing-filter-search-btn').on("click", function(e) {
-		
+
+	jQuery('.navbar button.btn-bbva-aqua.publishing-filter-search-btn, a.btn-bbva-aqua.publishing-filter-search-btn').on("click", function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		
-		console.log("hago click en buscar");
-
-		buscar_general(false);
-	
+		buscar_general(false, false);
 	}); 
 
 
@@ -76,7 +67,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		start = parseInt(jQuery("input#startPublicaciones").val()) + 10;
 		jQuery("input#startPublicaciones").attr('value', start);
-		buscar_general(true);
+		buscar_general(true, false);
 	});
 
 
@@ -84,38 +75,43 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		start = parseInt(jQuery("input#startHistorias").val()) + 10;
 		jQuery("input#startHistorias").attr('value', start);
-		buscar_general(true);
+		buscar_general(true, false);
 	});
 
 	jQuery('body').on('click', '#workshops footer a.readmore', function(event) {
 		event.preventDefault();
 		start = parseInt(jQuery("input#startTalleres").val()) + 6;
 		jQuery("input#startTalleres").attr('value', start);
-		buscar_general(true);
+		buscar_general(true, false);
 	});
 
 	jQuery('body').on('click', '#publishes .sort-items-container a', function(event) {
 		event.preventDefault();
 		orden = jQuery(this).attr("data-order-filter");
-		jQuery("input#sortByPublicaciones").val(orden);
+		jQuery("input#sortByPublicaciones").attr('value', orden);
 		jQuery('#publishes .sort-items-container a.selected').removeClass("selected");
 		jQuery(this).addClass("selected");
-		jQuery("input#startPublicaciones").val(0);
-		buscar_general(false);
+		jQuery("input#startPublicaciones").attr('value', 0);
+		buscar_general(false, true);
 	});
 
 	jQuery('body').on('click', '#histories .sort-items-container a', function(event) {
 		event.preventDefault();
 		orden = jQuery(this).attr("data-order-filter");
-		jQuery("input#sortByHistorias").val(orden);
+		jQuery("input#sortByHistorias").attr('value', orden);
 		jQuery('#histories .sort-items-container a.selected').removeClass("selected");
 		jQuery(this).addClass("selected");
-		jQuery("input#startHistorias").val(0);
-		buscar_general(false);
+		jQuery("input#startHistorias").attr('value', 0);
+		buscar_general(false, true);
 	});
 
 	jQuery('body').on('click', 'ul#results-tabs li a', function() {
-		jQuery('#currentTab').val(jQuery(this).attr('class'));
+		jQuery('#currentTab').attr('value', jQuery(this).attr('class'));
+	});
+
+	jQuery('body').on('change', 'select#select-tab-results', function() {
+		opcion = jQuery(this).children('option:selected').val();
+		jQuery('a.' + opcion).trigger('click');
 	});
 	 
 });
@@ -136,13 +132,15 @@ function getNumResultados(d, tipo) {
 }
 
 
-function buscar_general(ver_mas) {
+function buscar_general(ver_mas, reordenar) {
 
-	old_tags = tags;
-	old_texto = texto;
+	jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
 
 	tags = getSelectedTags_general();
 	textoInput = jQuery('input.input-search.navbar-search-input').val();
+	if (textoInput == '') {
+		textoInput = jQuery('input.publishing-filter-search-input.form-control').val();
+	}
 	texto = textoInput + ' ' + tags[0].join(' ');
 	texto = getCleanedString(texto);
 
@@ -151,9 +149,15 @@ function buscar_general(ver_mas) {
 	paises = tags[3];
 
 	if (!ver_mas) {
-		jQuery("input#startPublicaciones").val(0);
-		jQuery("input#startHistorias").val(0);
-		jQuery("input#startTalleres").val(0);
+		jQuery("input#startPublicaciones").attr('value', 0);
+		jQuery("input#startHistorias").attr('value', 0);
+		jQuery("input#startTalleres").attr('value', 0);
+	}
+
+	if (!ver_mas && !reordenar) {
+		jQuery('#sortByPublicaciones').attr('value', 'date desc');
+		jQuery('#sortByHistorias').attr('value', 'date desc');
+		jQuery('#currentTab').attr('value', 'publishes');
 	}
 
 	start_publicaciones = jQuery("input#startPublicaciones").val();
@@ -189,11 +193,11 @@ function buscar_general(ver_mas) {
 	}
 	if (order_publicaciones == 'destacados') {
 		order_publicaciones = 'date desc';
-		query_destacados_publicaciones += '(or keywords:\'destacado\')';
+		query_destacados_publicaciones += '(or keywords:\'destacada\')';
 	}
 	if (order_historias == 'destacados') {
 		order_historias = 'date desc';
-		query_destacados_historias += '(or keywords:\'destacado\')';
+		query_destacados_historias += '(or keywords:\'destacada\')';
 	}
 
 	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
@@ -202,8 +206,8 @@ function buscar_general(ver_mas) {
 		url_buscador_historias = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_historias + '(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 		url_buscador_talleres = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 	} else {
-		url_buscador_publicaciones = url_buscador + '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
-		url_buscador_historias = url_buscador + '&fq=(and(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+		url_buscador_publicaciones = url_buscador + '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_publicaciones + ')';
+		url_buscador_historias = url_buscador + '&fq=(and(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_historias + ')';
 		url_buscador_talleres = url_buscador + '&fq=(and(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 	}
 	url_buscador_publicaciones += '&start=' + start_publicaciones + '&sort=' + order_publicaciones + '&size=' + size_publicaciones;
@@ -212,137 +216,158 @@ function buscar_general(ver_mas) {
 
 	if (!ver_mas) {
 		jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
-		jQuery('.prefooter-bbva').before('<div class="contents">\
-															<div id="search-layer"></div>\
-															<div class="results">\
-																<div class="tabs container">\
-																	<header class="title-description mt-lg">\
-																		<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
-																		<div class="description-container">\
-																			<p>' + object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
-																		</div> \
-																	</header>\
-																	<section class="mt-lg results-content-tabs workshops-results">\
-																		<div class="controls">\
-																			<select id="select-tab-results" class="selectpicker-form visible-xs">\
-																				<option value="publishes">' + object_name_script_os_js.publicaciones + ' (0)</option>\
-																				<option value="histories">' + object_name_script_os_js.historias + ' (0)</option>\
-																				<option value="workshops">' + object_name_script_os_js.talleres + ' (0)</option>\
-																			</select>\
-																			<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
-																				<li class="hidden-xs active">\
-																					<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">' + object_name_script_os_js.publicaciones + ' (0)</a>\
-																				</li>\
-																					<li class="hidden-xs">\
-																						<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (0)</a>\
-																					</li>\
-																					<li class="hidden-xs">\
-																						<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
-																				</li>\
-																			</ul>\
-																		</div>\
-																		<div class="tab-content">\
-																			<div role="tabpanel" class="tab-pane active" id="publishes">\
-																				<section class="publishes-wrapper">\
-																					<div class="sort-items-container">\
-																						<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowUp"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
-																						</a>\
-																						<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowDown"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
-																						</a>\
-																						<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
-																							<span class="icon bbva-icon-view extra-space "></span>\
-																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
-																						</a>\
-																					</div>\
-																					<article class="cards-grid">\
-																						<section class="container">\
-																							<div class="row"></div>\
-																							<footer class="grid-footer">\
-																								<div class="row">\
-																									<div class="col-md-12 text-center">\
-																										<a href="#" class="readmore">\
-																											<span class="bbva-icon-more font-xs mr-xs"></span>\
-																											' + object_name_script_os_js.ver_mas_publicaciones + '\
-																										</a>\
-																									</div>\
-																								</div>\
-																							</footer>\
-																						</section>\
-																					</article>\
-																				</section>\
-																			</div>\
-																		<div role="tabpanel" class="tab-pane" id="histories">\
-																			<section class="histories-wrapper">\
-																				<div class="sort-items-container">\
-																						<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowUp"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
-																						</a>\
-																						<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
-																							<span class="icon bbva-icon-arrow arrowDown"></span>\
-																							<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
-																						</a>\
-																						<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
-																							<span class="icon bbva-icon-view extra-space "></span>\
-																							<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
-																						</a>\
-																				</div>\
-																				<article class="cards-grid">\
-																					<section class="container">\
-																						<div class="row"></div>\
-																						<footer class="grid-footer">\
-																							<div class="row">\
-																								<div class="col-md-12 text-center">\
-																									<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>' + object_name_script_os_js.ver_mas_historias + '</a>\
-																								</div>\
-																							</div>\
-																						</footer>\
-																					</section>\
-																				</article>\
-																			</section>\
-																		</div>\
-																			<div role="tabpanel" class="tab-pane" id="workshops">\
-																				<section class="workshops-wrapper">\
-																					<div class="workshops-results container removePadding">\
-																						<div class="controls">\
-																							<select id="select-country" class="selectpicker-form countries">\
-																								<option value="">Mexico</option>\
-																								<option value="">España</option>\
-																								<option value="">Perú</option>\
-																								<option value="">Francia</option>\
-																							</select>\
-																							<a href="#" class="link-web">' + object_name_script_os_js.ir_a_la_web_bancomer + ' <span class="current-country"></span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>\
-																						</div>\
-																					</div>\
-																				<article class="container data-grid">\
-																					<header>\
-																						<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + '<span class="current-country"></span></h1>\
-																					</header>\
-																					<div class="content">\
-																						<div class="grid-wrapper"></div>\
-																					</div>\
-																					<footer class="grid-footer">\
-																						<div class="row">\
-																							<div class="col-md-12 text-center">\
-																								<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
-																							</div>\
-																						</div>\
-																					</footer>\
-																				</article>\
-																			</section>\
+		codigoBuscador = '<div class="contents">\
+							<div id="search-layer"></div>\
+								<div class="results">\
+									<div class="tabs container">\
+										<header class="title-description mt-lg">\
+											<h1>' + object_name_script_os_js.resultado_de_busqueda + '</h1>\
+											<div class="description-container">\
+												<p>' + object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados_que_coinciden_con_la_palabra + ' <strong>Millenials</strong> ' + object_name_script_os_js.y_las_etiquetas + ' <strong>Fintech, Educación financiera</strong></p>\
+											</div> \
+										</header>\
+										<section class="mt-lg results-content-tabs workshops-results">\
+											<div class="controls">\
+												<select id="select-tab-results" class="selectpicker-form visible-xs">\
+													<option value="publishes">' + object_name_script_os_js.publicaciones + ' (0)</option>\
+													<option value="histories">' + object_name_script_os_js.historias + ' (0)</option>\
+													<option value="workshops">' + object_name_script_os_js.talleres + ' (0)</option>\
+												</select>\
+												<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
+													<li class="hidden-xs active">\
+														<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">' + object_name_script_os_js.publicaciones + ' (0)</a>\
+													</li>\
+														<li class="hidden-xs">\
+															<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (0)</a>\
+														</li>\
+														<li class="hidden-xs">\
+															<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
+													</li>\
+												</ul>\
+											</div>\
+											<div class="tab-content">\
+												<div role="tabpanel" class="tab-pane active" id="publishes">\
+													<section class="publishes-wrapper">\
+														<div class="sort-items-container">\
+															<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowUp"></span>\
+																<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
+															</a>\
+															<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowDown"></span>\
+																<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
+															</a>\
+															<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
+																<span class="icon bbva-icon-view extra-space "></span>\
+																<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
+															</a>\
+														</div>\
+														<article class="cards-grid">\
+															<section class="container">\
+																<div class="row"></div>\
+																<footer class="grid-footer">\
+																	<div class="row">\
+																		<div class="col-md-12 text-center">\
+																			<a href="#" class="readmore">\
+																				<span class="bbva-icon-more font-xs mr-xs"></span>\
+																				' + object_name_script_os_js.ver_mas_publicaciones + '\
+																			</a>\
 																		</div>\
 																	</div>\
-																</section>\
-															</div>\
+																</footer>\
+															</section>\
+														</article>\
+													</section>\
+												</div>\
+											<div role="tabpanel" class="tab-pane" id="histories">\
+												<section class="histories-wrapper">\
+													<div class="sort-items-container">\
+															<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowUp"></span>\
+																<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
+															</a>\
+															<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
+																<span class="icon bbva-icon-arrow arrowDown"></span>\
+																<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
+															</a>\
+															<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
+																<span class="icon bbva-icon-view extra-space "></span>\
+																<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
+															</a>\
+													</div>\
+													<article class="cards-grid">\
+														<section class="container">\
+															<div class="row"></div>\
+															<footer class="grid-footer">\
+																<div class="row">\
+																	<div class="col-md-12 text-center">\
+																		<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>' + object_name_script_os_js.ver_mas_historias + '</a>\
+																	</div>\
+																</div>\
+															</footer>\
+														</section>\
+													</article>\
+												</section>\
+											</div>\
+												<div role="tabpanel" class="tab-pane" id="workshops">\
+													<section class="workshops-wrapper">\
+														<div class="workshops-results container removePadding">\
+															<div class="controls">\
+																<select id="select-country" class="selectpicker-form countries">';
+																jQuery.each(paisesJson, function( index, value ) {
+																  selected = '';
+																  if (value[0] == 'Mexico' || value[0] == 'México') {
+																  	selected = 'selected';
+																  }
+																  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>'
+																});
+															codigoBuscador += '</select>';
+															jQuery.each(paisesJson, function( index, value ) {
+																  if (value[0] == 'Mexico' || value[0] == 'México') {
+																  	codigoBuscador += '<a href="' + value[2] + '" class="link-web"><span class="nombre">' + value[1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
+																  	return;
+																  }
+																});
+															codigoBuscador += '</div>\
 														</div>\
-														</div>');
+													<article class="container data-grid">\
+														<header>\
+															<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + ' <span class="current-country">';
+															jQuery.each(paisesJson, function( index, value ) {
+															  if (value[0] == 'Mexico' || value[0] == 'México') {
+															  	codigoBuscador += value[0];
+															  	return;
+															  }
+															});
+													codigoBuscador += '</span></h1>\
+														</header>\
+														<div class="content">\
+															<div class="grid-wrapper"></div>\
+														</div>\
+														<footer class="grid-footer">\
+															<div class="row">\
+																<div class="col-md-12 text-center">\
+																	<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
+																</div>\
+															</div>\
+														</footer>\
+													</article>\
+												</section>\
+											</div>\
+										</div>\
+									</section>\
+								</div>\
+							</div>\
+							</div>';
+		jQuery('.prefooter-bbva').before(codigoBuscador);
 		jQuery('.prefooter-bbva').removeClass('background-gray');
 
+	} else {
+		jQuery('#sortByPublicaciones').attr('value', 'date desc');
+		jQuery('#sortByHistorias').attr('value', 'date desc')
 	}
+
+	jQuery('select#select-country').selectpicker('refresh');
 
 
 	ordenacion = jQuery('#sortByPublicaciones').val();
@@ -364,23 +389,23 @@ function buscar_general(ver_mas) {
 			jQuery('#publishes a[data-order-filter="destacados"]').hide();
 			jQuery.each(d.data.hits.hit, function(i, result) {
 				jQuery('a.publishes').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
+				jQuery('select#select-tab-results option[value="publishes"]').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
 				keywords = result.fields['keywords'];
 				if (keywords !== undefined) {
-					if (jQuery.inArray('destacado', keywords) > -1 ) {
+					if (jQuery.inArray('destacada', keywords) > -1 ) {
 					    jQuery('#publishes a[data-order-filter="destacados"]').show();
 					}
 				}
 				jQuery('#publishes .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'publishes'));
 			});
 	        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
-	        	jQuery('#publishes footer a.readmore').remove();
+	        	jQuery('#publishes footer a.readmore').hide();
 	        }
 	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
-			jQuery('a.publishes').remove();
-			jQuery('#publishes footer a.readmore').remove();
-			jQuery('#publishes .sort-items-container').children('a').remove();
+			jQuery('#publishes footer a.readmore').hide();
+			jQuery('#publishes .sort-items-container').children('a').hide();
 		}
 	});
 
@@ -391,23 +416,23 @@ function buscar_general(ver_mas) {
 			jQuery('#histories a[data-order-filter="destacados"]').hide();
 			jQuery.each(d.data.hits.hit, function(i, result) {
 				jQuery('a.histories').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
+				jQuery('select#select-tab-results option[value="histories"]').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
 				keywords = result.fields['keywords'];
 				if (keywords !== undefined) {
-					if (jQuery.inArray('destacado', keywords) > -1 ) {
+					if (jQuery.inArray('destacada', keywords) > -1 ) {
 					    jQuery('#histories a[data-order-filter="destacados"]').show();
 					}
 				}
 				jQuery('#histories .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'histories'));
 			});
 	        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
-	        	jQuery('#histories footer a.readmore').remove();
+	        	jQuery('#histories footer a.readmore').hide();
 	        }
 	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
-			jQuery('a.histories').remove();
-			jQuery('#histories footer a.readmore').remove();
-			jQuery('#histories .sort-items-container').children('a').remove();
+			jQuery('#histories footer a.readmore').hide();
+			jQuery('#histories .sort-items-container').children('a').hide();
 		}
 	});
 
@@ -416,18 +441,20 @@ function buscar_general(ver_mas) {
 	jQuery.get(url_buscador_talleres, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
+			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
 			jQuery.each(d.data.hits.hit, function(i, result) {
 				jQuery('#workshops .grid-wrapper').first().append(getPostFiltro_general(result.fields, 'workshops'));
 			});
 	        if (d.data.hits.found == jQuery('#workshops .grid-wrapper').first().children().size()) {
-	        	jQuery('#workshops footer a.readmore').remove();
+	        	jQuery('#workshops footer a.readmore').hide();
 	        }
 	       	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
-			jQuery('a.workshops').remove();
-			jQuery('#workshops footer a.readmore').remove();
-			jQuery('#workshops .sort-items-container').children('a').remove();
+			jQuery('#workshops footer a.readmore').hide();
+			jQuery('#workshops .workshops-results.container.removePadding').hide();
+			jQuery('#workshops article.container.data-grid').hide();
+			jQuery('#workshops .sort-items-container').children('a').hide();
 		}
 	});
 
@@ -441,6 +468,27 @@ function getSelectedTags_general() {
 	autores = [];
 	paises = [];
 	targetContainer = jQuery('.navbar .selected-tags-container');
+	if (targetContainer.is(':empty') == false) {
+		targetContainer.children('.tag.selected-tag').each(function(i) {
+			type = jQuery(this).attr('from');
+			id = (jQuery(this).attr('id')).replace('tag-', '');
+			nombre = getCleanedString(jQuery(this).children('span').last().html());
+			switch(type) {
+			    case 'geo-container':
+			        paises.push(id);
+			        break;
+			    case 'author-container':
+			        autores.push(nombre);
+			        break;
+			    case 'tag-container':
+			        categorias.push(id);
+			        break;
+			    default:
+			        texto.push(nombre);
+			}
+		});
+	}
+	targetContainer = jQuery('#mobile-filter .selected-tags-container');
 	if (targetContainer.is(':empty') == false) {
 		targetContainer.children('.tag.selected-tag').each(function(i) {
 			type = jQuery(this).attr('from');
