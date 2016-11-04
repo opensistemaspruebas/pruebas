@@ -116,7 +116,7 @@ function add_search_meta() {
         <meta name="wp_topic" content="<?php echo get_post_type(); /*if ($destacada) echo '_destacada';*/ ?>"/>
         <meta name="image_src" content="<?php echo $image; ?>"/>
         <meta name="wp_keywords" content="<?php echo implode($keyboards, ','); ?>"/>
-        <meta name="content_language" content="<?php echo get_locale(); ?>"/>
+        <meta name="content_language" content="<?php echo str_replace('_', '-', get_locale()); ?>"/>
     <?php endif;
 }
 add_action('wp_head', 'add_search_meta', 100);
