@@ -149,6 +149,8 @@ function getNumResultados(d, tipo) {
 function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 
 	jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
+	if (jQuery('div#menu-search').hasClass('displayed'))
+		jQuery('button.close.close-navbar-filter.btn-close').trigger('click');
 
 	tags = getSelectedTags_general();
 	textoInput = jQuery('input.input-search.navbar-search-input').val();
@@ -204,7 +206,17 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	}
 
 	if (!ver_mas && !cambiando_talleres) {
-		jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
+		//jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
+		//jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).first().remove();
+		//jQuery('article.publication').remove();
+		
+		/*if (jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).size() == 0) {
+			jQuery('article#about-us').remove();
+		}*/
+		
+		jQuery('.prefooter-bbva').siblings().remove();
+		jQuery('article#about-us').removeClass('about-us');
+
 		codigoBuscador = '<div class="contents">\
 							<div id="search-layer"></div>\
 								<div class="results">\
@@ -306,6 +318,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																if (paises.length == 0){
 																	jQuery.each(paisesJson, function( index, value ) {
 																	  selected = '';
+
 																	  if (value[0] == 'Mexico' || value[0] == 'México') {
 																	  	selected = 'selected';
 																	  }
@@ -401,7 +414,8 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		query_paises_talleres = '';
 		jQuery.each(data.availableTags, function( index, value ) {
 			selected = '';
-			if (value['text'] == 'Mexico' || value['text'] == 'México') {
+			opcion = jQuery('#select-country').children('option:selected').val();
+			if (value['text'] == opcion) {
 				id = value['id'].replace('tag-', '');
 				query_paises_talleres = "(or wp_double_array:'" + id + "')";
 				return;
