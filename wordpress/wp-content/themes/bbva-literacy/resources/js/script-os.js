@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
 	jQuery('.navbar button.btn-bbva-aqua.publishing-filter-search-btn, a.btn-bbva-aqua.publishing-filter-search-btn').on("click", function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		buscar_general(false, false);
+		buscar_general(false, false, false);
 	}); 
 
 
@@ -67,7 +67,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		start = parseInt(jQuery("input#startPublicaciones").val()) + 10;
 		jQuery("input#startPublicaciones").attr('value', start);
-		buscar_general(true, false);
+		buscar_general(true, false, false);
 	});
 
 
@@ -75,14 +75,14 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		start = parseInt(jQuery("input#startHistorias").val()) + 10;
 		jQuery("input#startHistorias").attr('value', start);
-		buscar_general(true, false);
+		buscar_general(true, false, false);
 	});
 
 	jQuery('body').on('click', '#workshops footer a.readmore', function(event) {
 		event.preventDefault();
 		start = parseInt(jQuery("input#startTalleres").val()) + 6;
 		jQuery("input#startTalleres").attr('value', start);
-		buscar_general(true, false);
+		buscar_general(true, false, false);
 	});
 
 	jQuery('body').on('click', '#publishes .sort-items-container a', function(event) {
@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
 		jQuery('#publishes .sort-items-container a.selected').removeClass("selected");
 		jQuery(this).addClass("selected");
 		jQuery("input#startPublicaciones").attr('value', 0);
-		buscar_general(false, true);
+		buscar_general(false, true, false);
 	});
 
 	jQuery('body').on('click', '#histories .sort-items-container a', function(event) {
@@ -102,7 +102,7 @@ jQuery(document).ready(function($) {
 		jQuery('#histories .sort-items-container a.selected').removeClass("selected");
 		jQuery(this).addClass("selected");
 		jQuery("input#startHistorias").attr('value', 0);
-		buscar_general(false, true);
+		buscar_general(false, true, false);
 	});
 
 	jQuery('body').on('click', 'ul#results-tabs li a', function() {
@@ -112,6 +112,20 @@ jQuery(document).ready(function($) {
 	jQuery('body').on('change', 'select#select-tab-results', function() {
 		opcion = jQuery(this).children('option:selected').val();
 		jQuery('a.' + opcion).trigger('click');
+	});
+
+	jQuery('body').on('change', '#select-country', function() {
+		console.log("cambio");
+		opcion = jQuery(this).children('option:selected').val();
+		jQuery.each(paisesJson, function(index, value) {
+			if (value[0] == opcion) {
+				jQuery('a.link-web').attr('href', value[2]);
+				jQuery('a.link-web .nombre').html('<span class="nombre">' + value[1] + '</span>');
+				jQuery('#workshops span.current-country').html(value[0]);
+				buscar_general(false, false, true);
+				return;
+			}
+		});
 	});
 	 
 });
@@ -132,9 +146,10 @@ function getNumResultados(d, tipo) {
 }
 
 
-function buscar_general(ver_mas, reordenar) {
+function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 
-	jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
+	//jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
+	//jQuery('div#search-layer, div#menu-search').hide();
 
 	tags = getSelectedTags_general();
 	textoInput = jQuery('input.input-search.navbar-search-input').val();
@@ -178,43 +193,7 @@ function buscar_general(ver_mas, reordenar) {
 	query_destacados_publicaciones = '';
 	query_destacados_historias = '';
 
-	filter = false;
-	if (paises.length > 0){
-		filter = true;
-		query_paises = "(or wp_double_array:" + paises.join(" wp_double_array:") + ")";
-	}
-	if (autores.length > 0){
-		filter = true;
-		query_autores = "(or wp_text_array:'" + autores.join("' wp_text_array:'") + "')";
-	}
-	if (categorias.length > 0){
-		filter = true;
-		query_categorias = "(or wp_double_array:" + categorias.join(" wp_double_array:") + ")";	
-	}
-	if (order_publicaciones == 'destacados') {
-		order_publicaciones = 'date desc';
-		query_destacados_publicaciones += '(or keywords:\'destacada\')';
-	}
-	if (order_historias == 'destacados') {
-		order_historias = 'date desc';
-		query_destacados_historias += '(or keywords:\'destacada\')';
-	}
-
-	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
-	if (filter) {
-		url_buscador_publicaciones = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_publicaciones + '(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
-		url_buscador_historias = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_historias + '(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
-		url_buscador_talleres = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
-	} else {
-		url_buscador_publicaciones = url_buscador + '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_publicaciones + ')';
-		url_buscador_historias = url_buscador + '&fq=(and(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_historias + ')';
-		url_buscador_talleres = url_buscador + '&fq=(and(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
-	}
-	url_buscador_publicaciones += '&start=' + start_publicaciones + '&sort=' + order_publicaciones + '&size=' + size_publicaciones;
-	url_buscador_historias += '&start=' + start_historias + '&sort=' + order_historias + '&size=' + size_historias;
-	url_buscador_talleres += '&start=' + start_talleres + '&sort=' + order_talleres + '&size=' + size_talleres;
-
-	if (!ver_mas) {
+	if (!ver_mas && !cambiando_talleres) {
 		jQuery('.contents div:nth-child(2)').first().children().children().children().not(jQuery('.prefooter-bbva')).remove();
 		codigoBuscador = '<div class="contents">\
 							<div id="search-layer"></div>\
@@ -314,31 +293,55 @@ function buscar_general(ver_mas, reordenar) {
 														<div class="workshops-results container removePadding">\
 															<div class="controls">\
 																<select id="select-country" class="selectpicker-form countries">';
-																jQuery.each(paisesJson, function( index, value ) {
-																  selected = '';
-																  if (value[0] == 'Mexico' || value[0] == 'México') {
-																  	selected = 'selected';
-																  }
-																  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>'
-																});
+																if (paises.length == 0){
+																	jQuery.each(paisesJson, function( index, value ) {
+																	  selected = '';
+																	  if (value[0] == 'Mexico' || value[0] == 'México') {
+																	  	selected = 'selected';
+																	  }
+																	  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
+																	});
+																} else {
+																	jQuery.each(paises, function( index1, value1 ) {
+																		jQuery.each(data.availableTags, function( index2, value2 ) {
+																			id = value2['id'].replace('tag-', '');
+																			selected = '';
+																			if (index2 == 0) {
+																				selected = 'selected';
+																			}
+																			if (id == value1) {
+																				codigoBuscador += '<option ' + selected + ' value="' + value2['text'] + '">' + value2['text'] + '</option>';
+																			}	
+																		});
+																	});
+																}
 															codigoBuscador += '</select>';
-															jQuery.each(paisesJson, function( index, value ) {
-																  if (value[0] == 'Mexico' || value[0] == 'México') {
-																  	codigoBuscador += '<a href="' + value[2] + '" class="link-web"><span class="nombre">' + value[1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
-																  	return;
-																  }
+															if (paises.length == 0) {
+																jQuery.each(paisesJson, function( index, value ) {
+																	if (value[0] == 'Mexico' || value[0] == 'México') {
+																		codigoBuscador += '<a target="_blank" href="' + value[2] + '" class="link-web"><span class="nombre">' + value[1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
+																	  	return;
+																	}
 																});
+															} else {
+																codigoBuscador += '<a target="_blank" href="' + paisesJson[paises[0]][2] + '" class="link-web"><span class="nombre">' + paisesJson[paises[0]][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
+
+															}
 															codigoBuscador += '</div>\
 														</div>\
 													<article class="container data-grid">\
 														<header>\
 															<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + ' <span class="current-country">';
-															jQuery.each(paisesJson, function( index, value ) {
-															  if (value[0] == 'Mexico' || value[0] == 'México') {
-															  	codigoBuscador += value[0];
-															  	return;
-															  }
-															});
+															if (paises.length == 0) {
+																jQuery.each(paisesJson, function( index, value ) {
+																  if (value[0] == 'Mexico' || value[0] == 'México') {
+																  	codigoBuscador += value[0];
+																  	return;
+																  }
+																});
+															} else {
+																codigoBuscador +=  paisesJson[paises[0]][0];
+															}
 													codigoBuscador += '</span></h1>\
 														</header>\
 														<div class="content">\
@@ -361,13 +364,70 @@ function buscar_general(ver_mas, reordenar) {
 							</div>';
 		jQuery('.prefooter-bbva').before(codigoBuscador);
 		jQuery('.prefooter-bbva').removeClass('background-gray');
+		jQuery('select#select-country').selectpicker('refresh');
 
-	} else {
+	} else if (!cambiando_talleres) {
 		jQuery('#sortByPublicaciones').attr('value', 'date desc');
 		jQuery('#sortByHistorias').attr('value', 'date desc')
+	} else {
+		jQuery('#startTalleres').attr('value', 0);
 	}
 
-	jQuery('select#select-country').selectpicker('refresh');
+	filter = false;
+	if (paises.length > 0){
+		filter = true;
+		query_paises = "(or wp_double_array:" + paises.join(" wp_double_array:") + ")";
+		//query_paises_talleres = "(or wp_double_array:'" +  paises[0] + "')";
+		pais = jQuery('#select-country option:selected').text();
+		query_paises_talleres = "";
+		jQuery.each(data.availableTags, function(index, value) {
+			if (value['text'] == pais) {
+				id = value['id'].replace('tag-', '');
+				query_paises_talleres = "(or wp_double_array:'" + id + "')";
+				return;
+			}
+		});
+	} else {
+		query_paises_talleres = '';
+		jQuery.each(data.availableTags, function( index, value ) {
+			selected = '';
+			if (value['text'] == 'Mexico' || value['text'] == 'México') {
+				id = value['id'].replace('tag-', '');
+				query_paises_talleres = "(or wp_double_array:'" + id + "')";
+				return;
+			}
+		});
+	}
+	if (autores.length > 0){
+		filter = true;
+		query_autores = "(or wp_text_array:'" + autores.join("' wp_text_array:'") + "')";
+	}
+	if (categorias.length > 0){
+		filter = true;
+		query_categorias = "(or wp_double_array:" + categorias.join(" wp_double_array:") + ")";	
+	}
+	if (order_publicaciones == 'destacados') {
+		order_publicaciones = 'date desc';
+		query_destacados_publicaciones += '(or keywords:\'destacada\')';
+	}
+	if (order_historias == 'destacados') {
+		order_historias = 'date desc';
+		query_destacados_historias += '(or keywords:\'destacada\')';
+	}
+
+	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
+	if (filter) {
+		url_buscador_publicaciones = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_publicaciones + '(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+		url_buscador_historias = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_historias + '(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+		url_buscador_talleres = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises_talleres + '(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+	} else {
+		url_buscador_publicaciones = url_buscador + '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_publicaciones + ')';
+		url_buscador_historias = url_buscador + '&fq=(and(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_historias + ')';
+		url_buscador_talleres = url_buscador + '&fq=(and(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_paises_talleres + ')';
+	}
+	url_buscador_publicaciones += '&start=' + start_publicaciones + '&sort=' + order_publicaciones + '&size=' + size_publicaciones;
+	url_buscador_historias += '&start=' + start_historias + '&sort=' + order_historias + '&size=' + size_historias;
+	url_buscador_talleres += '&start=' + start_talleres + '&sort=' + order_talleres + '&size=' + size_talleres;
 
 
 	ordenacion = jQuery('#sortByPublicaciones').val();
@@ -376,31 +436,39 @@ function buscar_general(ver_mas, reordenar) {
 	ordenacion = jQuery('#sortByHistorias').val();
 	jQuery('#histories .sort-items-container a[data-order-filter="' + ordenacion + '"]').addClass('selected');
 
-	tab = jQuery('#currentTab').val();
-	jQuery('ul#results-tabs li').removeClass('active');
-	jQuery('a.' + tab).trigger('click');
-	jQuery('span.num_resultados').html('0');
-
+	if (!cambiando_talleres && !ver_mas) {
+		tab = jQuery('#currentTab').val();
+		jQuery('ul#results-tabs li').removeClass('active');
+		jQuery('a.' + tab).trigger('click');
+		jQuery('span.num_resultados').html('0');
+	} else {
+		jQuery('span.num_resultados').html('0');
+	}
 
 
 	//publicaciones
 	jQuery.get(url_buscador_publicaciones, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
-			jQuery('#publishes a[data-order-filter="destacados"]').hide();
-			jQuery.each(d.data.hits.hit, function(i, result) {
-				jQuery('a.publishes').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
-				jQuery('select#select-tab-results option[value="publishes"]').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
-				keywords = result.fields['keywords'];
-				if (keywords !== undefined) {
-					if (jQuery.inArray('destacada', keywords) > -1 ) {
-					    jQuery('#publishes a[data-order-filter="destacados"]').show();
-					}
+			if (!cambiando_talleres || !ver_mas) {
+				jQuery('#publishes a[data-order-filter="destacados"]').hide();
+				if (start_publicaciones == 0) {
+					jQuery('#publishes .cards-grid .container div.row').first().empty();
 				}
-				jQuery('#publishes .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'publishes'));
-			});
-	        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
-	        	jQuery('#publishes footer a.readmore').hide();
-	        }
+				jQuery.each(d.data.hits.hit, function(i, result) {
+					jQuery('a.publishes').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
+					jQuery('select#select-tab-results option[value="publishes"]').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
+					keywords = result.fields['keywords'];
+					if (keywords !== undefined) {
+						if (jQuery.inArray('destacada', keywords) > -1 ) {
+						    jQuery('#publishes a[data-order-filter="destacados"]').show();
+						}
+					}
+					jQuery('#publishes .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'publishes'));
+				});
+		        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
+		        	jQuery('#publishes footer a.readmore').hide();
+		        }
+	    	}
 	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
@@ -413,21 +481,26 @@ function buscar_general(ver_mas, reordenar) {
 	//historias
 	jQuery.get(url_buscador_historias, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
+			if (!cambiando_talleres || !ver_mas) {
 			jQuery('#histories a[data-order-filter="destacados"]').hide();
-			jQuery.each(d.data.hits.hit, function(i, result) {
-				jQuery('a.histories').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
-				jQuery('select#select-tab-results option[value="histories"]').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
-				keywords = result.fields['keywords'];
-				if (keywords !== undefined) {
-					if (jQuery.inArray('destacada', keywords) > -1 ) {
-					    jQuery('#histories a[data-order-filter="destacados"]').show();
+			if (start_publicaciones == 0) {
+				jQuery('#histories .cards-grid .container div.row').first().empty();
+			}
+				jQuery.each(d.data.hits.hit, function(i, result) {
+					jQuery('a.histories').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
+					jQuery('select#select-tab-results option[value="histories"]').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
+					keywords = result.fields['keywords'];
+					if (keywords !== undefined) {
+						if (jQuery.inArray('destacada', keywords) > -1 ) {
+						    jQuery('#histories a[data-order-filter="destacados"]').show();
+						}
 					}
-				}
-				jQuery('#histories .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'histories'));
-			});
-	        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
-	        	jQuery('#histories footer a.readmore').hide();
-	        }
+					jQuery('#histories .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'histories'));
+				});
+		        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
+		        	jQuery('#histories footer a.readmore').hide();
+		        }
+		    }
 	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
@@ -437,24 +510,35 @@ function buscar_general(ver_mas, reordenar) {
 	});
 
 
+
 	//talleres
 	jQuery.get(url_buscador_talleres, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
 			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
+			if (cambiando_talleres) {
+				jQuery('#workshops .grid-wrapper').first().empty();
+			}
 			jQuery.each(d.data.hits.hit, function(i, result) {
 				jQuery('#workshops .grid-wrapper').first().append(getPostFiltro_general(result.fields, 'workshops'));
 			});
 	        if (d.data.hits.found == jQuery('#workshops .grid-wrapper').first().children().size()) {
 	        	jQuery('#workshops footer a.readmore').hide();
+	        } else {
+	        	jQuery('#workshops footer a.readmore').show();
 	        }
 	       	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
 			jQuery('#workshops footer a.readmore').hide();
-			jQuery('#workshops .workshops-results.container.removePadding').hide();
-			jQuery('#workshops article.container.data-grid').hide();
-			jQuery('#workshops .sort-items-container').children('a').hide();
+			//jQuery('#workshops article.container.data-grid').hide();
+			//jQuery('#workshops .sort-items-container').children('a').hide();
+			//jQuery('#workshops article.container.data-grid').hide();
+			//jQuery('#workshops .btn-group.bootstrap-select.-form.countries').hide();
+			//jQuery('#workshops a.link-web').hide();
+			num_resultados = parseInt(jQuery('span.num_resultados').html()) + 0; 
+	        jQuery('span.num_resultados').html(num_resultados);
+			jQuery('#workshops .grid-wrapper').first().empty();
 		}
 	});
 
