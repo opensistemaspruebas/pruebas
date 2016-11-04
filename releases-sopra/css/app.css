@@ -13178,6 +13178,11 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
+/* line 8, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+.block-outstanding-image .block-content-center {
+  max-width: 560px;
+}
+
 @media (min-width: 767px) {
   /* line 8, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image .block-content-center {
@@ -13190,20 +13195,20 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 16, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 17, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image h2 {
   font-family: "BentonSans";
   font-weight: 300;
 }
 
 @media (max-width: 767px) {
-  /* line 16, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+  /* line 17, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image h2 {
     text-align: center;
   }
 }
 
-/* line 25, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 26, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image p {
   width: 487px;
   font-family: "BentonSans";
@@ -13213,7 +13218,7 @@ footer .icon-row:nth-child(2) .card-icon .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 25, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+  /* line 26, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image p {
     width: auto;
     text-align: center;
@@ -13221,32 +13226,32 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 39, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 40, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .container-button {
   padding-top: 40px;
 }
 
-/* line 41, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 42, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .container-button a.btn {
   width: 190px;
   height: 60px;
 }
 
 @media (max-width: 767px) {
-  /* line 39, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+  /* line 40, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image .container-button {
     margin-bottom: 30px;
     padding-top: 10px;
   }
 }
 
-/* line 51, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 52, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container {
   overflow: hidden;
 }
 
 @media (min-width: 767px) {
-  /* line 51, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+  /* line 52, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
   .block-outstanding-image .background-container {
     background: rgba(255, 255, 255, 0.75);
     padding: 35px;
@@ -13254,29 +13259,29 @@ footer .icon-row:nth-child(2) .card-icon .icon {
   }
 }
 
-/* line 58, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 59, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container .home-title-layer {
   position: absolute;
   z-index: -1;
 }
 
-/* line 61, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 62, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container .home-title-layer.home-title-layer-one {
   background-image: linear-gradient(to right bottom, transparent 50%, white 50%);
-  left: -500%;
+  left: -400%;
   bottom: 0;
-  width: 800%;
-  height: 48%;
+  width: 517%;
+  height: 38%;
   z-index: -1;
 }
 
-/* line 69, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
+/* line 70, /Users/GusLAN/Proyectos/bbva-educacionFinanciera-releases/app/assets/sass/partials/components/_outstanding-image.scss */
 .block-outstanding-image .background-container .home-title-layer.home-title-layer-two {
   background-image: linear-gradient(to right bottom, transparent 50%, rgba(255, 255, 255, 0.4) 50%);
-  left: -30%;
-  bottom: 95px;
-  width: 200%;
-  height: 65%;
+  left: -35%;
+  bottom: 51px;
+  width: 175%;
+  height: 90%;
   z-index: -1;
 }
 

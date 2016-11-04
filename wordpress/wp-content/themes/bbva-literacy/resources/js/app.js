@@ -1495,7 +1495,7 @@ var dataMap = [
     },
     {
         'id'        : 'US',
-        'country'   : 'United Stated',
+        'country'   : 'Estados Unidos',
         'title'     : 'Bancomer Educación Financiera',
         'text'      : 'Con el fin de mejorar tu conocimiento en finanzas ponemos a tu alcance un sitio en el que encontrarás tips, artículos, vídeos, calculadoras, simuladores y talleres gratuitos presenciales o en línea de ahorro, crédito y muchos más para niños, jóvenes, adultos y PyMEs.',
         'button'    : 'Más información',

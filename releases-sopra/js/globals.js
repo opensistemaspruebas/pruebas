@@ -14,7 +14,7 @@ function getConfig(max, suffix) {
         autoStyleContainer: false,
       },
       step: function (state, bar) {
-        bar.setText('<div class="progressNumber">' +  Math.round(bar.value() * max * 10) / 10
+        bar.setText('<div class="progressNumber">' + (Math.round(bar.value() * max * 10) / 10 + '').replace('.', ',')
         + '</div><div class="progressSuffix ml-xs">' + suffix + '</div>');
       },
     };
@@ -32,7 +32,7 @@ function getCircleConfig(max, color, trailColor, suffix, subColor, subtext) {
         autoStyleContainer: false,
       },
       step: function (state, circle) {
-        circle.setText('<div class="circleNumber">' + Math.round(circle.value() * max * 10) / 10
+        circle.setText('<div class="circleNumber">' + (Math.round(circle.value() * max * 10) / 10 + '').replace('.', ',')
         + '<label>' + suffix + '</label></div>' +
         '<div class="circleSubText ' + subColor + '">' + subtext + '</div>');
       },
