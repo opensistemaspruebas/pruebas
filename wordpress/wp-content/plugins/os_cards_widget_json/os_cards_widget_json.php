@@ -310,6 +310,8 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
                 			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
                 			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
                 			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
+
+                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
        					
        					?>
        					<?php $j = $i + 1; ?>
@@ -346,7 +348,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 								                    <div class="triangle triangle-down-right"></div>
 								                </div>
 			                                <?php endif; ?>
-			                                <?php if ($pdf) : ?>
+			                                <?php if (!empty($videoIntro_url)) : ?>
 								                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
 								                    <div class="triangle triangle-up-left"></div>
 								                    <div class="triangle triangle-down-right"></div>
@@ -435,6 +437,8 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
 	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
 			            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
+
+			            			$videoIntro_url = get_post_meta($post->ID, 'videoIntro-url', true);
 	                    		?>
 
 	           					<?php $grid = $order[($i % 5)]; ?>
@@ -464,19 +468,19 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 								            <a href="<?php echo $post_guid; ?>" class="hidden-xs mb-xs readmore"><?php _e('Leer más', 'os_cards_widget_json'); ?></a>
 								            <footer>
 								                <div class="icon-row">
-								                	<?php if (true) : ?>
+								                	<?php if (false) : ?>
 									                    <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
 									                        <div class="triangle triangle-up-left"></div>
 									                        <div class="triangle triangle-down-right"></div>
 									                    </div>
 								                	<?php endif; ?>	
-									                <?php if (true) : ?>							                    
+									                <?php if (!empty($videoIntro_url)) :?>
 									                    <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
 									                        <div class="triangle triangle-up-left"></div>
 									                        <div class="triangle triangle-down-right"></div>
 									                    </div>
 								                	<?php endif; ?>	
-								                	<?php if (true) : ?>
+								                	<?php if (false) : ?>
 									                    <div class="card-icon"><span class="icon bbva-icon-chat2"></span>
 									                        <div class="triangle triangle-up-left"></div>
 									                        <div class="triangle triangle-down-right"></div>
