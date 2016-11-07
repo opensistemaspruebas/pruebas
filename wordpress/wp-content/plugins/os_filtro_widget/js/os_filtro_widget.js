@@ -111,20 +111,23 @@ function buscar() {
 	autores = tags[2];
 	paises = tags[3];
 
-	start = jQuery("input#start").val();
-	order = jQuery("input#sortBy").val();
-	if (order == 'destacados') {
-		jQuery('a[data-order=DESTACADOS]').removeClass('selected');
-		jQuery('a[data-order=DESC]').addClass('selected');
-		order = 'date desc';
-		tipo = 'publicacion';
-	} else {
-		tipo = 'publicacion';
-	}
-	
+
 	query_paises = "";
 	query_autores = "";
 	query_categorias = "";
+	query_destacados = "";
+
+	start = jQuery("input#start").val();
+	order = jQuery("input#sortBy").val();
+	if (order == 'destacados') {
+		//jQuery('a[data-order=DESTACADOS]').removeClass('selected');
+		//jQuery('a[data-order=DESC]').addClass('selected');
+		order = 'date desc';
+		tipo = 'publicacion';
+		query_destacados += '(or keywords:\'destacada\')';
+	} else {
+		tipo = 'publicacion';
+	}
 
 	filter = false;
 	if (paises.length > 0){
@@ -142,9 +145,9 @@ function buscar() {
 
 	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
 	if (filter) {
-	    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + '(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\'))';
+	    url_buscador += '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados + '(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\'))';
 	} else {
-		url_buscador += '&fq=(and(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\'))';
+		url_buscador += '&fq=(and(or topic:\'' + tipo + '\')(or content_language:\'' + object_name.lang + '\')' + query_destacados + ')';
 	}
 	url_buscador += '&start=' + start + '&sort=' + order;
 
@@ -182,7 +185,7 @@ jQuery(document).ready(function($) {
 		$("input#start").attr('value', 0);
 
 		buscando = true;
-		$('a[data-order=DESTACADOS]').hide();
+		//$('a[data-order=DESTACADOS]').hide();
 		
 		buscar();
 	

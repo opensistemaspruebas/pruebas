@@ -16,7 +16,7 @@ jQuery(document).on("click", '#publishing-view .sort-items-container a', functio
 	event.preventDefault();
 	var orden_cards = jQuery(this).attr("data-order");
 	console.log(orden_cards);
-	if (orden_cards !== "DESTACADOS" && buscando) {
+	if (buscando) {
 		return;
 	}
 	buscando = false;
