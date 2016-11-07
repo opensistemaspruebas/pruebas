@@ -43,7 +43,7 @@ if (!class_exists('os_evento_widget_home')) :
 				'orderby' 		   => 'meta_value',
 				'post_type'        => 'evento',
 				'post_status'      => 'publish',
-				'suppress_filters' => true,
+				'suppress_filters' => false,
 			);
 
 	    	$evento = get_posts($args);
