@@ -636,12 +636,12 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 			                            <div class="main-card-data-container-title-wrapper">
 			                            	<h1 class="title nopadding"><?php echo $post_title; ?></h1>
 			                            </div>
-			                            <p class="main-card-data-container-description-wrapper"><?php echo $post_content; ?></p>
+			                            <p class="main-card-data-container-description-wrapper"><?php echo $texto_destacado; ?></p>
 			                            <a href="<?php echo $post_guid; ?>" class="hidden-xs mb-xs readmore"><?php _e("Leer más", "os_cards_widget_json"); ?></a>
 			                            
 			                            <footer>
 			                            	<div class="icon-row">
-				                            	<?php if (!empty($post_content) || !empty($subtitulo) || !empty($texto_destacado)) : ?>
+				                            	<?php if (false) : ?>
 								                    <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
 								                        <div class="triangle triangle-up-left"></div>
 								                        <div class="triangle triangle-down-right"></div>
