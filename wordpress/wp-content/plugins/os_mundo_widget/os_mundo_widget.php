@@ -191,7 +191,7 @@ if (!class_exists('OSMundoWidget')) :
 				          the_widget(
 				                'os_logos_widget', 
 				                array(
-				                    'titulo' => __('Partners del programa en'),
+				                    'titulo' => __('Nuestros aliados en'),
 				                    'texto' => '',
 				                    'numero_posts_mostrar' => '6',
 				                    'numero_posts_totales' => '6',
