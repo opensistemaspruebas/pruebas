@@ -20,9 +20,11 @@ function save_json_to_file($json, $post_type, $identificador, $json_type) {
 
 	if (function_exists('wpml_get_language_information')) {
 		$post_language_information = wpml_get_language_information($identificador);
+		if (is_wp_error($post_language_information)) {
+			return;
+		}
 		$locale = $post_language_information['locale'];
 	}
-
 
 	$path = get_home_path() . "wp-content/jsons/" . $locale . '/' . $post_type;
 
@@ -52,6 +54,8 @@ function save_json_to_file($json, $post_type, $identificador, $json_type) {
 }
 
 function post_to_json($post_id, $post_type){
+
+	error_log('post_to_json');
 
 	$json = array("_id" => $post_id, "type" => $post_type);
 
@@ -133,7 +137,8 @@ function fetch($post_type, $order){
 	        'meta_key' => 'publication_date', 
 	        'post_status'      => 'publish',
 	        'orderby' => 'meta_value',
-	        'order' => $order
+	        'order' => $order,
+	        'suppress_filters' => false
     	);
 
 	}
@@ -146,7 +151,7 @@ function fetch($post_type, $order){
 			'order'            => $order,
 			'post_type'        => $post_type,
 			'post_status'      => 'publish',
-			'suppress_filters' => true 
+			'suppress_filters' => false 
 		);
 
 	}

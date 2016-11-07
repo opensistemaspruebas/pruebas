@@ -6,7 +6,7 @@ jQuery(document).on("click", "#publishing-view #readmore", function(event) {
 	}
 	var tipo = jQuery("#tipo").val();
 	var orden_cards = jQuery("#orden").val();
-	var path = "/wp-content/jsons/" + tipo + "/";
+	var path = "/wp-content/jsons/" + object_name_cards.locale + '/' + tipo + "/";
 	jQuery.getJSON(path + orden_cards + ".json", getIndice);
 });
 
@@ -24,7 +24,7 @@ jQuery(document).on("click", '#publishing-view .sort-items-container a', functio
 	orden_filter = jQuery(this).attr("data-order-filter");
 	jQuery("input#sortBy").val(orden_filter);
 	jQuery("#orden").val(orden_cards);
-	var path = "/wp-content/jsons/" + tipo + "/";
+	var path = "/wp-content/jsons/" + object_name_cards.locale + '/' + tipo + "/";
 	jQuery('.cards-grid .container div.row').first().html('');
 	jQuery('#card-container').html('');
 	jQuery('.outstanding-histories .card-container .row').first().html('');
@@ -64,7 +64,7 @@ function loop(i, fin, indice, onDone){
 		
 		var tipo = jQuery("#tipo").val();
 		var orden_cards = jQuery("#orden").val();
-		var path = "/wp-content/jsons/" + tipo + "/";
+		var path = "/wp-content/jsons/" + object_name_cards.locale + '/' + tipo + "/";
 		
 		jQuery.getJSON(path + indice[i] + ".json", function(post) {
 			var plantilla = jQuery("#plantilla").val();

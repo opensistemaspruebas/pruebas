@@ -26,6 +26,13 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	        	)
 	        );
 			wp_register_script('os_cards_widget_json_js', plugins_url('js/os_cards_widget_json.js' , __FILE__), array('jquery'));
+
+			$locale = 'es_ES';
+			if (function_exists('get_locale')) {
+				$locale = get_locale();
+			}
+
+
 			$translation_array = array(
 				'leer_mas' => __('Leer más', 'os_cards_widget_json'),
 				'enero' => __('Enero', 'os_cards_widget_json'),
@@ -40,6 +47,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 				'octubre' => __('Octubre', 'os_cards_widget_json'),
 				'noviembre' => __('Noviembre', 'os_cards_widget_json'),
 				'diciembre' => __('Diciembre', 'os_cards_widget_json'),
+				'locale' => $locale,
 			);
 			wp_localize_script('os_cards_widget_json_js', 'object_name_cards', $translation_array);
 			wp_enqueue_script('os_cards_widget_json_js');
