@@ -12,7 +12,6 @@ get_header(); ?>
 <?php
 
     $title2 = get_the_title();
-    $date = get_the_date('l, j \d\e F \d\e Y');
     $abstract_destacado = get_post_meta(get_the_ID(), 'abstract_destacado', true);
     $imagenCabecera = get_post_meta(get_the_ID(), 'imagenCabecera', true);
     $abstract_contenido = get_post_meta(get_the_ID(), 'abstract_contenido', true);
@@ -34,6 +33,15 @@ get_header(); ?>
     $videoIntro_url = get_post_meta(get_the_ID(),'videoIntro-url',true);
     $videoFinal_type = get_post_meta(get_the_ID(),'video-type',true);
     $publicacion_puntosClave = get_post_meta(get_the_ID(), 'publicacion_puntosClave', true);
+
+    if(get_locale() == 'es_ES'){
+
+        $date = get_the_date('l, j \d\e F \d\e Y');
+    }
+    else{
+
+        $date = get_the_date('l, F j, Y');
+    }
 
     if($videoFinal_type == 'youtube'){
 
@@ -110,7 +118,7 @@ get_header(); ?>
                     </div>
                 </header>
                 <div class="row visible-xs">
-                    <?php if ((false) || (false) || ($pdf)) : ?>
+                    <?php if ((false) || (false) || ($videoIntro_url)) : ?>
                     <div class="icon-section col-xs-6">
                         <?php if (false) : ?>
                         <div class="card-icon icon-publication ml-xs">
@@ -119,14 +127,14 @@ get_header(); ?>
                             <div class="triangle triangle-down-right"></div>
                         </div>
                         <?php endif; ?>
-                        <?php if (false) : ?>
+                        <?php if ($videoIntro_url) : ?>
                         <div class="card-icon icon-publication ml-xs">
                             <span class="icon bbva-icon-audio2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
                         <?php endif; ?>
-                        <?php if ($pdf) : ?>
+                        <?php if (false) : ?>
                         <div class="card-icon icon-publication ml-xs">
                             <span class="icon bbva-icon-chat2"></span>
                             <div class="triangle triangle-up-left"></div>
@@ -143,7 +151,7 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="mb-xs hidden-xs icon-section-desktop">
-                    <?php if ((false) || (false) || ($pdf)) : ?>
+                    <?php if ((false) || (false) || ($videoIntro_url)) : ?>
                     <div class="icon-section">
                         <?php if (false) : ?>
                         <div class="card-icon ml-xs">
@@ -152,14 +160,14 @@ get_header(); ?>
                             <div class="triangle triangle-down-right"></div>
                         </div>
                         <?php endif; ?>
-                         <?php if (false) : ?>
+                         <?php if ($videoIntro_url) : ?>
                         <div class="card-icon ml-xs">
                             <span class="icon bbva-icon-audio2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
                         <?php endif; ?>
-                        <?php if ($pdf) : ?>
+                        <?php if (false) : ?>
                         <div class="card-icon ml-xs">
                             <span class="icon bbva-icon-chat2"></span>
                             <div class="triangle triangle-up-left"></div>
