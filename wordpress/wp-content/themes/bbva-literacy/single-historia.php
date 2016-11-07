@@ -220,23 +220,31 @@
                                         <p class="main-card-data-container-description-wrapper"><?php echo $texto_destacado; ?></p>
                                         <a href="<?php the_permalink(); ?>" class="hidden-xs mb-xs readmore"><?php _e('Leer más'); ?></a>
                                         <footer>
+                                            <?php if ((false) || (false) || !empty($videoIntro_url)) : ?>
                                             <div class="icon-row">
+                                                <?php if (false) : ?>
                                                 <div class="card-icon">
                                                     <span class="icon bbva-icon-quote2"></span>
                                                     <div class="triangle triangle-up-left"></div>
                                                     <div class="triangle triangle-down-right"></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (!empty($videoIntro_url)) : ?>
                                                 <div class="card-icon">
                                                     <span class="icon bbva-icon-audio2"></span>
                                                     <div class="triangle triangle-up-left"></div>
                                                     <div class="triangle triangle-down-right"></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (false) : ?>
                                                 <div class="card-icon">
                                                     <span class="icon bbva-icon-chat2"></span>
                                                     <div class="triangle triangle-up-left"></div>
                                                     <div class="triangle triangle-down-right"></div>
                                                 </div>
+                                                <?php endif; ?>
                                             </div>
+                                            <?php endif; ?>
                                         </footer>
                                     </div>
                                 </section>
