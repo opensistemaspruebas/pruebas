@@ -33,7 +33,6 @@ get_header(); ?>
     $videoIntro_url = get_post_meta(get_the_ID(),'videoIntro-url',true);
     $videoFinal_type = get_post_meta(get_the_ID(),'video-type',true);
     $publicacion_puntosClave = get_post_meta(get_the_ID(), 'publicacion_puntosClave', true);
-    os_imprimir(get_locale());
 
     if(get_locale() == 'es_ES'){
 
@@ -41,7 +40,7 @@ get_header(); ?>
     }
     else{
 
-        $date = get_the_date('l, F j Y');
+        $date = get_the_date('l, F j, Y');
     }
 
     if($videoFinal_type == 'youtube'){
