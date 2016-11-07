@@ -46,11 +46,11 @@ if (!class_exists('os_eventos_pasados_widget')) :
 				'offset'           => 0,
 				'orderby'          => 'post_date',
 				'meta_key' 		   => 'evento_fecha_de_inicio', 
-				'order'            => 'ASC',
+				'order'            => 'DESC',
 				'orderby' 		   => 'meta_value',
 				'post_type'        => 'evento',
 				'post_status'      => 'publish',
-				'suppress_filters' => true,
+				'suppress_filters' => false,
 				'meta_query' => array(
 			        array(
 						'key'         => 'evento_fecha_de_inicio',
