@@ -195,6 +195,7 @@
                               $date = get_the_date('j F Y');
                               $texto_destacado = get_post_meta($post->ID, 'texto-destacado', true);
                               $imagen = get_post_meta($post->ID, 'imagenCard', true);
+                              $videoIntro = get_post_meta($post->ID, 'videoIntro-url', true);
                             ?>
                             <div class="main-card-container col-xs-12 col-sm-4 noppading">
                                 <!-- main-card -->
@@ -220,7 +221,7 @@
                                         <p class="main-card-data-container-description-wrapper"><?php echo $texto_destacado; ?></p>
                                         <a href="<?php the_permalink(); ?>" class="hidden-xs mb-xs readmore"><?php _e('Leer más'); ?></a>
                                         <footer>
-                                            <?php if ((false) || (false) || !empty($videoIntro_url)) : ?>
+                                            <?php if ((false) || (false) || !empty($videoIntro)) : ?>
                                             <div class="icon-row">
                                                 <?php if (false) : ?>
                                                 <div class="card-icon">
@@ -229,7 +230,7 @@
                                                     <div class="triangle triangle-down-right"></div>
                                                 </div>
                                                 <?php endif; ?>
-                                                <?php if (!empty($videoIntro_url)) : ?>
+                                                <?php if (!empty($videoIntro)) : ?>
                                                 <div class="card-icon">
                                                     <span class="icon bbva-icon-audio2"></span>
                                                     <div class="triangle triangle-up-left"></div>
