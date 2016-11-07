@@ -217,8 +217,10 @@
 
                                     foreach ($programa as $p) {
                                         $dia = $p[0]['dia'];
-                                        $dateobj_dia = DateTime::createFromFormat($format, $dia);
-                                        $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');   
+                                        if (!empty($dia)) {
+                                            $dateobj_dia = DateTime::createFromFormat($format, $dia);
+                                            $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');   
+                                        }
                                         break;
                                     }
 
@@ -230,9 +232,10 @@
                                         <?php
                                             
                                             $dia = $p[0]['dia'];
-                                            $dateobj_dia = DateTime::createFromFormat($format, $dia);
-                                            $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');   
-                                            
+                                            if (!empty($dia)) {
+                                                $dateobj_dia = DateTime::createFromFormat($format, $dia);
+                                                $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');   
+                                            }
                                         ?>
                                         <li role="presentation"><a href="#day<?php echo $l; ?>" aria-controls="day<?php echo $l; ?>" role="tab" data-toggle="tab"><?php echo $dia_formateado; ?></a></li>
                                         <?php $l++; ?>
@@ -343,10 +346,12 @@
                                 <?php foreach ($programa as $p) : ?>
                                     <?php 
 
+                                    if (!empty($dia)) {
                                         $dia = $p[0]['dia'];
                                         $dateobj_dia = DateTime::createFromFormat($format, $dia);
                                         $dia_formateado =  __('Día', 'os_evento_futuro_widget') . ' ' . $dateobj_dia->format('d') . ' ' . __('de', 'os_evento_futuro_widget') . ' ' . $meses[$dateobj_dia->format('m') - 1] . ' ' . $dateobj_dia->format('Y');
-
+                                    }
+                                    
                                     ?>
                                     <h2 class="mt-xl"><?php echo $dia_formateado; ?></h2>
                                     <div class="program-content">
