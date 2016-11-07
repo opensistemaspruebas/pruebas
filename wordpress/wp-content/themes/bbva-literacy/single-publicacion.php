@@ -16,6 +16,7 @@ get_header(); ?>
     $imagenCabecera = get_post_meta(get_the_ID(), 'imagenCabecera', true);
     $abstract_contenido = get_post_meta(get_the_ID(), 'abstract_contenido', true);
     $pdf = get_post_meta(get_the_ID(), 'pdf', true);
+    $pdfInterno = get_post_meta(get_the_ID(), 'pdfInterno', true);
     $publication_date = get_post_meta(get_the_ID(), 'publication_date', true);
     $time = strtotime($publication_date);
     $publication_date = date('d/m/Y',$time);
@@ -286,7 +287,7 @@ get_header(); ?>
             </div>
             <?php endif; ?>
             <div class="container content-wrap">
-            <?php if (!empty($pdf)) : ?>
+            <?php if (!empty($pdf) || !empty($pdfInterno)) : ?>
                 <section class="pdf-rectangle mt-xl">
                     <div class="row">
                         <div class="col-xs-12 col-sm-1">
@@ -299,7 +300,7 @@ get_header(); ?>
                         </div>
                         <div class="col-xs-12 col-sm-3 col-sm-offset-2">
                             <div class="container-button mb-md mt-md">
-                                <a href="<?php echo $pdf; ?>" target="_blank" class="btn btn-bbva-aqua"><?php _e('Acceder', 'os_publicacion_type'); ?></a>
+                                <a href="<?php if(!empty($pdf)){echo $pdf;}else if(!empty($pdfInterno)){echo $pdfInterno;} ?>" target="_blank" class="btn btn-bbva-aqua"><?php _e('Acceder', 'os_publicacion_type'); ?></a>
                             </div>
                         </div>
                     </div>

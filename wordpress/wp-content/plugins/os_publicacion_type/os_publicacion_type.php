@@ -169,7 +169,7 @@ function meta_box_videoIntro_publicacion($post) {
     <p class="videoIntro-wordpress">
       <label for="videoIntro-url"><?php _e('Video presentación', 'os_publicacion_type'); ?></label>
       <input class="widefat" id="videoIntro-url" name="videoIntro-url" type="text" value="<?php if (isset($videoIntro_url)) echo $videoIntro_url; ?>"/>
-      <i><?php _e('Es el video que se mostrará al cargar la página en estado autoplay','os_publicacion_type'); ?></i>
+      <i><?php _e('Es el video que se mostrará al cargar la página en estado autoplay, debe estar subido a wordpress','os_publicacion_type'); ?></i>
     </p>    
     <p class="videoIntro-wordpress">
       <input id="upload_videoIntroPublicacion" name="upload_videoIntroPublicacion" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
@@ -279,7 +279,7 @@ function meta_box_publicacion_pdf($post) {
   </p>
   <p>
     <label for="pdfInterno"><?php _e('Cargador de archivo PDF', 'os_publicacion_type'); ?></label>
-    <input type="url" class="widefat" id="pdfInterno" name="pdfInterno" value="<?php if (isset($pdfInterno)) echo $pdfInterno; ?>" readonly="readonly"/>
+    <input type="url" class="widefat" id="pdfInterno" name="pdfInterno" value="<?php if (isset($pdfInterno)) echo $pdfInterno; ?>"/>
   </p>
   <p>
     <input id="upload_pdfInterno" name="upload_pdfInterno" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
