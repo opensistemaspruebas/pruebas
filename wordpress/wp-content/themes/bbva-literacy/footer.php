@@ -10,7 +10,7 @@
                         <div class="footer-menu-list">
                             <a href="/legal/"><?php _e('Aviso legal'); ?></a>
                             <a href="/condiciones/"><?php _e('Condiciones de uso'); ?></a>
-                            <a href="/cookies/"><?php _e('Política de cookies'); ?></a>
+                            <a href="/datos-personales/"><?php _e('Datos personales'); ?></a>
                         </div>
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
