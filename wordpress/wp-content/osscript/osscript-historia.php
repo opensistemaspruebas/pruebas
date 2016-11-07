@@ -31,6 +31,17 @@ if (empty($wp)) {
 
 		$json = array("_id" => $post_id, "type" => $post_type);
 
+
+		$locale = 'es_ES';
+
+		if (function_exists('wpml_get_language_information')) {
+			$post_language_information = wpml_get_language_information($identificador);
+			if (is_wp_error($post_language_information)) {
+				return;
+			}
+			$locale = $post_language_information['locale'];
+		}
+
 	
 		// Campos del post a recoger en el json
 		switch ($post_type) {
@@ -77,7 +88,7 @@ if (empty($wp)) {
 		}
 
 
-		file_put_contents("../jsons/historia/".$post_id.".json", json_encode($json));			
+		file_put_contents("../jsons/" . $locale . "/historia/".$post_id.".json", json_encode($json));			
 	}
 
 	echo "Proceso terminado.";

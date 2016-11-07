@@ -14,8 +14,19 @@
 if ( !function_exists( 'get_home_path' ) )
 	require_once( dirname(__FILE__) . '/../../../wp-admin/includes/file.php' );
 
-function save_json_to_file($json, $post_type, $identificador, $json_type){
-	$path = get_home_path() . "wp-content/jsons/" . $post_type;
+function save_json_to_file($json, $post_type, $identificador, $json_type) {
+
+	$locale = 'es_ES';
+
+	if (function_exists('wpml_get_language_information')) {
+		$post_language_information = wpml_get_language_information($identificador);
+		if (is_wp_error($post_language_information)) {
+			return;
+		}
+		$locale = $post_language_information['locale'];
+	}
+
+	$path = get_home_path() . "wp-content/jsons/" . $locale . '/' . $post_type;
 
 	// Comprueba si el directorio existe, si no lo crea y le da permisos
 	if (!is_dir($path)) {
@@ -60,9 +71,9 @@ function post_to_json($post_id, $post_type){
 				$dateobj = DateTime::createFromFormat($format, $fecha_publicacion);
 				$json["fecha"] = $dateobj->format('Y/m/d') . ' - 00:00 AM';
 			}
-			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
-			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
-			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+			$json["video"] = get_post_meta($post_id, "videoIntro-url", true) ? True: False;
+			$json["pdf"] = False;
+			$json["cita"] = False;
 			break;
 			
 		case "historia":
@@ -71,9 +82,9 @@ function post_to_json($post_id, $post_type){
 			$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
 			$json["urlPublicacion"] = get_permalink($post_id);
 			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
-			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
-			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
-			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+			$json["video"] = get_post_meta($post_id, "videoIntro-url", true) ? True: False;
+			$json["pdf"] = False;
+			$json["cita"] = False;
 			break;
 		
 		case "taller":
@@ -124,7 +135,8 @@ function fetch($post_type, $order){
 	        'meta_key' => 'publication_date', 
 	        'post_status'      => 'publish',
 	        'orderby' => 'meta_value',
-	        'order' => $order
+	        'order' => $order,
+	        'suppress_filters' => false
     	);
 
 	}
@@ -137,7 +149,7 @@ function fetch($post_type, $order){
 			'order'            => $order,
 			'post_type'        => $post_type,
 			'post_status'      => 'publish',
-			'suppress_filters' => true 
+			'suppress_filters' => false 
 		);
 
 	}
