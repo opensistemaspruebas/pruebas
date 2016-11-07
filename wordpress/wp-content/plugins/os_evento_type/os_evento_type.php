@@ -164,7 +164,7 @@ if (!class_exists('OS_Evento_Type')) {
 			<p><?php _e('Esta es la imagen que se muestra en la tarjeta del evento.','os_evento_type'); ?></p>
 			<p>
 				<label for="imagenCard"><?php _e('URL de una imagen alojada en WordPress', 'os_evento_type'); ?></label>
-				<input class="widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" readonly="readonly"/>
+				<input required class="readonly widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" />
 				<img id="show_imagenCard" draggable="false" alt="" name="show_imagenCard" src="<?php if (!empty($imagen_card_thumbnail)) echo esc_attr($imagen_card_thumbnail); ?>" style="<?php if (empty($imagen_card_thumbnail)) echo "display: none;"; ?>">
 			</p>
 			<p>

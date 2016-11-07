@@ -1,5 +1,9 @@
 jQuery(document).ready(function($) {
 
+    $(".readonly").keydown(function(e){
+        e.preventDefault();
+    });
+
     $('#video-type-yt').on('click', function(e) {
         $('.video-youtube').show();
         $('.video-wordpress').hide();
