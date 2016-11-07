@@ -60,9 +60,9 @@ function post_to_json($post_id, $post_type){
 				$dateobj = DateTime::createFromFormat($format, $fecha_publicacion);
 				$json["fecha"] = $dateobj->format('Y/m/d') . ' - 00:00 AM';
 			}
-			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
-			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
-			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+			$json["video"] = get_post_meta($post_id, "videoIntro-url", true) ? True: False;
+			$json["pdf"] = False;
+			$json["cita"] = False;
 			break;
 			
 		case "historia":
@@ -71,9 +71,9 @@ function post_to_json($post_id, $post_type){
 			$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
 			$json["urlPublicacion"] = get_permalink($post_id);
 			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
-			$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
-			$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
-			$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+			$json["video"] = get_post_meta($post_id, "videoIntro-url", true) ? True: False;
+			$json["pdf"] = False;
+			$json["cita"] = False;
 			break;
 		
 		case "taller":

@@ -129,7 +129,7 @@ function getPost(post){
 		
 		case 'plantilla_1':
 			numero = jQuery('section.latests-posts .card-container div:first').children().length;
-			html = '<div class="' + numero + ' main-card-container col-xs-12  col-lg-4  col-sm-6 col-md-6  noppading"><section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt="" /></a><img src="' + urlImagen + '" alt="" class="hidden-xs" /></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="' + urlPublicacion + '" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding"> ' + titulo + ' </h1></div><p class="main-card-data-container-description-wrapper">' + descripcion +'</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas +'</a><footer>';
+			html = '<div class="' + numero + ' main-card-container col-xs-12  col-lg-4  col-sm-6 col-md-6  noppading"><section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt="" /></a><img src="' + urlImagen + '" alt="" class="hidden-xs" /></div><div class="hidden-xs floating-text col-xs-9"><p class="date">' + fecha + '</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="' + urlPublicacion + '" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">' + fecha + '</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding"> ' + titulo + ' </h1></div><p class="main-card-data-container-description-wrapper">' + descripcion +'</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas +'</a><footer><div class="icon-row">';
 		    if (false)  {
 		        html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 		    }
@@ -139,7 +139,7 @@ function getPost(post){
 		    if (false)  {
 		        html += '<div class="card-icon"><span class="icon bbva-icon-chat2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 			}
- 			html += '</footer></div></section></div>';
+ 			html += '</div></footer></div></section></div>';
 			break;
 		
 		case 'plantilla_2':
@@ -173,7 +173,7 @@ function getPost(post){
 			} else if (grid == "secondary") {
 				html = '<div class="_main-card col-xs-12 col-sm-6 noppading _secondary-card">';
 			}
-			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt="" /></a><img src="' + urlImagen + '" alt="" class="hidden-xs" /></div><div class="hidden-xs floating-text col-xs-9"><p class="date">27 Agosto 2016</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="' + urlPublicacion + '" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">27 Agosto 2016</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas + '</a><footer>';		        	
+			html += '<section class="container-fluid main-card"><header class="row header-container"><div class="image-container col-xs-12"><a href="' + urlPublicacion + '" class="link-header-layer visible-xs"><img src="' + urlImagen + '" alt="" /></a><img src="' + urlImagen + '" alt="" class="hidden-xs" /></div><div class="hidden-xs floating-text col-xs-9"><p class="date">27 Agosto 2016</p><h1>' + titulo + '</h1></div></header><div class="row data-container"><a href="' + urlPublicacion + '" class="link-layer visible-xs">&nbsp;</a><div class="nopadding date">27 Agosto 2016</div><div class="main-card-data-container-title-wrapper"><h1 class="title nopadding">' + titulo + '</h1></div><p class="main-card-data-container-description-wrapper">' + descripcion + '</p><a href="' + urlPublicacion + '" class="hidden-xs mb-xs readmore">' + object_name_cards.leer_mas + '</a><footer><div class="icon-row">';		        	
 		    if (false)  {
 		        html += '<div class="card-icon"><span class="icon bbva-icon-quote2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 		    }
