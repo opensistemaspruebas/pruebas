@@ -87,14 +87,14 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'orderby' 		   => 'meta_value',
 							'post_type'        => $tipo_post,
 							'post_status'      => 'publish',
-							'suppress_filters' => false,
 							'meta_query' => array(
 						        array(
 									'key'         => 'destacada',
 									'value'       => 'on',
 									'compare'     => '=',
 						        ),
-						    )
+						    ),
+						    'suppress_filters' => false,
 						);
 	    			} else {
 			    		$args = array(

@@ -26,7 +26,7 @@ function save_json_to_file($json, $post_type, $identificador, $json_type) {
 		$locale = $post_language_information['locale'];
 	}
 
-	$path = get_home_path() . "wp-content/jsons/" . $locale . '/' . $post_type;
+	$path = get_home_path() . "wp-content/jsons/" . $locale . "/" . $post_type;
 
 	// Comprueba si el directorio existe, si no lo crea y le da permisos
 	if (!is_dir($path)) {
