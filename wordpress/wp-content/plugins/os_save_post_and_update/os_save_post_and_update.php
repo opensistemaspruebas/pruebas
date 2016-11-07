@@ -55,8 +55,6 @@ function save_json_to_file($json, $post_type, $identificador, $json_type) {
 
 function post_to_json($post_id, $post_type){
 
-	error_log('post_to_json');
-
 	$json = array("_id" => $post_id, "type" => $post_type);
 
 	$format = "Y-m-d";
