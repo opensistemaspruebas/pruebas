@@ -227,7 +227,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				<div class="destacado_asesor-<?php echo $key+1; ?>">
 					<label for="<?php echo $this->get_field_id('asesores_destacados') . '[' . $key . ']'; ?>"><?php _e('Asesor destacado ', 'os_grupo_autores_widget'); ?><?php echo $key+1; ?></label>
 	                <select id="<?php echo $this->get_field_id('asesores_destacados'); ?>" class="job-disp-sel" name="<?php echo $this->get_field_name('asesores_destacados') . '[' . $key . ']'; ?>" >
-	                				<?php if($asesor_destacado == "") {?>
+	                				<?php if($asesor_destacado == "") { ?>
 	                					<option value="" selected><?php _e('Seleccione un asesor','os_grupo_autores_widget'); ?></option>
 	                				<?php } else { ?>
 	                					<option value=""><?php _e('Seleccione un asesor','os_grupo_autores_widget'); ?></option>
@@ -272,7 +272,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
 							<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros_asesores') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros_asesores') . $miembro['id']; ?>"><?php echo $miembro['nombre']; ?></label>
 
-						<?php } else {?>
+						<?php } else { ?>
 
                 			<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros_asesores') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros_asesores') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros_asesores']) !== FALSE) { echo 'checked';} ?> <?php if(array_search($miembro['id'],$asesores_destacados) !== FALSE) { echo 'disabled';} ?>><?php echo $miembro['nombre']; ?></label>
 
@@ -291,7 +291,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
 						<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros') . $miembro['id']; ?>"><?php echo $miembro['nombre']; ?></label>
 
-					<?php } else { ?>}
+					<?php } else { ?>
 
                 		<label class="selectit"><input value="<?php echo $miembro['id']; ?>" type="checkbox" name="<?php echo $this->get_field_name('miembros') . '[]'; ?>" id="<?php echo $this->get_field_id('miembros') . $miembro['id']; ?>" <?php if(array_search($miembro['id'],$instance['miembros']) !== FALSE) { echo 'checked';} ?>><?php echo $miembro['nombre']; ?></label>
 
