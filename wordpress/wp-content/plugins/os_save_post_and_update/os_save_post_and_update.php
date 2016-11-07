@@ -14,8 +14,17 @@
 if ( !function_exists( 'get_home_path' ) )
 	require_once( dirname(__FILE__) . '/../../../wp-admin/includes/file.php' );
 
-function save_json_to_file($json, $post_type, $identificador, $json_type){
-	$path = get_home_path() . "wp-content/jsons/" . $post_type;
+function save_json_to_file($json, $post_type, $identificador, $json_type) {
+
+	$locale = 'es_ES';
+
+	if (function_exists('wpml_get_language_information')) {
+		$post_language_information = wpml_get_language_information($identificador);
+		$locale = $post_language_information['locale'];
+	}
+
+
+	$path = get_home_path() . "wp-content/jsons/" . $locale . '/' . $post_type;
 
 	// Comprueba si el directorio existe, si no lo crea y le da permisos
 	if (!is_dir($path)) {
