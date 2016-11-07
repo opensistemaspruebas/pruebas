@@ -10,19 +10,6 @@ jQuery(document).ready(function($) {
         $('.video-youtube').hide();
     });
 
-    if ($('input#ponencia').checked) {
-        jQuery(this).parent().parent().children(":nth-child(6)").show();
-        jQuery(this).parent().parent().children(":nth-child(7)").show();
-        jQuery(this).parent().parent().children(":nth-child(8)").show();
-    }
-
-
-    if ($('input#descanso').checked) {
-        jQuery(this).parent().parent().children(":nth-child(6)").hide();
-        jQuery(this).parent().parent().children(":nth-child(7)").hide();
-        jQuery(this).parent().parent().children(":nth-child(8)").hide();
-    }
-
     $('input#ponencia').live('click', function(e) {
         jQuery(this).parent().parent().children(":nth-child(6)").show();
         jQuery(this).parent().parent().children(":nth-child(7)").show();

@@ -565,9 +565,7 @@ if (!class_exists('OS_Evento_Type')) {
 	            $evento_elemento_programa = $_POST['evento_elemento_programa'];
 	            $evento_elemento_programa_save = array();
 	            foreach ($evento_elemento_programa as $e) {
-	                if (!(empty($e['titulo']))) {
-	                    array_push($evento_elemento_programa_save, $e);
-	                }
+	                array_push($evento_elemento_programa_save, $e);
 	            }
 	            update_post_meta($post_id, 'evento_elemento_programa', $evento_elemento_programa_save);
 	        }
