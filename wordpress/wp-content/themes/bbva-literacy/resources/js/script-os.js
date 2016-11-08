@@ -474,7 +474,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	jQuery.get(url_buscador_publicaciones, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			if (!cambiando_talleres || !ver_mas) {
-				jQuery('#publishes a[data-order-filter="destacados"]').hide();
+				//jQuery('#publishes a[data-order-filter="destacados"]').hide();
 				if (start_publicaciones == 0) {
 					jQuery('#publishes .cards-grid .container div.row').first().empty();
 				}
@@ -482,11 +482,11 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 					jQuery('a.publishes').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
 					jQuery('select#select-tab-results option[value="publishes"]').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
 					keywords = result.fields['keywords'];
-					if (keywords !== undefined) {
+					/*if (keywords !== undefined) {
 						if (jQuery.inArray('destacada', keywords) > -1 ) {
 						    jQuery('#publishes a[data-order-filter="destacados"]').show();
 						}
-					}
+					}*/
 					jQuery('#publishes .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'publishes'));
 				});
 		        if (d.data.hits.found == jQuery('#publishes .cards-grid .container div.row').first().children().size()) {
@@ -497,7 +497,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
 			jQuery('#publishes footer a.readmore').hide();
-			jQuery('#publishes .sort-items-container').children('a').hide();
+			//jQuery('#publishes .sort-items-container').children('a').hide();
 		}
 	});
 
@@ -506,7 +506,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	jQuery.get(url_buscador_historias, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			if (!cambiando_talleres || !ver_mas) {
-			jQuery('#histories a[data-order-filter="destacados"]').hide();
+			//jQuery('#histories a[data-order-filter="destacados"]').hide();
 			if (start_historias == 0) {
 				jQuery('#histories .cards-grid .container div.row').first().empty();
 			}
@@ -514,11 +514,11 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 					jQuery('a.histories').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
 					jQuery('select#select-tab-results option[value="histories"]').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
 					keywords = result.fields['keywords'];
-					if (keywords !== undefined) {
+					/*if (keywords !== undefined) {
 						if (jQuery.inArray('destacada', keywords) > -1 ) {
 						    jQuery('#histories a[data-order-filter="destacados"]').show();
 						}
-					}
+					}*/
 					jQuery('#histories .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'histories'));
 				});
 		        if (d.data.hits.found == jQuery('#histories .cards-grid .container div.row').first().children().size()) {
@@ -529,7 +529,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	        jQuery('span.num_resultados').html(num_resultados);
 		} else {
 			jQuery('#histories footer a.readmore').hide();
-			jQuery('#histories .sort-items-container').children('a').hide();
+			//jQuery('#histories .sort-items-container').children('a').hide();
 		}
 	});
 
