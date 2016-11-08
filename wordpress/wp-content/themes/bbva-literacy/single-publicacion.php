@@ -574,7 +574,7 @@ get_header(); ?>
                 <footer>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
+                            <a href="<?php _e('/publicaciones', 'os_publicacion_type'); ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Todas las publicaciones', 'os_publicacion_type'); ?></a>
                         </div>
                     </div>
                 </footer>
