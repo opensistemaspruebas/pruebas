@@ -511,7 +511,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    <footer class="grid-footer">
 	                        <div class="row">
 	                            <div class="col-md-12 text-center">
-	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Más publicaciones', 'os_cards_widget_json'); ?></a>
+	                                <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Todas las publicaciones', 'os_cards_widget_json'); ?></a>
 	                            </div>
 	                        </div>
 	                    </footer>

@@ -116,7 +116,11 @@ if (!class_exists('os_eventos_pasados_widget')) :
 					           <div class="col-xs-12 col-sm-6 summit-image">
 					               <header class="summit-image-title-wrapper">
 					                   <p class="text-center hidden-xs text-700"><?php echo $evento->post_title; ?></p>
-					               </header><img src="<?php echo $imagenCard; ?>" alt="<?php echo $evento->post_title; ?>"></div>
+					               </header>
+					               <a href="<?php echo get_permalink($evento->ID); ?>" class="link-header-layer visible-xs">
+					               		<img src="<?php echo $imagenCard; ?>" alt="<?php echo $evento->post_title; ?>">
+					               	</a>
+					           </div>
 					           <div class="col-xs-12 col-sm-6 summit-content">
 					               <div class="row">
 					                   <header class="col-xs-12">
