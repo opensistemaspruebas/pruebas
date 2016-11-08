@@ -3,9 +3,50 @@ jQuery(document).ready(function($) {
 	jQuery(".campo_personalizado").hide();
 	ocultar_campos();
 	
-	jQuery("#perfilchecklist input").click(function(e) {
+	jQuery("#taxonomy-perfil input").change(function(e) {
+		
+		jQuery("#taxonomy-perfil input").each(function(index, value) {
+			perfil = jQuery.trim(jQuery(this).parent().text());
+			if (perfil == "Asesor") {
+				jQuery('#taxonomy-perfil input').each(function(index, value) {
+					perfil_aux = jQuery.trim(jQuery(this).parent().text());
+					if (perfil_aux !== 'Autor' && perfil_aux !== 'Coordinador' && perfil_aux !== perfil) {
+						jQuery(this).attr('checked', false);
+						jQuery(this).attr('disabled', true);
+					}
+				});
+			} else if (perfil == "Autor") {
+				jQuery('#taxonomy-perfil input').each(function(index, value) {
+					perfil_aux = jQuery.trim(jQuery(this).parent().text());
+					if (perfil_aux !== 'Asesor' && perfil_aux !== 'Coordinador' && perfil_aux !== perfil) {
+						jQuery(this).attr('checked', false);
+						jQuery(this).attr('disabled', true);
+					}
+				});
+			} else if (perfil == "Coordinador") {
+				jQuery('#taxonomy-perfil input').each(function(index, value) {
+					perfil_aux = jQuery.trim(jQuery(this).parent().text());
+					if (perfil_aux !== 'Asesor' && perfil_aux !== 'Autor' && perfil_aux !== perfil) {
+						jQuery(this).attr('checked', false);
+						jQuery(this).attr('disabled', true);
+					}
+				});
+			} else if (perfil == "Ponente" || perfil == "Miembro") {
+				 jQuery('#taxonomy-perfil input').each(function(index, value) {
+					perfil_aux = jQuery.trim(jQuery(this).parent().text());
+					if (perfil_aux !== perfil) {
+						jQuery(this).attr('checked', false);
+						jQuery(this).attr('disabled', true);
+					}
+				});
+			} else {
+				jQuery("#taxonomy-perfil input").attr('disabled', false);
+			}
+		});
+		
 		jQuery(".campo_personalizado").hide();
 		ocultar_campos();
+	
 	});
 
 
