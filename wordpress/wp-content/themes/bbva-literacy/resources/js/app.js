@@ -594,9 +594,16 @@ var momentjs = function ($) {
   var diff = moment.preciseDiff(today, futureEvent, true);
   var $timezone = $('#timezone');
 
-  $timezone.find('.days').html(diff.days + '<label>DIAS</label>');
-  $timezone.find('.hours').html(diff.hours + '<label>HORAS</label>');
-  $timezone.find('.minutes').html(diff.minutes + '<label>MINUTOS</label>');
+  if (jQuery("html").attr("lang") == "es-ES") {
+    $timezone.find('.days').html(diff.days + '<label>DIAS</label>');
+    $timezone.find('.hours').html(diff.hours + '<label>HORAS</label>');
+    $timezone.find('.minutes').html(diff.minutes + '<label>MINUTOS</label>');
+} else {
+    $timezone.find('.days').html(diff.days + '<label>DAYS</label>');
+    $timezone.find('.hours').html(diff.hours + '<label>HOURS</label>');
+    $timezone.find('.minutes').html(diff.minutes + '<label>MINUTES</label>'); 
+}
+
 };
 
 var navPhone = function($) {
