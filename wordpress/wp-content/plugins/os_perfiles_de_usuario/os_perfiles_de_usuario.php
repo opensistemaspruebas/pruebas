@@ -58,6 +58,8 @@ class OS_Perfiles_de_Usuario {
 
         $post_id = $post->ID;
 
+        $tipo = get_post_meta($post_id, 'tipo', true);
+        if (empty($tipo)) $tipo = "maximos";
         $nombre = get_post_meta($post_id, 'cap-display_name', true);
         $cargo = get_post_meta($post_id, 'cargo', true);
         $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
@@ -90,6 +92,13 @@ class OS_Perfiles_de_Usuario {
         $ponente = get_term_by('slug', 'ponente', 'perfil');
         $ponente_id = $ponente->term_id;
         ?>
+
+        <div class="campo_personalizado <?php echo $asesor_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="información_perfiles" name="información_perfiles">
+            <h3><?php _e('Tipo de visualización', 'os_perfiles_de_usuario'); ?></h3>
+            <input type="radio" name="tipo" value="maximos" <?php if (empty($tipo) || $tipo == "maximos") echo "checked"; ?>><?php _e('Perfil de máximos', 'os_perfiles_de_usuario'); ?><br /><br />
+            <input type="radio" name="tipo" value="minimos" <?php if ($tipo == "minimos") echo "checked"; ?>><?php _e('Perfil de mínimos', 'os_perfiles_de_usuario'); ?><br /><br />
+        </div>
+
         <div id="informacion_personal" name="informacion_personal">
             <h3><?php _e('Información personal', 'os_perfiles_de_usuario'); ?></h3>
             <table class="form-table">
@@ -370,6 +379,12 @@ class OS_Perfiles_de_Usuario {
         if (wp_is_post_revision($post_id)) {
             return;
         }
+
+
+        if (isset($_POST['tipo'])) {
+            update_post_meta($post_id, 'tipo', esc_attr($_POST['tipo']));
+        }
+
 
         if (isset($_POST['cap-display_name'])) {
             update_post_meta($post_id, 'cap-display_name', esc_attr($_POST['cap-display_name']));

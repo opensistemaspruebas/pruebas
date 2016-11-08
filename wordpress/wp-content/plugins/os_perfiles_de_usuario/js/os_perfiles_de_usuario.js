@@ -199,8 +199,31 @@ jQuery(document).ready(function($) {
 	});
 
 
+	$('input[name=tipo]').on('click', function() {
+		tipo = jQuery(this).val();
+		cambia_tipo(tipo);
+	});
+
+
 });
 
+function cambia_tipo(tipo) {
+	if (jQuery('input[name=' + tipo + ']').is(":checked")) {
+		if (tipo == "maximos") {
+			ocultar_campos();
+		} else if (tipo == "minimos") {
+			jQuery('div#informacion_contacto').show();
+			jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+		}
+	} else {
+		if (tipo == "maximos") {
+			jQuery('div#informacion_contacto').show();
+			jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+		} else if (tipo == "minimos") {
+			ocultar_campos();
+		}
+	}
+}
 
 function ocultar_campos() {
 	jQuery("#perfilchecklist input:checked").each(function() {
