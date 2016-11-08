@@ -153,22 +153,24 @@ if (!class_exists('OS_Evento_Type')) {
 		 	<h1><?php _e('Imagen estática', 'os_evento_type'); ?></h1>
 			<p><?php _e('Esta es la imagen que se muestra en la cabecera de la página de detalle del evento. Si hay un vídeo, se mostrará el vídeo en lugar de ésta.','os_evento_type'); ?></p>
 			<p>
-				<label for="imagenCabecera"><?php _e('URL de una imagen alojada en WordPress', 'os_evento_type'); ?></label>
-				<input class="widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" readonly="readonly"/>
+				<label for="imagenCabecera"><?php _e('URL de una imagen alojada en WordPress (*)', 'os_evento_type'); ?></label>
+				<input required class="readonly widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" />
 				<img id="show_imagenCabecera" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_thumbnail)) echo esc_attr($imagen_cabecera_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_thumbnail)) echo "display: none;"; ?>">
 			</p>
 			<p>
 				<input id="upload_evento_imagenCabecera" name="upload_evento_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+				<span class="description">(<?php _e('*Campo obligatorio.', 'os_evento_type'); ?>)</span>
 			</p>
 			<h1><?php _e('Imagen para tarjeta', 'os_evento_type'); ?></h1>
 			<p><?php _e('Esta es la imagen que se muestra en la tarjeta del evento.','os_evento_type'); ?></p>
 			<p>
-				<label for="imagenCard"><?php _e('URL de una imagen alojada en WordPress', 'os_evento_type'); ?></label>
+				<label for="imagenCard"><?php _e('URL de una imagen alojada en WordPress (*)', 'os_evento_type'); ?></label>
 				<input required class="readonly widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" />
 				<img id="show_imagenCard" draggable="false" alt="" name="show_imagenCard" src="<?php if (!empty($imagen_card_thumbnail)) echo esc_attr($imagen_card_thumbnail); ?>" style="<?php if (empty($imagen_card_thumbnail)) echo "display: none;"; ?>">
 			</p>
 			<p>
 				<input id="upload_evento_imagenCard" name="upload_evento_imagenCard" type="button" value="<?php _e('Explorar/Subir', 'os_evento_type'); ?>" />
+				<span class="description">(<?php _e('*Campo obligatorio.', 'os_evento_type'); ?>)</span>
 			</p>
 			<h1><?php _e('Fecha', 'os_evento_type'); ?></h1>
 			<p><?php _e('Este es el rango de fechas de cuándo tendrá lugar el evento.', 'os_evento_type'); ?></p>
