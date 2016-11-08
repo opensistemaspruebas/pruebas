@@ -341,7 +341,7 @@ function meta_box_publicacion_info($post) {
 
   <p>
     <label for="publication_date"><?php _e('Fecha de publicación (*)', 'os_publicacion_type'); ?></label>
-    <input required type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
+    <input required type="text" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
     <span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA', 'os_publicacion_type'); ?>)</span>
   </p>
   <p>
@@ -403,14 +403,15 @@ function meta_boxes_save($post_id) {
   }
   if (isset($_POST['publication_date'])) {
 
+
     $publication_date = $_POST['publication_date'];
+
     $dia = substr($publication_date, 0, 2);
     $mes   = substr($publication_date, 3, 2);
-    $ano = substr($publication_date, -4);
-  
+    $ano = substr($publication_date, -4);  
     $publication_date = $ano . '-' . $mes . '-' . $dia;
 
-    update_post_meta($post_id, 'publication_date', strip_tags($publication_date ));
+    update_post_meta($post_id, 'publication_date', strip_tags($publication_date));
   }
   if (isset($_POST['type'])) {
    update_post_meta($post_id, 'type', strip_tags($_POST['type']));

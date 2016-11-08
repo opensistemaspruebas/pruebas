@@ -199,12 +199,12 @@ if (!class_exists('OS_Evento_Type')) {
 			<p><?php _e('Este es el rango de fechas de cuándo tendrá lugar el evento.', 'os_evento_type'); ?></p>
 			<p>
 				<label class="classfat" for="evento_fecha_de_inicio"><?php _e('Fecha de inicio (*)', 'os_evento_type'); ?></label>
-				<input required type="date" id="evento_fecha_de_inicio" name="evento_fecha_de_inicio" class="widefat" value="<?php echo $evento_fecha_de_inicio; ?>">
+				<input required type="text" id="evento_fecha_de_inicio" name="evento_fecha_de_inicio" class="widefat" value="<?php echo $evento_fecha_de_inicio; ?>">
 				<span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
 			</p>
 			<p>
 				<label class="classfat" for="evento_fecha_de_final"><?php _e('Fecha de final (*)', 'os_evento_type'); ?></label>
-				<input required type="date" id="evento_fecha_de_final" name="evento_fecha_de_final" class="widefat" value="<?php echo $evento_fecha_de_final; ?>">
+				<input required type="text" id="evento_fecha_de_final" name="evento_fecha_de_final" class="widefat" value="<?php echo $evento_fecha_de_final; ?>">
 				<span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA', 'os_evento_type'); ?>)</span>
 			</p>
 		 	<h1><?php _e('Lugar', 'os_evento_type'); ?></h1>
@@ -528,22 +528,24 @@ if (!class_exists('OS_Evento_Type')) {
 			if (isset($_POST['evento_fecha_de_inicio'])) {
 
 				$evento_fecha_de_inicio = $_POST['evento_fecha_de_inicio'];
-			    $dia = substr($evento_fecha_de_inicio, 0, 2);
-			    $mes   = substr($evento_fecha_de_inicio, 3, 2);
-			    $ano = substr($evento_fecha_de_inicio, -4);
-			  
-			    $evento_fecha_de_inicio = $ano . '-' . $mes . '-' . $dia;
+							    
+				$dia = substr($evento_fecha_de_inicio, 0, 2);
+				$mes   = substr($evento_fecha_de_inicio, 3, 2);
+				$ano = substr($evento_fecha_de_inicio, -4);
+				$evento_fecha_de_inicio = $ano . '-' . $mes . '-' . $dia;
+				
 				update_post_meta($post_id, 'evento_fecha_de_inicio', strip_tags($evento_fecha_de_inicio));
 			}
 
 			if (isset($_POST['evento_fecha_de_final'])) {
 
 				$evento_fecha_de_final = $_POST['evento_fecha_de_final'];
+  
 			    $dia = substr($evento_fecha_de_final, 0, 2);
 			    $mes   = substr($evento_fecha_de_final, 3, 2);
 			    $ano = substr($evento_fecha_de_final, -4);
-			  
 			    $evento_fecha_de_final = $ano . '-' . $mes . '-' . $dia;
+			
 				update_post_meta($post_id, 'evento_fecha_de_final', strip_tags($evento_fecha_de_final));
 			}
 
