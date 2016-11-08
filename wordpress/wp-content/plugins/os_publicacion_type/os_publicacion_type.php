@@ -325,11 +325,24 @@ function meta_box_publicacion_info($post) {
   $organization_logo = get_post_meta($post->ID, 'organization_logo', true);
   $organization_logo_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($organization_logo));
 
+  $ano = substr($publication_date, 0, 4);
+  $mes   = substr($publication_date, 5, 2);
+  $dia = substr($publication_date, -2);
+
+  $publication_date = $dia . '/' . $mes . '/' . $ano;
+
+  if($publication_date == "//"){
+
+    $publication_date ='';
+  }
+
+
   ?>
 
   <p>
-    <label for="publication_date"><?php _e('Fecha de publicación', 'os_publicacion_type'); ?></label>
+    <label for="publication_date"><?php _e('Fecha de publicación (*)', 'os_publicacion_type'); ?></label>
     <input required type="date" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
+    <span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA', 'os_publicacion_type'); ?>)</span>
   </p>
   <p>
     <label for="type"><?php _e('Tipo', 'os_publicacion_type'); ?></label>
@@ -389,7 +402,15 @@ function meta_boxes_save($post_id) {
     update_post_meta($post_id, 'pdfInterno', strip_tags($_POST['pdfInterno']));
   }
   if (isset($_POST['publication_date'])) {
-    update_post_meta($post_id, 'publication_date', strip_tags($_POST['publication_date']));
+
+    $publication_date = $_POST['publication_date'];
+    $dia = substr($publication_date, 0, 2);
+    $mes   = substr($publication_date, 3, 2);
+    $ano = substr($publication_date, -4);
+  
+    $publication_date = $ano . '-' . $mes . '-' . $dia;
+
+    update_post_meta($post_id, 'publication_date', strip_tags($publication_date ));
   }
   if (isset($_POST['type'])) {
    update_post_meta($post_id, 'type', strip_tags($_POST['type']));

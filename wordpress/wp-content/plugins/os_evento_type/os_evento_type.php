@@ -117,6 +117,29 @@ if (!class_exists('OS_Evento_Type')) {
 			$evento_fecha_de_final = get_post_meta($post->ID, 'evento_fecha_de_final', true);
 			$evento_localizacion = get_post_meta($post->ID, 'evento_localizacion', true);
 		 	$evento_url_registro = get_post_meta($post->ID, 'evento_url_registro', true);
+
+		 	$ano = substr($evento_fecha_de_inicio, 0, 4);
+			$mes   = substr($evento_fecha_de_inicio, 5, 2);
+			$dia = substr($evento_fecha_de_inicio, -2);
+
+			$evento_fecha_de_inicio = $dia . '/' . $mes . '/' . $ano;
+
+			if($evento_fecha_de_inicio == "//"){
+
+			$evento_fecha_de_inicio ='';
+			}
+
+			$ano = substr($evento_fecha_de_final, 0, 4);
+			$mes   = substr($evento_fecha_de_final, 5, 2);
+			$dia = substr($evento_fecha_de_final, -2);
+
+			$evento_fecha_de_final = $dia . '/' . $mes . '/' . $ano;
+
+			if($evento_fecha_de_final == "//"){
+
+			$evento_fecha_de_final ='';
+			}
+		 	
 		 	
 		 	?>
 		 	<h1><?php _e('Vídeo de introducción', 'os_evento_type'); ?></h1>
@@ -503,11 +526,25 @@ if (!class_exists('OS_Evento_Type')) {
 			}
 
 			if (isset($_POST['evento_fecha_de_inicio'])) {
-				update_post_meta($post_id, 'evento_fecha_de_inicio', strip_tags($_POST['evento_fecha_de_inicio']));
+
+				$evento_fecha_de_inicio = $_POST['evento_fecha_de_inicio'];
+			    $dia = substr($evento_fecha_de_inicio, 0, 2);
+			    $mes   = substr($evento_fecha_de_inicio, 3, 2);
+			    $ano = substr($evento_fecha_de_inicio, -4);
+			  
+			    $evento_fecha_de_inicio = $ano . '-' . $mes . '-' . $dia;
+				update_post_meta($post_id, 'evento_fecha_de_inicio', strip_tags($evento_fecha_de_inicio));
 			}
 
 			if (isset($_POST['evento_fecha_de_final'])) {
-				update_post_meta($post_id, 'evento_fecha_de_final', strip_tags($_POST['evento_fecha_de_final']));
+
+				$evento_fecha_de_final = $_POST['evento_fecha_de_final'];
+			    $dia = substr($evento_fecha_de_final, 0, 2);
+			    $mes   = substr($evento_fecha_de_final, 3, 2);
+			    $ano = substr($evento_fecha_de_final, -4);
+			  
+			    $evento_fecha_de_final = $ano . '-' . $mes . '-' . $dia;
+				update_post_meta($post_id, 'evento_fecha_de_final', strip_tags($evento_fecha_de_final));
 			}
 
 			if (isset($_POST['evento_localizacion'])) {
