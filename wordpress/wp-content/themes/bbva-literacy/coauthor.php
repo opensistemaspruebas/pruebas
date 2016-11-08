@@ -172,50 +172,53 @@
 
 ?>
       
-<!-- Otros trabajos del autor --> 
-<?php if (!empty($trabajos)) : ?>
-        <div class="consultant-data-grid">
-            <article id="otros_trabajos" name="otros_trabajos" class="container data-grid">
-                <header>
-                    <h1><?php _e('Otros trabajos del autor'); ?></h1>
-                </header>
-                <div class="content">
-                    <div class="grid-wrapper">
-                        <?php $i = 0; ?>
-                        <?php foreach ($trabajos as $trabajo) : ?>
-                            <?php 
-                                $titulo = $trabajo['titulo'];
-                                $texto = $trabajo['texto'];
-                                $enlace = $trabajo['enlace']
-                            ?>
-                            <section id="trabajo_<?php echo $i; ?>" name="trabajo_<?php echo $i; ?>" class="data-block" <?php if ($i > 5) echo 'style="display:none;"'; ?>>
-                                <h2><?php echo $titulo; ?></h2>
-                                <p class="description"><?php echo $texto; ?></p>
-                                <p class="link">
-                                    <a target="_blank" href="<?php echo $enlace; ?>"><?php _e('Aprender más'); ?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-                                </p>
-                            </section>
-                            <?php $i++; ?>
-                        <?php endforeach; ?>
+        <!-- Otros trabajos del autor --> 
+        <?php if (!empty($trabajos)) : ?>
+                <div class="consultant-data-grid">
+                    <article id="otros_trabajos" name="otros_trabajos" class="container data-grid">
+                        <header>
+                            <h1><?php _e('Otros trabajos del autor'); ?></h1>
+                        </header>
+                        <div class="content">
+                            <div class="grid-wrapper">
+                                <?php $i = 0; ?>
+                                <?php foreach ($trabajos as $trabajo) : ?>
+                                    <?php 
+                                        $titulo = $trabajo['titulo'];
+                                        $texto = $trabajo['texto'];
+                                        $enlace = $trabajo['enlace']
+                                    ?>
+                                    <section id="trabajo_<?php echo $i; ?>" name="trabajo_<?php echo $i; ?>" class="data-block" <?php if ($i > 5) echo 'style="display:none;"'; ?>>
+                                        <h2><?php echo $titulo; ?></h2>
+                                        <p class="description"><?php echo $texto; ?></p>
+                                        <p class="link">
+                                            <a target="_blank" href="<?php echo $enlace; ?>"><?php _e('Aprender más'); ?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
+                                        </p>
+                                    </section>
+                                    <?php $i++; ?>
+                                <?php endforeach; ?>
 
-                    </div>
-                </div>
-                <footer class="grid-footer">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <a href="javascript:void(0)" id="readmore_trabajos" name="readmore_trabajos" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más trabajos'); ?></a>
+                            </div>
                         </div>
-                    </div>
-                </footer>
-            </article>
-        </div>
-<?php endif; ?>
+                        <footer class="grid-footer">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <a href="javascript:void(0)" id="readmore_trabajos" name="readmore_trabajos" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Más trabajos'); ?></a>
+                                </div>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+        <?php endif; ?>
+
+        <?php 
+
+        if (empty($trabajos)) $color = "blanco"; else $color = "gris";
+        the_widget('os_prefooter_bbva', array('color_fondo' => $color, 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera'));
+
+        ?>
 
         </div>
-    
-                
-       
-
     </div>
 
 <?php get_footer(); ?>
