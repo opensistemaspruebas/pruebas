@@ -399,7 +399,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	$count_posts = wp_count_posts($tipo_post);
 
 	if (empty($author_name)) {
-		$published_posts = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name));
+		$published_posts = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name . '&orden=' . $orden . '&lang=' . ICL_LANGUAGE_CODE));
 	} else {
 		$published_posts = $count_posts->publish;
 	}
