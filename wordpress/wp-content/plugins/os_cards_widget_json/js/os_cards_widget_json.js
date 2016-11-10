@@ -1,5 +1,5 @@
 // Ver mas publicaciones
-jQuery(document).on("click", "#publishing-view #readmore", function(event) {
+jQuery(document).on("click", "#publishing-view #readmore, .outstanding-histories #readmore", function(event) {
 	event.preventDefault();
 	if (buscando) {
 		return;
@@ -79,7 +79,10 @@ function loop(i, fin, indice, onDone){
 				break;
 
 			case 'plantilla_3':
-				jQuery('section.outstanding-histories .card-container div:first').first().append(getPost(post));
+				if (i % 3 == 0) {
+					jQuery('section.outstanding-histories .card-container').last().after('<div class="card-container container-fluid mt-md mb-md"><div class="row contenedorTarjetas"></div></div>');					
+				}
+				jQuery('section.outstanding-histories .card-container').last().children('div.row.contenedorTarjetas').append(getPost(post));
 				break;
 
 			}
@@ -166,7 +169,7 @@ function getPost(post){
 		
 		case 'plantilla_3':
 			order = ["main", "secondary", "secondary"];
-			i = jQuery('.outstanding-histories .card-container .row').first().children().size();
+			i = jQuery('.outstanding-histories .card-container').last().children('div.row.contenedorTarjetas').children().size();
 			grid = order[(i % 3)];
 			if (grid == "main") {
 				html = '<div class="_main-card col-xs-12 col-sm-6 noppading _main-card">';
