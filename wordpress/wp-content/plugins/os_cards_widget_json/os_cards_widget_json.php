@@ -332,9 +332,9 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		                        <header class="row header-container">
 		                            <div class="image-container nopadding col-xs-12">
 		                            	<a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs">
-		                            		<img src="<?php echo $imagen; ?>" alt="" />
+		                            		<img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" />
 		                            	</a>
-		                            	<img src="<?php echo $imagen; ?>" alt="" class="hidden-xs" />
+		                            	<img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs" />
 		                            </div>
 		                            <div class="hidden-xs floating-text col-xs-9">
 		                                <p class="date"><?php echo $post_date; ?></p>
@@ -484,8 +484,8 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 								    <section class="container-fluid main-card">
 								        <header class="row header-container">
 								            <div class="image-container col-xs-12">
-								                <a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs"><img src="<?php echo $imagen; ?>" alt="" /></a>
-								                <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs" />
+								                <a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs"><img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" /></a>
+								                <img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs" />
 								            </div>
 								            <div class="hidden-xs floating-text col-xs-9">
 								                <p class="date"><?php echo $post_date; ?></p>
@@ -672,9 +672,9 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 			                        <header class="row header-container">
 							            <div class="image-container col-xs-12">
 							                <a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs">
-							                    <img src="<?php echo $imagen; ?>" alt="" />
+							                    <img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" />
 							                </a>
-							                <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs" />
+							                <img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs" />
 							            </div>
 			                            <div class="hidden-xs floating-text col-xs-9">
 			                                <p class="date"><?php echo $post_date; ?></p>
