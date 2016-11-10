@@ -8,9 +8,9 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
                         <div class="footer-menu-list">
-                            <a href="/legal/"><?php _e('Aviso legal'); ?></a>
-                            <a href="/condiciones/"><?php _e('Condiciones de uso'); ?></a>
-                            <a href="/datos-personales/"><?php _e('Datos personales'); ?></a>
+                            <a href="<?php _e('/legal/'); ?>"><?php _e('Aviso legal'); ?></a>
+                            <a href="<?php _e('/condiciones/'); ?>"><?php _e('Condiciones de uso'); ?></a>
+                            <a href="<?php _e('/datos-personales/'); ?>"><?php _e('Datos personales'); ?></a>
                         </div>
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
