@@ -1,5 +1,5 @@
 // Ver mas publicaciones
-jQuery(document).on("click", "#publishing-view #readmore, .outstanding-histories #readmore", function(event) {
+jQuery(document).on("click", "#publishing-view #readmore, .outstanding-histories #readmore, #publicaciones-autor #readmore", function(event) {
 	event.preventDefault();
 	if (buscando) {
 		return;

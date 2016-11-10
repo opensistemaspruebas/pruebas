@@ -418,17 +418,37 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
 	<?php endif; ?>
 
-	<div id="search-layer"></div>
+	<?php if (empty($author_name)) : ?>
+		<div id="search-layer"></div>
+	<?php endif; ?>
+	
+	<?php if (empty($author_name)) : ?>
 	<article id="publishing-view">
-	    <div class="main-wrapper">
-	        <header class="container">
-	            <h1><?php echo $titulo; ?></h1>
-	            <h2><?php echo $texto; ?></h2>
-	            <?php if (empty($author_name)) { imprime_links_ordenacion($orden); the_widget('os_filtro_widget', array()); } ?>
-	        </header>
+	<?php else : ?>
+	<div id="publicaciones-autor" name="publicaciones-autor" class="cards-grid-wrapper">
+	<?php endif; ?>
+
+		<?php if (empty($author_name)) : ?>
+	    	<div class="main-wrapper">
+	    <?php endif; ?>
+	       
+	       	<?php if (empty($author_name)) : ?>
+		        <header class="container">
+		            <h1><?php echo $titulo; ?></h1>
+		            <h2><?php echo $texto; ?></h2>
+		            <?php imprime_links_ordenacion($orden); the_widget('os_filtro_widget', array()); ?>
+		        </header>
+		    <?php else : ?>
+		    	<h1 class="container"><?php echo $titulo; ?></h1>
+		    <?php endif; ?>
+	        
 	        <?php if (!empty($posts)) : ?>
 	        <?php $order = array('double', 'double', 'triple', 'triple', 'triple'); ?>
-	        <section>
+	        
+	        <?php if (empty($author_name)) : ?>
+	        	<section>
+			<?php endif; ?>
+
 	            <article class="cards-grid">
 	                <section class="container">
 	                    <div class="row">
@@ -517,10 +537,23 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    </footer>
 	                </section>
 	            </article>
-	        </section>
+	        
+	       	<?php if (empty($author_name)) : ?>
+	        	</section>
+			<?php endif; ?>
+	    	
 	    	<?php endif; ?>
-	    </div>
-	</article>
+	    
+		<?php if (empty($author_name)) : ?>
+	    	</div>
+	    <?php endif; ?>
+	
+	<?php if (empty($author_name)) : ?>
+		</article>
+	<?php else : ?>
+	 	</div>
+	<?php endif; ?>
+
 	<?php if (empty($author_name)): ?>
 		<?php imprimir_json_etiquetas(); ?>
 		<div class="filter-mobile closed hidden-sm hidden-md hidden-lg">
