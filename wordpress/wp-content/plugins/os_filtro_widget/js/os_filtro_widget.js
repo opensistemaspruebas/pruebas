@@ -37,7 +37,7 @@ function getPostFiltro(post) {
 	var descripcion = post['content'];
 	var fecha = new Date(post['date'].substring(0, 10));
 	var urlImagen = post['image_src'];
-	var urlPublicacion = post['resourcename'];
+	var urlPublicacion = '/' + post['resourcename'];
 
 	var keywords = post['keywords'];
 
