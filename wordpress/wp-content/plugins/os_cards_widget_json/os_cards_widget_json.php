@@ -150,6 +150,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	
 	    	} 
 	    	else {
+
 	    		$posts = query_posts("posts_per_page=" . $numero_posts_mostrar . "&post_status=publish&post_type=" . $tipo_post . "&author_name=" . $author . "&order=" . $orden . '&lang=' . ICL_LANGUAGE_CODE);
 	    	}
 

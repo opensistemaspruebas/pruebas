@@ -160,7 +160,7 @@
                     'tipo_post' => 'publicacion',
                     'plantilla' => 'plantilla_2',
                     'enlace_detalle' => '',
-                    'orden_posts' => 'ASC',
+                    'orden_posts' => 'DESC',
                     'filtrar_por_autor' => 'on'
                 )
             );

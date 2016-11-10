@@ -221,7 +221,7 @@ function fetch_autores($post_type, $order, $author){
 
 	$index_array = array();
 
-	$posts = query_posts("post_status=publish&post_type=" . $post_type . "&author_name=" . $author . "&order=" . $orden . '&lang=' . ICL_LANGUAGE_CODE);
+	$posts = query_posts("post_status=publish&post_type=" . $post_type . "&author_name=" . $author . "&order=" . $order . '&lang=' . ICL_LANGUAGE_CODE);
 
 	for ($i = 0; $i < count($posts); $i++) { 
 		$index_array[] = $posts[$i]->ID;
