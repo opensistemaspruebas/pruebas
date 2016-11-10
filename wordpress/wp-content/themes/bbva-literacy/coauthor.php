@@ -17,7 +17,8 @@
 	    'name' => 'cap-' . $author_name, 
 	    'post_type' => 'guest-author',
 	    'post_status' => 'publish',
-	    'posts_per_page' => 1
+	    'posts_per_page' => 1,
+        'suppress_filters' => false,
 	) ) ) $found_post = $posts[0];
 
 	$post_id = $found_post->ID;
