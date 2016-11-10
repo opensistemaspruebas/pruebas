@@ -58,7 +58,7 @@ if (empty($wp)) {
 			
 			case "historia":
 				$json["titulo"] = get_the_title($post_id);
-				$json["descripcion"] = get_post_field('post_content', $post_id);
+				$json["descripcion"] = get_post_meta($post_id,'texto-destacado',true);
 				$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
 				$json["urlPublicacion"] = get_permalink($post_id);
 				$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);

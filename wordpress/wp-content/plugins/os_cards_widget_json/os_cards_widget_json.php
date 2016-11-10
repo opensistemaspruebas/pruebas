@@ -286,7 +286,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
 		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
-		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
+		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_1">
 	<?php endif; ?>
 
 	<section class="latests-posts pt-xl wow fadeInUp">
@@ -581,7 +581,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="npv" name="npv" value="<?php echo $numero_posts_totales; ?>">
 		<input type="hidden" id="npt" name="npt" value="<?php echo $numero_posts_mostrar; ?>">
 		<input type="hidden" id="npc" name="npc" value="<?php echo $numero_posts_mostrar; ?>">
-		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_2">
+		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_3">
 	<?php endif; ?>
 	
 	<section class="outstanding-histories pt-xl wow fadeInUp">
@@ -595,7 +595,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	        
 	        <?php if (!empty($posts)) : ?>
 	        <div class="card-container container-fluid mt-md mb-md">
-	            <div class="row">
+	            <div class="row contenedorTarjetas">
 	            	<?php $order = array("main", "secondary", "secondary"); ?>
 	            	<?php $i = 0; ?>
 	                <?php foreach ($posts as $post) : ?>
@@ -688,7 +688,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las Historias", "os_cards_widget_json");?></a>
+	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php if (!empty($enlace_detalle)) echo $enlace_detalle; else echo "javascript:void(0);" ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Todas las Historias", "os_cards_widget_json");?></a>
 	                </div>
 	            </div>
 	        </footer>
