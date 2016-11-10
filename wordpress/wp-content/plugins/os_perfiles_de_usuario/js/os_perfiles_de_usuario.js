@@ -51,6 +51,7 @@ jQuery(document).ready(function($) {
 	});
 	jQuery(".campo_personalizado").hide();
 	ocultar_campos();
+	cambia_tipo(jQuery('input[name=tipo]:checked').val());
 	
 	jQuery("#taxonomy-perfil input").change(function(e) {
 		perfil = jQuery.trim(jQuery(this).parent().text());
@@ -93,7 +94,7 @@ jQuery(document).ready(function($) {
 				if (perfil_aux == "Autor" || perfil_aux == "Asesor" || perfil_aux == "Coordinador") {
 					if (jQuery(this).is(":checked")) {
 						desmarcar = false;
-						return;
+						//return;
 					}
 				}
 			});
@@ -102,6 +103,7 @@ jQuery(document).ready(function($) {
 		}
 		jQuery(".campo_personalizado").hide();
 		ocultar_campos();
+		cambia_tipo(jQuery('input[name=tipo]:checked').val());
 	});
 
 
@@ -208,34 +210,53 @@ jQuery(document).ready(function($) {
 });
 
 function cambia_tipo(tipo) {
-	if (jQuery('input[name=' + tipo + ']').is(":checked")) {
-		if (tipo == "maximos") {
-			ocultar_campos();
-		} else if (tipo == "minimos") {
-			jQuery('div#informacion_contacto').show();
-			jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+
+	var marcadoSoloMiembroPonente = false;
+	jQuery('#taxonomy-perfil input:checked').each(function(index, value) {
+		perfil = jQuery.trim(jQuery(this).parent().text());
+		if (perfil !== 'Miembro' && perfil !== 'Ponente' && perfil !== 'Autor') {
+			marcadoSoloMiembroPonente = true;
+			return;
+		}
+	});
+
+
+	if (marcadoSoloMiembroPonente) {
+		if (jQuery('input[name=' + tipo + ']').is(":checked")) {
+			if (tipo == "maximos") {
+				ocultar_campos();
+			} else if (tipo == "minimos") {
+				jQuery('div#informacion_contacto').show();
+				jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+			}
+		} else {
+			if (tipo == "maximos") {
+				ocultar_campos();
+			} else if (tipo == "minimos") {
+				jQuery('div#informacion_contacto').show();
+				jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+			}
 		}
 	} else {
-		if (tipo == "maximos") {
-			jQuery('div#informacion_contacto').show();
-			jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
-		} else if (tipo == "minimos") {
-			ocultar_campos();
-		}
+		jQuery('div#informacion_contacto').hide();
 	}
 }
 
 function ocultar_campos() {
-	jQuery("#perfilchecklist input:checked").each(function() {
-		perfil = jQuery(this);
-		jQuery(".campo_personalizado").each(function() {
-			var elem = perfil.attr("value");
-			var clases = jQuery(this).attr("class").split(' ');
-			if (clases.indexOf(elem) !== -1) {
-				jQuery(this).show();
-			}
+	if (jQuery("#perfilchecklist input:checked").size() !== 0) {
+		jQuery("#perfilchecklist input:checked").each(function() {
+			perfil = jQuery(this);
+			jQuery(".campo_personalizado").each(function() {
+				var elem = perfil.attr("value");
+				var clases = jQuery(this).attr("class").split(' ');
+				if (clases.indexOf(elem) !== -1) {
+					jQuery(this).show();
+				}
+			});
 		});
-	});
+	} else {
+		jQuery('div.campo_personalizado').hide();
+	}
 
 	jQuery('.campo_personalizado:hidden input[type=text]').val('');
 	jQuery('.campo_personalizado:hidden input[type=url]').val('');

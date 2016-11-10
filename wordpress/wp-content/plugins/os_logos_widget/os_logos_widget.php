@@ -36,24 +36,29 @@ if (!class_exists('OS_Logos_Widget')) :
 	    	$titulo = $instance['titulo'];
 	    	$texto = $instance['texto'];
 	    	$tipo_post = (!empty($instance['tipo_post'])) ? $instance['tipo_post'] : 'organizaciones';
+	    	$cod_pais = '';
+			if(!empty($instance['cod_pais'])) {
+				$cod_pais = $instance['cod_pais'];
+			}
 
 	    	switch ($tipo_post) {
-	    		case 'organizaciones':{
+	    		case 'organizaciones':
 
 					$query = new WP_Query(
 						array(
 					    	'post_type' => 'organizaciones',
 					    	'post_status'      => 'publish',
 					    	'posts_per_page'   => 5, 
-					    	'orderby' => 'rand'
+					    	'orderby' => 'rand',
+					    	'suppress_filters' => false
 						)
 					);
+				
+					$this->imprime_plantilla_organizaciones($query, $titulo, $texto, $cod_pais);
 
-					$this->imprime_plantilla_organizaciones($query, $titulo, $texto);
-
-	    		}
+	    		
 	    			break;
-	    		case 'partners':{;
+	    		case 'partners':
 
 	    			$ambito = $instance['ambito_geografico'];
 
@@ -63,12 +68,13 @@ if (!class_exists('OS_Logos_Widget')) :
 					    	'post_status'      => 'publish',
 					    	'posts_per_page'   => 6, 
 					    	'orderby' => 'rand',
-					    	'ambito_geografico' => $ambito
+					    	'ambito_geografico' => $ambito,
+					    	'suppress_filters' => false
 						)
 					);
 
-					$this->imprime_plantilla_partners($query, $titulo, $texto);
-	    		}	
+					$this->imprime_plantilla_partners($query, $titulo, $texto, $cod_pais);
+	    		
 					break;
 	    	}
 
@@ -77,7 +83,7 @@ if (!class_exists('OS_Logos_Widget')) :
 
 
 
-		private function imprime_plantilla_organizaciones($query, $titulo, $texto) {
+		private function imprime_plantilla_organizaciones($query, $titulo, $texto, $cod_pais) {
 
 				?>
 
@@ -103,7 +109,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			      
 			    	?>
 			      		<div class="img-map">
-					    	<img data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+					    	<img data-toggle="modal" data-target="#modal-<?php echo $cod_pais . $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
 					    </div>
 					    
 					<?php
@@ -134,7 +140,7 @@ if (!class_exists('OS_Logos_Widget')) :
 								$externo5 = get_post_meta($post_id, 'externo5', true);
 			    	?>
 
-				<section class="lightbox modal wow fadeInUp" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
+				<section class="lightbox modal wow fadeInUp" id="modal-<?php echo $cod_pais . $post_id; ?>" tabindex="-1" role="dialog">
 			    	<div class="modal-dialog" role="document">
 			        	<div class="modal-content">
 			            	<div class="container">
@@ -177,7 +183,7 @@ if (!class_exists('OS_Logos_Widget')) :
 
 
 
-		private function imprime_plantilla_partners($query, $titulo, $texto) {
+		private function imprime_plantilla_partners($query, $titulo, $texto, $cod_pais) {
 
 
 			   if ($query->have_posts() ) { ?>
@@ -194,7 +200,7 @@ if (!class_exists('OS_Logos_Widget')) :
 			          $logoMP = get_post_meta($post_id, 'logoMP', true); 
 			      ?>
 			      		<div class="img-map">
-			          		<img data-toggle="modal" data-target="#modal-<?php echo $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
+			          		<img data-toggle="modal" data-target="#modal-<?php echo $cod_pais . $post_id; ?>" src="<?php echo $logoMP; ?>" alt="image title" />
 			          	</div>
 
 			      <?php  endwhile; 
@@ -214,7 +220,7 @@ if (!class_exists('OS_Logos_Widget')) :
 						$externo5 = get_post_meta($post_id, 'externo5', true);
 			        ?>
 
-			        <section class="lightbox modal wow fadeInUp" id="modal-<?php echo $post_id; ?>" tabindex="-1" role="dialog">
+			        <section class="lightbox modal wow fadeInUp" id="modal-<?php echo $cod_pais . $post_id; ?>" tabindex="-1" role="dialog">
 			            <div class="modal-dialog" role="document">
 			                <div class="modal-content">
 			                    <div class="container">

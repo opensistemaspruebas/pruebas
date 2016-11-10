@@ -196,7 +196,8 @@ if (!class_exists('OSMundoWidget')) :
 				                    'numero_posts_mostrar' => '6',
 				                    'numero_posts_totales' => '6',
 				                    'tipo_post' => 'partners',
-				                    'ambito_geografico' => $tag->slug
+				                    'ambito_geografico' => $tag->slug,
+				                    'cod_pais' => $isoCodeAux
 				                )
 				            );
 				?>
