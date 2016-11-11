@@ -51,6 +51,7 @@ jQuery(document).ready(function($) {
 	});
 	jQuery(".campo_personalizado").hide();
 	ocultar_campos();
+	cambia_tipo(jQuery('input[name=tipo]:checked').val());
 	
 	jQuery("#taxonomy-perfil input").change(function(e) {
 		perfil = jQuery.trim(jQuery(this).parent().text());
@@ -93,7 +94,7 @@ jQuery(document).ready(function($) {
 				if (perfil_aux == "Autor" || perfil_aux == "Asesor" || perfil_aux == "Coordinador") {
 					if (jQuery(this).is(":checked")) {
 						desmarcar = false;
-						return;
+						//return;
 					}
 				}
 			});
@@ -102,6 +103,7 @@ jQuery(document).ready(function($) {
 		}
 		jQuery(".campo_personalizado").hide();
 		ocultar_campos();
+		cambia_tipo(jQuery('input[name=tipo]:checked').val());
 	});
 
 
@@ -119,7 +121,17 @@ jQuery(document).ready(function($) {
 
 	jQuery("#add-trabajo").click(function(e) {        
 		count++;
-		$('<div style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos[' + count + '][titulo]" id="trabajos[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos[' + count + '][enlace]" id="trabajos[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(this);
+		// Añado en español e inglés
+		$('<div class="campo_personalizado es" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos-es[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos-es[' + count + '][titulo]" id="trabajos-es[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos-es[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos-es[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos-es[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos-es[' + count + '][enlace]" id="trabajos-es[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
+		$('<div class="campo_personalizado en" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos-en[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos-en[' + count + '][titulo]" id="trabajos-en[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos-en[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos-en[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos-en[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos-en[' + count + '][enlace]" id="trabajos-en[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
+		lang = jQuery('.cambio-idioma a.selected').attr('id');
+		if(lang == 'es') {
+			jQuery('.es').show();
+			jQuery('.en').hide();
+		} else {
+			jQuery('.en').show();
+			jQuery('.es').hide();
+		}
 	});
 
 	jQuery("#delete-trabajo").live("click", function(e) {
@@ -204,44 +216,88 @@ jQuery(document).ready(function($) {
 		cambia_tipo(tipo);
 	});
 
+	jQuery('.cambio-idioma a').on('click',function() {
+		lang = jQuery(this).attr('id');
+		if(lang == 'es') {
+			jQuery(this).addClass('selected');
+			jQuery(this).parent().find('#en').removeClass('selected');
+			jQuery('.es').show();
+			jQuery('.en').hide();
+		} else {
+			jQuery(this).addClass('selected');
+			jQuery(this).parent().find('#es').removeClass('selected');
+			jQuery('.en').show();
+			jQuery('.es').hide();
+		}
+	});
+
 
 });
 
 function cambia_tipo(tipo) {
-	if (jQuery('input[name=' + tipo + ']').is(":checked")) {
-		if (tipo == "maximos") {
-			ocultar_campos();
-		} else if (tipo == "minimos") {
-			jQuery('div#informacion_contacto').show();
-			jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+
+	var marcadoSoloMiembroPonente = false;
+	jQuery('#taxonomy-perfil input:checked').each(function(index, value) {
+		perfil = jQuery.trim(jQuery(this).parent().text());
+		if (perfil !== 'Miembro' && perfil !== 'Ponente' && perfil !== 'Autor') {
+			marcadoSoloMiembroPonente = true;
+			return;
+		}
+	});
+
+
+	if (marcadoSoloMiembroPonente) {
+		if (jQuery('input[name=' + tipo + ']').is(":checked")) {
+			if (tipo == "maximos") {
+				ocultar_campos();
+			} else if (tipo == "minimos") {
+				jQuery('div#informacion_contacto').show();
+				jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+			}
+		} else {
+			if (tipo == "maximos") {
+				ocultar_campos();
+			} else if (tipo == "minimos") {
+				jQuery('div#informacion_contacto').show();
+				jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
+			}
 		}
 	} else {
-		if (tipo == "maximos") {
-			jQuery('div#informacion_contacto').show();
-			jQuery('div#informacion_expertise, div#informacion_cabecera, div#informacion_trabajos_relacionados').hide();
-		} else if (tipo == "minimos") {
-			ocultar_campos();
-		}
+		jQuery('div#informacion_contacto').hide();
 	}
 }
 
 function ocultar_campos() {
-	jQuery("#perfilchecklist input:checked").each(function() {
-		perfil = jQuery(this);
-		jQuery(".campo_personalizado").each(function() {
-			var elem = perfil.attr("value");
-			var clases = jQuery(this).attr("class").split(' ');
-			if (clases.indexOf(elem) !== -1) {
-				jQuery(this).show();
-			}
+	if (jQuery("#perfilchecklist input:checked").size() !== 0) {
+		jQuery("#perfilchecklist input:checked").each(function() {
+			perfil = jQuery(this);
+			jQuery(".campo_personalizado").each(function() {
+				var elem = perfil.attr("value");
+				var clases = jQuery(this).attr("class").split(' ');
+				if (clases.indexOf(elem) !== -1) {
+						jQuery(this).show();
+				}
+			});
 		});
-	});
+	} else {
+		jQuery('div.campo_personalizado').hide();
+	}
 
 	jQuery('.campo_personalizado:hidden input[type=text]').val('');
 	jQuery('.campo_personalizado:hidden input[type=url]').val('');
 	jQuery('.campo_personalizado:hidden textarea').html('');
 	jQuery('.campo_personalizado:hidden img').attr('src', '').hide();
 	jQuery('div#informacion_trabajos_relacionados').children("p").children("div").remove();
+
+	// Muestro los campos del idioma activo
+	lang = jQuery('.cambio-idioma a.selected').attr('id');
+	if(lang == 'es') {
+		jQuery('.es').show();
+		jQuery('.en').hide();
+	} else {
+		jQuery('.en').show();
+		jQuery('.es').hide();
+	}
 
 }
 

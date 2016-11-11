@@ -1,5 +1,5 @@
 // Ver mas publicaciones
-jQuery(document).on("click", "#publishing-view #readmore, .outstanding-histories #readmore", function(event) {
+jQuery(document).on("click", "#publishing-view #readmore, .outstanding-histories #readmore, #publicaciones-autor #readmore", function(event) {
 	event.preventDefault();
 	if (buscando) {
 		return;
@@ -104,6 +104,7 @@ function getPost(post){
 	var descripcion = post['descripcion'];
 	var fecha = new Date(post['fecha'].substring(0, 10));
 	var urlImagen = post['urlImagen'];
+	if (urlImagen == null) urlImagen = '';
 	var urlPublicacion = post['urlPublicacion'];
 	var cita = post['cita'];
 	var video = post['video'];

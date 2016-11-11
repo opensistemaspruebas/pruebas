@@ -35,6 +35,53 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
 	    public function widget($args, $instance) {
 
+	    	if($instance['tipo_grupo'] == 'consejo_asesor') {
+	    		$perfil = 'asesor';
+	    		$destacados = array();
+	    		foreach ($instance['asesores_destacados'] as $key => $id) {
+					$asesor_dest = $this->get_author_print_fields($id,$perfil);
+					if(!empty($asesor_dest)) {
+						$destacados[$key] = $asesor_dest;
+					} else {
+						unset($instance['asesores_destacados'][$key]);
+					}
+	    		}
+
+	    		$miembros = array();
+	    		foreach ($instance['miembros_asesores'] as $key => $id) {
+					$asesor_miembro = $this->get_author_print_fields($id,$perfil);
+					if(!empty($asesor_miembro)) {
+						$miembros[$key] = $asesor_miembro;
+					} else {
+						unset($instance['miembros_asesores'][$key]);
+					}
+	    		}
+	    	} else {
+	    		$perfil = 'coordinador';
+	    		$destacados = array();
+	    		foreach ($instance['coordinador_destacado'] as $key => $value) {
+	    			$coordinador = $this->get_author_print_fields($id,$perfil);
+	    			if(!empty($coordinador)) {
+	    				$destacados[$key] = $coordinador;
+	    			} else {
+	    				unset($instance['coordinador_destacado'][$key]);
+	    			}
+	    		}
+	    		
+	    		$perfil = 'miembro';
+	    		$miembros = array();
+	    		foreach ($instance['miembros'] as $key => $value) {
+	    			$miembro = $this->get_author_print_fields($id,$perfil);
+	    			if(!empty($miembro)) {
+	    				$miembros[$key] = $miembro;
+	    			} else {
+	    				unset($instance['miembros'][$key]);
+	    			}
+	    		}
+	    	}
+
+	    	$num_miembros = count($destacados) + count($miembros);
+
     	?>
 
     		<section class="people-grid-wrapper medium wow fadeIn" id="<?php echo $args['widget_id']; ?>">
@@ -44,23 +91,10 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				  <section>
 				    <h1><?php echo $instance['titulo_grupo']; ?></h1>
 				    <div class="row">
-				    	<?php 
-					    	if($instance['tipo_grupo'] == 'consejo_asesor') {
-					    		$destacados = $instance['asesores_destacados'];
-					    		$perfil = 'asesor';
-					    		$miembros = $instance['miembros_asesores'];
-					    	} else {
-					    		$destacados[] = $instance['coordinador_destacado'];
-					    		$perfil = 'coordinador';
-					    		$miembros = $instance['miembros'];
-					    	}
-					    	$num_miembros = count($destacados) + count($miembros);
-				    	?>
+				    	
+				    	<?php $key = 0; ?>
+				    	<?php foreach ($destacados as $destacado): ?>
 
-				    	<?php foreach ($destacados as $key => $destacado_id): ?>
-				    		<?php			    			
-				    			$destacado = $this->get_author_print_fields($destacado_id,$perfil);
-				    		?>
 				    		<div class="card-container card-container-destacado col-xs-12 col-sm-6">     
 								<!-- person -->
 								<section class="container-fluid person">
@@ -80,14 +114,11 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 								</section>
 								<!-- EO person -->
 					        </div>
+					    <?php $key++; ?>
 				    	<?php endforeach; ?>
 				      
-
-				      	<?php foreach ($miembros as $key => $id_miembro): ?>
-
-				      		<?php 
-				      			$miembro = $this->get_author_print_fields($id_miembro,'');
-				      		?>
+				    	<?php $key = 0; ?>
+				      	<?php foreach ($miembros as $miembro): ?>
 			
 					        <div class="card-container col-xs-12 col-sm-6" id="<?php echo $args['widget_id'] . '_' . $key; ?>" style="display:none;">     
 								<!-- person -->
@@ -108,6 +139,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 								</section>
 								<!-- EO person -->
 					        </div>
+					    <?php $key++; ?>
 				        <?php endforeach; ?>
 				      
 				    </div>
@@ -307,7 +339,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
 	    function update($new_instance, $old_instance) {
 
-			$instance = $old_instance;
+			$instance = array();
 
 			$instance['titulo_grupo'] = (!empty( $new_instance['titulo_grupo'])) ? strip_tags($new_instance['titulo_grupo']) : '';
 			$instance['tipo_grupo'] = (!empty( $new_instance['tipo_grupo'])) ? strip_tags($new_instance['tipo_grupo']) : '';
@@ -349,7 +381,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 			} else {
 				$instance['num_miembros'] = 6;
 			}
-			
+
 			return $instance;
 	    }
 
@@ -385,11 +417,18 @@ if (!class_exists('OSGrupoAutoresWidget')) :
         }
 
         private function get_author_print_fields($author_id,$perfil) {
+        	$lang = ICL_LANGUAGE_CODE;
         	$author = array();
         	$author['nombre'] = get_post_meta($author_id,'cap-display_name')[0];
         	$author['imagen_perfil'] = get_post_meta($author_id,'imagen_perfil')[0];
-        	$author['cargo'] = get_post_meta($author_id,'cargo')[0];
+        	$author['cargo'] = get_post_meta($author_id,'cargo-' . $lang)[0];
+        	// Si lós tres campos están vacíos, es que el usuario ha sido eliminado y no lo muestro en el widget
+        	if(empty($author['nombre']) && empty($author['imagen_perfil']) && empty($author['cargo'])) {
+        		$author = array();
+        		return $author;
+        	}
 
+        	// Perfiles del usuario
         	$perfiles_aux = get_the_terms($author_id,'perfil');
         	$perfiles = array();
 
@@ -397,28 +436,51 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 	        	foreach ($perfiles_aux as $key => $perfil_aux) {
 	        		$perfiles[] = $perfil_aux->name;
 	        	}
-	        	if(array_search('Asesor', $perfiles) !== false) {
-	        		if($perfil == '') {
-	        			$author['perfil'] = 'asesor';
-	        		} else {
-	        			$author['perfil'] = $perfil;
-	        		}
+	        	// El usuario tiene que tener el perfil con el que se guarda en el widget
+	        	// (Por ejemplo: si es asesor en el widget, el usuario tiene que seguir siendo asesor cuando se muestra)
+	        	if(array_search('Asesor', $perfiles) !== false && $perfil == 'asesor') {
+	        		$author['perfil'] = $perfil;
 	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
-	        	} else if(array_search('Coordinador', $perfiles) !== false) {
-	        		if($perfil == '') {
-	        			$author['perfil'] = 'coordinador';
-	        		} else {
-	        			$author['perfil'] = $perfil;
-	        		}
-	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
+	        		return $author;
+	        	// El usuario ya no es Asesor
+	        	} else {
+	        		$author = array();
+	        		return $author;
 	        	}
+
+	        	if(array_search('Coordinador', $perfiles) !== false && $perfil == 'coordinador') {
+	        		$author['perfil'] = $perfil;
+	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
+	        		return $author;
+	        	// El usuario ya no es coordinador
+	        	} else {
+	        		$author = array();
+	        		return $author;
+	        	}
+
+	        	if(array_search('Miembro', $perfiles) !== false && $perfil == 'miembro') {
+	        		return $author;
+	        	// El usuario ya no es miembro
+	        	} else {
+	        		$author = array();
+	        		return $author;
+	        	}
+	        // Si no tiene, quiere decir que se ha modificado el usuario y no es asesor/coordinador/miembro
+	        } else {
+	        	$author = array();
 	        }
 
         	return $author;
         }
 
         private function get_url_perfil($nombre) {
-        	$url = get_site_url() . '/perfiles/' . sanitize_title($nombre) . '/';
+        	$lang = ICL_LANGUAGE_CODE;
+        	if($lang == 'en') {
+        		$url = get_site_url() . '/en/perfiles/' . sanitize_title($nombre) . '/';
+        	} else {
+        		$url = get_site_url() . '/perfiles/' . sanitize_title($nombre) . '/';	
+        	}
+        	
         	return $url;
         }
 

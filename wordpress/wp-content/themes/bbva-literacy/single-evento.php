@@ -303,6 +303,12 @@
                                                                         <div class="talktext">
                                                                             <h3 class="ml-md pr-md pt-md"><?php echo $titulo; ?></h3>
                                                                             <p class="ml-md pr-md"><?php echo $descripcion; ?></p>
+                                                                            <?php if (!empty($moderador)) : ?>
+                                                                                <p class="ml-md pr-md pb-md">
+                                                                                    <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
+                                                                                    <strong class="ml-xs"><?php echo $moderador; ?></strong>
+                                                                                </p>
+                                                                            <?php endif; ?>
                                                                             <?php if (!empty($ponentes)) : ?>
                                                                                 <p class="ml-md pr-md pb-md">
                                                                                     <?php _e('Ponentes', 'os_evento_futuro_widget'); ?>:
@@ -310,12 +316,6 @@
                                                                                         <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
                                                                                     <?php endforeach; ?>
                                                                                 </p>
-                                                                                <?php if (!empty($moderador)) : ?>
-                                                                                    <p class="ml-md pr-md pb-md">
-                                                                                        <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
-                                                                                        <strong class="ml-xs"><?php echo $moderador; ?></strong>
-                                                                                    </p>
-                                                                                <?php endif; ?>
                                                                             <?php endif; ?>
                                                                         </div>
                                                                     </div>
@@ -393,6 +393,12 @@
                                                         <div class="talktext">
                                                             <h3 class="ml-md"><?php echo $titulo; ?></h3>
                                                             <p class="ml-md"><?php echo $descripcion; ?></p>
+                                                            <?php if (!empty($moderador)) : ?>
+                                                                <p class="ml-md">
+                                                                    <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
+                                                                    <strong class="ml-xs"><?php echo $moderador; ?></strong>
+                                                                </p>
+                                                            <?php endif; ?>
                                                             <?php if (!empty($ponentes)) : ?>
                                                             <p class="ml-md mb-md">
                                                                 <?php _e('Ponentes', 'os_evento_futuro_widget'); ?>:
@@ -400,12 +406,6 @@
                                                                     <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
                                                                 <?php endforeach; ?>
                                                             </p>
-                                                            <?php endif; ?>
-                                                            <?php if (!empty($moderador)) : ?>
-                                                                <p class="ml-md mb-md">
-                                                                    <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
-                                                                    <strong class="ml-xs"><?php echo $moderador; ?></strong>
-                                                                </p>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
