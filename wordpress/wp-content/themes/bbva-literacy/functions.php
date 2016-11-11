@@ -262,13 +262,13 @@ function languages_list_header(){
     $languages = icl_get_languages('skip_missing=0&orderby=code');
     // Perfiles no está traducido por WPML, por lo que creamos la URL de la traducción así
     $lang = ICL_LANGUAGE_CODE;
-    if(!empty($_SERVER['SCRIPT_URI']) && preg_match('/perfiles/',$_SERVER['SCRIPT_URI']) == 1) {
+    if(!empty($_SERVER['REQUEST_URI']) && preg_match('/perfiles/',$_SERVER['REQUEST_URI']) == 1) {
     	if($lang == 'es') {
-    		$languages['es']['url'] = $_SERVER['SCRIPT_URI'];
-    		$languages['en']['url'] = str_replace('/perfiles/','/en/perfiles/',$_SERVER['SCRIPT_URI']);
+    		$languages['es']['url'] = '//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    		$languages['en']['url'] = '//' . $_SERVER['HTTP_HOST'] . str_replace('/perfiles/','/en/perfiles/',$_SERVER['REQUEST_URI']);
     	} else {
-    		$languages['en']['url'] = $_SERVER['SCRIPT_URI'];
-    		$languages['es']['url'] = str_replace('en/','',$_SERVER['SCRIPT_URI']);
+    		$languages['en']['url'] = '//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    		$languages['es']['url'] = '//' . $_SERVER['HTTP_HOST'] . str_replace('en/','',$_SERVER['REQUEST_URI']);
     	}
     }
     
@@ -295,13 +295,13 @@ function languages_list_header_responsive(){
     $languages = icl_get_languages('skip_missing=0&orderby=code');
     // Perfiles no está traducido por WPML, por lo que creamos la URL de la traducción así
     $lang = ICL_LANGUAGE_CODE;
-    if(!empty($_SERVER['SCRIPT_URI']) && preg_match('/perfiles/',$_SERVER['SCRIPT_URI']) == 1) {
+    if(!empty($_SERVER['REQUEST_URI']) && preg_match('/perfiles/',$_SERVER['REQUEST_URI']) == 1) {
     	if($lang == 'es') {
-    		$languages['es']['url'] = $_SERVER['SCRIPT_URI'];
-    		$languages['en']['url'] = str_replace('/perfiles/','/en/perfiles/',$_SERVER['SCRIPT_URI']);
+    		$languages['es']['url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    		$languages['en']['url'] = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('/perfiles/','/en/perfiles/',$_SERVER['REQUEST_URI']);
     	} else {
-    		$languages['en']['url'] = $_SERVER['SCRIPT_URI'];
-    		$languages['es']['url'] = str_replace('en/','',$_SERVER['SCRIPT_URI']);
+    		$languages['en']['url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    		$languages['es']['url'] = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('en/','',$_SERVER['REQUEST_URI']);
     	}
     }
     
