@@ -583,3 +583,16 @@ function wpdocs_theme_name_scripts() {
 	wp_enqueue_script('script_os_js');
 }
 add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
+
+
+add_action( 'template_redirect', 'so16179138_template_redirect', 0 );
+function so16179138_template_redirect() {
+    if( is_singular() ) {
+        global $post, $page;
+        $num_pages = substr_count( $post->post_content, '<!--nextpage-->' ) + 1;
+        if( $page > $num_pages ){
+            include( get_template_directory() . '/404.php' );
+            exit;
+        }
+    }
+}
