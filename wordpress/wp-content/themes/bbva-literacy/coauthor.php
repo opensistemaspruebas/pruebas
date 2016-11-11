@@ -160,8 +160,8 @@
                 array(
                     'titulo' => __('Publicaciones del autor'),
                     'texto' => '',
-                    'numero_posts_mostrar' => '5',
-                    'numero_posts_totales' => '5',
+                    'numero_posts_mostrar' => '7',
+                    'numero_posts_totales' => '7',
                     'tipo_post' => 'publicacion',
                     'plantilla' => 'plantilla_2',
                     'enlace_detalle' => '',
