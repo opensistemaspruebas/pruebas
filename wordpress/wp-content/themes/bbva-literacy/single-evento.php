@@ -313,7 +313,18 @@
                                                                                 <p class="ml-md pr-md pb-md">
                                                                                     <?php _e('Ponentes', 'os_evento_futuro_widget'); ?>:
                                                                                     <?php foreach ($ponentes as $p) : ?>
-                                                                                        <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
+                                                                                        <?php if (has_term('asesor', 'perfil', $p)) : ?>
+                                                                                            <?php
+                                                                                                $idioma = '';
+                                                                                                if (ICL_LANGUAGE_CODE !== 'es') {
+                                                                                                    $idioma = '/en';
+                                                                                                }
+                                                                                                $post_slug = $idioma . '/perfiles/' . str_replace('cap-' , '', get_post_field( 'post_name', get_post($p) ));
+                                                                                            ?>
+                                                                                            <strong class="ml-xs"><a href="<?php echo $post_slug; ?>"><?php echo get_the_title($p); ?></a></strong>
+                                                                                        <?php else : ?>
+                                                                                            <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
+                                                                                        <?php endif; ?>
                                                                                     <?php endforeach; ?>
                                                                                 </p>
                                                                             <?php endif; ?>
@@ -403,7 +414,18 @@
                                                             <p class="ml-md mb-md">
                                                                 <?php _e('Ponentes', 'os_evento_futuro_widget'); ?>:
                                                                 <?php foreach ($ponentes as $p) : ?>
-                                                                    <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
+                                                                    <?php if (has_term('asesor', 'perfil', $p)) : ?>
+                                                                        <?php
+                                                                            $idioma = '';
+                                                                            if (ICL_LANGUAGE_CODE !== 'es') {
+                                                                                $idioma = '/en';
+                                                                            }
+                                                                            $post_slug = $idioma . '/perfiles/' . str_replace('cap-' , '', get_post_field( 'post_name', get_post($p) ));
+                                                                        ?>
+                                                                        <strong class="ml-xs"><a href="<?php echo $post_slug; ?>"><?php echo get_the_title($p); ?></a></strong>
+                                                                    <?php else : ?>
+                                                                        <strong class="ml-xs"><?php echo get_the_title($p); ?></strong>
+                                                                    <?php endif; ?>
                                                                 <?php endforeach; ?>
                                                             </p>
                                                             <?php endif; ?>

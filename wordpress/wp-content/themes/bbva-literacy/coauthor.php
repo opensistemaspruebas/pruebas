@@ -32,23 +32,26 @@
     $trabajos = array();
 
     $lang = ICL_LANGUAGE_CODE;
+    $sufijo = '';
+    if($lang == 'en')
+        $sufijo = '-en';
 
     $nombre = get_post_meta($post_id, 'cap-display_name', true);
-    $cargo = get_post_meta($post_id, 'cargo-' . $lang, true);
+    $cargo = get_post_meta($post_id, 'cargo' . $sufijo, true);
     $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
-    $descripcion = get_post_meta($post_id, 'descripcion-' . $lang, true);
-    $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo-' . $lang, true);
+    $descripcion = get_post_meta($post_id, 'descripcion' . $sufijo, true);
+    $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo' . $sufijo, true);
     $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
-    $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1-' . $lang, true);
-    $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2-' . $lang, true);
-    $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3-' . $lang, true);
+    $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1' . $sufijo, true);
+    $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2' . $sufijo, true);
+    $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3' . $sufijo, true);
     $linkedin = get_post_meta($post_id, 'linkedin', true);
     $twitter = get_post_meta($post_id, 'twitter', true);
     $correo_electronico = get_post_meta($post_id, 'correo_electronico', true);
     $url_web = get_post_meta($post_id, 'url_web', true);
     $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
-    $frase_cabecera = get_post_meta($post_id, 'frase_cabecera-' . $lang, true);
-    $trabajos = get_post_meta($post_id, 'trabajos-' . $lang, true);
+    $frase_cabecera = get_post_meta($post_id, 'frase_cabecera' . $sufijo, true);
+    $trabajos = get_post_meta($post_id, 'trabajos' . $sufijo, true);
     
     $numero_publicaciones = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name));
 
@@ -157,8 +160,8 @@
                 array(
                     'titulo' => __('Publicaciones del autor'),
                     'texto' => '',
-                    'numero_posts_mostrar' => '5',
-                    'numero_posts_totales' => '5',
+                    'numero_posts_mostrar' => '7',
+                    'numero_posts_totales' => '7',
                     'tipo_post' => 'publicacion',
                     'plantilla' => 'plantilla_2',
                     'enlace_detalle' => '',
