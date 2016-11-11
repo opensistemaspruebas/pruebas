@@ -39,11 +39,18 @@ if (!class_exists('os_evento_futuro_widget')) :
 				'offset'           => 0,
 				'orderby'          => 'post_date',
 				'meta_key' 		   => 'evento_fecha_de_inicio', 
-				'order'            => 'DESC',
+				'order'            => 'ASC',
 				'orderby' 		   => 'meta_value',
 				'post_type'        => 'evento',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
+				'meta_query' => array(
+			        array(
+						'key'         => 'evento_fecha_de_inicio',
+						'value'       => date('Y-m-d'),
+						'compare'     => '>',
+			        ),
+			    )
 			);
 
 	    	$evento = get_posts($args);
