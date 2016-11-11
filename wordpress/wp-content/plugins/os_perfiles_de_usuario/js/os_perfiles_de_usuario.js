@@ -2,40 +2,7 @@ jQuery(document).ready(function($) {
 	
 	jQuery("#taxonomy-perfil input").each(function() {
 		perfil = jQuery.trim(jQuery(this).parent().text());
-		/*if (jQuery(this).is(':checked') && (perfil == "Ponente")) {
-			 jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== perfil && (perfil_aux !== 'Asesor')) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-			return false;
-		} else if (jQuery(this).is(':checked') && perfil == "Asesor") {
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== 'Ponente' && perfil_aux !== 'Autor' && perfil_aux !== 'Coordinador' && perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else if (jQuery(this).is(':checked') && perfil == "Autor") {
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== 'Asesor' && perfil_aux !== 'Coordinador' && perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else if (jQuery(this).is(':checked') && perfil == "Coordinador") {
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== 'Asesor' && perfil_aux !== 'Autor' && perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
+		if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
 			 jQuery('#taxonomy-perfil input').each(function(index, value) {
 				perfil_aux = jQuery.trim(jQuery(this).parent().text());
 				if (perfil_aux !== perfil) {
@@ -43,28 +10,7 @@ jQuery(document).ready(function($) {
 					jQuery(this).attr('disabled', true);
 				}
 			});
-		} else {
-			var desmarcar = true;
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux == "Ponente" || perfil_aux == "Autor" || perfil_aux == "Asesor" || perfil_aux == "Coordinador") {
-					if (jQuery(this).is(":checked")) {
-						desmarcar = false;
-						return;
-					}
-				}
-			});
-			if(desmarcar)
-				jQuery("#taxonomy-perfil input").removeAttr('disabled');
-		}*/
-		if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
-			 jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== perfil && (perfil_aux !== 'Miembro')) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
+			return false;
 		} else {
 			jQuery('#taxonomy-perfil input').attr('disabled', false);
 		}
@@ -75,65 +21,10 @@ jQuery(document).ready(function($) {
 	
 	jQuery("#taxonomy-perfil input").change(function(e) {
 		perfil = jQuery.trim(jQuery(this).parent().text());
-		/*if (jQuery(this).is(':checked') && (perfil == "Ponente")) {
-			 jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== perfil && (perfil_aux !== 'Asesor')) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-			return false;
-		} else if (jQuery(this).is(':checked') && perfil == "Asesor") {
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== 'Ponente' && perfil_aux !== 'Autor' && perfil_aux !== 'Coordinador' && perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else if (jQuery(this).is(':checked') && perfil == "Autor") {
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== 'Asesor' && perfil_aux !== 'Coordinador' && perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else if (jQuery(this).is(':checked') && perfil == "Coordinador") {
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== 'Asesor' && perfil_aux !== 'Autor' && perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
-			 jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== perfil) {
-					jQuery(this).attr('checked', false);
-					jQuery(this).attr('disabled', true);
-				}
-			});
-		} else {
-			var desmarcar = true;
-			jQuery('#taxonomy-perfil input').each(function(index, value) {
-				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux == "Ponente" || perfil_aux == "Autor" || perfil_aux == "Asesor" || perfil_aux == "Coordinador") {
-					if (jQuery(this).is(":checked")) {
-						desmarcar = false;
-						return;
-					}
-				}
-			});
-			if(desmarcar)
-				jQuery("#taxonomy-perfil input").removeAttr('disabled');
-		}*/
 		if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
 			 jQuery('#taxonomy-perfil input').each(function(index, value) {
 				perfil_aux = jQuery.trim(jQuery(this).parent().text());
-				if (perfil_aux !== perfil && (perfil_aux !== 'Miembro')) {
+				if (perfil_aux !== perfil) {
 					jQuery(this).attr('checked', false);
 					jQuery(this).attr('disabled', true);
 				}
