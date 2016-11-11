@@ -418,10 +418,14 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
         private function get_author_print_fields($author_id,$perfil) {
         	$lang = ICL_LANGUAGE_CODE;
+        	// Sufijo idioma para los campos traducibles
+        	$sufijo = '';
+        	if($lang == 'en')
+        		$sufijo = '-en';
         	$author = array();
         	$author['nombre'] = get_post_meta($author_id,'cap-display_name')[0];
         	$author['imagen_perfil'] = get_post_meta($author_id,'imagen_perfil')[0];
-        	$author['cargo'] = get_post_meta($author_id,'cargo-' . $lang)[0];
+        	$author['cargo'] = get_post_meta($author_id,'cargo' . $sufijo)[0];
         	// Si lós tres campos están vacíos, es que el usuario ha sido eliminado y no lo muestro en el widget
         	if(empty($author['nombre']) && empty($author['imagen_perfil']) && empty($author['cargo'])) {
         		$author = array();

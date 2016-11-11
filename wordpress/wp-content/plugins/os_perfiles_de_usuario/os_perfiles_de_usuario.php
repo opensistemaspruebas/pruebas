@@ -62,28 +62,28 @@ class OS_Perfiles_de_Usuario {
         $tipo = get_post_meta($post_id, 'tipo', true);
         if (empty($tipo)) $tipo = "maximos";
         $nombre = get_post_meta($post_id, 'cap-display_name', true);
-        $cargo_es = get_post_meta($post_id, 'cargo-es', true);
+        $cargo_es = get_post_meta($post_id, 'cargo', true);
         $cargo_en = get_post_meta($post_id, 'cargo-en', true);
         $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
-        $descripcion_es = get_post_meta($post_id, 'descripcion-es', true);
+        $descripcion_es = get_post_meta($post_id, 'descripcion', true);
         $descripcion_en = get_post_meta($post_id, 'descripcion-en', true);
-        $lugar_trabajo_es = get_post_meta($post_id, 'lugar_trabajo-es', true);
+        $lugar_trabajo_es = get_post_meta($post_id, 'lugar_trabajo', true);
         $lugar_trabajo_en = get_post_meta($post_id, 'lugar_trabajo-en', true);
         $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
-        $area_expertise_1_es = get_post_meta($post_id, 'area_expertise_1-es', true);
+        $area_expertise_1_es = get_post_meta($post_id, 'area_expertise_1', true);
         $area_expertise_1_en = get_post_meta($post_id, 'area_expertise_1-en', true);
-        $area_expertise_2_es = get_post_meta($post_id, 'area_expertise_2-es', true);
+        $area_expertise_2_es = get_post_meta($post_id, 'area_expertise_2', true);
         $area_expertise_2_en = get_post_meta($post_id, 'area_expertise_2-en', true);
-        $area_expertise_3_es = get_post_meta($post_id, 'area_expertise_3-es', true);
+        $area_expertise_3_es = get_post_meta($post_id, 'area_expertise_3', true);
         $area_expertise_3_en = get_post_meta($post_id, 'area_expertise_3-en', true);
         $linkedin = get_post_meta($post_id, 'linkedin', true);
         $twitter = get_post_meta($post_id, 'twitter', true);
         $correo_electronico = get_post_meta($post_id, 'correo_electronico', true);
         $url_web = get_post_meta($post_id, 'url_web', true);
         $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
-        $frase_cabecera_es = get_post_meta($post_id, 'frase_cabecera-es', true);
+        $frase_cabecera_es = get_post_meta($post_id, 'frase_cabecera', true);
         $frase_cabecera_en = get_post_meta($post_id, 'frase_cabecera-en', true);
-        $trabajos_es = get_post_meta($post_id, 'trabajos-es', true);
+        $trabajos_es = get_post_meta($post_id, 'trabajos', true);
         $trabajos_en = get_post_meta($post_id, 'trabajos-en', true);
 
         $miembro = get_term_by('slug', 'miembro', 'perfil');
@@ -127,10 +127,10 @@ class OS_Perfiles_de_Usuario {
                 </tr>
                 <tr class="es">
                     <th>
-                        <label for="cargo-es"><?php _e('Cargo/Estudios', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="cargo"><?php _e('Cargo/Estudios', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="cargo-es" id="cargo-es" value="<?php echo esc_attr($cargo_es); ?>" class="regular-text" /><br />
+                        <input type="text" name="cargo" id="cargo" value="<?php echo esc_attr($cargo_es); ?>" class="regular-text" /><br />
                         <span class="description"><?php _e('Cargo o estudios de la persona', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
@@ -163,10 +163,10 @@ class OS_Perfiles_de_Usuario {
             <table class="form-table">
                 <tr class="es">
                     <th>
-                        <label for="descripcion-es"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="descripcion"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <textarea cols="40" rows="5" name="descripcion-es" id="descripcion-es"><?php echo $descripcion_es; ?></textarea>
+                        <textarea cols="40" rows="5" name="descripcion" id="descripcion"><?php echo $descripcion_es; ?></textarea>
                     </td>
                 </tr>
                 <tr class="en" style="display:none;">
@@ -185,10 +185,10 @@ class OS_Perfiles_de_Usuario {
             <table class="form-table">
                 <tr class="es">
                     <th>
-                        <label for="lugar_trabajo-es"><?php _e('Lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="lugar_trabajo"><?php _e('Lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <input type="text" name="lugar_trabajo-es" id="lugar_trabajo-es" value="<?php echo esc_attr($lugar_trabajo_es); ?>" class="regular-text" /><br />
+                        <input type="text" name="lugar_trabajo" id="lugar_trabajo" value="<?php echo esc_attr($lugar_trabajo_es); ?>" class="regular-text" /><br />
                         <span class="description"><?php _e('Nombre del lugar de trabajo', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
@@ -221,10 +221,10 @@ class OS_Perfiles_de_Usuario {
             <table class="form-table">
                 <tr class="es">
                     <th>
-                        <label for="area_expertise_1-es"><?php _e('Área de expertise 1', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="area_expertise_1"><?php _e('Área de expertise 1', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <input type="text" name="area_expertise_1-es" id="area_expertise_1-es" value="<?php echo esc_attr($area_expertise_1_es); ?>" class="regular-text" /><br />
+                        <input type="text" name="area_expertise_1" id="area_expertise_1" value="<?php echo esc_attr($area_expertise_1_es); ?>" class="regular-text" /><br />
                     </td>
                 </tr>
 
@@ -239,10 +239,10 @@ class OS_Perfiles_de_Usuario {
 
                 <tr class="es">
                     <th>
-                        <label for="area_expertise_2-es"><?php _e('Área de expertise 2', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="area_expertise_2"><?php _e('Área de expertise 2', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <input type="text" name="area_expertise_2-es" id="area_expertise_2-es" value="<?php echo esc_attr($area_expertise_2_es); ?>" class="regular-text" /><br />
+                        <input type="text" name="area_expertise_2" id="area_expertise_2" value="<?php echo esc_attr($area_expertise_2_es); ?>" class="regular-text" /><br />
                     </td>
                 </tr>
 
@@ -257,10 +257,10 @@ class OS_Perfiles_de_Usuario {
 
                 <tr class="es">
                     <th>
-                        <label for="area_expertise_3-es"><?php _e('Área de expertise 3', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="area_expertise_3"><?php _e('Área de expertise 3', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <input type="text" name="area_expertise_3-es" id="area_expertise_3-es" value="<?php echo esc_attr($area_expertise_3_es); ?>" class="regular-text" /><br />
+                        <input type="text" name="area_expertise_3" id="area_expertise_3" value="<?php echo esc_attr($area_expertise_3_es); ?>" class="regular-text" /><br />
                     </td>
                 </tr>
 
@@ -337,10 +337,10 @@ class OS_Perfiles_de_Usuario {
                 </tr>
                 <tr class="es">
                     <th>
-                        <label for="frase_cabecera-es"><?php _e('Frase para la cabecera', 'os_perfiles_de_usuario'); ?></label>
+                        <label for="frase_cabecera"><?php _e('Frase para la cabecera', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <textarea cols="40" rows="5" name="frase_cabecera-es" id="frase_cabecera-es"><?php echo esc_attr($frase_cabecera_es); ?></textarea><br />
+                        <textarea cols="40" rows="5" name="frase_cabecera" id="frase_cabecera"><?php echo esc_attr($frase_cabecera_es); ?></textarea><br />
                         <span class="description"><?php _e('Frase para la cabecera de la página de perfil', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
@@ -363,26 +363,26 @@ class OS_Perfiles_de_Usuario {
                     <table class="form-table es">
                         <tr>
                             <th>
-                                <label for="trabajos-es[0][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
+                                <label for="trabajos[0][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
                             </th>
                              <td>
-                                <input type="text" name="trabajos-es[0][titulo]" id="trabajos-es[0][titulo]" value="" class="regular-text" /><br />
+                                <input type="text" name="trabajos[0][titulo]" id="trabajos[0][titulo]" value="" class="regular-text" /><br />
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label for="trabajos-es[0][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
+                                <label for="trabajos[0][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
                             </th>
                              <td>
-                                <textarea id="trabajos-es[0][texto]" name="trabajos-es[0][texto]" rows="5" cols="40"></textarea>
+                                <textarea id="trabajos[0][texto]" name="trabajos[0][texto]" rows="5" cols="40"></textarea>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label for="trabajos-es[0][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
+                                <label for="trabajos[0][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
                             </th>
                              <td>
-                                <input type="url" name="trabajos-es[0][enlace]" id="trabajos-es[0][enlace]" value="" class="regular-text" /><br />
+                                <input type="url" name="trabajos[0][enlace]" id="trabajos[0][enlace]" value="" class="regular-text" /><br />
                             </td>
                         </tr>
                     </table>
@@ -425,26 +425,26 @@ class OS_Perfiles_de_Usuario {
                         <table class="form-table es">
                             <tr>
                                 <th>
-                                    <label for="trabajos-es[<?php echo $i; ?>][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
+                                    <label for="trabajos[<?php echo $i; ?>][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
                                 </th>
                                  <td>
-                                    <input type="text" name="trabajos-es[<?php echo $i; ?>][titulo]" id="trabajos-es[<?php echo $i; ?>][titulo]" value="<?php echo $trabajo['titulo']; ?>" class="regular-text" /><br />
+                                    <input type="text" name="trabajos[<?php echo $i; ?>][titulo]" id="trabajos[<?php echo $i; ?>][titulo]" value="<?php echo $trabajo['titulo']; ?>" class="regular-text" /><br />
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <label for="trabajos-es[<?php echo $i; ?>][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
+                                    <label for="trabajos[<?php echo $i; ?>][texto]"><?php _e('Descripción', 'os_perfiles_de_usuario'); ?></label>
                                 </th>
                                  <td>
-                                    <textarea id="trabajos-es[<?php echo $i; ?>][texto]" name="trabajos-es[<?php echo $i; ?>][texto]" rows="5" cols="40"><?php echo $trabajo['texto']; ?></textarea>
+                                    <textarea id="trabajos[<?php echo $i; ?>][texto]" name="trabajos[<?php echo $i; ?>][texto]" rows="5" cols="40"><?php echo $trabajo['texto']; ?></textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <label for="trabajos-es[<?php echo $i; ?>][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
+                                    <label for="trabajos[<?php echo $i; ?>][enlace]"><?php _e('Enlace al trabajo', 'os_perfiles_de_usuario'); ?></label>
                                 </th>
                                  <td>
-                                    <input type="url" name="trabajos-es[<?php echo $i; ?>][enlace]" id="trabajos-es[<?php echo $i; ?>][enlace]" value="<?php echo $trabajo['enlace']; ?>" class="regular-text" /><br />
+                                    <input type="url" name="trabajos[<?php echo $i; ?>][enlace]" id="trabajos[<?php echo $i; ?>][enlace]" value="<?php echo $trabajo['enlace']; ?>" class="regular-text" /><br />
                                 </td>
                             </tr>
                         </table>
@@ -535,8 +535,8 @@ class OS_Perfiles_de_Usuario {
         }
 
 
-        if (isset($_POST['cargo-es'])) {
-            update_post_meta($post_id, 'cargo-es', $_POST['cargo-es']);
+        if (isset($_POST['cargo'])) {
+            update_post_meta($post_id, 'cargo', $_POST['cargo']);
         }
 
         if (isset($_POST['cargo-en'])) {
@@ -547,16 +547,16 @@ class OS_Perfiles_de_Usuario {
             update_post_meta($post_id, 'imagen_perfil', $_POST['imagen_perfil']);
         }
 
-        if (isset($_POST['descripcion-es'])) {
-            update_post_meta($post_id, 'descripcion-es', $_POST['descripcion-es']);
+        if (isset($_POST['descripcion'])) {
+            update_post_meta($post_id, 'descripcion', $_POST['descripcion']);
         }
 
         if (isset($_POST['descripcion-en'])) {
             update_post_meta($post_id, 'descripcion-en', $_POST['descripcion-en']);
         }
 
-        if (isset($_POST['lugar_trabajo-es'])) {
-            update_post_meta($post_id, 'lugar_trabajo-es', $_POST['lugar_trabajo-es']);
+        if (isset($_POST['lugar_trabajo'])) {
+            update_post_meta($post_id, 'lugar_trabajo', $_POST['lugar_trabajo']);
         }
 
         if (isset($_POST['lugar_trabajo-en'])) {
@@ -567,24 +567,24 @@ class OS_Perfiles_de_Usuario {
             update_post_meta($post_id, 'logo_trabajo', $_POST['logo_trabajo']);
         }
 
-        if (isset($_POST['area_expertise_1-es'])) {
-            update_post_meta($post_id, 'area_expertise_1-es', $_POST['area_expertise_1-es']);
+        if (isset($_POST['area_expertise_1'])) {
+            update_post_meta($post_id, 'area_expertise_1', $_POST['area_expertise_1']);
         }
 
         if (isset($_POST['area_expertise_1-en'])) {
             update_post_meta($post_id, 'area_expertise_1-en', $_POST['area_expertise_1-en']);
         }
 
-        if (isset($_POST['area_expertise_2-es'])) {
-            update_post_meta($post_id, 'area_expertise_2-es', $_POST['area_expertise_2-es']);
+        if (isset($_POST['area_expertise_2'])) {
+            update_post_meta($post_id, 'area_expertise_2', $_POST['area_expertise_2']);
         }
 
         if (isset($_POST['area_expertise_2-en'])) {
             update_post_meta($post_id, 'area_expertise_2-en', $_POST['area_expertise_2-en']);
         }
 
-        if (isset($_POST['area_expertise_3-es'])) {
-            update_post_meta($post_id, 'area_expertise_3-es', $_POST['area_expertise_3-es']);
+        if (isset($_POST['area_expertise_3'])) {
+            update_post_meta($post_id, 'area_expertise_3', $_POST['area_expertise_3']);
         }
 
         if (isset($_POST['area_expertise_3-en'])) {
@@ -611,23 +611,23 @@ class OS_Perfiles_de_Usuario {
             update_post_meta($post_id, 'imagen_cabecera', $_POST['imagen_cabecera']);
         }
 
-        if (isset($_POST['frase_cabecera-es'])) {
-            update_post_meta($post_id, 'frase_cabecera-es', $_POST['frase_cabecera-es']);
+        if (isset($_POST['frase_cabecera'])) {
+            update_post_meta($post_id, 'frase_cabecera', $_POST['frase_cabecera']);
         }
 
         if (isset($_POST['frase_cabecera-en'])) {
             update_post_meta($post_id, 'frase_cabecera-en', $_POST['frase_cabecera-en']);
         }
 
-        if (isset($_POST['trabajos-es'])) {
-            $trabajos = $_POST['trabajos-es'];
+        if (isset($_POST['trabajos'])) {
+            $trabajos = $_POST['trabajos'];
             $trabajos_nuevos = array();
             foreach ($trabajos as $trabajo) {
                 if (!(empty($trabajo['titulo']))) {
                     array_push($trabajos_nuevos, $trabajo);
                 }
             }
-            update_post_meta($post_id, 'trabajos-es', $trabajos_nuevos);
+            update_post_meta($post_id, 'trabajos', $trabajos_nuevos);
         }
 
         if (isset($_POST['trabajos-en'])) {
