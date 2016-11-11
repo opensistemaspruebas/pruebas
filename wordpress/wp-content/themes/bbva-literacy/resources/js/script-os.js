@@ -480,6 +480,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 				jQuery.each(d.data.hits.hit, function(i, result) {
 					jQuery('a.publishes').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
 					jQuery('select#select-tab-results option[value="publishes"]').html(object_name_script_os_js.publicaciones + ' (' + d.data.hits.found + ')');
+					jQuery('select#select-tab-results').selectpicker('refresh');
 					keywords = result.fields['keywords'];
 					/*if (keywords !== undefined) {
 						if (jQuery.inArray('destacada', keywords) > -1 ) {
@@ -512,6 +513,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 				jQuery.each(d.data.hits.hit, function(i, result) {
 					jQuery('a.histories').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
 					jQuery('select#select-tab-results option[value="histories"]').html(object_name_script_os_js.historias + ' (' + d.data.hits.found + ')');
+					jQuery('select#select-tab-results').selectpicker('refresh');
 					keywords = result.fields['keywords'];
 					/*if (keywords !== undefined) {
 						if (jQuery.inArray('destacada', keywords) > -1 ) {
@@ -539,6 +541,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		if (d.code === 200 && d.data.hits.found > 0) {
 			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
 			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
+			jQuery('select#select-tab-results').selectpicker('refresh');
 			if (cambiando_talleres || start_talleres == 0) {
 				jQuery('#workshops .grid-wrapper').first().empty();
 			}
