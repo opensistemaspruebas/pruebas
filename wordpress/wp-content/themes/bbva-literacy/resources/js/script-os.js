@@ -653,7 +653,7 @@ function getPostFiltro_general(post, id) {
 
 		var titulo = post['title'];
 		var descripcion = post['content'];
-		var urlPublicacion = post['image_src'];
+		var urlPublicacion = '/' + post['image_src'];
 		var nombreLink = post['wp_text_array'];
 
 		html += '<section class="data-block"><h2>' + titulo + '</h2><p class="description">' + descripcion + '</p><p class="link"><a target="blank" href="' + urlPublicacion + '">' + nombreLink + '<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p></section>';
