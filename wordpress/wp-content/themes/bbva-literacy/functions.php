@@ -301,7 +301,6 @@ add_action( 'generate_rewrite_rules', 'add_rule_coauthors' );
 function add_rule_coauthors() {
             global $wp_rewrite;
             $new_rules = array(
-                'en/perfiles/(.+)$' => 'index.php?pagename=perfiles&coauthor=' . $wp_rewrite->preg_index(1),
                 'perfiles/(.+)$' => 'index.php?pagename=perfiles&coauthor=' . $wp_rewrite->preg_index(1)
             );
 		error_log("paso por el rewrite ". print_r($new_rules,true));
@@ -409,7 +408,7 @@ function imprimir_json_etiquetas() {
 		array(
 			"taxonomy" => array("category"),
 			"hide_empty" => false,
-			"fields" => "id=>name",
+			"fields" => "id=>name"
 		)
 	);
 	$args_autores = 
@@ -453,32 +452,9 @@ function imprimir_json_etiquetas() {
 		array(
 			"taxonomy" => array("ambito_geografico"),
 			"hide_empty" => false,
-			'parent' => 0,
-			"suppress_filters" => false,
+			"fields" => "id=>name"
 		)
 	);
-	foreach ($countries as $country) {
-		$subterms = get_terms(
-			array(
-				"taxonomy" => array("ambito_geografico"),
-          		'parent'   => $country->term_id,
-          		'hide_empty' => false,
-          		"fields" => "id=>name",
-          		"suppress_filters" => false,
-        	)
-		);
-		break;
-	}
-	$countries = get_terms(
-		array(
-			"taxonomy" => array("ambito_geografico"),
-			"hide_empty" => false,
-			"fields" => "id=>name",
-			'parent' => 0,
-		)
-	);
-	$countries = array_merge($countries, $subterms);
-
 	$id = 1;
 	$data = array();
 	if (!empty($categories)) {
@@ -526,22 +502,10 @@ function imprime_json_paises() {
 		array(
 			"taxonomy" => array("ambito_geografico"),
 			"hide_empty" => false,
-			'parent' => 0,
+			"fields" => "all",
+			"suppress_filters" => 0,
 		)
 	);
-	foreach ($countries as $country) {
-		$countries_aux = get_terms(
-			array(
-				"taxonomy" => array("ambito_geografico"),
-          		'parent'   => $country->term_id,
-				"hide_empty" => false,
-				"fields" => "all",
-				"suppress_filters" => 0,
-        	)
-		);
-		break;
-	}
-	$countries = array_merge($countries, $countries_aux);
 	$data2 = array();
 	if (!empty($countries)) {
 		foreach ($countries as $country) {
