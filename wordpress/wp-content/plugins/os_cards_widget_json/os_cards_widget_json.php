@@ -342,6 +342,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		                            </div>
 		                        </header>
 		                        <div class="row data-container">
+		                        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs">&nbsp;</a>
 		                            <div class="nopadding date"><?php echo $post_date; ?></div>
 		                            <div class="main-card-data-container-title-wrapper">
 		                            	<h1 class="title nopadding"><?php echo $post_title; ?></h1>
