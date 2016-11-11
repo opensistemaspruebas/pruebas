@@ -115,7 +115,6 @@ jQuery(document).ready(function($) {
 	});
 
 	jQuery('body').on('change', '#select-country', function() {
-		console.log("cambio");
 		opcion = jQuery(this).children('option:selected').val();
 		jQuery.each(paisesJson, function(index, value) {
 			if (value[0] == opcion) {

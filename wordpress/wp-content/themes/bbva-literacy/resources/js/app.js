@@ -300,7 +300,7 @@ var googleMaps = function($) {
         html += '<span class="map-info-close">&times;</span>';
         html += '<h1>' + data.title + '</h1>';
         html += '<p>' + data.text + '</p>';
-        html += '<a class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
+        html += '<a target="_blank" class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
         return html;
     }
 
