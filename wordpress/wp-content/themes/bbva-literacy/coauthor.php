@@ -31,22 +31,24 @@
     $nombre = $cargo = $imagen_perfil = $descripcion = $lugar_trabajo = $logo_trabajo = $area_expertise_1 = $area_expertise_2 = $area_expertise_3 = $linkedin = $twitter = $correo_electronico = $url_web = $imagen_cabecera = $frase_cabecera = '';
     $trabajos = array();
 
+    $lang = ICL_LANGUAGE_CODE;
+
     $nombre = get_post_meta($post_id, 'cap-display_name', true);
-    $cargo = get_post_meta($post_id, 'cargo', true);
+    $cargo = get_post_meta($post_id, 'cargo-' . $lang, true);
     $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
-    $descripcion = get_post_meta($post_id, 'descripcion', true);
-    $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo', true);
+    $descripcion = get_post_meta($post_id, 'descripcion-' . $lang, true);
+    $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo-' . $lang, true);
     $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
-    $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1', true);
-    $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2', true);
-    $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3', true);
+    $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1-' . $lang, true);
+    $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2-' . $lang, true);
+    $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3-' . $lang, true);
     $linkedin = get_post_meta($post_id, 'linkedin', true);
     $twitter = get_post_meta($post_id, 'twitter', true);
     $correo_electronico = get_post_meta($post_id, 'correo_electronico', true);
     $url_web = get_post_meta($post_id, 'url_web', true);
     $imagen_cabecera = get_post_meta($post_id, 'imagen_cabecera', true);
-    $frase_cabecera = get_post_meta($post_id, 'frase_cabecera', true);
-    $trabajos = get_post_meta($post_id, 'trabajos', true);
+    $frase_cabecera = get_post_meta($post_id, 'frase_cabecera-' . $lang, true);
+    $trabajos = get_post_meta($post_id, 'trabajos-' . $lang, true);
     
     $numero_publicaciones = count(query_posts("post_status=publish&post_type=publicacion&author_name=" . $author_name));
 
