@@ -409,7 +409,7 @@ function imprimir_json_etiquetas() {
 		array(
 			"taxonomy" => array("category"),
 			"hide_empty" => false,
-			"fields" => "id=>name"
+			"fields" => "id=>name",
 		)
 	);
 	$args_autores = 
@@ -453,9 +453,32 @@ function imprimir_json_etiquetas() {
 		array(
 			"taxonomy" => array("ambito_geografico"),
 			"hide_empty" => false,
-			"fields" => "id=>name"
+			'parent' => 0,
+			"suppress_filters" => false,
 		)
 	);
+	foreach ($countries as $country) {
+		$subterms = get_terms(
+			array(
+				"taxonomy" => array("ambito_geografico"),
+          		'parent'   => $country->term_id,
+          		'hide_empty' => false,
+          		"fields" => "id=>name",
+          		"suppress_filters" => false,
+        	)
+		);
+		break;
+	}
+	$countries = get_terms(
+		array(
+			"taxonomy" => array("ambito_geografico"),
+			"hide_empty" => false,
+			"fields" => "id=>name",
+			'parent' => 0,
+		)
+	);
+	$countries = array_merge($countries, $subterms);
+
 	$id = 1;
 	$data = array();
 	if (!empty($categories)) {
@@ -503,10 +526,22 @@ function imprime_json_paises() {
 		array(
 			"taxonomy" => array("ambito_geografico"),
 			"hide_empty" => false,
-			"fields" => "all",
-			"suppress_filters" => 0,
+			'parent' => 0,
 		)
 	);
+	foreach ($countries as $country) {
+		$countries_aux = get_terms(
+			array(
+				"taxonomy" => array("ambito_geografico"),
+          		'parent'   => $country->term_id,
+				"hide_empty" => false,
+				"fields" => "all",
+				"suppress_filters" => 0,
+        	)
+		);
+		break;
+	}
+	$countries = array_merge($countries, $countries_aux);
 	$data2 = array();
 	if (!empty($countries)) {
 		foreach ($countries as $country) {
