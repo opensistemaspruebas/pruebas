@@ -7,7 +7,7 @@
 	$title = $blog_title . ' | ' . $post_title; 
 ?>
 
-<div class="share-rrss-section mt-md">
+<div class="share-rrss-section mt-md mb-lg">
     <p class="hidden-xs share-in"><?php _e('Compartir en'); ?></p>
     <div class="card-icon">
         <a class="icon icon-twitter bbva-icon-twitter-circle mr-xs" title="<?php echo $title; ?>" href="https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>" target="popup" onclick="window.open('https://twitter.com/share?url=<?php echo $permalink; ?>&text=<?php echo $title_encoded; ?>','name','width=600,height=500')"></a>
