@@ -59,18 +59,19 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 	    	} else {
 	    		$perfil = 'coordinador';
 	    		$destacados = array();
-	    		foreach ($instance['coordinador_destacado'] as $key => $value) {
+	    		if(!empty($instance['coordinador_destacado'])) {
+	    			$id = $instance['coordinador_destacado'];
 	    			$coordinador = $this->get_author_print_fields($id,$perfil);
 	    			if(!empty($coordinador)) {
 	    				$destacados[$key] = $coordinador;
 	    			} else {
-	    				unset($instance['coordinador_destacado'][$key]);
+	    				unset($instance['coordinador_destacado']);
 	    			}
 	    		}
 	    		
 	    		$perfil = 'miembro';
 	    		$miembros = array();
-	    		foreach ($instance['miembros'] as $key => $value) {
+	    		foreach ($instance['miembros'] as $key => $id) {
 	    			$miembro = $this->get_author_print_fields($id,$perfil);
 	    			if(!empty($miembro)) {
 	    				$miembros[$key] = $miembro;
@@ -81,7 +82,6 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 	    	}
 
 	    	$num_miembros = count($destacados) + count($miembros);
-
     	?>
 
     		<section class="people-grid-wrapper medium wow fadeIn" id="<?php echo $args['widget_id']; ?>">
@@ -418,14 +418,17 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 
         private function get_author_print_fields($author_id,$perfil) {
         	$lang = ICL_LANGUAGE_CODE;
+
         	// Sufijo idioma para los campos traducibles
         	$sufijo = '';
         	if($lang == 'en')
         		$sufijo = '-en';
+
         	$author = array();
         	$author['nombre'] = get_post_meta($author_id,'cap-display_name')[0];
         	$author['imagen_perfil'] = get_post_meta($author_id,'imagen_perfil')[0];
         	$author['cargo'] = get_post_meta($author_id,'cargo' . $sufijo)[0];
+
         	// Si lós tres campos están vacíos, es que el usuario ha sido eliminado y no lo muestro en el widget
         	if(empty($author['nombre']) && empty($author['imagen_perfil']) && empty($author['cargo'])) {
         		$author = array();
@@ -440,35 +443,43 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 	        	foreach ($perfiles_aux as $key => $perfil_aux) {
 	        		$perfiles[] = $perfil_aux->name;
 	        	}
+
 	        	// El usuario tiene que tener el perfil con el que se guarda en el widget
 	        	// (Por ejemplo: si es asesor en el widget, el usuario tiene que seguir siendo asesor cuando se muestra)
-	        	if(array_search('Asesor', $perfiles) !== false && $perfil == 'asesor') {
-	        		$author['perfil'] = $perfil;
-	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
-	        		return $author;
-	        	// El usuario ya no es Asesor
-	        	} else {
-	        		$author = array();
-	        		return $author;
+	        	if($perfil == 'asesor') {
+	        		if(array_search('Asesor', $perfiles) !== false) {
+		        		$author['perfil'] = $perfil;
+		        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
+		        		return $author;
+		        	// El usuario ya no es Asesor
+		        	} else {
+		        		$author = array();
+		        		return $author;
+		        	}
+	        	}
+	        	
+	        	if($perfil == 'coordinador') {
+	        		if(array_search('Coordinador', $perfiles) !== false) {
+		        		$author['perfil'] = $perfil;
+		        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
+		        		return $author;
+		        	// El usuario ya no es coordinador
+		        	} else {
+		        		$author = array();
+		        		return $author;
+		        	}
 	        	}
 
-	        	if(array_search('Coordinador', $perfiles) !== false && $perfil == 'coordinador') {
-	        		$author['perfil'] = $perfil;
-	        		$author['enlace'] = $this->get_url_perfil($author['nombre']);
-	        		return $author;
-	        	// El usuario ya no es coordinador
-	        	} else {
-	        		$author = array();
-	        		return $author;
+	        	if($perfil == 'miembro') {
+	        		if(array_search('Miembro', $perfiles) !== false) {
+		        		return $author;
+		        	// El usuario ya no es miembro
+		        	} else {
+		        		$author = array();
+		        		return $author;
+		        	}
 	        	}
-
-	        	if(array_search('Miembro', $perfiles) !== false && $perfil == 'miembro') {
-	        		return $author;
-	        	// El usuario ya no es miembro
-	        	} else {
-	        		$author = array();
-	        		return $author;
-	        	}
+	        	
 	        // Si no tiene, quiere decir que se ha modificado el usuario y no es asesor/coordinador/miembro
 	        } else {
 	        	$author = array();
