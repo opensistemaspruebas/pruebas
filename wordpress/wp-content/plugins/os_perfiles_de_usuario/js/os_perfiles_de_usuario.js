@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
 	
 	jQuery("#taxonomy-perfil input").each(function() {
 		perfil = jQuery.trim(jQuery(this).parent().text());
-		if (jQuery(this).is(':checked') && (perfil == "Ponente")) {
+		/*if (jQuery(this).is(':checked') && (perfil == "Ponente")) {
 			 jQuery('#taxonomy-perfil input').each(function(index, value) {
 				perfil_aux = jQuery.trim(jQuery(this).parent().text());
 				if (perfil_aux !== perfil && (perfil_aux !== 'Asesor')) {
@@ -56,6 +56,17 @@ jQuery(document).ready(function($) {
 			});
 			if(desmarcar)
 				jQuery("#taxonomy-perfil input").removeAttr('disabled');
+		}*/
+		if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
+			 jQuery('#taxonomy-perfil input').each(function(index, value) {
+				perfil_aux = jQuery.trim(jQuery(this).parent().text());
+				if (perfil_aux !== perfil && (perfil_aux !== 'Miembro')) {
+					jQuery(this).attr('checked', false);
+					jQuery(this).attr('disabled', true);
+				}
+			});
+		} else {
+			jQuery('#taxonomy-perfil input').attr('disabled', false);
 		}
 	});
 	jQuery(".campo_personalizado").hide();
@@ -64,7 +75,7 @@ jQuery(document).ready(function($) {
 	
 	jQuery("#taxonomy-perfil input").change(function(e) {
 		perfil = jQuery.trim(jQuery(this).parent().text());
-		if (jQuery(this).is(':checked') && (perfil == "Ponente")) {
+		/*if (jQuery(this).is(':checked') && (perfil == "Ponente")) {
 			 jQuery('#taxonomy-perfil input').each(function(index, value) {
 				perfil_aux = jQuery.trim(jQuery(this).parent().text());
 				if (perfil_aux !== perfil && (perfil_aux !== 'Asesor')) {
@@ -112,12 +123,23 @@ jQuery(document).ready(function($) {
 				if (perfil_aux == "Ponente" || perfil_aux == "Autor" || perfil_aux == "Asesor" || perfil_aux == "Coordinador") {
 					if (jQuery(this).is(":checked")) {
 						desmarcar = false;
-						//return;
+						return;
 					}
 				}
 			});
 			if(desmarcar)
 				jQuery("#taxonomy-perfil input").removeAttr('disabled');
+		}*/
+		if (jQuery(this).is(':checked') && (perfil == "Miembro")) {
+			 jQuery('#taxonomy-perfil input').each(function(index, value) {
+				perfil_aux = jQuery.trim(jQuery(this).parent().text());
+				if (perfil_aux !== perfil && (perfil_aux !== 'Miembro')) {
+					jQuery(this).attr('checked', false);
+					jQuery(this).attr('disabled', true);
+				}
+			});
+		} else {
+			jQuery('#taxonomy-perfil input').attr('disabled', false);
 		}
 		jQuery(".campo_personalizado").hide();
 		ocultar_campos();
