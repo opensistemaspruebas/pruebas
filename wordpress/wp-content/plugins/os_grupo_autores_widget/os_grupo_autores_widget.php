@@ -107,7 +107,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 										<p><?php echo $destacado['cargo']; ?></p>
 										
 										<?php if(isset($destacado['enlace'])): ?>
-									  	<a href="<?php echo $destacado['enlace']; ?>"><?php _e('Ficha del ','os_grupo_autores_widget'); ?><?php echo $destacado['perfil']; ?></a>
+									  	<a href="<?php echo $destacado['enlace']; ?>"><?php if($destacado['perfil'] == 'asesor'){_e('Ficha del asesor','os_grupo_autores_widget');}else if($destacado['perfil'] == 'coordinador'){_e('Ficha del coordinador','os_grupo_autores_widget');} ?></a>
 									  	<?php endif; ?>
 										
 									</div>
