@@ -86,6 +86,7 @@ class OS_Perfiles_de_Usuario {
         $trabajos_es = get_post_meta($post_id, 'trabajos', true);
         $trabajos_en = get_post_meta($post_id, 'trabajos-en', true);
 
+
         $miembro = get_term_by('slug', 'miembro', 'perfil');
         $miembro_id = $miembro->term_id;
         

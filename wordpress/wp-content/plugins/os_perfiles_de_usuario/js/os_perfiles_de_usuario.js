@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
 	});
 	jQuery(".campo_personalizado").hide();
 	ocultar_campos();
-	cambia_tipo(jQuery('input[name=tipo]:checked').val());
+	cambia_tipo(jQuery('input[name=tfipo]:checked').val());
 	
 	jQuery("#taxonomy-perfil input").change(function(e) {
 		perfil = jQuery.trim(jQuery(this).parent().text());
@@ -48,13 +48,20 @@ jQuery(document).ready(function($) {
     });
 
 
-	var count = 0;
+	jQuery("#add-trabajo").click(function(e) {  
 
-	jQuery("#add-trabajo").click(function(e) {        
+		count_es = jQuery('div#informacion_trabajos_relacionados table.es').size();
+		count_en = jQuery('div#informacion_trabajos_relacionados table.en').size();
+
+		if (lang == 'es') {
+			count = count_es;
+		} else {
+			count = count_en;
+		}      
 		count++;
 		// Añado en español e inglés
-		$('<div class="campo_personalizado es" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos[' + count + '][titulo]" id="trabajos[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos[' + count + '][enlace]" id="trabajos[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
-		$('<div class="campo_personalizado en" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos-en[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos-en[' + count + '][titulo]" id="trabajos-en[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos-en[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos-en[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos-en[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos-en[' + count + '][enlace]" id="trabajos-en[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
+		$('<div class="campo_personalizado es" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table ' + lang + '"><tbody><tr><th><label for="trabajos[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos[' + count + '][titulo]" id="trabajos[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos[' + count + '][enlace]" id="trabajos[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
+		$('<div class="campo_personalizado en" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table ' + lang + '"><tbody><tr><th><label for="trabajos-en[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos-en[' + count + '][titulo]" id="trabajos-en[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos-en[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos-en[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos-en[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos-en[' + count + '][enlace]" id="trabajos-en[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
 		lang = jQuery('.cambio-idioma a.selected').attr('id');
 		if(lang == 'es') {
 			jQuery('.es').show();

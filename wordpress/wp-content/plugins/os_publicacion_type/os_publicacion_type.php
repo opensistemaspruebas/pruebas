@@ -341,18 +341,16 @@ function meta_box_publicacion_info($post) {
 
   <p>
     <label for="publication_date"><?php _e('Fecha de publicación (*)', 'os_publicacion_type'); ?></label>
-    <input required type="text" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" maxlength="10" />
-    <span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA. Máximo número de caracteres: 10', 'os_publicacion_type'); ?>)</span>
+    <input required type="text" name="publication_date" value="<?php echo $publication_date; ?>" class="widefat" />
+    <span class="description">(<?php _e('*Campo obligatorio. Formato: DD/MM/AAAA.', 'os_publicacion_type'); ?>)</span>
   </p>
   <p>
     <label for="type"><?php _e('Tipo', 'os_publicacion_type'); ?></label>
-    <input type="text" name="type" value="<?php echo $type; ?>" class="widefat" maxlength="24" />
-    <span class="description"><?php _e('Máximo número de caracteres: 24', 'os_publicacion_type'); ?></span>
+    <input type="text" name="type" value="<?php echo $type; ?>" class="widefat" />
   </p>
   <p>
     <label for="target_audiences"><?php _e('Público objetivo', 'os_publicacion_type'); ?></label>
-    <input type="text" name="target_audiences" value="<?php echo $target_audiences; ?>" class="widefat" maxlength="24" />
-    <span class="description"><?php _e('Máximo número de caracteres: 24', 'os_publicacion_type'); ?></span>
+    <input type="text" name="target_audiences" value="<?php echo $target_audiences; ?>" class="widefat" />
   </p>
   <p>
     <label for="number_of_pages"><?php _e('Número de páginas', 'os_publicacion_type'); ?></label>
@@ -360,23 +358,19 @@ function meta_box_publicacion_info($post) {
   </p>
   <p>
     <label for="jel_code"><?php _e('Código JEL', 'os_publicacion_type'); ?></label>
-    <input type="text" name="jel_code" value="<?php echo $jel_code; ?>" class="widefat" maxlength="24" />
-    <span class="description"><?php _e('Máximo número de caracteres: 24', 'os_publicacion_type'); ?></span>
+    <input type="text" name="jel_code" value="<?php echo $jel_code; ?>" class="widefat" />
   </p>
   <p>
     <label for="edition"><?php _e('Edición', 'os_publicacion_type'); ?></label>
-    <input type="text" name="edition" value="<?php echo $edition; ?>" class="widefat" maxlength="24" />
-    <span class="description"><?php _e('Máximo número de caracteres: 24', 'os_publicacion_type'); ?></span>
+    <input type="text" name="edition" value="<?php echo $edition; ?>" class="widefat" />
   </p>
   <p>
     <label for="editorial"><?php _e('Editorial', 'os_publicacion_type'); ?></label>
-    <input type="text" name="editorial" value="<?php echo $editorial; ?>" class="widefat" maxlength="24" />
-    <span class="description"><?php _e('Máximo número de caracteres: 24', 'os_publicacion_type'); ?></span>
+    <input type="text" name="editorial" value="<?php echo $editorial; ?>" class="widefat" />
   </p>
   <p>
     <label for="organization_name"><?php _e('Nombre de la organización que lo publica', 'os_publicacion_type'); ?></label>
-    <input type="text" name="organization_name" value="<?php echo $organization_name; ?>" class="widefat" maxlength="24" />
-    <span class="description"><?php _e('Máximo número de caracteres: 24', 'os_publicacion_type'); ?></span>
+    <input type="text" name="organization_name" value="<?php echo $organization_name; ?>" class="widefat" />
   </p>
   <p>
     <label for="organization_url"><?php _e('URL de la organización que lo publica', 'os_publicacion_type'); ?></label>
