@@ -138,7 +138,8 @@ function meta_box_tipo($post) {
 
   <p>
     <label for="etiqueta"><?php _e('Etiqueta de texto', 'os_impacto_type'); ?></label>
-    <input type="text" class="widefat" id="etiqueta" name="etiqueta" value="<?php if (isset($etiqueta)) echo $etiqueta; ?>"/>
+    <input type="text" maxlength="16" class="widefat" id="etiqueta" name="etiqueta" value="<?php if (isset($etiqueta)) echo $etiqueta; ?>"/>
+    <span class="description"><?php _e("Máximo número de caracteres: 16", "os_impactos_widget") ?></span>
   </p>
   <p id="valor_objetivo" <?php if ($visualizacion != "circulo" && $visualizacion != "barra" ) echo 'style="display: none;"'; ?>>
     <label for="objetivo"><?php _e('Valor objetivo', 'os_impacto_type'); ?></label>

@@ -528,13 +528,15 @@ if (!class_exists('OS_Impactos_Widget')) :
 	    	<!-- Titulo widget -->
 	    	<p>
 	    		<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Título:', 'os_impactos_widget'); ?></label>
-				<input required="required" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="url" value="<?php echo esc_attr($title); ?>">
+				<input required="required" maxlength="37" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="url" value="<?php echo esc_attr($title); ?>">
+				<span class="description"><?php _e("Máximo número de caracteres: 37", "os_impactos_widget") ?></span>
 			</p>
 
 			<!-- Texto widget -->
 	    	<p>
 	    		<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto:', 'os_impactos_widget'); ?></label>
-				<textarea required="required" class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
+				<textarea required="required" maxlength="195" class="widefat" rows="4" cols="20" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>"><?php echo $texto; ?></textarea>
+				<span class="description"><?php _e("Máximo número de caracteres: 195", "os_impactos_widget") ?></span>
 			</p>
 
 			<!-- Lugar de colocacion del y tipo widget -->
