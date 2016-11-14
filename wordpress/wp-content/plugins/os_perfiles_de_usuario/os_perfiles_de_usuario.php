@@ -389,8 +389,8 @@ class OS_Perfiles_de_Usuario {
                 </div>
             <?php endif; ?>
             <?php if (empty($trabajos_en)) : ?>
-                <div style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
-                    <table class="form-table en" style="display:none;">
+                <div style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;display:none;">
+                    <table class="form-table en">
                         <tr>
                             <th>
                                 <label for="trabajos-en[0][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>
@@ -458,8 +458,8 @@ class OS_Perfiles_de_Usuario {
             <?php if(!empty($trabajos_en)): ?>
                 <?php $i = 0; ?>
                 <?php foreach ($trabajos_en as $trabajo) : ?>
-                    <div class="campo_personalizado en <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;">
-                        <table class="form-table en" style="display:none;">
+                    <div class="campo_personalizado en <?php echo $miembro_id; ?> <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;display:none;">
+                        <table class="form-table en">
                             <tr>
                                 <th>
                                     <label for="trabajos-en[<?php echo $i; ?>][titulo]"><?php _e('Trabajo relacionado', 'os_perfiles_de_usuario'); ?></label>

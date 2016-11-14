@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
 	jQuery("#add-trabajo").click(function(e) {        
 		count++;
 		// Añado en español e inglés
-		$('<div class="campo_personalizado es" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos-es[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos-es[' + count + '][titulo]" id="trabajos-es[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos-es[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos-es[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos-es[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos-es[' + count + '][enlace]" id="trabajos-es[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
+		$('<div class="campo_personalizado es" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos[' + count + '][titulo]" id="trabajos[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos[' + count + '][enlace]" id="trabajos[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
 		$('<div class="campo_personalizado en" style="border: 1px solid #e5e5e5;padding: 5px;margin-bottom: 10px;"><table class="form-table"><tbody><tr><th><label for="trabajos-en[' + count + '][titulo]">Trabajo relacionado</label></th><td><input type="text" name="trabajos-en[' + count + '][titulo]" id="trabajos-en[' + count + '][titulo]" value="" class="regular-text"><br></td></tr><tr><th><label for="trabajos-en[' + count + '][texto]">Descripción</label></th><td><textarea id="trabajo_texto[' + count + ']" name="trabajos-en[' + count + '][texto]" rows="5" cols="40"></textarea></td></tr><tr><th><label for="trabajos-en[' + count + '][enlace]">Enlace al trabajo</label></th><td><input type="url" name="trabajos-en[' + count + '][enlace]" id="trabajos-en[' + count + '][enlace]" value="" class="regular-text"></td></tr></tbody></table><button id="delete-trabajo" type="button">Eliminar este trabajo</button></div>').insertBefore(jQuery(this).parent().parent().find('p'));
 		lang = jQuery('.cambio-idioma a.selected').attr('id');
 		if(lang == 'es') {
@@ -153,12 +153,16 @@ jQuery(document).ready(function($) {
 			jQuery(this).addClass('selected');
 			jQuery(this).parent().find('#en').removeClass('selected');
 			jQuery('.es').show();
+			jQuery('table.es').parent().show();
 			jQuery('.en').hide();
+			jQuery('table.en').parent().hide();
 		} else {
 			jQuery(this).addClass('selected');
 			jQuery(this).parent().find('#es').removeClass('selected');
 			jQuery('.en').show();
+			jQuery('table.en').parent().show();
 			jQuery('.es').hide();
+			jQuery('table.es').parent().hide();
 		}
 	});
 
