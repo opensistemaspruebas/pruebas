@@ -132,7 +132,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 										<p><?php echo $miembro['cargo']; ?></p>
 										
 										<?php if(isset($miembro['enlace'])): ?>
-									  	<a href="<?php echo $miembro['enlace']; ?>"><?php _e('Ficha del ','os_grupo_autores_widget'); ?><?php echo $miembro['perfil']; ?></a>
+									  	<a href="<?php echo $miembro['enlace']; ?>"><?php if($miembro['perfil'] == 'asesor'){_e('Ficha del asesor','os_grupo_autores_widget');}else if($miembro['perfil'] == 'coordinador'){_e('Ficha del coordinador','os_grupo_autores_widget');} ?></a>
 									  	<?php endif; ?>
 										
 									</div>
