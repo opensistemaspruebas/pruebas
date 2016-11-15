@@ -35,7 +35,7 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 	    	if ($instance['color_fondo'] == "gris") {
 	    		$background = 'background-gray';
 	    	} else if ($instance['color_fondo'] == "blanco") {
-	    		$background = 'background-white"';
+	    		$background = 'background-white';
 	    	}
 
 	    	$elementos_menu_izquierdo = wp_get_nav_menu_items($instance['menu_izquierdo']);
