@@ -98,7 +98,9 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				    		<div class="card-container card-container-destacado col-xs-12 col-sm-6">     
 								<!-- person -->
 								<section class="container-fluid person">
-									<a href="<?php echo $destacado['enlace']; ?>" class="link-layer visible-xs">&nbsp;</a>
+									<?php if(isset($miembro['enlace'])): ?>
+									<a href="<?php echo $destacado['enlace']; ?>" class="link-layer visible-xs"></a>
+									<?php endif; ?>
 									<div class="image-wrapper">
 										<img src="<?php echo $destacado['imagen_perfil']; ?>" alt="">
 									</div>
@@ -123,7 +125,9 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 					        <div class="card-container col-xs-12 col-sm-6" id="<?php echo $args['widget_id'] . '_' . $key; ?>" style="display:none;">     
 								<!-- person -->
 								<section class="container-fluid person">
-									<a href="<?php echo $miembro['enlace']; ?>" class="link-layer visible-xs">&nbsp;</a>
+									<?php if(isset($miembro['enlace'])): ?>
+									<a href="<?php echo $miembro['enlace']; ?>" class="link-layer visible-xs"></a>
+									<?php endif; ?>
 									<div class="image-wrapper">
 										<img src="<?php echo $miembro['imagen_perfil']; ?>" alt="">
 									</div>

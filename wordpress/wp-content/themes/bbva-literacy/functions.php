@@ -546,27 +546,14 @@ function imprimir_json_etiquetas() {
 
 function imprime_json_paises() {
 
-	$args = array(
-        'posts_per_page' => -1,
-       	'parent' => 0,
-        'taxonomy' => 'ambito_geografico',
-        'hide_empty' => 0
-    );
-
-   	$global = get_terms('ambito_geografico', $args);
-
-   
-   	$args2 = array(
-        'posts_per_page' => -1,
-       	'parent' => $global[0]->term_id,
-        'taxonomy' => 'ambito_geografico',
-        'hide_empty' => false,
-        "fields" => "all",
+ 	$countries = get_terms(
+		array(
+		"taxonomy" => array("ambito_geografico"),
+		"hide_empty" => false,
+		"fields" => "all",
 		"suppress_filters" => 0
-    );
-
-    $countries = get_terms('ambito_geografico', $args2);
-
+		)
+	);
 	$data2 = array();
 	if (!empty($countries)) {
 		$data2[0] = array(__('Todos'), '', '');
