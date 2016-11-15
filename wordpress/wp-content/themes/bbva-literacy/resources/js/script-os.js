@@ -118,10 +118,20 @@ jQuery(document).ready(function($) {
 		opcion = jQuery(this).children('option:selected').val();
 		jQuery.each(paisesJson, function(index, value) {
 			if (value[0] == opcion) {
-				jQuery('a.link-web').attr('href', value[2]);
-				jQuery('a.link-web .nombre').html('<span class="nombre">' + value[1] + '</span>');
-				jQuery('#workshops span.current-country').html(value[0]);
-				buscar_general(false, false, true);
+				if (index == "0") {
+					jQuery('a.link-web').attr('href', value[2]);
+					jQuery('a.link-web .nombre').html('<span class="nombre">' + value[1] + '</span>');
+					jQuery('a.link-web').hide();
+					jQuery('#workshops h1').html(object_name_script_os_js.todos_los_talleres);
+					buscar_general(false, false, true);
+				} else {
+					jQuery('a.link-web').attr('href', value[2]);
+					jQuery('a.link-web .nombre').html('<span class="nombre">' + value[1] + '</span>');
+					jQuery('a.link-web').show();
+					jQuery('#workshops h1').html(object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + ' ' + '<span class="current-country"></span>');
+					jQuery('#workshops span.current-country').html(value[0]);
+					buscar_general(false, false, true);
+				}
 				return;
 			}
 		});
@@ -325,14 +335,16 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																} else {
 																	jQuery.each(paises, function( index1, value1 ) {
 																		jQuery.each(data.availableTags, function( index2, value2 ) {
-																			id = value2['id'].replace('tag-', '');
-																			selected = '';
-																			if (index2 == 0) {
-																				selected = 'selected';
+																			if (value2['from' == 'geo-container']) {
+																				id = value2['id'].replace('tag-', '');
+																				selected = '';
+																				if (index2 == 0) {
+																					selected = 'selected';
+																				}
+																				if (id == value1) {
+																					codigoBuscador += '<option ' + selected + ' value="' + value2['text'] + '">' + value2['text'] + '</option>';
+																				}	
 																			}
-																			if (id == value1) {
-																				codigoBuscador += '<option ' + selected + ' value="' + value2['text'] + '">' + value2['text'] + '</option>';
-																			}	
 																		});
 																	});
 																}
@@ -644,7 +656,11 @@ function getPostFiltro_general(post, id) {
 		if (post['date'] !== undefined) {
 			fecha = new Date(post['date'].substring(0, 10));
 		}
-		var urlImagen = post['image_src'];
+		var urlImagen = '';
+		if (post['image_src'] !== undefined) {
+			urlImagen = post['image_src'];
+		}
+
 		var urlPublicacion = post['resourcename'];
 		
 		var keywords = post['keywords'];
