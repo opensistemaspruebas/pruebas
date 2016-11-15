@@ -472,13 +472,26 @@ function imprimir_json_etiquetas() {
 			array_push($author_names, $name);
 		}
 	}
-	$countries = get_terms(
-		array(
-			"taxonomy" => array("ambito_geografico"),
-			"hide_empty" => false,
-			"fields" => "id=>name"
-		)
-	);
+	$args = array(
+        'posts_per_page' => -1,
+       	'parent' => 0,
+        'taxonomy' => 'ambito_geografico',
+        'hide_empty' => 0
+    );
+
+   	$global = get_terms('ambito_geografico', $args);
+   
+   	$args2 = array(
+        'posts_per_page' => -1,
+       	'parent' => $global[0]->term_id,
+        'taxonomy' => 'ambito_geografico',
+        'hide_empty' => false,
+        "fields" => "id=>name"
+    );
+
+    $countries = get_terms('ambito_geografico', $args2);
+
+
 	$id = 1;
 	$data = array();
 	if (!empty($categories)) {
@@ -506,6 +519,16 @@ function imprimir_json_etiquetas() {
 		}	
 	}
 	if (!empty($countries)) {
+
+		$tag['text'] = $global[0]->name;
+		$tag['deleteButton'] = false;
+		$tag['class'] = 'available-tag';
+		$tag['from'] = 'geo-container';
+		$tag['id'] = 'tag-' . $global[0]->term_id;
+		array_push($data, $tag);
+		$id++;
+
+
 		foreach ($countries as $key => $country) {
 			$tag['text'] = $country;
 			$tag['deleteButton'] = false;
@@ -522,14 +545,28 @@ function imprimir_json_etiquetas() {
 
 
 function imprime_json_paises() {
-	$countries = get_terms(
-		array(
-			"taxonomy" => array("ambito_geografico"),
-			"hide_empty" => false,
-			"fields" => "all",
-			"suppress_filters" => 0,
-		)
-	);
+
+	$args = array(
+        'posts_per_page' => -1,
+       	'parent' => 0,
+        'taxonomy' => 'ambito_geografico',
+        'hide_empty' => 0
+    );
+
+   	$global = get_terms('ambito_geografico', $args);
+
+   
+   	$args2 = array(
+        'posts_per_page' => -1,
+       	'parent' => $global[0]->term_id,
+        'taxonomy' => 'ambito_geografico',
+        'hide_empty' => false,
+        "fields" => "all",
+		"suppress_filters" => 0
+    );
+
+    $countries = get_terms('ambito_geografico', $args2);
+
 	$data2 = array();
 	if (!empty($countries)) {
 		$data2[0] = array(__('Todos'), '', '');
