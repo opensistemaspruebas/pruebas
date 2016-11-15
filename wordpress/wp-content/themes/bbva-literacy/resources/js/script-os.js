@@ -383,6 +383,12 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	filter = false;
 	if (paises.length > 0){
 		filter = true;
+		paises_aux = paises;
+		for (var i = 0; i < paises_aux.length; i++) {
+			if (paisesJson[paises_aux[i]][0] == "Global") {
+				
+			}
+		}
 		query_paises = "(or wp_double_array:" + paises.join(" wp_double_array:") + ")";
 		//query_paises_talleres = "(or wp_double_array:'" +  paises[0] + "')";
 		pais = jQuery('#select-country option:selected').text();

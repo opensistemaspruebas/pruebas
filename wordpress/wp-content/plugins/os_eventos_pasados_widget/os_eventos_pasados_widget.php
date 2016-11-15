@@ -108,6 +108,7 @@ if (!class_exists('os_eventos_pasados_widget')) :
 		    		$evento_highlights = get_post_meta($evento->ID, 'evento_highlights', true);
 
 		    		$imagenCard = get_post_meta($evento->ID, 'imagenCard', true);
+
 	   
 			    	?>
 					<section class="col-xs-12">
@@ -117,7 +118,7 @@ if (!class_exists('os_eventos_pasados_widget')) :
 					               <header class="summit-image-title-wrapper">
 					                   <p class="text-center hidden-xs text-700"><?php echo $evento->post_title; ?></p>
 					               </header>
-					               <a href="<?php echo get_permalink($evento->ID); ?>" class="link-header-layer visible-xs">
+					               <a href="<?php echo get_permalink($evento->ID); ?>" class="link-header-layer">
 					               		<img src="<?php echo $imagenCard; ?>" alt="<?php echo $evento->post_title; ?>">
 					               	</a>
 					           </div>
