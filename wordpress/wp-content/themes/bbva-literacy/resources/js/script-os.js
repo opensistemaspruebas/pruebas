@@ -318,7 +318,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																	jQuery.each(paisesJson, function( index, value ) {
 																	  selected = '';
 
-																	  if (value[0] == 'Mexico' || value[0] == 'México') {
+																	  if (index == 0) {
 																	  	selected = 'selected';
 																	  }
 																	  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
