@@ -751,7 +751,7 @@ function imprime_links_ordenacion($orden) {
         </a>
         <a data-order-filter="destacados" data-order="DESTACADOS" class="<?php if ($orden == 'DESTACADOS') echo 'selected';?>" href="" class="">
             <span class="icon bbva-icon-view extra-space "></span>
-            <span class="text"><?php _e('Más leídos', 'os_cards_widget_json'); ?></span>
+            <span class="text"><?php _e('Destacados', 'os_cards_widget_json'); ?></span>
         </a>
     </div>
 	<?php

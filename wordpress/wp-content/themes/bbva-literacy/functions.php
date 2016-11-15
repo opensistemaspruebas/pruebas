@@ -566,7 +566,7 @@ function wpdocs_theme_name_scripts() {
 		'resultado_de_busqueda' => __('Resultado de la búsqueda'),
 		'mas_recientes' => __('Más recientes'),
 		'mas_antiguos' => __('Más antiguos'),
-		'mas_leidos' => __('Más leídos'),
+		'mas_leidos' => __('Destacados'),
 		'ver_mas_publicaciones' => __('Ver más publicaciones'),
 		'ver_mas_historias' => __('Ver más historias'),
 		'ver_mas_talleres' => __('Ver más talleres'),
