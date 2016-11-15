@@ -181,7 +181,7 @@
             <?php endif; ?>
             <?php if (!empty($evento_topics)) : ?>
                 <section class="topics-section mt-lg">
-                    <h1 class="mb-md"><?php _e('Topics'); ?></h1>
+                    <h1 class="mb-md"><?php _e('Temas'); ?></h1>
                     <div class="row">
                         <?php foreach ($evento_topics as $evento_topic) : ?>
                             <div class="col-xs-12">
