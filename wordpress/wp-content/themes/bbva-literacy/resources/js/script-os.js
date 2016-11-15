@@ -333,22 +333,19 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																	  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
 																	});
 																} else {
+																	codigoBuscador += '<option selected value="' + paisesJson[0][0] + '">' + paisesJson[0][0] + '</option>';
 																	jQuery.each(paises, function( index1, value1 ) {
 																		jQuery.each(data.availableTags, function( index2, value2 ) {
-																			if (value2['from' == 'geo-container']) {
+																			if (value2['from'] == 'geo-container') {
 																				id = value2['id'].replace('tag-', '');
-																				selected = '';
-																				if (index2 == 0) {
-																					selected = 'selected';
-																				}
 																				if (id == value1) {
-																					codigoBuscador += '<option ' + selected + ' value="' + value2['text'] + '">' + value2['text'] + '</option>';
+																					codigoBuscador += '<option value="' + value2['text'] + '">' + value2['text'] + '</option>';
 																				}	
 																			}
 																		});
 																	});
 																}
-															codigoBuscador += '</select><a target="_blank" href="' + paisesJson[0][2] + '" class="link-web"><span class="nombre">' + paisesJson[0][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></div>\
+															codigoBuscador += '</select><a target="_blank" href="' + paisesJson[0][2] + '" class="link-web" style="display:none;"><span class="nombre">' + paisesJson[0][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></div>\
 														</div>\
 													<article class="container data-grid">\
 														<header>\
@@ -390,13 +387,18 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		//query_paises_talleres = "(or wp_double_array:'" +  paises[0] + "')";
 		pais = jQuery('#select-country option:selected').text();
 		query_paises_talleres = "";
-		jQuery.each(data.availableTags, function(index, value) {
-			if (value['text'] == pais) {
-				id = value['id'].replace('tag-', '');
-				query_paises_talleres = "(or wp_double_array:'" + id + "')";
-				return;
-			}
-		});
+		if (pais == "Todos" || pais == 'All') {
+			query_paises_talleres = query_paises;
+		} else {
+			jQuery.each(data.availableTags, function(index, value) {
+				if (value['text'] == pais) {
+					id = value['id'].replace('tag-', '');
+					query_paises_talleres = "(or wp_double_array:'" + id + "')";
+					if (!cambiando_talleres)
+						return;
+				}
+			});
+		}
 	} else {
 		query_paises_talleres = '';
 		jQuery.each(data.availableTags, function( index, value ) {
@@ -453,7 +455,8 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		jQuery('a.' + tab).trigger('click');
 		jQuery('span.num_resultados').html('0');
 	} else {
-		jQuery('span.num_resultados').html('0');
+		if (!cambiando_talleres)
+			jQuery('span.num_resultados').html('0');
 	}
 
 
@@ -481,8 +484,10 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		        	jQuery('#publishes footer a.readmore').hide();
 		        }
 	    	}
-	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
-	        jQuery('span.num_resultados').html(num_resultados);
+	    	if (!cambiando_talleres) {
+	        	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
+	        	jQuery('span.num_resultados').html(num_resultados);
+	        }
 		} else {
 			jQuery('#publishes footer a.readmore').hide();
 			//jQuery('#publishes .sort-items-container').children('a').hide();
@@ -514,8 +519,10 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		        	jQuery('#histories footer a.readmore').hide();
 		        }
 		    }
-	        num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
-	        jQuery('span.num_resultados').html(num_resultados);
+		    if (!cambiando_talleres) {
+	        	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
+	        	jQuery('span.num_resultados').html(num_resultados);
+	    	}
 		} else {
 			jQuery('#histories footer a.readmore').hide();
 			//jQuery('#histories .sort-items-container').children('a').hide();
@@ -527,7 +534,8 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	//talleres
 	jQuery.get(url_buscador_talleres, function(d) {
 		if (d.code === 200 && d.data.hits.found > 0) {
-			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
+			if (!cambiando_talleres)
+				jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
 			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (' + d.data.hits.found + ')');
 			jQuery('select#select-tab-results').selectpicker('refresh');
 			if (cambiando_talleres || start_talleres == 0) {
@@ -542,13 +550,16 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	        	jQuery('#workshops footer a.readmore').show();
 	        }
 	       	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
-	        jQuery('span.num_resultados').html(num_resultados);
+	       	if (!cambiando_talleres)
+	        	jQuery('span.num_resultados').html(num_resultados);
 		} else {
-			jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (0)');
-			jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (0)');
+			if (!cambiando_talleres) {
+				jQuery('a.workshops').html(object_name_script_os_js.talleres + ' (0)');
+				jQuery('select#select-tab-results option[value="workshops"]').html(object_name_script_os_js.talleres + ' (0)');
+				num_resultados = parseInt(jQuery('span.num_resultados').html()) + 0; 
+	        	jQuery('span.num_resultados').html(num_resultados);
+			}
 			jQuery('#workshops footer a.readmore').hide();
-			num_resultados = parseInt(jQuery('span.num_resultados').html()) + 0; 
-	        jQuery('span.num_resultados').html(num_resultados);
 			jQuery('#workshops .grid-wrapper').first().empty();
 		}
 	});
@@ -645,8 +656,14 @@ function getPostFiltro_general(post, id) {
 		var descripcion = post['content'];
 		var urlPublicacion = '/' + post['image_src'];
 		var nombreLink = post['wp_text_array'];
+		var paisesIds = post['wp_double_array']
+		var textoPaises = [];
+		for (var i = 0; i < paisesIds.length; i++) {
+			indice = parseInt(paisesIds[i]);
+			textoPaises.push(paisesJson[indice][0]);
+		}
 
-		html += '<section class="data-block"><h2>' + titulo + '</h2><p class="description">' + descripcion + '</p><p class="link"><a target="blank" href="' + urlPublicacion + '">' + nombreLink + '<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p></section>';
+		html += '<section class="data-block"><h2>' + titulo + '</h2><p class="pais">' + textoPaises.join(", ") + '</p><p class="description">' + descripcion + '</p><p class="link"><a target="blank" href="' + urlPublicacion + '">' + nombreLink + '<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p></section>';
 
 	} else {
 
