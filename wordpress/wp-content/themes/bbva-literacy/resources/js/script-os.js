@@ -317,7 +317,6 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																if (paises.length == 0){
 																	jQuery.each(paisesJson, function( index, value ) {
 																	  selected = '';
-
 																	  if (index == 0) {
 																	  	selected = 'selected';
 																	  }
@@ -337,41 +336,18 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																		});
 																	});
 																}
-															codigoBuscador += '</select>';
-															if (paises.length == 0) {
-																jQuery.each(paisesJson, function( index, value ) {
-																	if (value[0] == 'Mexico' || value[0] == 'México') {
-																		codigoBuscador += '<a target="_blank" href="' + value[2] + '" class="link-web"><span class="nombre">' + value[1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
-																	  	return;
-																	}
-																});
-															} else {
-																codigoBuscador += '<a target="_blank" href="' + paisesJson[paises[0]][2] + '" class="link-web"><span class="nombre">' + paisesJson[paises[0]][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>';
-
-															}
-															codigoBuscador += '</div>\
+															codigoBuscador += '</select><a target="_blank" href="' + paisesJson[0][2] + '" class="link-web"><span class="nombre">' + paisesJson[0][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></div>\
 														</div>\
 													<article class="container data-grid">\
 														<header>\
-															<h1>' + object_name_script_os_js.talleres + ' ' + object_name_script_os_js.de + ' <span class="current-country">';
-															if (paises.length == 0) {
-																jQuery.each(paisesJson, function( index, value ) {
-																  if (value[0] == 'Mexico' || value[0] == 'México') {
-																  	codigoBuscador += value[0];
-																  	return;
-																  }
-																});
-															} else {
-																codigoBuscador +=  paisesJson[paises[0]][0];
-															}
-													codigoBuscador += '</span></h1>\
+															<h1>' + object_name_script_os_js.todos_los_talleres + ' <span class="current-country"></span></h1>\
 														</header>\
 														<div class="content">\
 															<div class="grid-wrapper"></div>\
 														</div>\
 														<footer class="grid-footer">\
 															<div class="row">\
-																<div class="col-md-12 text-center">\
+																<div class="col-md-12 text-center" >\
 																	<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
 																</div>\
 															</div>\
