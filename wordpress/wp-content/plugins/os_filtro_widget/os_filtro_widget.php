@@ -97,7 +97,7 @@ if (!class_exists('OS_Filtro_Widget')) :
 		        	'no_results' => __('Sin resultados', 'os_filtro_widget'),
 		        	'sort_by_asc_date' => __('Más antiguos', 'os_filtro_widget'),
 		        	'sort_by_desc_date' => __('Más recientes', 'os_filtro_widget'),
-		        	'sort_by_popular' => __('Más leídos', 'os_filtro_widget'),
+		        	'sort_by_popular' => __('Destacados', 'os_filtro_widget'),
 		        	'resultado_de_busqueda' => __('Resultado de la búsqueda', 'os_filtro_widget'),
 		        	'lang' => str_replace('_', '-', get_locale()),
 		      	);
