@@ -64,14 +64,26 @@ if (!class_exists('OSMundoWidget')) :
 
 				    $args = array(
 				        'posts_per_page' => -1,
-
+				       	'parent' => 0,
 				        'taxonomy' => 'ambito_geografico',
 				        'hide_empty' => 0
 				    );
 
-				  $dataMap = array();
+				   	$global = get_terms('ambito_geografico', $args);
+
+				   
+				   	$args2 = array(
+				        'posts_per_page' => -1,
+				       	'parent' => $global[0]->term_id,
+				        'taxonomy' => 'ambito_geografico',
+				        'hide_empty' => 0
+				    );
+
+				    $children = get_terms('ambito_geografico', $args2);
+
+				  	$dataMap = array();
 			
-				  foreach (get_terms('ambito_geografico', $args ) as $tag) :
+				foreach ($children as $tag) :
 
 				    $arrayTaxAG = get_term_meta($tag->term_id);
 				    $isoCodeAux = $arrayTaxAG['isoCode'][0];
