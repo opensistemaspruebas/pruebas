@@ -187,12 +187,12 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	?>	
 	    	<p>
 				<label for="<?php echo $this->get_field_id('titulo'); ?>"><?php _e('Título', 'os_cards_widget_json'); ?>:</label>
-				<input class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" type="text" maxlength="37" value="<?php echo esc_attr($titulo); ?>">
+				<input class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" type="text" value="<?php echo esc_attr($titulo); ?>">
 				<span class="description"><?php _e('Máximo número de caracteres: 37', 'os_cards_widget_json'); ?></span>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto', 'os_cards_widget_json'); ?>:</label>
-				<textarea rows="5" class="widefat" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>" type="text" maxlength="85"><?php echo esc_attr($texto); ?></textarea>
+				<textarea rows="5" class="widefat" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>" type="text"><?php echo esc_attr($texto); ?></textarea>
 				<span class="description"><?php _e('Máximo número de caracteres: 85', 'os_cards_widget_json'); ?></span>
 			</p>
 	    	<p>

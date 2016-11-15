@@ -212,7 +212,7 @@
      
         <!-- Prefooter --> 
         <?php 
-            if (empty($trabajos)) $color = "blanco"; else $color = "gris";
+            if (($numero_publicaciones == 0) && (empty($trabajos))){ $color = "gris"; }else if(($numero_publicaciones > 0) && (empty($trabajos))){ $color = "blanco"; }else if(($numero_publicaciones > 0) && (!empty($trabajos))){ $color = "gris";}
             the_widget('os_prefooter_bbva', array('color_fondo' => $color, 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera'));
         ?>
     <?php else : ?>

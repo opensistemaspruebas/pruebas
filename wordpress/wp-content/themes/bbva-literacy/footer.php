@@ -1,3 +1,8 @@
+        <?php $url_youtube = get_option('youtube-url');  ?>
+        <?php $url_twitter = get_option('twitter-url'); ?>
+
+
+
         <footer class="footer-bbva">
             <!-- footer -->
             <div class="container">
@@ -8,15 +13,16 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
                         <div class="footer-menu-list">
-                            <a href="<?php _e('/legal/'); ?>"><?php _e('Aviso legal'); ?></a>
-                            <a href="<?php _e('/condiciones/'); ?>"><?php _e('Condiciones de uso'); ?></a>
-                            <a href="<?php _e('/datos-personales/'); ?>"><?php _e('Datos personales'); ?></a>
+                        <?php $menu_items = wp_get_nav_menu_items('menu-footer'); ?>
+                            <?php foreach($menu_items as $key => $item): ?>
+                            <a href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
                         <ul class="footer-menu footer-social">
-                            <li><a target="_blank" href="https://twitter.com/BBVALiteracy"><span class="bbva-icon-twitter_link"></span></a></li>
-                            <li><a target="_blank" href="https://www.youtube.com/user/bbva"><span class="bbva-icon-youtube"></span></a></li>
+                            <?php if(!empty($url_twitter)) : ?><li><a target="_blank" href="<?php echo $url_twitter; ?>"><span class="bbva-icon-twitter_link"></span></a></li> <?php endif; ?>
+                            <?php if(!empty($url_youtube)) : ?><li><a target="_blank" href="<?php echo $url_youtube; ?>"><span class="bbva-icon-youtube"></span></a></li> <?php endif; ?>
                         </ul>
                     </div>
                 </div>
@@ -26,8 +32,8 @@
                     </div>
                     <div class="visible-xs col-xs-12">
                         <ul class="footer-menu footer-social">
-                            <li><a target="_blank" href="https://twitter.com/BBVALiteracy"><span class="bbva-icon-twitter_link"></span></a></li>
-                            <li><a target="_blank" href="https://www.youtube.com/user/bbva"><span class="bbva-icon-youtube"></span></a></li>
+                            <?php if(!empty($url_twitter)) : ?><li><a target="_blank" href="<?php echo $url_twitter; ?>"><span class="bbva-icon-twitter_link"></span></a></li> <?php endif; ?>
+                            <?php if(!empty($url_youtube)) : ?><li><a target="_blank" href="<?php echo $url_youtube; ?>"><span class="bbva-icon-youtube"></span></a></li> <?php endif; ?>
                         </ul>
                     </div>
                 </div>
