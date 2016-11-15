@@ -174,6 +174,13 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	paises = tags[3];
 	cadenas = tags[4];
 
+	paises_aux = [];
+	for (var i = 0; i < paises.length; i++) {
+		if (paisesJson[paises[i]][0] !== "Global") {
+			paises_aux.push(paises[i]);
+		}
+	}
+
 	if (!ver_mas) {
 		jQuery("input#startPublicaciones").attr('value', 0);
 		jQuery("input#startHistorias").attr('value', 0);
@@ -324,7 +331,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 														<div class="workshops-results container removePadding">\
 															<div class="controls">\
 																<select id="select-country" class="selectpicker-form countries">';
-																if (paises.length == 0){
+																if (paises_aux.length == 0){
 																	jQuery.each(paisesJson, function( index, value ) {
 																	  selected = '';
 																	  if (index == 0) {
@@ -334,7 +341,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																	});
 																} else {
 																	codigoBuscador += '<option selected value="' + paisesJson[0][0] + '">' + paisesJson[0][0] + '</option>';
-																	jQuery.each(paises, function( index1, value1 ) {
+																	jQuery.each(paises_aux, function( index1, value1 ) {
 																		jQuery.each(data.availableTags, function( index2, value2 ) {
 																			if (value2['from'] == 'geo-container') {
 																				id = value2['id'].replace('tag-', '');
@@ -383,19 +390,11 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	filter = false;
 	if (paises.length > 0){
 		filter = true;
-		paises_aux = paises;
-		for (var i = 0; i < paises_aux.length; i++) {
-			if (paisesJson[paises_aux[i]][0] == "Global") {
-				
-			}
-		}
 		query_paises = "(or wp_double_array:" + paises.join(" wp_double_array:") + ")";
-		//query_paises_talleres = "(or wp_double_array:'" +  paises[0] + "')";
+		query_paises_talleres = "(or wp_double_array:" + paises_aux.join(" wp_double_array:") + ")";
 		pais = jQuery('#select-country option:selected').text();
 		query_paises_talleres = "";
-		if (pais == "Todos" || pais == 'All') {
-			query_paises_talleres = query_paises;
-		} else {
+		if (pais !== "Todos" && pais !== 'All') {
 			jQuery.each(data.availableTags, function(index, value) {
 				if (value['text'] == pais) {
 					id = value['id'].replace('tag-', '');
@@ -404,6 +403,8 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 						return;
 				}
 			});
+		} else {
+			query_paises_talleres = '';
 		}
 	} else {
 		query_paises_talleres = '';
