@@ -532,6 +532,7 @@ function imprime_json_paises() {
 	);
 	$data2 = array();
 	if (!empty($countries)) {
+		$data2[0] = array(__('Todos'), '', '');
 		foreach ($countries as $country) {
 			$descripURLpais = get_term_meta($country->term_id, 'descripURLpais', true);
 			$URLpais = get_term_meta($country->term_id, 'URLpais', true);
@@ -539,7 +540,6 @@ function imprime_json_paises() {
 		}
 	}
 	echo "<script>var paisesJson = " . json_encode($data2) . ";</script>";
-
 }
 
 

@@ -175,7 +175,7 @@ if (!class_exists('OSMundoWidget')) :
 				                <footer id="esconder" class="grid-footer">
 				                  <div class="row">
 				                    <div class="col-md-12 text-center">
-				                      <a href="javascript:void(0)" id="readmore_talleres" name="readmore_talleres" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e(" Más talleres", "os_mundo_widget"); ?></a>
+				                      <a href="javascript:void(0)" id="readmore_talleres" name="readmore_talleres" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Más talleres", "os_mundo_widget"); ?></a>
 				                    </div>
 				                  </div>
 				                </footer>
