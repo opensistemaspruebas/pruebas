@@ -333,11 +333,13 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 																<select id="select-country" class="selectpicker-form countries">';
 																if (paises_aux.length == 0){
 																	jQuery.each(paisesJson, function( index, value ) {
-																	  selected = '';
-																	  if (index == 0) {
-																	  	selected = 'selected';
-																	  }
-																	  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
+																	  if (value[0] !== "Global") {
+																		  selected = '';
+																		  if (index == 0) {
+																		  	selected = 'selected';
+																		  }
+																		  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
+																		}
 																	});
 																} else {
 																	codigoBuscador += '<option selected value="' + paisesJson[0][0] + '">' + paisesJson[0][0] + '</option>';
