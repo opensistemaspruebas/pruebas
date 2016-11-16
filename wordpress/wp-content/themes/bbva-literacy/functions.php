@@ -586,7 +586,7 @@ function wpdocs_theme_name_scripts() {
 		'no_results' => __("No hay resultados"),
 		'publicaciones' => __('Publicaciones'),
 		'historias' => __('Historias'),
-		'talleres' => __('Talleres'),
+		'talleres' => __('Iniciativas y talleres'),
 		'resultado_de_busqueda' => __('Resultado de la búsqueda'),
 		'mas_recientes' => __('Más recientes'),
 		'mas_antiguos' => __('Más antiguos'),
