@@ -49,7 +49,7 @@ function add_search_meta() {
     
     $post_type = get_post_type();
     
-    $types = array('publicacion', 'historia', 'taller');
+    $types = array('publicacion', 'historia', 'taller', 'practica');
     
     if (in_array($post_type, $types) && is_single()) : $p = get_post(get_the_ID()); $attrs = get_atts($p);
     	$post_content = '';
@@ -92,7 +92,7 @@ function add_search_meta() {
     		$fecha = get_the_date('Y-m-d');
     		$image = get_post_meta( $p->ID, 'link_taller', true);
     		$text_array = get_post_meta($p->ID, 'nombre_link', true);
-    	} else {
+    	} else if ($post_type == 'historia'){
     		$post_content = strip_tags($p->post_content);
     		$fecha = get_the_date('Y-m-d');
     		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
@@ -105,6 +105,12 @@ function add_search_meta() {
     		if ($destacada == 'on') {
     			$keyboards[] = 'destacada';
     		}
+    	}else if ($post_type == 'practica'){
+
+    		$descrip = get_post_meta($p->ID, 'texto-descriptivo', true);
+    		$post_content = strip_tags($descrip);
+    		$fecha = get_the_date('Y-m-d');
+    		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCardPractica', true) );
     	}
         ?>
         <meta name="wp_search" content="true"/>
