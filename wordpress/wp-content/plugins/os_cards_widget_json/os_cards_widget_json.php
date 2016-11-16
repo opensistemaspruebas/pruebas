@@ -20,7 +20,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    function __construct() {
 	        parent::__construct(
 	        	'os_cards_widget_json',
-	        	__('Tarjetas de publicaciones/historias', 'os_cards_widget_json'),
+	        	__('Lista cards', 'os_cards_widget_json'),
 	        	array(
 	            	'description' => __('Muestra tarjetas para distintos tipos de posts a partir de un json.', 'os_cards_widget_json')
 	        	)
