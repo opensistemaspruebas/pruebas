@@ -24,6 +24,13 @@ function save_json_to_file($json, $post_type, $identificador, $json_type) {
 			return;
 		}
 		$locale = $post_language_information['locale'];
+		
+	}
+	if(empty($locale)){
+		$lang = ICL_LANGUAGE_CODE;
+		$languages = icl_get_languages('skip_missing=0&orderby=code');
+		
+		$locale = $languages[$lang]['default_locale'];
 	}
 
 	$path = get_home_path() . "wp-content/jsons/" . $locale . "/" . $post_type;
@@ -80,6 +87,17 @@ function post_to_json($post_id, $post_type){
 			$json["titulo"] = get_the_title($post_id);
 			$json["descripcion"] = get_post_meta($post_id,'texto-destacado',true);
 			$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
+			$json["urlPublicacion"] = get_permalink($post_id);
+			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
+			$json["video"] = False;
+			$json["pdf"] = False;
+			$json["cita"] = False;
+			break;
+
+		case "practica":
+			$json["titulo"] = get_the_title($post_id);
+			$json["descripcion"] = get_post_meta($post_id,'texto-descriptivo',true);
+			$json["urlImagen"] = get_post_meta($post_id, 'imagenCardPractica', true);
 			$json["urlPublicacion"] = get_permalink($post_id);
 			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
 			$json["video"] = get_post_meta($post_id, "videoIntro-url", true) ? True: False;
@@ -241,7 +259,7 @@ function save_post_and_update($post_id) {
 
 
 	// Tipos de post para los que guardamos jsones
-	$valid_types = array("publicacion", "historia", "taller", "partners");
+	$valid_types = array("publicacion", "historia", "practica", "taller", "partners");
 
 	$post_type = get_post_type($post_id);
 	

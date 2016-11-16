@@ -5,13 +5,13 @@ if (empty($wp)) {
 
 	$query = new WP_Query(
 		array(
-			'post_type' => 'historia', 
+			'post_type' => 'practica', 
 		)
 	);
 	$i=0;
 	$posts = get_posts(array(
 		'numberposts' => -1,
-		'post_type' => 'historia'
+		'post_type' => 'practica'
 	));
 		
 	echo "Creando todos los JSON:";
@@ -22,7 +22,7 @@ if (empty($wp)) {
 		os_imprimir($post->ID);
 
 		$post_id = $post->ID;
-		$post_type = "historia";
+		$post_type = "practica";
 
 		$json = array("_id" => $post_id, "type" => $post_type);
 
@@ -36,12 +36,11 @@ if (empty($wp)) {
 			}
 			$locale = $post_language_information['locale'];
 		}
-
-		if (!is_dir("../jsons/" . $locale . "/historia/")) {
-			mkdir("../jsons/" . $locale . "/historia/", 0777, true);
-			chmod("../jsons/" . $locale . "/historia/", 0777);
+	
+		if (!is_dir("../jsons/" . $locale . "/practica/")) {
+			mkdir("../jsons/" . $locale . "/practica/", 0777, true);
+			chmod("../jsons/" . $locale . "/practica/", 0777);
 		}
-
 	
 		// Campos del post a recoger en el json
 		switch ($post_type) {
@@ -99,7 +98,7 @@ if (empty($wp)) {
 		}
 
 
-		file_put_contents("../jsons/" . $locale . "/historia/".$post_id.".json", json_encode($json));			
+		file_put_contents("../jsons/" . $locale . "/practica/".$post_id.".json", json_encode($json));			
 	}
 
 	echo "Proceso terminado.";

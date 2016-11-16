@@ -13,11 +13,6 @@ if (empty($wp)) {
 		'numberposts' => -1,
 		'post_type' => 'partners'
 	));
-
-	if (!is_dir("../jsons/partners/")) {
-		mkdir("../jsons/partners/", 0777, true);
-		chmod("../jsons/partners/", 0777);
-	}
 		
 	echo "Creando todos los JSON:";
 	echo "<br>";
@@ -30,6 +25,23 @@ if (empty($wp)) {
 		$post_type = "partners";
 
 		$json = array("_id" => $post_id, "type" => $post_type);
+
+
+		$locale = 'es_ES';
+
+		if (function_exists('wpml_get_language_information')) {
+			$post_language_information = wpml_get_language_information($identificador);
+			if (is_wp_error($post_language_information)) {
+				return;
+			}
+			$locale = $post_language_information['locale'];
+		}
+
+		if (!is_dir("../jsons/" . $locale . "/partners/")) {
+			mkdir("../jsons/" . $locale . "/partners/", 0777, true);
+			chmod("../jsons/" . $locale . "/partners/", 0777);
+		}
+
 
 	
 		// Campos del post a recoger en el json
@@ -48,6 +60,17 @@ if (empty($wp)) {
 			case "historia":
 				$json["titulo"] = get_the_title($post_id);
 				$json["descripcion"] = get_post_field('post_content', $post_id);
+				$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
+				$json["urlPublicacion"] = get_permalink($post_id);
+				$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
+				$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
+				$json["pdf"] = get_post_meta($post_id, "pdf", true) ? True: False;
+				$json["cita"] = get_post_meta($post_id, "cita", true) ? True: False;
+				break;
+
+			case "practica":
+				$json["titulo"] = get_the_title($post_id);
+				$json["descripcion"] = get_post_meta($post_id,'texto-descriptivo',true);
 				$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
 				$json["urlPublicacion"] = get_permalink($post_id);
 				$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
