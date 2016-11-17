@@ -36,6 +36,12 @@ if (empty($wp)) {
 			}
 			$locale = $post_language_information['locale'];
 		}
+		if(empty($locale)){
+			$lang = ICL_LANGUAGE_CODE;
+			$languages = icl_get_languages('skip_missing=0&orderby=code');
+			
+			$locale = $languages[$lang]['default_locale'];
+		}
 
 		if (!is_dir("../jsons/" . $locale . "/partners/")) {
 			mkdir("../jsons/" . $locale . "/partners/", 0777, true);
@@ -60,7 +66,7 @@ if (empty($wp)) {
 			case "historia":
 				$json["titulo"] = get_the_title($post_id);
 				$json["descripcion"] = get_post_meta($post_id,'texto-destacado',true);
-				$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
+				$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
 				$json["urlPublicacion"] = get_permalink($post_id);
 				$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
 				$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
@@ -71,7 +77,7 @@ if (empty($wp)) {
 			case "practica":
 				$json["titulo"] = get_the_title($post_id);
 				$json["descripcion"] = get_post_meta($post_id,'texto-destacado',true);
-				$json["urlImagen"] = wp_get_attachment_image_src(get_post_thumbnail_id($post_id))[0];
+				$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
 				$json["urlPublicacion"] = get_permalink($post_id);
 				$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
 				$json["video"] = get_post_meta($post_id, "video", true) ? True: False;
