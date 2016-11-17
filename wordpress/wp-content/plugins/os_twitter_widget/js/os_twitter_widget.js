@@ -78,11 +78,11 @@ jQuery(document).ready(function() {
 
 	        	
 
-	        });
+	    //    });
 		
 		} else {
 			jQuery('.row.tweets-container').append('<p>No hay tweets disponibles</p>');
 		}
-	//}, 'json');
+	}, 'json');
 
 });
