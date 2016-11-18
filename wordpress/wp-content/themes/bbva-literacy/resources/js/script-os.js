@@ -140,6 +140,7 @@ jQuery(document).ready(function($) {
 });
 
 
+
 function getNumResultados(d, tipo) {
 	if (d.code !== 200 || d.data.hits.found == 0)
 		return 0;
