@@ -304,7 +304,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_1">
 	<?php endif; ?>
 
-	<section class="latests-posts pt-xl wow fadeInUp">
+	<section class="latests-posts pt-xl">
 	    <div class="container">
 	        <header class="title-description">
 	            <h1><?php echo $titulo; ?></h1>
@@ -332,6 +332,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	                			$post_guid = get_permalink($posts[$i]->ID);
 	                			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
 	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
 	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
 	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
                 			}
@@ -339,6 +340,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
                 				$post_guid = get_permalink($posts[$i]->ID);
 	                			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'texto-destacado', true), 0, 140) . '...';
 	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
 	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
 	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
                 			}
@@ -356,15 +358,15 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		                            	<a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs">
 		                            		<img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" />
 		                            	</a>
-		                            	<img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs" />
+		                            	<img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs  wow fadeInUp" />
 		                            </div>
-		                            <div class="hidden-xs floating-text col-xs-9">
+		                            <div class="hidden-xs floating-text col-xs-11">
 		                                <p class="date"><?php echo $post_date; ?></p>
 		                                <h1><?php echo $post_title; ?></h1>
 		                            </div>
 		                        </header>
 		                        <div class="row data-container">
-		                        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs">&nbsp;</a>
+		                        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs"></a>
 		                            <div class="nopadding date"><?php echo $post_date; ?></div>
 		                            <div class="main-card-data-container-title-wrapper">
 		                            	<h1 class="title nopadding"><?php echo $post_title; ?></h1>
@@ -390,6 +392,12 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	                                                <div class="triangle triangle-up-left"></div>
 	                                                <div class="triangle triangle-down-right"></div>
 	                                            </div>
+                                            <?php endif; ?>
+                                           	<?php if (!empty(($pdf) || ($pdfInterno))) : ?>
+	                                            <div class="card-icon"><span class="icon bbva-icon-arrow-download"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
                                             <?php endif; ?>
                                         </div>
                                     </footer>
@@ -493,6 +501,7 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 	                    			$post_guid = get_permalink($post->ID);
 	                    			$post_abstract = get_post_meta($post->ID, 'abstract_destacado', true);
 	                    			$pdf = get_post_meta($post->ID, 'pdf', true);
+	                    			$pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
 			            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
 
 			            			$videoIntro_url = get_post_meta($post->ID, 'videoIntro-url', true);
@@ -510,13 +519,13 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 								                <a href="<?php echo $post_guid; ?>" class="link-header-layer visible-xs"><img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" /></a>
 								                <img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs" />
 								            </div>
-								            <div class="hidden-xs floating-text col-xs-9">
+								            <div class="hidden-xs floating-text col-xs-11">
 								                <p class="date"><?php echo $post_date; ?></p>
 								                <h1><?php echo $post_title; ?></h1>
 								            </div>
 								        </header>
 								        <div class="row data-container">
-								        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs">&nbsp;</a>
+								        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs"></a>
 								            <div class="nopadding date"><?php echo $post_date; ?></div>
 								            <div class="main-card-data-container-title-wrapper">
 								            	<h1 class="title nopadding"><?php echo $post_title; ?></h1>
@@ -543,6 +552,12 @@ function imprime_plantilla_2_json($titulo, $texto, $posts, $numero_posts_totales
 			                                                <div class="triangle triangle-down-right"></div>
 			                                            </div>
 			                                        <?php endif; ?>
+			                                        <?php if (!empty(($pdf) || ($pdfInterno))) : ?>
+			                                        <div class="card-icon"><span class="icon bbva-icon-arrow-download"></span>
+                                                        <div class="triangle triangle-up-left"></div>
+                                                        <div class="triangle triangle-down-right"></div>
+                                                    </div>
+                                                    <?php endif; ?>
 		                                        </div>
 		                                    </footer>
 								        </div>
@@ -640,7 +655,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_3">
 	<?php endif; ?>
 	
-	<section class="outstanding-histories pt-xl wow fadeInUp">
+	<section class="outstanding-histories">
 	    <div class="container">
 	        <header class="title-description">
 	            <h1><?php echo $titulo; ?></h1>
@@ -650,7 +665,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	        </header>
 	        
 	        <?php if (!empty($posts)) : ?>
-	        <div class="card-container container-fluid mt-md mb-md">
+	        <div class="card-container mt-md mb-md wow fadeInUp">
 	            <div class="row contenedorTarjetas">
 	            	<?php $order = array("main", "secondary", "secondary"); ?>
 	            	<?php $i = 0; ?>
@@ -675,6 +690,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	                			$post_guid = get_permalink($posts[$i]->ID);
 	                			$texto_destacado = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
 	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
 	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
 	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
                 			}
@@ -682,6 +698,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
                 				$post_guid = get_permalink($posts[$i]->ID);
 	                			$texto_destacado = substr(get_post_meta($posts[$i]->ID, 'texto-destacado', true), 0, 140) . '...';
 	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$pdfInterno = get_post_meta($post->ID, 'pdfInterno', true);
 	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
 	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
                 			}
@@ -698,9 +715,9 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	                	?>
 	                	<?php $grid = $order[$i % 3]; ?>
 	                	<?php if ($grid == "main") : ?>
-	                		<div class="_main-card col-xs-12 col-sm-6 noppading _main-card">
+	                		<div class="_main-card col-xs-12 col-sm-6 noppading _main-card wow fadeInUp">
 	                	<?php elseif ($grid == "secondary") : ?>
-	                		<div class="_main-card col-xs-12 col-sm-6 noppading _secondary-card">
+	                		<div class="_main-card col-xs-12 col-sm-6 noppading _secondary-card wow fadeInUp">
 	                	<?php endif; ?>
 			                    <section class="container-fluid main-card">
 			                        <header class="row header-container">
@@ -710,13 +727,13 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 							                </a>
 							                <img src="<?php if (!empty($imagen)) echo $imagen ?>" alt="" class="hidden-xs" />
 							            </div>
-			                            <div class="hidden-xs floating-text col-xs-9">
+			                            <div class="hidden-xs floating-text col-xs-11">
 			                                <p class="date"><?php echo $post_date; ?></p>
 			                                <h1><?php echo $post_title; ?></h1>
 			                            </div>
 			                        </header>
 			                        <div class="row data-container">
-			                        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs">&nbsp;</a>
+			                        	<a href="<?php echo $post_guid; ?>" class="link-layer visible-xs"></a>
 			                            <div class="nopadding date"><?php echo $post_date; ?></div>
 			                            <div class="main-card-data-container-title-wrapper">
 			                            	<h1 class="title nopadding"><?php echo $post_title; ?></h1>
@@ -743,6 +760,12 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	                                                    <div class="triangle triangle-down-right"></div>
 	                                                </div>
 	                                            <?php endif; ?>
+	                                            <?php if (!empty(($pdf) || ($pdfInterno))) : ?>
+			                                        <div class="card-icon"><span class="icon bbva-icon-arrow-download"></span>
+                                                        <div class="triangle triangle-up-left"></div>
+                                                        <div class="triangle triangle-down-right"></div>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </footer>
 			                        </div>
