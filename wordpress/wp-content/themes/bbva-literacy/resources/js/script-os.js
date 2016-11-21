@@ -788,6 +788,9 @@ function getPostFiltro_general(post, id) {
 			if ( jQuery.inArray('video', keywords) > -1 ) {
 			    video = true;
 			}
+			if ( jQuery.inArray('pdf', keywords) > -1 ) {
+			    pdf = true;
+			}
 		}
 		
 
@@ -831,7 +834,7 @@ function getPostFiltro_general(post, id) {
 	        html += '<div class="card-icon"><span class="icon bbva-icon-audio2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 	    }
 	    if (pdf)  {
-	        html += '<div class="card-icon"><span class="icon bbva-icon-chat2"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
+	        html += '<div class="card-icon"><span class="icon bbva-icon-arrow-download"></span><div class="triangle triangle-up-left"></div><div class="triangle triangle-down-right"></div></div>';
 		}
 		html += '</div></footer></div></section></div>';
 
