@@ -1,0 +1,226 @@
+@font-face {
+  font-family: 'bbva';
+  src:  url('fonts/bbva.eot?d6ygxl');
+  src:  url('fonts/bbva.eot?d6ygxl#iefix') format('embedded-opentype'),
+    url('fonts/bbva.ttf?d6ygxl') format('truetype'),
+    url('fonts/bbva.woff?d6ygxl') format('woff'),
+    url('fonts/bbva.svg?d6ygxl#bbva') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="bbva-icon-"], [class*=" bbva-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bbva' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bbva-icon-publication-clip:before {
+  content: "\e93f";
+}
+.bbva-icon-arrow-download:before {
+  content: "\e93e";
+}
+.bbva-icon-reply-icon:before {
+  content: "\e93c";
+}
+.bbva-icon-twitter2:before {
+  content: "\e93d";
+}
+.bbva-icon-ico-arrowup:before {
+  content: "\e93b";
+}
+.bbva-icon-audio2:before {
+  content: "\e938";
+}
+.bbva-icon-chat2:before {
+  content: "\e939";
+}
+.bbva-icon-quote2:before {
+  content: "\e93a";
+}
+.bbva-icon-arrow2:before {
+  content: "\e937";
+}
+.bbva-icon-ico_email:before {
+  content: "\e934";
+}
+.bbva-icon-linkedin2:before {
+  content: "\e935";
+}
+.bbva-icon-web2:before {
+  content: "\e936";
+}
+.bbva-icon-facebook-circle:before {
+  content: "\e92f";
+}
+.bbva-icon-google-plus-circle:before {
+  content: "\e930";
+}
+.bbva-icon-linkedin-circle:before {
+  content: "\e931";
+}
+.bbva-icon-pinterest-circle:before {
+  content: "\e932";
+}
+.bbva-icon-twitter-circle:before {
+  content: "\e933";
+}
+.bbva-icon-calendar-01:before {
+  content: "\e92d";
+}
+.bbva-icon-pdf-01:before {
+  content: "\e92e";
+}
+.bbva-icon-coffe:before {
+  content: "\e92c";
+}
+.bbva-icon-arrow:before {
+  content: "\e91f";
+}
+.bbva-icon-cash:before {
+  content: "\e920";
+}
+.bbva-icon-facebook_link:before {
+  content: "\e921";
+}
+.bbva-icon-filter:before {
+  content: "\e922";
+}
+.bbva-icon-less:before {
+  content: "\e923";
+}
+.bbva-icon-link_external:before {
+  content: "\e924";
+}
+.bbva-icon-minus:before {
+  content: "\e925";
+}
+.bbva-icon-more:before {
+  content: "\e926";
+}
+.bbva-icon-plus:before {
+  content: "\e927";
+}
+.bbva-icon-twitter_link:before {
+  content: "\e928";
+}
+.bbva-icon-twitter:before {
+  content: "\e929";
+}
+.bbva-icon-view:before {
+  content: "\e92a";
+}
+.bbva-icon-youtube:before {
+  content: "\e92b";
+}
+.bbva-icon-world_carrusel .path1:before {
+  content: "\e91a";
+  color: rgb(42, 109, 168);
+}
+.bbva-icon-world_carrusel .path2:before {
+  content: "\e91b";
+  margin-left: -0.966796875em;
+  color: rgb(248, 205, 81);
+}
+.bbva-icon-world_carrusel .path3:before {
+  content: "\e91c";
+  margin-left: -0.966796875em;
+  color: rgb(186, 154, 61);
+}
+.bbva-icon-world_carrusel .path4:before {
+  content: "\e91d";
+  margin-left: -0.966796875em;
+  color: rgb(216, 179, 72);
+}
+.bbva-icon-BBVA:before {
+  content: "\e91e";
+}
+.bbva-icon-alert:before {
+  content: "\e900";
+}
+.bbva-icon-arrow_bottom:before {
+  content: "\e901";
+}
+.bbva-icon-arrow_up:before {
+  content: "\e902";
+}
+.bbva-icon-audio:before {
+  content: "\e903";
+}
+.bbva-icon-check:before {
+  content: "\e904";
+}
+.bbva-icon-close:before {
+  content: "\e905";
+}
+.bbva-icon-comments:before {
+  content: "\e906";
+}
+.bbva-icon-commerce:before {
+  content: "\e907";
+}
+.bbva-icon-configuration:before {
+  content: "\e908";
+}
+.bbva-icon-document:before {
+  content: "\e909";
+}
+.bbva-icon-favorite:before {
+  content: "\e90a";
+}
+.bbva-icon-get_out:before {
+  content: "\e90b";
+}
+.bbva-icon-go:before {
+  content: "\e90c";
+}
+.bbva-icon-help:before {
+  content: "\e90d";
+}
+.bbva-icon-info:before {
+  content: "\e90e";
+}
+.bbva-icon-loan:before {
+  content: "\e90f";
+}
+.bbva-icon-mail:before {
+  content: "\e910";
+}
+.bbva-icon-menu:before {
+  content: "\e911";
+}
+.bbva-icon-pin:before {
+  content: "\e912";
+}
+.bbva-icon-play:before {
+  content: "\e913";
+}
+.bbva-icon-quote:before {
+  content: "\e914";
+}
+.bbva-icon-return:before {
+  content: "\e915";
+}
+.bbva-icon-search:before {
+  content: "\e916";
+}
+.bbva-icon-share:before {
+  content: "\e917";
+}
+.bbva-icon-video_chat:before {
+  content: "\e918";
+}
+.bbva-icon-web:before {
+  content: "\e919";
+}
+

@@ -1,0 +1,356 @@
+@import "variables";
+
+@font-face {
+  font-family: 'bbva';
+  src:  url('#{$icomoon-font-path}/bbva.eot?d6ygxl');
+  src:  url('#{$icomoon-font-path}/bbva.eot?d6ygxl#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/bbva.ttf?d6ygxl') format('truetype'),
+    url('#{$icomoon-font-path}/bbva.woff?d6ygxl') format('woff'),
+    url('#{$icomoon-font-path}/bbva.svg?d6ygxl#bbva') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="bbva-icon-"], [class*=" bbva-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bbva' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bbva-icon-publication-clip {
+  &:before {
+    content: $bbva-icon-publication-clip;
+  }
+}
+.bbva-icon-arrow-download {
+  &:before {
+    content: $bbva-icon-arrow-download;
+  }
+}
+.bbva-icon-reply-icon {
+  &:before {
+    content: $bbva-icon-reply-icon;
+  }
+}
+.bbva-icon-twitter2 {
+  &:before {
+    content: $bbva-icon-twitter2;
+  }
+}
+.bbva-icon-ico-arrowup {
+  &:before {
+    content: $bbva-icon-ico-arrowup;
+  }
+}
+.bbva-icon-audio2 {
+  &:before {
+    content: $bbva-icon-audio2;
+  }
+}
+.bbva-icon-chat2 {
+  &:before {
+    content: $bbva-icon-chat2;
+  }
+}
+.bbva-icon-quote2 {
+  &:before {
+    content: $bbva-icon-quote2;
+  }
+}
+.bbva-icon-arrow2 {
+  &:before {
+    content: $bbva-icon-arrow2;
+  }
+}
+.bbva-icon-ico_email {
+  &:before {
+    content: $bbva-icon-ico_email;
+  }
+}
+.bbva-icon-linkedin2 {
+  &:before {
+    content: $bbva-icon-linkedin2;
+  }
+}
+.bbva-icon-web2 {
+  &:before {
+    content: $bbva-icon-web2;
+  }
+}
+.bbva-icon-facebook-circle {
+  &:before {
+    content: $bbva-icon-facebook-circle;
+  }
+}
+.bbva-icon-google-plus-circle {
+  &:before {
+    content: $bbva-icon-google-plus-circle;
+  }
+}
+.bbva-icon-linkedin-circle {
+  &:before {
+    content: $bbva-icon-linkedin-circle;
+  }
+}
+.bbva-icon-pinterest-circle {
+  &:before {
+    content: $bbva-icon-pinterest-circle;
+  }
+}
+.bbva-icon-twitter-circle {
+  &:before {
+    content: $bbva-icon-twitter-circle;
+  }
+}
+.bbva-icon-calendar-01 {
+  &:before {
+    content: $bbva-icon-calendar-01;
+  }
+}
+.bbva-icon-pdf-01 {
+  &:before {
+    content: $bbva-icon-pdf-01;
+  }
+}
+.bbva-icon-coffe {
+  &:before {
+    content: $bbva-icon-coffe;
+  }
+}
+.bbva-icon-arrow {
+  &:before {
+    content: $bbva-icon-arrow;
+  }
+}
+.bbva-icon-cash {
+  &:before {
+    content: $bbva-icon-cash;
+  }
+}
+.bbva-icon-facebook_link {
+  &:before {
+    content: $bbva-icon-facebook_link;
+  }
+}
+.bbva-icon-filter {
+  &:before {
+    content: $bbva-icon-filter;
+  }
+}
+.bbva-icon-less {
+  &:before {
+    content: $bbva-icon-less;
+  }
+}
+.bbva-icon-link_external {
+  &:before {
+    content: $bbva-icon-link_external;
+  }
+}
+.bbva-icon-minus {
+  &:before {
+    content: $bbva-icon-minus;
+  }
+}
+.bbva-icon-more {
+  &:before {
+    content: $bbva-icon-more;
+  }
+}
+.bbva-icon-plus {
+  &:before {
+    content: $bbva-icon-plus;
+  }
+}
+.bbva-icon-twitter_link {
+  &:before {
+    content: $bbva-icon-twitter_link;
+  }
+}
+.bbva-icon-twitter {
+  &:before {
+    content: $bbva-icon-twitter;
+  }
+}
+.bbva-icon-view {
+  &:before {
+    content: $bbva-icon-view;
+  }
+}
+.bbva-icon-youtube {
+  &:before {
+    content: $bbva-icon-youtube;
+  }
+}
+.bbva-icon-world_carrusel .path1 {
+  &:before {
+    content: $bbva-icon-world_carrusel-path1;  
+    color: rgb(42, 109, 168);
+  }
+}
+.bbva-icon-world_carrusel .path2 {
+  &:before {
+    content: $bbva-icon-world_carrusel-path2;  
+    margin-left: -0.966796875em;  
+    color: rgb(248, 205, 81);
+  }
+}
+.bbva-icon-world_carrusel .path3 {
+  &:before {
+    content: $bbva-icon-world_carrusel-path3;  
+    margin-left: -0.966796875em;  
+    color: rgb(186, 154, 61);
+  }
+}
+.bbva-icon-world_carrusel .path4 {
+  &:before {
+    content: $bbva-icon-world_carrusel-path4;  
+    margin-left: -0.966796875em;  
+    color: rgb(216, 179, 72);
+  }
+}
+.bbva-icon-BBVA {
+  &:before {
+    content: $bbva-icon-BBVA;
+  }
+}
+.bbva-icon-alert {
+  &:before {
+    content: $bbva-icon-alert;
+  }
+}
+.bbva-icon-arrow_bottom {
+  &:before {
+    content: $bbva-icon-arrow_bottom;
+  }
+}
+.bbva-icon-arrow_up {
+  &:before {
+    content: $bbva-icon-arrow_up;
+  }
+}
+.bbva-icon-audio {
+  &:before {
+    content: $bbva-icon-audio;
+  }
+}
+.bbva-icon-check {
+  &:before {
+    content: $bbva-icon-check;
+  }
+}
+.bbva-icon-close {
+  &:before {
+    content: $bbva-icon-close;
+  }
+}
+.bbva-icon-comments {
+  &:before {
+    content: $bbva-icon-comments;
+  }
+}
+.bbva-icon-commerce {
+  &:before {
+    content: $bbva-icon-commerce;
+  }
+}
+.bbva-icon-configuration {
+  &:before {
+    content: $bbva-icon-configuration;
+  }
+}
+.bbva-icon-document {
+  &:before {
+    content: $bbva-icon-document;
+  }
+}
+.bbva-icon-favorite {
+  &:before {
+    content: $bbva-icon-favorite;
+  }
+}
+.bbva-icon-get_out {
+  &:before {
+    content: $bbva-icon-get_out;
+  }
+}
+.bbva-icon-go {
+  &:before {
+    content: $bbva-icon-go;
+  }
+}
+.bbva-icon-help {
+  &:before {
+    content: $bbva-icon-help;
+  }
+}
+.bbva-icon-info {
+  &:before {
+    content: $bbva-icon-info;
+  }
+}
+.bbva-icon-loan {
+  &:before {
+    content: $bbva-icon-loan;
+  }
+}
+.bbva-icon-mail {
+  &:before {
+    content: $bbva-icon-mail;
+  }
+}
+.bbva-icon-menu {
+  &:before {
+    content: $bbva-icon-menu;
+  }
+}
+.bbva-icon-pin {
+  &:before {
+    content: $bbva-icon-pin;
+  }
+}
+.bbva-icon-play {
+  &:before {
+    content: $bbva-icon-play;
+  }
+}
+.bbva-icon-quote {
+  &:before {
+    content: $bbva-icon-quote;
+  }
+}
+.bbva-icon-return {
+  &:before {
+    content: $bbva-icon-return;
+  }
+}
+.bbva-icon-search {
+  &:before {
+    content: $bbva-icon-search;
+  }
+}
+.bbva-icon-share {
+  &:before {
+    content: $bbva-icon-share;
+  }
+}
+.bbva-icon-video_chat {
+  &:before {
+    content: $bbva-icon-video_chat;
+  }
+}
+.bbva-icon-web {
+  &:before {
+    content: $bbva-icon-web;
+  }
+}
+
