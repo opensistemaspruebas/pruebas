@@ -140,7 +140,7 @@ if (!class_exists('OS_Logos_Widget')) :
 								$externo5 = get_post_meta($post_id, 'externo5', true);
 			    	?>
 
-				<section class="lightbox modal wow fadeInUp" id="modal-<?php echo $cod_pais . $post_id; ?>" tabindex="-1" role="dialog">
+				<section class="lightbox modal fade" id="modal-<?php echo $cod_pais . $post_id; ?>" tabindex="-1" role="dialog">
 			    	<div class="modal-dialog" role="document">
 			        	<div class="modal-content">
 			            	<div class="container">
