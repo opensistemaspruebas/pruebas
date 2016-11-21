@@ -250,16 +250,20 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 													<option value="publishes">' + object_name_script_os_js.publicaciones + ' (0)</option>\
 													<option value="histories">' + object_name_script_os_js.historias + ' (0)</option>\
 													<option value="workshops">' + object_name_script_os_js.talleres + ' (0)</option>\
+													<option value="bestpractices">' + object_name_script_os_js.mejores_practicas + ' (0)</option>\
 												</select>\
 												<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
 													<li class="hidden-xs active">\
 														<a class="publishes" href="#publishes" aria-controls="publishes" role="tab" data-toggle="tab">' + object_name_script_os_js.publicaciones + ' (0)</a>\
 													</li>\
-														<li class="hidden-xs">\
-															<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (0)</a>\
-														</li>\
-														<li class="hidden-xs">\
-															<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
+													<li class="hidden-xs">\
+														<a class="histories" href="#histories" aria-controls="histories" role="tab" data-toggle="tab">' + object_name_script_os_js.historias + ' (0)</a>\
+													</li>\
+													<li class="hidden-xs">\
+														<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
+													</li>\
+													<li class="hidden-xs">\
+														<a class="bestpractices" href="#bestpractices" aria-controls="bestpractices" role="tab" data-toggle="tab">' + object_name_script_os_js.mejores_practicas + ' (0)</a>\
 													</li>\
 												</ul>\
 											</div>\
@@ -327,50 +331,83 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 													</article>\
 												</section>\
 											</div>\
-												<div role="tabpanel" class="tab-pane" id="workshops">\
-													<section class="workshops-wrapper">\
-														<div class="workshops-results container removePadding">\
-															<div class="controls">\
-																<select id="select-country" class="selectpicker-form countries">';
-																if (paises_aux.length == 0){
-																	jQuery.each(paisesJson, function( index, value ) {
-																	  if (value[0] !== "Global") {
-																		  selected = '';
-																		  if (index == 0) {
-																		  	selected = 'selected';
-																		  }
-																		  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
+											<div role="tabpanel" class="tab-pane" id="workshops">\
+												<section class="workshops-wrapper">\
+													<div class="workshops-results container removePadding">\
+														<div class="controls">\
+															<select id="select-country" class="selectpicker-form countries">';
+															if (paises_aux.length == 0){
+																jQuery.each(paisesJson, function( index, value ) {
+																  if (value[0] !== "Global") {
+																	  selected = '';
+																	  if (index == 0) {
+																	  	selected = 'selected';
+																	  }
+																	  codigoBuscador += '<option value="' + value[0] + '" ' + selected + '>' + value[0] + '</option>';
+																	}
+																});
+															} else {
+																codigoBuscador += '<option selected value="' + paisesJson[0][0] + '">' + paisesJson[0][0] + '</option>';
+																jQuery.each(paises_aux, function( index1, value1 ) {
+																	jQuery.each(data.availableTags, function( index2, value2 ) {
+																		if (value2['from'] == 'geo-container') {
+																			id = value2['id'].replace('tag-', '');
+																			if (id == value1) {
+																				codigoBuscador += '<option value="' + value2['text'] + '">' + value2['text'] + '</option>';
+																			}	
 																		}
 																	});
-																} else {
-																	codigoBuscador += '<option selected value="' + paisesJson[0][0] + '">' + paisesJson[0][0] + '</option>';
-																	jQuery.each(paises_aux, function( index1, value1 ) {
-																		jQuery.each(data.availableTags, function( index2, value2 ) {
-																			if (value2['from'] == 'geo-container') {
-																				id = value2['id'].replace('tag-', '');
-																				if (id == value1) {
-																					codigoBuscador += '<option value="' + value2['text'] + '">' + value2['text'] + '</option>';
-																				}	
-																			}
-																		});
-																	});
-																}
-															codigoBuscador += '</select><a target="_blank" href="' + paisesJson[0][2] + '" class="link-web" style="display:none;"><span class="nombre">' + paisesJson[0][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></div>\
-														</div>\
+																});
+															}
+														codigoBuscador += '</select><a target="_blank" href="' + paisesJson[0][2] + '" class="link-web" style="display:none;"><span class="nombre">' + paisesJson[0][1] + '</span><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></div>\
+													</div>\
 													<article class="container data-grid">\
-														<header>\
-															<h1>' + object_name_script_os_js.todos_los_talleres + ' <span class="current-country"></span></h1>\
-														</header>\
-														<div class="content">\
-															<div class="grid-wrapper"></div>\
-														</div>\
-														<footer class="grid-footer">\
-															<div class="row">\
-																<div class="col-md-12 text-center" >\
-																	<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
-																</div>\
+													<header>\
+														<h1>' + object_name_script_os_js.todos_los_talleres + ' <span class="current-country"></span></h1>\
+													</header>\
+													<div class="content">\
+														<div class="grid-wrapper"></div>\
+													</div>\
+													<footer class="grid-footer">\
+														<div class="row">\
+															<div class="col-md-12 text-center" >\
+																<a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> ' + object_name_script_os_js.ver_mas_talleres + '</a>\
 															</div>\
-														</footer>\
+														</div>\
+													</footer>\
+													</article>\
+												</section>\
+											</div>\
+											<div role="tabpanel" class="tab-pane" id="bestpractices">\
+												<section class="bestpractices-wrapper">\
+													<div class="sort-items-container">\
+														<a data-order-filter="date desc" data-order="DESC" href="#" class="">\
+															<span class="icon bbva-icon-arrow arrowUp"></span>\
+															<span class="text">' + object_name_script_os_js.mas_recientes + '</span>\
+														</a>\
+														<a data-order-filter="date asc" data-order="ASC" href="#" class="">\
+															<span class="icon bbva-icon-arrow arrowDown"></span>\
+															<span class="text">' + object_name_script_os_js.mas_antiguos + '</span>\
+														</a>\
+														<a data-order-filter="destacados" data-order="DESTACADOS" href="#" class="">\
+															<span class="icon bbva-icon-view extra-space "></span>\
+															<span class="text">' + object_name_script_os_js.mas_leidos + '</span>\
+														</a>\
+													</div>\
+													<article class="cards-grid">\
+														<section class="container">\
+															<div class="row"></div>\
+															<footer class="grid-footer">\
+																<div class="row">\
+																	<div class="col-md-12 text-center">\
+																		<a href="#" class="readmore">\
+																			<span class="bbva-icon-more font-xs mr-xs"></span>\
+																			' + object_name_script_os_js.ver_mas_practicas + '\
+																		</a>\
+																	</div>\
+																</div>\
+															</footer>\
+														</section>\
 													</article>\
 												</section>\
 											</div>\
