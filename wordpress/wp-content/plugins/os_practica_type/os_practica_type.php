@@ -85,12 +85,12 @@ add_action('add_meta_boxes', 'practica_meta_boxes');
 function meta_box_texto_descriptivo_practica($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_texto_descriptivo_practica-nonce');
 
-  $texto_descriptivo = get_post_meta($post->ID, 'texto-descriptivo', true);
+  $texto_destacado = get_post_meta($post->ID, 'texto-destacado', true);
 
   ?>
 
   <p>
-    <textarea type="text" style="width:100%;" rows="4" id="texto-descriptivo" name="texto-descriptivo"><?php if (isset($texto_descriptivo)) echo $texto_descriptivo; ?></textarea>
+    <textarea type="text" style="width:100%;" rows="4" id="texto-destacado" name="texto-destacado"><?php if (isset($texto_destacado)) echo $texto_destacado; ?></textarea>
   </p>
 
   <?php
@@ -101,17 +101,17 @@ function meta_box_imagen_cabecera_practica($post) {
 
   wp_nonce_field(basename(__FILE__), 'meta_box_imagen_cabecera_practica-nonce');
 
-  $imagenCabeceraPractica = get_post_meta($post->ID, 'imagenCabeceraPractica', true);
-  $imagen_cabecera_practica_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCabeceraPractica));
+  $imagenCabecera = get_post_meta($post->ID, 'imagenCabecera', true);
+  $imagen_cabecera_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCabecera));
 ?>
 
   <p>
-    <label for="imagenCabeceraPractica"><?php _e('Imagen cabecera', 'os_practica_type'); ?></label>
-    <input class="widefat" id="imagenCabeceraPractica" name="imagenCabeceraPractica" type="text" value="<?php if (!empty($imagenCabeceraPractica)) echo $imagenCabeceraPractica; ?>" readonly="readonly"/>
-    <img id="show_imagenCabeceraPractica" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_practica_thumbnail)) echo esc_attr($imagen_cabecera_practica_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_practica_thumbnail)) echo "display: none;"; ?>">
+    <label for="imagenCabecera"><?php _e('Imagen cabecera', 'os_practica_type'); ?></label>
+    <input class="widefat" id="imagenCabecera" name="imagenCabecera" type="text" value="<?php if (!empty($imagenCabecera)) echo $imagenCabecera; ?>" readonly="readonly"/>
+    <img id="show_imagenCabecera" draggable="false" alt="" name="show_imagenCabecera" src="<?php if (!empty($imagen_cabecera_thumbnail)) echo esc_attr($imagen_cabecera_thumbnail); ?>" style="<?php if (empty($imagen_cabecera_thumbnail)) echo "display: none;"; ?>">
   </p>
   <p>
-    <input id="upload_imagenCabeceraPractica" name="upload_imagenCabeceraPractica" type="button" value="<?php _e('Explorar/Subir', 'os_practica_type'); ?>" />
+    <input id="upload_imagenCabecera" name="upload_imagenCabecera" type="button" value="<?php _e('Explorar/Subir', 'os_practica_type'); ?>" />
   </p>
             
 <?php
@@ -124,17 +124,17 @@ function meta_box_imagen_card_practica($post) {
 
   wp_nonce_field(basename(__FILE__), 'meta_box_imagen_card_practica-nonce');
 
-  $imagenCardPractica = get_post_meta($post->ID, 'imagenCardPractica', true);
-  $imagen_card_practica_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCardPractica));
+  $imagenCard = get_post_meta($post->ID, 'imagenCard', true);
+  $imagen_card_thumbnail = wp_get_attachment_thumb_url(get_attachment_id_by_url($imagenCard));
 ?>
 
   <p>
-    <label for="imagenCardPractica"><?php _e('Imagen Card', 'os_practica_type'); ?></label>
-    <input class="widefat" id="imagenCardPractica" name="imagenCardPractica" type="text" value="<?php if (!empty($imagenCardPractica)) echo $imagenCardPractica; ?>" readonly="readonly"/>
-    <img id="show_imagenCardPractica" draggable="false" alt="" name="show_imagenCardPractica" src="<?php if (!empty($imagen_card_practica_thumbnail)) echo esc_attr($imagen_card_practica_thumbnail); ?>" style="<?php if (empty($imagen_card_practica_thumbnail)) echo "display: none;"; ?>">
+    <label for="imagenCard"><?php _e('Imagen Card', 'os_practica_type'); ?></label>
+    <input class="widefat" id="imagenCard" name="imagenCard" type="text" value="<?php if (!empty($imagenCard)) echo $imagenCard; ?>" readonly="readonly"/>
+    <img id="show_imagenCard" draggable="false" alt="" name="show_imagenCard" src="<?php if (!empty($imagen_card_thumbnail)) echo esc_attr($imagen_card_thumbnail); ?>" style="<?php if (empty($imagen_card_thumbnail)) echo "display: none;"; ?>">
   </p>
   <p>
-    <input id="upload_imagenCardPractica" name="upload_imagenCardPractica" type="button" value="<?php _e('Explorar/Subir', 'os_practica_type'); ?>" />
+    <input id="upload_imagenCard" name="upload_imagenCard" type="button" value="<?php _e('Explorar/Subir', 'os_practica_type'); ?>" />
   </p>
             
 <?php
@@ -165,16 +165,16 @@ function meta_box_url_practica($post) {
 
 function meta_boxes_save_practica($post_id) {
 
-  if(isset($_POST['texto-descriptivo'])) {
-    update_post_meta($post_id, 'texto-descriptivo', strip_tags($_POST['texto-descriptivo']));
+  if(isset($_POST['texto-destacado'])) {
+    update_post_meta($post_id, 'texto-destacado', strip_tags($_POST['texto-destacado']));
   }
  
-  if (isset($_POST['imagenCardPractica'])) {
-    update_post_meta($post_id, 'imagenCardPractica', strip_tags($_POST['imagenCardPractica']));
+  if (isset($_POST['imagenCard'])) {
+    update_post_meta($post_id, 'imagenCard', strip_tags($_POST['imagenCard']));
   }
  
-  if (isset($_POST['imagenCabeceraPractica'])) {
-    update_post_meta($post_id, 'imagenCabeceraPractica', strip_tags($_POST['imagenCabeceraPractica']));
+  if (isset($_POST['imagenCabecera'])) {
+    update_post_meta($post_id, 'imagenCabecera', strip_tags($_POST['imagenCabecera']));
   }
 
   if(isset($_POST['urlPractica'])) {

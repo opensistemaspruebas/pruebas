@@ -109,7 +109,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'suppress_filters' => false
 						);
 	    			}
-	    		} else {
+	    		} else if($tipo_post == "historia"){
 	    			if ($orden == 'DESTACADOS') {
 		    			$args = array(
 							'posts_per_page'   => $numero_posts_mostrar,
@@ -144,6 +144,20 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 							'suppress_filters' => false
 						);
 	    			}
+	    		} else{
+
+	    			$args = array(
+							'posts_per_page'   => $numero_posts_mostrar,
+							'offset'           => 0,
+							'category'         => '',
+							'orderby'          => 'post_date',
+							'order'            => 'DESC',
+							'meta_key'         => '',
+							'meta_value'       => '',
+							'post_type'        => $tipo_post,
+							'post_status'      => 'publish',
+							'suppress_filters' => false
+						);
 	    		}
 
 		    	$posts = get_posts($args);
@@ -188,12 +202,10 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 	    	<p>
 				<label for="<?php echo $this->get_field_id('titulo'); ?>"><?php _e('Título', 'os_cards_widget_json'); ?>:</label>
 				<input class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" type="text" value="<?php echo esc_attr($titulo); ?>">
-				<span class="description"><?php _e('Máximo número de caracteres: 37', 'os_cards_widget_json'); ?></span>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('texto'); ?>"><?php _e('Texto', 'os_cards_widget_json'); ?>:</label>
 				<textarea rows="5" class="widefat" id="<?php echo $this->get_field_id('texto'); ?>" name="<?php echo $this->get_field_name('texto'); ?>" type="text"><?php echo esc_attr($texto); ?></textarea>
-				<span class="description"><?php _e('Máximo número de caracteres: 85', 'os_cards_widget_json'); ?></span>
 			</p>
 	    	<p>
 				<label for="<?php echo $this->get_field_id('numero_posts_mostrar'); ?>"><?php _e('Número de posts a mostrar inicialmente', 'os_cards_widget_json'); ?>:</label>
@@ -208,6 +220,7 @@ if (!class_exists('OS_Cards_Widget_Json')) :
 				<select class="widefat" id="<?php echo $this->get_field_id('tipo_post'); ?>" name="<?php echo $this->get_field_name('tipo_post'); ?>">
 					<option value="publicacion" <?php $selected = ($tipo_post == 'publicacion') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Publicación', 'os_cards_widget_json'); ?></option>
 					<option value="historia" <?php $selected = ($tipo_post == 'historia') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Historia', 'os_cards_widget_json'); ?></option>
+					<option value="practica" <?php $selected = ($tipo_post == 'practica') ? 'selected="selected"' : ''; echo $selected; ?>><?php _e('Práctica', 'os_cards_widget_json'); ?></option>
 				</select>
 			</p>
 			<p>
@@ -307,7 +320,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
                 		<?php
 
                 			$post_title = $posts[$i]->post_title;
-
+                	
                 			$post_type = $posts[$i]->post_type;
                 			if ($post_type == 'publicacion') {
                 				$fecha_publicacion = get_post_meta($posts[$i]->ID, 'publication_date', true);
@@ -315,13 +328,20 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
                 			} else {
                 				$post_date = get_the_date('j F Y', $posts[$i]->ID);
                 			}
-
-                			$post_guid = get_permalink($posts[$i]->ID);
-                			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
-                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
-                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
-
-                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
+                			if ($post_type == 'publicacion') {
+	                			$post_guid = get_permalink($posts[$i]->ID);
+	                			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
+	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
+	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
+                			}
+                			else{
+                				$post_guid = get_permalink($posts[$i]->ID);
+	                			$post_abstract = substr(get_post_meta($posts[$i]->ID, 'texto-destacado', true), 0, 140) . '...';
+	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
+	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
+                			}
        					
        					?>
        					<?php $j = $i + 1; ?>
@@ -382,7 +402,7 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                     <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php _e('Ver más publicaciones', 'os_cards_widget_json'); ?></a>
+	                     <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php echo $enlace_detalle; ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> <?php if($post_type == 'historia'){_e("Ver más historias", "os_cards_widget_json");}else if($post_type == 'publicacion'){_e("Ver más publicaciones", "os_cards_widget_json");}else if($post_type == 'practica'){_e("Ver más prácticas", "os_cards_widget_json");} ?></a>
 	                </div>
 	            </div>
 	        </footer>
@@ -650,19 +670,30 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 								$post_date = get_the_date('j F Y', $posts[$i]->ID);
 							}
 
-                			$post_guid = get_permalink($post->ID);
-                			$post_content = substr($post->post_content, 0, 140) . '...';
-	            			$imagen = get_post_meta($post->ID, 'imagenCard', true);
 
-	            			$videoIntro_url = get_post_meta($post->ID,'videoIntro-url',true);
+							if ($post_type == 'publicacion') {
+	                			$post_guid = get_permalink($posts[$i]->ID);
+	                			$texto_destacado = substr(get_post_meta($posts[$i]->ID, 'abstract_destacado', true), 0, 140) . '...';
+	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
+	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
+                			}
+                			else{
+                				$post_guid = get_permalink($posts[$i]->ID);
+	                			$texto_destacado = substr(get_post_meta($posts[$i]->ID, 'texto-destacado', true), 0, 140) . '...';
+	                			$pdf = get_post_meta($posts[$i]->ID, 'pdf', true);
+	                			$imagen = get_post_meta($posts[$i]->ID, 'imagenCard', true);
+	                			$videoIntro_url = get_post_meta($posts[$i]->ID, 'videoIntro-url', true);
+                			}
+
+                			$post_content = substr($post->post_content, 0, 140) . '...';
+	            			
 
        						$style = '';
        						if (empty($enlace_detalle) && $i >= $numero_posts_mostrar) 
        							$style = 'style="display: none;';
 
        						$subtitulo = get_post_meta($post->ID,'subtitulo',true);
-    						$texto_destacado = get_post_meta($post->ID,'texto-destacado',true);
-
 
 	                	?>
 	                	<?php $grid = $order[$i % 3]; ?>
@@ -724,7 +755,7 @@ function imprime_plantilla_3_json($titulo, $texto, $posts, $numero_posts_totales
 	        <footer class="grid-footer">
 	            <div class="row">
 	                <div class="col-md-12 text-center">
-	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php if (!empty($enlace_detalle)) echo $enlace_detalle; else echo "javascript:void(0);" ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e("Ver más historias", "os_cards_widget_json");?></a>
+	                    <a <?php if ($numero_posts_mostrar >= $published_posts) echo 'style="display: none;"';?> href="<?php if (!empty($enlace_detalle)) echo $enlace_detalle; else echo "javascript:void(0);" ?>" <?php if (empty($enlace_detalle)) : echo 'id="readmore"'; endif; ?> class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php if($post_type == 'historia'){_e("Ver más historias", "os_cards_widget_json");}else if($post_type == 'publicacion'){_e("Ver más publicaciones", "os_cards_widget_json");}else if($post_type == 'practica'){_e("Ver más prácticas", "os_cards_widget_json");} ?></a>
 	                </div>
 	            </div>
 	        </footer>

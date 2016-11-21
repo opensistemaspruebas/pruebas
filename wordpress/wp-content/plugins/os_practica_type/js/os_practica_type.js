@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-    $("input#upload_imagenCabeceraPractica").click(function(e) {
+    $("input#upload_imagenCabecera").click(function(e) {
         e.preventDefault();
         var custom_uploader;
         if (custom_uploader) {
@@ -17,18 +17,18 @@ jQuery(function($) {
         });
         custom_uploader.on('select', function() {
             var attachment = custom_uploader.state().get('selection').first().toJSON();
-            $('input#imagenCabeceraPractica').val(attachment.url);
+            $('input#imagenCabecera').val(attachment.url);
             if(typeof(attachment.sizes.thumbnail) !== 'undefined') {
-                $('img#show_imagenCabeceraPractica').attr("src", attachment.sizes.thumbnail.url);
+                $('img#show_imagenCabecera').attr("src", attachment.sizes.thumbnail.url);
             } else {
-                $('img#show_imagenCabeceraPractica').attr("src", attachment.sizes.full.url);
+                $('img#show_imagenCabecera').attr("src", attachment.sizes.full.url);
             }
-            $('img#show_imagenCabeceraPractica').show();
+            $('img#show_imagenCabecera').show();
         });
         custom_uploader.open();
     });
 
-    $("input#upload_imagenCardPractica").click(function(e) {
+    $("input#upload_imagenCard").click(function(e) {
         e.preventDefault();
         var custom_uploader;
         if (custom_uploader) {
@@ -45,13 +45,13 @@ jQuery(function($) {
         });
         custom_uploader.on('select', function() {
             var attachment = custom_uploader.state().get('selection').first().toJSON();
-            $('input#imagenCardPractica').val(attachment.url);
+            $('input#imagenCard').val(attachment.url);
             if(typeof(attachment.sizes.thumbnail) !== 'undefined') {
-                $('img#show_imagenCardPractica').attr("src", attachment.sizes.thumbnail.url);
+                $('img#show_imagenCard').attr("src", attachment.sizes.thumbnail.url);
             } else {
-                $('img#show_imagenCardPractica').attr("src", attachment.sizes.full.url);
+                $('img#show_imagenCard').attr("src", attachment.sizes.full.url);
             }
-            $('img#show_imagenCardPractica').show();
+            $('img#show_imagenCard').show();
         });
         custom_uploader.open();
     });
