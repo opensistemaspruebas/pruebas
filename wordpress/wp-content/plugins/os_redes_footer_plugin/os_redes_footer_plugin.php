@@ -42,6 +42,7 @@ if (!class_exists('OSRedesFooter')) :
 		
 			register_setting( 'os-social-footer', 'twitter-url' );
 			register_setting( 'os-social-footer', 'youtube-url' );
+			register_setting( 'os-social-footer', 'facebook-url' );
 
 		}
 

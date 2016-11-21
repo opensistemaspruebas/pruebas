@@ -9,7 +9,6 @@
     <p><?php _e('Los siguientes enlaces aparecerán en el footer de la página', 'os_redes_plugin') ?></p>
 
     <h3>Twitter</h3>
-    
     <table class="form-table">
         <tr valign="top">
         <th scope="row"><?php _e('URL de la cuenta', 'os_redes_plugin') ?></th>
@@ -24,6 +23,14 @@
         <td><input class="widefat" type="text" name="youtube-url" value="<?php echo get_option('youtube-url'); ?>" /></td>
         </tr>
     </table>
+
+    <h3>Facebook</h3>
+   <table class="form-table">
+       <tr valign="top">
+       <th scope="row"><?php _e('URL de la página', 'os_redes_plugin') ?></th>
+       <td><input class="widefat" type="text" name="facebook-url" value="<?php echo get_option('facebook-url'); ?>" /></td>
+       </tr>
+   </table>
     
     <?php submit_button(); ?>
 
