@@ -181,7 +181,7 @@
             <?php endif; ?>
             <?php if (!empty($evento_topics)) : ?>
                 <section class="topics-section mt-lg">
-                    <h1 class="mb-md"><?php _e('Temas'); ?></h1>
+                    <h1 class="mb-md"><?php _e('Temas relevantes'); ?></h1>
                     <div class="row">
                         <?php foreach ($evento_topics as $evento_topic) : ?>
                             <div class="col-xs-12">
@@ -209,7 +209,7 @@
             <?php endif; ?>
             <?php if (!empty($evento_documento)) : ?>
                 <section class="file-section mt-lg">
-                      <h1 class="mb-md"><?php _e('Ficha del evento'); ?></h1>
+                      <h1 class="mb-md"><?php _e('Detalles del evento'); ?></h1>
                       <div class="pdf-rectangle">
                           <div class="row">
                               <div class="col-xs-12 col-sm-1">
@@ -472,7 +472,7 @@
             <section class="contact-person">
                 <div class="container content-wrap">
                     <h1 class="mt-xl"><?php _e('Persona de contacto'); ?></h1>
-                    <h2 class="mb-md"><?php _e('Si tienes alguna duda sobre el evento, puedes ponerte en contacto con:'); ?></h2>
+                    <h2 class="mb-md"><?php _e('Para más información sobre el evento, ponte en contacto con:'); ?></h2>
                     <!-- person -->
                     <section class="container-fluid person">
                         <a href="#" class="link-layer visible-xs">&nbsp;</a>
