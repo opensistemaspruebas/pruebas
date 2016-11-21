@@ -593,7 +593,7 @@ function wpdocs_theme_name_scripts() {
 		'publicaciones' => __('Publicaciones'),
 		'historias' => __('Historias'),
 		'talleres' => __('Iniciativas y talleres'),
-		'mejores_practicas' => __('Mejores prácticas'),
+		'practicas' => __('Mejores prácticas'),
 		'resultado_de_busqueda' => __('Resultado de la búsqueda'),
 		'mas_recientes' => __('Más recientes'),
 		'mas_antiguos' => __('Más antiguos'),

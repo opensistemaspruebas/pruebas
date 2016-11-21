@@ -129,6 +129,10 @@
                     <input type="hidden" name="sortByTalleres" id="sortByTalleres" value="date desc">
                     <input type="hidden" name="sizeTalleres" id="sizeTalleres" value="6">
 
+                    <input type="hidden" name="startPracticas" id="startPracticas" value="0">
+                    <input type="hidden" name="sortByPracticas" id="sortByPracticas" value="date desc">
+                    <input type="hidden" name="sizePracticas" id="sizePracticas" value="10">
+
                     <input type="hidden" name="currentTab" id="currentTab" value="publishes">
                    
                     <div class="navbar navbar-search">

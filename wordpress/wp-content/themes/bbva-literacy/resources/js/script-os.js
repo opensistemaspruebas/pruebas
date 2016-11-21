@@ -70,6 +70,12 @@ jQuery(document).ready(function($) {
 		buscar_general(true, false, false);
 	});
 
+	jQuery('body').on('click', '#bestpractices footer a.readmore', function(event) {
+		event.preventDefault();
+		start = parseInt(jQuery("input#startPracticas").val()) + 10;
+		jQuery("input#startPracticas").attr('value', start);
+		buscar_general(true, false, false);
+	});
 
 	jQuery('body').on('click', '#histories footer a.readmore', function(event) {
 		event.preventDefault();
@@ -186,11 +192,13 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		jQuery("input#startPublicaciones").attr('value', 0);
 		jQuery("input#startHistorias").attr('value', 0);
 		jQuery("input#startTalleres").attr('value', 0);
+		jQuery("input#startPracticas").attr('value', 0);
 	}
 
 	if (!ver_mas && !reordenar) {
 		jQuery('#sortByPublicaciones').attr('value', 'date desc');
 		jQuery('#sortByHistorias').attr('value', 'date desc');
+		jQuery('#sortByPracticas').attr('value', 'date desc');
 		jQuery('#currentTab').attr('value', 'publishes');
 	}
 
@@ -205,12 +213,17 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 	start_talleres = jQuery("input#startTalleres").val();
 	order_talleres = jQuery("input#sortByTalleres").val();
 	size_talleres = jQuery("input#sizeTalleres").val();
+
+	start_practicas = jQuery("input#startPracticas").val();
+	order_practicas = jQuery("input#sortByPracticas").val();
+	size_practicas = jQuery("input#sizePracticas").val();
 	
 	query_paises = "";
 	query_autores = "";
 	query_categorias = "";
 	query_destacados_publicaciones = '';
 	query_destacados_historias = '';
+	query_destacados_practicas = '';
 
 	frase = object_name_script_os_js.se_han_encontrado + ' <span class="num_resultados">0</span> ' + object_name_script_os_js.resultados;
 	if (textoInput !== '') {
@@ -250,7 +263,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 													<option value="publishes">' + object_name_script_os_js.publicaciones + ' (0)</option>\
 													<option value="histories">' + object_name_script_os_js.historias + ' (0)</option>\
 													<option value="workshops">' + object_name_script_os_js.talleres + ' (0)</option>\
-													<option value="bestpractices">' + object_name_script_os_js.mejores_practicas + ' (0)</option>\
+													<option value="bestpractices">' + object_name_script_os_js.practicas + ' (0)</option>\
 												</select>\
 												<ul id="results-tabs" class="nav nav-tabs" role="tablist">\
 													<li class="hidden-xs active">\
@@ -263,7 +276,7 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 														<a class="workshops" href="#workshops" aria-controls="workshops" role="tab" data-toggle="tab">' + object_name_script_os_js.talleres + ' (0)</a>\
 													</li>\
 													<li class="hidden-xs">\
-														<a class="bestpractices" href="#bestpractices" aria-controls="bestpractices" role="tab" data-toggle="tab">' + object_name_script_os_js.mejores_practicas + ' (0)</a>\
+														<a class="bestpractices" href="#bestpractices" aria-controls="bestpractices" role="tab" data-toggle="tab">' + object_name_script_os_js.practicas + ' (0)</a>\
 													</li>\
 												</ul>\
 											</div>\
@@ -474,18 +487,25 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 		order_historias = 'date desc';
 		query_destacados_historias += '(or keywords:\'destacada\')';
 	}
+	if (order_practicas == 'destacados') {
+		order_practicas = 'date desc';
+		query_destacados_practicas += '(or keywords:\'destacada\')';
+	}
 
 	var url_buscador = 'http://d1xkg658gp8s5n.cloudfront.net/bbva-components/search?&q.parser=lucene&q=*' + texto + '*&project=is8lyryw';
 	if (filter) {
 		url_buscador_publicaciones = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_publicaciones + '(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
+		url_buscador_practicas = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_practicas + '(or topic:\'practica\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 		url_buscador_historias = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises + query_destacados_historias + '(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 		url_buscador_talleres = url_buscador + '&fq=(and' + query_categorias + query_autores + query_paises_talleres + '(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\'))';
 	} else {
 		url_buscador_publicaciones = url_buscador + '&fq=(and(or topic:\'publicacion\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_publicaciones + ')';
+		url_buscador_practicas = url_buscador + '&fq=(and(or topic:\'practica\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_practicas + ')';
 		url_buscador_historias = url_buscador + '&fq=(and(or topic:\'historia\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_destacados_historias + ')';
 		url_buscador_talleres = url_buscador + '&fq=(and(or topic:\'taller\')(or content_language:\'' + object_name_script_os_js.lang + '\')' + query_paises_talleres + ')';
 	}
 	url_buscador_publicaciones += '&start=' + start_publicaciones + '&sort=' + order_publicaciones + '&size=' + size_publicaciones;
+	url_buscador_practicas += '&start=' + start_practicas + '&sort=' + order_practicas + '&size=' + size_practicas;
 	url_buscador_historias += '&start=' + start_historias + '&sort=' + order_historias + '&size=' + size_historias;
 	url_buscador_talleres += '&start=' + start_talleres + '&sort=' + order_talleres + '&size=' + size_talleres;
 
@@ -495,6 +515,9 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 
 	ordenacion = jQuery('#sortByHistorias').val();
 	jQuery('#histories .sort-items-container a[data-order-filter="' + ordenacion + '"]').addClass('selected');
+
+	ordenacion = jQuery('#sortByPracticas').val();
+	jQuery('#bestpractices .sort-items-container a[data-order-filter="' + ordenacion + '"]').addClass('selected');
 
 	if (!cambiando_talleres && !ver_mas) {
 		tab = jQuery('#currentTab').val();
@@ -608,6 +631,34 @@ function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 			}
 			jQuery('#workshops footer a.readmore').hide();
 			jQuery('#workshops .grid-wrapper').first().empty();
+		}
+	});
+
+
+	//practicas
+	jQuery.get(url_buscador_practicas, function(d) {
+		if (d.code === 200 && d.data.hits.found > 0) {
+			if (!cambiando_talleres || !ver_mas) {
+				if (start_practicas == 0) {
+					jQuery('#bestpractices .cards-grid .container div.row').first().empty();
+				}
+				jQuery.each(d.data.hits.hit, function(i, result) {
+					jQuery('a.bestpractices').html(object_name_script_os_js.practicas + ' (' + d.data.hits.found + ')');
+					jQuery('select#select-tab-results option[value="bestpractices"]').html(object_name_script_os_js.practicas + ' (' + d.data.hits.found + ')');
+					jQuery('select#select-tab-results').selectpicker('refresh');
+					keywords = result.fields['keywords'];
+					jQuery('#bestpractices .cards-grid .container div.row').first().append(getPostFiltro_general(result.fields, 'bestpractices'));
+				});
+		        if (d.data.hits.found == jQuery('#bestpractices .cards-grid .container div.row').first().children().size()) {
+		        	jQuery('#bestpractices footer a.readmore').hide();
+		        }
+	    	}
+	    	if (!cambiando_talleres) {
+	        	num_resultados = parseInt(jQuery('span.num_resultados').html()) + d.data.hits.found; 
+	        	jQuery('span.num_resultados').html(num_resultados);
+	        }
+		} else {
+			jQuery('#bestpractices footer a.readmore').hide();
 		}
 	});
 
