@@ -1,978 +1,568 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    
-         <!--[if IE ]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <![endif]-->
-        <meta name="HandheldFriendly" content="true" />
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/vendor.css" />
-        <link rel="stylesheet" href="css/app.css" />
-	    <link rel="shortcut icon" href="images/favicon.ico">
-        <title>BBVA</title>
-        <script src="js/globals.js"></script>
-    
+    <!--[if IE ]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/vendor.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>BBVA</title>
+    <script src="js/globals.js"></script>
 </head>
-<body >
+
+<body>
     <div class="webpage">
-        
-            <header class="header">
-                
-
-<!-- header -->
-<div class="top hidden-xs">
-    <div class="container">
-        <div class="languages-menu">
-            <label for="language-header" class="hidden">Idioma</label>
-            <div class="languages-buttons">
-                <a href="#" class="btn btn-primary active">ES</a>
-                <a href="#" class="btn btn-primary">EN</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container stycky-menu-in-mobile">
-    <div class="row vertical-align header-logo">
-        <div class="visible-xs col-xs-12 header-phone text-center">
-            <div class="launcher-menu-mobil visible-xs">
-                <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
-            </div>
-            <div class="logo">
-                <a href="index.html" class="bbva-icon-BBVA-wrap">
-                    <span class="bbva-icon-BBVA"></span>
-                </a>
-                <h1>Educación Financiera</h1>
-                <div class="logo-search ml-sm search-mobile-button">
-                    <span class="bbva-icon-search"></span>
+        <header class="header">
+            <!-- header -->
+            <div class="top hidden-xs">
+                <div class="container">
+                    <div class="languages-menu">
+                        <label for="language-header" class="hidden">Idioma</label>
+                        <div class="languages-buttons"><a href="#" class="btn btn-primary active">ES</a><a href="#" class="btn btn-primary">EN</a></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo">
-            <a href="index.html" class="bbva-icon-BBVA-wrap">
-                <span class="bbva-icon-BBVA"></span>
-                <span class="hidden">Logo BBVA</span>
-            </a>
-        </div>
-        <div class="hidden-xs col-xs-12 col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-5 col-lg-4 col-lg-offset-4 header-text">
-            <h1>Educación Financiera</h1>
-        </div>
-    </div>
-</div>
-
-<div class="search-mobile closed hidden-sm hidden-md hidden-lg">
-    <div class="container">
-        <div class="header-phone">
-            <div class="logo">
-                <a href="index.html" class="bbva-icon-BBVA-wrap">
-                    <span class="bbva-icon-BBVA"></span>
-                </a>
-                <h1>Educación Financiera</h1>
-            </div>
-            <div class="close-search-mobile ml-sm">
-                <span class="bbva-icon-close"></span>
-            </div>
-        </div>
-        <section class="content">
-            
-<div id="mobile-filter" class="publishing-filter-wrapper-mobile">
-
-    <header>
-        <div class="form-group has-feedback">
-            <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
-            <span class="bbva-icon-search form-control-feedback"></span>
-        </div>
-        <div class="selected-tags-container"></div>
-        <div class="button-filter">
-            <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a>
-        </div>
-    </header>
-
-    <section>
-        <div class="row available-tags-wrapper">
-            
-            <div class="col-xs-12">
-                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
-                <div class="tag-container">
+            <div class="container stycky-menu-in-mobile">
+                <div class="row vertical-align header-logo">
+                    <div class="visible-xs col-xs-12 header-phone text-center">
+                        <div class="launcher-menu-mobil visible-xs"><span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span></div>
+                        <div class="logo">
+                            <h1>Centro para la Educación <br />y Capacidades Financieras</h1>
+                            <div class="logo-search ml-sm search-mobile-button"><span class="bbva-icon-search"></span></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-9 header-text">
+                        <h1 class="go-left">Centro para la Educación y Capacidades Financieras</h1></div>
+                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-3 logo text-right iniciative-wrapper"><a href="index.html" class="bbva-icon-BBVA-wrap"><span class="iniciative">Una iniciativa de</span><span class="bbva-icon-BBVA"></span><span class="hidden">Logo BBVA</span></a></div>
                 </div>
             </div>
-            
-            <div class="col-xs-12">
-                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
-                <div class="author-container">
+            <div class="search-mobile closed hidden-sm hidden-md hidden-lg">
+                <div class="container">
+                    <div class="header-phone">
+                        <div class="logo">
+                            <h1>Centro para la Educación <br />y Capacidades Financieras</h1></div>
+                        <div class="close-search-mobile ml-sm"><span class="bbva-icon-close"></span></div>
+                    </div>
+                    <section class="content">
+                        <div id="mobile-filter" class="publishing-filter-wrapper-mobile">
+                            <header>
+                                <div class="form-group has-feedback">
+                                    <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input" /><span class="bbva-icon-search form-control-feedback"></span></div>
+                                <div class="selected-tags-container"></div>
+                                <div class="button-filter"><a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a></div>
+                            </header>
+                            <section>
+                                <div class="row available-tags-wrapper">
+                                    <div class="col-xs-12">
+                                        <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                                        <div class="tag-container"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                                        <div class="author-container"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                                        <div class="geo-container"></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
                 </div>
             </div>
-            
-            <div class="col-xs-12">
-                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-                <div class="geo-container">
+            <!-- EO header -->
+        </header>
+        <div class="nav-content open">
+            <!-- navbar menu -->
+            <div class="container">
+                <nav class="navbar">
+                    <div class="row visible-xs">
+                        <div class="col-xs-12 pt-md">
+                            <div class="menu-text ml-md"><span> Centro para la Educación <br />y Capacidades Financieras</span></div>
+                            <div class="menu-close ml-xxxl"><a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a></div>
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav" id="topmenu">
+                        <li class="panel"><a class=" collapsed  mr-xs" href="index.html"><span class="hidden-xs">Home</span><span class="visible-xs pl-lg">Home</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#home"><span>Home</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="publishing.html"><span class="hidden-xs">Publicaciones</span><span class="visible-xs pl-lg">Publicaciones</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#publishing"><span>Publicaciones</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="bestPractices.html"><span class="hidden-xs">Mejores prácticas</span><span class="visible-xs pl-lg">Mejores prácticas</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#bestPractices"><span>Mejores prácticas</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="world.html"><span class="hidden-xs">Iniciativas</span><span class="visible-xs pl-lg">Iniciativas</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#world"><span>Iniciativas</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="impact.html"><span class="hidden-xs">Impacto</span><span class="visible-xs pl-lg">Impacto</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#impact"><span>Impacto</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="summits.html"><span class="hidden-xs">Eventos</span><span class="visible-xs pl-lg">Eventos</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#summits"><span>Eventos</span></a></li>
+                        <li class="panel"><a class=" collapsed active_menu mr-xs" href="aboutUs.html"><span class="hidden-xs">Sobre Nosotros</span><span class="visible-xs pl-lg">Sobre Nosotros</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#aboutUs"><span>Sobre Nosotros</span></a></li>
+                    </ul>
+                    <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
+                        <div class="search-form-container hidden">
+                            <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
+                            <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+                            <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+                        </div>
+                    </div>
+                    <div class="visible-xs">
+                        <div class="languages-menu pb-lg pl-lg"><a role="button" class="languages-mobile-button active"><span class="language">Español</span></a><a role="button" class="languages-mobile-button ml-lg"><span class="language">Inglés</span></a></div>
+                    </div>
+                </nav>
+                <div class="navbar navbar-search">
+                    <div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
+                        <div class="form-wrapper">
+                            <div class="title"><span class="text-uppercase text">filtros</span></div>
+                            <div class="selected-tags-container"></div>
+                        </div>
+                        <section>
+                            <div class="row available-tags-wrapper">
+                                <div class="col-xs-4">
+                                    <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                                    <div class="tag-container"></div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                                    <div class="author-container"></div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                                    <div class="geo-container"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
-            
+            <!-- EO navbar menu -->
         </div>
-    </section>
-
-</div>
-
-        </section>
-    </div>
-</div>
-
-<!-- EO header -->
-            </header>
-            <div class="nav-content open">
-                
-
-<!-- navbar menu -->
-<div class="container">
-    <nav class="navbar">
-        <div class="row visible-xs">
-          <div class="col-xs-12 pt-md">
-            <div class="menu-logo">
-              <a href="index.html">
-                  <span class="bbva-icon-BBVA"></span>
-              </a>
-            </div>
-            <div class="menu-text ml-md">
-              <span>Educación Financiera</span>
-            </div>
-            <div class="menu-close ml-xxxl">
-              <a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a>
-            </div>
-          </div>
-        </div>
-        <ul class="nav navbar-nav" id="topmenu">
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="index.html">
-                        <span class="hidden-xs">Home</span>
-                        <span class="visible-xs pl-lg">Home</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#home">
-                        <span>Home</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="publishing.html">
-                        <span class="hidden-xs">Publicaciones</span>
-                        <span class="visible-xs pl-lg">Publicaciones</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publishing">
-                        <span>Publicaciones</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="world.html">
-                        <span class="hidden-xs">En el mundo</span>
-                        <span class="visible-xs pl-lg">En el mundo</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#world">
-                        <span>En el mundo</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="impact.html">
-                        <span class="hidden-xs">Impacto</span>
-                        <span class="visible-xs pl-lg">Impacto</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#impact">
-                        <span>Impacto</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="summits.html">
-                        <span class="hidden-xs">Eventos</span>
-                        <span class="visible-xs pl-lg">Eventos</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#summits">
-                        <span>Eventos</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed active_menu mr-sm" href="aboutUs.html">
-                        <span class="hidden-xs">Sobre Nosotros</span>
-                        <span class="visible-xs pl-lg">Sobre Nosotros</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutUs">
-                        <span>Sobre Nosotros</span>
-                        
-                    </a>
-                </li>
-            
-        </ul>
-        <div class="hidden-xs logo-search">
-            <span class="search-icon bbva-icon-search"></span>
-            <div class="search-form-container hidden">
-              <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
-              <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
-              <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-            </div>
-        </div>
-        <div class="visible-xs">
-            <div class="languages-menu pb-lg pl-lg">
-                <a role="button" class="languages-mobile-button active"><span class="language">Español</span></a>
-                <a role="button" class="languages-mobile-button ml-lg"><span class="language">Inglés</span></a>
-            </div>
-        </div>
-    </nav>
-    <div class="navbar navbar-search">
-      
-<div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
-
-  <div class="form-wrapper">
-        <div class="title">
-          <span class="text-uppercase text">filtros</span>
-        </div>
-        <div class="selected-tags-container"></div>
-  </div>
-
-  <section>
-    <div class="row available-tags-wrapper">
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
-          <div class="tag-container">
-          </div>
-        </div>
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
-          <div class="author-container">
-          </div>
-        </div>
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-          <div class="geo-container">
-          </div>
-        </div>
-      
-    </div>
-  </section>
-
-</div>
-
-    </div>
-</div>
-<!-- EO navbar menu -->
-            </div>
-        
         <div class="contents">
             <div id="search-layer"></div>
-            
-  <article id="about-us" class="about-us">
-
-    <header class="wow fadeIn">
-      <span>Sobre nosotros</span>
-      <img class="img-responsive" src="images/consultant-card/img_fija.png" alt="" />
-    </header>
-
-    <section class="who-we-are-wrapper wow fadeIn">
-      <div class="container">
-        <h1>Quiénes somos...</h1>
-        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin malesuada mollis. Donec ac pharetra diam, ac fringilla enim. Vivamus ultricies massa eu bibendum vulputate.</h2>
-        <p>Nunc dictum lorem nec lectus varius, eu porta tellus lobortis. Aliquam lectus nibh, placerat ac efficitur at, feugiat et sem. Pellentesque eu malesuada elit. Pellentesque fermentum quam magna, id gravida purus hendrerit ac. Vivamus turpis purus, ullamcorper ac nisi eu, commodo dapibus nibh. Aenean condimentum, dolor id tristique venenatis, nulla purus pulvinar nisl, vitae tincidunt nisl velit quis ipsum. Phasellus dapibus massa vitae magna faucibus, quis consequat sem fringilla. Ut est diam, semper id sapien a, ornare lacinia neque. Mauris eget justo dignissim, eleifend arcu id, aliquet est.</p>
-      </div>
-    </section>
-
-    <section class="people-grid-wrapper wow fadeIn">
-      <div class="container">
-        <h1>Nuestro equipo de expertos</h1>
-        <h2>BBVA cuenta con un equipo de expertos para garantizar una información de calidad acerca del mundo de las finanzas, si quieres ponerte en contacto con alguno de ellos, accede a su ficha. ¡Conócelos!  </h2>
-        
-          
-<article class="people-grid">
-
-  <section>
-    <h1>Consejo asesor</h1>
-    <div class="row">
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar2.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Christian Pattinson</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar3.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Georgina Suárez Arnold</span>
-        <p>Licenciada en ciencias empresariales.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar4.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Carlos García de la Llave</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar2.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>John Deere</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar3.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Georgina Suárez Arnold</span>
-        <p>Licenciada en ciencias empresariales.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar4.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Carlos García de la Llave</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-    </div>
-    
-<footer class="grid-footer">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a>
-    </div>
-  </div>
-</footer>
-
-  </section>
-</article>
-
-        
-          
-<article class="people-grid">
-
-  <section>
-    <h1>Comité de trabajo</h1>
-    <div class="row">
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-        <div class="leader-gray-mark"></div>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar2.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Christian Pattinson</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar3.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Georgina Suárez Arnold</span>
-        <p>Licenciada en ciencias empresariales.</p>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Carlos García de la Llave</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>John Deere</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-    </div>
-    
-<footer class="grid-footer">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a>
-    </div>
-  </div>
-</footer>
-
-  </section>
-</article>
-
-        
-          
-<article class="people-grid">
-
-  <section>
-    <h1>Grupo de investigación</h1>
-    <div class="row">
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar2.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Christian Pattinson</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar3.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Georgina Suárez Arnold</span>
-        <p>Licenciada en ciencias empresariales.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Carlos García de la Llave</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar2.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar3.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>John Deere</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-    </div>
-    
-<footer class="grid-footer">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a>
-    </div>
-  </div>
-</footer>
-
-  </section>
-</article>
-
-        
-          
-<article class="people-grid">
-
-  <section>
-    <h1>Grupo de formación</h1>
-    <div class="row">
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar1.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar2.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Christian Pattinson</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar3.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Georgina Suárez Arnold</span>
-        <p>Licenciada en ciencias empresariales.</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar4.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Carlos García de la Llave</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar5.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>Sarah Collens</span>
-        <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-        <div class="card-container col-xs-12 col-sm-6">
-          
-<!-- person -->
-<section class="container-fluid person">
-    <a href="#" class="link-layer visible-xs">&nbsp;</a>
-    
-    <div class="image-wrapper">
-        <img src="images/about-us/avatar6.png" alt="" />
-    </div>
-    <div class="data-wrapper">
-        <span>John Deere</span>
-        <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
-        
-          <a href="#">Ficha del asesor</a>
-        
-    </div>
-</section>
-<!-- EO person -->
-
-        </div>
-      
-    </div>
-    
-<footer class="grid-footer">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a>
-    </div>
-  </div>
-</footer>
-
-  </section>
-</article>
-
-        
-      </div>
-    </section>
-
-  </article>
-
+            <article id="about-us" class="about-us">
+                <header class="initial-header-image wow fadeIn"><span>Sobre nosotros</span><img class="img-responsive" src="images/consultant-card/img_fija.png" alt="" /></header>
+                <section class="initial-text wow fadeIn">
+                    <div class="container">
+                        <h1>Quiénes somos...</h1>
+                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin malesuada mollis. Donec ac pharetra diam, ac fringilla enim. Vivamus ultricies massa eu bibendum vulputate.</h2>
+                        <p>Nunc dictum lorem nec lectus varius, eu porta tellus lobortis. Aliquam lectus nibh, placerat ac efficitur at, feugiat et sem. Pellentesque eu malesuada elit. Pellentesque fermentum quam magna, id gravida purus hendrerit ac. Vivamus turpis purus, ullamcorper ac nisi eu, commodo dapibus nibh. Aenean condimentum, dolor id tristique venenatis, nulla purus pulvinar nisl, vitae tincidunt nisl velit quis ipsum. Phasellus dapibus massa vitae magna faucibus, quis consequat sem fringilla. Ut est diam, semper id sapien a, ornare lacinia neque. Mauris eget justo dignissim, eleifend arcu id, aliquet est.</p>
+                    </div>
+                </section>
+                <section class="people-grid-wrapper wow fadeIn">
+                    <div class="container">
+                        <h1>Nuestro equipo de expertos</h1>
+                        <h2> BBVA cuenta con un equipo de expertos para garantizar una información de calidad acerca del mundo de las finanzas, si quieres ponerte en contacto con alguno de ellos, accede a su ficha. ¡Conócelos! </h2>
+                        <article class="people-grid">
+                            <section>
+                                <h1>Consejo asesor</h1>
+                                <div class="row">
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar2.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Christian Pattinson</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar3.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Georgina Suárez Arnold</span>
+                                                <p>Licenciada en ciencias empresariales.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar4.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Carlos García de la Llave</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar2.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>John Deere</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar3.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Georgina Suárez Arnold</span>
+                                                <p>Licenciada en ciencias empresariales.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar4.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Carlos García de la Llave</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                </div>
+                                <footer class="grid-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a></div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </article>
+                        <article class="people-grid">
+                            <section>
+                                <h1>Comité de trabajo</h1>
+                                <div class="row">
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="leader-gray-mark"></div>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar2.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Christian Pattinson</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
+                                            </div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar3.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Georgina Suárez Arnold</span>
+                                                <p>Licenciada en ciencias empresariales.</p>
+                                            </div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Carlos García de la Llave</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p>
+                                            </div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>John Deere</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                </div>
+                                <footer class="grid-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a></div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </article>
+                        <article class="people-grid">
+                            <section>
+                                <h1>Grupo de investigación</h1>
+                                <div class="row">
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar2.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Christian Pattinson</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar3.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Georgina Suárez Arnold</span>
+                                                <p>Licenciada en ciencias empresariales.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Carlos García de la Llave</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar2.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar3.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>John Deere</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                </div>
+                                <footer class="grid-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a></div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </article>
+                        <article class="people-grid">
+                            <section>
+                                <h1>Grupo de formación</h1>
+                                <div class="row">
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar2.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Christian Pattinson</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar3.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Georgina Suárez Arnold</span>
+                                                <p>Licenciada en ciencias empresariales.</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar4.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Carlos García de la Llave</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar5.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>Sarah Collens</span>
+                                                <p>Doctora honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                    <div class="card-container col-xs-12 col-sm-6">
+                                        <!-- person -->
+                                        <section class="container-fluid person">
+                                            <a href="#" class="link-layer visible-xs"></a>
+                                            <div class="image-wrapper"><img src="images/about-us/avatar6.png" alt="" /></div>
+                                            <div class="data-wrapper"><span>John Deere</span>
+                                                <p>Doctor honoris causa de estadística por la Universidad Complutense. Trabaja en el FMI</p><a href="#">Ficha del asesor</a></div>
+                                        </section>
+                                        <!-- EO person -->
+                                    </div>
+                                </div>
+                                <footer class="grid-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más miembros</a></div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </article>
+                    </div>
+                </section>
+                <div class="prefooter-bbva background-white">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 mt-lg mb-lg footer-menu-group">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 footer-menu-item">
+                                        <div>
+                                            <p class="hidden-xs title mb-md"><a role="button">Sobre Educación Financiera</a></p>
+                                            <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample"> Sobre Educación Financiera<span class="icon-plus icon-collapsable"></span></a></p>
+                                            <div class="collapse" id="collapseOne">
+                                                <ul class="hidden-xs prefooter-menu">
+                                                    <li><a href="#">Publicaciones</a></li>
+                                                    <li><a href="#">Mejores prácticas</a></li>
+                                                    <li><a href="#">Iniciativas de BBVA</a></li>
+                                                    <li><a href="#">Impacto de BBVA</a></li>
+                                                    <li><a href="#">Eventos</a></li>
+                                                    <li><a href="#">Sobre Nosotros</a></li>
+                                                </ul>
+                                                <div class="visible-xs row prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" /><a href="#" class="col-xs-6">Publicaciones</a><a href="#" class="col-xs-6">Mejores prácticas</a><a href="#" class="col-xs-6">Iniciativas de BBVA</a><a href="#" class="col-xs-6">Impacto de BBVA</a><a href="#" class="col-xs-6">Eventos</a><a href="#" class="col-xs-6">Sobre Nosotros</a><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 footer-menu-item">
+                                        <div>
+                                            <p class="hidden-xs title mb-md"><a role="button">En el mundo</a></p>
+                                            <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample"> En el mundo<span class="icon-plus icon-collapsable"></span></a></p>
+                                            <div class="collapse" id="collapseTwo">
+                                                <div class="row mgl-0 prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" />
+                                                    <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
+                                                        <li><a href="#">España</a></li>
+                                                        <li><a href="#">USA</a></li>
+                                                        <li><a href="#">Turquía</a></li>
+                                                        <li><a href="#">Portugal</a></li>
+                                                        <li><a href="#">Chile</a></li>
+                                                        <li><a href="#">Colombia</a></li>
+                                                    </ul>
+                                                    <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
+                                                        <li><a href="#">Venezuela</a></li>
+                                                        <li><a href="#">Uruguay</a></li>
+                                                        <li><a href="#">Paraguay</a></li>
+                                                        <li><a href="#">Argentina</a></li>
+                                                        <li><a href="#">México</a></li>
+                                                        <li><a href="#">Perú</a></li>
+                                                    </ul><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 footer-menu-item">
+                                        <p class="hidden-xs title mb-md"><a role="button">Enlaces de interés</a></p>
+                                        <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample"> Enlaces de interés<span class="icon-plus icon-collapsable"></span></a></p>
+                                        <div class="collapse" id="collapseThree">
+                                            <ul class="hidden-xs prefooter-menu">
+                                                <li><a href="#">Web corporativa BBVA.com</a></li>
+                                                <li><a href="#">Empleo BBVA</a></li>
+                                                <li><a href="#">Fundación Microfinanzas BBVA</a></li>
+                                            </ul>
+                                            <div class="visible-xs row prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" /><a href="#" class="col-xs-8">Web corporativa BBVA.com</a><a href="#" class="col-xs-4">Empleo BBVA</a><a href="#" class="col-xs-4">Fundación Microfinanzas BBVA</a><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
         <footer class="footer-bbva">
             <!-- footer -->
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-4 footer-logo">
-            <span class="bbva-icon-BBVA"></span>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-sm-offset-4 col-md-6 col-md-offset-4 col-lg-4 col-lg-offset-4 footer-text">
-            <span>Educación Financiera</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
-			<div class="footer-menu-list">
-                <a href="#">Seguridad</a>
-                <a href="#">Aviso legal y Política de Cookies</a>
-                <a href="#">Términos y condiciones</a>
-                <a href="#">Accesibilidad</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 col-lg-8 footer-text"><span>Centro para la Educación y Capacidades Financieras</span></div>
+                    <div class="col-xs-12 col-sm-2 col-lg-4 footer-logo text-right"><span class="footer-iniciative">Una iniciativa de</span><span class="bbva-icon-BBVA"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
+                        <div class="footer-menu-list"><a href="#">Seguridad</a><a href="#">Aviso legal y Política de Cookies</a><a href="#">Términos y condiciones</a><a href="#">Accesibilidad</a></div>
+                    </div>
+                    <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
+                        <ul class="footer-menu footer-social">
+                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 footer-copyright-group">
+                        <p class="footer-copyright">&copy; 2016 BBVA</p>
+                    </div>
+                    <div class="visible-xs col-xs-12">
+                        <ul class="footer-menu footer-social">
+                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
-            <ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
-                <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 footer-copyright-group mt-sm">
-            <p class="footer-copyright">&copy; 2016 BBVA</p>
-        </div>
-        <div class="visible-xs col-xs-12">
-			<ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
-                <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- EO footer -->
+            <!-- EO footer -->
         </footer>
     </div>
-
     <script src="js/data.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -989,9 +579,10 @@
     <script src="js/moment.min.js"></script>
     <script src="js/moment-precise-range.js"></script>
     <script src="js/progressbar.min.js"></script>
-	<script src="js/underscore-min.js"></script>
+    <script src="js/underscore-min.js"></script>
     <script src="js/jquery.touchSwipe.min.js"></script>
     <script src="js/ofi.browser.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>

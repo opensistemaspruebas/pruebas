@@ -1,919 +1,605 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    
-         <!--[if IE ]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <![endif]-->
-        <meta name="HandheldFriendly" content="true" />
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/vendor.css" />
-        <link rel="stylesheet" href="css/app.css" />
-	    <link rel="shortcut icon" href="images/favicon.ico">
-        <title>BBVA</title>
-        <script src="js/globals.js"></script>
-    
+    <!--[if IE ]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/vendor.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>BBVA</title>
+    <script src="js/globals.js"></script>
 </head>
-<body >
+
+<body>
     <div class="webpage">
-        
-            <header class="header">
-                
-
-<!-- header -->
-<div class="top hidden-xs">
-    <div class="container">
-        <div class="languages-menu">
-            <label for="language-header" class="hidden">Idioma</label>
-            <div class="languages-buttons">
-                <a href="#" class="btn btn-primary active">ES</a>
-                <a href="#" class="btn btn-primary">EN</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container stycky-menu-in-mobile">
-    <div class="row vertical-align header-logo">
-        <div class="visible-xs col-xs-12 header-phone text-center">
-            <div class="launcher-menu-mobil visible-xs">
-                <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
-            </div>
-            <div class="logo">
-                <a href="index.html" class="bbva-icon-BBVA-wrap">
-                    <span class="bbva-icon-BBVA"></span>
-                </a>
-                <h1>Educación Financiera</h1>
-                <div class="logo-search ml-sm search-mobile-button">
-                    <span class="bbva-icon-search"></span>
+        <header class="header">
+            <!-- header -->
+            <div class="top hidden-xs">
+                <div class="container">
+                    <div class="languages-menu">
+                        <label for="language-header" class="hidden">Idioma</label>
+                        <div class="languages-buttons"><a href="#" class="btn btn-primary active">ES</a><a href="#" class="btn btn-primary">EN</a></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo">
-            <a href="index.html" class="bbva-icon-BBVA-wrap">
-                <span class="bbva-icon-BBVA"></span>
-                <span class="hidden">Logo BBVA</span>
-            </a>
-        </div>
-        <div class="hidden-xs col-xs-12 col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-5 col-lg-4 col-lg-offset-4 header-text">
-            <h1>Educación Financiera</h1>
-        </div>
-    </div>
-</div>
-
-<div class="search-mobile closed hidden-sm hidden-md hidden-lg">
-    <div class="container">
-        <div class="header-phone">
-            <div class="logo">
-                <a href="index.html" class="bbva-icon-BBVA-wrap">
-                    <span class="bbva-icon-BBVA"></span>
-                </a>
-                <h1>Educación Financiera</h1>
-            </div>
-            <div class="close-search-mobile ml-sm">
-                <span class="bbva-icon-close"></span>
-            </div>
-        </div>
-        <section class="content">
-            
-<div id="mobile-filter" class="publishing-filter-wrapper-mobile">
-
-    <header>
-        <div class="form-group has-feedback">
-            <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
-            <span class="bbva-icon-search form-control-feedback"></span>
-        </div>
-        <div class="selected-tags-container"></div>
-        <div class="button-filter">
-            <a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a>
-        </div>
-    </header>
-
-    <section>
-        <div class="row available-tags-wrapper">
-            
-            <div class="col-xs-12">
-                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
-                <div class="tag-container">
+            <div class="container stycky-menu-in-mobile">
+                <div class="row vertical-align header-logo">
+                    <div class="visible-xs col-xs-12 header-phone text-center">
+                        <div class="launcher-menu-mobil visible-xs"><span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span></div>
+                        <div class="logo">
+                            <h1>Centro para la Educación <br />y Capacidades Financieras</h1>
+                            <div class="logo-search ml-sm search-mobile-button"><span class="bbva-icon-search"></span></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-9 header-text">
+                        <h1 class="go-left">Centro para la Educación y Capacidades Financieras</h1></div>
+                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-3 logo text-right iniciative-wrapper"><a href="index.html" class="bbva-icon-BBVA-wrap"><span class="iniciative">Una iniciativa de</span><span class="bbva-icon-BBVA"></span><span class="hidden">Logo BBVA</span></a></div>
                 </div>
             </div>
-            
-            <div class="col-xs-12">
-                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
-                <div class="author-container">
+            <div class="search-mobile closed hidden-sm hidden-md hidden-lg">
+                <div class="container">
+                    <div class="header-phone">
+                        <div class="logo">
+                            <h1>Centro para la Educación <br />y Capacidades Financieras</h1></div>
+                        <div class="close-search-mobile ml-sm"><span class="bbva-icon-close"></span></div>
+                    </div>
+                    <section class="content">
+                        <div id="mobile-filter" class="publishing-filter-wrapper-mobile">
+                            <header>
+                                <div class="form-group has-feedback">
+                                    <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input" /><span class="bbva-icon-search form-control-feedback"></span></div>
+                                <div class="selected-tags-container"></div>
+                                <div class="button-filter"><a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a></div>
+                            </header>
+                            <section>
+                                <div class="row available-tags-wrapper">
+                                    <div class="col-xs-12">
+                                        <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                                        <div class="tag-container"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                                        <div class="author-container"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                                        <div class="geo-container"></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
                 </div>
             </div>
-            
-            <div class="col-xs-12">
-                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-                <div class="geo-container">
+            <!-- EO header -->
+        </header>
+        <div class="nav-content open">
+            <!-- navbar menu -->
+            <div class="container">
+                <nav class="navbar">
+                    <div class="row visible-xs">
+                        <div class="col-xs-12 pt-md">
+                            <div class="menu-text ml-md"><span> Centro para la Educación <br />y Capacidades Financieras</span></div>
+                            <div class="menu-close ml-xxxl"><a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a></div>
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav" id="topmenu">
+                        <li class="panel"><a class=" collapsed  mr-xs" href="index.html"><span class="hidden-xs">Home</span><span class="visible-xs pl-lg">Home</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#home"><span>Home</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="publishing.html"><span class="hidden-xs">Publicaciones</span><span class="visible-xs pl-lg">Publicaciones</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#publishing"><span>Publicaciones</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="bestPractices.html"><span class="hidden-xs">Mejores prácticas</span><span class="visible-xs pl-lg">Mejores prácticas</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#bestPractices"><span>Mejores prácticas</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="world.html"><span class="hidden-xs">Iniciativas</span><span class="visible-xs pl-lg">Iniciativas</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#world"><span>Iniciativas</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="impact.html"><span class="hidden-xs">Impacto</span><span class="visible-xs pl-lg">Impacto</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#impact"><span>Impacto</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="summits.html"><span class="hidden-xs">Eventos</span><span class="visible-xs pl-lg">Eventos</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#summits"><span>Eventos</span></a></li>
+                        <li class="panel"><a class=" collapsed  mr-xs" href="aboutUs.html"><span class="hidden-xs">Sobre Nosotros</span><span class="visible-xs pl-lg">Sobre Nosotros</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#aboutUs"><span>Sobre Nosotros</span></a></li>
+                    </ul>
+                    <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
+                        <div class="search-form-container hidden">
+                            <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
+                            <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+                            <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+                        </div>
+                    </div>
+                    <div class="visible-xs">
+                        <div class="languages-menu pb-lg pl-lg"><a role="button" class="languages-mobile-button active"><span class="language">Español</span></a><a role="button" class="languages-mobile-button ml-lg"><span class="language">Inglés</span></a></div>
+                    </div>
+                </nav>
+                <div class="navbar navbar-search">
+                    <div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
+                        <div class="form-wrapper">
+                            <div class="title"><span class="text-uppercase text">filtros</span></div>
+                            <div class="selected-tags-container"></div>
+                        </div>
+                        <section>
+                            <div class="row available-tags-wrapper">
+                                <div class="col-xs-4">
+                                    <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                                    <div class="tag-container"></div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                                    <div class="author-container"></div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                                    <div class="geo-container"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
-            
+            <!-- EO navbar menu -->
         </div>
-    </section>
-
-</div>
-
-        </section>
-    </div>
-</div>
-
-<!-- EO header -->
-            </header>
-            <div class="nav-content open">
-                
-
-<!-- navbar menu -->
-<div class="container">
-    <nav class="navbar">
-        <div class="row visible-xs">
-          <div class="col-xs-12 pt-md">
-            <div class="menu-logo">
-              <a href="index.html">
-                  <span class="bbva-icon-BBVA"></span>
-              </a>
-            </div>
-            <div class="menu-text ml-md">
-              <span>Educación Financiera</span>
-            </div>
-            <div class="menu-close ml-xxxl">
-              <a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a>
-            </div>
-          </div>
-        </div>
-        <ul class="nav navbar-nav" id="topmenu">
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="index.html">
-                        <span class="hidden-xs">Home</span>
-                        <span class="visible-xs pl-lg">Home</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#home">
-                        <span>Home</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="publishing.html">
-                        <span class="hidden-xs">Publicaciones</span>
-                        <span class="visible-xs pl-lg">Publicaciones</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publishing">
-                        <span>Publicaciones</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="world.html">
-                        <span class="hidden-xs">En el mundo</span>
-                        <span class="visible-xs pl-lg">En el mundo</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#world">
-                        <span>En el mundo</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="impact.html">
-                        <span class="hidden-xs">Impacto</span>
-                        <span class="visible-xs pl-lg">Impacto</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#impact">
-                        <span>Impacto</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="summits.html">
-                        <span class="hidden-xs">Eventos</span>
-                        <span class="visible-xs pl-lg">Eventos</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#summits">
-                        <span>Eventos</span>
-                        
-                    </a>
-                </li>
-            
-                <li class="panel">
-                    <a class=" collapsed  mr-sm" href="aboutUs.html">
-                        <span class="hidden-xs">Sobre Nosotros</span>
-                        <span class="visible-xs pl-lg">Sobre Nosotros</span>
-                        
-                    </a>
-                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutUs">
-                        <span>Sobre Nosotros</span>
-                        
-                    </a>
-                </li>
-            
-        </ul>
-        <div class="hidden-xs logo-search">
-            <span class="search-icon bbva-icon-search"></span>
-            <div class="search-form-container hidden">
-              <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
-              <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
-              <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-            </div>
-        </div>
-        <div class="visible-xs">
-            <div class="languages-menu pb-lg pl-lg">
-                <a role="button" class="languages-mobile-button active"><span class="language">Español</span></a>
-                <a role="button" class="languages-mobile-button ml-lg"><span class="language">Inglés</span></a>
-            </div>
-        </div>
-    </nav>
-    <div class="navbar navbar-search">
-      
-<div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
-
-  <div class="form-wrapper">
-        <div class="title">
-          <span class="text-uppercase text">filtros</span>
-        </div>
-        <div class="selected-tags-container"></div>
-  </div>
-
-  <section>
-    <div class="row available-tags-wrapper">
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
-          <div class="tag-container">
-          </div>
-        </div>
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
-          <div class="author-container">
-          </div>
-        </div>
-      
-        <div class="col-xs-4">
-          <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-          <div class="geo-container">
-          </div>
-        </div>
-      
-    </div>
-  </section>
-
-</div>
-
-    </div>
-</div>
-<!-- EO navbar menu -->
-            </div>
-        
         <div class="contents">
             <div id="search-layer"></div>
-            
-    
-
-
-<article class="consultant-cv">
-
-  <header>
-    <div class="hidden-xs back-wrapper">
-      <a href="#"><span class="icon bbva-icon-arrow"></span><span class="text">Volver</span></a>
-    </div>
-    <div class="visible-xs img-overlay">
-        <div class="overlay"></div>
-        <img class="img-responsive" src="images/consultant-card/img_fija.png" alt="" />
-    </div>
-    <img class="hidden-xs img-responsive" src="images/consultant-card/img_fija.png" alt="" />
-    <div class="hidden-xs title-wrapper">
-        <div class="container">
-             <h1>“A journey is best measured in friends, rather than miles”</h1>
-        </div>
-    </div>
-  </header>
-
-  <section class="container">
-    <div class="row info-wrapper">
-
-      <div class="col-xs-12 col-sm-8 main-data">
-        
-<!-- consultant-main-data -->
-<section class="consultant-main-data-wrapper">
-  
-    <img class="img-responsive consultant-pic" src="images/consultant-card/katie_morell.png" alt="" />
-  
-  <h1>Katie Morell</h1>
-  <h4>Licenciada en Economía, trabaja en el Banco Mundial</h4>
-  
-  <div class="current-work mt-md mb-md">
-    <img src="images/publication/worldbank.jpg" alt="" />
-  </div>
-  
-    <p>
-      San Francisco-based, writes about business, travel, social justice and human interest topics. Contributes to Fast Company, Hemispheres, The Guardian, Consumers Digest, OPEN Forum, BBC Travel & others.
-    </p>
-  
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin malesuada mollis. Donec ac pharetra diam, ac fringilla enim. Vivamus ultricies massa eu bibendum vulputate. Mauris tempor bibendum malesuada.
-    </p>
-  
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin malesuada mollis. Donec ac pharetra diam, ac fringilla enim. Vivamus ultricies massa eu bibendum vulputate. Mauris tempor bibendum malesuada.
-    </p>
-  
-</section>
-<!-- EO consultant-main-data -->
-
-      </div>
-
-      <div class="col-xs-12 col-sm-4 secondary-data">
-        <div class="contacts-wrapper">
-          
-            <a href="#"><span class="bbva-icon-linkedin2"></span></a>
-          
-            <a href="#"><span class="bbva-icon-ico_email"></span></a>
-          
-            <a href="#"><span class="bbva-icon-web2"></span></a>
-          
-            <a href="#"><span class="bbva-icon-twitter2"></span></a>
-          
-        </div>
-        
-<!-- consultant-secondary-data -->
-<section class="consultant-secondary-data-wrapper">
-  <div class="reports-wrapper">
-    <h2>21</h2>
-    <h4>Informes escritos</h4>
-  </div>
-  <div class="expertise-wrapper">
-    <h2>Áreas de expertise</h2>
-    
-      <div>
-        <img src="images/consultant-card/lista.png" alt="" />
-        <span>Educación financiera</span>
-      </div>
-    
-      <div>
-        <img src="images/consultant-card/lista.png" alt="" />
-        <span>Medición de impacto</span>
-      </div>
-    
-      <div>
-        <img src="images/consultant-card/lista.png" alt="" />
-        <span>Inclusión financiera</span>
-      </div>
-    
-  </div>
-</section>
-<!-- EO consultant-secondary-data -->
-
-      </div>
-
-    </div>
-  </section>
-
-</article>
-
-    <div class="cards-grid-wrapper">
-        <h1 class="container">Publicaciones del autor</h1>
-        
-
-
-<article class="cards-grid">
-
-  <section class="container">
-    <div class="row">
-      
-        <div class="col-xs-12 col-sm-6 double-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/historia1.png" alt="" />
-          </a>
-          <img src="images/home/historia1.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">27 Agosto 2016</p>
-            <h1>Beyond Ties and Cofee Mugs</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">27 Agosto 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Beyond Ties and Cofee Mugs
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-chat2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
+            <article class="consultant-cv">
+                <header>
+                    <div class="hidden-xs back-wrapper"><a href="#"><span class="icon bbva-icon-arrow"></span><span class="text">Volver</span></a></div>
+                    <div class="visible-xs img-overlay">
+                        <div class="overlay"></div><img class="img-responsive" src="images/consultant-card/img_fija.png" alt="" /></div><img class="hidden-xs img-responsive" src="images/consultant-card/img_fija.png" alt="" />
+                    <div class="hidden-xs title-wrapper">
+                        <div class="container">
+                            <h1>“A journey is best measured in friends, rather than miles”</h1></div>
+                    </div>
+                </header>
+                <section class="container">
+                    <div class="row info-wrapper">
+                        <div class="col-xs-12 col-sm-8 main-data">
+                            <!-- consultant-main-data -->
+                            <section class="consultant-main-data-wrapper"><img class="img-responsive consultant-pic" src="images/consultant-card/katie_morell.png" alt="" />
+                                <h1>Katie Morell</h1>
+                                <h4>Licenciada en Economía, trabaja en el Banco Mundial</h4>
+                                <div class="current-work mt-md mb-md"><img data-toggle="modal" data-target="#modal" src="images/publication/worldbank.jpg" alt="image title" /></div>
+                                <p> San Francisco-based, writes about business, travel, social justice and human interest topics. Contributes to Fast Company, Hemispheres, The Guardian, Consumers Digest, OPEN Forum, BBC Travel & others. </p>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin malesuada mollis. Donec ac pharetra diam, ac fringilla enim. Vivamus ultricies massa eu bibendum vulputate. Mauris tempor bibendum malesuada. </p>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin malesuada mollis. Donec ac pharetra diam, ac fringilla enim. Vivamus ultricies massa eu bibendum vulputate. Mauris tempor bibendum malesuada. </p>
+                                <section class="lightbox modal fade" id="modal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="container">
+                                                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title">Miembros del consejo asesor</h1></div>
+                                                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                                                    <div class="row">
+                                                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md"><img src="images/home/_worldbank.jpg" alt="image title" /></div>
+                                                        <div class="col-xs-12 col-sm-8 mt-md">
+                                                            <h2 class="text-left ml-md">THE WORLD BANK</h2>
+                                                            <p class="ml-md">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam libero temporibus tenetur ratione maxime nihil provident eius. Sequi, minus repudiandae commodi ipsam voluptatibus fugit quos reiciendis quam deleniti laborum nihil.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-bbva-aqua">Más información</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>
+                            <!-- EO consultant-main-data -->
+                        </div>
+                        <div class="col-xs-12 col-sm-4 secondary-data">
+                            <div class="contacts-wrapper"><a href="#"><span class="bbva-icon-linkedin2"></span></a><a href="#"><span class="bbva-icon-ico_email"></span></a><a href="#"><span class="bbva-icon-web2"></span></a><a href="#"><span class="bbva-icon-twitter2"></span></a></div>
+                            <!-- consultant-secondary-data -->
+                            <section class="consultant-secondary-data-wrapper">
+                                <div class="reports-wrapper">
+                                    <h2>21</h2>
+                                    <h4>Informes escritos</h4></div>
+                                <div class="expertise-wrapper">
+                                    <h2>Áreas de expertise</h2>
+                                    <div><img src="images/consultant-card/lista.png" alt="" /><span>Educación financiera</span></div>
+                                    <div><img src="images/consultant-card/lista.png" alt="" /><span>Medición de impacto</span></div>
+                                    <div><img src="images/consultant-card/lista.png" alt="" /><span>Inclusión financiera</span></div>
+                                </div>
+                            </section>
+                            <!-- EO consultant-secondary-data -->
+                        </div>
+                    </div>
+                </section>
+            </article>
+            <div class="cards-grid-wrapper">
+                <h1 class="container">Publicaciones del autor</h1>
+                <article class="cards-grid">
+                    <section class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 double-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/historia1.png" alt="" /></a><img src="images/home/historia1.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">27 Agosto 2016</p>
+                                            <h1>Beyond Ties and Cofee Mugs</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">27 Agosto 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Beyond Ties and Cofee Mugs </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">Want to make your dad feel loved this Father's Day? Avoid purchasing the traditional necktie or boring coffee. </p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-arrow-download"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-6 double-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/historia1.png" alt="" /></a><img src="images/home/historia1.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">23 Agosto 2016</p>
+                                            <h1>Smart Mom, Rich Mom: Build...</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">23 Agosto 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Smart Mom, Rich Mom: Build... </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">There's a massive disconnect between the financial services and ohter important thing like all people know.</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-chat2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-4 triple-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe1.png" alt="" /></a><img src="images/home/informe1.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">17 Agosto 2016</p>
+                                            <h1>Situación regulación financiera</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">17 Agosto 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Situación regulación financiera </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">Este mes tratamos los siguientes temas: el papel de la deuda para la absorción de p...</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-chat2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-4 triple-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe2.png" alt="" /></a><img src="images/home/informe2.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">22 Julio 2016</p>
+                                            <h1>Heterogeneidad y difusión de la economía digital: el caso español.</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">22 Julio 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Heterogeneidad y difusión de la economía digital: el caso español. </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">El tradicional modelo de Bass (1969) sobre adopción y difusión de nuevos productos... </p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-4 triple-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe3.png" alt="" /></a><img src="images/home/informe3.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">12 abril 2016</p>
+                                            <h1>Midiendo la inclusión financiera</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">12 abril 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Midiendo la inclusión financiera </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">Existe un amplio consenso respecto al rol que juega la inclusión financiera para pr... </p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-6 double-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe1.png" alt="" /></a><img src="images/home/informe1.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">17 Agosto 2016</p>
+                                            <h1>Moving on a Budget</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">17 Agosto 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Moving on a Budget </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">Moving to a new home can be stressful. And that's even before you calculate the thousands of dollars you may spend on packing.</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-chat2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                            <div class="col-xs-12 col-sm-6 double-card card-container">
+                                <!-- main-card -->
+                                <section class="container-fluid main-card">
+                                    <header class="row header-container">
+                                        <div class="image-container col-xs-12">
+                                            <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe2.png" alt="" /></a><img src="images/home/informe2.png" alt="" class="hidden-xs " /></div>
+                                        <div class="hidden-xs floating-text col-xs-11">
+                                            <p class="date">17 Agosto 2016</p>
+                                            <h1>Six Ways to inspire Charity in Your Children</h1></div>
+                                    </header>
+                                    <div class="row data-container">
+                                        <a href="#" class="link-layer visible-xs"></a>
+                                        <div class="nopadding date">17 Agosto 2016</div>
+                                        <div class="main-card-data-container-title-wrapper">
+                                            <h1 class="title nopadding"> Six Ways to inspire Charity in Your Children </h1></div>
+                                        <p class="main-card-data-container-description-wrapper">Arguably every parent would love to see their kids grow into the kind of people who give back to society. But how can we instill charitable…</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <footer>
+                                            <div class="icon-row">
+                                                <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                                <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                                    <div class="triangle triangle-up-left"></div>
+                                                    <div class="triangle triangle-down-right"></div>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <!-- EO main-card -->
+                            </div>
+                        </div>
+                        <footer class="grid-footer">
+                            <div class="row">
+                                <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las publicaciones</a></div>
+                            </div>
+                        </footer>
+                    </section>
+                </article>
             </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-        <div class="col-xs-12 col-sm-6 double-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/historia1.png" alt="" />
-          </a>
-          <img src="images/home/historia1.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">23 Agosto 2016</p>
-            <h1>Smart Mom, Rich Mom: Build...</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">23 Agosto 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Smart Mom, Rich Mom: Build...
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">There's a massive disconnect between the financial services and ohter important thing like all people know.</p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-chat2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
+            <div class="consultant-data-grid">
+                <article class="container data-grid">
+                    <header>
+                        <h1>Otros trabajos del autor</h1></header>
+                    <div class="content">
+                        <div class="grid-wrapper">
+                            <section class="data-block">
+                                <h2> Car Rental Loss and Damage Insurance </h2>
+                                <p class="description"> When you use your Card to pay for the entire rental and you don't have other coverage, you’re covered in case of damage to your rental car, anywhere in the United States and Canada! </p>
+                                <p class="link"><a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                            </section>
+                            <section class="data-block">
+                                <h2> Emergency Assistance </h2>
+                                <p class="description"> Whether you are traveling at home or many places abroad, you Card helps you to get ready for your travels and is there for you in case of emergencies. </p>
+                                <p class="link"><a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                            </section>
+                            <section class="data-block">
+                                <h2> Travel Accident Insurance </h2>
+                                <p class="description"> When you use it to pay for the entire cost of your plane, trip, ship or bus tickets, your Card covers many potential injuries when you are traveling at home or abroad! </p>
+                                <p class="link"><a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                            </section>
+                            <section class="data-block">
+                                <h2> ID Theft Protection </h2>
+                                <p class="description"> With your Card, you are protected from most fraud and identify theft expenses. </p>
+                                <p class="link"><a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                            </section>
+                            <section class="data-block">
+                                <h2> Retail Protection (Purchase Protection) </h2>
+                                <p class="description"> When you use your Card and you don't have other coverage, you are covered for 90 days after your eligible purchase in case of theft or damage. </p>
+                                <p class="link"><a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                            </section>
+                            <section class="data-block">
+                                <h2> Extended Warranty </h2>
+                                <p class="description"> Extend the original U.S. manufacturer’s warranty for up to an additional year on eligible purchases when you make the entire purchase with your Card. </p>
+                                <p class="link"><a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a></p>
+                            </section>
+                        </div>
+                    </div>
+                    <footer class="grid-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más trabajos</a></div>
+                        </div>
+                    </footer>
+                </article>
             </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-        <div class="col-xs-12 col-sm-4 triple-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/informe1.png" alt="" />
-          </a>
-          <img src="images/home/informe1.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">17 Agosto 2016</p>
-            <h1>Situación regulación financiera</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">17 Agosto 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Situación regulación financiera
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">Este mes tratamos los siguientes temas: el papel de la deuda para la absorción de p...</p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
+            <div class="prefooter-bbva background-gray">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 mt-lg mb-lg footer-menu-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 footer-menu-item">
+                                    <div>
+                                        <p class="hidden-xs title mb-md"><a role="button">Sobre Educación Financiera</a></p>
+                                        <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample"> Sobre Educación Financiera<span class="icon-plus icon-collapsable"></span></a></p>
+                                        <div class="collapse" id="collapseOne">
+                                            <ul class="hidden-xs prefooter-menu">
+                                                <li><a href="#">Publicaciones</a></li>
+                                                <li><a href="#">Mejores prácticas</a></li>
+                                                <li><a href="#">Iniciativas de BBVA</a></li>
+                                                <li><a href="#">Impacto de BBVA</a></li>
+                                                <li><a href="#">Eventos</a></li>
+                                                <li><a href="#">Sobre Nosotros</a></li>
+                                            </ul>
+                                            <div class="visible-xs row prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" /><a href="#" class="col-xs-6">Publicaciones</a><a href="#" class="col-xs-6">Mejores prácticas</a><a href="#" class="col-xs-6">Iniciativas de BBVA</a><a href="#" class="col-xs-6">Impacto de BBVA</a><a href="#" class="col-xs-6">Eventos</a><a href="#" class="col-xs-6">Sobre Nosotros</a><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 footer-menu-item">
+                                    <div>
+                                        <p class="hidden-xs title mb-md"><a role="button">En el mundo</a></p>
+                                        <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample"> En el mundo<span class="icon-plus icon-collapsable"></span></a></p>
+                                        <div class="collapse" id="collapseTwo">
+                                            <div class="row mgl-0 prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" />
+                                                <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
+                                                    <li><a href="#">España</a></li>
+                                                    <li><a href="#">USA</a></li>
+                                                    <li><a href="#">Turquía</a></li>
+                                                    <li><a href="#">Portugal</a></li>
+                                                    <li><a href="#">Chile</a></li>
+                                                    <li><a href="#">Colombia</a></li>
+                                                </ul>
+                                                <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
+                                                    <li><a href="#">Venezuela</a></li>
+                                                    <li><a href="#">Uruguay</a></li>
+                                                    <li><a href="#">Paraguay</a></li>
+                                                    <li><a href="#">Argentina</a></li>
+                                                    <li><a href="#">México</a></li>
+                                                    <li><a href="#">Perú</a></li>
+                                                </ul><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 footer-menu-item">
+                                    <p class="hidden-xs title mb-md"><a role="button">Enlaces de interés</a></p>
+                                    <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample"> Enlaces de interés<span class="icon-plus icon-collapsable"></span></a></p>
+                                    <div class="collapse" id="collapseThree">
+                                        <ul class="hidden-xs prefooter-menu">
+                                            <li><a href="#">Web corporativa BBVA.com</a></li>
+                                            <li><a href="#">Empleo BBVA</a></li>
+                                            <li><a href="#">Fundación Microfinanzas BBVA</a></li>
+                                        </ul>
+                                        <div class="visible-xs row prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" /><a href="#" class="col-xs-8">Web corporativa BBVA.com</a><a href="#" class="col-xs-4">Empleo BBVA</a><a href="#" class="col-xs-4">Fundación Microfinanzas BBVA</a><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-chat2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
             </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-        <div class="col-xs-12 col-sm-4 triple-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/informe2.png" alt="" />
-          </a>
-          <img src="images/home/informe2.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">22 Julio 2016</p>
-            <h1>Heterogeneidad y difusión de la economía digital: el caso español.</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">22 Julio 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Heterogeneidad y difusión de la economía digital: el caso español.
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">El tradicional modelo de Bass (1969) sobre adopción y difusión de nuevos productos... </p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-            </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-        <div class="col-xs-12 col-sm-4 triple-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/informe3.png" alt="" />
-          </a>
-          <img src="images/home/informe3.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">12 abril 2016</p>
-            <h1>Midiendo la inclusión financiera</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">12 abril 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Midiendo la inclusión financiera
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">Existe un amplio consenso respecto al rol que juega la inclusión financiera para pr... </p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-            </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-        <div class="col-xs-12 col-sm-6 double-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/informe1.png" alt="" />
-          </a>
-          <img src="images/home/informe1.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">17 Agosto 2016</p>
-            <h1>Moving on a Budget</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">17 Agosto 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Moving on a Budget
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">Moving to a new home can be stressful. And that's even before you calculate the thousands of dollars you may spend on packing.</p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-chat2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-            </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-        <div class="col-xs-12 col-sm-6 double-card card-container">
-          
-<!-- main-card -->
-<section class="container-fluid main-card">
-    <header class="row header-container">
-        <div class="image-container col-xs-12">
-          <a href="#" class="link-header-layer visible-xs">
-            <img src="images/home/informe2.png" alt="" />
-          </a>
-          <img src="images/home/informe2.png" alt="" class="hidden-xs" />
-        </div>
-        <div class="hidden-xs floating-text col-xs-9">
-            <p class="date">17 Agosto 2016</p>
-            <h1>Six Ways to inspire Charity in Your Children</h1>
-        </div>
-    </header>
-    <div class="row data-container">
-        <a href="#" class="link-layer visible-xs">&nbsp;</a>
-        <div class="nopadding date">17 Agosto 2016</div>
-        <div class="main-card-data-container-title-wrapper">
-            <h1 class="title nopadding">
-                Six Ways to inspire Charity in Your Children
-            </h1>
-        </div>
-        <p class="main-card-data-container-description-wrapper">Arguably every parent would love to see their kids grow into the kind of people who give back to society. But how can we instill charitable…</p>
-        <a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-        <footer>
-            <div class="icon-row">
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-quote2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-                <div class="card-icon">
-                    <span class="icon bbva-icon-audio2"></span>
-                    <div class="triangle triangle-up-left"></div>
-                    <div class="triangle triangle-down-right"></div>
-                </div>
-            
-            </div>
-        </footer>
-    </div>
-</section>
-<!-- EO main-card -->
-
-        </div>
-      
-    </div>
-    
-<footer class="grid-footer">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Todas las publicaciones</a>
-    </div>
-  </div>
-</footer>
-
-  </section>
-</article>
-    </div>
-
-    <div class="consultant-data-grid">
-        
-
-<article class="container data-grid">
-
-  <header>
-    <h1>Otros trabajos del autor</h1>
-  </header>
-
-  <div class="content">
-    <div class="grid-wrapper">
-      
-        <section class="data-block">
-          <h2>
-            Car Rental Loss and Damage Insurance
-          </h2>
-          <p class="description">
-            When you use your Card to pay for the entire rental and you don't have other coverage, you’re covered in case of damage to your rental car, anywhere in the United States and Canada!
-          </p>
-          <p class="link">
-            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-          </p>
-        </section>
-      
-        <section class="data-block">
-          <h2>
-            Emergency Assistance
-          </h2>
-          <p class="description">
-            Whether you are traveling at home or many places abroad, you Card helps you to get ready for your travels and is there for you in case of emergencies.
-          </p>
-          <p class="link">
-            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-          </p>
-        </section>
-      
-        <section class="data-block">
-          <h2>
-            Travel Accident Insurance
-          </h2>
-          <p class="description">
-            When you use it to pay for the entire cost of your plane, trip, ship or bus tickets, your Card covers many potential injuries when you are traveling at home or abroad!
-          </p>
-          <p class="link">
-            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-          </p>
-        </section>
-      
-        <section class="data-block">
-          <h2>
-            ID Theft Protection
-          </h2>
-          <p class="description">
-            With your Card, you are protected from most fraud and identify theft expenses.
-          </p>
-          <p class="link">
-            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-          </p>
-        </section>
-      
-        <section class="data-block">
-          <h2>
-            Retail Protection (Purchase Protection)
-          </h2>
-          <p class="description">
-            When you use your Card and you don't have other coverage, you are covered for 90 days after your eligible purchase in case of theft or damage.
-          </p>
-          <p class="link">
-            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-          </p>
-        </section>
-      
-        <section class="data-block">
-          <h2>
-            Extended Warranty
-          </h2>
-          <p class="description">
-            Extend the original U.S. manufacturer’s warranty for up to an additional year on eligible purchases when you make the entire purchase with your Card.
-          </p>
-          <p class="link">
-            <a href="#">Aprender más<span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
-          </p>
-        </section>
-      
-    </div>
-  </div>
-  
-<footer class="grid-footer">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span> Más trabajos</a>
-    </div>
-  </div>
-</footer>
-
-</article>
-    </div>
-
         </div>
         <footer class="footer-bbva">
             <!-- footer -->
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-4 footer-logo">
-            <span class="bbva-icon-BBVA"></span>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-sm-offset-4 col-md-6 col-md-offset-4 col-lg-4 col-lg-offset-4 footer-text">
-            <span>Educación Financiera</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
-			<div class="footer-menu-list">
-                <a href="#">Seguridad</a>
-                <a href="#">Aviso legal y Política de Cookies</a>
-                <a href="#">Términos y condiciones</a>
-                <a href="#">Accesibilidad</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 col-lg-8 footer-text"><span>Centro para la Educación y Capacidades Financieras</span></div>
+                    <div class="col-xs-12 col-sm-2 col-lg-4 footer-logo text-right"><span class="footer-iniciative">Una iniciativa de</span><span class="bbva-icon-BBVA"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
+                        <div class="footer-menu-list"><a href="#">Seguridad</a><a href="#">Aviso legal y Política de Cookies</a><a href="#">Términos y condiciones</a><a href="#">Accesibilidad</a></div>
+                    </div>
+                    <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
+                        <ul class="footer-menu footer-social">
+                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 footer-copyright-group">
+                        <p class="footer-copyright">&copy; 2016 BBVA</p>
+                    </div>
+                    <div class="visible-xs col-xs-12">
+                        <ul class="footer-menu footer-social">
+                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
+                            <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
-            <ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
-                <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 footer-copyright-group mt-sm">
-            <p class="footer-copyright">&copy; 2016 BBVA</p>
-        </div>
-        <div class="visible-xs col-xs-12">
-			<ul class="footer-menu footer-social">
-                <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
-                <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- EO footer -->
+            <!-- EO footer -->
         </footer>
     </div>
-
     <script src="js/data.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -930,9 +616,10 @@
     <script src="js/moment.min.js"></script>
     <script src="js/moment-precise-range.js"></script>
     <script src="js/progressbar.min.js"></script>
-	<script src="js/underscore-min.js"></script>
+    <script src="js/underscore-min.js"></script>
     <script src="js/jquery.touchSwipe.min.js"></script>
     <script src="js/ofi.browser.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>

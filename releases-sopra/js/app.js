@@ -209,6 +209,24 @@ var homeStopCarouselOnMobile = function ($) {
   }
 };
 
+var createMobileHelper = function createMobileHelper($) {
+    'use strict';
+
+    window.isMobile = function isMobile() {
+        return isMobileBrowser() || hasMobileSize();
+    };
+
+    function isMobileBrowser() {
+        var mobileRegexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+        return navigator && navigator.userAgent && mobileRegexp.test(navigator.userAgent);
+    }
+
+    function hasMobileSize() {
+        var xsScreenMax = window.xsScreenMax || 767;
+        var isXs = $(window).width() <= xsScreenMax;
+        return isXs;
+    }
+};
 var googleMaps = function($) {
     'use strict';
     var hasMap = $('#map_canvas').length;
@@ -298,7 +316,7 @@ var googleMaps = function($) {
         html += '<span class="map-info-close">&times;</span>';
         html += '<h1>' + data.title + '</h1>';
         html += '<p>' + data.text + '</p>';
-        html += '<a class="btn-bbva-aqua" href="'+ data.link +'">'+ data.button +'</a>';
+        html += '<a class="btn-bbva-aqua" href="'+ data.link +'" target="_blank">'+ data.button +'</a>';
         return html;
     }
 
@@ -373,7 +391,7 @@ var googleMaps = function($) {
 
 };
 
-var menuSearch = function($) {
+var menuSearch = function ($) {
     'use strict';
 
     var selectedTags = [];
@@ -392,7 +410,7 @@ var menuSearch = function($) {
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
-    $inputSearch.on('input', searchValueUpdated)
+    $inputSearch.on('input', searchValueUpdated);
     $btnSearch.on('click', searchByTags);
     $btnCloseFilter.on('click', toggleFilter);
     $btnFilter.on('click', toggleFilter);
@@ -414,53 +432,54 @@ var menuSearch = function($) {
     }
 
     function onInputKeyPressed(e) {
-        if(e.keyCode == 13){
+        if (e.keyCode == 13) {
             var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
             var newTag = createTag(tagModel);
             addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
-            this.value = "";
+            this.value = '';
             removeAllMatchedTags();
         }
     }
 
-    function searchValueUpdated(e) {
+    function searchValueUpdated() {
         var $this = $(this);
         var value = $this.val();
         removeAllMatchedTags();
         if (value.length > 2) {
-            var matchedResults = _.filter(data.availableTags, function(obj){
-                return obj.text.includes(value);
+            var matchedResults = _.filter(data.availableTags, function (obj) {
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
+
             refreshTagMatches(matchedResults);
             showGeoTags();
         }
+
         refreshTagCounters(currentMatches);
     }
 
     function showGeoTags() {
         var allTags = data.availableTags;
-        $.each(data.availableTags, function(index, tag) {
-            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+        $.each(data.availableTags, function (index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, { text: tag.text }).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                if ($('.selected-tags-container').find('#' + tag.id).length === 0) {
                     addTagToContainer(newTag, tag.from, selectTag);
                 }
+
                 currentMatches.push(tag);
             }
         });
     }
 
     function searchByTags() {
-        console.log(selectedTags);
         if (selectedTags.length > 0) {
-            window.location.href = "index.html";
+            window.location.href = 'index.html';
         }
     }
 
     function toggleFilter() {
         var $filterWrapper = $('#menu-search.menu-filter-wrapper');
-
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
         } else {
@@ -471,14 +490,14 @@ var menuSearch = function($) {
 
     //private methods
     function restoreTag(element) {
-      var $element = $(element);
-      var from = $element.attr('from');
-      if (from) {
-          var tagValue = $element.attr('tag-value');
-          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
-          var newTag = createTag(tagModel);
-          addTagToContainer(newTag, from, selectTag);
-      }
+        var $element = $(element);
+        var from = $element.attr('from');
+        if (from) {
+            var tagValue = $element.attr('tag-value');
+            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, from, selectTag);
+        }
     }
 
     function addTagToContainer(tag, targetContainer, clickCallback) {
@@ -490,8 +509,8 @@ var menuSearch = function($) {
 
     function createTag(tag) {
         var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
-        newTag += tag.icon ? '<span class="' + tag.icon +'"></span>' : '';
-        newTag += '<span>' + tag.text +'</span>' +
+        newTag += tag.icon ? '<span class="' + tag.icon + '"></span>' : '';
+        newTag += '<span>' + tag.text + '</span>' +
               '</div>';
         $(newTag).click(removeTagFromColumn);
         return newTag;
@@ -503,8 +522,8 @@ var menuSearch = function($) {
             from: from,
             icon: icon,
             text: text,
-            id: id
-        }
+            id: id,
+        };
     }
 
     function removeTagFromArray(_array, tag) {
@@ -520,15 +539,17 @@ var menuSearch = function($) {
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
-            if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+            if (tag.from !== 'geo-container' && _.where(currentMatches, { text: tag.text }).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                if ($('.selected-tags-container').find('#' + tag.id).length === 0) {
                     addTagToContainer(newTag, tag.from, selectTag);
                 }
+
                 currentMatches.push(tag);
             }
         }
+
         cleanOldMatches(_.difference(currentMatches, matchedResults));
     }
 
@@ -573,15 +594,6 @@ var menuSearch = function($) {
         selectedTags = [];
     }
 };
-
-setProgressBarLine('#lineContainer', getConfig(70.5, 'MM'), 0.8);
-setProgressBarLine('#lineContainer2', getConfig(1.1, 'K'), 0.5);
-setProgressBarCircle('#circleContainer', getCircleConfig(3.2, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
-setProgressBarCircle('#circleContainer2', getCircleConfig(7.1, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
-setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
-setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
-setProgressBarCircle('#circleContainer5', getCircleConfig(300.5, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
-setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
 
 var momentjs = function ($) {
 
@@ -631,51 +643,51 @@ var navPhone = function($) {
 };
 
 var navBar = function ($) {
+    'use strict';
+    var $searchContainer = $('.logo-search');
+    var $searchIcon = $('.search-icon');
+    var $closeNavbarFilter = $('.close-navbar-filter');
+    var $searchFormContainer = $('.search-form-container');
+    var $navBarNav = $('.navbar-nav');
+    var $searchMenu = $('.navbar-search');
+    var $filterWrapper = $('.navbar .menu-filter-wrapper');
+    var $inputFilter = $('.navbar .navbar-search-input');
+    var $webContent = $('.webpage .contents');
+    var $searchLayer = $('.webpage .contents #search-layer');
 
-  var $searchContainer = $('.logo-search');
-  var $searchIcon = $('.search-icon');
-  var $closeNavbarFilter = $('.close-navbar-filter');
-  var $searchFormContainer = $('.search-form-container');
-  var $navBarNav = $('.navbar-nav');
-  var $searchMenu = $('.navbar-search');
-  var $filterWrapper = $('.navbar .menu-filter-wrapper');
-  var $inputFilter = $('.navbar .navbar-search-input');
-  var $webContent = $('.webpage .contents');
-  var $searchLayer = $('.webpage .contents #search-layer');
+    $searchIcon.click(onClickedSearch);
+    $closeNavbarFilter.click(onClickedSearch);
 
-  $searchIcon.click(onClickedSearch);
-  $closeNavbarFilter.click(onClickedSearch);
-  $inputFilter.on('input', function() {
-      if(this.value.length > 2) {
-          $filterWrapper.removeClass('hidden');
-          $webContent.css("position", "relative");
-          $searchLayer.addClass('search-layer');
-      }
-  });
+    $inputFilter.on('input', function () {
+        if (this.value.length > 2) {
+            $filterWrapper.removeClass('hidden');
+            $webContent.css('position', 'relative');
+            $searchLayer.addClass('search-layer');
+        }
+    });
 
-  function onClickedSearch() {
+    function onClickedSearch() {
+        if ($navBarNav.hasClass('hidden')) {
+            $searchFormContainer.toggleClass('hidden');
+            $searchContainer.toggleClass('active');
+            $searchMenu.fadeToggle(750);
+            setTimeout(function () {
+                $navBarNav.toggleClass('hidden');
+            }, 800);
 
-      if ($navBarNav.hasClass('hidden')) {
-          $searchFormContainer.toggleClass('hidden');
-          $searchContainer.toggleClass('active');
+            $webContent.css('position', 'inherit');
+            $searchLayer.removeClass('search-layer');
+            $inputFilter.val('');
+        } else {
+            $navBarNav.toggleClass('hidden');
+            $searchFormContainer.toggleClass('hidden');
+            $searchContainer.toggleClass('active');
 
-          $searchMenu.fadeToggle(750);
-
-          setTimeout(function() {
-              $navBarNav.toggleClass('hidden');
-          }, 800);
-          $webContent.css("position", "inherit");
-          $searchLayer.removeClass('search-layer');
-      } else {
-          $navBarNav.toggleClass('hidden');
-
-          $searchFormContainer.toggleClass('hidden');
-          $searchContainer.toggleClass('active');
-
-          //$filterWrapper.removeClass('hidden');
-          $searchMenu.fadeToggle(750);
-      }
-  }
+            //$filterWrapper.removeClass('hidden');
+            $searchMenu.fadeToggle(750);
+            $inputFilter.focus();
+        }
+    }
 };
 
 var popover = function ($) {
@@ -727,9 +739,81 @@ var popover = function ($) {
   });
 };
 
-var publishingFilter = function($) {
+var initProgressElements = function initProgressElements($) {
     'use strict';
+    initProgressBarLines($);
+    initCircles($);
 
+    function initProgressBarLines($) {
+        setProgressBarLine('#lineContainer', getConfig(70.5, 'MM'), 0.8);
+        setProgressBarLine('#lineContainer2', getConfig(1.1, 'K'), 0.5);
+    }
+
+    function initCircles($) {
+        var impactCirclesCreated = false;
+        var microfinancesCirclesCreated = false;
+        $(window).scroll(function () {
+            var yPosition = window.pageYOffset;
+
+            // Home and impact circles
+            var yPositionCirclesSection = 0;
+            var startAnimationPosition = 0;
+            if (isHomeImpact($)) {
+                // We are in home page
+                yPositionCirclesSection = $('.home-impact').offset().top;
+                startAnimationPosition = window.isMobile()
+                    ? yPositionCirclesSection * 0.7
+                    : yPositionCirclesSection * 0.9;
+            } else {
+                // We are in impact subpage
+                var beneficiariesSection = $('.beneficiaries-section');
+                if (beneficiariesSection.length === 0) {
+                    return;
+                }
+
+                yPositionCirclesSection = $('.beneficiaries-section').offset().top;
+                startAnimationPosition = window.isMobile()
+                    ? yPositionCirclesSection * 0.7
+                    : yPositionCirclesSection * 0.9;
+            }
+
+            if ((yPosition >= startAnimationPosition) && !impactCirclesCreated) {
+                setProgressBarCircle('#circleContainer', getCircleConfig(3.2, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
+                setProgressBarCircle('#circleContainer2', getCircleConfig(7.1, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
+                setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
+                impactCirclesCreated = true;
+            }
+
+            // Impact second circles
+            var microfinancesSection = $('.micro-section');
+            if (!microfinancesSection.length || microfinancesCirclesCreated) {
+                return;
+            } else {
+                var microfinancesSectionPosition = microfinancesSection.offset().top;
+                var startAnimationPositionMicrofinances = window.isMobile()
+                    ? microfinancesSectionPosition * 0.7
+                    : microfinancesSectionPosition * 0.9;
+                if ((yPosition >= startAnimationPositionMicrofinances) && !microfinancesCirclesCreated) {
+                    setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
+                    setProgressBarCircle('#circleContainer5', getCircleConfig(300.5, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
+                    setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
+                    microfinancesCirclesCreated = true;
+                }
+            }
+
+
+        });
+    }
+
+    function isHomeImpact($) {
+        return $('.home-impact').length > 0;
+    }
+};
+
+
+var publishingFilter = function ($) {
+    'use strict';
+    var _ = window._;
     var selectedTags = [];
     var currentMatches = [];
     var $availableTag = $('#publishing-filter .available-tag');
@@ -743,24 +827,24 @@ var publishingFilter = function($) {
     var $tagsCounter = $('#publishing-filter .tag-container-counter');
     var $authorsCounter = $('#publishing-filter .author-container-counter');
     var $geoCounter = $('#publishing-filter .geo-container-counter');
-	var $sortItemsContainer = $('.sort-items-container');
+    var $sortItemsContainer = $('.sort-items-container');
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
-    $inputSearch.on('input', searchValueUpdated)
+    $inputSearch.on('input', searchValueUpdated);
     $btnSearch.on('click', searchByTags);
     $btnCloseFilter.on('click', toggleFilter);
     $btnFilter.on('click', toggleFilter);
 
     //public methods
-    function removeTagFromColumn(e) {
+    function removeTagFromColumn() {
         var $tag = $(this);
         $tag.remove();
         restoreTag(this);
         removeTagFromArray(selectedTags, $(this).attr('tag-value'));
     }
 
-    function selectTag(e) {
+    function selectTag() {
         var $tag = $(this);
         $tag.remove();
         var tagModel = getTagModel('wow fadeIn selected-tag', $tag.attr('from'), 'bbva-icon-close', $tag.attr('tag-value'), $tag.attr('id'));
@@ -769,76 +853,80 @@ var publishingFilter = function($) {
     }
 
     function onInputKeyPressed(e) {
-        if(e.keyCode == 13){
+        if (e.keyCode === 13) {
             var tagModel = getTagModel('selected-tag', null, 'bbva-icon-close', this.value, null);
             var newTag = createTag(tagModel);
             addTagToContainer(newTag, 'selected-tags-container', removeTagFromColumn);
-            this.value = "";
+            this.value = '';
             removeAllMatchedTags();
         }
     }
 
-    function searchValueUpdated(e) {
+    function searchValueUpdated() {
         var $this = $(this);
         var value = $this.val();
         removeAllMatchedTags();
         if (value.length > 2) {
-            var matchedResults = _.filter(data.availableTags, function(obj){
-                return obj.text.includes(value);
+            var matchedResults = _.filter(data.availableTags, function (obj) {
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
+
             refreshTagMatches(matchedResults);
             showGeoTags();
         }
+
         refreshTagCounters(currentMatches);
     }
 
     function showGeoTags() {
         var allTags = data.availableTags;
-        $.each(data.availableTags, function(index, tag) {
-            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+        $.each(data.availableTags, function (index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, { text: tag.text }).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 console.log(tag.from);
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                if ($('.selected-tags-container').find('#' + tag.id).length === 0) {
                     addTagToContainer(newTag, tag.from, selectTag);
                 }
+
                 currentMatches.push(tag);
             }
         });
     }
 
     function searchByTags() {
-		$('.cards-grid').css('opacity', '1');
+        $('.cards-grid').css('opacity', '1');
         console.log(selectedTags);
     }
 
     function toggleFilter() {
         var $filterWrapper = $('#publishing-filter.publishing-filter-wrapper');
-
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
             $('.cards-grid').css('opacity', '0.4');
-			$sortItemsContainer.hide();
-			$btnFilter.hide();
+            $sortItemsContainer.hide();
+            $btnFilter.hide();
+            $inputSearch.focus();
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
-			$btnFilter.show();
-			$sortItemsContainer.show();
+            $btnFilter.show();
+            $sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
+            $inputSearch.val('');
             emptyData();
         }
     }
 
     //private methods
     function restoreTag(element) {
-      var $element = $(element);
-      var from = $element.attr('from');
-      if (from) {
-          var tagValue = $element.attr('tag-value');
-          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
-          var newTag = createTag(tagModel);
-          addTagToContainer(newTag, from, selectTag);
-      }
+        var $element = $(element);
+        var from = $element.attr('from');
+        if (from) {
+            var tagValue = $element.attr('tag-value');
+            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+            var newTag = createTag(tagModel);
+            addTagToContainer(newTag, from, selectTag);
+        }
     }
 
     function addTagToContainer(tag, targetContainer, clickCallback) {
@@ -850,8 +938,8 @@ var publishingFilter = function($) {
 
     function createTag(tag) {
         var newTag = '<div class="tag ' + tag.type + '" from="' + tag.from + '" tag-value="' + tag.text + '" id="' + tag.id + '">';
-        newTag += tag.icon ? '<span class="' + tag.icon +'"></span>' : '';
-        newTag += '<span>' + tag.text +'</span>' +
+        newTag += tag.icon ? '<span class="' + tag.icon + '"></span>' : '';
+        newTag += '<span>' + tag.text + '</span>' +
               '</div>';
         $(newTag).click(removeTagFromColumn);
         return newTag;
@@ -863,8 +951,8 @@ var publishingFilter = function($) {
             from: from,
             icon: icon,
             text: text,
-            id: id
-        }
+            id: id,
+        };
     }
 
     function removeTagFromArray(_array, tag) {
@@ -880,15 +968,17 @@ var publishingFilter = function($) {
         var l = matchedResults.length;
         for (var i = 0; i < l; i++) {
             var tag = matchedResults[i];
-            if (tag.from !== 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+            if (tag.from !== 'geo-container' && _.where(currentMatches, { text: tag.text }).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
-                if ($(".selected-tags-container").find('#'+tag.id).length === 0) {
+                if ($('.selected-tags-container').find('#' + tag.id).length === 0) {
                     addTagToContainer(newTag, tag.from, selectTag);
                 }
+
                 currentMatches.push(tag);
             }
         }
+
         cleanOldMatches(_.difference(currentMatches, matchedResults));
     }
 
@@ -934,15 +1024,9 @@ var publishingFilter = function($) {
     }
 };
 
-var publishingFilterMobile = function($) {
+var publishingFilterMobile = function ($) {
     'use strict';
-
-    var searchPage = $('.filter-mobile');
-
-    $('.filter-mobile-button, .close-filter-mobile').click(function() {
-        searchPage.toggleClass('closed');
-    });
-
+    var $searchPage = $('.filter-mobile');
     var selectedTags = [];
     var currentMatches = [];
     var $availableTag = $('#publishing-filter-mobile .available-tag');
@@ -954,6 +1038,7 @@ var publishingFilterMobile = function($) {
     var $tagsCounter = $('#publishing-filter-mobile .tag-container-counter');
     var $authorsCounter = $('#publishing-filter-mobile .author-container-counter');
     var $geoCounter = $('#publishing-filter-mobile .geo-container-counter');
+    var _ = window._;
 
     bindEventsWithHandlers();
 
@@ -962,6 +1047,16 @@ var publishingFilterMobile = function($) {
         $inputSearch.keypress(onInputKeyPressed);
         $inputSearch.on('input', searchValueUpdated);
         $btnSearch.on('click', searchByTags);
+
+        $('.filter-mobile-button').click(function () {
+            $searchPage.toggleClass('closed');
+            $inputSearch.focus();
+        });
+
+        $('.close-filter-mobile').click(function () {
+            $searchPage.toggleClass('closed');
+            $inputSearch.val('');
+        });
     }
 
     function removeTagFromColumn() {
@@ -997,21 +1092,20 @@ var publishingFilterMobile = function($) {
         var value = $this.val();
         removeAllMatchedTags();
         if (value.length > 2) {
-            var matchedResults = _.filter(data.availableTags, function (obj) {
-                return obj.text.includes(value);
+            var matchedResults = _.filter(window.data.availableTags, function (obj) {
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
+
             refreshTagMatches(matchedResults);
-            showGeoTags()
+            showGeoTags();
         }
 
         refreshTagCounters(currentMatches);
     }
 
     function showGeoTags() {
-        var allTags = data.availableTags;
-        $.each(data.availableTags, function(index, tag) {
-            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
-                console.log(tag.from);
+        $.each(window.data.availableTags, function (index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, { text: tag.text }).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
                 addTagToContainer(newTag, tag.from, selectTag);
@@ -1122,16 +1216,6 @@ var publishingFilterMobile = function($) {
             $target.text(++currentVal);
         }
     }
-
-    function emptyData() {
-        removeAllMatchedTags();
-        $authorsCounter.text('0');
-        $tagsCounter.text('0');
-        $geoCounter.text('0');
-        $inputSearch.val('');
-        selectedTags = [];
-        $('#publishing-filter-mobile .selected-tags-container').empty();
-    }
 };
 
 var refreshPage = function($) {
@@ -1151,72 +1235,65 @@ var refreshPage = function($) {
     });
 };
 
-var scroll = function($) {
-
-      var getMax = function(){
-          return $(document).height() - $(window).height();
-      }
-
-      var getValue = function(){
-          return $(window).scrollTop();
-      }
-
-      if('max' in document.createElement('progress')){
-          // Browser supports progress element
-          var progressBar = $('progress');
-
-          // Set the Max attr for the first time
-          progressBar.attr({ max: getMax() });
-
-          $(document).on('scroll', function(){
-              // On scroll only Value attr needs to be calculated
-              progressBar.attr({ value: getValue() });
-          });
-
-          $(window).resize(function(){
-              // On resize, both Max/Value attr needs to be calculated
-              progressBar.attr({ max: getMax(), value: getValue() });
-          });
-      }
-      else {
-          var progressBar = $('.progress-bar'),
-              max = getMax(),
-              value, width;
-
-          var getWidth = function(){
-              // Calculate width in percentage
-              value = getValue();
-              width = (value/max) * 100;
-              width = width + '%';
-              return width;
-          }
-
-          var setWidth = function(){
-              progressBar.css({ width: getWidth() });
-          }
-
-          $(document).on('scroll', setWidth);
-          $(window).on('resize', function(){
-              // Need to reset the Max attr
-              max = getMax();
-              setWidth();
-          });
-      }
-};
-
-var searchMobile = function($) {
+var scroll = function ($) {
     'use strict';
 
-    var searchPage = $('.search-mobile');
+    var getMax = function () {
+        return $(document).height() - $(window).height();
+    };
 
-    $('.search-mobile-button, .close-search-mobile').click(function() {
-        window.scrollTo(0, 0);
-        searchPage.toggleClass('closed');
-        setTimeout(function () {
-            $('.input-search-mobile').focus();
-        }, 500);
-    });
+    var getValue = function () {
+        return $(window).scrollTop();
+    };
 
+    var $progressBar;
+
+    if ('max' in document.createElement('progress')) {
+        // Browser supports progress element
+        $progressBar = $('progress');
+
+        // Set the Max attr for the first time
+        $progressBar.attr({ max: getMax() });
+
+        $(document).on('scroll', function () {
+            // On scroll only Value attr needs to be calculated
+            $progressBar.attr({ value: getValue() });
+        });
+
+        $(window).resize(function () {
+            // On resize, both Max/Value attr needs to be calculated
+            $progressBar.attr({ max: getMax(), value: getValue() });
+        });
+    } else {
+        $progressBar = $('.progress-bar');
+        var max = getMax();
+        var value;
+        var width;
+
+        var getWidth = function () {
+            // Calculate width in percentage
+            value = getValue();
+            width = (value / max) * 100;
+            width = width + '%';
+            return width;
+        };
+
+        var setWidth = function () {
+            $progressBar.css({ width: getWidth() });
+        };
+
+        $(document).on('scroll', setWidth);
+        $(window).on('resize', function () {
+            // Need to reset the Max attr
+            max = getMax();
+            setWidth();
+        });
+    }
+};
+
+var searchMobile = function ($) {
+    'use strict';
+    var $searchPage = $('.search-mobile');
     var selectedTags = [];
     var currentMatches = [];
     var $availableTag = $('#mobile-filter .available-tag');
@@ -1236,6 +1313,20 @@ var searchMobile = function($) {
         $inputSearch.keypress(onInputKeyPressed);
         $inputSearch.on('input', searchValueUpdated);
         $btnSearch.on('click', searchByTags);
+
+        $('.search-mobile-button').click(function () {
+            window.scrollTo(0, 0);
+            $searchPage.toggleClass('closed');
+            setTimeout(function () {
+                $('.publishing-filter-search-input').focus();
+            }, 500);
+        });
+
+        $('.close-search-mobile').click(function () {
+            window.scrollTo(0, 0);
+            $searchPage.toggleClass('closed');
+            $('.publishing-filter-search-input').val('');
+        });
     }
 
     function removeTagFromColumn() {
@@ -1272,8 +1363,9 @@ var searchMobile = function($) {
         removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function (obj) {
-                return obj.text.includes(value);
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
+
             refreshTagMatches(matchedResults);
             showGeoTags();
         }
@@ -1283,8 +1375,8 @@ var searchMobile = function($) {
 
     function showGeoTags() {
         var allTags = data.availableTags;
-        $.each(data.availableTags, function(index, tag) {
-            if (tag.from === 'geo-container' && _.where(currentMatches, {'text': tag.text}).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
+        $.each(data.availableTags, function (index, tag) {
+            if (tag.from === 'geo-container' && _.where(currentMatches, { text: tag.text }).length < 1 && _.indexOf(selectedTags, tag.text) < 0) {
                 console.log(tag.from);
                 var tagModel = getTagModel('available-tag', tag.from, null, tag.text, tag.id);
                 var newTag = createTag(tagModel);
@@ -1577,28 +1669,30 @@ var dataEvents = [
 jQuery.noConflict();
 jQuery(document).ready(function ($) {
     'use strict';
-    selectLanguage($);
-    fixedMenu($);
-    navPhone($);
-    footerMenu($);
-    animationWow($);
-    animationWowAppear($);
-    cookies($);
-    popover($);
-    googleMaps($);
-    scroll($);
-    dropdowns($);
-    momentjs($);
-    googlemap($);
-    publishingFilter($);
-    navBar($);
-    menuSearch($);
-    sortOptions($);
-    searchMobile($);
-    refreshPage($);
-    homeStopCarouselOnMobile($);
-    homeCarouselSwipe($);
-    publishingFilterMobile($);
+    window.selectLanguage($);
+    window.fixedMenu($);
+    window.navPhone($);
+    window.footerMenu($);
+    window.animationWow($);
+    window.animationWowAppear($);
+    window.cookies($);
+    window.popover($);
+    window.googleMaps($);
+    window.scroll($);
+    window.dropdowns($);
+    window.momentjs($);
+    window.googlemap($);
+    window.publishingFilter($);
+    window.navBar($);
+    window.menuSearch($);
+    window.sortOptions($);
+    window.searchMobile($);
+    window.refreshPage($);
+    window.homeStopCarouselOnMobile($);
+    window.homeCarouselSwipe($);
+    window.publishingFilterMobile($);
+    window.initProgressElements($);
+    window.createMobileHelper($);
 });
 
 var lgScreenMin = 1200;
