@@ -1840,7 +1840,7 @@ jQuery(document).ready(function ($) {
     window.homeStopCarouselOnMobile($);
     window.homeCarouselSwipe($);
     window.publishingFilterMobile($);
-    window.initProgressElements($);
+    //window.initProgressElements($);
     window.createMobileHelper($);
 });
 
