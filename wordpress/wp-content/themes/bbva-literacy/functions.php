@@ -105,12 +105,19 @@ function add_search_meta() {
     		if ($destacada == 'on') {
     			$keyboards[] = 'destacada';
     		}
-    	}else if ($post_type == 'practica'){
-
-    		$descrip = get_post_meta($p->ID, 'texto-descriptivo', true);
-    		$post_content = strip_tags($descrip);
+    	}else if ($post_type == 'practica') {
+    		$descrip = get_post_meta($p->ID, 'texto-destacado', true);
+    		if (empty($descrip)) {
+    			$post_content = strip_tags($p->post_title);
+    		} else {
+    			$post_content = strip_tags($descrip);
+    		}
     		$fecha = get_the_date('Y-m-d');
-    		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCardPractica', true) );
+    		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
+    		$destacada = get_post_meta($p->ID, 'destacada', true);
+    		if ($destacada == 'on') {
+    			$keyboards[] = 'destacada';
+    		}
     	}
         ?>
         <meta name="wp_search" content="true"/>
