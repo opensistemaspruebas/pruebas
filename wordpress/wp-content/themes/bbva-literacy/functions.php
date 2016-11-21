@@ -608,7 +608,7 @@ function wpdocs_theme_name_scripts() {
 		'resultados_que_coinciden_con' => __('que coinciden con'),
 		'y_las_etiquetas' => __('las etiquetas'),
 		'de' => __('de'),
-		'todos_los_talleres' => __('Todos los talleres'),
+		'todos_los_talleres' => __('Todas las iniciativas y talleres'),
 	);
 	wp_localize_script('script_os_js', 'object_name_script_os_js', $translation_array);
 	wp_enqueue_script('script_os_js');

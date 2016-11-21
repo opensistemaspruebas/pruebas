@@ -58,7 +58,7 @@ if (!class_exists('OS_Filtro_Widget')) :
 			        <section>
 			            <div class="row available-tags-wrapper">
 			                <div class="col-xs-4">
-			                    <p class="text-uppercase column-name"><?php _e('tags', 'os_filtro_widget'); ?> (<span class="tag-container-counter">0</span>)</p>
+			                    <p class="text-uppercase column-name"><?php _e('etiquetas', 'os_filtro_widget'); ?> (<span class="tag-container-counter">0</span>)</p>
 			                    <div class="tag-container"></div>
 			                </div>
 			                <div class="col-xs-4">
