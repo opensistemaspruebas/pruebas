@@ -1,5 +1,5 @@
 // Ver mas publicaciones
-jQuery(document).on("click", "#publishing-view #readmore, .outstanding-histories #readmore, #publicaciones-autor #readmore", function(event) {
+jQuery(document).on("click", ".latests-posts #readmore, #publishing-view #readmore, .outstanding-histories #readmore, #publicaciones-autor #readmore", function(event) {
 	event.preventDefault();
 	if (buscando) {
 		return;
@@ -66,6 +66,8 @@ function loop(i, fin, indice, onDone){
 		var orden_cards = jQuery("#orden").val();
 		var path = "/wp-content/jsons/" + object_name_cards.locale + '/' + tipo + "/";
 		
+		console.log(i);
+
 		jQuery.getJSON(path + indice[i] + ".json", function(post) {
 			var plantilla = jQuery("#plantilla").val();
 			switch(plantilla) {

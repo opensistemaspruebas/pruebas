@@ -96,8 +96,8 @@ function post_to_json($post_id, $post_type){
 
 		case "practica":
 			$json["titulo"] = get_the_title($post_id);
-			$json["descripcion"] = get_post_meta($post_id,'texto-descriptivo',true);
-			$json["urlImagen"] = get_post_meta($post_id, 'imagenCardPractica', true);
+			$json["descripcion"] = get_post_meta($post_id,'texto-destacado',true);
+			$json["urlImagen"] = get_post_meta($post_id, 'imagenCard', true);
 			$json["urlPublicacion"] = get_permalink($post_id);
 			$json["fecha"] = get_post_time('Y/m/d - g:i A', true, $post_id, true);
 			$json["video"] = get_post_meta($post_id, "videoIntro-url", true) ? True: False;
@@ -130,10 +130,10 @@ function post_to_json($post_id, $post_type){
 }
 
 
-function update_post_index($post_type){
-	fetch($post_type, "ASC");
-	fetch($post_type, "DESC");
-	fetch_destacados($post_type, "DESC");
+function update_post_index($post_type, $post_id){
+	fetch($post_type, "ASC", $post_id);
+	fetch($post_type, "DESC", $post_id);
+	fetch_destacados($post_type, "DESC", $post_id);
 }
 
 
@@ -142,7 +142,8 @@ function update_post_index_autores($post_type, $author) {
 }
 
 
-function fetch($post_type, $order){
+function fetch($post_type, $order, $post_id){
+
 
 	if($post_type == "publicacion"){
 
@@ -175,14 +176,39 @@ function fetch($post_type, $order){
 	$posts = get_posts($args);
 	$index_array = array();
 
-	for ($i = 0; $i < count($posts); $i++) { 
-		$index_array[] = $posts[$i]->ID;
+	$last_post = get_post($post_id);
+	$last_post_id = $last_post->ID;
+
+
+	if(($order == 'DESC') && (!in_array($last_post_id, $index_array))){
+
+			array_push($index_array, $last_post_id);
+		
+
+		/*for ($i = 1; $i < count($posts); $i++) { 
+			$index_array[] = $posts[$i]->ID;
+		}*/
 	}
+
+	for ($i = 0; $i < count($posts); $i++) { 
+			$index_array[] = $posts[$i]->ID;
+	}
+
+	if(($order == 'ASC') && (!in_array($last_post_id, $index_array))){
+
+		/*for ($i = 0; $i < count($posts)-1; $i++) { 
+			$index_array[] = $posts[$i]->ID;
+		}*/
+
+		array_push($index_array, $last_post_id);
+	}
+
+	
 
 	save_json_to_file($index_array, $post_type, $order, "indice");
 }
 
-function fetch_destacados($post_type, $order){
+function fetch_destacados($post_type, $order, $post_id){
 
 
 	if($post_type == "publicacion"){
@@ -220,17 +246,18 @@ function fetch_destacados($post_type, $order){
 			'meta_compare'     => '=',
 			'suppress_filters' => false 
 		);
-
-
 	}
-
 
 	$posts = get_posts($args);
 	$index_array = array();
 
+	$last_post = get_post($post_id);
+
 	for ($i = 0; $i < count($posts); $i++) { 
-		$index_array[] = $posts[$i]->ID;
+		$index_array[] = $posts[$i]->ID;		
 	}
+	
+	array_push($index_array, $last_post);
 
 	save_json_to_file($index_array, $post_type, $order, "destacados");
 }
@@ -285,8 +312,8 @@ function save_post_and_update($post_id) {
 		}
 	}
 
-	update_post_index($post_type);
-
+	update_post_index($post_type,$post_id);
 }
+
 add_action('save_post', 'save_post_and_update');
 add_action('delete_post', 'save_post_and_update');
