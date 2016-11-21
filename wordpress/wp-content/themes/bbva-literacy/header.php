@@ -26,21 +26,29 @@
                 <div class="row vertical-align header-logo">
                     <div class="visible-xs col-xs-12 header-phone text-center">
                         <div class="launcher-menu-mobil visible-xs"><span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span></div>
-                        <div class="logo"><a href="<?php echo get_home_url(); ?>" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span></a>
+                        <div class="logo">
                             <h1><?php echo bloginfo('name'); ?></h1>
                             <div class="logo-search ml-sm search-mobile-button"><span class="bbva-icon-search"></span></div>
                         </div>
                     </div>
-                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-4 logo"><a href="<?php echo get_home_url(); ?>" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span><span class="hidden"><?php _e('Logo BBVA'); ?></span></a></div>
-                    <div class="hidden-xs col-xs-12 col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-5 col-lg-4 col-lg-offset-4 header-text">
-                        <h1><?php echo bloginfo('name'); ?></h1></div>
+                    <div class="hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-9 header-text">
+                        <h1 class="go-left"><?php echo bloginfo('name'); ?></h1>
+                    </div>
+                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-3 logo text-right iniciative-wrapper">
+                        <a href="<?php echo get_home_url(); ?>" class="bbva-icon-BBVA-wrap">
+                            <span class="iniciative"><?php _e('Una iniciativa de'); ?></span>
+                            <span class="bbva-icon-BBVA"></span>
+                            <span class="hidden"><?php _e('Logo BBVA'); ?></span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="search-mobile closed hidden-sm hidden-md hidden-lg">
                 <div class="container">
                     <div class="header-phone">
-                        <div class="logo"><a href="<?php echo get_home_url(); ?>" class="bbva-icon-BBVA-wrap"><span class="bbva-icon-BBVA"></span></a>
-                            <h1><?php _e('Educación Financiera'); ?></h1></div>
+                        <div class="logo">
+                            <h1><?php echo bloginfo('name'); ?></h1>
+                        </div>
                         <div class="close-search-mobile ml-sm"><span class="bbva-icon-close"></span></div>
                     </div>
                     <section class="content">
@@ -54,7 +62,7 @@
                             <section>
                                 <div class="row available-tags-wrapper">
                                     <div class="col-xs-12">
-                                        <p class="text-capitalize column-name"><?php _e('tags'); ?> (<span class="tag-container-counter">0</span>)</p>
+                                        <p class="text-capitalize column-name"><?php _e('etiquetas'); ?> (<span class="tag-container-counter">0</span>)</p>
                                         <div class="tag-container"></div>
                                     </div>
                                     <div class="col-xs-12">
@@ -79,7 +87,6 @@
                 <nav class="navbar">
                     <div class="row visible-xs">
                         <div class="col-xs-12 pt-md">
-                            <div class="menu-logo"><a href="<?php echo get_home_url(); ?>"><span class="bbva-icon-BBVA"></span></a></div>
                             <div class="menu-text ml-md"><span><?php echo bloginfo('name'); ?></span></div>
                             <div class="menu-close ml-xxxl"><a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a></div>
                         </div>
@@ -136,7 +143,7 @@
                         <section>
                             <div class="row available-tags-wrapper">
                                 <div class="col-xs-4">
-                                    <p class="text-uppercase column-name"><?php _e('tags'); ?> (<span class="tag-container-counter">0</span>)</p>
+                                    <p class="text-uppercase column-name"><?php _e('etiquetas'); ?> (<span class="tag-container-counter">0</span>)</p>
                                     <div class="tag-container"></div>
                                 </div>
                                 <div class="col-xs-4">

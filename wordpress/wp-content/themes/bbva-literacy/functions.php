@@ -206,7 +206,7 @@ class Custom_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 		$item_output = $args->before;
-		$item_output .= '<a class="collapsed mr-sm '. $active .'" '. $attributes .'>';
+		$item_output .= '<a class="collapsed mr-xs '. $active .'" '. $attributes .'>';
 		$item_output .= '<span class="hidden-xs">' . $title . '</span>';
 		$item_output .= '<span class="visible-xs pl-lg">' . $title . '</span>';
 		$item_output .= '</a>';
