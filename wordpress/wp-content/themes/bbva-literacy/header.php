@@ -129,33 +129,35 @@
                     <input type="hidden" name="sortByTalleres" id="sortByTalleres" value="date desc">
                     <input type="hidden" name="sizeTalleres" id="sizeTalleres" value="6">
 
+                    <input type="hidden" name="startPracticas" id="startPracticas" value="0">
+                    <input type="hidden" name="sortByPracticas" id="sortByPracticas" value="date desc">
+                    <input type="hidden" name="sizePracticas" id="sizePracticas" value="10">
+
                     <input type="hidden" name="currentTab" id="currentTab" value="publishes">
                    
-                    <div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
-                        <header>
+                    <div class="navbar navbar-search">
+                        <div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
                             <div class="form-wrapper">
-                                <div class="title"><span class="text-uppercase text"><?php _e('filtros'); ?></span>
-                                    <button type="button" class="close close-menu-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-                                </div>
+                                <div class="title"><span class="text-uppercase text"><?php _e('filtros'); ?></span></div>
+                                <div class="selected-tags-container"></div>
                             </div>
-                            <div class="selected-tags-container"></div>
-                        </header>
-                        <section>
-                            <div class="row available-tags-wrapper">
-                                <div class="col-xs-4">
-                                    <p class="text-uppercase column-name"><?php _e('etiquetas'); ?> (<span class="tag-container-counter">0</span>)</p>
-                                    <div class="tag-container"></div>
+                            <section>
+                                <div class="row available-tags-wrapper">
+                                    <div class="col-xs-4">
+                                        <p class="text-uppercase column-name"><?php _e('etiquetas'); ?> (<span class="tag-container-counter">0</span>)</p>
+                                        <div class="tag-container"></div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="text-uppercase column-name"><?php _e('Autores'); ?> (<span class="author-container-counter">0</span>)</p>
+                                        <div class="author-container"></div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p class="text-uppercase column-name"><?php _e('ámbito geográfico'); ?> (<span class="geo-container-counter">0</span>)</p>
+                                        <div class="geo-container"></div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-4">
-                                    <p class="text-uppercase column-name"><?php _e('Autores'); ?> (<span class="author-container-counter">0</span>)</p>
-                                    <div class="author-container"></div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <p class="text-uppercase column-name"><?php _e('ámbito geográfico'); ?> (<span class="geo-container-counter">0</span>)</p>
-                                    <div class="geo-container"></div>
-                                </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
