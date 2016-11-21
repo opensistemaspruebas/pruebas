@@ -67,6 +67,8 @@ function add_search_meta() {
     		}
     	}
     	$destacada = get_post_meta($p->ID, 'destacada', true);
+	    $pdfInterno = get_post_meta(get_the_ID(), 'pdfInterno', true);
+	    $publication_date = get_post_meta(get_the_ID(), 'publication_date', true);	
     	if ($post_type == 'publicacion') {
     		$abstract_destacado = get_post_meta($p->ID, 'abstract_destacado', true);
     		$abstract_contenido = get_post_meta($p->ID, 'abstract_contenido', true);
@@ -82,9 +84,11 @@ function add_search_meta() {
     		if (!empty($videoIntro_url)) {
     			$keyboards[] = 'video';
     		}
-    		$destacada = get_post_meta($p->ID, 'destacada', true);
     		if ($destacada == 'on') {
     			$keyboards[] = 'destacada';
+    		}
+    		if ($pdf || $pdfInterno) {
+    			$keyboards[] = 'pdf';
     		}
     	} else if ($post_type == 'taller') {
     		$descp = get_post_meta($p->ID, 'descp', true);
@@ -101,9 +105,11 @@ function add_search_meta() {
     		if (!empty($videoIntro_url)) {
     			$keyboards[] = 'video';
     		}
-    		$destacada = get_post_meta($p->ID, 'destacada', true);
     		if ($destacada == 'on') {
     			$keyboards[] = 'destacada';
+    		}
+    		if ($pdf || $pdfInterno) {
+    			$keyboards[] = 'pdf';
     		}
     	}else if ($post_type == 'practica') {
     		$descrip = get_post_meta($p->ID, 'texto-destacado', true);
@@ -114,9 +120,11 @@ function add_search_meta() {
     		}
     		$fecha = get_the_date('Y-m-d');
     		$image = str_replace('http://ec2-52-209-71-102.eu-west-1.compute.amazonaws.com', '', get_post_meta(get_the_ID(), 'imagenCard', true) );
-    		$destacada = get_post_meta($p->ID, 'destacada', true);
     		if ($destacada == 'on') {
     			$keyboards[] = 'destacada';
+    		}
+    		if ($pdf || $pdfInterno) {
+    			$keyboards[] = 'pdf';
     		}
     	}
         ?>
