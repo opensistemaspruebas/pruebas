@@ -1,33 +1,24 @@
-var initCookies = function initCookies($) {
+var cookies = function($) {
     'use strict';
-    init();
+    var time = 400;
+    var cookieName = 'allowCookie';
+    var container = $('.cookies');
+    var closeBtn = container.find('.close-cookies');
+    var isAllowedCookies = Cookies.get(cookieName);
 
-    function init() {
-        if (acceptedCookies()) {
-            return;
-        }
-
-        showCookiesMessage();
+    function allowCookies() {
+        container.slideUp(time, function() {
+            container.remove();
+            Cookies.set(cookieName, true);
+        });
     }
 
-    function showCookiesMessage() {
-        var $container = $('.cookies');
-        var closeBtn = $container.find('.close-cookies');
-        closeBtn.click(hideCookiesMessage);
-        $container.slideDown(500);
-    }
+    closeBtn.click(allowCookies);
 
-    function hideCookiesMessage() {
-        $('.cookies').slideUp(500);
-        window.Cookies.set(getCookieName(), true);
-    }
-
-    function acceptedCookies() {
-        return !!window.Cookies.get(getCookieName());
-    }
-
-    function getCookieName() {
-        return 'accepted-cookies';
+    if (isAllowedCookies) {
+        container.remove();
+    } else {
+        container.show();
     }
 };
 
@@ -420,7 +411,6 @@ var menuSearch = function ($) {
     var $tagsCounter = $('#menu-search .tag-container-counter');
     var $authorsCounter = $('#menu-search .author-container-counter');
     var $geoCounter = $('#menu-search .geo-container-counter');
-    var $selectTagColumn = $('#menu-search .selected-tags-container');
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
@@ -461,7 +451,7 @@ var menuSearch = function ($) {
         removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function (obj) {
-                return obj.text.toLowerCase().removeAccents().includes(value.toLowerCase().removeAccents());
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
 
             refreshTagMatches(matchedResults);
@@ -487,30 +477,33 @@ var menuSearch = function ($) {
     }
 
     function searchByTags() {
-        $btnCloseFilter.click();
+        console.log(selectedTags);
+        if (selectedTags.length > 0) {
+            //window.location.href = "index.html";
+        }
     }
 
     function toggleFilter() {
         var $filterWrapper = $('#menu-search.menu-filter-wrapper');
+
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
-            emptyData();
-            $selectTagColumn.empty();
+            //emptyData();
         }
     }
 
     //private methods
     function restoreTag(element) {
-        var $element = $(element);
-        var from = $element.attr('from');
-        if (from) {
-            var tagValue = $element.attr('tag-value');
-            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
-            var newTag = createTag(tagModel);
-            addTagToContainer(newTag, from, selectTag);
-        }
+      var $element = $(element);
+      var from = $element.attr('from');
+      if (from) {
+          var tagValue = $element.attr('tag-value');
+          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+          var newTag = createTag(tagModel);
+          addTagToContainer(newTag, from, selectTag);
+      }
     }
 
     function addTagToContainer(tag, targetContainer, clickCallback) {
@@ -857,7 +850,6 @@ var publishingFilter = function ($) {
     var $authorsCounter = $('#publishing-filter .author-container-counter');
     var $geoCounter = $('#publishing-filter .geo-container-counter');
     var $sortItemsContainer = $('.sort-items-container');
-    var $selectTagColumn = $('#publishing-filter .selected-tags-container');
 
     $availableTag.on('click', selectTag);
     $inputSearch.keypress(onInputKeyPressed);
@@ -898,7 +890,7 @@ var publishingFilter = function ($) {
         removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function (obj) {
-                return obj.text.toLowerCase().removeAccents().includes(value.toLowerCase().removeAccents());
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
 
             refreshTagMatches(matchedResults);
@@ -926,11 +918,12 @@ var publishingFilter = function ($) {
 
     function searchByTags() {
         $('.cards-grid').css('opacity', '1');
-        $btnFilter.click();
+        console.log(selectedTags);
     }
 
     function toggleFilter() {
         var $filterWrapper = $('#publishing-filter.publishing-filter-wrapper');
+
         if ($filterWrapper.hasClass('hidden')) {
             $filterWrapper.removeClass('hidden').addClass('displayed');
             $('.cards-grid').css('opacity', '0.4');
@@ -943,21 +936,20 @@ var publishingFilter = function ($) {
             $sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
             $inputSearch.val('');
-            emptyData();
-            $selectTagColumn.empty();
+            //emptyData();
         }
     }
 
     //private methods
     function restoreTag(element) {
-        var $element = $(element);
-        var from = $element.attr('from');
-        if (from) {
-            var tagValue = $element.attr('tag-value');
-            var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
-            var newTag = createTag(tagModel);
-            addTagToContainer(newTag, from, selectTag);
-        }
+      var $element = $(element);
+      var from = $element.attr('from');
+      if (from) {
+          var tagValue = $element.attr('tag-value');
+          var tagModel = getTagModel('available-tag', from, null, tagValue, $element.attr('id'));
+          var newTag = createTag(tagModel);
+          addTagToContainer(newTag, from, selectTag);
+      }
     }
 
     function addTagToContainer(tag, targetContainer, clickCallback) {
@@ -1069,7 +1061,6 @@ var publishingFilterMobile = function ($) {
     var $tagsCounter = $('#publishing-filter-mobile .tag-container-counter');
     var $authorsCounter = $('#publishing-filter-mobile .author-container-counter');
     var $geoCounter = $('#publishing-filter-mobile .geo-container-counter');
-    var $selectTagColumn = $('#publishing-filter-mobile .selected-tags-container');
     var _ = window._;
 
     bindEventsWithHandlers();
@@ -1088,8 +1079,6 @@ var publishingFilterMobile = function ($) {
         $('.close-filter-mobile').click(function () {
             $searchPage.toggleClass('closed');
             $inputSearch.val('');
-            emptyData();
-            $selectTagColumn.empty();
         });
     }
 
@@ -1127,7 +1116,7 @@ var publishingFilterMobile = function ($) {
         removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(window.data.availableTags, function (obj) {
-                return obj.text.toLowerCase().removeAccents().includes(value.toLowerCase().removeAccents());
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
 
             refreshTagMatches(matchedResults);
@@ -1150,7 +1139,6 @@ var publishingFilterMobile = function ($) {
 
     function searchByTags() {
         $('.cards-grid').css('opacity', '1');
-        $('.close-filter-mobile').click();
     }
 
     //private methods
@@ -1252,14 +1240,7 @@ var publishingFilterMobile = function ($) {
         }
     }
 
-    function emptyData() {
-        removeAllMatchedTags();
-        $authorsCounter.text('0');
-        $tagsCounter.text('0');
-        $geoCounter.text('0');
-        $inputSearch.val('');
-        selectedTags = [];
-    }
+  
 };
 
 var refreshPage = function($) {
@@ -1279,106 +1260,6 @@ var refreshPage = function($) {
     });
 };
 
-String.prototype.removeAccents = function () {
-    'use strict';
-    var _this = this;
-    var removalMap = {
-        A: /[AⒶＡÀÁÂẦẤẪẨÃĀĂẰẮẴẲȦǠÄǞẢÅǺǍȀȂẠẬẶḀĄ]/g,
-        AA: /[Ꜳ]/g,
-        AE: /[ÆǼǢ]/g,
-        AO: /[Ꜵ]/g,
-        AU: /[Ꜷ]/g,
-        AV: /[ꜸꜺ]/g,
-        AY: /[Ꜽ]/g,
-        B: /[BⒷＢḂḄḆɃƂƁ]/g,
-        C: /[CⒸＣĆĈĊČÇḈƇȻꜾ]/g,
-        D: /[DⒹＤḊĎḌḐḒḎĐƋƊƉꝹ]/g,
-        DZ: /[ǱǄ]/g,
-        Dz: /[ǲǅ]/g,
-        E: /[EⒺＥÈÉÊỀẾỄỂẼĒḔḖĔĖËẺĚȄȆẸỆȨḜĘḘḚƐƎ]/g,
-        F: /[FⒻＦḞƑꝻ]/g,
-        G: /[GⒼＧǴĜḠĞĠǦĢǤƓꞠꝽꝾ]/g,
-        H: /[HⒽＨĤḢḦȞḤḨḪĦⱧⱵꞍ]/g,
-        I: /[IⒾＩÌÍÎĨĪĬİÏḮỈǏȈȊỊĮḬƗ]/g,
-        J: /[JⒿＪĴɈ]/g,
-        K: /[KⓀＫḰǨḲĶḴƘⱩꝀꝂꝄꞢ]/g,
-        L: /[LⓁＬĿĹĽḶḸĻḼḺŁȽⱢⱠꝈꝆꞀ]/g,
-        LJ: /[Ǉ]/g,
-        Lj: /[ǈ]/g,
-        M: /[MⓂＭḾṀṂⱮƜ]/g,
-        N: /[NⓃＮǸŃÑṄŇṆŅṊṈȠƝꞐꞤ]/g,
-        NJ: /[Ǌ]/g,
-        Nj: /[ǋ]/g,
-        O: /[OⓄＯÒÓÔỒỐỖỔÕṌȬṎŌṐṒŎȮȰÖȪỎŐǑȌȎƠỜỚỠỞỢỌỘǪǬØǾƆƟꝊꝌ]/g,
-        OI: /[Ƣ]/g,
-        OO: /[Ꝏ]/g,
-        OU: /[Ȣ]/g,
-        P: /[PⓅＰṔṖƤⱣꝐꝒꝔ]/g,
-        Q: /[QⓆＱꝖꝘɊ]/g,
-        R: /[RⓇＲŔṘŘȐȒṚṜŖṞɌⱤꝚꞦꞂ]/g,
-        S: /[SⓈＳẞŚṤŜṠŠṦṢṨȘŞⱾꞨꞄ]/g,
-        T: /[TⓉＴṪŤṬȚŢṰṮŦƬƮȾꞆ]/g,
-        TZ: /[Ꜩ]/g,
-        U: /[UⓊＵÙÚÛŨṸŪṺŬÜǛǗǕǙỦŮŰǓȔȖƯỪỨỮỬỰỤṲŲṶṴɄ]/g,
-        V: /[VⓋＶṼṾƲꝞɅ]/g,
-        VY: /[Ꝡ]/g,
-        W: /[WⓌＷẀẂŴẆẄẈⱲ]/g,
-        X: /[XⓍＸẊẌ]/g,
-        Y: /[YⓎＹỲÝŶỸȲẎŸỶỴƳɎỾ]/g,
-        Z: /[ZⓏＺŹẐŻŽẒẔƵȤⱿⱫꝢ]/g,
-        a: /[aⓐａẚàáâầấẫẩãāăằắẵẳȧǡäǟảåǻǎȁȃạậặḁąⱥɐ]/g,
-        aa: /[ꜳ]/g,
-        ae: /[æǽǣ]/g,
-        ao: /[ꜵ]/g,
-        au: /[ꜷ]/g,
-        av: /[ꜹꜻ]/g,
-        ay: /[ꜽ]/g,
-        b: /[bⓑｂḃḅḇƀƃɓ]/g,
-        c: /[cⓒｃćĉċčçḉƈȼꜿↄ]/g,
-        d: /[dⓓｄḋďḍḑḓḏđƌɖɗꝺ]/g,
-        dz: /[ǳǆ]/g,
-        e: /[eⓔｅèéêềếễểẽēḕḗĕėëẻěȅȇẹệȩḝęḙḛɇɛǝ]/g,
-        f: /[fⓕｆḟƒꝼ]/g,
-        g: /[gⓖｇǵĝḡğġǧģǥɠꞡᵹꝿ]/g,
-        h: /[hⓗｈĥḣḧȟḥḩḫẖħⱨⱶɥ]/g,
-        hv: /[ƕ]/g,
-        i: /[iⓘｉìíîĩīĭïḯỉǐȉȋịįḭɨı]/g,
-        j: /[jⓙｊĵǰɉ]/g,
-        k: /[kⓚｋḱǩḳķḵƙⱪꝁꝃꝅꞣ]/g,
-        l: /[lⓛｌŀĺľḷḹļḽḻſłƚɫⱡꝉꞁꝇ]/g,
-        lj: /[ǉ]/g,
-        m: /[mⓜｍḿṁṃɱɯ]/g,
-        n: /[nⓝｎǹńñṅňṇņṋṉƞɲŉꞑꞥ]/g,
-        nj: /[ǌ]/g,
-        o: /[oⓞｏòóôồốỗổõṍȭṏōṑṓŏȯȱöȫỏőǒȍȏơờớỡởợọộǫǭøǿɔꝋꝍɵ]/g,
-        oi: /[ƣ]/g,
-        ou: /[ȣ]/g,
-        oo: /[ꝏ]/g,
-        p: /[pⓟｐṕṗƥᵽꝑꝓꝕ]/g,
-        q: /[qⓠｑɋꝗꝙ]/g,
-        r: /[rⓡｒŕṙřȑȓṛṝŗṟɍɽꝛꞧꞃ]/g,
-        s: /[sⓢｓßśṥŝṡšṧṣṩșşȿꞩꞅẛ]/g,
-        t: /[tⓣｔṫẗťṭțţṱṯŧƭʈⱦꞇ]/g,
-        tz: /[ꜩ]/g,
-        u: /[uⓤｕùúûũṹūṻŭüǜǘǖǚủůűǔȕȗưừứữửựụṳųṷṵʉ]/g,
-        v: /[vⓥｖṽṿʋꝟʌ]/g,
-        vy: /[ꝡ]/g,
-        w: /[wⓦｗẁẃŵẇẅẘẉⱳ]/g,
-        x: /[xⓧｘẋẍ]/g,
-        y: /[yⓨｙỳýŷỹȳẏÿỷẙỵƴɏỿ]/g,
-        z: /[zⓩｚźẑżžẓẕƶȥɀⱬꝣ]/g,
-    };
-
-    for (var latin in removalMap) {
-        if (removalMap[latin]) {
-            var nonLatin = removalMap[latin];
-            _this = _this.replace(nonLatin, latin);
-        }
-    }
-
-    return _this;
-};
-
 var scroll = function ($) {
     'use strict';
 
@@ -1392,13 +1273,12 @@ var scroll = function ($) {
 
     var $progressBar;
 
-    if ('max' in document.createElement('progress')) {
-        // Browser supports progress element
-        $progressBar = $('progress');
+      if('max' in document.createElement('progress')){
+          // Browser supports progress element
+          var progressBar = $('progress');
 
-        // Set the Max attr for the first time
-        $progressBar.attr({ max: getMax() });
-
+          // Set the Max attr for the first time
+          progressBar.attr({ max: getMax() });
         $(document).on('scroll', function () {
             // On scroll only Value attr needs to be calculated
             $progressBar.attr({ value: getValue() });
@@ -1449,7 +1329,6 @@ var searchMobile = function ($) {
     var $tagsCounter = $('#mobile-filter .tag-container-counter');
     var $authorsCounter = $('#mobile-filter .author-container-counter');
     var $geoCounter = $('#mobile-filter .geo-container-counter');
-    var $selectTagColumn = $('#menu-search .selected-tags-container');
 
     bindEventsWithHandlers();
 
@@ -1471,8 +1350,6 @@ var searchMobile = function ($) {
             window.scrollTo(0, 0);
             $searchPage.toggleClass('closed');
             $('.publishing-filter-search-input').val('');
-            emptyData();
-            $('#mobile-filter .selected-tags-container').empty();
         });
     }
 
@@ -1510,7 +1387,7 @@ var searchMobile = function ($) {
         removeAllMatchedTags();
         if (value.length > 2) {
             var matchedResults = _.filter(data.availableTags, function (obj) {
-                return obj.text.toLowerCase().removeAccents().includes(value.toLowerCase().removeAccents());
+                return obj.text.toLowerCase().includes(value.toLowerCase());
             });
 
             refreshTagMatches(matchedResults);
@@ -1535,7 +1412,6 @@ var searchMobile = function ($) {
 
     function searchByTags() {
         $('.cards-grid').css('opacity', '1');
-        $('.close-search-mobile').click();
     }
 
     //private methods
@@ -1610,7 +1486,6 @@ var searchMobile = function ($) {
         $authorsColumn.empty();
         $tagsColumn.empty();
         $geoColumn.empty();
-        $selectTagColumn.empty();
     }
 
     function cleanOldMatches(oldMatches) {
@@ -1645,6 +1520,7 @@ var searchMobile = function ($) {
         $geoCounter.text('0');
         $inputSearch.val('');
         selectedTags = [];
+        $('#mobile-filter .selected-tags-container').empty();
     }
 };
 
@@ -1824,7 +1700,7 @@ jQuery(document).ready(function ($) {
     window.footerMenu($);
     window.animationWow($);
     window.animationWowAppear($);
-    window.initCookies($);
+    window.cookies($);
     window.popover($);
     window.googleMaps($);
     window.scroll($);
