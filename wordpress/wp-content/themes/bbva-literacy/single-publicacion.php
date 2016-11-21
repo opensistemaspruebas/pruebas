@@ -119,7 +119,7 @@ get_header(); ?>
                     </div>
                 </header>
                 <div class="row visible-xs">
-                    <?php if ((false) || (false) || ($videoIntro_url)) : ?>
+                    <?php if ((false) || (false) || ($videoIntro_url) || ($pdf) || ($pdfInterno)) : ?>
                     <div class="icon-section col-xs-6">
                         <?php if (false) : ?>
                         <div class="card-icon icon-publication ml-xs">
@@ -142,6 +142,13 @@ get_header(); ?>
                             <div class="triangle triangle-down-right"></div>
                         </div>
                         <?php endif; ?>
+                        <?php if (($pdf) || ($pdfInterno)) : ?>
+                        <div class="card-icon">
+                            <span class="icon bbva-icon-arrow-download"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?>
                     </div>
                     <?php endif; ?>
                     <div class="share-rrss-section rrss-xs">
@@ -152,7 +159,7 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="mb-xs hidden-xs icon-section-desktop">
-                    <?php if ((false) || (false) || ($videoIntro_url)) : ?>
+                    <?php if ((false) || (false) || ($videoIntro_url) || ($pdf) || ($pdfInterno)) : ?>
                     <div class="icon-section">
                         <?php if (false) : ?>
                         <div class="card-icon ml-xs">
@@ -171,6 +178,13 @@ get_header(); ?>
                         <?php if (false) : ?>
                         <div class="card-icon ml-xs">
                             <span class="icon bbva-icon-chat2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?>
+                        <?php if (($pdf) || ($pdfInterno)) : ?>
+                        <div class="card-icon ml-xs">
+                            <span class="icon bbva-icon-arrow-download"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
@@ -288,17 +302,17 @@ get_header(); ?>
             <?php endif; ?>
             <div class="container content-wrap">
             <?php if (!empty($pdf) || !empty($pdfInterno)) : ?>
-                <section class="pdf-rectangle mt-xl">
+                <section class="pdf-rectangle">
                     <div class="row">
                         <div class="col-xs-12 col-sm-1">
                             <span class="icon bbva-icon-pdf-01"></span>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-7">
                             <h1 class="mt-md pt-sm ml-xs publication-access-title">
                             <?php _e('Contenido completo de la publicación', 'os_publicacion_type'); ?>
                             </h1>
                         </div>
-                        <div class="col-xs-12 col-sm-3 col-sm-offset-2">
+                        <div class="col-xs-12 col-sm-3 col-sm-offset-1">
                             <div class="container-button mb-md mt-md">
                                 <a href="<?php if(!empty($pdf)){echo $pdf;}else if(!empty($pdfInterno)){echo $pdfInterno;} ?>" target="_blank" class="btn btn-bbva-aqua"><?php _e('Acceder', 'os_publicacion_type'); ?></a>
                             </div>
@@ -312,7 +326,7 @@ get_header(); ?>
         <?php if (!empty($tags)) : ?>
         <section class="tags-section">
             <div class="container content-wrap">
-                <h1 class="mt-lg mb-md"><?php _e('Tags', 'os_publicacion_type'); ?></h1>
+                <h1 class="tags-title mb-md"><?php _e('Tags', 'os_publicacion_type'); ?></h1>
                 <div class="tags">
                 <?php foreach ($tags as $tag) : ?>
                     <span class="tag pt-xs pl-sm pr-sm pb-xs mr-xs mb-xs"><?php echo $tag->name; ?></span>
@@ -493,7 +507,7 @@ get_header(); ?>
         <?php endif; ?>
         <?php if ($query->have_posts()) { ?>
         <!-- latests-posts -->
-        <section class="latests-posts pt-xl pb-lg wow fadeInUp">
+        <section class="latests-posts pt-xl pb-lg">
             <div class="container">
                 <header class="title-description">
                     <h1><?php _e('Publicaciones relacionadas', 'os_publicacion_type'); ?></h1>
@@ -522,15 +536,15 @@ get_header(); ?>
                                         <a href="<?php the_permalink(); ?>" class="link-header-layer visible-xs">
                                             <img src="<?php echo $imagen; ?>" alt="" />
                                         </a>
-                                        <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs" />
+                                        <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs wow fadeInUp" />
                                     </div>
-                                    <div class="hidden-xs floating-text col-xs-9">
+                                    <div class="hidden-xs floating-text col-xs-11">
                                         <p class="date"><?php echo $date; ?></p> <!--Cambiar por la fecha del pdf-->
                                         <h1><?php the_title(); ?></h1>
                                     </div>
                                 </header>
                                 <div class="row data-container">
-                                    <a href="<?php the_permalink(); ?>" class="link-layer visible-xs">&nbsp;</a>
+                                    <a href="<?php the_permalink(); ?>" class="link-layer visible-xs"></a>
                                     <div class="nopadding date"><?php echo $date; ?></div>
                                     <div class="main-card-data-container-title-wrapper">
                                         <h1 class="title nopadding"><?php the_title(); ?></h1>
@@ -538,7 +552,7 @@ get_header(); ?>
                                     <p class="main-card-data-container-description-wrapper"><?php echo $abstract_destacado; ?></p>
                                     <a href="<?php the_permalink(); ?>" class="hidden-xs mb-xs readmore"><?php _e('Leer más', 'os_publicacion_type'); ?></a>
                                     <footer>
-                                        <?php if ((false) || (false) || ($pdf)) : ?>
+                                        <?php if ((false) || (false) || ($videoIntro_url) || ($pdf) || ($pdfInterno)) : ?>
                                         <div class="icon-row">
                                             <?php if (false) : ?>
                                             <div class="card-icon">
@@ -547,16 +561,23 @@ get_header(); ?>
                                                 <div class="triangle triangle-down-right"></div>
                                             </div>
                                             <?php endif; ?>
-                                            <?php if (false) : ?>
+                                            <?php if ($videoIntro_url) : ?>
                                             <div class="card-icon">
                                                 <span class="icon bbva-icon-audio2"></span>
                                                 <div class="triangle triangle-up-left"></div>
                                                 <div class="triangle triangle-down-right"></div>
                                             </div>
                                             <?php endif; ?>
-                                            <?php if ($pdf) : ?>
+                                            <?php if (false) : ?>
                                             <div class="card-icon">
                                                 <span class="icon bbva-icon-chat2"></span>
+                                                <div class="triangle triangle-up-left"></div>
+                                                <div class="triangle triangle-down-right"></div>
+                                            </div>
+                                            <?php endif; ?>
+                                            <?php if (($pdf) || ($pdfInterno)) : ?>
+                                            <div class="card-icon ml-xs">
+                                                <span class="icon bbva-icon-arrow-download"></span>
                                                 <div class="triangle triangle-up-left"></div>
                                                 <div class="triangle triangle-down-right"></div>
                                             </div>
