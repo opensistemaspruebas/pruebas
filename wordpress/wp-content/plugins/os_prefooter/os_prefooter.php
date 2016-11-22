@@ -222,5 +222,14 @@ endif;
 
 
 function get_all_wordpress_menus(){
-    return get_terms('nav_menu', array( 'hide_empty' => false ) ); 
+	$terms_to_return = [];
+	$terms = get_terms('nav_menu', array( 'taxonomy' => 'nav_menu', 'hide_empty' => false ) );
+   	foreach ($terms as $term) {
+        if ($term->term_id == icl_object_id($term->term_id, 'nav_menu', false, ICL_LANGUAGE_CODE)) {
+        	if (!in_array($term, $terms_to_return) && strpos($term->name, 'principal') == false) {
+        		$terms_to_return[] = $term;
+        	}
+        }
+    }
+    return $terms_to_return; 
 }
