@@ -124,13 +124,13 @@ if (!class_exists('os_eventos_pasados_widget')) :
 					           <div class="col-xs-12 col-sm-6 summit-content">
 					           	   <a href="<?php echo get_permalink($evento->ID); ?>" class="visible-xs summit-mobile-link"></a>
 					               <div class="row">
-					                   <header class="col-xs-12">
-					                       <p class="summit-mobile-title text-420 hidden-sm hidden-md hidden-lg"><?php echo $evento->post_title; ?></p>
-					                   </header>
-					                   <div class="col-xs-12">
-					                       <div class="header-date text-left"><span class="icon bbva-icon-calendar-01 mr-xs text-501"></span><span class="summit-date"> <?php echo $fecha_evento; ?> </span></div>
-					                       <div class="header-location text-left"><span class="icon bbva-icon-pin mr-xs text-501"></span><span class="summit-location"><?php echo $evento_localizacion[2]; ?></span></div>
-					                   </div>
+										<header class="col-xs-12">
+											<p class="summit-mobile-title text-420 hidden-sm hidden-md hidden-lg"><?php echo $evento->post_title; ?></p>
+										</header>
+										<div class="col-xs-12">
+										    <div class="header-date text-left"><span class="icon bbva-icon-calendar-01 mr-xs text-501"></span><span class="summit-date"><?php echo $fecha_evento; ?></span></div>
+										    <div class="header-location text-left"><span class="icon bbva-icon-pin mr-xs text-501"></span><span class="summit-location"><?php echo $evento_localizacion[2]; ?></span></div>
+										</div>
 					               </div>
 					               <div class="row">
 					                   <div class="col-xs-12 summit-highlights">
