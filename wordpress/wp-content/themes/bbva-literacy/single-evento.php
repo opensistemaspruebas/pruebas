@@ -174,7 +174,7 @@
                 </section>
             <?php endif; ?>
             <?php if (!empty($evento_descripcion_larga)) : ?>
-                <section class="description-section mt-lg">
+                <section class="description-section">
                     <h1 class="mb-md"><?php _e('Descripción'); ?></h1>
                     <?php echo wpautop($evento_descripcion_larga); ?>
                 </section>
@@ -182,50 +182,29 @@
             <?php if (!empty($evento_topics)) : ?>
                 <section class="topics-section mt-lg">
                     <h1 class="mb-md"><?php _e('Temas relevantes'); ?></h1>
-                    <div class="row">
-                        <?php foreach ($evento_topics as $evento_topic) : ?>
+                    <?php foreach ($evento_topics as $evento_topic) : ?>
+                        <div class="row">
                             <div class="col-xs-12">
                                 <div class="rectangle"></div>
                                 <div class="pre-rectangle"></div>
-                                <p class="topics-section-topic-text"><?php echo $evento_topic; ?></p>
+                                <p><?php echo $evento_topic; ?></p>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
+                        </div>
+                    <?php endforeach; ?>
                 </section>
             <?php endif; ?>
             <?php if ($evento_pasado == false && !empty($evento_te_interesas)) : ?>
                 <section class="interest-section mt-lg">
                     <h1 class="mb-md"><?php _e('Te interesa si...'); ?></h1>
-                    <div class="row">
-                        <?php foreach ($evento_te_interesas as $evento_te_interesa) : ?>
+                    <?php foreach ($evento_te_interesas as $evento_te_interesa) : ?>
+                        <div class="row">
                             <div class="col-xs-12">
                                 <div class="rectangle"></div>
                                 <div class="pre-rectangle"></div>
                                 <p><?php echo $evento_te_interesa; ?></p>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
-                </section>
-            <?php endif; ?>
-            <?php if (!empty($evento_documento)) : ?>
-                <section class="file-section mt-lg">
-                      <h1 class="mb-md"><?php _e('Detalles del evento'); ?></h1>
-                      <div class="pdf-rectangle">
-                          <div class="row">
-                              <div class="col-xs-12 col-sm-1">
-                                  <span class="icon bbva-icon-pdf-01"></span>
-                              </div>
-                              <div class="col-xs-12 col-sm-6">
-                                  <h2 class="ml-md mt-md"><?php _e('Descarga el programa'); ?></h2>
-                                  <p class="hidden-xs ml-md"><?php _e('Consulta y/o descarga el PDF del evento'); ?></p>
-                              </div>
-                              <div class="col-xs-12 col-sm-3 col-sm-offset-1">
-                                  <div class="container-button mb-md mt-md">
-                                      <a href="<?php echo $evento_documento; ?>" target="_blank" class="btn btn-bbva-aqua"><?php _e('Ver PDF'); ?></a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                        </div>
+                    <?php endforeach; ?>
                 </section>
             <?php endif; ?>
             <?php if ($evento_pasado == false && !empty($programa)) : ?>
@@ -467,6 +446,27 @@
                     </div>
                 </section>
             <?php endif; ?>
+            <?php if (!empty($evento_documento)) : ?>
+                <section class="hidden-xs file-section mt-lg">
+                      <h1 class="mb-md"><?php _e('Detalles del evento'); ?></h1>
+                      <div class="pdf-rectangle">
+                          <div class="row">
+                              <div class="col-xs-12 col-sm-1">
+                                  <span class="icon bbva-icon-pdf-01"></span>
+                              </div>
+                              <div class="col-xs-12 col-sm-6">
+                                  <h2 class="ml-md"><?php _e('Descarga el programa'); ?></h2>
+                                  <p class="ml-md"><?php _e('Consulta y/o descarga el PDF del evento'); ?></p>
+                              </div>
+                              <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+                                  <div class="container-button mb-md mt-md">
+                                      <a href="<?php echo $evento_documento; ?>" target="_blank" class="btn btn-bbva-aqua"><?php _e('Ver PDF'); ?></a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                </section>
+            <?php endif; ?>
         </div>
         <?php if ($evento_pasado == false && !empty($evento_persona_de_contacto)) : ?>
             <section class="contact-person">
@@ -475,7 +475,7 @@
                     <h2 class="mb-md"><?php _e('Para más información sobre el evento, ponte en contacto con:'); ?></h2>
                     <!-- person -->
                     <section class="container-fluid person">
-                        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+                        <a href="#" class="link-layer visible-xs"></a>
                         <div class="image-wrapper"><img src="<?php echo $evento_persona_de_contacto[2]; ?>" alt="" /></div>
                         <div class="data-wrapper"><span><?php echo $evento_persona_de_contacto[0]; ?></span>
                             <p><?php echo $evento_persona_de_contacto[1]; ?></p>
