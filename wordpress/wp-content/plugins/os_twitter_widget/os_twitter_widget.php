@@ -59,13 +59,13 @@ if (!class_exists('OS_Twitter_Widget')) :
 	    	?>
 
 	    	<section class="latests-tweets pt-xl wow fadeInUp">
-                <div class="container">
+                <div>
                     <header>
                         <p class="icon bbva-icon-twitter"></p>
                         <h1 class="pt-xs pb-sm"><?php echo $titulo; ?></h1>
                         <p><?php echo $texto; ?></p>
                     </header>
-                    <section class="container-fluid mt-md mb-md">
+                    <section class="container mt-md mb-md">
                         <div class="row tweets-container">
 
 
