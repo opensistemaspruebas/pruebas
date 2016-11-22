@@ -68,7 +68,6 @@
                       </div>
                   </header>
                   <div class="row visible-xs">
-                    <?php if ((false) || (false) || !empty($videoIntro_url)) : ?>
                     <div class="icon-section col-xs-6">
                           <?php if (false) : ?>
                           <div class="card-icon icon-publication ml-xs">
@@ -91,12 +90,10 @@
                               <div class="triangle triangle-down-right"></div>
                           </div>
                         <?php endif; ?>
-                    </div>
-                    <?php endif; ?>          
+                    </div>        
                       <?php get_template_part('content','rrssmovil'); ?>
                   </div>
                   <div class="mb-xs hidden-xs icon-section-desktop">
-                  <?php if ((false) || (false) || !empty($videoIntro_url)) : ?>
                     <div class="icon-section">
                         <?php if (false) : ?>
                           <div class="card-icon ml-xs">
@@ -120,7 +117,6 @@
                           </div>
                         <?php endif; ?>  
                     </div>
-                    <?php endif; ?> 
                     <?php get_template_part( 'content', 'rrss' ); ?>
                   </div>
               </div>
