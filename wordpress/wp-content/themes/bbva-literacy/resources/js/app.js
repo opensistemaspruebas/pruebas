@@ -922,14 +922,17 @@ var publishingFilter = function ($) {
             $sortItemsContainer.hide();
             $btnFilter.hide();
             $inputSearch.focus();
+            $inputSearch.val('');
+            emptyData();
+            $selectTagColumn.empty();
         } else {
             $filterWrapper.removeClass('displayed').addClass('hidden');
             $btnFilter.show();
             $sortItemsContainer.show();
             $('.cards-grid').css('opacity', '1');
-            $inputSearch.val('');
+            /*$inputSearch.val('');
             emptyData();
-            $selectTagColumn.empty();
+            $selectTagColumn.empty();*/
         }
     }
 
