@@ -26,7 +26,7 @@ if (!class_exists('OSImagenTituloWidget')) :
 	        );
 	        add_action( 'admin_enqueue_scripts', array(&$this, 'register_admin_styles'));
             add_action('admin_enqueue_scripts', array(&$this, 'register_admin_scripts'));
-            add_action( 'wp_enqueue_scripts', array(&$this, 'register_wp_styles'));
+            //add_action( 'wp_enqueue_scripts', array(&$this, 'register_wp_styles'));
         }
 
 
@@ -37,7 +37,7 @@ if (!class_exists('OSImagenTituloWidget')) :
 	    	}
     	?>
 
-    		<header class="wow fadeIn">
+    		<header class="initial-header-image wow fadeIn">
 		      <span><?php echo $instance['titulo']; ?></span>
 		      <img class="img-responsive" src="<?php echo $imagen_url; ?>" alt="">
 		    </header>

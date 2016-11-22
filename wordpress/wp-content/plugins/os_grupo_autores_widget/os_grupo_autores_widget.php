@@ -98,7 +98,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				    		<div class="card-container card-container-destacado col-xs-12 col-sm-6">     
 								<!-- person -->
 								<section class="container-fluid person">
-									<?php if(isset($miembro['enlace'])): ?>
+									<?php if(isset($miembro['enlace']) || $destacado['perfil'] == 'asesor' || isset($destacado['enlace'])): ?>
 									<a href="<?php echo $destacado['enlace']; ?>" class="link-layer visible-xs"></a>
 									<?php endif; ?>
 									<div class="image-wrapper">
@@ -120,8 +120,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 				    	<?php endforeach; ?>
 				      
 				    	<?php $key = 0; ?>
-				      	<?php foreach ($miembros as $miembro): ?>
-			
+				      	<?php foreach ($miembros as $miembro): ?>			
 					        <div class="card-container col-xs-12 col-sm-6" id="<?php echo $args['widget_id'] . '_' . $key; ?>" style="display:none;">     
 								<!-- person -->
 								<section class="container-fluid person">

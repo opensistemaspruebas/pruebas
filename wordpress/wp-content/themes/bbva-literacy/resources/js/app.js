@@ -1273,12 +1273,13 @@ var scroll = function ($) {
 
     var $progressBar;
 
-      if('max' in document.createElement('progress')){
-          // Browser supports progress element
-          var progressBar = $('progress');
+    if ('max' in document.createElement('progress')) {
+        // Browser supports progress element
+        $progressBar = $('progress');
 
-          // Set the Max attr for the first time
-          progressBar.attr({ max: getMax() });
+        // Set the Max attr for the first time
+        $progressBar.attr({ max: getMax() });
+
         $(document).on('scroll', function () {
             // On scroll only Value attr needs to be calculated
             $progressBar.attr({ value: getValue() });
@@ -1314,7 +1315,6 @@ var scroll = function ($) {
         });
     }
 };
-
 var searchMobile = function ($) {
     'use strict';
     var $searchPage = $('.search-mobile');

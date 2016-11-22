@@ -31,7 +31,7 @@ if (!class_exists('OSTextoWidget')) :
 
     	?>
     		<?php if($instance['color_fondo'] == 'blanco') : ?>
-	    		<section class="who-we-are-wrapper wow fadeIn">
+	    		<section class="initial-text wow fadeIn">
 			      <div class="container">
 			        <h1><?php echo $instance['titulo']; ?></h1>
 			        <h2><?php echo $instance['texto_destacado']; ?></h2>
