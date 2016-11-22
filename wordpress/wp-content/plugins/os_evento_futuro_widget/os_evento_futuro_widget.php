@@ -93,7 +93,7 @@ if (!class_exists('os_evento_futuro_widget')) :
 
 
 	    	?>
-			<section class="block-image summit wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+			<section class="block-image summit wow fadeInUp">
 			    <div class="img-overlay  summits-page ">
 			        <div class="overlay"></div>
 			        <img src="<?php echo $instance['imagen_fondo']; ?>" alt="image title">
@@ -103,10 +103,9 @@ if (!class_exists('os_evento_futuro_widget')) :
 			            <h1 class="bold summit-title"><?php _e('Eventos', 'os_evento_futuro_widget'); ?></h1>
 			            <label><?php _e('Próximo evento', 'os_evento_futuro_widget'); ?></label>
 			            <h2 class="mt-xs mb-sm"><?php echo $evento[0]->post_title; ?></h2>
-			            <div class="row">
-			            	<span class="col-xs-6 col-sm-4 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span><?php echo $fecha_evento; ?></span></span>
-			            	<span class="col-xs-6 col-sm-3 info-event"><span class="icon bbva-icon-pin mr-xs"></span><span><?php echo $evento_localizacion[2]; ?></span></span>
-			            </div>
+						<div class="row">
+		                    <div class="col-xs-12 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span class="event-date text"><?php echo $fecha_evento; ?></span><span class="icon bbva-icon-pin mr-xs"></span><span class="text"><?php echo $evento_localizacion[2]; ?></span></div>
+		                </div>
 			            <div class="content-wrap">
 			                <p class="mt-md"><?php echo get_post_meta($evento[0]->ID, 'evento_descripcion_corta', true); ?></p>
 			            </div>
