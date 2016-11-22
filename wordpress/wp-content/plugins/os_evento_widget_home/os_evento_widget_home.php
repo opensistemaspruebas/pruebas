@@ -96,14 +96,16 @@ if (!class_exists('os_evento_widget_home')) :
 			            <label><?php _e('Próximo evento', 'os_evento_widget_home'); ?></label>
 			            <h1 class="mt-xs mb-sm"><?php echo $evento[0]->post_title; ?></h1>
 			            <div class="row">
-			            	<span class="col-xs-6 col-sm-4 info-event"><span class="icon bbva-icon-calendar-01 mr-xs"></span><span><?php echo $fecha_evento; ?></span></span>
-			            	<span class="col-xs-6 col-sm-3 info-event"><span class="icon bbva-icon-pin mr-xs"></span><span><?php echo $evento_localizacion[2]; ?></span></span>
+			            	<div class="col-xs-12 info-event">
+			            	<span class="icon bbva-icon-calendar-01 mr-xs"></span>
+			            	<span class="event-date text"><?php echo $fecha_evento; ?></span>
+			            	<span class="icon bbva-icon-pin mr-xs"></span><span class="text"><?php echo $evento_localizacion[2]; ?></span>
 			            </div>
 			            <div class="content-wrap">
 			                <p class="mt-md"><?php echo get_post_meta($evento[0]->ID, 'evento_descripcion_corta', true); ?></p>
 			            </div>
 			            <div class="container-button mt-lg">
-			            	<a href="<?php echo get_permalink($evento[0]->ID); ?>" class="col-sm-offset-0 col-sm-3 btn btn-bbva-dark-blue "><?php _e('Ver evento', 'os_evento_widget_home'); ?></a>
+			            	<a href="<?php echo get_permalink($evento[0]->ID); ?>" class="col-sm-offset-0 col-sm-3 btn btn-bbva-dark-blue"><?php _e('Ver evento', 'os_evento_widget_home'); ?></a>
 			            	<a href="<?php echo get_page_uri($instance['subhome_eventos']); ?>" class="col-xs-12 col-sm-4 mt-md link text-center"><span class="bbva-icon-more mr-xs"></span><?php _e('Ver más eventos', 'os_evento_widget_home'); ?></a>
 			            </div>
 			        </div>

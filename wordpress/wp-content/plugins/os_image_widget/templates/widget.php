@@ -11,7 +11,7 @@
  * @since     4.0.0
  */
 ?>
-<section class="block-image block-outstanding-image wow fadeInUp">
+<section class="block-image block-outstanding-image">
     <div class="image-section">
     	<img class="img-responsive" src="<?php echo wp_get_attachment_image_url($image_id, 'original'); ?>" alt="image title" />
         <div class="visible-xs triangle-down-right"></div>
