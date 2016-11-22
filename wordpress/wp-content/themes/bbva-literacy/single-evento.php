@@ -480,6 +480,7 @@
                         <div class="data-wrapper"><span><?php echo $evento_persona_de_contacto[0]; ?></span>
                             <p><?php echo $evento_persona_de_contacto[1]; ?></p>
                             <a href="mailto:<?php echo $evento_persona_de_contacto[3]; ?>"><?php echo $evento_persona_de_contacto[3]; ?></a>
+                        </div>
                     </section>
                     <!-- EO person -->
                 </div>

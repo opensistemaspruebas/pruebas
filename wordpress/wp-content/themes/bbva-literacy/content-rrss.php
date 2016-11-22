@@ -22,6 +22,6 @@
     <a href="#" class="icon icon-pinterest bbva-icon-pinterest-circle mr-xs"></a>
   </div>-->
   <div class="card-icon">
-    <a class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs title="<?php echo $title; ?>" href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>" target="popup" onclick="window.open(this.href,'name','width=520,height=570')"></a>
+    <a class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs" title="<?php echo $title; ?>" href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $title_encoded; ?>&summary=<?php echo $summary; ?>&source=<?php echo urlencode( html_entity_decode($blog_title)); ?>" target="popup" onclick="window.open(this.href,'name','width=520,height=570')"></a>
   </div>
 </div>
