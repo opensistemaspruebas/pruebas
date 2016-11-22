@@ -99,7 +99,7 @@ if (!class_exists('os_evento_widget_home')) :
 			            	<div class="col-xs-12 info-event">
 			            	<span class="icon bbva-icon-calendar-01 mr-xs"></span>
 			            	<span class="event-date text"><?php echo $fecha_evento; ?></span>
-			            	<span class="icon bbva-icon-pin mr-xs"></span><span class="text"><?php echo $evento_localizacion[2]; ?></span>
+			            	<span class="icon bbva-icon-pin mr-xs"></span><span class="text"><?php echo $evento_localizacion[2]; ?></span></div>
 			            </div>
 			            <div class="content-wrap">
 			                <p class="mt-md"><?php echo get_post_meta($evento[0]->ID, 'evento_descripcion_corta', true); ?></p>
