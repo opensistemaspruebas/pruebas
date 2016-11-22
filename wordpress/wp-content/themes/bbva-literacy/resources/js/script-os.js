@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
 
+	var tags = [];
+	var textoInput = '';
+
 	buscando = false;
 
 	jQuery('.btn-group.languages-buttons a').on('click', function($) {
@@ -164,15 +167,19 @@ function getNumResultados(d, tipo) {
 
 function buscar_general(ver_mas, reordenar, cambiando_talleres) {
 
-	jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
+	/*jQuery('.search-mobile.hidden-sm.hidden-md.hidden-lg').addClass('closed');
 	if (jQuery('div#menu-search').hasClass('displayed'))
-		jQuery('button.close.close-navbar-filter.btn-close').trigger('click');
+		jQuery('button.close.close-navbar-filter.btn-close').trigger('click');*/
 
-	tags = getSelectedTags_general();
-	textoInput = jQuery('input.input-search.navbar-search-input').val();
-	if (textoInput == '') {
-		textoInput = jQuery('input.publishing-filter-search-input.form-control').val();
+	if (!ver_mas && !reordenar && !cambiando_talleres) {
+		tags = getSelectedTags_general();
+		textoInput = jQuery('input.input-search.navbar-search-input').val();
+		if (textoInput == '') {
+			textoInput = jQuery('input.publishing-filter-search-input.form-control').val();
+		}
 	}
+
+
 	texto = textoInput + ' ' + tags[0].join(' ');
 	texto = getCleanedString(texto);
 
