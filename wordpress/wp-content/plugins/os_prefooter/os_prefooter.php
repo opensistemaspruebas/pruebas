@@ -60,7 +60,7 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 			                            	<?php if (!empty($elementos_menu_izquierdo)) : ?>
 				                                <ul class="hidden-xs prefooter-menu">
 				                                	<?php foreach ($elementos_menu_izquierdo as $e) : ?>
-					                                    <li class="mb-md"><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
+					                                    <li><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
 				                                    <?php endforeach; ?>
 				                                </ul>
 			                            	<?php endif; ?>
@@ -90,14 +90,14 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 			                                    	<?php if (!empty($parte1)) : ?>
 					                                    <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
 					                                    	<?php foreach ($parte1 as $e) : ?>
-						                                        <li class="mb-md"><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
+						                                        <li><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
 						                                    <?php endforeach; ?>
 					                                    </ul>
 				                                	<?php endif; ?>
 				                                	<?php if (!empty($parte2)) : ?>
 					                                    <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
 					                                    	<?php foreach ($parte2 as $e) : ?>
-					                                        	 <li class="mb-md"><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
+					                                        	 <li><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
 					                                        <?php endforeach; ?>
 					                                    </ul>
 				                                    <?php endif; ?>
@@ -114,7 +114,7 @@ if (!class_exists('OS_Prefooter_BBVA')) :
 			                            <?php if (!empty($elementos_menu_derecho)) : ?>
 				                            <ul class="hidden-xs prefooter-menu">
 				                            	<?php foreach ($elementos_menu_derecho as $e) : ?>
-				                                	<li class="mb-md"><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
+				                                	<li><a target="<?php echo $e->target; ?>" href="<?php echo $e->url; ?>"><?php echo $e->post_title; ?></a></li>
 				                                <?php endforeach; ?>
 				                            </ul>
 			                            <?php endif; ?>
