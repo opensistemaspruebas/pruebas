@@ -136,7 +136,7 @@
                           <?php get_template_part('content','rrssmovil'); ?>
                       </div>
                   </div>
-                  <progress value="2279" id="progressBar" max="2827">
+                  <progress value="0" id="progressBar">
                       <div class="progress-container">
                           <span class="progress-bar"></span>
                       </div>
@@ -179,7 +179,7 @@
           </section>
           <?php if ($query->have_posts()) : ?>
           <!-- latests-posts -->
-          <section class="latests-posts pt-xl pb-lg wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+          <section class="latests-posts pt-xl pb-lg" style="visibility: visible; animation-name: fadeInUp;">
               <div class="container">
                   <header class="title-description">
                       <h1><?php _e('Otras Historias'); ?></h1>
@@ -207,13 +207,13 @@
                                             </a>
                                             <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs">
                                         </div>
-                                        <div class="hidden-xs floating-text col-xs-9">
+                                        <div class="hidden-xs floating-text col-xs-11">
                                             <p class="date"><?php echo $date; ?></p>
                                             <h1><?php the_title(); ?></h1>
                                         </div>
                                     </header>
                                     <div class="row data-container">
-                                        <a href="#" class="link-layer visible-xs">&nbsp;</a>
+                                        <a href="#" class="link-layer visible-xs"></a>
                                         <div class="nopadding date"><?php echo $date; ?></div>
                                         <div class="main-card-data-container-title-wrapper">
                                             <h1 class="title nopadding"><?php the_title(); ?></h1>
