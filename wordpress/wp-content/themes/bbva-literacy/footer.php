@@ -63,6 +63,7 @@
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/progressbar.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/underscore-min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/jquery.touchSwipe.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/resources/js/scrollreveal.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/ofi.browser.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/resources/js/app.js"></script>
 
