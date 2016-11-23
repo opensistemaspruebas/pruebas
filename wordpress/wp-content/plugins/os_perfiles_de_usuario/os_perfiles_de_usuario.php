@@ -69,7 +69,10 @@ class OS_Perfiles_de_Usuario {
         $descripcion_en = get_post_meta($post_id, 'descripcion-en', true);
         $lugar_trabajo_es = get_post_meta($post_id, 'lugar_trabajo', true);
         $lugar_trabajo_en = get_post_meta($post_id, 'lugar_trabajo-en', true);
+        $descripcion_lugar_trabajo_es = get_post_meta($post_id, 'descripcion_lugar_trabajo', true);
+        $descripcion_lugar_trabajo_en = get_post_meta($post_id, 'descripcion_lugar_trabajo-en', true);
         $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
+        $urlVentanaModal = get_post_meta($post_id, 'urlVentanaModal', true);
         $area_expertise_1_es = get_post_meta($post_id, 'area_expertise_1', true);
         $area_expertise_1_en = get_post_meta($post_id, 'area_expertise_1-en', true);
         $area_expertise_2_es = get_post_meta($post_id, 'area_expertise_2', true);
@@ -182,7 +185,8 @@ class OS_Perfiles_de_Usuario {
         </div>
 
         <div class="campo_personalizado <?php echo $coordinador_id; ?> <?php echo $asesor_id; ?>" id="informacion_trabajo" name="informacion_trabajo">
-            <h3><?php _e('Información sobre el trabajo', 'os_perfiles_de_usuario'); ?></h3>
+            <h3><?php _e('Información sobre el trabajo*', 'os_perfiles_de_usuario'); ?></h3>
+            <h4><?php _e('*(Si solo se añade el logo del trabajo no existirá una ventana modal. Si se añade lugar, descripción o url del trabajo si se generará una ventana modal con los datos introducidos.)', 'os_perfiles_de_usuario'); ?></h2>
             <table class="form-table">
                 <tr class="es">
                     <th>
@@ -190,7 +194,16 @@ class OS_Perfiles_de_Usuario {
                     </th>
                      <td>
                         <input type="text" name="lugar_trabajo" id="lugar_trabajo" value="<?php echo esc_attr($lugar_trabajo_es); ?>" class="regular-text" /><br />
-                        <span class="description"><?php _e('Nombre del lugar de trabajo', 'os_perfiles_de_usuario'); ?></span>
+                        <span class="description"><?php _e('Nombre del lugar de trabajo (Título ventana modal)', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+                <tr class="es">    
+                    <th>
+                        <label for="descripcion_lugar_trabajo"><?php _e('Descripción del lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="descripcion_lugar_trabajo" id="descripcion_lugar_trabajo" value="<?php echo esc_attr($descripcion_lugar_trabajo_es); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('Descripción del lugar de trabajo (Descripción de la ventana modal)', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
                 <tr class="en" style="display:none;">
@@ -200,6 +213,15 @@ class OS_Perfiles_de_Usuario {
                      <td>
                         <input type="text" name="lugar_trabajo-en" id="lugar_trabajo-en" value="<?php echo esc_attr($lugar_trabajo_en); ?>" class="regular-text" /><br />
                         <span class="description"><?php _e('Nombre del lugar de trabajo', 'os_perfiles_de_usuario'); ?></span>
+                    </td>
+                </tr>
+                <tr class="en" style="display:none;">    
+                    <th>
+                        <label for="descripcion_lugar_trabajo-en"><?php _e('Descripción del lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="text" name="descripcion_lugar_trabajo-en" id="descripcion_lugar_trabajo-en" value="<?php echo esc_attr($descripcion_lugar_trabajo_en); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('Descripción del lugar de trabajo (Descripción de la ventana modal)', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -212,6 +234,15 @@ class OS_Perfiles_de_Usuario {
                         <span class="description"><?php _e('Subir logo de trabajo', 'os_perfiles_de_usuario'); ?></span>
                         <br /><br />
                         <img id="mostrar_imagen_trabajo" name="mostrar_imagen_trabajo" src="<?php echo esc_url($logo_trabajo); ?>" style="width:150px;<?php if (empty($logo_trabajo)) echo 'display:none;';?>">
+                    </td>
+                </tr>    
+                <tr> 
+                   <th>
+                        <label for="urlVentanaModal"><?php _e('URL del botón de la ventana modal', 'os_perfiles_de_usuario'); ?></label>
+                    </th>
+                     <td>
+                        <input type="url" name="urlVentanaModal" id="urlVentanaModal" value="<?php echo esc_attr($urlVentanaModal); ?>" class="regular-text" /><br />
+                        <span class="description"><?php _e('URL del enlace (Botón ventana modal)', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
             </table>
@@ -564,8 +595,20 @@ class OS_Perfiles_de_Usuario {
             update_post_meta($post_id, 'lugar_trabajo-en', $_POST['lugar_trabajo-en']);
         }
 
+        if (isset($_POST['descripcion_lugar_trabajo'])) {
+            update_post_meta($post_id, 'descripcion_lugar_trabajo', $_POST['descripcion_lugar_trabajo']);
+        }
+
+        if (isset($_POST['descripcion_lugar_trabajo-en'])) {
+            update_post_meta($post_id, 'descripcion_lugar_trabajo-en', $_POST['descripcion_lugar_trabajo-en']);
+        }
+
         if (isset($_POST['logo_trabajo'])) {
             update_post_meta($post_id, 'logo_trabajo', $_POST['logo_trabajo']);
+        }
+
+        if (isset($_POST['urlVentanaModal'])) {
+            update_post_meta($post_id, 'urlVentanaModal', $_POST['urlVentanaModal']);
         }
 
         if (isset($_POST['area_expertise_1'])) {
