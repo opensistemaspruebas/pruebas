@@ -109,7 +109,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 										<p><?php echo $destacado['cargo']; ?></p>
 										
 										<?php if(isset($destacado['enlace'])): ?>
-									  	<a href="<?php echo $destacado['enlace']; ?>"><?php if($destacado['perfil'] == 'asesor'){_e('Ficha del asesor','os_grupo_autores_widget');}else if($destacado['perfil'] == 'coordinador'){_e('Ficha del coordinador','os_grupo_autores_widget');} ?></a>
+									  	<a href="<?php echo $destacado['enlace']; ?>"><?php if($destacado['perfil'] == 'asesor'){_e('Más información','os_grupo_autores_widget');}else if($destacado['perfil'] == 'coordinador'){_e('Más información','os_grupo_autores_widget');} ?></a>
 									  	<?php endif; ?>
 										
 									</div>
@@ -135,7 +135,7 @@ if (!class_exists('OSGrupoAutoresWidget')) :
 										<p><?php echo $miembro['cargo']; ?></p>
 										
 										<?php if(isset($miembro['enlace'])): ?>
-									  	<a href="<?php echo $miembro['enlace']; ?>"><?php if($miembro['perfil'] == 'asesor'){_e('Ficha del asesor','os_grupo_autores_widget');}else if($miembro['perfil'] == 'coordinador'){_e('Ficha del coordinador','os_grupo_autores_widget');} ?></a>
+									  	<a href="<?php echo $miembro['enlace']; ?>"><?php if($miembro['perfil'] == 'asesor'){_e('Más información','os_grupo_autores_widget');}else if($miembro['perfil'] == 'coordinador'){_e('Más información','os_grupo_autores_widget');} ?></a>
 									  	<?php endif; ?>
 										
 									</div>
