@@ -120,12 +120,12 @@
                             <?php if ($numero_publicaciones > 0) : ?>
                                 <div class="reports-wrapper">
                                     <h2><?php echo $numero_publicaciones; ?></h2>
-                                    <h4><?php _e('Informes escritos'); ?></h4>
+                                    <h4><?php _e('Publicaciones'); ?></h4>
                                 </div>
                             <?php endif; ?>
                             <?php if (!empty($area_expertise_1) || !empty($area_expertise_2) || !empty($area_expertise_3)) : ?>
                                 <div class="expertise-wrapper">
-                                    <h2><?php _e('Áreas de expertise'); ?></h2>
+                                    <h2><?php _e('Experto en'); ?></h2>
                                     <?php if (!empty($area_expertise_1)) : ?>
                                         <div>
                                             <img src="<?php echo get_template_directory_uri(); ?>/resources/images/consultant-card/lista.png" alt="" />
@@ -158,7 +158,7 @@
             the_widget(
                 'os_cards_widget_json', 
                 array(
-                    'titulo' => __('Publicaciones del autor'),
+                    'titulo' => __('Publicaciones'),
                     'texto' => '',
                     'numero_posts_mostrar' => '7',
                     'numero_posts_totales' => '7',
@@ -176,7 +176,7 @@
             <div class="consultant-data-grid">
                 <article id="otros_trabajos" name="otros_trabajos" class="container data-grid">
                     <header>
-                        <h1><?php _e('Otros trabajos del autor'); ?></h1>
+                        <h1><?php _e('Otros trabajos'); ?></h1>
                     </header>
                     <div class="content">
                         <div class="grid-wrapper">
@@ -191,7 +191,7 @@
                                     <h2><?php echo $titulo; ?></h2>
                                     <p class="description"><?php echo $texto; ?></p>
                                     <p class="link">
-                                        <a target="_blank" href="<?php echo $enlace; ?>"><?php _e('Aprender más'); ?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
+                                        <a target="_blank" href="<?php echo $enlace; ?>"><?php _e('Leer más'); ?><span class="icon bbva-icon-link_external font-xs mr-xs"></span></a>
                                     </p>
                                 </section>
                                 <?php $i++; ?>
