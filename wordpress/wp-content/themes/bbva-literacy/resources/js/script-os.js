@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+	window.sr = ScrollReveal();
+
 	var tags = [];
 	var textoInput = '';
 

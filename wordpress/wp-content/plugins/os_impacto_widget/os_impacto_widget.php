@@ -49,6 +49,8 @@ if (!class_exists('OS_Impactos_Widget')) :
 
 
 
+
+
 	    		if($tipo_widget == 'widgetHome'){
 
 	    			$query = new WP_Query(
@@ -69,7 +71,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 			?>
 
 
-						<section class="home-impact pt-xl">
+						<section class="home-impact">
 			                <div class="container">
 			                    <header class="title-description">
 			                        <h1><?php echo $title; ?></h1>
@@ -168,7 +170,6 @@ if (!class_exists('OS_Impactos_Widget')) :
 						
 										pintaWidgetCirculos($etiqueta, $color_circulo, $objetivo, $completado, $identificador);
 
-
 										$i++;
 									endwhile;
 
@@ -204,8 +205,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 											$objetivo = get_post_meta($post_id, 'objetivo', true);
 											$completado = get_post_meta($post_id, 'completado', true);
 							
-											pintaWidgetCirculos($etiqueta, $color_circulo, $objetivo, $completado, $identificador);
-
+											pintaWidgetCirculos($etiqueta, $color_circulo, $objetivo, $completado, $identificador);											
 
 											$i++;
 										endwhile;
@@ -358,7 +358,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 						                    <h1><?php echo $title; ?></h1>
 						                    <p class="initial-description"><?php echo $texto; ?></p>
 						                </section>
-						                <section class="micro-section mb-xxl">
+						                <section class="micro-section">
 						                    <div class="row">					                 
 				<?php
 
@@ -390,7 +390,7 @@ if (!class_exists('OS_Impactos_Widget')) :
 
 		    	?>						 
 									<div class="impact container">
-										<section class="micro-section mb-xxl">
+										<section class="micro-section">
 						                    <h1><?php echo $title; ?></h1>
 						                    <p><?php echo $texto; ?></p>
 						                    <div class="row">
@@ -770,8 +770,17 @@ function pintaWidgetHomeCirculos($etiqueta, $color, $objetivo, $completado, $ide
 	<?php
 	
 		echo "<script>jQuery(document).ready(function() {
-				setProgressBarCircle('#".$identificador."', getCircleConfig(".$values[0].", '".$color."', '#F4F4F4', '".$values[1]."', '', '".$etiqueta."'), ".$porcentaje.") });
-			  </script>";
+
+
+			sr.reveal('#".$identificador."', {
+		        duration: 0,
+		        distance: '0px',
+				afterReveal: function() {
+					setProgressBarCircle('#".$identificador."', getCircleConfig(".$values[0].", '".$color."', '#F4F4F4', '".$values[1]."', '', '".$etiqueta."'), ".$porcentaje.") 
+				}
+			});
+
+		}); </script>";
 }
 
 
@@ -799,8 +808,16 @@ function pintaWidgetCirculos($etiqueta, $color, $objetivo, $completado, $identif
 	<?php
 	
 		echo "<script>jQuery(document).ready(function() {
-				setProgressBarCircle('#".$identificador."', getCircleConfig(".$values[0].", '".$color."', '#F4F4F4', '".$values[1]."', '', '".$etiqueta."'), ".$porcentaje.") });
-			  </script>";
+
+			sr.reveal('#".$identificador."', {
+		        duration: 0,
+		        distance: '0px',
+				afterReveal: function() {
+					setProgressBarCircle('#".$identificador."', getCircleConfig(".$values[0].", '".$color."', '#F4F4F4', '".$values[1]."', '', '".$etiqueta."'), ".$porcentaje.") 
+				}
+			});
+
+		}); </script>";
 }
 
 
@@ -826,10 +843,20 @@ function pintaWidgetBarras($etiqueta, $objetivo, $completado, $identificador){
 
 <?php
 
-	 echo "<script>jQuery(document).ready(function() {
-			setProgressBarLine('#".$identificador."', getConfig(".$valuesObj[0].", '".$valuesObj[1]."'), ".$porcentaje.") });
-		  </script>";
+	echo "<script>jQuery(document).ready(function() {
+
+		sr.reveal('#".$identificador."', {
+		    
+		    duration: 0,
+		    distance: '0px',
+			afterReveal: function() {
+				setProgressBarLine('#".$identificador."', getConfig(".$valuesObj[0].", '".$valuesObj[1]."'), ".$porcentaje.") 
+			}
+		});
+
+	}); </script>";
 }
+
 
 function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
 
@@ -840,11 +867,11 @@ function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
 
 		switch ($color_dato) {
 
-			case '#f35e61': $color =  'red'; break;
+			case '#f35e61': $color = 'red'; break;
 			
-			case '#d8be75': $color =  'yellow'; break;
+			case '#d8be75': $color = 'yellow'; break;
 			
-			case '#004481':$color =  'blue'; break;
+			case '#004481':$color = 'blue'; break;
 		}
 
 	?>
@@ -858,9 +885,17 @@ function pintaWidgetDatos($etiqueta, $color_dato, $completado, $identificador){
     </div>
 
     <?php
-	
-		echo "<script>jQuery(document).ready(function() {
-				setProgressBarCircle('#".$identificador."', getCircleConfig(".$valuesCom[0].", 'transparent', 'transparent', '".$valuesCom[1]."', '".$color."', '".$etiqueta."'), 1) });
-			  </script>";
 
+	echo "<script>jQuery(document).ready(function() {
+
+		sr.reveal('#".$identificador."', {
+		    
+		    duration: 0,
+		    distance: '0px',
+			afterReveal: function() {
+				setProgressBarCircle('#".$identificador."', getCircleConfig(".$valuesCom[0].", 'transparent', 'transparent', '".$valuesCom[1]."', '".$color."', '".$etiqueta."'), 1)
+			}
+		});
+
+	}); </script>";
 }
