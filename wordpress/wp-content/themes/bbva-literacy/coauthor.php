@@ -41,7 +41,9 @@
     $imagen_perfil = get_post_meta($post_id, 'imagen_perfil', true);
     $descripcion = get_post_meta($post_id, 'descripcion' . $sufijo, true);
     $lugar_trabajo = get_post_meta($post_id, 'lugar_trabajo' . $sufijo, true);
+    $descripcion_lugar_trabajo = get_post_meta($post_id, 'descripcion_lugar_trabajo' . $sufijo, true);
     $logo_trabajo = get_post_meta($post_id, 'logo_trabajo', true);
+    $urlVentanaModal = get_post_meta($post_id, 'urlVentanaModal', true);
     $area_expertise_1 = get_post_meta($post_id, 'area_expertise_1' . $sufijo, true);
     $area_expertise_2 = get_post_meta($post_id, 'area_expertise_2' . $sufijo, true);
     $area_expertise_3 = get_post_meta($post_id, 'area_expertise_3' . $sufijo, true);
@@ -93,10 +95,35 @@
                                 <h4><?php echo $cargo; ?></h4>
                                 <div class="current-work mt-md mb-md">
                                     <?php if (!empty($logo_trabajo)) : ?>
-                                    <img src="<?php echo $logo_trabajo; ?>" alt="<?php echo $lugar_trabajo; ?>" />
+                                    <img data-toggle="modal" data-target="#modal" src="<?php echo $logo_trabajo; ?>" alt="<?php echo $lugar_trabajo; ?>" alt="image title" />
                                     <?php endif; ?>
                                 </div>
                                 <?php echo wpautop($descripcion); ?>
+                                <?php if ((!empty($logo_trabajo)) && (!empty($lugar_trabajo)) || (!empty($descripcion_lugar_trabajo)) || (!empty($urlVentanaModal))) : ?>
+                                <section class="lightbox modal fade" id="modal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="container">
+                                                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                                                <!--div class="modal-header">
+                                                    <h1 class="modal-title">Miembros del consejo asesor</h1></div-->
+                                                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                                                    <div class="row">
+                                                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md"><img src="<?php echo $logo_trabajo; ?>" alt="image title" /></div>
+                                                        <div class="col-xs-12 col-sm-8 mt-md">
+                                                            <h2 class="text-left ml-md"><?php echo $lugar_trabajo; ?></h2>
+                                                            <p class="ml-md"><?php echo $descripcion_lugar_trabajo; ?></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a target="_blank" class="btn btn-bbva-aqua" href="<?php echo $urlVentanaModal; ?>">Más información</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <?php endif; ?>
                         </section>
                     </div>
                     <div class="col-xs-12 col-sm-4 secondary-data">
@@ -226,7 +253,7 @@
                                 <h4><?php echo $cargo; ?></h4>
                                 <div class="visible-xs current-work mt-md mb-md">
                                     <?php if (!empty($logo_trabajo)) : ?>
-                                        <img src="<?php echo $logo_trabajo; ?>" alt="<?php echo $lugar_trabajo; ?>" />
+                                        <img data-toggle="modal" data-target="#modal" src="<?php echo $logo_trabajo; ?>" alt="<?php echo $lugar_trabajo; ?>" alt="image title" />
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($correo_electronico) || !empty($url_web) || !empty($twitter) || !empty($linkedin)) : ?>
@@ -247,10 +274,35 @@
                                 <?php endif; ?>
                                 <div class="hidden-xs current-work mt-md mgb-30">
                                     <?php if (!empty($logo_trabajo)) : ?>
-                                        <img src="<?php echo $logo_trabajo; ?>" alt="<?php echo $lugar_trabajo; ?>" />
+                                        <img data-toggle="modal" data-target="#modal" src="<?php echo $logo_trabajo; ?>" alt="<?php echo $lugar_trabajo; ?>" alt="image title" />       
                                     <?php endif; ?>
                                 </div>
                                 <?php echo wpautop($descripcion); ?>
+                                <?php if ((!empty($logo_trabajo)) && (!empty($lugar_trabajo)) || (!empty($descripcion_lugar_trabajo)) || (!empty($urlVentanaModal))) : ?>
+                                <section class="lightbox modal fade" id="modal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="container">
+                                                <a rol="button" class="bbva-icon-close pull-right icon-close mt-md mr-md" data-dismiss="modal" aria-label="Close"></a>
+                                                <!--div class="modal-header">
+                                                    <h1 class="modal-title">Miembros del consejo asesor</h1></div-->
+                                                <div class="modal-body mr-xxl ml-xxxl pl-lg">
+                                                    <div class="row">
+                                                        <div class="col-xs-6 col-xs-offset-4 col-sm-offset-0 col-sm-4 mt-md"><img src="<?php echo $logo_trabajo; ?>" alt="image title" /></div>
+                                                        <div class="col-xs-12 col-sm-8 mt-md">
+                                                            <h2 class="text-left ml-md"><?php echo $lugar_trabajo; ?></h2>
+                                                            <p class="ml-md"><?php echo $descripcion_lugar_trabajo; ?></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a target="_blank" class="btn btn-bbva-aqua" href="<?php echo $urlVentanaModal; ?>">Más información</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <?php endif; ?>
                             </section>
                         </div>
                     </div>

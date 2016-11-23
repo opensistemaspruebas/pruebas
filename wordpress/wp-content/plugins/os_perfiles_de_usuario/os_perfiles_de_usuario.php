@@ -202,7 +202,7 @@ class OS_Perfiles_de_Usuario {
                         <label for="descripcion_lugar_trabajo"><?php _e('Descripción del lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <input type="text" name="descripcion_lugar_trabajo" id="descripcion_lugar_trabajo" value="<?php echo esc_attr($descripcion_lugar_trabajo_es); ?>" class="regular-text" /><br />
+                        <textarea cols="40" rows="5" name="descripcion_lugar_trabajo" id="descripcion_lugar_trabajo"><?php echo esc_attr($descripcion_lugar_trabajo_es); ?></textarea> <br />
                         <span class="description"><?php _e('Descripción del lugar de trabajo (Descripción de la ventana modal)', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
@@ -220,7 +220,7 @@ class OS_Perfiles_de_Usuario {
                         <label for="descripcion_lugar_trabajo-en"><?php _e('Descripción del lugar de trabajo', 'os_perfiles_de_usuario'); ?></label>
                     </th>
                      <td>
-                        <input type="text" name="descripcion_lugar_trabajo-en" id="descripcion_lugar_trabajo-en" value="<?php echo esc_attr($descripcion_lugar_trabajo_en); ?>" class="regular-text" /><br />
+                        <textarea cols="40" rows="5" name="descripcion_lugar_trabajo-en" id="descripcion_lugar_trabajo-en"><?php echo esc_attr($descripcion_lugar_trabajo_en); ?></textarea> <br />
                         <span class="description"><?php _e('Descripción del lugar de trabajo (Descripción de la ventana modal)', 'os_perfiles_de_usuario'); ?></span>
                     </td>
                 </tr>
