@@ -755,73 +755,74 @@ var popover = function ($) {
 
 var initProgressElements = function initProgressElements($) {
     'use strict';
-    initProgressBarLines($);
-    initCircles($);
 
-    function initProgressBarLines($) {
-        setProgressBarLine('#lineContainer', getConfig(70.5, 'MM'), 0.8);
-        setProgressBarLine('#lineContainer2', getConfig(1.1, 'K'), 0.5);
-    }
+    window.sr = ScrollReveal();
 
-    function initCircles($) {
-        var impactCirclesCreated = false;
-        var microfinancesCirclesCreated = false;
-        $(window).scroll(function () {
-            var yPosition = window.pageYOffset;
+    sr.reveal('#lineContainer', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarLine('#lineContainer', getConfig(70.5, 'MM'), 0.8);
+        }
+    });
 
-            // Home and impact circles
-            var yPositionCirclesSection = 0;
-            var startAnimationPosition = 0;
-            if (isHomeImpact($)) {
-                // We are in home page
-                yPositionCirclesSection = $('.home-impact').offset().top;
-                startAnimationPosition = window.isMobile()
-                    ? yPositionCirclesSection * 0.7
-                    : yPositionCirclesSection * 0.9;
-            } else {
-                // We are in impact subpage
-                var beneficiariesSection = $('.beneficiaries-section');
-                if (beneficiariesSection.length === 0) {
-                    return;
-                }
+    sr.reveal('#lineContainer2', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarLine('#lineContainer2', getConfig(1.1, 'K'), 0.5);
+        }
+    });
 
-                yPositionCirclesSection = $('.beneficiaries-section').offset().top;
-                startAnimationPosition = window.isMobile()
-                    ? yPositionCirclesSection * 0.7
-                    : yPositionCirclesSection * 0.9;
-            }
+    sr.reveal('#circleContainer', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarCircle('#circleContainer', getCircleConfig(3.2, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
+        }
+    });
 
-            if ((yPosition >= startAnimationPosition) && !impactCirclesCreated) {
-                setProgressBarCircle('#circleContainer', getCircleConfig(3.2, '#5bbeff', '#F4F4F4', 'MM', '', 'ADULTOS'), 0.5);
-                setProgressBarCircle('#circleContainer2', getCircleConfig(7.1, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
-                setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
-                impactCirclesCreated = true;
-            }
+    sr.reveal('#circleContainer2', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarCircle('#circleContainer2', getCircleConfig(7.1, '#f8cd51', '#F4F4F4', 'MM', '', 'NIÑOS Y JÓVENES'), 0.8);
+        }
+    });
 
-            // Impact second circles
-            var microfinancesSection = $('.micro-section');
-            if (!microfinancesSection.length || microfinancesCirclesCreated) {
-                return;
-            } else {
-                var microfinancesSectionPosition = microfinancesSection.offset().top;
-                var startAnimationPositionMicrofinances = window.isMobile()
-                    ? microfinancesSectionPosition * 0.7
-                    : microfinancesSectionPosition * 0.9;
-                if ((yPosition >= startAnimationPositionMicrofinances) && !microfinancesCirclesCreated) {
-                    setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
-                    setProgressBarCircle('#circleContainer5', getCircleConfig(300.5, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
-                    setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
-                    microfinancesCirclesCreated = true;
-                }
-            }
+    sr.reveal('#circleContainer3', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarCircle('#circleContainer3', getCircleConfig(200, '#02a5a5', '#F4F4F4', 'K', '', 'PYMES'), 0.5);
 
+        }
+    });
 
-        });
-    }
+    sr.reveal('#circleContainer4', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarCircle('#circleContainer4', getCircleConfig(1000, 'transparent', 'transparent', 'K', 'red', 'MUJERES'), 0.8);
+        }
+    });
 
-    function isHomeImpact($) {
-        return $('.home-impact').length > 0;
-    }
+    sr.reveal('#circleContainer5', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarCircle('#circleContainer5', getCircleConfig(300.5, 'transparent', 'transparent', 'K', 'yellow', 'ENTORNOS RURALES'), 0.6);
+        }
+    });
+
+    sr.reveal('#circleContainer6', {
+        duration: 0,
+        distance: '0px',
+        afterReveal: function() {
+            setProgressBarCircle('#circleContainer6', getCircleConfig(200, 'transparent', 'transparent', 'K', 'blue', 'NIVEL DE EDUCACIÓN PRIMARIA'), 0.5);
+        }
+    });
+
 };
 
 
