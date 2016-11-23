@@ -1,603 +1,1035 @@
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <!--[if IE ]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
-    <meta name="HandheldFriendly" content="true" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/vendor.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <title>BBVA</title>
-    <script src="js/globals.js"></script>
+    
+         <!--[if IE ]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <![endif]-->
+        <meta name="HandheldFriendly" content="true" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/vendor.css" />
+        <link rel="stylesheet" href="css/app.css" />
+	    <link rel="shortcut icon" href="images/favicon.ico">
+        <title>BBVA</title>
+        <script src="js/globals.js"></script>
+    
 </head>
-
-<body>
+<body >
     <div class="webpage">
-        <header class="header">
-            <!-- header -->
-            <div class="top hidden-xs">
-                <div class="container">
-                    <div class="languages-menu">
-                        <label for="language-header" class="hidden">Idioma</label>
-                        <div class="languages-buttons"><a href="#" class="btn btn-primary active">ES</a><a href="#" class="btn btn-primary">EN</a></div>
-                    </div>
-                </div>
+        
+            <header class="header">
+                
+
+<!-- header -->
+<div class="top hidden-xs">
+    <div class="container">
+        <div class="languages-menu">
+            <label for="language-header" class="hidden">Idioma</label>
+            <div class="languages-buttons">
+                <a href="#" class="btn btn-primary active">ES</a>
+                <a href="#" class="btn btn-primary">EN</a>
             </div>
-            <div class="container stycky-menu-in-mobile">
-                <div class="row vertical-align header-logo">
-                    <div class="visible-xs col-xs-12 header-phone text-center">
-                        <div class="launcher-menu-mobil visible-xs"><span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span></div>
-                        <div class="logo">
-                            <h1>Centro para la Educación <br />y Capacidades Financieras</h1>
-                            <div class="logo-search ml-sm search-mobile-button"><span class="bbva-icon-search"></span></div>
-                        </div>
-                    </div>
-                    <div class="hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-9 header-text">
-                        <h1 class="go-left">Centro para la Educación y Capacidades Financieras</h1></div>
-                    <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-3 logo text-right iniciative-wrapper"><a href="index.html" class="bbva-icon-BBVA-wrap"><span class="iniciative">Una iniciativa de</span><span class="bbva-icon-BBVA"></span><span class="hidden">Logo BBVA</span></a></div>
-                </div>
-            </div>
-            <div class="search-mobile closed hidden-sm hidden-md hidden-lg">
-                <div class="container">
-                    <div class="header-phone">
-                        <div class="logo">
-                            <h1>Centro para la Educación <br />y Capacidades Financieras</h1></div>
-                        <div class="close-search-mobile ml-sm"><span class="bbva-icon-close"></span></div>
-                    </div>
-                    <section class="content">
-                        <div id="mobile-filter" class="publishing-filter-wrapper-mobile">
-                            <header>
-                                <div class="form-group has-feedback">
-                                    <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input" /><span class="bbva-icon-search form-control-feedback"></span></div>
-                                <div class="selected-tags-container"></div>
-                                <div class="button-filter"><a href="results.html" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a></div>
-                            </header>
-                            <section>
-                                <div class="row available-tags-wrapper">
-                                    <div class="col-xs-12">
-                                        <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
-                                        <div class="tag-container"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
-                                        <div class="author-container"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-                                        <div class="geo-container"></div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <!-- EO header -->
-        </header>
-        <div class="nav-content open">
-            <!-- navbar menu -->
-            <div class="container">
-                <nav class="navbar">
-                    <div class="row visible-xs">
-                        <div class="col-xs-12 pt-md">
-                            <div class="menu-text ml-md"><span> Centro para la Educación <br />y Capacidades Financieras</span></div>
-                            <div class="menu-close ml-xxxl"><a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a></div>
-                        </div>
-                    </div>
-                    <ul class="nav navbar-nav" id="topmenu">
-                        <li class="panel"><a class=" collapsed  mr-xs" href="index.html"><span class="hidden-xs">Home</span><span class="visible-xs pl-lg">Home</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#home"><span>Home</span></a></li>
-                        <li class="panel"><a class=" collapsed  mr-xs" href="publishing.html"><span class="hidden-xs">Publicaciones</span><span class="visible-xs pl-lg">Publicaciones</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#publishing"><span>Publicaciones</span></a></li>
-                        <li class="panel"><a class=" collapsed  mr-xs" href="bestPractices.html"><span class="hidden-xs">Mejores prácticas</span><span class="visible-xs pl-lg">Mejores prácticas</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#bestPractices"><span>Mejores prácticas</span></a></li>
-                        <li class="panel"><a class=" collapsed  mr-xs" href="world.html"><span class="hidden-xs">Iniciativas</span><span class="visible-xs pl-lg">Iniciativas</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#world"><span>Iniciativas</span></a></li>
-                        <li class="panel"><a class=" collapsed  mr-xs" href="impact.html"><span class="hidden-xs">Impacto</span><span class="visible-xs pl-lg">Impacto</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#impact"><span>Impacto</span></a></li>
-                        <li class="panel"><a class=" collapsed  mr-xs" href="summits.html"><span class="hidden-xs">Eventos</span><span class="visible-xs pl-lg">Eventos</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#summits"><span>Eventos</span></a></li>
-                        <li class="panel"><a class=" collapsed  mr-xs" href="aboutUs.html"><span class="hidden-xs">Sobre Nosotros</span><span class="visible-xs pl-lg">Sobre Nosotros</span></a><a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu" data-target="#aboutUs"><span>Sobre Nosotros</span></a></li>
-                    </ul>
-                    <div class="hidden-xs logo-search"><span class="search-icon bbva-icon-search"></span>
-                        <div class="search-form-container hidden">
-                            <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
-                            <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
-                            <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
-                        </div>
-                    </div>
-                    <div class="visible-xs">
-                        <div class="languages-menu pb-lg pl-lg"><a role="button" class="languages-mobile-button active"><span class="language">Español</span></a><a role="button" class="languages-mobile-button ml-lg"><span class="language">Inglés</span></a></div>
-                    </div>
-                </nav>
-                <div class="navbar navbar-search">
-                    <div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
-                        <div class="form-wrapper">
-                            <div class="title"><span class="text-uppercase text">filtros</span></div>
-                            <div class="selected-tags-container"></div>
-                        </div>
-                        <section>
-                            <div class="row available-tags-wrapper">
-                                <div class="col-xs-4">
-                                    <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
-                                    <div class="tag-container"></div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
-                                    <div class="author-container"></div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
-                                    <div class="geo-container"></div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <!-- EO navbar menu -->
         </div>
+    </div>
+</div>
+
+<div class="container stycky-menu-in-mobile">
+    <div class="row vertical-align header-logo">
+
+        <div class="visible-xs col-xs-12 header-phone text-center">
+            <div class="launcher-menu-mobil visible-xs">
+                <span class="bbva-icon-menu nav-phone-launch" aria-hidden="true"></span>
+            </div>
+            <div class="logo">
+                <h1>Centro para la Educación y Capacidades Financieras</h1>
+                <div class="logo-search ml-sm search-mobile-button">
+                    <span class="bbva-icon-search"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-9 header-text">
+            <h1 class="go-left">Centro para la Educación y Capacidades Financieras</h1>
+        </div>
+        <div class="hidden-xs col-xs-12 col-sm-2 col-md-2 col-lg-3 logo text-right iniciative-wrapper">
+            <a href="index.html" class="bbva-icon-BBVA-wrap">
+                <span class="iniciative">Una iniciativa de</span>
+                <span class="bbva-icon-BBVA"></span>
+                <span class="hidden">Logo BBVA</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div class="search-mobile closed hidden-sm hidden-md hidden-lg">
+    <div class="container">
+        <div class="header-phone">
+            <div class="logo">
+                <h1>Centro para la Educación y Capacidades Financieras</h1>
+            </div>
+            <div class="close-search-mobile ml-sm">
+                <span class="bbva-icon-close"></span>
+            </div>
+        </div>
+        <section class="content">
+            
+<div id="mobile-filter" class="publishing-filter-wrapper-mobile">
+
+    <header>
+        <div class="form-group has-feedback">
+            <input type="text" class="publishing-filter-search-input form-control" name="publishing-filter-search-input"/>
+            <span class="bbva-icon-search form-control-feedback"></span>
+        </div>
+        <div class="selected-tags-container"></div>
+        <div class="button-filter">
+            <a href="#" class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</a>
+        </div>
+    </header>
+
+    <section>
+        <div class="row available-tags-wrapper">
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">tags (<span class="tag-container-counter">0</span>)</p>
+                <div class="tag-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">Autores (<span class="author-container-counter">0</span>)</p>
+                <div class="author-container">
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <p class="text-capitalize column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+                <div class="geo-container">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+</div>
+
+        </section>
+    </div>
+</div>
+
+<!-- EO header -->
+            </header>
+            <div class="nav-content open">
+                
+
+<!-- navbar menu -->
+<div class="container">
+    <nav class="navbar">
+        <div class="row visible-xs">
+            <div class="col-xs-12 pt-md">
+                <div class="menu-text ml-md">
+                    <span> Centro para la Educación y Capacidades Financieras</span>
+                </div>
+                <div class="menu-close ml-xxxl">
+                    <a role="button" class="visible-xs nav-phone-launch"><span class="bbva-icon-close"></span></a>
+                </div>
+            </div>
+        </div>
+        <ul class="nav navbar-nav" id="topmenu">
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="index.html">
+                        <span class="hidden-xs">Home</span>
+                        <span class="visible-xs pl-lg">Home</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#home">
+                        <span>Home</span>
+                        
+                    </a>
+                </li>
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="publishing.html">
+                        <span class="hidden-xs">Publicaciones</span>
+                        <span class="visible-xs pl-lg">Publicaciones</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#publishing">
+                        <span>Publicaciones</span>
+                        
+                    </a>
+                </li>
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="bestPractices.html">
+                        <span class="hidden-xs">Mejores prácticas</span>
+                        <span class="visible-xs pl-lg">Mejores prácticas</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#bestPractices">
+                        <span>Mejores prácticas</span>
+                        
+                    </a>
+                </li>
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="world.html">
+                        <span class="hidden-xs">Iniciativas BBVA</span>
+                        <span class="visible-xs pl-lg">Iniciativas BBVA</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#world">
+                        <span>Iniciativas BBVA</span>
+                        
+                    </a>
+                </li>
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="impact.html">
+                        <span class="hidden-xs">Impacto BBVA</span>
+                        <span class="visible-xs pl-lg">Impacto BBVA</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#impact">
+                        <span>Impacto BBVA</span>
+                        
+                    </a>
+                </li>
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="summits.html">
+                        <span class="hidden-xs">Eventos</span>
+                        <span class="visible-xs pl-lg">Eventos</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#summits">
+                        <span>Eventos</span>
+                        
+                    </a>
+                </li>
+            
+                <li class="panel">
+                    <a class=" collapsed  mr-xs" href="aboutUs.html">
+                        <span class="hidden-xs">El centro</span>
+                        <span class="visible-xs pl-lg">El centro</span>
+                        
+                    </a>
+                    <a class=" hidden " role="button" data-toggle="collapse" data-parent="#topmenu"  data-target="#aboutUs">
+                        <span>El centro</span>
+                        
+                    </a>
+                </li>
+            
+        </ul>
+        <div class="hidden-xs logo-search">
+            <span class="search-icon bbva-icon-search"></span>
+            <div class="search-form-container hidden">
+                <input class="input-search navbar-search-input" type="text" name="publishing-filter-search-input" value="">
+                <button class="btn-bbva-aqua publishing-filter-search-btn" type="button" name="publishing-filter-search-btn">Buscar</button>
+                <button type="button" class="close close-navbar-filter btn-close"><span class="icon bbva-icon-close"></span></button>
+            </div>
+        </div>
+        <div class="visible-xs">
+            <div class="languages-menu pb-lg pl-lg">
+                <a role="button" class="languages-mobile-button active"><span class="language">Español</span></a>
+                <a role="button" class="languages-mobile-button ml-lg"><span class="language">Inglés</span></a>
+            </div>
+        </div>
+    </nav>
+    <div class="navbar navbar-search">
+        
+<div id="menu-search" class="content menu-filter-wrapper container hidden filter-container nopadding">
+
+  <div class="form-wrapper">
+        <div class="title">
+          <span class="text-uppercase text">filtros</span>
+        </div>
+        <div class="selected-tags-container"></div>
+  </div>
+
+  <section>
+    <div class="row available-tags-wrapper">
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">tags (<span class="tag-container-counter">0</span>)</p>
+          <div class="tag-container">
+          </div>
+        </div>
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">Autores (<span class="author-container-counter">0</span>)</p>
+          <div class="author-container">
+          </div>
+        </div>
+      
+        <div class="col-xs-4">
+          <p class="text-uppercase column-name">ámbito geográfico (<span class="geo-container-counter">0</span>)</p>
+          <div class="geo-container">
+          </div>
+        </div>
+      
+    </div>
+  </section>
+
+</div>
+
+    </div>
+</div>
+<!-- EO navbar menu -->
+            </div>
+        
         <div class="contents">
             <div id="search-layer"></div>
-            <div class="futureEvents">
-                <section class="block-image wow fadeInUp">
-                    <div class="visible-xs">
-                        <h1 class="screen-title mt-xs mb-sm">Anual Summit 2017</h1><img class="img-responsive" src="images/future-events/cover.png" alt="image title" />
-                        <div class="container">
-                            <div class="content-center">
-                                <div class="text-center mgt-25"><span><span class="icon bbva-icon-calendar-01 mr-xs"></span>22-23 de octubre, 2017</span><span class="mgl-13"><span class="icon bbva-icon-pin mr-xs"></span>Madrid</span>
-                                </div>
-                                <div class="container-button mb-lg mt-lg"><a href="" class="text-center btn btn-bbva-aqua">Registrarme</a></div>
-                            </div>
-                        </div>
+            
+<div class="futureEvents">
+
+    <section class="block-image wow fadeInUp">
+        <div class="visible-xs">
+            <h1 class="screen-title mt-xs mb-sm">Anual Summit 2017</h1>
+            <img class="img-responsive" src="images/future-events/cover.png" alt="image title" />
+            <div class="container">
+                <div class="content-center">
+                    <div class="text-center mgt-25">
+                        <span><span class="icon bbva-icon-calendar-01 mr-xs"></span>22-23 de octubre, 2017</span>
+                        <span class="mgl-13"><span class="icon bbva-icon-pin mr-xs"></span>Madrid</span>
                     </div>
-                    <div class="hidden-xs"><img class="img-responsive" src="images/future-events/cover.png" alt="image title" />
-                        <div class="container">
-                            <div class="block-content-center">
-                                <div class="row">
-                                    <div class="text-center mt-md"><span class="icon bbva-icon-calendar-01 mr-xs"></span>22-23 de octubre, 2017 <span class="icon bbva-icon-pin mr-xs mgl-20"></span>Madrid </div>
-                                </div>
-                                <h1 class="screen-title mt-xs mb-sm">Anual Summit 2017</h1>
-                                <div id="timezone" class="time">
-                                    <div class="days ml-md mr-md"> 90
-                                        <label>DIAS</label>
-                                    </div>
-                                    <div class="hours mr-md"> 12
-                                        <label>HORAS</label>
-                                    </div>
-                                    <div class="minutes mr-md"> 24
-                                        <label>MINUTOS</label>
-                                    </div>
-                                </div>
-                                <div class="container-button mt-lg"><a href="" class="text-center btn btn-bbva-aqua">Registrarme</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="container content-wrap mb-xl">
-                    <div class="share-rrss-section mt-md">
-                        <p class="hidden-xs share-in">Compartir en</p>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-twitter bbva-icon-twitter-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-facebook bbva-icon-facebook-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-googleplus bbva-icon-google-plus-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-pinterest bbva-icon-pinterest-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs"></a>
-                        </div>
-                    </div>
-                    <section class="description-section">
-                        <h1 class="mb-md">Descripción</h1>
-                        <p> This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy. Power up your printers, make copies of this list, and start jotting down notes that can help you create the summer of your dreams. The food in Europe is some of the best you'll find in the world, which can make it tempting to splurge. Fight this temptation and go to local markets and have picnics in parks instead. If you must go out to eat, limit those excursions to a few times per week and only go to the places that are packed with locals. France's capital, the City of Light, is a wanderer's dream, with an exciting mix of wide boulevards and tiny brick alleyways hiding delicious restaurants and boutique shops. When in Paris, it's best to take in the city by walking until you can't walk anymore. Picnic in front of the Eiffel Tower, take a nighttime boat ride down the Seine, and relax in the Luxembourg Gardens. Florence is a magical city filled with historical attractions, art galleries, and tempting gelato shops. Among the many must-dos is climbing a hill on the south side of the Arno River to Piazzale Michelangelo. This is a lookout point with tiered seating that offers some of the city's best views, especially at sunset. If you're lucky, street performers will serenade you as the sun goes down. </p>
-                    </section>
-                    <section class="topics-section mt-lg">
-                        <h1 class="mb-md">Topics</h1>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="rectangle"></div>
-                                <div class="pre-rectangle"></div>
-                                <p>Introductory purchase & balance transfer APRs</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="rectangle"></div>
-                                <div class="pre-rectangle"></div>
-                                <p>CompassPoints rewards program</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="rectangle"></div>
-                                <div class="pre-rectangle"></div>
-                                <p>No annual fee</p>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="interest-section mt-lg">
-                        <h1 class="mb-md">Te interesa si...</h1>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="rectangle"></div>
-                                <div class="pre-rectangle"></div>
-                                <p>Introductory purchase & balance transfer APRs</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="rectangle"></div>
-                                <div class="pre-rectangle"></div>
-                                <p>CompassPoints rewards program</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="rectangle"></div>
-                                <div class="pre-rectangle"></div>
-                                <p>No annual fee</p>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="program-section mt-lg">
-                        <h1 class="mb-md">Programa</h1>
-                        <div class="visible-xs">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="dropdown mb-md"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Día 22 de octubre 2017<span class="icon bbva-icon-arrow_bottom"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li role="presentation"><a href="#day1" aria-controls="day1" role="tab" data-toggle="tab">Día 22 de octubre 2017</a></li>
-                                        <li role="presentation"><a href="#day2" aria-controls="day2" role="tab" data-toggle="tab">Día 25 de mayo 2018</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane  active " id="day1">
-                                    <div>
-                                        <div class="program visible-xs">
-                                            <div class="program-day">
-                                                <div class="program-content">
-                                                    <div class="individual-info  animate fadeIn  ">
-                                                        <div class="col-xs-1 nopadding">
-                                                            <div class="redbullet"></div>
-                                                        </div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">12:00 <span class="duration">(45min)</span></span>
-                                                            </div>
-                                                            <div class="information-xs talk-bubble tri-right">
-                                                                <div class="talktext">
-                                                                    <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                    <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                    <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="individual-info  animate fadeIn  break">
-                                                        <div class="col-xs-1 nopadding"><span class="break-icon bbva-icon-coffe"></span></div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">13:00 Coffe break <span class="duration">(15min)</span></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="individual-info last-child animate fadeIn  ">
-                                                        <div class="col-xs-1 nopadding">
-                                                            <div class="redbullet"></div>
-                                                        </div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">14:00 <span class="duration">(45min)</span></span>
-                                                            </div>
-                                                            <div class="information-xs talk-bubble tri-right">
-                                                                <div class="talktext">
-                                                                    <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                    <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                    <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="program hidden-xs">
-                                            <div class="program-day"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane " id="day2">
-                                    <div>
-                                        <div class="program visible-xs">
-                                            <div class="program-day">
-                                                <div class="program-content">
-                                                    <div class="individual-info  animate fadeIn  ">
-                                                        <div class="col-xs-1 nopadding">
-                                                            <div class="redbullet"></div>
-                                                        </div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">22:00 <span class="duration">(45min)</span></span>
-                                                            </div>
-                                                            <div class="information-xs talk-bubble tri-right">
-                                                                <div class="talktext">
-                                                                    <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                    <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                    <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="individual-info  animate fadeIn  break">
-                                                        <div class="col-xs-1 nopadding"><span class="break-icon bbva-icon-coffe"></span></div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">23:00 Coffe break <span class="duration">(15min)</span></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="individual-info  animate fadeIn  ">
-                                                        <div class="col-xs-1 nopadding">
-                                                            <div class="redbullet"></div>
-                                                        </div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">24:00 <span class="duration">(45min)</span></span>
-                                                            </div>
-                                                            <div class="information-xs talk-bubble tri-right">
-                                                                <div class="talktext">
-                                                                    <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                    <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                    <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="individual-info last-child animate fadeIn  ">
-                                                        <div class="col-xs-1 nopadding">
-                                                            <div class="redbullet"></div>
-                                                        </div>
-                                                        <div class="col-xs-11">
-                                                            <div class="time"><span class="hour">01:00 <span class="duration">(45min)</span></span>
-                                                            </div>
-                                                            <div class="information-xs talk-bubble tri-right">
-                                                                <div class="talktext">
-                                                                    <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
-                                                                    <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                                    <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="program hidden-xs">
-                                            <div class="program-day"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hidden-xs">
-                            <div class="program visible-xs">
-                                <div class="program-day">
-                                    <div class="program-content"></div>
-                                </div>
-                            </div>
-                            <div class="program hidden-xs">
-                                <div class="program-day">
-                                    <h2 class="mt-xl">Día 22 de octubre 2017</h2>
-                                    <div class="program-content">
-                                        <div class="individual-info  wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">12:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="individual-info  wow fadeIn break">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">13:00</span><span class="duration">(15min)</span></div>
-                                            <div class="coffee-break"><span class="bbva-icon-coffe"></span><span class="text">Coffee Break</span></div>
-                                        </div>
-                                        <div class="individual-info last-child wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">14:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h2 class="mt-xl">Día 25 de mayo 2018</h2>
-                                    <div class="program-content">
-                                        <div class="individual-info  wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">22:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="individual-info  wow fadeIn break">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">23:00</span><span class="duration">(15min)</span></div>
-                                            <div class="coffee-break"><span class="bbva-icon-coffe"></span><span class="text">Coffee Break</span></div>
-                                        </div>
-                                        <div class="individual-info  wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">24:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="individual-info last-child wow fadeIn ">
-                                            <div class="redbullet"></div>
-                                            <div class="time"><span class="hour">01:00</span><span class="duration">(45min)</span></div>
-                                            <div class="information ml-sm talk-bubble tri-right left-top">
-                                                <div class="talktext">
-                                                    <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
-                                                    <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
-                                                    <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="hidden-xs file-section mt-lg">
-                        <h1 class="mb-md">Ficha del evento</h1>
-                        <div class="pdf-rectangle">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-1"><span class="icon bbva-icon-pdf-01"></span></div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <h2 class="ml-md">Descarga el programa</h2>
-                                    <p class="ml-md">Consulta y/o descarga el PDF del evento</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-3 col-sm-offset-1">
-                                    <div class="container-button mb-md mt-md"><a href="" class="btn btn-bbva-aqua">Ver PDF</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <section class="contact-person">
-                    <div class="container content-wrap">
-                        <h1 class="mt-xl">Persona de contacto</h1>
-                        <h2 class="mb-md">Si tienes alguna duda sobre el evento, puedes ponerte en contacto con:</h2>
-                        <!-- person -->
-                        <section class="container-fluid person">
-                            <a href="#" class="link-layer visible-xs"></a>
-                            <div class="image-wrapper"><img src="images/about-us/avatar1.png" alt="" /></div>
-                            <div class="data-wrapper"><span>Diana Repiso</span>
-                                <p>Doctora honoris causa de estadística por la Universidad Complutense.</p><a href="#">Ficha de la asesora</a></div>
-                        </section>
-                        <!-- EO person -->
-                    </div>
-                </section>
-                <section class="attend">
-                    <div class="container content-wrap">
-                        <div class="row mb-lg">
-                            <h1 class="col-xs-12 col-sm-7">Quiero asistir</h1>
-                            <div class="col-xs-12 col-sm-offset-1 col-sm-4 text-right container-button"><a href="" class="btn btn-bbva-aqua">Registrarme</a></div>
-                        </div>
-                    </div>
-                </section>
-                <section id="mapSection" class="map-section id-2015"></section>
-            </div>
-            <div class="prefooter-bbva background-white">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 mt-lg mb-lg footer-menu-group">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-4 footer-menu-item">
-                                    <div>
-                                        <p class="hidden-xs title mb-md"><a role="button">Sobre Educación Financiera</a></p>
-                                        <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample"> Sobre Educación Financiera<span class="icon-plus icon-collapsable"></span></a></p>
-                                        <div class="collapse" id="collapseOne">
-                                            <ul class="hidden-xs prefooter-menu">
-                                                <li><a href="#">Publicaciones</a></li>
-                                                <li><a href="#">Mejores prácticas</a></li>
-                                                <li><a href="#">Iniciativas de BBVA</a></li>
-                                                <li><a href="#">Impacto de BBVA</a></li>
-                                                <li><a href="#">Eventos</a></li>
-                                                <li><a href="#">Sobre Nosotros</a></li>
-                                            </ul>
-                                            <div class="visible-xs row prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" /><a href="#" class="col-xs-6">Publicaciones</a><a href="#" class="col-xs-6">Mejores prácticas</a><a href="#" class="col-xs-6">Iniciativas de BBVA</a><a href="#" class="col-xs-6">Impacto de BBVA</a><a href="#" class="col-xs-6">Eventos</a><a href="#" class="col-xs-6">Sobre Nosotros</a><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 footer-menu-item">
-                                    <div>
-                                        <p class="hidden-xs title mb-md"><a role="button">En el mundo</a></p>
-                                        <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample"> En el mundo<span class="icon-plus icon-collapsable"></span></a></p>
-                                        <div class="collapse" id="collapseTwo">
-                                            <div class="row mgl-0 prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" />
-                                                <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
-                                                    <li><a href="#">España</a></li>
-                                                    <li><a href="#">USA</a></li>
-                                                    <li><a href="#">Turquía</a></li>
-                                                    <li><a href="#">Portugal</a></li>
-                                                    <li><a href="#">Chile</a></li>
-                                                    <li><a href="#">Colombia</a></li>
-                                                </ul>
-                                                <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
-                                                    <li><a href="#">Venezuela</a></li>
-                                                    <li><a href="#">Uruguay</a></li>
-                                                    <li><a href="#">Paraguay</a></li>
-                                                    <li><a href="#">Argentina</a></li>
-                                                    <li><a href="#">México</a></li>
-                                                    <li><a href="#">Perú</a></li>
-                                                </ul><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 footer-menu-item">
-                                    <p class="hidden-xs title mb-md"><a role="button">Enlaces de interés</a></p>
-                                    <p class="visible-xs title"><a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample"> Enlaces de interés<span class="icon-plus icon-collapsable"></span></a></p>
-                                    <div class="collapse" id="collapseThree">
-                                        <ul class="hidden-xs prefooter-menu">
-                                            <li><a href="#">Web corporativa BBVA.com</a></li>
-                                            <li><a href="#">Empleo BBVA</a></li>
-                                            <li><a href="#">Fundación Microfinanzas BBVA</a></li>
-                                        </ul>
-                                        <div class="visible-xs row prefooter-menu-collapsed"><img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png" /><a href="#" class="col-xs-8">Web corporativa BBVA.com</a><a href="#" class="col-xs-4">Empleo BBVA</a><a href="#" class="col-xs-4">Fundación Microfinanzas BBVA</a><img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png" /></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container-button mb-lg mt-lg">
+                        <a href="" class="text-center btn btn-bbva-aqua">Registrarme</a>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="footer-bbva">
-            <!-- footer -->
+
+        <div class="hidden-xs">
+            <img class="img-responsive" src="images/future-events/cover.png" alt="image title" />
             <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-10 col-lg-8 footer-text"><span>Centro para la Educación y Capacidades Financieras</span></div>
-                    <div class="col-xs-12 col-sm-2 col-lg-4 footer-logo text-right"><span class="footer-iniciative">Una iniciativa de</span><span class="bbva-icon-BBVA"></span></div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
-                        <div class="footer-menu-list"><a href="#">Seguridad</a><a href="#">Aviso legal y Política de Cookies</a><a href="#">Términos y condiciones</a><a href="#">Accesibilidad</a></div>
+                <div class="block-content-center">
+                    <div class="row">
+                        <div class="text-center mt-md">
+                            <span class="icon bbva-icon-calendar-01 mr-xs"></span>22-23 de octubre, 2017
+                            <span class="icon bbva-icon-pin mr-xs mgl-20"></span>Madrid
+                        </div>
                     </div>
-                    <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
-                        <ul class="footer-menu footer-social">
-                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
-                            <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
-                            <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
-                        </ul>
+                    <h1 class="screen-title mt-xs mb-sm">Anual Summit 2017</h1>
+                    <div id="timezone" class="time">
+                        <div class="days ml-md mr-md">
+                            90 <label>DIAS</label>
+                        </div>
+                        <div class="hours mr-md">
+                            12 <label>HORAS</label>
+                        </div>
+                        <div class="minutes mr-md">
+                            24 <label>MINUTOS</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 footer-copyright-group">
-                        <p class="footer-copyright">&copy; 2016 BBVA</p>
-                    </div>
-                    <div class="visible-xs col-xs-12">
-                        <ul class="footer-menu footer-social">
-                            <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
-                            <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
-                            <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
-                        </ul>
+                    <div class="container-button mt-lg">
+                        <a href="" class="text-center btn btn-bbva-aqua">Registrarme</a>
                     </div>
                 </div>
             </div>
-            <!-- EO footer -->
+        </div>
+    </section>
+
+    <div class="container content-wrap mb-xl">
+        <div class="share-rrss-section mt-md">
+            <p class="hidden-xs share-in">Compartir en</p>
+            
+            <div class="card-icon">
+                <a href="#" class="icon icon-twitter bbva-icon-twitter-circle mr-xs"></a>
+            </div>
+            
+            <div class="card-icon">
+                <a href="#" class="icon icon-facebook bbva-icon-facebook-circle mr-xs"></a>
+            </div>
+            
+            <div class="card-icon">
+                <a href="#" class="icon icon-googleplus bbva-icon-google-plus-circle mr-xs"></a>
+            </div>
+            
+            <div class="card-icon">
+                <a href="#" class="icon icon-pinterest bbva-icon-pinterest-circle mr-xs"></a>
+            </div>
+            
+            <div class="card-icon">
+                <a href="#" class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs"></a>
+            </div>
+            
+        </div>
+        <section class="description-section">
+            <h1 class="mb-md">Descripción</h1>
+            <p>
+                This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.
+                Power up your printers, make copies of this list, and start jotting down notes that can help you create the summer of your dreams.
+                The food in Europe is some of the best you'll find in the world, which can make it tempting to splurge. Fight this temptation and go
+                to local markets and have picnics in parks instead. If you must go out to eat, limit those excursions to a few times per week and only
+                go to the places that are packed with locals. France's capital, the City of Light, is a wanderer's dream, with an exciting mix of wide
+                boulevards and tiny brick alleyways hiding delicious restaurants and boutique shops. When in Paris, it's best to take in the city by walking
+                until you can't walk anymore. Picnic in front of the Eiffel Tower, take a nighttime boat ride down the Seine, and relax in the Luxembourg Gardens.
+                Florence is a magical city filled with historical attractions, art galleries, and tempting gelato shops. Among the many must-dos is climbing a hill
+                on the south side of the Arno River to Piazzale Michelangelo. This is a lookout point with tiered seating that offers some of the city's best views,
+                especially at sunset. If you're lucky, street performers will serenade you as the sun goes down.
+            </p>
+        </section>
+
+        <section class="topics-section mt-lg">
+            <h1 class="mb-md">Topics</h1>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rectangle"></div>
+                    <div class="pre-rectangle"></div>
+                    <p>Introductory purchase & balance transfer APRs</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rectangle"></div>
+                    <div class="pre-rectangle"></div>
+                    <p>CompassPoints rewards program</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rectangle"></div>
+                    <div class="pre-rectangle"></div>
+                    <p>No annual fee</p>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="interest-section mt-lg">
+            <h1 class="mb-md">Te interesa si...</h1>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rectangle"></div>
+                    <div class="pre-rectangle"></div>
+                    <p>Introductory purchase & balance transfer APRs</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rectangle"></div>
+                    <div class="pre-rectangle"></div>
+                    <p>CompassPoints rewards program</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rectangle"></div>
+                    <div class="pre-rectangle"></div>
+                    <p>No annual fee</p>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="program-section mt-lg">
+            <h1 class="mb-md">Programa</h1>
+            <div class="visible-xs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="dropdown mb-md">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Día 22 de octubre 2017<span class="icon bbva-icon-arrow_bottom"></span></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li role="presentation"><a href="#day1" aria-controls="day1" role="tab" data-toggle="tab">Día 22 de octubre 2017</a></li>
+                            
+                            <li role="presentation"><a href="#day2" aria-controls="day2" role="tab" data-toggle="tab">Día 25 de mayo 2018</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    
+                    <div role="tabpanel" class="tab-pane  active " id="day1">
+                        <div>
+                            
+
+<div class="program visible-xs">
+  <div class="program-day">
+      <div class="program-content">
+        
+          <div class="individual-info  animate fadeIn  ">
+              
+              <div class="col-xs-1 nopadding"><div class="redbullet"></div></div>
+              <div class="col-xs-11">
+                  <div class="time">
+                    <span class="hour">12:00
+                      <span class="duration">(45min)</span>
+                    </span>
+                  </div>
+                  
+                  <div class="information-xs talk-bubble tri-right">
+                    <div class="talktext">
+                      <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
+                      <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                      <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                    </div>
+                  </div>
+                  
+               </div>
+              
+          </div>
+          
+          <div class="individual-info  animate fadeIn  break">
+              
+               <div class="col-xs-1 nopadding">
+                   <span class="break-icon bbva-icon-coffe"></span>
+               </div>
+               <div class="col-xs-11">
+                    <div class="time">
+                      <span class="hour">13:00 Coffe break
+                          <span class="duration">(15min)</span>
+                      </span>
+                  </div>
+               </div>
+              
+          </div>
+          
+          <div class="individual-info last-child animate fadeIn  ">
+              
+              <div class="col-xs-1 nopadding"><div class="redbullet"></div></div>
+              <div class="col-xs-11">
+                  <div class="time">
+                    <span class="hour">14:00
+                      <span class="duration">(45min)</span>
+                    </span>
+                  </div>
+                  
+                  <div class="information-xs talk-bubble tri-right">
+                    <div class="talktext">
+                      <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
+                      <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                      <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                    </div>
+                  </div>
+                  
+               </div>
+              
+          </div>
+          
+        </div>
+      </div>
+</div>
+
+<div class="program hidden-xs">
+  <div class="program-day">
+    
+      </div>
+  </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <div role="tabpanel" class="tab-pane " id="day2">
+                        <div>
+                            
+
+<div class="program visible-xs">
+  <div class="program-day">
+      <div class="program-content">
+        
+          <div class="individual-info  animate fadeIn  ">
+              
+              <div class="col-xs-1 nopadding"><div class="redbullet"></div></div>
+              <div class="col-xs-11">
+                  <div class="time">
+                    <span class="hour">22:00
+                      <span class="duration">(45min)</span>
+                    </span>
+                  </div>
+                  
+                  <div class="information-xs talk-bubble tri-right">
+                    <div class="talktext">
+                      <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
+                      <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                      <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                    </div>
+                  </div>
+                  
+               </div>
+              
+          </div>
+          
+          <div class="individual-info  animate fadeIn  break">
+              
+               <div class="col-xs-1 nopadding">
+                   <span class="break-icon bbva-icon-coffe"></span>
+               </div>
+               <div class="col-xs-11">
+                    <div class="time">
+                      <span class="hour">23:00 Coffe break
+                          <span class="duration">(15min)</span>
+                      </span>
+                  </div>
+               </div>
+              
+          </div>
+          
+          <div class="individual-info  animate fadeIn  ">
+              
+              <div class="col-xs-1 nopadding"><div class="redbullet"></div></div>
+              <div class="col-xs-11">
+                  <div class="time">
+                    <span class="hour">24:00
+                      <span class="duration">(45min)</span>
+                    </span>
+                  </div>
+                  
+                  <div class="information-xs talk-bubble tri-right">
+                    <div class="talktext">
+                      <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
+                      <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                      <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                    </div>
+                  </div>
+                  
+               </div>
+              
+          </div>
+          
+          <div class="individual-info last-child animate fadeIn  ">
+              
+              <div class="col-xs-1 nopadding"><div class="redbullet"></div></div>
+              <div class="col-xs-11">
+                  <div class="time">
+                    <span class="hour">01:00
+                      <span class="duration">(45min)</span>
+                    </span>
+                  </div>
+                  
+                  <div class="information-xs talk-bubble tri-right">
+                    <div class="talktext">
+                      <h3 class="ml-md pr-md pt-md">Lorem ipsum dolor sit amet</h3>
+                      <p class="ml-md pr-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                      <p class="ml-md pr-md pb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                    </div>
+                  </div>
+                  
+               </div>
+              
+          </div>
+          
+        </div>
+      </div>
+</div>
+
+<div class="program hidden-xs">
+  <div class="program-day">
+    
+      </div>
+  </div>
+
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="hidden-xs">
+                
+
+<div class="program visible-xs">
+  <div class="program-day">
+      <div class="program-content">
+        
+        </div>
+      </div>
+</div>
+
+<div class="program hidden-xs">
+  <div class="program-day">
+    
+      <h2 class="mt-xl">Día 22 de octubre 2017</h2>
+      <div class="program-content">
+        
+          <div class="individual-info  wow fadeIn
+                      ">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">12:00</span>
+                <span class="duration">(45min)</span>
+              </div>
+              
+              <div class="information ml-sm talk-bubble tri-right left-top">
+                <div class="talktext">
+                  <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                  <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                  <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                </div>
+              </div>
+              
+              
+          </div>
+          
+          <div class="individual-info  wow fadeIn
+                      break">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">13:00</span>
+                <span class="duration">(15min)</span>
+              </div>
+              
+              
+                <div class="coffee-break">
+                    <span class="bbva-icon-coffe"></span>
+                    <span class="text">Coffee Break</span>
+                </div>
+              
+          </div>
+          
+          <div class="individual-info last-child wow fadeIn
+                      ">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">14:00</span>
+                <span class="duration">(45min)</span>
+              </div>
+              
+              <div class="information ml-sm talk-bubble tri-right left-top">
+                <div class="talktext">
+                  <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                  <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                  <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                </div>
+              </div>
+              
+              
+          </div>
+          
+        </div>
+        
+      <h2 class="mt-xl">Día 25 de mayo 2018</h2>
+      <div class="program-content">
+        
+          <div class="individual-info  wow fadeIn
+                      ">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">22:00</span>
+                <span class="duration">(45min)</span>
+              </div>
+              
+              <div class="information ml-sm talk-bubble tri-right left-top">
+                <div class="talktext">
+                  <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                  <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                  <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                </div>
+              </div>
+              
+              
+          </div>
+          
+          <div class="individual-info  wow fadeIn
+                      break">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">23:00</span>
+                <span class="duration">(15min)</span>
+              </div>
+              
+              
+                <div class="coffee-break">
+                    <span class="bbva-icon-coffe"></span>
+                    <span class="text">Coffee Break</span>
+                </div>
+              
+          </div>
+          
+          <div class="individual-info  wow fadeIn
+                      ">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">24:00</span>
+                <span class="duration">(45min)</span>
+              </div>
+              
+              <div class="information ml-sm talk-bubble tri-right left-top">
+                <div class="talktext">
+                  <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                  <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                  <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                </div>
+              </div>
+              
+              
+          </div>
+          
+          <div class="individual-info last-child wow fadeIn
+                      ">
+              <div class="redbullet"></div>
+              <div class="time">
+                <span class="hour">01:00</span>
+                <span class="duration">(45min)</span>
+              </div>
+              
+              <div class="information ml-sm talk-bubble tri-right left-top">
+                <div class="talktext">
+                  <h3 class="ml-md">Lorem ipsum dolor sit amet</h3>
+                  <p class="ml-md">This piece on Europe will focus on must-see places in the United Kingdom, France, Spain, Portugal, and Italy.</p>
+                  <p class="ml-md mb-md">Ponente:<strong class="ml-xs">Carlos Pérez</strong></p>
+                </div>
+              </div>
+              
+              
+          </div>
+          
+        </div>
+        
+      </div>
+  </div>
+
+
+            </div>
+        </section>
+
+        <section class="hidden-xs file-section mt-lg">
+            <h1 class="mb-md">Ficha del evento</h1>
+            <div class="pdf-rectangle">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-1">
+                        <span class="icon bbva-icon-pdf-01"></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h2 class="ml-md">Descarga el programa</h2>
+                        <p class="ml-md">Consulta y/o descarga el PDF del evento</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+                        <div class="container-button mb-md mt-md">
+                            <a href="" class="btn btn-bbva-aqua">Ver PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <section class="contact-person">
+        <div class="container content-wrap">
+            <h1 class="mt-xl">Persona de contacto</h1>
+            <h2 class="mb-md">Si tienes alguna duda sobre el evento, puedes ponerte en contacto con:</h2>
+            
+<!-- person -->
+<section class="container-fluid person">
+    <a href="#" class="link-layer visible-xs"></a>
+    
+    <div class="image-wrapper">
+        <img src="images/about-us/avatar1.png" alt="" />
+    </div>
+    <div class="data-wrapper">
+        <span>Diana Repiso</span>
+        <p>Doctora honoris causa de estadística por la Universidad Complutense.</p>
+        
+        <a href="#">Ficha de la asesora</a>
+        
+    </div>
+</section>
+<!-- EO person -->
+
+        </div>
+    </section>
+
+    <section class="attend">
+        <div class="container content-wrap">
+            <div class="row mb-lg">
+                <h1 class="col-xs-12 col-sm-7">Quiero asistir</h1>
+                <div class="col-xs-12 col-sm-offset-1 col-sm-4 text-right container-button">
+                    <a href="" class="btn btn-bbva-aqua">Registrarme</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mapSection" class="map-section id-2015">
+    </section>
+</div>
+
+<div class="prefooter-bbva background-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 mt-lg mb-lg footer-menu-group">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-4 footer-menu-item">
+                        <div>
+                            <p class="hidden-xs title mb-md">
+                                <a role="button">Sobre Educación Financiera</a>
+                            </p>
+                            <p class="visible-xs title">
+                                <a role="button" class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseExample">
+                                    Sobre Educación Financiera<span class="icon-plus icon-collapsable"></span>
+                                </a>
+                            </p>
+                            <div class="collapse" id="collapseOne">
+                                <ul class="hidden-xs prefooter-menu">
+                                    <li><a href="#">Publicaciones</a></li>
+                                    <li><a href="#">Mejores prácticas</a></li>
+                                    <li><a href="#">Iniciativas de BBVA</a></li>
+                                    <li><a href="#">Impacto de BBVA</a></li>
+                                    <li><a href="#">Eventos</a></li>
+                                    <li><a href="#">Sobre Nosotros</a></li>
+                                </ul>
+                                <div class="visible-xs row prefooter-menu-collapsed">
+                                    <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
+                                    <a href="#" class="col-xs-6">Publicaciones</a>
+                                    <a href="#" class="col-xs-6">Mejores prácticas</a>
+                                    <a href="#" class="col-xs-6">Iniciativas de BBVA</a>
+                                    <a href="#" class="col-xs-6">Impacto de BBVA</a>
+                                    <a href="#" class="col-xs-6">Eventos</a>
+                                    <a href="#" class="col-xs-6">Sobre Nosotros</a>
+                                    <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4 footer-menu-item">
+                        <div>
+                            <p class="hidden-xs title mb-md">
+                                <a role="button">En el mundo</a>
+                            </p>
+                            <p class="visible-xs title">
+                                <a role="button" class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseExample">
+                                    En el mundo<span class="icon-plus icon-collapsable"></span>
+                                </a>
+                            </p>
+                            <div class="collapse" id="collapseTwo">
+                                <div class="row mgl-0 prefooter-menu-collapsed">
+                                    <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
+                                    <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world double-column">
+                                        <li><a href="#">España</a></li>
+                                        <li><a href="#">USA</a></li>
+                                        <li><a href="#">Turquía</a></li>
+                                        <li><a href="#">Portugal</a></li>
+                                        <li><a href="#">Chile</a></li>
+                                        <li><a href="#">Colombia</a></li>
+                                    </ul>
+                                    <ul class="col-xs-6 col-sm-6 prefooter-menu prefooter-menu-world">
+                                        <li><a href="#">Venezuela</a></li>
+                                        <li><a href="#">Uruguay</a></li>
+                                        <li><a href="#">Paraguay</a></li>
+                                        <li><a href="#">Argentina</a></li>
+                                        <li><a href="#">México</a></li>
+                                        <li><a href="#">Perú</a></li>
+                                    </ul>
+                                    <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4 footer-menu-item">
+                        <p class="hidden-xs title mb-md">
+                            <a role="button">Enlaces de interés</a>
+                        </p>
+                        <p class="visible-xs title">
+                            <a role="button" class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseExample">
+                                Enlaces de interés<span class="icon-plus icon-collapsable"></span>
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseThree">
+                            <ul class="hidden-xs prefooter-menu">
+                                <li><a href="#">Web corporativa BBVA.com</a></li>
+                                <li><a href="#">Empleo BBVA</a></li>
+                                <li><a href="#">Fundación Microfinanzas BBVA</a></li>
+                            </ul>
+                            <div class="visible-xs row prefooter-menu-collapsed">
+                                <img class="visible-xs prefooter-mobile-shadow" src="images/prefooter/shadow.png"/>
+                                <a href="#" class="col-xs-8">Web corporativa BBVA.com</a>
+                                <a href="#" class="col-xs-4">Empleo BBVA</a>
+                                <a href="#" class="col-xs-4">Fundación Microfinanzas BBVA</a>
+                                <img class="visible-xs prefooter-mobile-shadow-reverse" src="images/prefooter/shadow-reverse.png"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+
+        <div class="cookies">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <span class="bbva-icon-close close-cookies"></span>
+                <p>
+                    Utilizamos <b>cookies</b> propias y de terceros para mejorar nuestros servicios y mostrar
+                    a los usuarios publicidad relacionada con sus preferencias mediante el
+                    análisis de sus hábitos de navegación.
+                    Si se continúa navegando, consideramos que se acepta su uso.
+                </p>
+                <a href="404.html">Mas información</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <footer class="footer-bbva">
+            <!-- footer -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-lg-8 footer-text">
+            <span>Centro para la Educación y Capacidades Financieras</span>
+        </div>
+        <div class="col-xs-12 col-sm-2 col-lg-4 footer-logo text-right">
+            <span class="footer-iniciative">Una iniciativa de</span>
+            <span class="bbva-icon-BBVA"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8">
+            <div class="footer-menu-list">
+                <a href="#">Seguridad</a>
+                <a href="#">Aviso legal y Política de Cookies</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="#">Accesibilidad</a>
+            </div>
+        </div>
+        <div class="hidden-xs col-sm-2 col-md-4 col-lg-4">
+            <ul class="footer-menu footer-social">
+                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
+                <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
+                <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 footer-copyright-group">
+            <p class="footer-copyright">&copy; 2016 BBVA</p>
+        </div>
+        <div class="visible-xs col-xs-12">
+            <ul class="footer-menu footer-social">
+                <li><a href="#"><span class="bbva-icon-facebook_link"></span></a></li>
+                <li><a href="#"><span class="bbva-icon-twitter_link"></span></a></li>
+                <li><a href="#"><span class="bbva-icon-youtube"></span></a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!-- EO footer -->
         </footer>
     </div>
+
     <script src="js/data.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -614,10 +1046,10 @@
     <script src="js/moment.min.js"></script>
     <script src="js/moment-precise-range.js"></script>
     <script src="js/progressbar.min.js"></script>
-    <script src="js/underscore-min.js"></script>
+	<script src="js/underscore-min.js"></script>
     <script src="js/jquery.touchSwipe.min.js"></script>
     <script src="js/ofi.browser.js"></script>
+    <script src="js/scrollreveal.min.js"></script>
     <script src="js/app.js"></script>
 </body>
-
 </html>
