@@ -68,27 +68,34 @@
                       </div>
                   </header>
                   <div class="row visible-xs">
-                    <div class="icon-section col-xs-6">
-                          <?php if (false) : ?>
-                          <div class="card-icon icon-publication ml-xs">
-                              <span class="icon bbva-icon-quote2"></span>
-                              <div class="triangle triangle-up-left"></div>
-                              <div class="triangle triangle-down-right"></div>
-                          </div>
+                    <div class="icon-section col-xs-6"> 
+                        <?php if (false) : ?>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-quote2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
                         <?php endif; ?>
-                        <?php if (!empty($videoIntro_url)) : ?>
-                          <div class="card-icon icon-publication ml-xs">
-                              <span class="icon bbva-icon-audio2"></span>
-                              <div class="triangle triangle-up-left"></div>
-                              <div class="triangle triangle-down-right"></div>
-                          </div>
+                        <?php if ($videoIntro_url) : ?>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-audio2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
                         <?php endif; ?>
                         <?php if (false) : ?>
-                          <div class="card-icon icon-publication ml-xs">
-                              <span class="icon bbva-icon-chat2"></span>
-                              <div class="triangle triangle-up-left"></div>
-                              <div class="triangle triangle-down-right"></div>
-                          </div>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-chat2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?>
+                        <?php if ((false) || (false)) : ?>
+                        <div class="card-icon">
+                            <span class="icon bbva-icon-arrow-download"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
                         <?php endif; ?>
                     </div>        
                       <?php get_template_part('content','rrssmovil'); ?>
@@ -96,26 +103,33 @@
                   <div class="mb-xs hidden-xs icon-section-desktop">
                     <div class="icon-section">
                         <?php if (false) : ?>
-                          <div class="card-icon ml-xs">
-                              <span class="icon bbva-icon-quote2"></span>
-                              <div class="triangle triangle-up-left"></div>
-                              <div class="triangle triangle-down-right"></div>
-                          </div>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-quote2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
                         <?php endif; ?>
-                        <?php if (!empty($videoIntro_url)) : ?>
-                          <div class="card-icon ml-xs">
-                              <span class="icon bbva-icon-audio2"></span>
-                              <div class="triangle triangle-up-left"></div>
-                              <div class="triangle triangle-down-right"></div>
-                          </div>
+                        <?php if ($videoIntro_url) : ?>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-audio2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
                         <?php endif; ?>
                         <?php if (false) : ?>
-                          <div class="card-icon ml-xs">
-                              <span class="icon bbva-icon-chat2"></span>
-                              <div class="triangle triangle-up-left"></div>
-                              <div class="triangle triangle-down-right"></div>
-                          </div>
-                        <?php endif; ?>  
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-chat2"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?>
+                        <?php if ((false) || (false)) : ?>
+                        <div class="card-icon">
+                            <span class="icon bbva-icon-arrow-download"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?> 
                     </div>
                     <?php get_template_part( 'content', 'rrss' ); ?>
                   </div>
