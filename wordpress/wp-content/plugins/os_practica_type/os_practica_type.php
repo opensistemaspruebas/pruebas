@@ -48,7 +48,8 @@ function practica_type() {
       'hierarchical'       => false,
       'menu_position'      => null,
       'menu_icon'           => 'dashicons-thumbs-up',
-      'supports'           => array('title')
+      'supports'           => array('title'),
+      'taxonomies'         => array('category', 'ambito_geografico')
   );
   register_post_type('practica', $args );
 }
@@ -86,11 +87,15 @@ function meta_box_texto_descriptivo_practica($post) {
   wp_nonce_field(basename(__FILE__), 'meta_box_texto_descriptivo_practica-nonce');
 
   $texto_destacado = get_post_meta($post->ID, 'texto-destacado', true);
+  $texto = get_post_meta($post->ID, 'texto', true);
 
   ?>
 
   <p>
     <textarea type="text" style="width:100%;" rows="4" id="texto-destacado" name="texto-destacado"><?php if (isset($texto_destacado)) echo $texto_destacado; ?></textarea>
+  </p>
+  <p>
+    <textarea type="text" style="width:100%;" rows="4" id="texto" name="texto"><?php if (isset($texto)) echo $texto; ?></textarea>
   </p>
 
   <?php
@@ -167,6 +172,10 @@ function meta_boxes_save_practica($post_id) {
 
   if(isset($_POST['texto-destacado'])) {
     update_post_meta($post_id, 'texto-destacado', strip_tags($_POST['texto-destacado']));
+  }
+
+  if(isset($_POST['texto'])) {
+    update_post_meta($post_id, 'texto', strip_tags($_POST['texto']));
   }
  
   if (isset($_POST['imagenCard'])) {

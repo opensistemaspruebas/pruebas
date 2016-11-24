@@ -2,11 +2,69 @@
 
 /**
  *
+ * Template Name: Página buenas prácticas
  * Template para mostrar una práctica
  *
  */
 
 get_header(); ?>
+
+<?php
+
+    $title = get_the_title();
+    $texto_destacado = get_post_meta(get_the_ID(), 'texto-destacado', true);
+    $texto = get_post_meta(get_the_ID(), 'texto', true);
+    $imagenCabecera = get_post_meta(get_the_ID(), 'imagenCabecera', true);
+    $urlPractica = get_post_meta(get_the_ID(), 'urlPractica', true);
+    $externo10 = get_post_meta(get_the_ID(), 'externo10', true);
+
+    if(get_locale() == 'es_ES'){
+
+        $date = get_the_date('l, j \d\e F \d\e Y');
+    }
+    else{
+
+        $date = get_the_date('l, F j, Y');
+    }
+
+
+
+    $args = array(
+        'post_type' => 'practica',
+        'post__not_in' => array(get_the_ID()),
+        'posts_per_page' => 3,
+    );
+
+    $query = new WP_Query($args);
+
+
+
+
+
+
+    $pdf = get_post_meta(get_the_ID(), 'pdf', true);
+    $pdfInterno = get_post_meta(get_the_ID(), 'pdfInterno', true);
+    $publication_date = get_post_meta(get_the_ID(), 'publication_date', true);
+    $time = strtotime($publication_date);
+    $publication_date = date('d/m/Y',$time);
+    $type = get_post_meta(get_the_ID(), 'type', true);
+    $target_audiences = get_post_meta(get_the_ID(), 'target_audiences', true);
+    $number_of_pages = get_post_meta(get_the_ID(), 'number_of_pages', true);
+    $jel_code = get_post_meta(get_the_ID(), 'jel_code', true);
+    $edition = get_post_meta(get_the_ID(), 'edition', true);
+    $editorial = get_post_meta(get_the_ID(), 'editorial', true);
+    $organization_name = get_post_meta(get_the_ID(), 'organization_name', true);
+    $name_url = get_post_meta(get_the_ID(), 'name_url', true);
+    $source_url = get_post_meta(get_the_ID(), 'source_url', true);
+    $organization_url = get_post_meta(get_the_ID(), 'organization_url', true);
+    $organization_logo = get_post_meta(get_the_ID(), 'organization_logo', true);
+    $videoIntro_url = get_post_meta(get_the_ID(),'videoIntro-url',true);
+    $videoFinal_type = get_post_meta(get_the_ID(),'video-type',true);
+    $publicacion_puntosClave = get_post_meta(get_the_ID(), 'publicacion_puntosClave', true);
+
+
+
+?>
 
 <div class="contents">
     <div id="search-layer"></div>
@@ -14,73 +72,88 @@ get_header(); ?>
         <div class="header-section">
             <div class="container">
                 <header class="title-description">
-                    <h1>Título de la práctica, lorem ipsum dolor.</h1>
+                    <h1><?php echo $title; ?></h1>
                     <div class="description-container">
                         <p></p>
                     </div>
                 </header>
                 <div class="row visible-xs">
                     <div class="icon-section col-xs-6">
-                        <div class="card-icon icon-publication ml-xs"><span class="icon bbva-icon-quote2"></span>
+                        <?php if (false) : ?>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-quote2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
-                        <div class="card-icon icon-publication ml-xs"><span class="icon bbva-icon-audio2"></span>
+                        <?php endif; ?>
+                        <?php if (false) : ?>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-audio2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
-                        <div class="card-icon icon-publication ml-xs"><span class="icon bbva-icon-chat2"></span>
+                        <?php endif; ?>
+                        <?php if (false) : ?>
+                        <div class="card-icon icon-publication ml-xs">
+                            <span class="icon bbva-icon-chat2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
+                        <?php endif; ?>
+                        <?php if ((false) || (false)) : ?>
+                        <div class="card-icon">
+                            <span class="icon bbva-icon-arrow-download"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="share-rrss-section rrss-xs"><span id="share-button" class="icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a href='#' data-wow-delay='0.4s' class='bbva-icon-twitter-circle icon-rrss twitter-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0.3s' class='bbva-icon-facebook-circle icon-rrss facebook-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0.2s' class='bbva-icon-google-plus-circle icon-rrss googleplus-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0.1s' class='bbva-icon-pinterest-circle icon-rrss pinterest-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0s' class='bbva-icon-linkedin-circle icon-rrss linkedin-icon mr-xs wow rollIn'></a>"></span></div>
+                    <?php get_template_part('content','rrssmovil'); ?>
                 </div>
                 <div class="mb-xs hidden-xs icon-section-desktop">
                     <div class="icon-section">
-                        <div class="card-icon ml-xs"><span class="icon bbva-icon-quote2"></span>
+                        <?php if (false) : ?>
+                        <div class="card-icon ml-xs">
+                            <span class="icon bbva-icon-quote2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
-                        <div class="card-icon ml-xs"><span class="icon bbva-icon-audio2"></span>
+                        <?php endif; ?>
+                         <?php if (false) : ?>
+                        <div class="card-icon ml-xs">
+                            <span class="icon bbva-icon-audio2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
-                        <div class="card-icon ml-xs"><span class="icon bbva-icon-chat2"></span>
+                        <?php endif; ?>
+                        <?php if (false) : ?>
+                        <div class="card-icon ml-xs">
+                            <span class="icon bbva-icon-chat2"></span>
                             <div class="triangle triangle-up-left"></div>
                             <div class="triangle triangle-down-right"></div>
                         </div>
+                        <?php endif; ?>
+                        <?php if ((false) || (false)) : ?>
+                        <div class="card-icon ml-xs">
+                            <span class="icon bbva-icon-arrow-download"></span>
+                            <div class="triangle triangle-up-left"></div>
+                            <div class="triangle triangle-down-right"></div>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="share-rrss-section">
-                        <p class="share-in">Compartir en</p>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-twitter bbva-icon-twitter-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-facebook bbva-icon-facebook-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-googleplus bbva-icon-google-plus-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-pinterest bbva-icon-pinterest-circle mr-xs"></a>
-                        </div>
-                        <div class="card-icon">
-                            <a href="#" class="icon icon-linkedin bbva-icon-linkedin-circle mr-xs"></a>
-                        </div>
-                    </div>
+                    <?php get_template_part( 'content', 'rrss' ); ?>
                 </div>
             </div>
             <div class="header-fixed-top hidden">
                 <div class="container">
                     <div class="content">
                         <header class="title-description">
-                            <h1>Título de la práctica, lorem ipsum dolor.</h1>
+                            <h1><?php echo $title; ?></h1>
                             <div class="description-container">
                                 <p></p>
                             </div>
                         </header>
-                        <div id="share-fixed-button" class="share-rrss-section rrss-xs icon bbva-icon-share" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="<a href='#' data-wow-delay='0.4s' class='bbva-icon-twitter-circle twitter-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0.3s' class='bbva-icon-facebook-circle facebook-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0.2s' class='bbva-icon-google-plus-circle googleplus-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0.1s' class='bbva-icon-pinterest-circle pinterest-icon mr-xs wow rollIn'></a><a href='#' data-wow-delay='0s' class='bbva-icon-linkedin-circle linkedin-icon mr-xs wow rollIn'></a>"></div>
+                        <?php get_template_part('content','rrssmovil'); ?>
                     </div>
                 </div>
                 <progress value="0" id="progressBar">
@@ -88,147 +161,120 @@ get_header(); ?>
                 </progress>
             </div>
         </div>
-        <div class="image-section"><img src="images/practice-detail/cover.png" alt="practice detail cover" /></div>
+        <div class="image-section"><img src="<?php echo $imagenCabecera; ?>" alt="practice detail cover" /></div>
         <section class="content-section">
             <div class="container content-wrap">
-                <label class="mt-lg">Lunes, 18 de julio de 2016</label>
-                <h1 class="mt-xs">Resumen</h1>
-                <h2> El tradicional modelo de Bass (1969) sobre adopción y difusión de nuevos productos ha servido tradicionalmente para medir la velocidad con la que se introducían nuevos productos en un mercado a través de la estimación de un parámetro de innovación (p) y otro de imitación (q). </h2>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum lacus eu gravida aliquam. Vestibulum scelerisque tempor velit ut dapibus. Phasellus vitae tincidunt est. Nulla auctor, est id porta pulvinar, ipsum nunc tincidunt sem, eget ultrices neque eros et massa. Nunc a pulvinar est. Fusce convallis tellus orci, a gravida sem eleifend at. Sed dapibus suscipit quam et sollicitudin. Praesent molestie tristique justo in blandit. Integer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum lacus eu gravida aliquam. Vestibulum scelerisque tempor velit ut dapibus. Phasellus vitae tincidunt est. </p>
+                 <?php if (!empty($date)) : ?>
+                <label class="mt-lg"><?php echo $date; ?></label>
+                <?php endif; ?>
+                <h1 class="mt-xs"><?php _e('Resumen'); ?></h1>
+                <h2><?php echo $texto_destacado; ?></h2>
+                <p><?php echo $texto; ?></p>
             </div>
             <div class="container content-wrap">
                 <section class="pdf-rectangle">
                     <div class="row">
                         <div class="col-xs-12 col-sm-1"><span class="icon bbva-icon-publication-clip"></span></div>
                         <div class="col-xs-12 col-sm-7">
-                            <h1 class="mt-md pt-sm ml-xs publication-access-title"> Acceso a la publicación original </h1></div>
+                            <h1 class="mt-md pt-sm ml-xs publication-access-title"><?php _e('Acceso a la publicación original'); ?></h1></div>
                         <div class="col-xs-12 col-sm-4">
-                            <div class="container-button mb-md mt-md text-right"><a href="" class="btn btn-bbva-aqua">Ir a la web</a></div>
+                            <div class="container-button mb-md mt-md text-right"><a <?php if($externo10 == 'on'){ echo 'target=_blank';} ?> href="<?php echo $urlPractica; ?>" class="btn btn-bbva-aqua"><?php _e('Ir a la web'); ?></a></div>
                         </div>
                     </div>
                 </section>
             </div>
         </section>
         <!-- latests-posts -->
+        <?php if ($query->have_posts()) { ?>
         <section class="latests-posts pt-xl pb-lg">
             <div class="container">
                 <header class="title-description">
-                    <h1>Otras mejores prácticas</h1>
+                    <h1><?php _e('Otras mejores prácticas', 'os_practica_type'); ?></h1>
                     <div class="description-container">
                         <p></p>
                     </div>
                 </header>
                 <div class="card-container nopadding container-fluid mt-md mb-md">
                     <div class="row">
+                     <?php
+                            while ($query->have_posts()) {
+
+                                $query->the_post();
+                                $date = get_the_date('j F Y');
+                                $abstract_destacado = substr(get_post_meta($post->ID, 'texto-destacado', true), 0, 140) . '...';
+                                $abstract_contenido = get_post_meta(get_the_ID(), 'texto', true);
+                                $imagen = get_post_meta($post->ID, 'imagenCard', true);
+                        ?>
                         <div class="main-card-container col-xs-12 col-sm-4 noppading">
                             <!-- main-card -->
                             <section class="container-fluid main-card">
                                 <header class="row header-container">
                                     <div class="image-container col-xs-12">
-                                        <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe1.png" alt="" /></a><img src="images/home/informe1.png" alt="" class="hidden-xs  wow fadeInUp " /></div>
+                                        <a href="<?php the_permalink(); ?>" class="link-header-layer visible-xs">
+                                            <img src="<?php echo $imagen; ?>" alt="" />
+                                        </a>
+                                        <img src="<?php echo $imagen; ?>" alt="" class="hidden-xs  wow fadeInUp " /></div>
                                     <div class="hidden-xs floating-text col-xs-11">
-                                        <p class="date">27 Agosto 2016</p>
-                                        <h1>Situación regulación financiera</h1></div>
+                                        <p class="date"><?php echo $date; ?></p>
+                                        <h1><?php the_title(); ?></h1></div>
                                 </header>
                                 <div class="row data-container">
-                                    <a href="#" class="link-layer visible-xs"></a>
-                                    <div class="nopadding date">27 Agosto 2016</div>
+                                    <a href="<?php the_permalink(); ?>" class="link-layer visible-xs"></a>
+                                    <div class="nopadding date"><?php echo $date; ?></div>
                                     <div class="main-card-data-container-title-wrapper">
-                                        <h1 class="title nopadding"> Situación regulación financiera </h1></div>
-                                    <p class="main-card-data-container-description-wrapper">Este mes tratamos los siguientes temas: el papel de la deuda para la absorción de Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
+                                        <h1 class="title nopadding"><?php the_title(); ?></h1></div>
+                                    <p class="main-card-data-container-description-wrapper"><?php echo $abstract_destacado; ?></p>
+                                    <a href="<?php the_permalink(); ?>" class="hidden-xs mb-xs readmore"><?php _e('Leer más', 'os_practica_type'); ?></a>
                                     <footer>
+                                        <?php if ((false) || (false) || (false) || (false) || (false)) : ?>
                                         <div class="icon-row">
-                                            <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
+                                            <?php if (false) : ?>
+                                            <div class="card-icon">
+                                                <span class="icon bbva-icon-quote2"></span>
                                                 <div class="triangle triangle-up-left"></div>
                                                 <div class="triangle triangle-down-right"></div>
                                             </div>
-                                            <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
+                                            <?php endif; ?>
+                                            <?php if (false) : ?>
+                                            <div class="card-icon">
+                                                <span class="icon bbva-icon-audio2"></span>
                                                 <div class="triangle triangle-up-left"></div>
                                                 <div class="triangle triangle-down-right"></div>
                                             </div>
-                                            <div class="card-icon"><span class="icon bbva-icon-arrow-download"></span>
+                                            <?php endif; ?>
+                                            <?php if (false) : ?>
+                                            <div class="card-icon">
+                                                <span class="icon bbva-icon-chat2"></span>
                                                 <div class="triangle triangle-up-left"></div>
                                                 <div class="triangle triangle-down-right"></div>
                                             </div>
+                                            <?php endif; ?>
+                                            <?php if ((false) || (false)) : ?>
+                                            <div class="card-icon ml-xs">
+                                                <span class="icon bbva-icon-arrow-download"></span>
+                                                <div class="triangle triangle-up-left"></div>
+                                                <div class="triangle triangle-down-right"></div>
+                                            </div>
+                                            <?php endif; ?>
                                         </div>
+                                        <?php endif; ?>
                                     </footer>
                                 </div>
                             </section>
                             <!-- EO main-card -->
                         </div>
-                        <div class="main-card-container col-xs-12 col-sm-4 noppading">
-                            <!-- main-card -->
-                            <section class="container-fluid main-card">
-                                <header class="row header-container">
-                                    <div class="image-container col-xs-12">
-                                        <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe2.png" alt="" /></a><img src="images/home/informe2.png" alt="" class="hidden-xs  wow fadeInUp " /></div>
-                                    <div class="hidden-xs floating-text col-xs-11">
-                                        <p class="date">24 Agosto 2016</p>
-                                        <h1>Heterogeneidad y difusión de la economía digital: el caso español.</h1></div>
-                                </header>
-                                <div class="row data-container">
-                                    <a href="#" class="link-layer visible-xs"></a>
-                                    <div class="nopadding date">24 Agosto 2016</div>
-                                    <div class="main-card-data-container-title-wrapper">
-                                        <h1 class="title nopadding"> Heterogeneidad y difusión de la economía digital: el caso español. </h1></div>
-                                    <p class="main-card-data-container-description-wrapper">El tradicional modelo de Bass (1969) sobre adopción y difusión de nuevos productos Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-                                    <footer>
-                                        <div class="icon-row">
-                                            <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
-                                                <div class="triangle triangle-up-left"></div>
-                                                <div class="triangle triangle-down-right"></div>
-                                            </div>
-                                            <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
-                                                <div class="triangle triangle-up-left"></div>
-                                                <div class="triangle triangle-down-right"></div>
-                                            </div>
-                                        </div>
-                                    </footer>
-                                </div>
-                            </section>
-                            <!-- EO main-card -->
-                        </div>
-                        <div class="main-card-container col-xs-12 col-sm-4 noppading">
-                            <!-- main-card -->
-                            <section class="container-fluid main-card">
-                                <header class="row header-container">
-                                    <div class="image-container col-xs-12">
-                                        <a href="#" class="link-header-layer visible-xs"><img src="images/home/informe3.png" alt="" /></a><img src="images/home/informe3.png" alt="" class="hidden-xs  wow fadeInUp " /></div>
-                                    <div class="hidden-xs floating-text col-xs-11">
-                                        <p class="date">23 Agosto 2016</p>
-                                        <h1>Midiendo la inclusión financiera</h1></div>
-                                </header>
-                                <div class="row data-container">
-                                    <a href="#" class="link-layer visible-xs"></a>
-                                    <div class="nopadding date">23 Agosto 2016</div>
-                                    <div class="main-card-data-container-title-wrapper">
-                                        <h1 class="title nopadding"> Midiendo la inclusión financiera </h1></div>
-                                    <p class="main-card-data-container-description-wrapper">Existe un amplio consenso respecto al rol que juega la inclusión financiera para rem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><a href="#" class="hidden-xs mb-xs readmore">Leer más</a>
-                                    <footer>
-                                        <div class="icon-row">
-                                            <div class="card-icon"><span class="icon bbva-icon-quote2"></span>
-                                                <div class="triangle triangle-up-left"></div>
-                                                <div class="triangle triangle-down-right"></div>
-                                            </div>
-                                            <div class="card-icon"><span class="icon bbva-icon-audio2"></span>
-                                                <div class="triangle triangle-up-left"></div>
-                                                <div class="triangle triangle-down-right"></div>
-                                            </div>
-                                        </div>
-                                    </footer>
-                                </div>
-                            </section>
-                            <!-- EO main-card -->
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <footer>
                     <div class="row">
-                        <div class="col-md-12 text-center"><a href="#" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span>Ver más practicas</a></div>
+                        <div class="col-md-12 text-center">
+                            <a href="<?php _e('/practicas', 'os_practica_type'); ?>" class="readmore"><span class="bbva-icon-more font-xs mr-xs"></span><?php _e('Ver más practicas', 'os_practica_type'); ?></a></div>
                     </div>
                 </footer>
             </div>
         </section>
+        <?php } ?>
         <!-- EO latests-posts -->
     </article>
     <?php the_widget('os_prefooter_bbva', array('color_fondo' => 'blanco', 'menu_derecho' => 'enlaces-de-interes', 'menu_central' => 'en-el-mundo', 'menu_izquierdo' => 'sobre-educacion-financiera')); ?>
