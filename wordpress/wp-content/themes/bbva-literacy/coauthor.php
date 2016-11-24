@@ -117,7 +117,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a target="_blank" class="btn btn-bbva-aqua" href="<?php echo $urlVentanaModal; ?>">Más información</a>
+                                                    <a target="_blank" class="btn btn-bbva-aqua" href="<?php echo $urlVentanaModal; ?>"><?php _e("Más información") ?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -296,7 +296,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a target="_blank" class="btn btn-bbva-aqua" href="<?php echo $urlVentanaModal; ?>">Más información</a>
+                                                    <a target="_blank" class="btn btn-bbva-aqua" href="<?php echo $urlVentanaModal; ?>"><?php _e("Más información") ?></a>
                                                 </div>
                                             </div>
                                         </div>
