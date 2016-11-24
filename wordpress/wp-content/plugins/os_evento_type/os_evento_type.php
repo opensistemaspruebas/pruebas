@@ -403,7 +403,7 @@ if (!class_exists('OS_Evento_Type')) {
 						<textarea rows="1" cols="40" maxlength="280" name="evento_elemento_programa[0][descripcion]" id="evento_elemento_programa[0][descripcion]"></textarea>
 					</p>
 					<p>
-						<label for="evento_elemento_programa[0][ponentes]"><?php _e('Ponentes', 'os_evento_type'); ?></label>
+						<label for="evento_elemento_programa[0][ponentes]"><?php _e('Ponentes (Perfiles disponibles)', 'os_evento_type'); ?></label>
 						<select class="widefat ponentes" id="evento_elemento_programa[0][ponentes][]" name="evento_elemento_programa[0][ponentes][]" multiple="multiple">
 						<?php
 						if (!empty($ponentes)) {
@@ -417,8 +417,18 @@ if (!class_exists('OS_Evento_Type')) {
 						</select>
 					</p>
 					<p>
-						<label for="evento_elemento_programa[0][moderador]"><?php _e('Moderador', 'os_evento_type'); ?></label>
-						<input class="widefat" id="evento_elemento_programa[0][moderador]" name="evento_elemento_programa[0][moderador]" type="text" value="" />
+						<label for="evento_elemento_programa[0][moderadores]"><?php _e('Moderador (Perfiles disponibles)', 'os_evento_type'); ?></label>
+						<select class="widefat moderadores" id="evento_elemento_programa[0][moderadores][]" name="evento_elemento_programa[0][moderadores][]" multiple="multiple">
+						<?php
+						if (!empty($ponentes)) {
+							foreach ($ponentes as $p) {
+								?>
+								<option value="<?php echo $p->ID; ?>"><?php echo $p->post_title; ?></option>
+								<?php
+							}
+						}
+						?>
+						</select>
 					</p>
 				</div>
 	            <p>
@@ -472,7 +482,16 @@ if (!class_exists('OS_Evento_Type')) {
 					</p>
 					<p <?php if ($evento_elemento_programa[$i]['tipo'] == 'descanso') echo 'style="display:none;"' ?>>
 						<label for="evento_elemento_programa[<?php echo $i; ?>][moderador]"><?php _e('Moderador', 'os_evento_type'); ?></label>
-						<input class="widefat" id="evento_elemento_programa[<?php echo $i; ?>][moderador]" name="evento_elemento_programa[<?php echo $i; ?>][moderador]" type="text" value="<?php if (!empty($evento_elemento_programa[$i]['moderador'])) echo $evento_elemento_programa[$i]['moderador']; ?>" />
+						<select class="widefat moderadores" id="evento_elemento_programa[<?php echo $i; ?>][moderadores][]" name="evento_elemento_programa[<?php echo $i; ?>][moderadores][]" multiple="multiple">
+						<?php
+						if (!empty($ponentes)) {
+							foreach ($ponentes as $p) {								?>
+								<option value="<?php echo $p->ID; ?>" <?php if (!empty($evento_elemento_programa[$i]['moderadores'])) if (in_array($p->ID, $evento_elemento_programa[$i]['moderadores'])) echo "selected"; ?>><?php echo $p->post_title; ?></option>
+								<?php
+							}
+						}
+						?>
+						</select>
 					</p>
 				    <?php if ($i > 0) : ?>
                         <button id="delete-elemento-programa" type="button"><?php _e('Eliminar este elemento', 'os_evento_type'); ?></button>

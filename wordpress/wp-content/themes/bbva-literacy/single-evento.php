@@ -271,7 +271,7 @@
                                                             $titulo = $e['titulo'];
                                                             $descripcion = $e['descripcion'];
                                                             $ponentes = $e['ponentes'];
-                                                            $moderador = $e['moderador'];
+                                                            $moderadores = $e['moderadores'];
                                                             $tipo = $e['tipo'];
 
                                                             $class = '';
@@ -303,10 +303,23 @@
                                                                         <div class="talktext">
                                                                             <h3 class="ml-md pr-md pt-md"><?php echo $titulo; ?></h3>
                                                                             <p class="ml-md pr-md"><?php echo $descripcion; ?></p>
-                                                                            <?php if (!empty($moderador)) : ?>
+                                                                            <?php if (!empty($moderadores)) : ?>
                                                                                 <p class="ml-md pr-md pb-md">
-                                                                                    <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
-                                                                                    <strong class="ml-xs"><?php echo $moderador; ?></strong>
+                                                                                    <?php _e('Moderadores', 'os_evento_futuro_widget'); ?>:
+                                                                                    <?php foreach ($moderadores as $m) : ?>
+                                                                                        <?php if (has_term('asesor', 'perfil', $m)) : ?>
+                                                                                            <?php
+                                                                                                $idioma = '';
+                                                                                                if (ICL_LANGUAGE_CODE !== 'es') {
+                                                                                                    $idioma = '/en';
+                                                                                                }
+                                                                                                $post_slug = $idioma . '/perfiles/' . str_replace('cap-' , '', get_post_field( 'post_name', get_post($m) ));
+                                                                                            ?>
+                                                                                            <strong class="ml-xs"><a href="<?php echo $post_slug; ?>"><?php echo get_the_title($m); ?></a></strong>
+                                                                                        <?php else : ?>
+                                                                                            <strong class="ml-xs"><?php echo get_the_title($m); ?></strong>
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>
                                                                                 </p>
                                                                             <?php endif; ?>
                                                                             <?php if (!empty($ponentes)) : ?>
@@ -380,7 +393,7 @@
                                                 $titulo = $e['titulo'];
                                                 $descripcion = $e['descripcion'];
                                                 $ponentes = $e['ponentes'];
-                                                $moderador = $e['moderador'];
+                                                $moderadores = $e['moderadores'];
                                                 $tipo = $e['tipo'];
 
                                                 $class = '';
@@ -404,10 +417,23 @@
                                                         <div class="talktext">
                                                             <h3 class="ml-md"><?php echo $titulo; ?></h3>
                                                             <p class="ml-md"><?php echo $descripcion; ?></p>
-                                                            <?php if (!empty($moderador)) : ?>
+                                                            <?php if (!empty($moderadores)) : ?>
                                                                 <p class="ml-md">
                                                                     <?php _e('Moderador', 'os_evento_futuro_widget'); ?>:
-                                                                    <strong class="ml-xs"><?php echo $moderador; ?></strong>
+                                                                    <?php foreach ($moderadores as $m) : ?>
+                                                                    <?php if (has_term('asesor', 'perfil', $m)) : ?>
+                                                                        <?php
+                                                                            $idioma = '';
+                                                                            if (ICL_LANGUAGE_CODE !== 'es') {
+                                                                                $idioma = '/en';
+                                                                            }
+                                                                            $post_slug = $idioma . '/perfiles/' . str_replace('cap-' , '', get_post_field( 'post_name', get_post($m) ));
+                                                                        ?>
+                                                                        <strong class="ml-xs"><a href="<?php echo $post_slug; ?>"><?php echo get_the_title($m); ?></a></strong>
+                                                                    <?php else : ?>
+                                                                        <strong class="ml-xs"><?php echo get_the_title($m); ?></strong>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
                                                                 </p>
                                                             <?php endif; ?>
                                                             <?php if (!empty($ponentes)) : ?>
