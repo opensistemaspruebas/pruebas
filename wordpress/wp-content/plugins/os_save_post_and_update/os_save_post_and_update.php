@@ -133,7 +133,7 @@ function post_to_json($post_id, $post_type){
 function update_post_index($post_type, $post_id){
 	fetch($post_type, "ASC", $post_id);
 	fetch($post_type, "DESC", $post_id);
-	fetch_destacados($post_type, "DESC", $post_id);
+	fetch_destacados($post_type, "DESC");
 }
 
 
@@ -208,7 +208,7 @@ function fetch($post_type, $order, $post_id){
 	save_json_to_file($index_array, $post_type, $order, "indice");
 }
 
-function fetch_destacados($post_type, $order, $post_id){
+function fetch_destacados($post_type, $order){
 
 
 	if($post_type == "publicacion"){
