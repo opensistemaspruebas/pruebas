@@ -304,7 +304,17 @@ function imprime_plantilla_1_json($titulo, $texto, $posts, $numero_posts_totales
 		<input type="hidden" id="plantilla" name="plantilla" value="plantilla_1">
 	<?php endif; ?>
 
+
+	<?php if ($post_type == 'publicacion') { ?>
+
 	<section class="latests-posts pt-xl">
+
+	<?php else { ?>
+
+	<section class="outstanding-histories best-practices-grid">	
+
+	<?php } ?>
+
 	    <div class="container">
 	        <header class="title-description">
 	            <h1><?php echo $titulo; ?></h1>
