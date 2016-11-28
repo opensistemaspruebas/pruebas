@@ -153,7 +153,7 @@ if (!class_exists('OSPracticasWidget')) :
 			    <input type="url" class="widefat" id="<?php echo $this->get_field_id('titulo'); ?>" name="<?php echo $this->get_field_name('titulo'); ?>" value="<?php echo $titulo; ?>"/>
 			</p>
 			<p>
-			    <label for="<?php echo $this->get_field_id('descripcion'); ?>"><?php _e('URL externa del archivo PDF', 'os_practicas_widget'); ?></label>
+			    <label for="<?php echo $this->get_field_id('descripcion'); ?>"><?php _e('Descripción común a los principios', 'os_practicas_widget'); ?></label>
 			    <textarea type="text" style="width:100%;" rows="4" class="widefat" id="<?php echo $this->get_field_id('descripcion'); ?>" name="<?php echo $this->get_field_name('descripcion'); ?>" value=""><?php echo $descripcion; ?></textarea>
   			</p>
 			</p>
@@ -162,10 +162,10 @@ if (!class_exists('OSPracticasWidget')) :
 					<label for="<?php echo $this->get_field_id('titulo1'); ?>"><?php _e('Título 1:', 'os_practicas_widget'); ?></label>
 					<input class="widefat" id="<?php echo $this->get_field_id('titulo1'); ?>" name="<?php echo $this->get_field_name('titulo1'); ?>" type="text" value="<?php echo esc_attr($titulo1); ?>">
 				</p>
-				<p class="os_practica_widget-control1" data-title="Selecciona imagen 1" data-update-text="Selecciona imagen 1" data-target=".image-id1">
+				<p class="os_practicas_widget-control1" data-title="Selecciona imagen 1" data-update-text="Selecciona imagen 1" data-target=".image-id1">
 					<img src="<?php echo $imagen_url1; ?>">
-					<input type="hidden" name="<?php echo $this->get_field_name('imagen1'); ?>" id="<?php echo $this->get_field_id('imagen1'); ?>" value="<?php echo $imagen1; ?>" class="image-id1 os_practica_widget-control1-target">
-					<input id="upload_image1" class="button button-hero os_practica_widget-control1-choose" type="button" value="Selecciona imagen 1"/>
+					<input type="hidden" name="<?php echo $this->get_field_name('imagen1'); ?>" id="<?php echo $this->get_field_id('imagen1'); ?>" value="<?php echo $imagen1; ?>" class="image-id1 os_practicas_widget-control1-target">
+					<input id="upload_image1" class="button button-hero os_practicas_widget-control1-choose" type="button" value="Selecciona imagen 1"/>
 				</p>
 			</div>
 	    	<div style="border-width: 0px 0px 1px 0px; border-color: #CAC6C6; border-style: solid;">
@@ -173,10 +173,10 @@ if (!class_exists('OSPracticasWidget')) :
 					<label for="<?php echo $this->get_field_id('titulo2'); ?>"><?php _e('Título 2:', 'os_practicas_widget'); ?></label>
 					<input class="widefat" id="<?php echo $this->get_field_id('titulo2'); ?>" name="<?php echo $this->get_field_name('titulo2'); ?>" type="text" value="<?php echo esc_attr($titulo2); ?>">
 				</p>
-				<p class="os_practica_widget-control2" data-title="Selecciona imagen 2" data-update-text="Selecciona imagen 2" data-target=".image-id2">
+				<p class="os_practicas_widget-control2" data-title="Selecciona imagen 2" data-update-text="Selecciona imagen 2" data-target=".image-id2">
 					<img src="<?php echo $imagen_url2; ?>">
-					<input type="hidden" name="<?php echo $this->get_field_name('imagen2'); ?>" id="<?php echo $this->get_field_id('imagen2'); ?>" value="<?php echo $imagen2; ?>" class="image-id2 os_practica_widget-control2-target">
-					<input id="upload_image2" class="button button-hero os_practica_widget-control2-choose" type="button" value="Selecciona imagen 2"/>
+					<input type="hidden" name="<?php echo $this->get_field_name('imagen2'); ?>" id="<?php echo $this->get_field_id('imagen2'); ?>" value="<?php echo $imagen2; ?>" class="image-id2 os_practicas_widget-control2-target">
+					<input id="upload_image2" class="button button-hero os_practicas_widget-control2-choose" type="button" value="Selecciona imagen 2"/>
 				</p>
 			</div>
 	    	<div style="border-width: 0px 0px 1px 0px; border-color: #CAC6C6; border-style: solid;">
@@ -184,20 +184,20 @@ if (!class_exists('OSPracticasWidget')) :
 					<label for="<?php echo $this->get_field_id('titulo3'); ?>"><?php _e('Título 3:', 'os_practicas_widget'); ?></label>
 					<input class="widefat" id="<?php echo $this->get_field_id('titulo3'); ?>" name="<?php echo $this->get_field_name('titulo3'); ?>" type="text" value="<?php echo esc_attr($titulo3); ?>">
 				</p>
-				<p class="os_practica_widget-control3" data-title="Selecciona imagen 3" data-update-text="Selecciona imagen 3" data-target=".image-id3">
+				<p class="os_practicas_widget-control3" data-title="Selecciona imagen 3" data-update-text="Selecciona imagen 3" data-target=".image-id3">
 					<img src="<?php echo $imagen_url3; ?>">
-					<input type="hidden" name="<?php echo $this->get_field_name('imagen3'); ?>" id="<?php echo $this->get_field_id('imagen3'); ?>" value="<?php echo $imagen3; ?>" class="image-id3 os_practica_widget-control3-target">
-					<input id="upload_image3" class="button button-hero os_practica_widget-control3-choose" type="button" value="Selecciona imagen 3"/>
+					<input type="hidden" name="<?php echo $this->get_field_name('imagen3'); ?>" id="<?php echo $this->get_field_id('imagen3'); ?>" value="<?php echo $imagen3; ?>" class="image-id3 os_practicas_widget-control3-target">
+					<input id="upload_image3" class="button button-hero os_practicas_widget-control3-choose" type="button" value="Selecciona imagen 3"/>
 				</p>
 			</div>
 			<p>
 			    <label for="<?php echo $this->get_field_id('pdf'); ?>"><?php _e('URL externa del archivo PDF', 'os_practicas_widget'); ?></label>
 			    <input type="url" class="widefat" id="<?php echo $this->get_field_id('pdf'); ?>" name="<?php echo $this->get_field_name('pdf'); ?>" value="<?php echo $pdf; ?>"/>
 			</p>
-			<p class="os_practica_widget-controlPdfInterno" data-title="Selecciona PdfInterno " data-update-text="Selecciona PdfInterno" data-target=".PdfInterno">
+			<p class="os_practicas_widget-controlPdfInterno" data-title="Selecciona PdfInterno " data-update-text="Selecciona PdfInterno" data-target=".PdfInterno">
 			    <label for="<?php echo $this->get_field_id('pdfInterno'); ?>"><?php _e('Cargador de archivo PDF', 'os_practicas_widget'); ?></label></br>
-			    <input class="PdfInterno os_practica_widget-controlPdfInterno-target widefat" type="url" id="<?php echo $this->get_field_id('pdfInterno'); ?>" name="<?php echo $this->get_field_name('pdfInterno'); ?>" value="<?php echo $pdfInterno; ?>" readonly></br>
-			 	<input id="upload_pdfInterno" class="button button-hero os_practica_widget-controlPdfInterno-choose" name="upload_pdfInterno" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
+			    <input class="PdfInterno os_practicas_widget-controlPdfInterno-target widefat" type="url" id="<?php echo $this->get_field_id('pdfInterno'); ?>" name="<?php echo $this->get_field_name('pdfInterno'); ?>" value="<?php echo $pdfInterno; ?>" readonly></br>
+			 	<input id="upload_pdfInterno" class="button button-hero os_practicas_widget-controlPdfInterno-choose" name="upload_pdfInterno" type="button" value="<?php _e('Explorar/Subir', 'os_publicacion_type'); ?>" />
 			</p>
 					
 						

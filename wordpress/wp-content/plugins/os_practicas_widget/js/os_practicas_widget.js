@@ -32,7 +32,7 @@ jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
        //When a file is selected, grab the URL and set it as the text field's value
        custom_uploader1.on('select', function() {
            attachment1 = custom_uploader1.state().get('selection').first().toJSON();
-           jQuery('.' + widget_p1 + ' input.image-id1.os_image_widget-control1-target').val(attachment1.id);
+           jQuery('.' + widget_p1 + ' input.image-id1.os_practicas_widget-control1-target').val(attachment1.id);
            jQuery('.' + widget_p1 + ' img').attr('src',attachment1.url);
        });
    });
@@ -63,7 +63,7 @@ jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
        //When a file is selected, grab the URL and set it as the text field's value
        custom_uploader2.on('select', function() {
            attachment2 = custom_uploader2.state().get('selection').first().toJSON();
-           jQuery('.' + widget_p2 + ' input.image-id2.os_image_widget-control2-target').val(attachment2.id);
+           jQuery('.' + widget_p2 + ' input.image-id2.os_practicas_widget-control2-target').val(attachment2.id);
            jQuery('.' + widget_p2 + ' img').attr('src',attachment2.url);
        });
    });
@@ -95,7 +95,7 @@ jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
        //When a file is selected, grab the URL and set it as the text field's value
        custom_uploader3.on('select', function() {
            attachment3 = custom_uploader3.state().get('selection').first().toJSON();
-           jQuery('.' + widget_p3 + ' input.image-id3.os_image_widget-control3-target').val(attachment3.id);
+           jQuery('.' + widget_p3 + ' input.image-id3.os_practicas_widget-control3-target').val(attachment3.id);
            jQuery('.' + widget_p3 + ' img').attr('src',attachment3.url);
        });
     });
@@ -127,28 +127,6 @@ jQuery(document).ajaxComplete(function(event,jqXHR,ajaxOptions){
           custom_uploaderPdfInterno.open();
          }
     });
-
-    /*jQuery("input#upload_pdfInterno").click(function(e) {
-        e.preventDefault();
-        var custom_uploader;
-        if (custom_uploader) {
-            custom_uploader.open();
-            return;
-        }
-        custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: object_name.choose_source_logo,
-            button: {
-                text: object_name.choose_source_logo
-            },
-            multiple: false,
-            library: { type: 'application/pdf' },
-        });
-        custom_uploader.on('select', function() {
-            var attachment = custom_uploader.state().get('selection').first().toJSON();
-            jQuery('input#pdfInterno').attr('value', attachment.url);
-        });
-        custom_uploader.open();
-    });*/
 
   }
 });
