@@ -176,7 +176,7 @@ function fetch($post_type, $order, $post_id){
 	$posts = get_posts($args);
 	$index_array = array();
 
-	$last_post = get_post($post_id);
+	/*$last_post = get_post($post_id);
 	$last_post_id = $last_post->ID;
 
 
@@ -188,20 +188,20 @@ function fetch($post_type, $order, $post_id){
 		/*for ($i = 1; $i < count($posts); $i++) { 
 			$index_array[] = $posts[$i]->ID;
 		}*/
-	}
+	/*}*/
 
 	for ($i = 0; $i < count($posts); $i++) { 
 			$index_array[] = $posts[$i]->ID;
 	}
 
-	if(($order == 'ASC') && (!in_array($last_post_id, $index_array))){
+	/*if(($order == 'ASC') && (!in_array($last_post_id, $index_array))){
 
 		/*for ($i = 0; $i < count($posts)-1; $i++) { 
 			$index_array[] = $posts[$i]->ID;
 		}*/
 
-		array_push($index_array, $last_post_id);
-	}
+	/*	array_push($index_array, $last_post_id);
+	}*/
 
 	
 
