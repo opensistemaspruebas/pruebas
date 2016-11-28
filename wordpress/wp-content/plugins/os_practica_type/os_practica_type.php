@@ -92,9 +92,11 @@ function meta_box_texto_descriptivo_practica($post) {
   ?>
 
   <p>
+    <label for="texto-destacado"><?php _e('Texto destacado', 'os_practica_type'); ?></label>
     <textarea type="text" style="width:100%;" rows="4" id="texto-destacado" name="texto-destacado"><?php if (isset($texto_destacado)) echo $texto_destacado; ?></textarea>
   </p>
   <p>
+    <label for="texto"><?php _e('Texto', 'os_practica_type'); ?></label>
     <textarea type="text" style="width:100%;" rows="4" id="texto" name="texto"><?php if (isset($texto)) echo $texto; ?></textarea>
   </p>
 
