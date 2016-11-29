@@ -174,35 +174,33 @@ function fetch($post_type, $order, $post_id){
 	}
 
 	$posts = get_posts($args);
+	$last_post = get_post($post_id);
+
 	$index_array = array();
 
-	/*$last_post = get_post($post_id);
-	$last_post_id = $last_post->ID;
+	if($last_post->post_status != 'trash'){
 
+		if(($order == 'DESC')){
 
-	if(($order == 'DESC') && (!in_array($last_post_id, $index_array))){
+			if(!in_array($last_post, $posts)){
 
-			array_push($index_array, $last_post_id);
-		
+				array_unshift($posts,$last_post);
+			}
+		}
 
-		/*for ($i = 1; $i < count($posts); $i++) { 
-			$index_array[] = $posts[$i]->ID;
-		}*/
-	/*}*/
+		if(($order == 'ASC')){
 
-	for ($i = 0; $i < count($posts); $i++) { 
-			$index_array[] = $posts[$i]->ID;
+			if(!in_array($last_post, $posts)){
+
+				array_push($posts, $last_post);
+			}
+		}
 	}
 
-	/*if(($order == 'ASC') && (!in_array($last_post_id, $index_array))){
-
-		/*for ($i = 0; $i < count($posts)-1; $i++) { 
-			$index_array[] = $posts[$i]->ID;
-		}*/
-
-	/*	array_push($index_array, $last_post_id);
-	}*/
-
+	for ($i = 0; $i < count($posts); $i++) { 
+		
+		$index_array[] = $posts[$i]->ID;
+	}
 	
 
 	save_json_to_file($index_array, $post_type, $order, "indice");
@@ -279,7 +277,6 @@ function fetch_autores($post_type, $order, $author){
 
 // Generar jsones al guardar un post
 function save_post_and_update($post_id) {
-
 	// si entramos a crear un post
 	if ('auto-draft' === get_post_status($post_id) || 'draft' === get_post_status($post_id))
 		return false;
