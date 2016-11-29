@@ -75,8 +75,8 @@ if (!class_exists('slider_widget')) :
                 
             // Inicio de html para el formulario del widget    
             ?>  
-            <div class="tabs-slider">  
-            <?php for ($i = 1; $i <= 3; $i++): ?>
+            <!--div class="tabs-slider"-->  
+            <?php for ($i = 1; $i <= 1; $i++): ?>
                 <div class="slider-tab<?php echo $i; ?>" <?php if ($i > 3) { echo 'style="display:none;"'; } ?> >
                     <div class="bloque-item"><span style=""><?php _e("Elemento"); echo ' ' . $i; ?></span></div>
                     <div class="campos_tipo4" id="<?php echo $i; ?>">
@@ -107,7 +107,7 @@ if (!class_exists('slider_widget')) :
                     </div>
                 </div>
             <?php endfor; ?>
-            </div> 
+            <!--/div--> 
             <?php
             // Fin del html para el formulario del widget
         
@@ -148,9 +148,9 @@ if (!class_exists('slider_widget')) :
             <div class="slider">
                 <div id="home-slider" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#home-slider" data-slide-to="0" class="active"><span class="bbva-icon-commerce"></span></li>
+                        <!--li data-target="#home-slider" data-slide-to="0" class="active"><span class="bbva-icon-commerce"></span></li>
                         <li data-target="#home-slider" data-slide-to="1" class=""><span class="bbva-icon-cash"></span></li>
-                        <li data-target="#home-slider" data-slide-to="2" class=""><span class="bbva-icon-loan"></span></li>
+                        <li data-target="#home-slider" data-slide-to="2" class=""><span class="bbva-icon-loan"></span></li-->
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <article class="item active">
@@ -171,20 +171,20 @@ if (!class_exists('slider_widget')) :
                                 </div>
                             </div>
                         </article>
-                        <article class="item">
+                        <!--article class="item">
                             <div class="spotlight spotlight-dark-blue">
                                 <div class="film-one"></div>
                                 <div class="film-two"></div>
                                 <div class="film-three"></div>
                                 <div class="film-four"></div>
                             </div>
-                            <img src="<?php echo get_template_directory_uri(); ?>/resources/images/home/world.png" class="img-gb-right">
+                            <img src="--><?php/* echo get_template_directory_uri(); */?><!--/resources/images/home/world.png" class="img-gb-right">
                             <div class="slider-caption">
                                 <div class="container">
                                     <div class="caption-container">
-                                        <h1><?php echo $instance['title2']; ?></h1>
-                                        <p><?php echo $instance['descr2']; ?></p>
-                                        <a <?php if ($instance['externo2'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink2']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink2']; ?></a>
+                                        <h1>--><?php //echo $instance['title2']; ?><!--/h1>
+                                        <p--><?php ///echo $instance['descr2']; ?><!--/p>
+                                        <a --><?php //if ($instance['externo2'] == "on") echo 'target="_blank"';?><!--- href="--><?php //echo $instance['ulink2']; ?><!--" class="btn btn-bbva-blue"--><?php //echo $instance['tlink2']; ?><!--/a>
                                     </div>
                                 </div>
                             </div>
@@ -196,26 +196,26 @@ if (!class_exists('slider_widget')) :
                                 <div class="film-three"></div>
                                 <div class="film-four"></div>
                             </div>
-                            <img src="<?php echo get_template_directory_uri(); ?>/resources/images/home/world.png" class="img-gb-right">
+                            <img src="--><?php //echo get_template_directory_uri(); ?><!--/resources/images/home/world.png" class="img-gb-right">
                             <div class="slider-caption">
                                 <div class="container">
                                     <div class="caption-container">
-                                        <h1><?php echo $instance['title3']; ?></h1>
-                                        <p><?php echo $instance['descr3']; ?></p>
-                                        <a <?php if ($instance['externo3'] == "on") echo 'target="_blank"';?> href="<?php echo $instance['ulink3']; ?>" class="btn btn-bbva-blue"><?php echo $instance['tlink3']; ?></a>
+                                        <h1--><?php // echo $instance['title3']; ?><!--/h1>
+                                        <p--><?php // echo $instance['descr3']; ?><!--/p>
+                                        <a --><?php //if ($instance['externo3'] == "on") echo 'target="_blank"';?><!-- href="--><?php ///echo $instance['ulink3']; ?><!--" class="btn btn-bbva-blue"--><?php// echo $instance['tlink3']; ?><!--</a>
                                     </div>
                                 </div>
                             </div>
-                        </article>
+                        </article-->
                     </div>
-                    <a href="#home-slider" class="hidden-xs hidden-sm left carousel-control" role="button" data-slide="prev">
+                    <!--a href="#home-slider" class="hidden-xs hidden-sm left carousel-control" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
                     <a href="#home-slider" class="hidden-xs hidden-sm right carousel-control" role="button" data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
-                    </a>
+                    </a-->
                 </div>
             </div>
             <?php

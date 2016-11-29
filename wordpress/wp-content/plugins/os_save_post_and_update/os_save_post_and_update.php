@@ -246,16 +246,25 @@ function fetch_destacados($post_type, $order){
 		);
 	}
 
-	$posts = get_posts($args);
-	$index_array = array();
 
+	$posts = get_posts($args);
 	$last_post = get_post($post_id);
 
+	$index_array = array();
+
+	if($last_post->post_status != 'trash'){
+	
+		if(!in_array($last_post, $posts)){
+
+			array_unshift($posts,$last_post);
+		}
+	}
+
 	for ($i = 0; $i < count($posts); $i++) { 
-		$index_array[] = $posts[$i]->ID;		
+		
+		$index_array[] = $posts[$i]->ID;
 	}
 	
-	array_push($index_array, $last_post);
 
 	save_json_to_file($index_array, $post_type, $order, "destacados");
 }
